@@ -1,3 +1,11 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+Created on Thu May 21 21:24:23 2015
+
+@author: Thomas
+"""
+
 import random
 import math
 import csv
@@ -255,7 +263,7 @@ def get_length_months():
 
 def date_add(number, date):
     """ 
-    Problem: Richardson tool uses a VBA built-in function called DateAdd.
+    Problem: Usage of a VBA built-in function called DateAdd.
     
     According to the VBA manual, this function adds a _number_ of days to the given _date_
     The return value is (in the Richardson tool) definded as a "day"-type. Therefore, we return an integer.

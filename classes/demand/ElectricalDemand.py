@@ -3,7 +3,7 @@
 """
 Created on Sat Feb 14 09:12:18 2015
 
-@author: T_ohne_admin
+@author: Thomas
 """
 from __future__ import division
 
@@ -29,7 +29,7 @@ class ElectricalDemand(classes.demand.Load.Load):
                  loadcurve=[], 
                  annualDemand=0, profileType="H0",
                  singleFamilyHouse=True, numberHousehold=0,
-                 randomizeAppliances=True, lightConfiguration=0):
+                 randomizeAppliances=True, lightConfiguration=0, occupancy=[]):
         """
         Parameters
         ----------
@@ -62,7 +62,9 @@ class ElectricalDemand(classes.demand.Load.Load):
             - False : Use the standard distribution
         lightConfiguration : Integer (only optional in method 2)
             There are 100 light bulb configurations predefined for the 
-            Richardson model. Select one by entering an integer in [0, ..., 99]
+            Stochastic model. Select one by entering an integer in [0, ..., 99]
+        occupancy : Array-like (optional, but recommended in method 2)
+            Occupancy given at 10-minute intervals for a full year
             
         Info
         ----
@@ -95,9 +97,8 @@ class ElectricalDemand(classes.demand.Load.Load):
             timeDis = environment.timer.timeDiscretization
             timestepsDay = int(86400/timeDis)
             day = environment.timer.currentWeekday
-            self.r_wrapper = wrapper.Electricity_profile(numberHousehold, 
-                                                         self.appliances, 
-                                                         self.lights, day)
+            self.wrapper = wrapper.Electricity_profile(self.appliances, 
+                                                       self.lights)
             
             # Make full year simulation
             demand = []
@@ -107,6 +108,7 @@ class ElectricalDemand(classes.demand.Load.Load):
             required_timestamp = np.arange(1440)
             given_timestamp = timeDis * np.arange(timestepsDay)
             
+            # Loop over all days
             for i in range(int(len(irradiance) * timeDis / 86400)):
                 if (i + day) % 7 in (0,6):
                     weekend = True
@@ -117,8 +119,12 @@ class ElectricalDemand(classes.demand.Load.Load):
                 current_irradiation = np.interp(required_timestamp, 
                                                 given_timestamp, irrad_day)
                 
-                demand.append(self.r_wrapper.demands(current_irradiation, 
-                                                     weekend, i+day)[0])
+                current_occupancy = occupancy[144*i : 144*(i+1)]
+                                
+                demand.append(self.wrapper.demands(current_irradiation, 
+                                                   weekend, 
+                                                   i, 
+                                                   current_occupancy)[0])
 
             res = np.array(demand)
             res = np.reshape(res, res.size)

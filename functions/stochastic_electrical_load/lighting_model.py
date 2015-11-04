@@ -1,3 +1,10 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+Created on Thu May 21 21:24:29 2015
+
+@author: Thomas
+"""
 from __future__ import division
 
 import random
@@ -41,7 +48,7 @@ class LightingModelConfiguration():
 def load_lighting_profile(filename, index=0):
     """
     Load the installed light bulbs
-    The Richardson tool already provided a sheet with 100 sample bulb configurations.
+    The tool already provided a sheet with 100 sample bulb configurations.
     """
     read_in = []
     

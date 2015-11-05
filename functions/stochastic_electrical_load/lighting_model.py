@@ -52,7 +52,7 @@ def load_lighting_profile(filename, index=0):
     """
     read_in = []
     
-    with open(filename, 'rb') as input:
+    with open(filename, 'rt', encoding='utf8') as input:
         reader = csv.reader(input, delimiter=';')
         for row in reader:
             row_float=[]

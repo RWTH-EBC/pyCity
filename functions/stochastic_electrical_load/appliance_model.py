@@ -130,7 +130,7 @@ class Appliances:
         """
         result = []
         
-        with open(filename, 'rb') as input:
+        with open(filename, 'rt', encoding='utf8') as input:
             reader = csv.reader(input, delimiter=';')
             next(reader) # Skip first line!
             for row in reader:

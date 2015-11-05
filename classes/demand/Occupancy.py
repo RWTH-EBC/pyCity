@@ -6,8 +6,7 @@ Created on Tue Nov 03 16:09:06 2015
 @author: tsz
 """
 
-
-
+import os
 import numpy as np
 import random
 
@@ -44,21 +43,24 @@ class Occupancy(object):
         # available for these numbers)
         number_occupants = max(1, min(5, number_occupants))
 
-        folder = "inputs/stochastic_electrical_load/constants/"
+        src_path = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+        folder_path = os.path.join(src_path, 'inputs', 'stochastic_electrical_load', 'constants')
         if not Occupancy.occ_start_states_loaded:
             # Load start states matrixes
             Occupancy.occ_start_states_loaded = True
             
             for weekday in self.type_weekday:
-                temp = (np.loadtxt(folder+"occ_start_states_" +weekday+".csv",
-                                   delimiter=";")).tolist()
+                filename = str("occ_start_states_" +weekday+".csv")
+                file_path = os.path.join(folder_path, filename)
+                temp = (np.loadtxt(file_path, delimiter=";")).tolist()
                 Occupancy.occ_start_states[weekday] = temp
         
         if not (number_occupants, "wd") in list(Occupancy.tpm.keys()):
             # Load transition probability matrixes
             for weekday in self.type_weekday:
-                fname = folder+"tpm"+str(number_occupants)+"_"+weekday+".csv"
-                temp = (np.loadtxt(fname, delimiter=";")).tolist()
+                fname = str("tpm"+str(number_occupants)+"_"+weekday+".csv")
+                file_path = os.path.join(folder_path, fname)
+                temp = (np.loadtxt(file_path, delimiter=";")).tolist()
                 Occupancy.tpm[number_occupants, weekday] = temp
 
         # Determine initial occupancy:

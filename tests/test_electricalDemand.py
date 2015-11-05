@@ -43,4 +43,3 @@ el_dem_stochastic = ED.ElectricalDemand(environment,
                                         randomizeAppliances=True,
                                         lightConfiguration=10,
                                         occupancy=occupancy.occupancy)
-                                                      

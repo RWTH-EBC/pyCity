@@ -72,11 +72,12 @@ class ElectricalDemand(classes.demand.Load.Load):
         The standard load profile can be downloaded here:
         http://www.ewe-netz.de/strom/1988.php
         """
+        src_path = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+
         if method == 0:
             super(ElectricalDemand, self).__init__(environment, loadcurve)
         elif method == 1:
             if not ElectricalDemand.loaded_slp:
-                src_path = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
                 filename = os.path.join(src_path, 'inputs', 'standard_load_profile', 'slp_electrical.xlsx')
                 ElectricalDemand.slp = slp_el.load(filename)
                 ElectricalDemand.loaded_slp = True
@@ -88,10 +89,11 @@ class ElectricalDemand(classes.demand.Load.Load):
             super(ElectricalDemand, self).__init__(environment, loadcurve)
         elif method == 2:
             # Initialize appliances and lights
-            pathApps = 'inputs/stochastic_electrical_load/Appliances.csv'
+
+            pathApps = os.path.join(src_path, 'inputs', 'stochastic_electrical_load', 'Appliances.csv')
             self.appliances = app_model.Appliances(pathApps, 
                                                    randomizeAppliances)
-            pathLights = 'inputs/stochastic_electrical_load/LightBulbs.csv'
+            pathLights = os.path.join(src_path, 'inputs', 'stochastic_electrical_load', 'LightBulbs.csv')
             self.lights = light_model.load_lighting_profile(pathLights, 
                                                             lightConfiguration)
             

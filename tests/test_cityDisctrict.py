@@ -65,11 +65,11 @@ cityDistrict.addEntity(pv)
 cityDistrict.addEntity(pv)
 cityDistrict.addEntity(pv)
 
-print
-print cityDistrict.getDemands()
+print()
+print(cityDistrict.getDemands())
 
-print
-print cityDistrict.getFlowTemperatures()
+print()
+print(cityDistrict.getFlowTemperatures())
 
-print
-print cityDistrict.getPVPower()
+print()
+print(cityDistrict.getPVPower())

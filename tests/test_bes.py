@@ -21,13 +21,13 @@ import classes.supply.PV as PV
 import classes.supply.ThermalEnergyStorage as ThermalEnergyStorage
 
 def print_bes_attributes(bes):
-    print("Has Battery: " + str(bes.hasBattery))
-    print("Has Boiler: " + str(bes.hasBoiler))
-    print("Has CHP unit: " + str(bes.hasChp))
-    print("Has Electrical Heater: " + str(bes.hasElectricalHeater))    
-    print("Has AC/DC inverter: " + str(bes.hasInverterAcdc))
-    print("Has DC/AC inverter: " + str(bes.hasInverterDcac))
-    print("Has PV: " + str(bes.hasPv))
+    print(("Has Battery: " + str(bes.hasBattery)))
+    print(("Has Boiler: " + str(bes.hasBoiler)))
+    print(("Has CHP unit: " + str(bes.hasChp)))
+    print(("Has Electrical Heater: " + str(bes.hasElectricalHeater)))    
+    print(("Has AC/DC inverter: " + str(bes.hasInverterAcdc)))
+    print(("Has DC/AC inverter: " + str(bes.hasInverterDcac)))
+    print(("Has PV: " + str(bes.hasPv)))
   
 
 timer = classes.Timer.Timer()
@@ -50,7 +50,7 @@ tes = ThermalEnergyStorage.ThermalEnergyStorage(environment, 50, 1000, 85)
 bes = BES.BES(environment)
 
 # Print "status quo"
-print
+print()
 print("Original BES - before adding devices")
 print_bes_attributes(bes)
 
@@ -66,17 +66,17 @@ bes.addDevice(pv)
 bes.addDevice(tes)
 
 # Print current status
-print
+print()
 print("Final BES - after adding devices")
 print_bes_attributes(bes)
 
 # Check if objects stored in BES are the same as the original objects:
-print
-print "Battery: " + str(battery is bes.battery)
-print "Boiler: " + str(boiler is bes.boiler)
-print "CHP: " + str(chp is bes.chp)
-print "Electrical heater: " + str(elHeater is bes.electricalHeater)
-print "Inverter AC to DC: " + str(inverter_ac_dc is bes.inverterAcdc)
-print "Inverter DC to AC: " + str(inverter_dc_ac is bes.inverterDcac)
-print "PV: " + str(pv is bes.pv)
-print "TES: " + str(tes is bes.tes)
+print()
+print("Battery: " + str(battery is bes.battery))
+print("Boiler: " + str(boiler is bes.boiler))
+print("CHP: " + str(chp is bes.chp))
+print("Electrical heater: " + str(elHeater is bes.electricalHeater))
+print("Inverter AC to DC: " + str(inverter_ac_dc is bes.inverterAcdc))
+print("Inverter DC to AC: " + str(inverter_dc_ac is bes.inverterDcac))
+print("PV: " + str(pv is bes.pv))
+print("TES: " + str(tes is bes.tes))

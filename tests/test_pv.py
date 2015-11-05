@@ -6,7 +6,7 @@ Created on Tue Feb 10 14:43:11 2015
 @author: tsz
 """
 
-from __future__ import division
+
 
 import classes.supply.PV as PV
 
@@ -43,21 +43,21 @@ pvPower_simple = pv_simple.getPower()
 pvPower_detailed = pv_detailed.getPower()
 
 # Print results
-print
-print("Efficiency: " + str(pv_detailed.eta))
-print("Area: " + str(pv_detailed.area))
-print("Cell temperature: " + str(pv_detailed.temperature_nominal))
-print("Loss coefficient: "    + str(pv_detailed.alpha))
+print()
+print(("Efficiency: " + str(pv_detailed.eta)))
+print(("Area: " + str(pv_detailed.area)))
+print(("Cell temperature: " + str(pv_detailed.temperature_nominal)))
+print(("Loss coefficient: "    + str(pv_detailed.alpha)))
 
-print("Nominal values: " + str(pv_detailed.getNominalValues()))
+print(("Nominal values: " + str(pv_detailed.getNominalValues())))
 
-print
-print("PV power (simple model): " + np.str(pvPower_simple))
-print
-print("PV power (detailed model): " + np.str(pvPower_detailed))
+print()
+print(("PV power (simple model): " + np.str(pvPower_simple)))
+print()
+print(("PV power (detailed model): " + np.str(pvPower_detailed)))
 
 # Plot PV power
-plot_time = range(environment.timer.timestepsHorizon)
+plot_time = list(range(environment.timer.timestepsHorizon))
 figure = plt.figure(figsize=(6,6))
 from matplotlib import gridspec
 gs = gridspec.GridSpec(2,1, height_ratios=[3,1])

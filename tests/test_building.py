@@ -93,11 +93,11 @@ entities = [apartment, bes, heatingCurve]
 building.addMultipleEntities(entities)
 
 
-print
-print building.getDemands()
+print()
+print(building.getDemands())
 
-print
-print building.getHeatpumpNominals()
+print()
+print(building.getHeatpumpNominals())
 
-print
-print building.flowTemperature
+print()
+print(building.flowTemperature)

@@ -5,7 +5,7 @@ Created on Sat Feb 14 09:12:35 2015
 
 @author: Thomas
 """
-from __future__ import division
+
 
 import numpy as np
 import classes.demand.Load

@@ -6,7 +6,7 @@ Created on Wed Jul 08 22:07:49 2015
 @author: Thomas
 """
 
-from __future__ import division
+
 
 import classes.Timer
 import classes.Weather

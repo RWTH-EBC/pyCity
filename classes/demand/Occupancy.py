@@ -6,7 +6,7 @@ Created on Tue Nov 03 16:09:06 2015
 @author: tsz
 """
 
-from __future__ import division
+
 
 import numpy as np
 import random
@@ -54,7 +54,7 @@ class Occupancy(object):
                                    delimiter=";")).tolist()
                 Occupancy.occ_start_states[weekday] = temp
         
-        if not (number_occupants, "wd") in Occupancy.tpm.keys():
+        if not (number_occupants, "wd") in list(Occupancy.tpm.keys()):
             # Load transition probability matrixes
             for weekday in self.type_weekday:
                 fname = folder+"tpm"+str(number_occupants)+"_"+weekday+".csv"

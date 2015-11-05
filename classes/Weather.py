@@ -6,6 +6,8 @@ Created on Fri Feb 06 17:11:19 2015
 @author: tsz
 """
 
+
+import os
 import numpy as np
 import functions.changeResolution as changeResolution
 import classes.Sun
@@ -18,7 +20,7 @@ class Weather(classes.Sun.Sun):
     """
         
     def __init__(self, timer, 
-                 pathTRY="inputs/weather/TRY2010_05_Jahr.dat",
+                 pathTRY='inputs/weather/TRY2010_05_Jahr.dat',
                  pathTemperature="", pathDirectRadiation="", 
                  pathDiffuseRadiation="", pathWindspeed="", pathHumidity="", 
                  pathPressure="", pathCloudiness="",

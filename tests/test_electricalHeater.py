@@ -30,17 +30,17 @@ heater = ElectricalHeater.ElectricalHeater(environment, q_nominal, eta,
                                            t_max, lower_activation_limit)
 
 # Print results
-print
-print("Type: " + heater._kind)
-print
-print("Maximum electricity input: " + str(heater.pNominal))
-print("Maximum heat output: "       + str(heater.qNominal))
-print("Efficiency: "                + str(heater.eta))
-print("Maximum flow temperature: "  + str(heater.tMax))
-print("Lower activation limit: "    + str(heater.lowerActivationLimit))
+print()
+print(("Type: " + heater._kind))
+print()
+print(("Maximum electricity input: " + str(heater.pNominal)))
+print(("Maximum heat output: "       + str(heater.qNominal)))
+print(("Efficiency: "                + str(heater.eta)))
+print(("Maximum flow temperature: "  + str(heater.tMax)))
+print(("Lower activation limit: "    + str(heater.lowerActivationLimit)))
 
-print
-print("Nominals: " + str(heater.getNominalValues()))
+print()
+print(("Nominals: " + str(heater.getNominalValues())))
 
 np.random.seed(0)
 result_p = np.random.rand(timer.timestepsUsedHorizon) * heater.pNominal
@@ -49,9 +49,9 @@ result_schedule = np.random.randint(2, size=timer.timestepsUsedHorizon)
 heater.setResults(result_p, result_q, result_schedule)
 
 results = heater.getResults(True)
-print
-print "Electricity input: " + str(results[0])
-print
-print "Heat output: " + str(results[1])
-print
-print "Schedule: " + str(results[2])
+print()
+print("Electricity input: " + str(results[0]))
+print()
+print("Heat output: " + str(results[1]))
+print()
+print("Schedule: " + str(results[2]))

@@ -8,7 +8,7 @@ Created on Tue Mar 24 21:22:29 2015
 Inputs:
 A_f (section 6.4) - used area in m2
 """
-from __future__ import division
+
 
 import numpy as np
 import math

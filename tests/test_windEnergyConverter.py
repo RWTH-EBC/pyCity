@@ -6,7 +6,7 @@ Created on Tue Mar 03 15:50:08 2015
 @author: tsz
 """
 
-from __future__ import division
+
 
 import classes.supply.WindEnergyConverter as WindEnergyConverter
 
@@ -49,12 +49,12 @@ currentPower = wec.getPower() / 1000 # in kW
 # Plot wind and WEC power
 figure = plt.figure(figsize=(8,6))
 ax1 = plt.subplot(211)
-ax1.plot(range(environment.timer.timestepsHorizon), currentWind)
+ax1.plot(list(range(environment.timer.timestepsHorizon)), currentWind)
 plt.xlim((0,environment.timer.timestepsHorizon-1))
 plt.ylim((0,12))
 plt.ylabel("Wind velocity in m/s", fontsize=12)
 ax2 = plt.subplot(212)
-ax2.plot(range(environment.timer.timestepsHorizon), currentPower)
+ax2.plot(list(range(environment.timer.timestepsHorizon)), currentPower)
 plt.xlim((0,environment.timer.timestepsHorizon-1))
 plt.xlabel("Timesteps", fontsize=12)
 plt.ylabel("Electricity generation in kW", fontsize=12)

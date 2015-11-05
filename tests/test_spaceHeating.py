@@ -27,8 +27,8 @@ hd_slp = SpaceHeating.SpaceHeating(environment,
 
 results = hd_slp.getDemand()
 
-print
-print "Heat demand: " + str(results)
+print()
+print("Heat demand: " + str(results))
 
 import matplotlib.pyplot as plt
 plt.plot(hd_slp.loadcurve, label="SLP", color="b")

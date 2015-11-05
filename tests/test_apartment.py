@@ -41,18 +41,18 @@ dhw_annex42 = DomesticHotWater.DomesticHotWater(environment,
                                                 
 apartment = Apartment.Apartment(environment)
 
-print apartment.demandDomesticHotWater
-print apartment.demandElectrical
-print apartment.demandSpaceheating
+print(apartment.demandDomesticHotWater)
+print(apartment.demandElectrical)
+print(apartment.demandSpaceheating)
 
 entities = [heat_demand, el_demand, dhw_annex42]
 apartment.addMultipleEntities(entities)
 
-print
-print apartment.getDemands()
+print()
+print(apartment.getDemands())
 
-print
-print apartment.getTotalElectricalDemand()
+print()
+print(apartment.getTotalElectricalDemand())
 
-print
-print apartment.getTotalThermalDemand()
+print()
+print(apartment.getTotalThermalDemand())

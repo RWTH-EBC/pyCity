@@ -19,12 +19,12 @@ weather = classes.Weather.Weather(time, useTRY=True)
                                                             getPhiAmbient=True,
                                                             getPAmbient=True)
 
-print 
-print "Ambient temperature: " + str(tamb)
-print
-print "Diffuse radiation: " + str(weather.getPreviousWeather(fromTimestep=0, 
-                                                             getQDiffuse=True))
-print
-print ("Total radiation on a tilted surface: " + 
+print() 
+print("Ambient temperature: " + str(tamb))
+print()
+print("Diffuse radiation: " + str(weather.getPreviousWeather(fromTimestep=0, 
+                                                             getQDiffuse=True)))
+print()
+print(("Total radiation on a tilted surface: " + 
        str((weather.getRadiationTiltedSurface(beta=30, gamma=45, 
-                                              update=True))[0]))
+                                              update=True))[0])))

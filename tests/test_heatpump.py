@@ -57,21 +57,21 @@ heater = HP.Heatpump(environment, tAmbient, tFlow, qNominal, pNominal, cop,
                      tMax, lower_activation_limit)
 
 # Print results
-print
-print("Type: " + heater._kind)
-print
-print("Maximum flow temperature: " + str(heater.tMax))
-print("Lower activation limit: "   + str(heater.lowerActivationLimit))
+print()
+print(("Type: " + heater._kind))
+print()
+print(("Maximum flow temperature: " + str(heater.tMax)))
+print(("Lower activation limit: "   + str(heater.lowerActivationLimit)))
 
 np.random.seed(0)
 flowTemperature = np.random.rand(timer.timestepsHorizon) * 20 + 35
 
 nominals = heater.getNominalValues(flowTemperature)
-print 
-print("Nominal electricity consumption: " + str(nominals[0]))
-print("Nominal heat output: " + str(nominals[1]))
-print("Maximum flow temperature: " + str(nominals[2]))
-print("Lower activation limit: "   + str(nominals[3]))
+print() 
+print(("Nominal electricity consumption: " + str(nominals[0])))
+print(("Nominal heat output: " + str(nominals[1])))
+print(("Maximum flow temperature: " + str(nominals[2])))
+print(("Lower activation limit: "   + str(nominals[3])))
 
 schedule = np.random.randint(2, size=timer.timestepsUsedHorizon)
 result_p = (nominals[0])[0:96] * schedule
@@ -80,9 +80,9 @@ result_q = (nominals[1])[0:96] * schedule
 heater.setResults(result_p, result_q, schedule)
 
 results = heater.getResults(True)
-print
-print "Electricity input: " + str(results[0])
-print
-print "Heat output: " + str(results[1])
-print
-print "Schedule: " + str(results[2])
+print()
+print("Electricity input: " + str(results[0]))
+print()
+print("Heat output: " + str(results[1]))
+print()
+print("Schedule: " + str(results[2]))

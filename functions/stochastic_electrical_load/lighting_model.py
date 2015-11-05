@@ -5,7 +5,7 @@ Created on Thu May 21 21:24:29 2015
 
 @author: Thomas
 """
-from __future__ import division
+
 
 import random
 import math

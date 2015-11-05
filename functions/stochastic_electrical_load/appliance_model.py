@@ -132,7 +132,7 @@ class Appliances:
         
         with open(filename, 'rb') as input:
             reader = csv.reader(input, delimiter=';')
-            reader.next() # Skip first line!
+            next(reader) # Skip first line!
             for row in reader:
                 row_float=[]
                 for col in row[2:]:

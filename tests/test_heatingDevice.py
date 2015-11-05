@@ -34,12 +34,12 @@ someSchedule = np.random.randint(low=0, high=2,
                                  size=environment.timer.timestepsUsedHorizon)
 
 # Print results
-print
-print "Lower activation limit: " + str(heater.lowerActivationLimit)
-print "Nominal heat output: " + str(heater.qNominal)
-print "Maximum flow temperature: " + str(heater.tMax)
-print "Previous schedule: "      + str(heater._getSchedule(True))
+print()
+print("Lower activation limit: " + str(heater.lowerActivationLimit))
+print("Nominal heat output: " + str(heater.qNominal))
+print("Maximum flow temperature: " + str(heater.tMax))
+print("Previous schedule: "      + str(heater._getSchedule(True)))
 
 heater._setSchedule(someSchedule)
-print
-print "Current schedule: " + str(heater._getSchedule(True))
+print()
+print("Current schedule: " + str(heater._getSchedule(True)))

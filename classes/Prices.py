@@ -6,7 +6,7 @@ Created on Mon Feb 09 16:19:18 2015
 @author: tsz
 """
 
-from __future__ import division
+
 
 class Prices(object):
     """

@@ -5,7 +5,7 @@ Created on Tue Jul 14 12:18:14 2015
 
 @author: tsz
 """
-from __future__ import division
+
 
 import numpy as np
 import xlrd
@@ -153,7 +153,7 @@ def full_year_computation(occupancy,
     water = np.zeros(len(occupancy) * 10)
     heat = np.zeros(len(occupancy) * 10)
     
-    for day in xrange(number_days):
+    for day in range(number_days):
         # Is the current day on a weekend?
         if (day + initial_day) % 7 >= 5:
             probability_profiles = profiles["we"]
@@ -216,7 +216,7 @@ if __name__ == "__main__":
     plt.ylabel("Active occupants")
     offset = 0.2
     plt.ylim((-offset, max(occupancy)+offset))
-    plt.yticks(range(int(max(occupancy)+1)))
+    plt.yticks(list(range(int(max(occupancy)+1))))
     
     plt.show()
     

@@ -6,7 +6,7 @@ Created on Tue Mar 03 14:38:14 2015
 @author: tsz
 """
 
-from __future__ import division
+
 
 import numpy as np
 import functions.handleData

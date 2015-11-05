@@ -94,10 +94,10 @@ building.addMultipleEntities(entities)
 
 
 print
-print building.getDemands()
+print(building.getDemands())
 
 print
-print building.getHeatpumpNominals()
+print(building.getHeatpumpNominals())
 
 print
-print building.flowTemperature
+print(building.flowTemperature)

@@ -9,6 +9,8 @@ Created on Thu May 21 21:24:23 2015
 import random
 import math
 import csv
+from __future__ import division
+
 
 class Appliances:
     """ Class to hold all relevant variables:

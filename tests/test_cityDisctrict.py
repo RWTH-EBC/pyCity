@@ -6,6 +6,7 @@ Created on Fri May 22 15:17:26 2015
 @author: tsz
 """
 
+from __future__ import division
 import classes.Timer
 import classes.Weather
 import classes.Prices
@@ -20,6 +21,7 @@ import classes.Building as Building
 import classes.CityDistrict as CityDistrict
 
 import classes.supply.PV as PV
+
 
 timer = classes.Timer.Timer()
 weather = classes.Weather.Weather(timer)

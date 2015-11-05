@@ -6,6 +6,7 @@ Created on Wed Feb 11 15:07:39 2015
 @author: tsz
 """
 
+from __future__ import division
 import classes.Timer
 import classes.Weather
 import classes.Prices

@@ -8,6 +8,8 @@ Created on Fri Feb 06 17:44:16 2015
 
 import numpy as np
 import functions.handleData as handleData
+from __future__ import division
+
 
 class Inverter(object):
     """

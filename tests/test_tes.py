@@ -5,6 +5,7 @@ Created on Tue Feb 10 14:37:31 2015
 
 @author: tsz
 """
+
 import numpy as np
 import classes.supply.ThermalEnergyStorage as ThermalEnergyStorage
 
@@ -12,6 +13,8 @@ import classes.Timer
 import classes.Weather
 import classes.Prices
 import classes.Environment
+from __future__ import division
+
 
 # Create environment
 timer = classes.Timer.Timer()

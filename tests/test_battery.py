@@ -6,6 +6,7 @@ Created on Tue Feb 10 14:59:48 2015
 @author: tsz
 """
 
+from __future__ import division
 import numpy as np
 
 import classes.supply.Battery as Battery

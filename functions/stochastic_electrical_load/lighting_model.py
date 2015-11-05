@@ -6,10 +6,11 @@ Created on Thu May 21 21:24:29 2015
 @author: Thomas
 """
 
-
 import random
 import math
 import csv
+from __future__ import division
+
 
 # The Excel Sheet has a fairly complicated configuration file (which I suppose most people have ignored so far)
 # This class provides the standard inputs. If required, other values can be entered.

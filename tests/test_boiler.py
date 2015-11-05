@@ -5,6 +5,8 @@ Created on Tue Feb 10 14:32:46 2015
 
 @author: tsz
 """
+
+from __future__ import division
 import numpy as np
 
 import classes.Timer
@@ -13,6 +15,7 @@ import classes.Environment
 import classes.Prices
 
 import classes.supply.Boiler as Boiler
+
 
 # Create environment
 timer = classes.Timer.Timer()

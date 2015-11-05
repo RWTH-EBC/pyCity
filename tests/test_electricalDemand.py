@@ -6,6 +6,7 @@ Created on Fri May 22 08:43:12 2015
 @author: tsz
 """
 
+from __future__ import division
 import classes.demand.ElectricalDemand as ED
 
 import classes.Timer

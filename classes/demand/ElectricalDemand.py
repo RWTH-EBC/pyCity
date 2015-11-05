@@ -14,6 +14,7 @@ import functions.changeResolution as cr
 import functions.stochastic_electrical_load.appliance_model as app_model
 import functions.stochastic_electrical_load.lighting_model as light_model
 import classes.demand.StochasticElectricalLoadWrapper as wrapper
+from __future__ import division
 
 
 class ElectricalDemand(classes.demand.Load.Load):

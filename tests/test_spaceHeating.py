@@ -12,6 +12,8 @@ import classes.Timer
 import classes.Weather
 import classes.Environment
 import classes.Prices
+from __future__ import division
+
 
 timer = classes.Timer.Timer()
 weather = classes.Weather.Weather(timer, useTRY=True)

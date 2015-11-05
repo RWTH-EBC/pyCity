@@ -6,6 +6,7 @@ Created on Tue Mar 03 15:50:08 2015
 @author: tsz
 """
 
+from __future__ import division
 import os
 import classes.supply.WindEnergyConverter as WindEnergyConverter
 

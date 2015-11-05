@@ -6,11 +6,11 @@ Created on Fri Feb 06 16:16:07 2015
 @author: tsz
 """
 
-
-
 import numpy as np
 import classes.supply.HeatingDevice as HeatingDevice
 import functions.handleData as handleData
+from __future__ import division
+
 
 class CHP(HeatingDevice.HeatingDevice):
     """

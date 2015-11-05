@@ -6,11 +6,11 @@ Created on Tue Jul 21 16:50:36 2015
 @author: tsz
 """
 
-
-
 import numpy as np
 import xlrd
 import functions.changeResolution as cr
+from __future__ import division
+
 
 def load(filename, time_discretization=900):
     """

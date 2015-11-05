@@ -12,7 +12,7 @@ import classes.demand.Load
 import classes.demand.ZoneInputs
 import functions.slp_thermal as slp_th
 import functions.zoneModel
-#import functions.changeResolution as cr
+from __future__ import division
 
 
 class SpaceHeating(classes.demand.Load.Load):

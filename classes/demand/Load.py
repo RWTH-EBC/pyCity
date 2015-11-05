@@ -7,6 +7,8 @@ Created on Sat Feb 07 07:09:12 2015
 """
 
 import numpy as np
+from __future__ import division
+
 
 class Load(object):
     """

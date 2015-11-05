@@ -6,6 +6,7 @@ Created on Tue Feb 10 14:19:59 2015
 @author: tsz
 """
 
+from __future__ import division
 import classes.supply.HeatingDevice as HeatingDevice
 import numpy as np
 
@@ -13,6 +14,7 @@ import classes.Timer
 import classes.Weather
 import classes.Prices
 import classes.Environment
+
 
 # Create environment
 timer = classes.Timer.Timer()

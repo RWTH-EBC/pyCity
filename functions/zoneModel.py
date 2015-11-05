@@ -6,9 +6,10 @@ Created on Tue Mar 24 21:24:23 2015
 @author: Thomas
 """
 
-
 import numpy as np
 import numpy.linalg as linalg
+from __future__ import division
+
 
 def _solve(A, b):
     return linalg.solve(A,b)

@@ -6,11 +6,12 @@ Created on Fri Jul 10 16:44:44 2015
 @author: tsz
 """
 
-
 import numpy as np
 import math
 import xlrd
 import functions.changeResolution as cr
+from __future__ import division
+
 
 # Sources:
 # [1] BDEW/VKU/GEODE-Leitfaden. Abwicklung von Standardlastprofilen Gas (2014)

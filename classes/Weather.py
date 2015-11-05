@@ -6,11 +6,12 @@ Created on Fri Feb 06 17:11:19 2015
 @author: tsz
 """
 
-
 import os
 import numpy as np
 import functions.changeResolution as changeResolution
 import classes.Sun
+from __future__ import division
+
 
 class Weather(classes.Sun.Sun):
     """

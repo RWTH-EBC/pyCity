@@ -6,9 +6,9 @@ Created on Wed Feb 11 16:01:52 2015
 @author: tsz
 """
 
-
-
 import numpy as np
+from __future__ import division
+
 
 class HeatingCurve(object):
     """

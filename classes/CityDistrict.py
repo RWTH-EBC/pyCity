@@ -6,9 +6,9 @@ Created on Thu Mar 12 14:29:18 2015
 @author: tsz
 """
 
-
-
 import numpy as np
+from __future__ import division
+
 
 class CityDistrict(object):
     """

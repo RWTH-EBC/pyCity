@@ -6,12 +6,13 @@ Created on Tue Jul 14 12:18:14 2015
 @author: tsz
 """
 
-
 import numpy as np
 import xlrd
 import math
 import random
 import functions.changeResolution as cr
+from __future__ import division
+
 
 def load_profiles(filename):
     """

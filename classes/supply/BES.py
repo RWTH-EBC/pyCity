@@ -6,6 +6,9 @@ Created on Mon Feb 09 12:26:24 2015
 @author: tsz
 """
 
+from __future__ import division
+
+
 class BES(object):
     """
     Building Energy System (BES) is able to contain the following devices:

@@ -6,6 +6,7 @@ Created on Thu May 21 22:07:04 2015
 @author: Thomas
 """
 
+from __future__ import division
 import numpy as np
 
 import classes.demand.DomesticHotWater as DomesticHotWater
@@ -14,6 +15,7 @@ import classes.Timer
 import classes.Weather
 import classes.Environment
 import classes.Prices
+
 
 timer = classes.Timer.Timer(3600, 8760, 8760, 8760, 0)
 weather = classes.Weather.Weather(timer, useTRY=True)

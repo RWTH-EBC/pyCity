@@ -7,6 +7,7 @@ Created on Sun Feb 15 17:01:21 2015
 """
 
 import numpy as np
+from __future__ import division
 
 
 class Building(object):

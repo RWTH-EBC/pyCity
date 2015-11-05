@@ -17,6 +17,7 @@ import classes.Timer
 import classes.Weather
 import classes.Prices
 import classes.Environment
+from __future__ import division
 
 
 # Create environment

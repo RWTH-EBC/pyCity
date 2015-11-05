@@ -6,6 +6,7 @@ Created on Fri May 22 14:39:29 2015
 @author: tsz
 """
 
+from __future__ import division
 import os
 import xlrd
 import numpy as np

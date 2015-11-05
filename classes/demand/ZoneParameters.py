@@ -9,10 +9,11 @@ Inputs:
 A_f (section 6.4) - used area in m2
 """
 
-
 import numpy as np
 import math
 import functions.changeResolution as changeResolution
+from __future__ import division
+
 
 class ZoneParameters(object):
     """

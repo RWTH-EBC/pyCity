@@ -8,6 +8,8 @@ Created on Fri Feb 06 20:01:19 2015
 
 import numpy as np
 import functions.handleData as handleData
+from __future__ import division
+
 
 class Battery(object):
     """

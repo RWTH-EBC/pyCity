@@ -6,12 +6,12 @@ Created on Fri Feb 13 11:01:43 2015
 @author: tsz
 env."""
 
-
-
+from __future__ import division
 import classes.Timer
 import classes.Weather
 import classes.Prices
 import classes.Environment
+
 
 timer   = classes.Timer.Timer()
 weather = classes.Weather.Weather(timer, useTRY=True)

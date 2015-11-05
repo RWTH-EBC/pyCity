@@ -6,8 +6,7 @@ Created on Tue Feb 10 14:43:11 2015
 @author: tsz
 """
 
-
-
+import os
 import classes.supply.PV as PV
 
 import numpy as np
@@ -19,6 +18,7 @@ import classes.Weather
 import classes.Prices
 import classes.Environment
 
+
 # Create environment
 timer = classes.Timer.Timer()
 timer.reinit(3600, 8760, 8760, 8760, 0, True)
@@ -26,8 +26,10 @@ weather = classes.Weather.Weather(timer)
 prices = classes.Prices.Prices()
 environment = classes.Environment.Environment(timer, weather, prices)
 
-# Create PV 
-pv_data = xlrd.open_workbook("inputs/photovoltaic_modules.xlsx")
+# Create PV
+src_path = os.path.dirname(os.path.dirname(__file__))
+pv_data_path = os.path.join(src_path, 'inputs', 'photovoltaic_modules.xlsx')
+pv_data = xlrd.open_workbook(pv_data_path)
 sw_290 = pv_data.sheet_by_name("SolarWorld_SW290")
 area = sw_290.cell_value(1,2) # m2, 1 module
 eta = sw_290.cell_value(6,2)

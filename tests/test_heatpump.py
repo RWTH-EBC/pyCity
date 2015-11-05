@@ -6,6 +6,7 @@ Created on Thu May 21 13:44:16 2015
 @author: Thomas
 """
 
+import os
 import numpy as np
 
 import classes.supply.HeatPump as HP
@@ -17,14 +18,19 @@ import classes.Environment
 
 import xlrd
 
+
 # Create environment
 timer = classes.Timer.Timer()
 weather = classes.Weather.Weather(timer, useTRY=True)
 prices = classes.Prices.Prices()
 environment = classes.Environment.Environment(timer, weather, prices)
 
-heatpumpData = xlrd.open_workbook("inputs/heat_pumps.xlsx")
+#  Heatpump data path
+src_path = os.path.dirname(os.path.dirname(__file__))
+hp_data_path = os.path.join(src_path, 'inputs', 'heat_pumps.xlsx')
+heatpumpData = xlrd.open_workbook(hp_data_path)
 dimplex_LA12TU = heatpumpData.sheet_by_name("Dimplex_LA12TU")
+
 # Size of the worksheet
 number_rows = dimplex_LA12TU._dimnrows
 number_columns = dimplex_LA12TU._dimncols

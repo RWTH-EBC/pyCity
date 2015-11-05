@@ -6,7 +6,7 @@ Created on Sat Feb 14 09:12:18 2015
 @author: Thomas
 """
 
-
+import os
 import classes.demand.Load
 import numpy as np
 import functions.slp_electrical as slp_el
@@ -14,6 +14,7 @@ import functions.changeResolution as cr
 import functions.stochastic_electrical_load.appliance_model as app_model
 import functions.stochastic_electrical_load.lighting_model as light_model
 import classes.demand.StochasticElectricalLoadWrapper as wrapper
+
 
 class ElectricalDemand(classes.demand.Load.Load):
     """
@@ -75,7 +76,8 @@ class ElectricalDemand(classes.demand.Load.Load):
             super(ElectricalDemand, self).__init__(environment, loadcurve)
         elif method == 1:
             if not ElectricalDemand.loaded_slp:
-                filename = "inputs/standard_load_profile/slp_electrical.xlsx"
+                src_path = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+                filename = os.path.join(src_path, 'inputs', 'standard_load_profile', 'slp_electrical.xlsx')
                 ElectricalDemand.slp = slp_el.load(filename)
                 ElectricalDemand.loaded_slp = True
             

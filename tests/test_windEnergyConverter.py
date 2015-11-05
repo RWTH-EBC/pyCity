@@ -6,8 +6,7 @@ Created on Tue Mar 03 15:50:08 2015
 @author: tsz
 """
 
-
-
+import os
 import classes.supply.WindEnergyConverter as WindEnergyConverter
 
 import numpy as np
@@ -19,6 +18,7 @@ import classes.Weather
 import classes.Prices
 import classes.Environment
 
+
 # Create environment
 timer = classes.Timer.Timer()
 weather = classes.Weather.Weather(timer, useTRY=True)
@@ -26,7 +26,9 @@ prices = classes.Prices.Prices()
 environment = classes.Environment.Environment(timer, weather, prices)
 
 # Create Wind Energy Converter (ENERCON E-126)
-wecDatasheets = xlrd.open_workbook("inputs/wind_energy_converters.xlsx")
+src_path = os.path.dirname(os.path.dirname(__file__))
+wind_data_path = os.path.join(src_path, 'inputs', 'wind_energy_converters.xlsx')
+wecDatasheets = xlrd.open_workbook(wind_data_path)
 ENERCON_E_126 = wecDatasheets.sheet_by_name("ENERCON_E_126")
 hubHeight = ENERCON_E_126.cell_value(0,1)
 mapWind = []

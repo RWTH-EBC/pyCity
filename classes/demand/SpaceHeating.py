@@ -6,13 +6,14 @@ Created on Sat Feb 14 09:12:35 2015
 @author: Thomas
 """
 
-
+import os
 import numpy as np
 import classes.demand.Load
 import classes.demand.ZoneInputs
 import functions.slp_thermal as slp_th
 import functions.zoneModel
 #import functions.changeResolution as cr
+
 
 class SpaceHeating(classes.demand.Load.Load):
     """
@@ -72,10 +73,11 @@ class SpaceHeating(classes.demand.Load.Load):
         elif method == 1:
             timeDis = environment.timer.timeDiscretization
             if not SpaceHeating.loaded_slp:
-                folder = "inputs/standard_load_profile/"
-                f_hour = folder + "slp_thermal_hourly_factors.xlsx"
-                f_prof = folder + "slp_thermal_profile_factors.xlsx"
-                f_week = folder + "slp_thermal_week_day_factors.xlsx"
+                src_path = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+                folder = os.path.join(src_path, 'inputs', 'standard_load_profile')
+                f_hour = os.path.join(folder, 'slp_thermal_hourly_factors.xlsx')
+                f_prof = os.path.join(folder, 'slp_thermal_profile_factors.xlsx')
+                f_week = os.path.join(folder, 'slp_thermal_week_day_factors.xlsx')
                 SpaceHeating.slp_hour = slp_th.load_hourly_factors(f_hour,
                                                                    timeDis)
                 SpaceHeating.slp_prof = slp_th.load_profile_factors(f_prof)

@@ -7,9 +7,9 @@ Created on Fri Mar 27 16:47:12 2015
 """
 
 from __future__ import division
-
 import numpy as np
 import math
+
 
 class Sun(object):
     """

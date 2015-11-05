@@ -7,10 +7,10 @@ Created on Fri Feb 06 17:01:58 2015
 """
 
 from __future__ import division
-
 import classes.supply.HeatingDevice as HeatingDevice
 import numpy as np
 import functions.handleData as handleData
+
 
 class ElectricalHeater(HeatingDevice.HeatingDevice):
     """

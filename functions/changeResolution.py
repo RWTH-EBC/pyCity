@@ -7,10 +7,10 @@ Created on Wed Feb 11 11:00:03 2015
 """
 
 from __future__ import division
-
 import pandas as pd
 import numpy as np
 import math
+
 
 def changeResolutionPD(values, oldResolution, newResolution, method="mean"):
     """

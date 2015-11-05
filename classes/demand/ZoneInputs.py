@@ -114,7 +114,7 @@ class ZoneInputs(object):
         solarGains = np.zeros_like(beamRadiation)
 
         # Iterate over all surface areas
-        for i in xrange(len(gamma)):
+        for i in range(len(gamma)):
             # Update only in the first iteration
             if i == 0:
                 update = True

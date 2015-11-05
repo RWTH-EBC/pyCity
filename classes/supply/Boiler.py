@@ -7,8 +7,8 @@ Created on Fri Feb 06 16:50:30 2015
 """
 
 from __future__ import division
-
 import classes.supply.HeatingDevice as HeatingDevice
+
 
 class Boiler(HeatingDevice.HeatingDevice):
     """

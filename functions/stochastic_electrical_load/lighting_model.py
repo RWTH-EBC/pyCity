@@ -5,11 +5,12 @@ Created on Thu May 21 21:24:29 2015
 
 @author: Thomas
 """
-from __future__ import division
 
+from __future__ import division
 import random
 import math
 import csv
+
 
 # The Excel Sheet has a fairly complicated configuration file (which I suppose most people have ignored so far)
 # This class provides the standard inputs. If required, other values can be entered.
@@ -52,7 +53,7 @@ def load_lighting_profile(filename, index=0):
     """
     read_in = []
     
-    with open(filename, 'rb') as input:
+    with open(filename, 'rt', encoding='utf8') as input:
         reader = csv.reader(input, delimiter=';')
         for row in reader:
             row_float=[]

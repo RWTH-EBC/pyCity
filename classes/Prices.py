@@ -8,6 +8,7 @@ Created on Mon Feb 09 16:19:18 2015
 
 from __future__ import division
 
+
 class Prices(object):
     """
     Class that keeps track of the current market conditions (prices and 

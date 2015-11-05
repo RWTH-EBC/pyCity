@@ -5,7 +5,10 @@ Created on Fri Aug 21 16:50:36 2015
 
 @author: tsz
 """
+
+from __future__ import division
 import random
+
 
 def all_states(tpm, initial_state):
     """ 

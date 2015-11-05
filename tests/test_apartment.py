@@ -6,6 +6,7 @@ Created on Wed Feb 11 15:07:39 2015
 @author: tsz
 """
 
+from __future__ import division
 import classes.Timer
 import classes.Weather
 import classes.Prices
@@ -41,18 +42,18 @@ dhw_annex42 = DomesticHotWater.DomesticHotWater(environment,
                                                 
 apartment = Apartment.Apartment(environment)
 
-print apartment.demandDomesticHotWater
-print apartment.demandElectrical
-print apartment.demandSpaceheating
+print(apartment.demandDomesticHotWater)
+print(apartment.demandElectrical)
+print(apartment.demandSpaceheating)
 
 entities = [heat_demand, el_demand, dhw_annex42]
 apartment.addMultipleEntities(entities)
 
-print
-print apartment.getDemands()
+print()
+print(apartment.getDemands())
 
-print
-print apartment.getTotalElectricalDemand()
+print()
+print(apartment.getTotalElectricalDemand())
 
-print
-print apartment.getTotalThermalDemand()
+print()
+print(apartment.getTotalThermalDemand())

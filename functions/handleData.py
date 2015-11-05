@@ -6,6 +6,9 @@ Created on Wed Feb 11 14:19:13 2015
 @author: tsz
 """
 
+from __future__ import division
+
+
 def saveResult(timer, currentAttribute, totalAttribute, currentResult):
     """ 
     Save the current result in currentAttribute and append to totalAttribute 

@@ -7,7 +7,7 @@ Created on Tue Jul 21 14:09:28 2015
 """
 
 from __future__ import division
-
+import os
 import numpy as np
 import functions.stochastic_electrical_load.lighting_model as lighting_model
 import functions.stochastic_electrical_load.appliance_model as appliance_model
@@ -33,15 +33,16 @@ class Electricity_profile(object):
         appliances : list
             List of appliance objects
         """
-
-        folder = "inputs/stochastic_electrical_load/constants/"
+        src_path = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+        folder = os.path.join(src_path, 'inputs', 'stochastic_electrical_load', 'constants')
         if not Electricity_profile.activity_statistics_loaded:
             # Load activity statistics
             Electricity_profile.activity_statistics_loaded = True
             
             for weekday in self.type_weekday:
-                temp = (np.loadtxt(folder+"ActiveAppliances_" +weekday+".csv",
-                                   delimiter=";")).tolist()
+                filename = "ActiveAppliances_" +weekday+".csv"
+                file_path = os.path.join(folder, filename)
+                temp = (np.loadtxt(file_path, delimiter=";")).tolist()
                 Electricity_profile.activity_statistics[weekday] = temp
         
         # Create lighting configuration

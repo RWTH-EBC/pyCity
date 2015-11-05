@@ -5,6 +5,7 @@ Created on Thu May 21 22:07:04 2015
 
 @author: Thomas
 """
+
 from __future__ import division
 import numpy as np
 
@@ -14,6 +15,7 @@ import classes.Timer
 import classes.Weather
 import classes.Environment
 import classes.Prices
+
 
 timer = classes.Timer.Timer(3600, 8760, 8760, 8760, 0)
 weather = classes.Weather.Weather(timer, useTRY=True)
@@ -30,10 +32,10 @@ dhw_annex42 = DomesticHotWater.DomesticHotWater(environment,
 
 results = dhw_annex42.getDemand()
 
-print
-print "Thermal demand: " + str(results[0])
-print "Required flow temperature: " + str(results[1])
-print
+print()
+print("Thermal demand: " + str(results[0]))
+print("Required flow temperature: " + str(results[1]))
+print()
 
 # Compute active occupants for one year
 # Max. occupancy is 5 people simultaneously
@@ -58,7 +60,7 @@ plt.step((np.arange(len(occupancy)) * 10+10)/60, occupancy, linewidth=2)
 plt.ylabel("Active occupants")
 offset = 0.2
 plt.ylim((-offset, max(occupancy)+offset))
-plt.yticks(range(int(max(occupancy)+1)))
+plt.yticks(list(range(int(max(occupancy)+1))))
 
 plt.show()
 

@@ -6,8 +6,11 @@ Created on Wed Feb 11 14:12:12 2015
 @author: tsz
 """
 
+from __future__ import division
+
 import classes.Timer
 import classes.Weather
+
 
 time = classes.Timer.Timer()
 weather = classes.Weather.Weather(time, useTRY=True)
@@ -19,12 +22,12 @@ weather = classes.Weather.Weather(time, useTRY=True)
                                                             getPhiAmbient=True,
                                                             getPAmbient=True)
 
-print 
-print "Ambient temperature: " + str(tamb)
-print
-print "Diffuse radiation: " + str(weather.getPreviousWeather(fromTimestep=0, 
-                                                             getQDiffuse=True))
-print
-print ("Total radiation on a tilted surface: " + 
+print() 
+print("Ambient temperature: " + str(tamb))
+print()
+print("Diffuse radiation: " + str(weather.getPreviousWeather(fromTimestep=0, 
+                                                             getQDiffuse=True)))
+print()
+print(("Total radiation on a tilted surface: " + 
        str((weather.getRadiationTiltedSurface(beta=30, gamma=45, 
-                                              update=True))[0]))
+                                              update=True))[0])))

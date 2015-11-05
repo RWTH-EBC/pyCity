@@ -7,10 +7,10 @@ Created on Wed Jul 08 22:07:49 2015
 """
 
 from __future__ import division
-
 import classes.Timer
 import classes.Weather
 import classes.Environment
+
 
 # Create environment
 # Initialize the timer object for a full year computation, without rolling 

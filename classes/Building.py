@@ -7,8 +7,8 @@ Created on Sun Feb 15 17:01:21 2015
 """
 
 from __future__ import division
-
 import numpy as np
+
 
 class Building(object):
     """
@@ -16,7 +16,7 @@ class Building(object):
     System (BES), one controller and multiple apartments
     """
     
-    def __init__(self, environment, location=(0,0)):
+    def __init__(self, environment):
         """
         Workflow
         --------
@@ -29,13 +29,10 @@ class Building(object):
         ---------
         environment : Environment object
             Common to all other objects. Includes time and weather instances
-        location : Tuple, optional
-            x and y coordinates of the building
         """
         self._kind = "building"
         
         self.environment = environment
-        self.location = location
         
         self.apartments = []
         self.bes        = []        

@@ -8,6 +8,7 @@ Created on Thu Feb 12 20:26:30 2015
 
 from __future__ import division
 
+
 class Environment(object):
     """
     This class keeps track of the simulation time and the weather conditions

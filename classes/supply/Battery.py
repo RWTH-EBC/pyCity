@@ -6,8 +6,10 @@ Created on Fri Feb 06 20:01:19 2015
 @author: Thomas
 """
 
+from __future__ import division
 import numpy as np
 import functions.handleData as handleData
+
 
 class Battery(object):
     """

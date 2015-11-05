@@ -7,8 +7,8 @@ Created on Wed Feb 11 16:01:52 2015
 """
 
 from __future__ import division
-
 import numpy as np
+
 
 class HeatingCurve(object):
     """

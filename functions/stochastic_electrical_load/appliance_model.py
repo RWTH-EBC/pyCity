@@ -6,9 +6,11 @@ Created on Thu May 21 21:24:23 2015
 @author: Thomas
 """
 
+from __future__ import division
 import random
 import math
 import csv
+
 
 class Appliances:
     """ Class to hold all relevant variables:
@@ -130,9 +132,9 @@ class Appliances:
         """
         result = []
         
-        with open(filename, 'rb') as input:
+        with open(filename, 'rt', encoding='utf8') as input:
             reader = csv.reader(input, delimiter=';')
-            reader.next() # Skip first line!
+            next(reader) # Skip first line!
             for row in reader:
                 row_float=[]
                 for col in row[2:]:

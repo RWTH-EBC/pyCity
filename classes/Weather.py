@@ -6,9 +6,12 @@ Created on Fri Feb 06 17:11:19 2015
 @author: tsz
 """
 
+from __future__ import division
+import os
 import numpy as np
 import functions.changeResolution as changeResolution
 import classes.Sun
+
 
 class Weather(classes.Sun.Sun):
     """
@@ -18,7 +21,7 @@ class Weather(classes.Sun.Sun):
     """
         
     def __init__(self, timer, 
-                 pathTRY="inputs/weather/TRY2010_05_Jahr.dat",
+                 pathTRY=None,
                  pathTemperature="", pathDirectRadiation="", 
                  pathDiffuseRadiation="", pathWindspeed="", pathHumidity="", 
                  pathPressure="", pathCloudiness="",
@@ -29,7 +32,8 @@ class Weather(classes.Sun.Sun):
         ----------
         timer : Timer object 
             A pointer to the common timer object 
-        pathTRY : String, optional if useTRY=False
+        pathTRY : String, optional if useTRY=False.
+            Default value is None. If default value is set, TRY2010_05_Jahr.dat is used.
             Path to a standard Test Reference Year file
             Example: "inputs/weather/TRY2010_05_Jahr.dat"
         pathTemperature : String, optional if useTRY=True
@@ -78,7 +82,12 @@ class Weather(classes.Sun.Sun):
         self.currentCloudiness = np.zeros(timer.timestepsHorizon)
 
         if useTRY:
-            # Read TRY data
+            #  Generate TRY path (if path is None) and use TRY2010_05_Jahr.dat
+            if pathTRY is None:
+                src_path = os.path.dirname(os.path.dirname(__file__))
+                pathTRY = os.path.join(src_path, 'inputs', 'weather', 'TRY2010_05_Jahr.dat')
+
+            #  Read TRY data
             TRYData = np.loadtxt(pathTRY, skiprows=38)
 
             # Save relevant weather data

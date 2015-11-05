@@ -46,6 +46,6 @@ heater.setResults(result_q, result_schedule)
 
 results = heater.getResults(True)
 print
-print "Heat output: " + str(results[0])
+print("Heat output: " + str(results[0]))
 print
-print "Schedule: " + str(results[1])
+print("Schedule: " + str(results[1]))

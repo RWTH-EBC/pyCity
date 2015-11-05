@@ -64,7 +64,7 @@ def calculate(temperature, initial_day, profiles, weekly_factors,
         Total yearly demand in kWh
     """
     # Compute average daily temperatures. [1], page 17, section 3.5.2
-    timesteps_day = len(hourly_factors[hourly_factors.keys()[0]])
+    timesteps_day = len(hourly_factors[list(hourly_factors.keys())[0]])
     t_average = _average_temperature(temperature, timesteps_day)
 
     # Compute h-factors. [1], page 38
@@ -143,7 +143,7 @@ def _daily_profiles(temperatures, KW, h, F, hourly_factors, initial_day):
     result = []
     temperature_range = [-15, -10, -5, 0, 5, 10, 15, 20, 25, 100]
     
-    for day in xrange(len(temperatures)):
+    for day in range(len(temperatures)):
         # Get the relative day (Monday, Tuesday... Sunday)
         relative_day = (initial_day + day) % 7
         

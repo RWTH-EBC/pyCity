@@ -6,10 +6,10 @@ Created on Thu Feb 19 16:45:15 2015
 @author: tsz
 """
 
+from __future__ import division
 import classes.supply.HeatingDevice as HeatingDevice
 import numpy as np
 import functions.handleData as handleData
-from __future__ import division
 
 
 class Heatpump(HeatingDevice.HeatingDevice):

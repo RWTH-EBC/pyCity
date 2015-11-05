@@ -6,13 +6,13 @@ Created on Sat Feb 14 09:12:35 2015
 @author: Thomas
 """
 
+from __future__ import division
 import os
 import numpy as np
 import classes.demand.Load
 import classes.demand.ZoneInputs
 import functions.slp_thermal as slp_th
 import functions.zoneModel
-from __future__ import division
 
 
 class SpaceHeating(classes.demand.Load.Load):

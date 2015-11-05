@@ -6,9 +6,10 @@ Created on Wed Feb 11 14:12:12 2015
 @author: tsz
 """
 
+from __future__ import division
+
 import classes.Timer
 import classes.Weather
-from __future__ import division
 
 
 time = classes.Timer.Timer()

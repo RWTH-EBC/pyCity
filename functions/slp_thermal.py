@@ -6,11 +6,11 @@ Created on Fri Jul 10 16:44:44 2015
 @author: tsz
 """
 
+from __future__ import division
 import numpy as np
 import math
 import xlrd
 import functions.changeResolution as cr
-from __future__ import division
 
 
 # Sources:

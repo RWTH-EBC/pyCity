@@ -6,13 +6,14 @@ Created on Fri May 22 11:29:11 2015
 @author: tsz
 """
 
+from __future__ import division
+
 import classes.demand.SpaceHeating as SpaceHeating
 
 import classes.Timer
 import classes.Weather
 import classes.Environment
 import classes.Prices
-from __future__ import division
 
 
 timer = classes.Timer.Timer()

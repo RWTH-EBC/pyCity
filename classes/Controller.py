@@ -6,8 +6,8 @@ Created on Wed Feb 11 16:01:38 2015
 @author: tsz
 """
 
-import numpy as np
 from __future__ import division
+import numpy as np
 
 
 class Controller(object):

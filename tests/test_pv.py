@@ -6,6 +6,7 @@ Created on Tue Feb 10 14:43:11 2015
 @author: tsz
 """
 
+from __future__ import division
 import os
 import classes.supply.PV as PV
 
@@ -17,7 +18,6 @@ import classes.Timer
 import classes.Weather
 import classes.Prices
 import classes.Environment
-from __future__ import division
 
 
 # Create environment

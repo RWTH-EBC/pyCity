@@ -6,8 +6,8 @@ Created on Sun Feb 15 17:01:21 2015
 @author: Thomas
 """
 
-import numpy as np
 from __future__ import division
+import numpy as np
 
 
 class Building(object):

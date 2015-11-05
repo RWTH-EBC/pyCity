@@ -7,8 +7,8 @@ Created on Fri Mar 27 09:27:39 2015
 
 """
 
-import numpy as np
 from __future__ import division
+import numpy as np
 
 
 class ZoneInputs(object):

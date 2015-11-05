@@ -6,12 +6,12 @@ Created on Sun Feb 08 22:39:15 2015
 @author: Thomas
 """
 
+from __future__ import division
 import os
 import classes.demand.Load
 import numpy as np
 import functions.changeResolution as cr
 import functions.dhw_stochastical as dhw_sto
-from __future__ import division
 
 
 class DomesticHotWater(classes.demand.Load.Load):

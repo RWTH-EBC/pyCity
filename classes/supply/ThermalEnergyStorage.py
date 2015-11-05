@@ -6,9 +6,9 @@ Created on Fri Feb 06 23:00:27 2015
 @author: Thomas
 """
 
+from __future__ import division
 import numpy as np
 import functions.handleData as handleData
-from __future__ import division
 
 
 class ThermalEnergyStorage(object):

@@ -6,12 +6,12 @@ Created on Tue Nov 03 16:09:06 2015
 @author: tsz
 """
 
+from __future__ import division
 import os
 import numpy as np
 import random
 
 import functions.occupancy_model as occupancy_model
-from __future__ import division
 
 
 class Occupancy(object):

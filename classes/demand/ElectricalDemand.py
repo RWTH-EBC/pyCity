@@ -6,6 +6,7 @@ Created on Sat Feb 14 09:12:18 2015
 @author: Thomas
 """
 
+from __future__ import division
 import os
 import classes.demand.Load
 import numpy as np
@@ -14,7 +15,6 @@ import functions.changeResolution as cr
 import functions.stochastic_electrical_load.appliance_model as app_model
 import functions.stochastic_electrical_load.lighting_model as light_model
 import classes.demand.StochasticElectricalLoadWrapper as wrapper
-from __future__ import division
 
 
 class ElectricalDemand(classes.demand.Load.Load):

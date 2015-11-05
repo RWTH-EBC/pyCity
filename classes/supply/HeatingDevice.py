@@ -6,9 +6,9 @@ Created on Fri Feb 06 15:57:15 2015
 @author: tsz
 """
 
+from __future__ import division
 import numpy as np
 import functions.handleData as handleData
-from __future__ import division
 
 
 class HeatingDevice(object):

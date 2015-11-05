@@ -6,9 +6,9 @@ Created on Fri Mar 27 16:47:12 2015
 @author: tsz
 """
 
+from __future__ import division
 import numpy as np
 import math
-from __future__ import division
 
 
 class Sun(object):

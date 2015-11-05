@@ -6,8 +6,8 @@ Created on Sat Feb 07 07:09:12 2015
 @author: Thomas
 """
 
-import numpy as np
 from __future__ import division
+import numpy as np
 
 
 class Load(object):

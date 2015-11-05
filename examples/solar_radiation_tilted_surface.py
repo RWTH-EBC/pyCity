@@ -33,3 +33,8 @@ solar_radiation_tilted_surface = function(beta, gamma, update=True)
 # 2. Direct radiation on the given surface
 # 3. Reflected radiation from the ground on the given surface
 # (The total radiation (index 0) is the sum of the other three)
+
+total_radiation = solar_radiation_tilted_surface[0]
+diffuse_radiation = solar_radiation_tilted_surface[1]
+direct_radiation = solar_radiation_tilted_surface[2]
+reflected_radiation = solar_radiation_tilted_surface[3]

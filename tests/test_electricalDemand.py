@@ -30,7 +30,7 @@ el_demand = ED.ElectricalDemand(environment,
 results = el_demand.getDemand()
 
 print
-print "Electrical demand: " + str(results)
+print("Electrical demand: " + str(results))
 
 
 

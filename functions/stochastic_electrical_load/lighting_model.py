@@ -60,16 +60,16 @@ def load_lighting_profile(filename, index=0):
     # Split resulting line
     line_split = line.split(";")
     
-    # Save results in separate list    
+    # Save results in separate list
     result = []
     
-    # Not all houses have the same amount of light bulbs -> to prevent errors, 
+    # Not all houses have the same amount of light bulbs -> to prevent errors,
     # since "" is not translatable into a float, we have to filter the values:
     i = 0
     while i < len(line_split) and line_split[i] != "":
         result.append(float(line_split[i]))
         i += 1
-    return result    
+    return result
     
 
 def run_lighting_simulation(vOccupancyArray, vBulbArray, vIrradianceArray, light_mod_config):

@@ -42,6 +42,6 @@ inverter.setResults(results_p_in, results_p_out)
 
 results = inverter.getResults(True)
 print
-print "Electricity input: " + str(results[0])
+print("Electricity input: " + str(results[0]))
 print
-print "Electricity output: " + str(results[1])
+print("Electricity output: " + str(results[1]))

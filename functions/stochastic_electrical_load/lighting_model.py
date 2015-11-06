@@ -9,7 +9,6 @@ from __future__ import division
 
 import random
 import math
-import csv
 
 # The Excel Sheet has a fairly complicated configuration file (which I suppose most people have ignored so far)
 # This class provides the standard inputs. If required, other values can be entered.
@@ -50,22 +49,27 @@ def load_lighting_profile(filename, index=0):
     Load the installed light bulbs
     The tool already provided a sheet with 100 sample bulb configurations.
     """
-    read_in = []
-    
-    with open(filename, 'rb') as input:
-        reader = csv.reader(input, delimiter=';')
-        for row in reader:
-            row_float=[]
 
-            # Not all houses have the same amount of light bulbs -> to prevent errors, 
-            # since "" is not translatable into a float, we have to filter the values:
-            i = 0
-            while (i < len(row) and row[i] != ""):
-                row_float.append(float(row[i]))
-                i += 1
-            read_in.append(row_float)
-   
-    return read_in[index] # this is the desired house configuration.
+    # Get the correct line
+    fp = open(filename)
+    for i, line in enumerate(fp):
+        if i == index:
+            break
+    fp.close()
+    
+    # Split resulting line
+    line_split = line.split(";")
+    
+    # Save results in separate list    
+    result = []
+    
+    # Not all houses have the same amount of light bulbs -> to prevent errors, 
+    # since "" is not translatable into a float, we have to filter the values:
+    i = 0
+    while i < len(line_split) and line_split[i] != "":
+        result.append(float(line_split[i]))
+        i += 1
+    return result    
     
 
 def run_lighting_simulation(vOccupancyArray, vBulbArray, vIrradianceArray, light_mod_config):

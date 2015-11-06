@@ -8,7 +8,7 @@ Created on Thu May 21 21:24:23 2015
 
 import random
 import math
-import csv
+import numpy as np
 
 class Appliances:
     """ Class to hold all relevant variables:
@@ -128,19 +128,23 @@ class Appliances:
         """
         Load the installed appliances
         """
-        result = []
-        
-        with open(filename, 'rb') as input:
-            reader = csv.reader(input, delimiter=';')
-            reader.next() # Skip first line!
-            for row in reader:
-                row_float=[]
-                for col in row[2:]:
-                    row_float.append(float(col))
-
-                result.append(row_float)
-    
-        self.data = result
+#        result = []
+#        
+#        with open(filename, 'rb') as input:
+#            reader = csv.reader(input, delimiter=';')
+#            reader.next() # Skip first line!
+#            for row in reader:
+#                row_float=[]
+#                for col in row[2:]:
+#                    row_float.append(float(col))
+#
+#                result.append(row_float)
+#    
+#        self.data = result
+        self.data = np.loadtxt(filename, 
+                               delimiter=";", 
+                               skiprows=1, 
+                               usecols=range(2,13))
     
     def randomize(self):
         """

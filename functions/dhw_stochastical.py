@@ -153,7 +153,7 @@ def full_year_computation(occupancy,
     water = np.zeros(len(occupancy) * 10)
     heat = np.zeros(len(occupancy) * 10)
     
-    for day in xrange(number_days):
+    for day in range(number_days):
         # Is the current day on a weekend?
         if (day + initial_day) % 7 >= 5:
             probability_profiles = profiles["we"]

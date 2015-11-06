@@ -31,8 +31,8 @@ dhw_annex42 = DomesticHotWater.DomesticHotWater(environment,
 results = dhw_annex42.getDemand()
 
 print
-print "Thermal demand: " + str(results[0])
-print "Required flow temperature: " + str(results[1])
+print("Thermal demand: " + str(results[0]))
+print("Required flow temperature: " + str(results[1]))
 print
 
 # Compute active occupants for one year

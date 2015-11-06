@@ -5,12 +5,14 @@ Created on Sun Feb 08 22:39:15 2015
 
 @author: Thomas
 """
-from __future__ import division
 
+from __future__ import division
+import os
 import classes.demand.Load
 import numpy as np
 import functions.changeResolution as cr
 import functions.dhw_stochastical as dhw_sto
+
 
 class DomesticHotWater(classes.demand.Load.Load):
     """
@@ -68,7 +70,8 @@ class DomesticHotWater(classes.demand.Load.Load):
             timeDis = environment.timer.timeDiscretization
             # If not already done, load the Annex 42 profile
             if not DomesticHotWater.loaded_profile:
-                filename = "inputs/standard_load_profile/dhw_annex42.csv"
+                src_path = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+                filename = os.path.join(src_path, 'inputs', 'standard_load_profile', 'dhw_annex42.csv')
                 DomesticHotWater.a42 = np.loadtxt(filename, 
                                                   skiprows=1, delimiter="\t")
                 # Adjust time resolution. Annex 42 data is sampled at 900 sec.
@@ -100,7 +103,8 @@ class DomesticHotWater(classes.demand.Load.Load):
         elif method == 2:
             # Load profiles
             if not DomesticHotWater.loaded_dhw_sto:
-                loc = "inputs/dhw_stochastical.xlsx"
+                src_path = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+                loc = os.path.join(src_path, 'inputs', 'dhw_stochastical.xlsx')
                 DomesticHotWater.dhw_sto_profiles = dhw_sto.load_profiles(loc)
                 DomesticHotWater.loaded_dhw_sto = True
             

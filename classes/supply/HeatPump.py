@@ -6,9 +6,11 @@ Created on Thu Feb 19 16:45:15 2015
 @author: tsz
 """
 
+from __future__ import division
 import classes.supply.HeatingDevice as HeatingDevice
 import numpy as np
 import functions.handleData as handleData
+
 
 class Heatpump(HeatingDevice.HeatingDevice):
     """
@@ -111,14 +113,14 @@ class Heatpump(HeatingDevice.HeatingDevice):
         power = np.zeros((timestepsHorizon, len(self.tFlow)))
         
         # Compute first interpolation
-        for i in xrange(len(self.tFlow)):
+        for i in range(len(self.tFlow)):
             heat[:,i]  = np.interp(tAmbient, self.tAmbient, self.heat[:,i])
             power[:,i] = np.interp(tAmbient, self.tAmbient, self.power[:,i])
         
         # Initialize final results
         heatNominal  = np.zeros(timestepsHorizon)
         powerNominal = np.zeros(timestepsHorizon)
-        for j in xrange(timestepsHorizon):
+        for j in range(timestepsHorizon):
             heatNominal[j]  = np.interp(tFlow[j], self.tFlow, heat[j,:])
             powerNominal[j] = np.interp(tFlow[j], self.tFlow, power[j,:])
             

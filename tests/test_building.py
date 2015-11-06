@@ -6,6 +6,8 @@ Created on Fri May 22 14:39:29 2015
 @author: tsz
 """
 
+from __future__ import division
+import os
 import xlrd
 import numpy as np
 
@@ -22,6 +24,7 @@ import classes.supply.BES as BES
 import classes.supply.HeatPump as HeatPump
 import classes.HeatingCurve as HeatingCurve
 import classes.Building as Building
+
 
 timer = classes.Timer.Timer()
 weather = classes.Weather.Weather(timer)
@@ -50,11 +53,16 @@ apartment = Apartment.Apartment(environment)
 apartment.addEntity(heat_demand)
 apartment.addMultipleEntities([el_demand, dhw_annex42])
 
-heatpumpData = xlrd.open_workbook("inputs/heat_pumps.xlsx")
+#  Heatpump data path
+src_path = os.path.dirname(os.path.dirname(__file__))
+hp_data_path = os.path.join(src_path, 'inputs', 'heat_pumps.xlsx')
+heatpumpData = xlrd.open_workbook(hp_data_path)
 dimplex_LA12TU = heatpumpData.sheet_by_name("Dimplex_LA12TU")
+
 # Size of the worksheet
 number_rows = dimplex_LA12TU._dimnrows
 number_columns = dimplex_LA12TU._dimncols
+
 # Flow, ambient and max. temperatures
 tFlow = np.zeros(number_columns-2)
 tAmbient = np.zeros(int((number_rows-7)/2))
@@ -93,11 +101,11 @@ entities = [apartment, bes, heatingCurve]
 building.addMultipleEntities(entities)
 
 
-print
-print building.getDemands()
+print()
+print(building.getDemands())
 
-print
-print building.getHeatpumpNominals()
+print()
+print(building.getHeatpumpNominals())
 
-print
-print building.flowTemperature
+print()
+print(building.flowTemperature)

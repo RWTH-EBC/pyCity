@@ -10,6 +10,7 @@ from __future__ import division
 import numpy as np
 import numpy.linalg as linalg
 
+
 def _solve(A, b):
     return linalg.solve(A,b)
 
@@ -299,8 +300,8 @@ def calc(zoneParameters, zoneInputs, TCoolingSet, THeatingSet,
         if not beQuiet:
             interval = int(numberTimesteps / 20)
             if t % interval == 0:
-                print ("Timestep: " + str(t) + ". Progress: " + 
-                       str(t / numberTimesteps) + ".")
+                print(("Timestep: " + str(t) + ". Progress: " + 
+                       str(t / numberTimesteps) + "."))
     
     # Compute operating temperature
     T_op = 0.3 * T_i + 0.7 * T_s        

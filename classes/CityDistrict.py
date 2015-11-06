@@ -7,8 +7,8 @@ Created on Thu Mar 12 14:29:18 2015
 """
 
 from __future__ import division
-
 import numpy as np
+
 
 class CityDistrict(object):
     """

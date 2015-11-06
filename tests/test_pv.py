@@ -7,7 +7,7 @@ Created on Tue Feb 10 14:43:11 2015
 """
 
 from __future__ import division
-
+import os
 import classes.supply.PV as PV
 
 import numpy as np
@@ -19,6 +19,7 @@ import classes.Weather
 import classes.Prices
 import classes.Environment
 
+
 # Create environment
 timer = classes.Timer.Timer()
 timer.reinit(3600, 8760, 8760, 8760, 0, True)
@@ -26,8 +27,10 @@ weather = classes.Weather.Weather(timer)
 prices = classes.Prices.Prices()
 environment = classes.Environment.Environment(timer, weather, prices)
 
-# Create PV 
-pv_data = xlrd.open_workbook("inputs/photovoltaic_modules.xlsx")
+# Create PV
+src_path = os.path.dirname(os.path.dirname(__file__))
+pv_data_path = os.path.join(src_path, 'inputs', 'photovoltaic_modules.xlsx')
+pv_data = xlrd.open_workbook(pv_data_path)
 sw_290 = pv_data.sheet_by_name("SolarWorld_SW290")
 area = sw_290.cell_value(1,2) # m2, 1 module
 eta = sw_290.cell_value(6,2)
@@ -43,21 +46,21 @@ pvPower_simple = pv_simple.getPower()
 pvPower_detailed = pv_detailed.getPower()
 
 # Print results
-print
-print("Efficiency: " + str(pv_detailed.eta))
-print("Area: " + str(pv_detailed.area))
-print("Cell temperature: " + str(pv_detailed.temperature_nominal))
-print("Loss coefficient: "    + str(pv_detailed.alpha))
+print()
+print(("Efficiency: " + str(pv_detailed.eta)))
+print(("Area: " + str(pv_detailed.area)))
+print(("Cell temperature: " + str(pv_detailed.temperature_nominal)))
+print(("Loss coefficient: "    + str(pv_detailed.alpha)))
 
-print("Nominal values: " + str(pv_detailed.getNominalValues()))
+print(("Nominal values: " + str(pv_detailed.getNominalValues())))
 
-print
-print("PV power (simple model): " + np.str(pvPower_simple))
-print
-print("PV power (detailed model): " + np.str(pvPower_detailed))
+print()
+print(("PV power (simple model): " + np.str(pvPower_simple)))
+print()
+print(("PV power (detailed model): " + np.str(pvPower_detailed)))
 
 # Plot PV power
-plot_time = range(environment.timer.timestepsHorizon)
+plot_time = list(range(environment.timer.timestepsHorizon))
 figure = plt.figure(figsize=(6,6))
 from matplotlib import gridspec
 gs = gridspec.GridSpec(2,1, height_ratios=[3,1])

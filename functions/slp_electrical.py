@@ -7,10 +7,10 @@ Created on Tue Jul 21 16:50:36 2015
 """
 
 from __future__ import division
-
 import numpy as np
 import xlrd
 import functions.changeResolution as cr
+
 
 def load(filename, time_discretization=900):
     """

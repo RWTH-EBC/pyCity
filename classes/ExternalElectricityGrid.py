@@ -7,9 +7,9 @@ Created on Sat Mar 14 08:52:56 2015
 """
 
 from __future__ import division
-
 import numpy as np
 import functions.handleData as handleData
+
 
 class ExternalElectricityGrid(object):
     """

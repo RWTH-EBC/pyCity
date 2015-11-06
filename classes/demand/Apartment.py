@@ -6,9 +6,11 @@ Created on Tue Feb 10 13:30:09 2015
 @author: tsz
 """
 
+from __future__ import division
 import classes.demand.DomesticHotWater as DHW
 import classes.demand.ElectricalDemand as ElecDemand
 import classes.demand.SpaceHeating as SpaceHeat
+
 
 class Apartment(object):
     """

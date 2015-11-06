@@ -5,6 +5,9 @@ Created on Tue Feb 10 14:37:31 2015
 
 @author: tsz
 """
+
+from __future__ import division
+
 import numpy as np
 import classes.supply.ThermalEnergyStorage as ThermalEnergyStorage
 
@@ -12,6 +15,7 @@ import classes.Timer
 import classes.Weather
 import classes.Prices
 import classes.Environment
+
 
 # Create environment
 timer = classes.Timer.Timer()
@@ -35,17 +39,17 @@ tes = ThermalEnergyStorage.ThermalEnergyStorage(environment,
 (tesCapacity, tesTMax, tesTSurroundings, tesKLosses) = tes.getNominalValues()
 
 # Print results
-print
-print("Initial temperature: "      + str(tes.tInit))
-print("Water mass: "               + str(tesCapacity))
-print("Maximum temperature: "      + str(tesTMax))
-print("Surroundings temperature: " + str(tesTSurroundings))
-print("Loss factor: "              + str(tesKLosses))
+print()
+print(("Initial temperature: "      + str(tes.tInit)))
+print(("Water mass: "               + str(tesCapacity)))
+print(("Maximum temperature: "      + str(tesTMax)))
+print(("Surroundings temperature: " + str(tesTSurroundings)))
+print(("Loss factor: "              + str(tesKLosses)))
 
 np.random.seed(0)
 result = (np.random.rand(timer.timestepsUsedHorizon) * (t_max - t_surroundings)
           + t_surroundings)
 tes.setResults(result)
 
-print
-print("Storage temperature: " + str(tes.getResults(True)))
+print()
+print(("Storage temperature: " + str(tes.getResults(True))))

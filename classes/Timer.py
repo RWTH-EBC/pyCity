@@ -5,7 +5,9 @@ Created on Fri Feb 06 17:05:44 2015
 
 @author: tsz
 """
+
 from __future__ import division
+
 
 class Timer(object):
     """

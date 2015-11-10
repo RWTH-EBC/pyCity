@@ -21,22 +21,29 @@ class Weather(pycity.classes.Sun.Sun):
     """
         
     def __init__(self, timer, 
-                 pathTRY=None,
+                 pathTRY=None, pathTMY3=None,
                  pathTemperature="", pathDirectRadiation="", 
                  pathDiffuseRadiation="", pathWindspeed="", pathHumidity="", 
                  pathPressure="", pathCloudiness="",
-                 timeDiscretization=3600, delimiter="\t", useTRY=True,
-                 location=(50.76, 6.07), heightVelocityMeasurement=10):
+                 timeDiscretization=3600, delimiter="\t",
+                 useTRY=True, useTMY3=False,
+                 location=(50.76, 6.07), heightVelocityMeasurement=10,
+                 altitude=0, timeZone=1):
         """
         Parameters
         ----------
         timer : Timer object 
             A pointer to the common timer object 
         pathTRY : String, optional if useTRY=False.
-            Default value is None. If default value is set, TRY2010_05_Jahr.dat is used.
             Path to a standard Test Reference Year file
+            Default value is None. If default value is set, TRY2010_05_Jahr.dat is used.
             Example: "inputs/weather/TRY2010_05_Jahr.dat"
-        pathTemperature : String, optional if useTRY=True
+        pathTMY3 : String, optional if useTMY3=False.
+            Path to a standard Test Reference Year file
+            Default value is None. If default value is set, data for New York 
+            City, JFK airport
+            Example: "inputs/weather/tmy3_744860_new_york_jfk_airport.csv"
+        pathTemperature : String, optional if useTRY=True or useTMY3=True
             Path to the file that holds the ambient temperature values
         pathDirectRadiation : String, optional
             Path to the file that holds the values for direct solar radiation
@@ -56,18 +63,25 @@ class Weather(pycity.classes.Sun.Sun):
             elimiter used in all files
             "\t" is tab-separated, "," is column separated...
         useTRY : Boolean, optional
-            True: Read data from TRY file 
+            True: Read data from TRY file
+            False: Read data from other files.
+        useTMY3 : Boolean, optional
+            True: Read data from TMY3 file 
             False: Read data from other files. 
-            Note, if useTRY=False: Only the ambient temperature is required!
         location : Tuple, optional
             (longitude, latitude) of the simulated system's position. Standard
             values (50.76, 6.07) represent Aachen, Germany.
         heightVelocityMeasurement : Float, optional
             At which height is the wind velocity measured? (10 meters for
             German test reference years).
+        altitude : float, optional
+            The locations altitude in meters.
+        timeZone : integer, optional
+            Shift between the location's time and GMT in hours. CET is 1.
+            Daylight savings time is neglected.
         """
 
-        super(Weather, self).__init__(timer, location)
+        super(Weather, self).__init__(timer, location, timeZone, altitude)
         self._kind  = "weather"
         
         self.heightVelocityMeasurement = heightVelocityMeasurement
@@ -82,12 +96,15 @@ class Weather(pycity.classes.Sun.Sun):
         self.currentCloudiness = np.zeros(timer.timestepsHorizon)
 
         if useTRY:
-            #  Generate TRY path (if path is None) and use TRY2010_05_Jahr.dat
+            # Generate TRY path (if path is None) and use TRY2010_05_Jahr.dat
             if pathTRY is None:
                 src_path = os.path.dirname(os.path.dirname(__file__))
-                pathTRY = os.path.join(src_path, 'inputs', 'weather', 'TRY2010_05_Jahr.dat')
+                pathTRY = os.path.join(src_path,
+                                       'inputs',
+                                       'weather',
+                                       'TRY2010_05_Jahr.dat')
 
-            #  Read TRY data
+            # Read TRY data
             TRYData = np.loadtxt(pathTRY, skiprows=38)
 
             # Save relevant weather data
@@ -104,6 +121,37 @@ class Weather(pycity.classes.Sun.Sun):
                 first_line = data.readline()
             self.try_number = first_line[3] + first_line[4]
 
+        elif useTMY3:
+            # Generate TMY3 path (if path is None) and use 
+            # tmy3_744860_new_york_jfk_airport.csv
+            if pathTMY3 is None:
+                src_path = os.path.dirname(os.path.dirname(__file__))
+                pathTMY3 = os.path.join(src_path,
+                                        'inputs',
+                                        'weather',
+                                        'tmy3_744860_new_york_jfk_airport.csv')
+
+            weather_data = np.loadtxt(pathTMY3, skiprows=2, delimiter=",",
+                                      usecols=(4,7,10,25,31,37,40,46))
+
+            self.pAmbient   = weather_data[:,6]
+            self.phiAmbient = weather_data[:,5]
+            self.tAmbient   = weather_data[:,4]
+            self.vWind      = weather_data[:,7]
+            self.cloudiness = weather_data[:,3]
+            
+            globalHorIrrad = weather_data[:,0]
+            directNormalIrrad = weather_data[:,1]
+            
+            self.computeGeometry(allTimeSteps=True)
+            changeRes = changeResolution.changeResolution
+            thetaZ = changeRes(self.thetaZ, 
+                               self.timer.timeDiscretization, 
+                               timeDiscretization)
+            self.qDirect  = directNormalIrrad * np.cos(np.radians(thetaZ))
+            self.qDiffuse = np.maximum(0, globalHorIrrad - self.qDirect)
+            self.try_number = "00"
+            
         else:
             # If the data is not provided via TRY, load each file separately
             def readTXT(path, delimiter):

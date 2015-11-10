@@ -32,6 +32,13 @@ def run_test():
            str((weather.getRadiationTiltedSurface(beta=30, gamma=45,
                                                   update=True))[0])))
 
+    w2 = pycity.classes.Weather.Weather(time, useTRY=False, useTMY3=True)
+    (tamb2, qdif2, vw2, phiamb2, pamb2) = w2.getWeatherForecast(getTAmbient=True,
+                                                                getQDirect=True,
+                                                                getQDiffuse=False,
+                                                                getVWind=True,
+                                                                getPhiAmbient=True,
+                                                                getPAmbient=True)
 if __name__ == '__main__':
     #  Run program
     run_test()

@@ -67,7 +67,7 @@ class Sun(object):
         """
         self.computeGeometry()
     
-    def computeGeometry(self):
+    def computeGeometry(self, allTimeSteps=False):
         """
         This function computes hour angle, declination, zenith angle of the 
         sun for the forecasting horizon.
@@ -76,7 +76,13 @@ class Sun(object):
         Duffie, Beckman - Solar Engineering of Thermal Processes, 2013 (4th 
         ed.)
         
-        Returns
+        Parameters
+        ----------
+        allTimeSteps : boolean, optional
+            - True: Compute the results for all time steps
+            - False: Compute the results only for the upcoming horizon
+        
+        Updates
         -------
         omega : array_like
             Hour angle. The angular displacement of the sun east or west of 
@@ -92,9 +98,13 @@ class Sun(object):
             horizontal surface; 0 <= thetaZ <= 90
         """
         # Get timer-relevant data
-        timesteps          = self.timer.timestepsHorizon
         timeDiscretization = self.timer.timeDiscretization
         initialTime = self.timer.currentTimestep * timeDiscretization
+        
+        if allTimeSteps:
+            timesteps = self.timer.timestepsTotal
+        else:
+            timesteps = self.timer.timestepsHorizon
         
         # Define pi
         pi = math.pi

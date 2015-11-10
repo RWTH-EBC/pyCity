@@ -145,9 +145,12 @@ class Weather(pycity.classes.Sun.Sun):
             
             self.computeGeometry(allTimeSteps=True)
             changeRes = changeResolution.changeResolution
-            thetaZ = changeRes(self.thetaZ, self.timer.timeDiscretization, timeDiscretization)
+            thetaZ = changeRes(self.thetaZ, 
+                               self.timer.timeDiscretization, 
+                               timeDiscretization)
             self.qDirect  = directNormalIrrad * np.cos(np.radians(thetaZ))
             self.qDiffuse = np.maximum(0, globalHorIrrad - self.qDirect)
+            self.try_number = "00"
             
         else:
             # If the data is not provided via TRY, load each file separately

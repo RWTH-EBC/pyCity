@@ -16,7 +16,12 @@ class Sun(object):
     
     """
     
-    def __init__(self, timer, location=(50.76, 6.07), timeZone=1, altitude=0):
+    def __init__(self, 
+                 timer, 
+                 location=(50.76, 6.07), 
+                 timeZone=1, 
+                 altitude=0, 
+                 TRY=True):
         """
         location : tuple, optional
             (latitude, longitude) of the simulated system's position. Standard
@@ -26,6 +31,9 @@ class Sun(object):
             Daylight savings time is neglected.
         altitude : float, optional
             The locations altitude in meters.
+        TRY : Boolean, optional
+            Is the input data from a test reference year? If yes, the time 
+            equation has an offset of 0.5 hours, else 0.
         """
         self.timer = timer
         self.altitude = altitude
@@ -33,6 +41,8 @@ class Sun(object):
         
         # Split location into latitude (phi) and longitude (lambda).
         (self.latitude, self.longitude) = location
+        
+        self.TRY = TRY
     
     def setLocation(self, location=(50.76, 6.07), timeZone=1, altitude=0):
         """ 
@@ -134,6 +144,8 @@ class Sun(object):
         sinB  = np.sin(BR)
         cos2B = np.cos(2 * BR)
         sin2B = np.sin(2 * BR)
+        cos3B = np.cos(3 * BR)
+        sin3B = np.sin(3 * BR)
         
         # Convert local time into solar time
         # Equation 1.5.3, page 11
@@ -149,9 +161,15 @@ class Sun(object):
         
         # Compute solar time
         # Equation 1.5.2, page 11 (conversion to hours instead of minutes)
+        if self.TRY:
+            offset = 0.5
+        else:
+            offset = 0
+            
         solarTime = (standardTime
-                   + 4 * (self.longitude - lambdaStandard) / 60
-                   + E)
+                     + 4 * (self.longitude - lambdaStandard) / 60
+                     + E
+                     - offset)
         
         # Hour angle
         # The angular displacement of the sun east or west of the local 
@@ -168,8 +186,10 @@ class Sun(object):
         # The angular position of the sun at solar noon (i.e., when the sun 
         # is on the local meridian) with respect to the plane of the equator, 
         # north positive; −23.45 <= delta <= 23.45
-        # Equation 1.6.1a, page 13
-        delta = 23.45 * np.sin((284 + numberDay) / 365 * 2 * pi)
+        # Equation 1.6.1b, page 14
+        delta = 180 / pi * (0.006918 - 0.399912 * cosB  + 0.070257 * sinB 
+                                     - 0.006758 * cos2B + 0.000907 * sin2B 
+                                     - 0.002697 * cos3B + 0.001480 * sin3B)
         deltaR = np.radians(delta)
         
         # Zenith angle

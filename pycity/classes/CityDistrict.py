@@ -1,37 +1,67 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Created on Thu Mar 12 14:29:18 2015
-
-@author: tsz
+Python code with city district class. Usage requires installation of uesgraphs Python package.
+uesgraphs can be downloaded on Github: https://github.com/RWTH-EBC/uesgraphs
 """
+
 
 from __future__ import division
 import numpy as np
 
+try:
+    import uesgraphs.uesgraph as ues
+except:
+    ImportError('Package uesgraphs is not found. Please install uesgraphs first. https://github.com/RWTH-EBC/uesgraphs')
 
-class CityDistrict(object):
+
+class CityDistrict(ues.UESGraph):
     """
+    City district class. Inheritance from urban energy system graph (uesgraph).
     """
-    
+
     def __init__(self, environment):
         """
-        """
-        self.environment = environment
-        
-        self._kind = "citydistrict"
+        Constructor of city district object.
 
-        # Initialize buildings and renewables (wind energy converters (wec) 
-        # and photovoltaic modules (pv))
-        self.buildings = []
-        self.wec = []
-        self.pv = []
-        
-        
-    def addEntity(self, entity):
+        Parameters
+        ----------
+        environment : object
+            Environmental object of PyCity (common to all other objects)
+
+        Atributes
+        ---------
+        _kind : str
+            Type of object ("citydistrict")
+        buildings : list
+            List holding building objects
+        wec : list
+            List holding wind energy converters of city district
+        pv : list
+            List holding central PV farms of city district
         """
-        Add an entity
-        
+        #  Initialize super class
+        super(CityDistrict, self).__init__()
+
+        #  Add pointer to environment
+        self.environment = environment
+
+        #  Define object type
+        self._kind = 'citydistrict'
+
+    def addEntity(self, entity, position=None, name=None):
+        """
+        Method adds entity (e.g. building object) to city district object.
+
+        Parameters
+        ----------
+        entity : object
+            Possible entity object (building, windenergyconverter or pv)
+        position : sympy.geometry.Point object, optional
+            New node's position (default: None)
+        name : str, optional
+            Name of entity (default: None)
+
         Example
         -------
         >>> myBuilding = Building(...)
@@ -39,16 +69,24 @@ class CityDistrict(object):
         >>> myCityDistrict.addDevice(myBuilding)
         """
 
-        # Append new device (note: there can be multiple wec and/or pv devices)
         if entity._kind == "building":
-            self.buildings.append(entity)
+            is_supply_electricity = False
 
         elif entity._kind == "windenergyconverter":
-            self.wec.append(entity)
+            is_supply_electricity = True
 
         elif entity._kind == "pv":
-            self.pv.append(entity)
+            is_supply_electricity = True
 
+        #  TODO: Add further entities, e.g. power plants, gas supply, cooling supply feeder etc.
+
+        #  Use add_building method of uesgraph (in ues graph, every demand and every supplier is linked to a building)
+        #  PV or wec "buildings" are buildings with zero energy demand (only generation is taken into account)
+        #  Add building node to graph (node_type='building')
+        node_number = self.add_building(name=name, position=position, is_supply_electricity=is_supply_electricity)
+
+        #  Add entity as attribute to node with returned node_number
+        self.add_node(node_number, entity=entity)
 
     def addMultipleEntities(self, entities):
         """
@@ -69,7 +107,6 @@ class CityDistrict(object):
         for entity in entities:
             self.addEntity(entity)
 
-
     def _getRESPower(self, generators):
         """
         Get the (aggregated) forecast of all renewable electricity generators.
@@ -80,16 +117,15 @@ class CityDistrict(object):
 
         return power
 
-
     def getPVPower(self):
         """
         Get the (aggregated) forecast of all pv units.
         """
+        #  Fixme: Of all pv units or only centralized pv farms?
         if len(self.pv) == 0:
             return np.zeros(self.environment.timer.timestepsHorizon)
         else:
             return self._getRESPower(self.pv)
-
 
     def getWindEnergyConverterPower(self):
         """
@@ -99,7 +135,7 @@ class CityDistrict(object):
             return np.zeros(self.environment.timer.timestepsHorizon)
         else:
             return self._getRESPower(self.wec)
-         
+
     def getDemands(self):
         """ 
         Get the aggregated electricity and heat demand forecast of all
@@ -115,25 +151,33 @@ class CityDistrict(object):
         timesteps = self.environment.timer.timestepsHorizon
         demandElectrical = np.zeros(timesteps)
         demandThermal = np.zeros(timesteps)
-        
-        for building in self.buildings:
-            temp = building.getDemands()
-            demandElectrical += temp[0]
-            demandThermal += temp[1]
-        
+
+        #  Loop over all nodes
+        for n in self:
+            #  If node holds attribute 'node_type'
+            if 'node_type' in self.node[n]:
+                #  If node_type is building
+                if self.node[n]['node_type'] == 'building':
+                    temp = self.node[n]['entity'].getDemands()
+                    demandElectrical += temp[0]
+                    demandThermal += temp[1]
+
+        # # for building in self.buildings:
+        #     temp = building.getDemands()
+        #     demandElectrical += temp[0]
+        #     demandThermal += temp[1]
+
         return (demandElectrical, demandThermal)
-        
+
     def getFlowTemperatures(self):
         """ 
         Get the aggregated flow temperature forecast.
         """
         timesteps = self.environment.timer.timestepsHorizon
         flowTemperature = np.zeros(timesteps)
-        
+
         for building in self.buildings:
             flowTemperature = np.maximum(flowTemperature,
                                          building.getFlowTemperature())
-        
+
         return flowTemperature
-        
-        

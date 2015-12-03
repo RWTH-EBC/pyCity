@@ -53,18 +53,32 @@ def load_lighting_profile(filename, index=0):
     """
     read_in = []
     
-    with open(filename, 'rt', encoding='utf8') as input:
-        reader = csv.reader(input, delimiter=';')
-        for row in reader:
-            row_float=[]
-
-            # Not all houses have the same amount of light bulbs -> to prevent errors, 
-            # since "" is not translatable into a float, we have to filter the values:
-            i = 0
-            while (i < len(row) and row[i] != ""):
-                row_float.append(float(row[i]))
-                i += 1
-            read_in.append(row_float)
+    try:
+        with open(filename, 'rt', encoding='utf8') as input:
+            reader = csv.reader(input, delimiter=';')
+            for row in reader:
+                row_float=[]
+    
+                # Not all houses have the same amount of light bulbs -> to prevent errors, 
+                # since "" is not translatable into a float, we have to filter the values:
+                i = 0
+                while (i < len(row) and row[i] != ""):
+                    row_float.append(float(row[i]))
+                    i += 1
+                read_in.append(row_float)
+    except:
+        with open(filename, 'r') as input:
+            reader = csv.reader(input, delimiter=';')
+            for row in reader:
+                row_float=[]
+    
+                # Not all houses have the same amount of light bulbs -> to prevent errors, 
+                # since "" is not translatable into a float, we have to filter the values:
+                i = 0
+                while (i < len(row) and row[i] != ""):
+                    row_float.append(float(row[i]))
+                    i += 1
+                read_in.append(row_float)
    
     return read_in[index] # this is the desired house configuration.
     

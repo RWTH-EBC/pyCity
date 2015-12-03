@@ -131,16 +131,26 @@ class Appliances:
         Load the installed appliances
         """
         result = []
-        
-        with open(filename, 'rt', encoding='utf8') as input:
-            reader = csv.reader(input, delimiter=';')
-            next(reader) # Skip first line!
-            for row in reader:
-                row_float=[]
-                for col in row[2:]:
-                    row_float.append(float(col))
-
-                result.append(row_float)
+        try:
+            with open(filename, 'rt', encoding='utf8') as input:
+                reader = csv.reader(input, delimiter=';')
+                next(reader) # Skip first line!
+                for row in reader:
+                    row_float=[]
+                    for col in row[2:]:
+                        row_float.append(float(col))
+    
+                    result.append(row_float)
+        except:
+            with open(filename, 'r') as input:
+                reader = csv.reader(input, delimiter=';')
+                next(reader) # Skip first line!
+                for row in reader:
+                    row_float=[]
+                    for col in row[2:]:
+                        row_float.append(float(col))
+    
+                    result.append(row_float)
     
         self.data = result
     

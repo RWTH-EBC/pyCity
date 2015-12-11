@@ -161,13 +161,13 @@ class Weather(pycity.classes.Sun.Sun):
                     result = np.zeros(timer.timestepsTotal)
                 return result
             
-            self.tAmbient   = readTXT(pathTemperature)
-            self.qDirect    = readTXT(pathDirectRadiation)
-            self.qDiffuse   = readTXT(pathDiffuseRadiation)
-            self.vWind      = readTXT(pathWindspeed)
-            self.phiAmbient = readTXT(pathHumidity)
-            self.pAmbient   = readTXT(pathPressure)
-            self.cloudiness = readTXT(pathCloudiness)
+            self.tAmbient   = readTXT(pathTemperature, delimiter)
+            self.qDirect    = readTXT(pathDirectRadiation, delimiter)
+            self.qDiffuse   = readTXT(pathDiffuseRadiation, delimiter)
+            self.vWind      = readTXT(pathWindspeed, delimiter)
+            self.phiAmbient = readTXT(pathHumidity, delimiter)
+            self.pAmbient   = readTXT(pathPressure, delimiter)
+            self.cloudiness = readTXT(pathCloudiness, delimiter)
             self.try_number = "00"
 
                            

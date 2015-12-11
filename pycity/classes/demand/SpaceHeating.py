@@ -10,7 +10,7 @@ from __future__ import division
 import os
 import numpy as np
 import pycity.classes.demand.Load
-import pycity.classes.demand.ZoneInputs
+import pycity.classes.demand.ZoneInputs as zi
 import pycity.functions.slp_thermal as slp_th
 import pycity.functions.zoneModel
 
@@ -28,7 +28,9 @@ class SpaceHeating(pycity.classes.demand.Load.Load):
     def __init__(self, environment, method=0,
                  loadcurve=[], 
                  livingArea=0, specificDemand=0, singleFamilyHouse=True,
-                 zoneParameters=None, T_m_init=None):
+                 zoneParameters=None, T_m_init=None, ventilation=0,
+                 TCoolingSet=200, THeatingSet=-50, occupancy=0,
+                 appliances=0, lighting=0):
         """
         Parameters
         ----------
@@ -56,7 +58,25 @@ class SpaceHeating(pycity.classes.demand.Load.Load):
         T_m_init : Float, optional
             Initial temperature of the internal heat capacity.
             Requires ``method=2``.
-            
+        ventilation : Array-like, optional
+            Ventilation rate in 1/h.
+            Requires ``method=2``.
+        TCoolingSet : Array-like, optional
+            Cooling starts if the room temperature exceeds this value.
+            Requires ``method=2``.
+        THeatingSet : Array-like, optional
+            Heating starts if the room temperature drops below this value.
+            Requires ``method=2``.
+        occupancy : Array-like, optional
+            Full year occupancy profile.
+            Requires ``method=2``.
+        appliances : Array-like, optional
+            Internal gains from electrical appliances in Watt.
+            Requires ``method=2``.
+        lighting : Array-like, optional
+            Internal gains from lighting in Watt.
+            Requires ``method=2``.
+        
         Info
         ----
         The thermal standard load profile is based on the disseratation of
@@ -101,29 +121,46 @@ class SpaceHeating(pycity.classes.demand.Load.Load):
             
         elif method == 2:
             self.zoneParameters = zoneParameters
-            self.zoneInputs = pycity.classes.ZoneInputs.ZoneInputs(environment,
-                                                            zoneParameters,
-                                                            T_m_init)
-            self.loadcurve = np.zeros(environment.timer.timestepsTotal)
+            # Create zoneInputs (this already creates the full year inputs!)
+            self.zoneInputs = zi.ZoneInputs(environment,
+                                            zoneParameters,
+                                            T_m_init,
+                                            ventilation=ventilation,
+                                            occupancy=occupancy,
+                                            appliances=appliances,
+                                            lighting=lighting)
+            
+            calc = pycity.functions.zoneModel.calc
+            res = calc(zoneParameters=self.zoneParameters,
+                           zoneInputs=self.zoneInputs, 
+                           TCoolingSet=TCoolingSet,
+                           THeatingSet=THeatingSet,
+                           limitHeating=np.inf, 
+                           limitCooling=-np.inf, 
+                           beQuiet=True)
+            
+            self.loadcurve = res[0]
+            self.T_op = res[1]
+            self.T_m = res[2]
+            self.T_i = res[3]
+            self.T_s = res[4]
             
         self._kind = "spaceheating"
         
-    def getDemand(self, TCoolingSet=None, THeatingSet=None, ventilation=None,
-                  occupancy=None, appliances=None, lighting=None, 
-                  currentValues=True):
+    def getDemand(self, currentValues=True):
         """
         """
-        if self.method in (0, 1):
+        if self.method in (0, 1, 2):
             return self._getLoadcurve(currentValues)
-        elif self.method == 2:
-            if currentValues:
-                self.zoneInputs.update(occupancy, appliances, lighting)
-                function = pycity.functions.zoneModel.calc
-                res = function(zoneParameters=self.zoneParameters,
-                               zoneInputs=self.zoneInputs, 
-                               TCoolingSet=TCoolingSet,
-                               THeatingSet=THeatingSet,
-                               limitHeating=np.inf, 
-                               limitCooling=-np.inf, 
-                               beQuiet=True)
-            return res[0]
+#        elif self.method == 2:
+#            if currentValues:
+#                self.zoneInputs.update(occupancy, appliances, lighting)
+#                calc = pycity.functions.zoneModel.calc
+#                res = calc(zoneParameters=self.zoneParameters,
+#                           zoneInputs=self.zoneInputs, 
+#                           TCoolingSet=TCoolingSet,
+#                           THeatingSet=THeatingSet,
+#                           limitHeating=np.inf, 
+#                           limitCooling=-np.inf, 
+#                           beQuiet=True)
+#            return res[0]

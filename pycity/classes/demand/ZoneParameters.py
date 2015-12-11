@@ -40,7 +40,10 @@ class ZoneParameters(object):
                  buildingClass=0, 
                  kappa_j=[], 
                  A_j=[], 
-                 simplifiedCapacity=True):
+                 simplifiedCapacity=True,
+                 albedo=0.2,
+                 gamma=[0, 90, 180, 270, 0, 0],
+                 beta=[90, 90, 90, 90, 0, 0]):
         """
         Set up a thermal zone as required for calculations according to 
         DIN EN ISO 13790:2008 (German version of ISO 13790:2008).
@@ -70,8 +73,8 @@ class ZoneParameters(object):
         - 1 : West
         - 2 : North
         - 3 : East
-        - 4 : Floor
-        - 5 : Roof / Ceiling
+        - 4 : Roof / Ceiling
+        - 5 : Floor
         This convention is derived from the definition of the surface azimuth 
         angles. See Duffie and Beckman: Solar Engineering of Thermal Processes
         (4th ed.), section 1.6, page 13. If a surface for example does not 
@@ -131,6 +134,14 @@ class ZoneParameters(object):
         simplifiedCapacity : boolean, optional
             - ``True``: Simplified computation of effective area and capacity
             - ``False``: Detailed computation of effective area and capacity
+        albedo : float, optional
+            Average reflectivity of the ground.
+            Typical values are between 0.2 and 0.3.
+        gamma : array_like, optional
+            Surface azimuth angle, according to the index convention. 
+            0 represents Southern orientation and 90 Western orientation.
+        beta : array_like, optional
+            Slope angle. 0 stands for horizontal surfaces and 90 for vertical.
         """
         
         # Note: We are not consequently using CamelCase in this function, 
@@ -248,6 +259,18 @@ class ZoneParameters(object):
         # Initialize ventilation
         ventilationRate = np.zeros(int(8760 / 3600 * samplingRate))
         self.updateVentilation(ventilationRate)
+        
+        # Save Albedo
+        self.albedo = albedo
+        
+        # Save beta and gamma
+        self.beta = beta
+        self.gamma = gamma
+        
+        # Compute interaction between outside surfaces (indexes 0-4) and sky
+        # 0.5 describes vertical walls and 1 horizontal roofs 
+        # (see DIN EN ISO 13790:2008, section 11.4.6, page 73)
+        self.F_r = [0.5 if beta[i] > 0 else 1 for i in range(5)]
 
     def updateVentilation(self, 
                           ventilationRate, 

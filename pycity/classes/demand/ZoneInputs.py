@@ -15,7 +15,13 @@ class ZoneInputs(object):
     """
     """
 
-    def __init__(self, environment, zoneParameters, T_m_init):
+    def __init__(self, environment, 
+                 zoneParameters=None, 
+                 T_m_init=20, 
+                 ventilation=0,
+                 occupancy=0,
+                 appliances=0, 
+                 lighting=0):
         """
         Parameters
         ----------
@@ -24,38 +30,37 @@ class ZoneInputs(object):
         zoneParameters : ZoneParameters object
             Holds all relevant parameters of the thermal zone (geometry,
             U-values)
+        T_m_init : Float, optional
+            Initial temperature of the internal heat capacity.
+            Requires ``method=2``.
+        ventilation : Array-like, optional
+            Ventilation rate in 1/h.
+            Requires ``method=2``.
+        occupancy : Array-like, optional
+            Full year occupancy profile.
+            Requires ``method=2``.
+        appliances : Array-like, optional
+            Internal gains from electrical appliances in Watt.
+            Requires ``method=2``.
+        lighting : Array-like, optional
+            Internal gains from lighting in Watt.
+            Requires ``method=2``.
         """
         self.environment = environment
         self.zoneParameters = zoneParameters
         self.T_m_init = T_m_init
 
-        # Initialize internal and solar gains as well as supply temperatures
-        timestepsHorizon = environment.timer.timestepsHorizon
-        self.Phi_int = np.zeros(timestepsHorizon)
-        self.Phi_sol = np.zeros(timestepsHorizon)
-        self.T_e = np.zeros(timestepsHorizon)
-        self.T_sup = np.zeros(timestepsHorizon)
+        # Compute internal and solar gains. Get ambient (supply) temperature.
+        self.Phi_int = self.getInternalGains(occupancy=occupancy,
+                                             appliances=appliances,
+                                             lighting=lighting)
+        self.T_e = environment.weather.tAmbient
+        self.T_sup = environment.weather.tAmbient
+        
+        # UNDER CONSTRUCTION
+        self.Phi_sol, self.solarOpaque, self.solarWindow = self.getSolarGains()
 
-    def getTInit(self):
-        """ """
-        return self.T_m_init
-    
-    def setTInit(self, T_m_init):
-        """ """
-        self.T_m_init = T_m_init
-
-    def update(self, occupancy, appliances, lighting):
-        """
-        Compute internal and solar gains as well as the ambient and supply
-        temperature.
-        """
-        self.getInternalGains(occupancy=occupancy,
-                              appliances=appliances,
-                              lighting=lighting)
-        self.getSolarGains()
-        self.getAmbientTemperatures()
-
-    def getInternalGains(self, occupancy, appliances, lighting):
+    def getInternalGains(self, occupancy=0, appliances=0, lighting=0):
         """
         Computation of Phi_int.
 
@@ -80,73 +85,54 @@ class ZoneInputs(object):
         gainsPeople = occupancy * averagePowerPerson
 
         # Assumption: The entire electricity consumption are heat gains
-        self.Phi_int = gainsPeople + appliances + lighting
+        return (gainsPeople + appliances + lighting)
 
-    def getSolarGains(self, groundReflectance=0.3):
+    def getSolarGains(self):
         """
         Set the solar gains for the upcoming scheduling period.
-
-        Parameter
-        ---------
-        groundReflectance : float, optional
-            Average reflectivity of the ground (sometimes refered to as
-            albedo). Typical values are between 0.2 and 0.3.
         """
         # Get beam and diffuse radiation on a horizontal surface
-        radiation = self.environment.getWeatherForecast(getQDirect=True,
-                                                        getQDiffuse=True)
-        (beamRadiation, diffuseRadiation) = radiation
+        beamRad = self.environment.weather.qDirect
+        diffuseRad = self.environment.weather.qDiffuse
 
-        # Set form factors for radiation between component and sky (DIN EN
-        # ISO 13790:2008, section 11.4.6, page 73)
-        # Based on the index convention
-        # ([South, West, North, East, Floor, Roof/Ceiling]), the azimuth
-        # (gamma), slope (beta) angles and form factor for losses to the sky
-        # (F_r) are:
-        #         S,   W,   N,   E,   F, R
-        gamma = [ 0,  90, 180, 270,   0, 0]
-        beta  = [90,  90,  90,  90,   0, 0]
-        F_r   = [0.5,  0.5, 0.5, 0.5, 0, 1]
-        # No direct interaction between sun and floor, therefore the
-        # corresponding F_r entry is zero.
+        # Get ground reflectance
+        groundReflectance = self.zoneParameters.albedo
+
 
         # Initialize solar gains
-        solarGains = np.zeros_like(beamRadiation)
+        solarGains = np.zeros_like(beamRad)
+        solarOpaque = []
+        solarWindows = []
+        
+        # Update solar geometry
+        self.environment.weather.computeGeometry(True)
 
         # Iterate over all surface areas
-        for i in range(len(gamma)):
-            # Update only in the first iteration
-            if i == 0:
-                update = True
-            else:
-                update = False
-            # Compute solar irradiation on tilted surfaces
-            function = self.environment.getTotalRadiationTiltedSurface
-            radTiltedSurface = function(beta=beta[i],
-                                        gamma=gamma[i],
-                                        albedo=groundReflectance,
-                                        update=update)
-            totalRadiationTiltedSurface = radTiltedSurface[0]
-
+        for i in range(len(self.zoneParameters.F_r)):
             # Compute heat flux through each opaque and window-like surface
             # DIN EN ISO 13790:2008, equation 43, section 11.3.2, page 67
-            # Note: F_sh_ob, I_sol and F_r are the same for opaque and
-            # window-like components, therefore the total, effective area and
+            # Note: F_sh_ob, I_sol and F_r are the same for opaque and 
+            # window-like components, therefore the total, effective area and 
             # radiative heat exchange with the sky are summed up.
-            A_total = (self.zoneParameters.A_opaque_sol[i]
-                       + self.zoneParameters.A_windows_sol[i])
-            Psi_r_total = (self.zoneParameters.Psi_r_opaque[i]
-                           + self.zoneParameters.Psi_r_windows[i])
-            solarGains += (A_total * totalRadiationTiltedSurface
-                           - Psi_r_total * F_r[i])
+            A_opaque_sol  = self.zoneParameters.A_opaque_sol[i]
+            A_windows_sol = self.zoneParameters.A_windows_sol[i]
+            A_windows     = self.zoneParameters.A_windows[i]
+            A_total = A_opaque_sol + A_windows_sol
+            Psi_r_windows = self.zoneParameters.Psi_r_windows[i]
+            Psi_r_total = self.zoneParameters.Psi_r_opaque[i] + Psi_r_windows
+        
+            radFunc = self.environment.weather.getTotalRadiationTiltedSurface
+            radTilt = radFunc(beamRadiation=beamRad,
+                              diffuseRadiation=diffuseRad,
+                              beta=self.zoneParameters.beta[i],
+                              gamma=self.zoneParameters.gamma[i],
+                              albedo=groundReflectance)[0]
+            solarOpaque.append(radTilt)
+            solarWindows.append((A_windows_sol * radTilt
+                               - Psi_r_windows * self.zoneParameters.F_r[i]) 
+                               / A_windows)
+            solarGains += (A_total * radTilt 
+                         - Psi_r_total * self.zoneParameters.F_r[i])
 
         # Return results
-        self.Phi_sol = solarGains
-
-    def getAmbientTemperatures(self):
-        """
-        """
-        (tAmbient,) = self.environment.getWeatherForecast(getTAmbient=True)
-
-        self.T_e = tAmbient
-        self.T_sup = tAmbient  # Assume that both temperatures are equal
+        return solarGains, solarOpaque, solarWindows

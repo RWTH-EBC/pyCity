@@ -247,7 +247,7 @@ def calc(zoneParameters, zoneInputs, TCoolingSet, THeatingSet,
     for t in range(numberTimesteps):
 
         if t == 0:
-            t_previous = zoneInputs.getTInit()
+            t_previous = zoneInputs.T_m_init
         else:
             t_previous = T_m[t-1]
         

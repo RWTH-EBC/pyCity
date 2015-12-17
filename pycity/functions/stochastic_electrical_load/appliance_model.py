@@ -10,6 +10,7 @@ from __future__ import division
 import random
 import math
 import csv
+from collections import namedtuple
 
 
 class Appliances:
@@ -44,88 +45,6 @@ class Appliances:
     8 - CUSTOM (not further described in original tool)
     """
     
-    def comp_calib_cycles(self, calibration_factor):
-        calib_cycles = []
-        for rows in self.data:
-            calib_cycles.append(rows[2]*calibration_factor)
-        return calib_cycles
-        
-    def comp_mean_energy_demand(self):
-        mean_energy_demand = []
-        for rows in self.data:
-            mean_energy_demand.append(rows[3]*rows[4] / (60*1000))
-        return mean_energy_demand
-        
-    def comp_time_running(self):
-        time_running = []
-        for rows in range(len(self.data)):
-            time_running.append(self.data[rows][3]*self.calib_cycles[rows])
-        return time_running
-
-    def comp_time_not_running(self):
-        time_not_running = []
-        for rows in self.time_running:
-            time_not_running.append(365*24*60-rows)
-        return time_not_running
-    
-    def comp_proportion_starts_occupancy(self, mean_active_occupancy):
-        proportion_starts_occupancy = []
-        for rows in self.data:
-            if(rows[7] == 0):
-                temp = 1
-            else:
-                temp = mean_active_occupancy
-            
-            proportion_starts_occupancy.append(temp)
-        return proportion_starts_occupancy 
-    
-    def comp_minutes_events(self):
-        minutes_events = []
-        for rows in range(len(self.data)):
-            minutes_events.append(365*24*60*self.proportion_starts_occupancy[rows]-self.time_running[rows]-self.calib_cycles[rows]*self.data[rows][6])
-        return minutes_events
-
-    # Mean time between start etvents given occupancy is NOT computed!
-    # This value sometimes suffers from division by zero. Instead only its
-    # reciprocal, _lambda is computed (please notice the _ before lambda. This
-    # is necessary, since lambda defines short functions in Python!)
-        
-    def comp_lambda(self):
-        _lambda = []
-        for rows in range(len(self.data)):
-            _lambda.append(self.calib_cycles[rows]/self.minutes_events[rows])
-        return _lambda
-        
-    def comp_calib_scalar(self):
-        calib_scalar = []
-        for rows in range(len(self.data)):
-            calib_scalar.append(self._lambda[rows]/self.data[rows][9])
-        return calib_scalar
-        
-    def comp_energy_used(self):
-        energy_used = []
-        for rows in range(len(self.data)):
-            energy_used.append(self.calib_cycles[rows]*self.mean_energy_demand[rows])
-        return energy_used    
-
-    def comp_energy_standby(self):
-        energy_standby = []
-        for rows in range(len(self.data)):
-            energy_standby.append(self.time_not_running[rows]*self.data[rows][5]/(60*1000))
-        return energy_standby    
-        
-    def comp_energy_total(self):
-        energy_total = []
-        for rows in range(len(self.data)):
-            energy_total.append(self.energy_standby[rows]+self.energy_used[rows])
-        return energy_total    
-        
-    def comp_energy_total_ownership(self):
-        energy_total_ownership = []
-        for rows in range(len(self.data)):
-            energy_total_ownership.append(self.energy_total[rows]*self.data[rows][1])
-        return energy_total_ownership    
-
     def load_appliances(self, filename):
         """
         Load the installed appliances
@@ -162,33 +81,68 @@ class Appliances:
                 app[0] = 1
             else:
                 app[0] = 0
+
+    def estimate_annual_consumption(self, calibration_factor=1, mean_active_occupancy=0.459):
+        num_appliances = len(self.data)
+        
+        self.calib_cycles = [rows[2] * calibration_factor for rows in self.data]
+
+        mean_energy_demand = [rows[3] * rows[4] / (60*1000) for rows in self.data]
+
+        time_running = [self.data[rows][3] * self.calib_cycles[rows] for rows in range(num_appliances)]
+        
+        time_not_running = [365 * 24 * 60 - rows for rows in time_running]
+        
+        proportion_starts_occupancy = [1 if rows[7]==0 else mean_active_occupancy for rows in self.data]
+        
+        minutes_events = [365 * 24 * 60 * proportion_starts_occupancy[rows]
+                         - time_running[rows]
+                         - self.calib_cycles[rows] * self.data[rows][6] for rows in range(num_appliances)]
+        
+        _lambda = [self.calib_cycles[rows] / minutes_events[rows] for rows in range(num_appliances)]
+        
+        self.calib_scalar = [_lambda[rows] / self.data[rows][9] for rows in range(num_appliances)]
+
+        energy_used = [self.calib_cycles[rows] * mean_energy_demand[rows] for rows in range(num_appliances)]
+
+        energy_standby = [time_not_running[rows] * self.data[rows][5]/(60*1000) for rows in range(num_appliances)]
+
+        energy_total = [energy_standby[rows] + energy_used[rows] for rows in range(num_appliances)]
+
+        energy_total_ownership = [energy_total[rows] * self.data[rows][0] for rows in range(num_appliances)]
+        
+        return sum(energy_total_ownership)
                 
     
     def __init__(self,
                  filename,
-                 calibration_factor=1,
+                 annual_consumption=3200,
                  mean_active_occupancy=0.459,
-                 randomize_appliances=False):
+                 randomize_appliances=False,
+                 max_iter=2):
         """
         """
         self.load_appliances(filename)
 
         if randomize_appliances:
             self.randomize()
+
+        Bound = namedtuple("bound", ["calibration_factor", "annual_demand"])
         
-        self.calib_cycles = self.comp_calib_cycles(calibration_factor)
-        self.mean_energy_demand = self.comp_mean_energy_demand()
-        self.time_running = self.comp_time_running()
-        self.time_not_running = self.comp_time_not_running()
-        self.proportion_starts_occupancy = self.comp_proportion_starts_occupancy(mean_active_occupancy)
-        self.minutes_events = self.comp_minutes_events()
-        self._lambda = self.comp_lambda()
-        self.calib_scalar = self.comp_calib_scalar()
-        self.energy_used = self.comp_energy_used()
-        self.energy_standby = self.comp_energy_standby()
-        self.energy_total = self.comp_energy_total()
-        self.energy_total_ownership = self.comp_energy_total_ownership()
+        lb = Bound(0,   self.estimate_annual_consumption(0,   mean_active_occupancy))
+        ub = Bound(100, self.estimate_annual_consumption(100, mean_active_occupancy))
         
+        iteration = 0
+        while iteration < max_iter:
+            calib_factor = lb[0] + (ub[0] - lb[0]) * (annual_consumption - lb[1]) / (ub[1] - lb[1])
+            calib_demand = self.estimate_annual_consumption(calib_factor, mean_active_occupancy)
+            
+            if calib_demand > annual_consumption:
+                ub = Bound(calib_factor, calib_demand)
+            else:
+                lb = Bound(calib_factor, calib_demand)
+            
+            iteration += 1
 
 
 def get_power_usage(iCycleTimeLeft, sApplianceType, iStandbyPower, iRatedPower):

@@ -24,6 +24,16 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
     
     loaded_slp = False
     slp = []
+    standard_consumption = {"SFH": {1: 2700,
+                                    2: 3200,
+                                    3: 4000,
+                                    4: 4400,
+                                    5: 5500},
+                            "MFH": {1: 1500,
+                                    2: 2200,
+                                    3: 3000,
+                                    4: 3400,
+                                    5: 4100}}
 
     def __init__(self, 
                  environment, 
@@ -43,8 +53,11 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
             - `2` : Stochastic electrical load model
         loadcurve : Array-like, optional
             Load curve for all investigated time steps
-        annualDemand : Float (required for SLP)
+        annualDemand : Float (required for SLP and recommended for method 2)
             Annual electrical demand in kWh.
+            If method 2 is chosen but no value is given, a standard value for
+            Germany (http://www.die-stromsparinitiative.de/fileadmin/bilder/
+            Stromspiegel/Brosch%C3%BCre/Stromspiegel2014web_final.pdf) is used.
         profileType : String (required for SLP)
             - H0 : Household
             - L0 : Farms
@@ -72,6 +85,10 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
         ----
         The standard load profile can be downloaded here:
         http://www.ewe-netz.de/strom/1988.php
+        
+        Average German electricity consumption per household can be found here:
+        http://www.die-stromsparinitiative.de/fileadmin/bilder/Stromspiegel/
+        Brosch%C3%BCre/Stromspiegel2014web_final.pdf
         """
         src_path = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
@@ -90,10 +107,22 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
             super(ElectricalDemand, self).__init__(environment, loadcurve)
         elif method == 2:
             # Initialize appliances and lights
-
+            if annualDemand == 0:
+                if singleFamilyHouse:
+                    annualDemand = self.standard_consumption["SFH"][numberHousehold]
+                else:
+                    annualDemand = self.standard_consumption["MFH"][numberHousehold]
+            
+            # According to http://www.die-stromsparinitiative.de/fileadmin/
+            # bilder/Stromspiegel/Brosch%C3%BCre/Stromspiegel2014web_final.pdf
+            # roughly 9% of the electricity consumption are due to lighting.
+            # This has to be excluded from the appliances' demand:
+            appliancesDemand = 0.91 * annualDemand
+            
             pathApps = os.path.join(src_path, 'inputs', 'stochastic_electrical_load', 'Appliances.csv')
-            self.appliances = app_model.Appliances(pathApps, 
-                                                   randomizeAppliances)
+            self.appliances = app_model.Appliances(pathApps,
+                                                   annual_consumption=appliancesDemand,
+                                                   randomize_appliances=randomizeAppliances)
             pathLights = os.path.join(src_path, 'inputs', 'stochastic_electrical_load', 'LightBulbs.csv')
             self.lights = light_model.load_lighting_profile(pathLights, 
                                                             lightConfiguration)

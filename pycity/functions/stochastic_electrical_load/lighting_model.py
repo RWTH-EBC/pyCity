@@ -27,15 +27,21 @@ class LightingModelConfiguration():
     def __init__(self, 
                  external_irradiance_threshold = [60, 10],
                  calibration_scalar=0.00815368639667705, 
-                 effective_occupancy=[0, 1, 1.52814569536424, 1.69370860927152, 1.98344370860927, 2.09437086092715], 
-                 lighting_event_lower_value=[1, 2, 3, 5, 9, 17, 28, 50, 92],
+                 effective_occupancy=[0, 
+                                      1, 
+                                      1.52814569536424, 
+                                      1.69370860927152, 
+                                      1.98344370860927, 
+                                      2.09437086092715], 
+                 lighting_event_lower_value=[1, 2, 3, 5,  9, 17, 28, 50,  92],
                  lighting_event_upper_value=[1, 2, 4, 8, 16, 27, 49, 91, 259]):
         
         # House external global irradiance threshold
         self.ext_irr_threshold_mean = external_irradiance_threshold[0]
         self.ext_irr_threshold_std_dev = external_irradiance_threshold[1]
 
-        # This calibration scaler is used to calibrate the model to so that it provides a particular average output over a large number of runs.
+        # This calibration scaler is used to calibrate the model to so that it provides 
+        # a particular average output over a large number of runs.
         self.calib_scalar = calibration_scalar
 
         #Effective occupancy represents the sharing of light use.
@@ -93,19 +99,12 @@ def run_lighting_simulation(vOccupancyArray, vBulbArray, vIrradianceArray, light
     
     # "Clear the target area"
     result = []
-    
-    # Get the bulb data
-#    vBulbArray = load_lighting.load_lighting_profile(path + '\\HouseSpecification\\', 'LightBulbs.csv', 0)
-    iNumBulbs = len(vBulbArray)    
-    
-    # Load the irradiance array    
-#    vIrradianceArray = load_lighting.load_irradiance(path + '\\ConstantInputs\\','SolarIrradiance.csv', iMonth)
-    
+
     # Get the calibration scalar
     fCalibrationScalar = light_mod_config.calib_scalar
     
     # For each bulb
-    for i in range(iNumBulbs):
+    for i in range(len(vBulbArray)):
         # Reset counter for current light bulb
         consumption = []        
         
@@ -149,8 +148,7 @@ def run_lighting_simulation(vOccupancyArray, vBulbArray, vIrradianceArray, light
                 
                 j = 1
                 while j <= 9:
-                    
-                    #  Get the cumulative probability of this duration
+                    # Get the cumulative probability of this duration
                     cml = j / 9 # Equally distributed probabilities
                     
                     # Check to see if this is the type of light
@@ -166,12 +164,12 @@ def run_lighting_simulation(vOccupancyArray, vBulbArray, vIrradianceArray, light
                         iLightDuration = (r2 * (iUpperDuration - iLowerDuration)) + iLowerDuration
                                                   
                         # Exit the loop
-                        break;
+                        break
                     
                     j += 1
-                    
+                
                 j = 1
-                while j <= iLightDuration:
+                while j <= int(iLightDuration):
                     # Range check
                     if iTime > 24*60-1:
                         break
@@ -189,12 +187,14 @@ def run_lighting_simulation(vOccupancyArray, vBulbArray, vIrradianceArray, light
                     # Increment the time
                     iTime += 1
                 
+                    j += 1
+                
             else:
                 # The bulb remains off
                 consumption.append(0)
                 
                 # Increase counter
-                iTime += 1                    
+                iTime += 1
             
         
         result.append(consumption)

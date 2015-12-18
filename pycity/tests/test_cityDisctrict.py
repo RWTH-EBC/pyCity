@@ -74,6 +74,8 @@ def run_test():
     position_2 = point.Point(0, 10)
     position_3 = point.Point(10, 0)
     position_4 = point.Point(10, 10)
+    position_5 = point.Point(20, 20)
+    position_6 = point.Point(30, 30)
 
     #  Add buildings to city district
     cityDistrict.addEntity(entity=building, position=position_1)
@@ -82,17 +84,16 @@ def run_test():
     cityDistrict.addEntity(entity=building, position=position_4)
 
     #  Add PV fields to city district
-    # cityDistrict.addEntity(pv)
-    # cityDistrict.addEntity(pv)
-    # cityDistrict.addEntity(pv)
+    cityDistrict.addEntity(entity=pv, position=position_5)
+    cityDistrict.addEntity(entity=pv, position=position_6)
 
-    print()
+    print('Energy demands of building objects:')
     print(cityDistrict.getDemands())
 
-    print()
+    print('Flow temperatures:')
     print(cityDistrict.getFlowTemperatures())
 
-    print()
+    print('PV power:')
     print(cityDistrict.getPVPower())
 
 

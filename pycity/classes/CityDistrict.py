@@ -49,7 +49,7 @@ class CityDistrict(ues.UESGraph):
         #  Define object type
         self._kind = 'citydistrict'
 
-    def addEntity(self, entity, position=None, name=None):
+    def addEntity(self, entity, position, name=None):
         """
         Method adds entity (e.g. building object) to city district object.
 
@@ -57,8 +57,8 @@ class CityDistrict(ues.UESGraph):
         ----------
         entity : object
             Possible entity object (building, windenergyconverter or pv)
-        position : sympy.geometry.Point object, optional
-            New node's position (default: None)
+        position : sympy.geometry.Point object
+            New node's position
         name : str, optional
             Name of entity (default: None)
 
@@ -88,24 +88,34 @@ class CityDistrict(ues.UESGraph):
         #  Add entity as attribute to node with returned node_number
         self.add_node(node_number, entity=entity)
 
-    def addMultipleEntities(self, entities):
+    def addMultipleEntities(self, entities, positions):
         """
-        Add multiple entities to the existing city district
+        Add multiple entities to the existing city district.
         
         Parameter
         ---------
-        entities: List-like
+        entities_tuple : List-like
             List (or tuple) of entities that are added to the city district
+        positions : List-like
+            List (or tuple) of positions (of entities) that are added to city district
+            (list of sympy.geometry.Point objects)
             
         Example
         -------
+        >>> import sympy.geometry.point as point
         >>> myPV  = PV(...)
         >>> myWEC = WindEnergyConverter(...)
         >>> myCityDistrict = CityDistrict(...)
-        >>> myCityDistrict.addMultipleEntities([myPV, myWEC])
+        >>> position_1 = point.Point(0, 0)
+        >>> position_2 = point.Point(0, 10)
+        >>> myCityDistrict.addMultipleEntities([myPV, myWEC], [position_1, position_2])
         """
-        for entity in entities:
-            self.addEntity(entity)
+        assert len(entities) == len(positions), 'Number of entities must match to number of positions'
+
+        for i in range(len(entities)):
+            curr_entity = entities[i]
+            curr_pos = positions[i]
+            self.addEntity(entity=curr_entity, position=curr_pos)
 
     def _getRESPower(self, generators):
         """
@@ -119,28 +129,60 @@ class CityDistrict(ues.UESGraph):
 
     def getPVPower(self):
         """
-        Get the (aggregated) forecast of all pv units.
+        Get the (aggregated) forecast of all (stand alone) pv units.
         """
         #  Fixme: Of all pv units or only centralized pv farms?
-        if len(self.pv) == 0:
+
+        #  Create empty list of pv entities
+        pv_entities = []
+
+        #  Loop over all nodes
+        for n in self:
+            #  If node holds attribute 'node_type'
+            if 'node_type' in self.node[n]:
+                #  If node_type is building
+                if self.node[n]['node_type'] == 'building':
+                    #  If entity is of type pv
+                    if self.node[n]['entity']._kind == 'pv':
+                        #  Add pv entity to list
+                        pv_entities.append(self.node[n]['entity'])
+
+        if len(pv_entities) == 0:
             return np.zeros(self.environment.timer.timestepsHorizon)
         else:
-            return self._getRESPower(self.pv)
+            return self._getRESPower(pv_entities)
 
     def getWindEnergyConverterPower(self):
         """
         Get the (aggregated) forecast of all wind energy converters.
         """
-        if len(self.wec) == 0:
+
+        #  Create empty list of pv entities
+        wind_entities = []
+
+        #  Loop over all nodes
+        for n in self:
+            #  If node holds attribute 'node_type'
+            if 'node_type' in self.node[n]:
+                #  If node_type is building
+                if self.node[n]['node_type'] == 'building':
+                    #  If entity is of type pv
+                    if self.node[n]['entity']._kind == 'windenergyconverter':
+                        #  Add pv entity to list
+                        wind_entities.append(self.node[n]['entity'])
+
+        if len(wind_entities) == 0:
             return np.zeros(self.environment.timer.timestepsHorizon)
         else:
-            return self._getRESPower(self.wec)
+            return self._getRESPower(wind_entities)
 
     def getDemands(self):
         """ 
         Get the aggregated electricity and heat demand forecast of all
         buildings.
-        
+
+        Returns tuple of electrical and thermal demand array
+
         Order
         -----
         ElectricityDemand : Array_like
@@ -158,14 +200,11 @@ class CityDistrict(ues.UESGraph):
             if 'node_type' in self.node[n]:
                 #  If node_type is building
                 if self.node[n]['node_type'] == 'building':
-                    temp = self.node[n]['entity'].getDemands()
-                    demandElectrical += temp[0]
-                    demandThermal += temp[1]
-
-        # # for building in self.buildings:
-        #     temp = building.getDemands()
-        #     demandElectrical += temp[0]
-        #     demandThermal += temp[1]
+                    #  If entity is kind building
+                    if self.node[n]['entity']._kind == 'building':
+                        temp = self.node[n]['entity'].getDemands()
+                        demandElectrical += temp[0]
+                        demandThermal += temp[1]
 
         return (demandElectrical, demandThermal)
 
@@ -173,11 +212,19 @@ class CityDistrict(ues.UESGraph):
         """ 
         Get the aggregated flow temperature forecast.
         """
+
         timesteps = self.environment.timer.timestepsHorizon
         flowTemperature = np.zeros(timesteps)
 
-        for building in self.buildings:
-            flowTemperature = np.maximum(flowTemperature,
-                                         building.getFlowTemperature())
+         #  Loop over all nodes
+        for n in self:
+            #  If node holds attribute 'node_type'
+            if 'node_type' in self.node[n]:
+                #  If node_type is building
+                if self.node[n]['node_type'] == 'building':
+                    #  If entity is kind building
+                    if self.node[n]['entity']._kind == 'building':
+                        flow_temp = self.node[n]['entity'].getFlowTemperature()
+                        flowTemperature = np.maximum(flowTemperature, flow_temp)
 
         return flowTemperature

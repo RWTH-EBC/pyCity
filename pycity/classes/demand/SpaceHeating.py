@@ -27,7 +27,7 @@ class SpaceHeating(pycity.classes.demand.Load.Load):
     
     def __init__(self, environment, method=0,
                  loadcurve=[], 
-                 livingArea=0, specificDemand=0, singleFamilyHouse=True,
+                 livingArea=0, specificDemand=0, profile_type='HEF',
                  zoneParameters=None, T_m_init=None, ventilation=0,
                  TCoolingSet=200, THeatingSet=-50, occupancy=0,
                  appliances=0, lighting=0):
@@ -49,9 +49,23 @@ class SpaceHeating(pycity.classes.demand.Load.Load):
         specificDemand : Float, optional
             Specific thermal demand of the building in kWh/(m2 a)
             Requires ``method=1``
-        singleFamilyDwelling : Boolean, optional
-            Single family house (True) or multiple family house (False)?
+        profile_type : str, optional
+            Thermal SLP profile name
             Requires ``method=1``
+            - `HEF` : Single family household
+            - `HMF` : Multi family household
+            - `GBA` : Bakeries
+            - `GBD` : Other services
+            - `GBH` : Accomodations
+            - `GGA` : Restaurants
+            - `GGB` : Gardening
+            - `GHA` : Retailers
+            - `GHD` : Summed load profile business, trade and services
+            - `GKO` : Banks, insurances, public institutions
+            - `GMF` : Household similar businesses
+            - `GMK` : Automotive
+            - `GPD` : Paper and printing
+            - `GWA` : Laundries
         zoneParameters : ZoneParameters object, optional
             Parameters of the building (floor area, building class, etc.). 
             Requires ``method=2``.
@@ -106,7 +120,6 @@ class SpaceHeating(pycity.classes.demand.Load.Load):
                 SpaceHeating.loaded_slp = True
             
             annual_demand = livingArea * specificDemand # kWh
-            profile_type = "HEF" # Single family dwelling
             profile = 3
     
             fun = slp_th.calculate

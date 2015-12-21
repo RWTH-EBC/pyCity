@@ -25,8 +25,7 @@ def run_test():
     hd_slp = SpaceHeating.SpaceHeating(environment,
                                        method=1, # Standard load profile
                                        livingArea=146,
-                                       specificDemand=166,
-                                       singleFamilyHouse=True)
+                                       specificDemand=166)
 
     results = hd_slp.getDemand()
 

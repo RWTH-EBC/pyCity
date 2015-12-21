@@ -34,8 +34,7 @@ def run_test():
     heat_demand = SpaceHeating.SpaceHeating(environment,
                                             method=1,  # Standard load profile
                                             livingArea=146,
-                                            specificDemand=166,
-                                            singleFamilyHouse=True)
+                                            specificDemand=166)
 
     #  Generate electrical demand curve
     el_demand = ElectricalDemand.ElectricalDemand(environment,

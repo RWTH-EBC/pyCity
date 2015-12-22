@@ -122,7 +122,7 @@ def run_city_generator(gen_mo=0, input_name='test_city_only_buildings.txt', outp
                                                           method=el_method,
                                                           annualDemand=curr_el_demand, profileType=curr_el_slp,
                                                           singleFamilyHouse=True,
-                                                          numberHousehold=curr_total_nb_occupants,
+                                                          total_nb_occupants=curr_total_nb_occupants,
                                                           randomizeAppliances=True, lightConfiguration=0,
                                                           occupancy=occupancy_profile)
 

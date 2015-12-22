@@ -40,7 +40,7 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
                  method=0,
                  loadcurve=[], 
                  annualDemand=0, profileType="H0",
-                 singleFamilyHouse=True, numberHousehold=0,
+                 singleFamilyHouse=True, total_nb_occupants=0,
                  randomizeAppliances=True, lightConfiguration=0, occupancy=[]):
         """
         Parameters
@@ -70,7 +70,7 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
             - G4 : Shops / Barbers
             - G5 : Bakery
             - G6 : Weekend operation
-        numberHousehold : int, optional (used in method 2)
+        total_nb_occupants : int, optional (used in method 2)
             Number of people living in the household.
         randomizeAppliances : Boolean (only required in method 2)
             - True : Distribute installed appliances randomly
@@ -109,9 +109,9 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
             # Initialize appliances and lights
             if annualDemand == 0:
                 if singleFamilyHouse:
-                    annualDemand = self.standard_consumption["SFH"][numberHousehold]
+                    annualDemand = self.standard_consumption["SFH"][total_nb_occupants]
                 else:
-                    annualDemand = self.standard_consumption["MFH"][numberHousehold]
+                    annualDemand = self.standard_consumption["MFH"][total_nb_occupants]
             
             # According to http://www.die-stromsparinitiative.de/fileadmin/
             # bilder/Stromspiegel/Brosch%C3%BCre/Stromspiegel2014web_final.pdf

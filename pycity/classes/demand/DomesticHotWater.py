@@ -31,7 +31,6 @@ class DomesticHotWater(pycity.classes.demand.Load.Load):
                  method=0,
                  loadcurve=[],
                  dailyConsumption=0, supplyTemperature=0,
-                 singleFamilyHouse=True, numberHousehold=0,
                  occupancy=[]):
         """
         Parameters

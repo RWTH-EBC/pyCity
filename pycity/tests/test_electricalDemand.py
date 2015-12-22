@@ -40,7 +40,7 @@ def run_test():
 
     el_dem_stochastic = ED.ElectricalDemand(environment,
                                             method=2,
-                                            numberHousehold=3,
+                                            total_nb_occupants=3,
                                             randomizeAppliances=True,
                                             lightConfiguration=10,
                                             occupancy=occupancy.occupancy)

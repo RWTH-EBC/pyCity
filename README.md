@@ -25,7 +25,7 @@ as well as the python package
 
 uesgraph
 
-which is available unter [https://github.com/RWTH-EBC/uesgraphs](https://github.com/RWTH-EBC/uesgraphs)
+which is available under [https://github.com/RWTH-EBC/uesgraphs](https://github.com/RWTH-EBC/uesgraphs)
 
 First, you should download and install uesgraph. Local installation is possible via pip:
 

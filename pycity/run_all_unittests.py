@@ -16,8 +16,7 @@ from nose.suite import LazySuite
 
 basepath = os.path.dirname(__file__)
 #  Add further unittest pathes here
-paths = (
-         os.path.join(basepath, 'unittests', 'classes', 'demand'),
+paths = (os.path.join(basepath, 'unittests', 'classes', 'demand'),
          os.path.join(basepath, 'unittests', 'classes', 'supply')
          )
 

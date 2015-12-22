@@ -7,6 +7,7 @@ Created on Tue Jul 21 16:50:36 2015
 """
 
 from __future__ import division
+import os
 import numpy as np
 import xlrd
 import pycity.functions.changeResolution as cr
@@ -48,7 +49,14 @@ def get_demand(annual_demand, profile, time_discretization):
 
 if __name__ == "__main__":
     time_dis = 3600
-    profiles = load("inputs/standard_load_profile/slp_electrical.xlsx", 
-                    time_dis)
+
+    #  Define src path
+    src_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+    # Temperature - mean values
+    filename = 'slp_electrical.xlsx'
+    import_path = os.path.join(src_path, 'inputs', 'standard_load_profile', filename)
+
+    profiles = load(import_path, time_dis)
     
     load_household = get_demand(3000, profiles["H0"], time_dis)

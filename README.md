@@ -12,6 +12,21 @@ Python package for data handling and scenario generation of city districts.
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request
 
+## Installation
+
+PyCity requires the following Python packages:
+- numpy
+- pandas
+- sympy
+- nose
+- xlrd
+as well as the python package
+uesgraph
+which is available unter [https://github.com/RWTH-EBC/uesgraphs](https://github.com/RWTH-EBC/uesgraphs)
+
+First, you should download and install uesgraph. Local installation is possible via pip:
+`pip install -e 'your_path_to_uesgraph_setup'`
+
 ## License
 
 PyCity is released by RWTH Aachen University's Institute for Energy Efficient Buildings and Indoor Climate (EBC) 

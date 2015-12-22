@@ -16,9 +16,9 @@ from nose.suite import LazySuite
 
 basepath = os.path.dirname(__file__)
 #  Add further unittest pathes here
-paths = (os.path.join(basepath, 'unittests', 'classes', 'demand'),
-         os.path.join(basepath, 'unittests', 'classes', 'supply'),
-         os.path.join(basepath, 'unittests', 'classes')
+paths = (
+         os.path.join(basepath, 'unittests', 'classes', 'demand'),
+         os.path.join(basepath, 'unittests', 'classes', 'supply')
          )
 
 
@@ -29,8 +29,8 @@ def run_tests():
                                     TestLoader().loadTestsFromDir(path))
     suite = LazySuite(all_tests)
     run(suite=suite, argv=['--processes=4',
-                           #  '--verbose',
-                           #  '-s',
+                             # '--verbose',
+                             # '-s',
                            '--process-timeout=30'])
 
 if __name__ == '__main__':

@@ -17,8 +17,7 @@ class TestSpaceheating(unittest.TestCase):
     """
 
     def setUp(self):
-        timer = pycity.classes.Timer.Timer(timeDiscretization=3600, timestepsHorizon=24, timestepsUsedHorizon=96,
-                                           timestepsTotal=3600*24*365, initialDay=1)
+        timer = pycity.classes.Timer.Timer(timeDiscretization=900, timestepsTotal=365*24*4, initialDay=1)
         weather = pycity.classes.Weather.Weather(timer, useTRY=True)
         prices = pycity.classes.Prices.Prices()
 
@@ -46,9 +45,13 @@ class TestSpaceheating(unittest.TestCase):
 
         #  Get space heating load curve (in W) per timestep
         space_heat_load_curve = spaceheating.getDemand(currentValues=False)
+        #  Convert to energy demand values (in kWh)
+        th_energy_demand_curve = space_heat_load_curve * self.environment.timer.timeDiscretization / (1000*3600)
+        print(space_heat_load_curve)
 
+        print(np.sum(th_energy_demand_curve))
         #  Check if sum of energy demand values is (almost) equal to input
-        self.assertAlmostEqual(np.sum(space_heat_load_curve)/1000, 150*100, delta=3)
+        self.assertAlmostEqual(np.sum(th_energy_demand_curve), 150*100, delta=3)
 
 if __name__ == '__main__':
     unittest.main()

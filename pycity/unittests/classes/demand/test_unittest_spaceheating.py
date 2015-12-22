@@ -29,28 +29,28 @@ class TestSpaceheating(unittest.TestCase):
 
     def test_method0(self):
         #  energy comparison array
-        energy_array = np.array ([10, 10, 10, 10, 20, 20, 20, 20])
+        load_array = np.array ([10, 10, 10, 10, 20, 20, 20, 20])
 
         #  Space heating object
-        spaceheating = SpaceHeating.SpaceHeating(self.environment, method=0, loadcurve=energy_array)
+        spaceheating = SpaceHeating.SpaceHeating(self.environment, method=0, loadcurve=load_array)
 
-        #  Return demand of space heating object
-        space_h_demand = spaceheating.getDemand(currentValues=False)
+        #  Return load curve of space heating object
+        space_heat_load_curve = spaceheating.getDemand(currentValues=False)
 
         #  Compare arrays
-        np.testing.assert_equal(space_h_demand, energy_array)
+        np.testing.assert_equal(space_heat_load_curve, load_array)
         #  Compare sums
-        self.assertEqual(np.sum(space_h_demand), np.sum(energy_array))
+        self.assertEqual(np.sum(space_heat_load_curve), np.sum(load_array))
 
     def test_method1(self):  # Standard load profile
         #  Generate space heating object
         spaceheating = SpaceHeating.SpaceHeating(self.environment, method=1, livingArea=100, specificDemand=150)
 
-        #  Get space heating demand values (in Wh) per timestep
-        space_h_demand = spaceheating.getDemand(currentValues=False)
+        #  Get space heating load curve (in W) per timestep
+        space_heat_load_curve = spaceheating.getDemand(currentValues=False)
 
         #  Check if sum of energy demand values is (almost) equal to input
-        self.assertAlmostEqual(np.sum(space_h_demand)/1000, 150*100, delta=3)
+        self.assertAlmostEqual(np.sum(space_heat_load_curve)/1000, 150*100, delta=3)
 
 if __name__ == '__main__':
     unittest.main()

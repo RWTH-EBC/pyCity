@@ -70,7 +70,7 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
             - G4 : Shops / Barbers
             - G5 : Bakery
             - G6 : Weekend operation
-        numberHousehold : Boolean, optional (used in method 2)
+        numberHousehold : int, optional (used in method 2)
             Number of people living in the household.
         randomizeAppliances : Boolean (only required in method 2)
             - True : Distribute installed appliances randomly

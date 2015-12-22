@@ -18,7 +18,7 @@ import pycity.classes.demand.Occupancy
 
 def run_test():
     timer = pycity.classes.Timer.Timer()
-    weather = pycity.classes.Weather.Weather(timer, useTRY=True)
+    weather = pycity.classes.Weather.Weather(timer)#, useTRY=True)
     prices = pycity.classes.Prices.Prices()
 
     environment = pycity.classes.Environment.Environment(timer, weather, prices)

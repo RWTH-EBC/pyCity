@@ -274,3 +274,11 @@ if __name__ == "__main__":
                        week_day_factors[profile_type],
                        hourly_factors[profile_type],
                        annual_demand)
+
+    print('Load curve:')
+    print(result)
+    print('\n')
+    print('Length load array:')
+    print(len(result))
+    print('Sum demand values in kWh:')
+    print(np.sum(result)/1000)

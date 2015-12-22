@@ -17,8 +17,7 @@ class TestElectricalDemand(unittest.TestCase):
     """
 
     def setUp(self):
-        timer = pycity.classes.Timer.Timer(timeDiscretization=60, timestepsHorizon=24, timestepsUsedHorizon=96,
-                                           timestepsTotal=3600*24*365, initialDay=1)
+        timer = pycity.classes.Timer.Timer(timeDiscretization=60, timestepsTotal=365*24*60, initialDay=1)
         weather = pycity.classes.Weather.Weather(timer, useTRY=True)
         prices = pycity.classes.Prices.Prices()
 

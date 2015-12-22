@@ -8,5 +8,5 @@ setup(name='pycity',
       author_email='tschuetz@eonerc.rwth-aachen.de',
       license='GNU General Public License',
       packages=['pycity'],
-      setup_requires = ['numpy', 'pandas', 'xlrd'],
-      install_requires = ['numpy', 'pandas', 'xlrd'])
+      setup_requires = ['numpy', 'pandas', 'sympy', 'xlrd'],
+      install_requires = ['numpy', 'pandas', 'sympy', 'xlrd'])

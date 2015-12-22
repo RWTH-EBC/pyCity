@@ -1,0 +1,11 @@
+name	x_coord / m	y_coord / m	living_area / m2	specific_th_demand / kWh/m2a	an_el_demand / kWh/a	th_slp_profile_type	el_slp_profile_type	total_nb_occupants
+b_0001	0	0	100	150	3000	HEF	H0	2
+b_0002	0	10	120	150	3200	HEF	H0	3
+b_0003	10	10	100	150	2800	HEF	H0	1
+b_0004	10	0	200	150	4000	HEF	H0	5
+b_0005	20	0	350	300	15000	GMK	G0	
+b_0006	20	10	100	150	3000	HEF	H0	4
+b_0007	20	20	120	150	3500	HEF	H0	1
+b_0008	0	20	100	150	2500	HEF	H0	2
+b_0009	10	20	200	150	3200	HEF	H0	3
+b_0010	20	30	100	150	3200	HEF	H0	2

@@ -7,6 +7,7 @@ Created on Tue Jul 14 12:18:14 2015
 """
 
 from __future__ import division
+import os
 import numpy as np
 import xlrd
 import math
@@ -183,9 +184,14 @@ def full_year_computation(occupancy,
     return (water, heat)
 
 if __name__ == "__main__":
+
+    #  Define src path
+    src_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    filename = 'dhw_stochastical.xlsx'
+    input_path = os.path.join(src_path, 'inputs', filename)
+
     # Load profiles
-    fname = "inputs/dhw_stochastical.xlsx"
-    profiles = load_profiles(fname)
+    profiles = load_profiles(input_path)
     
     # Compute active occupants for one year
     # Max. occupancy is 5 people simultaneously
@@ -197,7 +203,7 @@ if __name__ == "__main__":
     
     # Run simulation
     (water, heat) = full_year_computation(occupancy, profiles, 
-                                          time_discretization=60,
+                                          time_dis=60,
                                           initial_day=initial_day)
     
     # Change time resolution to 15 minutes

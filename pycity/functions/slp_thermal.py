@@ -7,6 +7,7 @@ Created on Fri Jul 10 16:44:44 2015
 """
 
 from __future__ import division
+import os
 import numpy as np
 import math
 import xlrd
@@ -240,17 +241,24 @@ def load_profile_factors(filename):
     
 # Test script
 if __name__ == "__main__":
+    #  Define src path
+    src_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+    # Temperature - mean values
+    try_filename = 'TRY2010_05_Jahr.dat'
+    try_path = os.path.join(src_path, 'inputs', 'weather', try_filename)
+
     # Load temperatures
-    f_TRY = "inputs/weather/TRY2010_05_Jahr.dat"
-    temperature = np.loadtxt(f_TRY, skiprows=38, usecols=(8,))
+    temperature = np.loadtxt(try_path, skiprows=38, usecols=(8,))
 
     # Set initial day
     initial_day = 0
     
     # Load hourly_factors, profile_factors and week_day_factors
-    f_hour = "inputs/standard_load_profile/slp_thermal_hourly_factors.xlsx"
-    f_prof = "inputs/standard_load_profile/slp_thermal_profile_factors.xlsx"
-    f_week = "inputs/standard_load_profile/slp_thermal_week_day_factors.xlsx"
+    f_hour = os.path.join(src_path, 'inputs', 'standard_load_profile', 'slp_thermal_hourly_factors.xlsx')
+    f_prof = os.path.join(src_path, 'inputs', 'standard_load_profile', 'slp_thermal_profile_factors.xlsx')
+    f_week = os.path.join(src_path, 'inputs', 'standard_load_profile', 'slp_thermal_week_day_factors.xlsx')
+
     hourly_factors = load_hourly_factors(f_hour)
     profile_factors = load_profile_factors(f_prof)
     week_day_factors = load_week_day_factors(f_week)

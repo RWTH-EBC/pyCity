@@ -27,7 +27,7 @@ def run_test():
                                                     tFlow=60,
                                                     thermal=True,
                                                     method=1, # Annex 42
-                                                    dailyConsumption=200,
+                                                    dailyConsumption=100,
                                                     supplyTemperature=25)
 
     results = dhw_annex42.getDemand()

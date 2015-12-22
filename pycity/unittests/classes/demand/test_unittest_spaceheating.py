@@ -39,8 +39,6 @@ class TestSpaceheating(unittest.TestCase):
 
         #  Compare arrays
         np.testing.assert_equal(space_heat_load_curve, load_array)
-        #  Compare sums
-        self.assertEqual(np.sum(space_heat_load_curve), np.sum(load_array))
 
     def test_method1(self):  # Standard load profile
         #  Generate space heating object

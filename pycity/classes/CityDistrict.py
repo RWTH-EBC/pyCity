@@ -57,7 +57,7 @@ class CityDistrict(ues.UESGraph):
         Parameters
         ----------
         entity : object
-            Possible entity object (building, windenergyconverter or pv)
+            Standard entity object (building, windenergyconverter or pv)
         position : sympy.geometry.Point object
             New node's position
         name : str, optional

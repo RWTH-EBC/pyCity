@@ -17,27 +17,30 @@ class Apartment(object):
     Apartments potentially contain:
         Electricity, domestic hot water and space heating demand
     """
-    
-    def __init__(self, environment):
+
+    def __init__(self, environment, nb_of_occupants=0):
         """
         Parameter
         ---------
         environment : Environment object
             Common to all other objects. Includes time and weather instances
+        nb_of_occupants : int, optional
+            Maximum number of occupants living within apartment (Default: 0)
         """
         self.environment = environment
         self._kind = "apartment"
-        
+        self.nb_of_occupants = nb_of_occupants
+
         # Create empty demands
-        self.demandElectrical = ElecDemand.ElectricalDemand(environment, 
-                                                            method=0, 
+        self.demandElectrical = ElecDemand.ElectricalDemand(environment,
+                                                            method=0,
                                                             annualDemand=0)
         self.demandDomesticHotWater = DHW.DomesticHotWater(environment,
                                                            tFlow=0,
                                                            method=1,
                                                            dailyConsumption=0,
                                                            supplyTemperature=0)
-        self.demandSpaceheating = SpaceHeat.SpaceHeating(environment, 
+        self.demandSpaceheating = SpaceHeat.SpaceHeating(environment,
                                                          method=1,
                                                          livingArea=0,
                                                          specificDemand=0)
@@ -52,7 +55,7 @@ class Apartment(object):
         >>> myApartment = Apartment(...)
         >>> myApartment.addDevice(myDHW)
         """
-        
+
         if entity._kind == "electricaldemand":
             self.demandElectrical = entity
 
@@ -62,7 +65,6 @@ class Apartment(object):
         elif entity._kind == "spaceheating":
             self.demandSpaceheating = entity
 
-        
     def addMultipleEntities(self, entities):
         """
         Add multiple entities to the existing apartment
@@ -82,9 +84,9 @@ class Apartment(object):
         for entity in entities:
             self.addEntity(entity)
 
-    def getDemands(self, 
-                   getElectrical=True, 
-                   getDomesticHotWater=True, 
+    def getDemands(self,
+                   getElectrical=True,
+                   getDomesticHotWater=True,
                    getSpaceheating=True,
                    currentValues=True):
         """
@@ -114,23 +116,22 @@ class Apartment(object):
                                                              False),)
         if getSpaceheating:
             result += (self.demandSpaceheating.getDemand(currentValues),)
-        
+
         return result
-    
+
     def getTotalElectricalDemand(self, currentValues=True):
         """
         """
         demandElectrical = self.demandElectrical.getDemand(currentValues)
         if not self.demandDomesticHotWater.thermal:
-            demandDHW = self.demandDomesticHotWater.getDemand(currentValues, 
+            demandDHW = self.demandDomesticHotWater.getDemand(currentValues,
                                                               False)
             return (demandDHW + demandElectrical)
         else:
             return demandElectrical
-            
-        
-    def getTotalThermalDemand(self, 
-                              currentValues=True, 
+
+    def getTotalThermalDemand(self,
+                              currentValues=True,
                               returnTemperature=True):
         """
         """
@@ -138,10 +139,8 @@ class Apartment(object):
         if self.demandDomesticHotWater.thermal:
             function = self.demandDomesticHotWater.getDemand
             demandDHW = function(currentValues, returnTemperature)
-        
+
         if returnTemperature:
             return (demandDHW[0] + demandSpaceHeating, demandDHW[1])
         else:
             return (demandDHW + demandSpaceHeating)
-    
-    

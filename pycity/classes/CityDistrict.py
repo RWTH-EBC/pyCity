@@ -77,6 +77,11 @@ class CityDistrict(ues.UESGraph):
         is_supply_other : bool, optional
             Boolean to define, if entity is of kind other supply (default: False)
 
+        Returns
+        -------
+        node_number : int
+            Node number
+
         Example
         -------
         >>> myBuilding = Building(...)
@@ -106,6 +111,8 @@ class CityDistrict(ues.UESGraph):
 
         #  Add entity as attribute to node with returned node_number
         self.add_node(node_number, entity=entity)
+
+        return node_number
 
     def addMultipleEntities(self, entities, positions):
         """

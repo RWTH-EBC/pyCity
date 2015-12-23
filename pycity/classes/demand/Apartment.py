@@ -18,16 +18,16 @@ class Apartment(object):
         Electricity, domestic hot water and space heating demand
     """
 
-    def __init__(self, environment, nb_of_occupants=0, net_floor_area=0):
+    def __init__(self, environment, nb_of_occupants=None, net_floor_area=None):
         """
         Parameter
         ---------
         environment : Environment object
             Common to all other objects. Includes time and weather instances
         nb_of_occupants : int, optional
-            Maximum number of occupants living within apartment (default: 0)
+            Maximum number of occupants living within apartment (default: None)
         net_floor_area : float, optional
-            Net floor area of apartment in m^2 (default: 0)
+            Net floor area of apartment in m^2 (default: None)
         """
         self.environment = environment
         self._kind = "apartment"

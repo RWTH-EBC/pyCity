@@ -7,6 +7,9 @@ Created on Wed Jul 08 22:07:49 2015
 """
 
 from __future__ import division
+
+import matplotlib.pyplot as plt
+
 import pycity.classes.Timer
 import pycity.classes.Weather
 import pycity.classes.Environment
@@ -39,6 +42,21 @@ def run_example():
     diffuse_radiation = solar_radiation_tilted_surface[1]
     direct_radiation = solar_radiation_tilted_surface[2]
     reflected_radiation = solar_radiation_tilted_surface[3]
+
+    fig = plt.figure()
+    fig.add_subplot(411)
+    plt.plot(total_radiation)
+    plt.ylabel('total_radiation')
+    fig.add_subplot(412)
+    plt.plot(diffuse_radiation)
+    plt.ylabel('diffuse_radiation')
+    fig.add_subplot(413)
+    plt.plot(direct_radiation)
+    plt.ylabel('direct_radiation')
+    fig.add_subplot(414)
+    plt.plot(reflected_radiation)
+    plt.ylabel('reflected_radiation')
+    plt.show()
 
 if __name__ == '__main__':
     run_example()

@@ -22,4 +22,4 @@ class Test_ThermalSLP(object):
 
         test_temp_array_2 = np.zeros(24*4)
         average_temp_2 = slp_thermal._average_temperature(test_temp_array_2)
-        assert sum(test_temp_array)/len(test_temp_array) == average_temp[0]
+        assert average_temp_2 == [0.0, 0.0, 0.0, 0.0]

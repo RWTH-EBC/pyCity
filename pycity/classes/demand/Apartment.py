@@ -18,7 +18,8 @@ class Apartment(object):
         Electricity, domestic hot water and space heating demand
     """
 
-    def __init__(self, environment, nb_of_occupants=None, net_floor_area=None):
+    def __init__(self, environment, nb_of_occupants=None, net_floor_area=None,
+                 occupancy_profile=None):
         """
         Parameter
         ---------
@@ -28,11 +29,14 @@ class Apartment(object):
             Maximum number of occupants living within apartment (default: None)
         net_floor_area : float, optional
             Net floor area of apartment in m^2 (default: None)
+        occupancy_profile : array-like, optional
+            Occupancy profile of apartment (default: None)
         """
         self.environment = environment
         self._kind = "apartment"
         self.nb_of_occupants = nb_of_occupants
         self.net_floor_area = net_floor_area
+        self.occupancy_profile = occupancy_profile
 
         # Create empty demands
         self.demandElectrical = ElecDemand.ElectricalDemand(environment,

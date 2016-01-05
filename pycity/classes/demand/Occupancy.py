@@ -44,7 +44,8 @@ class Occupancy(object):
         # available for these numbers)
         number_occupants = max(1, min(5, number_occupants))
 
-        src_path = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+        src_path = os.path.dirname(os.path.dirname(os.path.dirname
+                                                   (os.path.abspath(__file__))))
         folder_path = os.path.join(src_path, 'inputs', 'stochastic_electrical_load', 'constants')
         if not Occupancy.occ_start_states_loaded:
             # Load start states matrixes

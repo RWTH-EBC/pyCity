@@ -18,18 +18,22 @@ PyCity requires the following Python packages:
 - numpy
 - pandas
 - sympy
-- nose
+- pytest
 - xlrd
 
 as well as the python package
 
-uesgraph
+- uesgraphs
 
 which is available under [https://github.com/RWTH-EBC/uesgraphs](https://github.com/RWTH-EBC/uesgraphs)
 
 First, you should download and install uesgraph. Local installation is possible via pip:
 
-`pip install -e 'your_path_to_uesgraph_setup'`
+`pip install -e 'your_path_to_uesgraphs_setup'`
+
+Second, you can install pycity via pip:
+
+`pip install -e 'your_path_to_pycity_setup'`
 
 ## License
 

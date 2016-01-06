@@ -85,7 +85,6 @@ def changeResolution(values, oldResolution, newResolution, method="mean"):
         #  Check if original values can be divided by timestep factor
         #  without remainder
         remainder = int(len(values)%(newResolution/oldResolution))
-        print('remainder', remainder)
         if remainder != 0:
             #  Fit length of value list
             fitted_values = values[:-remainder]
@@ -110,7 +109,6 @@ def changeResolution(values, oldResolution, newResolution, method="mean"):
 
         if remainder != 0:
             remaining_values = values[-remainder:]
-            print('remaining_values', remaining_values)
             #  Calculate mean value of last entry
             mean_last_value = sum(remaining_values)/len(remaining_values)
             #  Add last values

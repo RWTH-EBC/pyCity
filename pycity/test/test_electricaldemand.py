@@ -55,7 +55,7 @@ class Test_ElectricalDemand(object):
                                                 annualDemand=3000,
                                                 method=2,
                                                 total_nb_occupants=1,
-                                                randomizeAppliances=True,
+                                                randomizeAppliances=False,
                                                 lightConfiguration=10,
                                                 occupancy=occupancy_profile)
 

@@ -23,6 +23,7 @@ import pycity.examples.example_tes as tes
 import pycity.examples.example_timer as timer
 import pycity.examples.example_weather as weat
 import pycity.examples.example_windEnergyConverter as wind
+import pycity.examples.example_occupancy as occ
 
 
 def run_all_examples():
@@ -56,6 +57,8 @@ def run_all_examples():
     hp.run_test()
     print('## Example: inverter ##################################################################')
     inv.run_test()
+    print('## Example: occupancy ##################################################################')
+    occ.exampe_occupancy()
     print('## Example: photovoltaic ##################################################################')
     pv.run_test()
     print('## Example: space heating ##################################################################')

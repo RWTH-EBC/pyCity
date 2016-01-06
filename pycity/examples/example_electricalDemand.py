@@ -16,15 +16,17 @@ import pycity.classes.Prices
 
 import pycity.classes.demand.Occupancy
 
+
 def run_test():
     timer = pycity.classes.Timer.Timer()
-    weather = pycity.classes.Weather.Weather(timer)#, useTRY=True)
+    weather = pycity.classes.Weather.Weather(timer)  # , useTRY=True)
     prices = pycity.classes.Prices.Prices()
 
-    environment = pycity.classes.Environment.Environment(timer, weather, prices)
+    environment = pycity.classes.Environment.Environment(timer, weather,
+                                                         prices)
 
     el_demand = ED.ElectricalDemand(environment,
-                                    method=1, # Standard load profile
+                                    method=1,  # Standard load profile
                                     profileType="H0",
                                     annualDemand=3000)
 
@@ -33,10 +35,8 @@ def run_test():
     print()
     print("Electrical demand: " + str(results))
 
-
-
     occupancy = pycity.classes.demand.Occupancy.Occupancy(environment,
-                                                   number_occupants=3)
+                                                          number_occupants=3)
 
     el_dem_stochastic = ED.ElectricalDemand(environment,
                                             method=2,
@@ -44,6 +44,9 @@ def run_test():
                                             randomizeAppliances=True,
                                             lightConfiguration=10,
                                             occupancy=occupancy.occupancy)
+
+    print()
+    print("Electrical demand: " + str(el_dem_stochastic))
 
 if __name__ == '__main__':
     #  Run program

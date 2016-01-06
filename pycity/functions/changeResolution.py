@@ -82,8 +82,40 @@ def changeResolution(values, oldResolution, newResolution, method="mean"):
 
     # Sample means or sum values
     if method == "mean":
-        # Interpolate
-        valuesResampled = np.interp(timeNew, timeOld, values)        
+        #  Check if original values can be divided by timestep factor
+        #  without remainder
+        remainder = int(len(values)%(newResolution/oldResolution))
+        print('remainder', remainder)
+        if remainder != 0:
+            #  Fit length of value list
+            fitted_values = values[:-remainder]
+        else:
+            fitted_values = values
+
+        valuesResampled = np.zeros(len(timeNew))
+        counter = 0
+        #  Add mean values
+        for i in range(int(len(fitted_values)/(newResolution/oldResolution))):
+            curr_data_value = 0
+            for j in range(int(newResolution/oldResolution)):
+                #  sum up data values for time interval
+                curr_data_value += fitted_values[j+counter]
+            #  Generate mean value
+            curr_data_value = curr_data_value / (newResolution/oldResolution)
+
+            #  add mean value to new data array
+            valuesResampled[i] = curr_data_value
+            #  Counter up
+            counter += newResolution/oldResolution
+
+        if remainder != 0:
+            remaining_values = values[-remainder:]
+            print('remaining_values', remaining_values)
+            #  Calculate mean value of last entry
+            mean_last_value = sum(remaining_values)/len(remaining_values)
+            #  Add last values
+            valuesResampled[-1] = mean_last_value
+
     else:
         # If values have to be summed up, use cumsum to modify the given data
         # Add one dummy value to later use diff (which reduces the number of

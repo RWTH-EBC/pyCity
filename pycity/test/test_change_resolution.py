@@ -19,7 +19,16 @@ class Test_ChangeResolution(object):
                                                 oldResolution=900,
                                                 newResolution=3600,
                                                 method="mean")
+        assert output_array == [15]
+
+    def test_change_res_mean_larger_timestep_2(self):
+        input_array = [10, 10, 20, 20, 20, 30]
+        output_array = chres.changeResolution(values=input_array,
+                                                oldResolution=900,
+                                                newResolution=3600,
+                                                method="mean")
         assert output_array[0] == 15
+        assert output_array[1] == 25
 
     # def test_change_res_mean_smaller_timestep(self):
     #     input_array = [10]
@@ -35,7 +44,7 @@ class Test_ChangeResolution(object):
                                                 oldResolution=900,
                                                 newResolution=3600,
                                                 method="sum")
-        assert output_array[0] == 60
+        assert output_array == [60]
 
     # def test_change_res_sum_smaller_timestep(self):
     #     input_array = [40]
@@ -51,7 +60,7 @@ class Test_ChangeResolution(object):
                                                 oldResolution=900,
                                                 newResolution=3600,
                                                 method="mean")
-        assert output_array[0] == 15
+        assert output_array == [15]
 
     # def test_change_res_mean_smaller_timestep_pd(self):
     #     input_array = [10]
@@ -67,7 +76,7 @@ class Test_ChangeResolution(object):
                                                 oldResolution=900,
                                                 newResolution=3600,
                                                 method="sum")
-        assert output_array[0] == 60
+        assert output_array == [60]
 
     # def test_change_res_sum_smaller_timestep_pd(self):
     #     input_array = [40]

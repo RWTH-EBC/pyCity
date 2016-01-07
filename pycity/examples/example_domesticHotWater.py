@@ -36,14 +36,14 @@ def run_test():
                                                     dailyConsumption=100,
                                                     supplyTemperature=25)
 
-    results = dhw_annex42.getDemand()
+    results = dhw_annex42.getDemand(currentValues=False)
 
     print('Results for Annex42 profile:')
     print()
     print("Thermal demand: " + str(results[0]))
     print("Required flow temperature: " + str(results[1]))
     print()
-
+    
     #  Convert into energy values in kWh
     dhw_energy_curve = results[0] * timeDiscretization / (3600*1000)
     annual_energy_demand = np.sum(dhw_energy_curve)

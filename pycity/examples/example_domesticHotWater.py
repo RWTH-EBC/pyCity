@@ -38,13 +38,22 @@ def run_test():
 
     results = dhw_annex42.getDemand()
 
+    print('Results for Annex42 profile:')
     print()
     print("Thermal demand: " + str(results[0]))
     print("Required flow temperature: " + str(results[1]))
     print()
 
-    # Compute active occupants for one year
-    # Max. occupancy is 5 people simultaneously
+    #  Convert into energy values in kWh
+    dhw_energy_curve = results[0] * timeDiscretization / (3600*1000)
+    annual_energy_demand = np.sum(dhw_energy_curve)
+
+    print('Annual dhw energy demand in kWh: ', annual_energy_demand)
+
+    print('#----------------------------------------------------------------')
+    #  #---------------------------------------------------------------------
+    #  Compute active occupants for one year
+    #  Max. occupancy is 5 people simultaneously
     occupancy = np.random.geometric(p=0.8, size=6 * 24 * 365) - 1
     occupancy = np.minimum(5, occupancy)
 
@@ -67,7 +76,8 @@ def run_test():
     # Average daily dhw consumption in liters
     av_daily_dhw_volume = np.sum(water_volume_per_timestep) / 365
 
-    print('Max. number of occupants:', max(occupancy))
+    print('Results for stochastic DHW profile:\n')
+    print('Max number of occupants:', max(occupancy))
     print('Annual dhw energy demand in kWh: ', annual_energy_demand)
     print('Average daily domestic hot water volume in liters:',
           av_daily_dhw_volume)

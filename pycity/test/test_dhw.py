@@ -82,5 +82,5 @@ class TestDomesticHotWater(object):
         av_daily_dhw_volume = np.sum(water_volume_per_timestep) / 365
 
         #  Check if av_daily_dhw_volume is within sufficient limits
-        assert (av_daily_dhw_volume <= 300)
-        assert (av_daily_dhw_volume >= 50)
+        assert (av_daily_dhw_volume <= 250)
+        assert (av_daily_dhw_volume >= 45)

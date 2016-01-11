@@ -69,7 +69,7 @@ class Weather(pycity.classes.Sun.Sun):
             True: Read data from TMY3 file 
             False: Read data from other files. 
         location : Tuple, optional
-            (longitude, latitude) of the simulated system's position. Standard
+            (latitude, longitude) of the simulated system's position. Standard
             values (50.76, 6.07) represent Aachen, Germany.
         heightVelocityMeasurement : Float, optional
             At which height is the wind velocity measured? (10 meters for

@@ -105,7 +105,7 @@ if __name__ == '__main__':
     start = timeit.default_timer()
 
     #  User inputs
-    nb_of_apartments = 100
+    nb_of_apartments = 5
     randomize_appliances = True
 
     #  Run program

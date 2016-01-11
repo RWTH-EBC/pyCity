@@ -64,7 +64,7 @@ def compute_daily_demand(probability_profiles, average_profile, occupancy,
     Returns
     -------
     water : array_like
-        Minute-wise sampled tap water consumption in liters.
+        Tap water volume flow in liters per hour.
     heat : array_like
         Resulting minute-wise sampled heat demand in Watt.
         The heat capacity of water is assumed to be 4180 J/(kg.K) and the
@@ -143,7 +143,7 @@ def full_year_computation(occupancy,
     Returns
     -------
     water : array_like
-        Minute-wise sampled tap water consumption in liters.
+        Tap water volume flow in liters per hour.
     heat : array_like
         Resulting minute-wise sampled heat demand in Watt.
         The heat capacity of water is assumed to be 4180 J/(kg.K) and the

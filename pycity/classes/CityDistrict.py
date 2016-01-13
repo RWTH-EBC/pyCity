@@ -6,7 +6,6 @@ Python package.
 uesgraphs can be downloaded on Github: https://github.com/RWTH-EBC/uesgraphs
 """
 
-
 from __future__ import division
 import numpy as np
 

@@ -95,6 +95,11 @@ def run_test():
     print('Number of PV farms:')
     print(cityDistrict.get_nb_of_entities(entity_name='pv'))
 
+    print('Node information:')
+    print(cityDistrict.nodes(data=True))
+
+    print('\n')
+
     print('Energy demands of building objects:')
     print(cityDistrict.getDemands())
 
@@ -103,7 +108,6 @@ def run_test():
 
     print('PV power:')
     print(cityDistrict.getPVPower())
-
 
 if __name__ == '__main__':
     #  Run program

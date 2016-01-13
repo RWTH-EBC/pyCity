@@ -12,53 +12,10 @@ import numpy as np
 import math
 
 
-def changeResolutionPD(values, oldResolution, newResolution, method="mean"):
-    """
-    Change the temporal resolution of values that have a constant sampling rate
-    
-    Parameters
-    ----------
-    values : array-like
-        data points
-    oldResolution : integer
-        temporal resolution of the given values. oldResolution=3600 means
-        hourly sampled data
-    newResolution : integer
-        temporal resolution of the given data shall be converted to
-    method : ``{"mean"; "sum"}``, optional
-        - ``"mean"`` : compute mean values while resampling (e.g. for power).
-        - ``"sum"``  : compute sum values while resampling (e.g. for energy).
-    """
-    #  Compute time indexes
-    timeIndex = pd.date_range(0, periods=len(values), 
-                              freq=str(oldResolution)+"s")
-
-    #  Construct original time series
-    timeseriesOld = pd.Series(data=values, index=timeIndex)
-    
-    #  Resample
-    #  When using "mean" for a timeseries that does not have sufficient entries
-    #  (e.g. hourly data should be resampled on a daily scheme, but there are
-    #  only 40 instead of 48 data points available), the final time period was
-    #  averaged by the available data (16 instead of 24 hours).
-    #  Using "sum" and dividing/multiplying by the resolution worked fine.
-    timeseriesNew = timeseriesOld.resample(rule=str(newResolution)+"s", 
-                                           how="sum", fill_method="pad")
-    if method == "mean" and newResolution > oldResolution:
-        timeseriesNew = timeseriesNew * oldResolution / newResolution
-
-    elif method == "sum" and newResolution < oldResolution:
-        pass
-
-    #  Get resampled values
-    valuesResampled = timeseriesNew.get_values()
-    
-    return valuesResampled
-    
 def changeResolution(values, oldResolution, newResolution, method="mean"):
     """
     Change the temporal resolution of values that have a constant sampling rate
-    
+
     Parameters
     ----------
     values : array-like
@@ -71,110 +28,35 @@ def changeResolution(values, oldResolution, newResolution, method="mean"):
     method : ``{"mean"; "sum"}``, optional
         - ``"mean"`` : compute mean values while resampling (e.g. for power).
         - ``"sum"``  : compute sum values while resampling (e.g. for energy).
-
-    Raises
-    ------
-    AssertionError
-        If oldResolution is larger than newResolution and oldResolution
-        cannot be divided by newResolution without remainder.
     """
-    #  Compute original time indexes
+    # Compute original time indexes
     timeOld = np.arange(len(values)) * oldResolution
 
-    #  Compute new time indexes
+    # Compute new time indexes
     length = math.ceil(len(values) * oldResolution / newResolution)
     timeNew = np.arange(length) * newResolution
 
-    #  #---------------------------------------------------------------------
-    if newResolution > oldResolution:  # Enlargement of timestep
-        # Sample means or sum values
-        if method == "mean":
-            #  Check if original values can be divided by timestep factor
-            #  without remainder
-            remainder = int(len(values)%(newResolution/oldResolution))
-            if remainder != 0:
-                #  Fit length of value list
-                fitted_values = values[:-remainder]
-            else:
-                fitted_values = values
+    # Sample means or sum values
+    if method == "mean":
+        # Interpolate
+        valuesResampled = np.interp(timeNew, timeOld, values)
+    else:
+        # If values have to be summed up, use cumsum to modify the given data
+        # Add one dummy value to later use diff (which reduces the number of
+        # indexes by one)
+        values = np.cumsum(np.concatenate(([0], values)))
+        timeOld = np.concatenate((timeOld, [timeOld[-1] + oldResolution]))
+        timeNew = np.concatenate((timeNew, [timeNew[-1] + newResolution]))
 
-            valuesResampled = np.zeros(len(timeNew))
-            counter = 0
-            #  Add mean values
-            for i in range(int(len(fitted_values)/(newResolution/oldResolution))):
-                curr_data_value = 0
-                for j in range(int(newResolution/oldResolution)):
-                    #  sum up data values for time interval
-                    curr_data_value += fitted_values[j+counter]
-                #  Generate mean value
-                curr_data_value = curr_data_value / (newResolution/oldResolution)
+        # Interpolate
+        valuesResampled = np.interp(timeNew, timeOld, values)
 
-                #  add mean value to new data array
-                valuesResampled[i] = curr_data_value
-                #  Counter up
-                counter += newResolution/oldResolution
-
-            if remainder != 0:
-                remaining_values = values[-remainder:]
-                #  Calculate mean value of last entry
-                mean_last_value = sum(remaining_values)/len(remaining_values)
-                #  Add last values
-                valuesResampled[-1] = mean_last_value
-
-        else:  # method='sum'
-            # If values have to be summed up, use cumsum to modify the given data
-            # Add one dummy value to later use diff (which reduces the number of
-            # indexes by one)
-            values = np.cumsum(np.concatenate(([0], values)))
-            timeOld = np.concatenate((timeOld, [timeOld[-1]+oldResolution]))
-            timeNew = np.concatenate((timeNew, [timeNew[-1]+newResolution]))
-
-            # Interpolate
-            valuesResampled = np.interp(timeNew, timeOld, values)
-
-            # "Undo" the cumsum
-            valuesResampled = np.diff(valuesResampled)
-
-    #  #---------------------------------------------------------------------
-    elif oldResolution == newResolution:  # Unchanged resolution
-        valuesResampled = values  # Return original value
-
-    #  #---------------------------------------------------------------------
-    else:  # Downsize timestep (e.g. from 3600 to 900 seconds)
-
-        remainder = oldResolution%newResolution
-        assert remainder == 0, ('oldResolution must be dividable with ' +
-                                'newResolution without remainder. ' +
-                                'remainder value is: ' + str(remainder))
-
-        valuesResampled = np.zeros(len(timeNew))
-
-        if method == "mean":
-            counter = 0
-            #  Loop over length of old time array
-            for i in range(len(timeOld)):
-                j = 0
-                while j < int(oldResolution/newResolution):
-                    #  Distribute constant values over new timesteps
-                    valuesResampled[j+counter] = values[i]
-                    j += 1
-                counter += oldResolution/newResolution
-
-        else:  # method='sum'
-            counter = 0
-            #  Loop over length of old time array
-            for i in range(len(timeOld)):
-                j = 0
-                while j < int(oldResolution/newResolution):
-                #  Equally distribute values to new, smaller timesteps
-                    valuesResampled[j+counter] = values[i] \
-                                                 * newResolution / \
-                                                 oldResolution
-                    j += 1
-                counter += oldResolution/newResolution
+        # "Undo" the cumsum
+        valuesResampled = np.diff(valuesResampled)
 
     return valuesResampled
-    
+
+
 if __name__ == "__main__":
     values_old = np.arange(2000)
     dt_old = 60
@@ -193,7 +75,7 @@ if __name__ == "__main__":
     dt_temp_long = 7200
     temp_long = changeResolution(temp, dt_temp_old, dt_temp_long)
     temp_short = changeResolution(temp, dt_temp_old, dt_temp_short)
-    
+
     #  Energy - sum values
     np.random.seed(0)
     profile = np.sort(np.random.rand(1440))  # minute wise sampling

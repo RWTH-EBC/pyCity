@@ -86,6 +86,15 @@ def run_test():
     cityDistrict.addEntity(entity=pv, position=position_5)
     cityDistrict.addEntity(entity=pv, position=position_6)
 
+    print('Number of building entities:')
+    print(cityDistrict.get_nb_of_building_entities())
+
+    print('Node id list of building entities:')
+    print(cityDistrict.get_list_build_entity_node_ids())
+
+    print('Number of PV farms:')
+    print(cityDistrict.get_nb_of_entities(entity_name='pv'))
+
     print('Energy demands of building objects:')
     print(cityDistrict.getDemands())
 

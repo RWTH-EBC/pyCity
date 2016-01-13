@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Python code with city district class. Usage requires installation of uesgraphs Python package.
+Python code with city district class. Usage requires installation of uesgraphs
+Python package.
 uesgraphs can be downloaded on Github: https://github.com/RWTH-EBC/uesgraphs
 """
 
@@ -12,7 +13,8 @@ import numpy as np
 try:
     import uesgraphs.uesgraph as ues
 except:
-    ImportError('Package uesgraphs is not found. Please install uesgraphs first. https://github.com/RWTH-EBC/uesgraphs')
+    ImportError('Package uesgraphs is not found. Please install uesgraphs' +
+                'first. https://github.com/RWTH-EBC/uesgraphs')
 
 
 class CityDistrict(ues.UESGraph):
@@ -49,8 +51,10 @@ class CityDistrict(ues.UESGraph):
         #  Define object type
         self._kind = 'citydistrict'
 
-    def addEntity(self, entity, position, name=None, is_supply_electricity=None, is_supply_heating=False,
-                  is_supply_cooling=False, is_supply_gas=False, is_supply_other=False):
+    def addEntity(self, entity, position, name=None,
+                  is_supply_electricity=None, is_supply_heating=False,
+                  is_supply_cooling=False, is_supply_gas=False,
+                  is_supply_other=False):
         """
         Method adds entity (e.g. building object) to city district object.
 
@@ -63,19 +67,25 @@ class CityDistrict(ues.UESGraph):
         name : str, optional
             Name of entity (default: None)
         is_supply_electricity : bool, optional
-            Boolean to define, if entity is of kind electrical supply (default: None)
+            Boolean to define, if entity is of kind electrical supply
+            (default: None)
             True - Entity is electric supplier
             False - Entity is not an electric supplier
-            When initialized as "None", method automatically decides if value is True or False,
-            based on _kind of entity ("building" - False; "windenergyconverter" - True; "pv" - True)
+            When initialized as "None", method automatically decides if value
+            is True or False, based on _kind of entity
+            ("building" - False; "windenergyconverter" - True; "pv" - True)
         is_supply_heating : bool, optional
-            Boolean to define, if entity is of kind heating supply (default: False)
+            Boolean to define, if entity is of kind heating supply
+            (default: False)
         is_supply_cooling : bool, optional
-            Boolean to define, if entity is of kind cooling supply (default: False)
+            Boolean to define, if entity is of kind cooling supply
+            (default: False)
         is_supply_gas : bool, optional
-            Boolean to define, if entity is of kind gas supply (default: False)
+            Boolean to define, if entity is of kind gas supply
+            (default: False)
         is_supply_other : bool, optional
-            Boolean to define, if entity is of kind other supply (default: False)
+            Boolean to define, if entity is of kind other supply
+            (default: False)
 
         Returns
         -------
@@ -89,7 +99,8 @@ class CityDistrict(ues.UESGraph):
         >>> myCityDistrict.addDevice(myBuilding)
         """
 
-        if is_supply_electricity is None:  # Automatically decide via entity._kind
+        #  Automatically decide via entity._kind
+        if is_supply_electricity is None:
             if entity._kind == "building":
                 is_supply_electricity = False
 
@@ -99,15 +110,23 @@ class CityDistrict(ues.UESGraph):
             elif entity._kind == "pv":
                 is_supply_electricity = True
             else:
-                raise ValueError('Unknown kind of entity. Select known entity (building, windenergyconverter, pv) or '
-                                 'clearly define parameter is_supply_electricity, when using own entity type.')
+                raise ValueError('Unknown kind of entity. Select known ' +
+                                 'entity (building, windenergyconverter, pv)' +
+                                 ' or clearly define parameter ' +
+                                 'is_supply_electricity, when using own ' +
+                                 'entity type.')
 
-        #  Use add_building method of uesgraph (in ues graph, every demand and every supplier is linked to a building)
-        #  PV or wec "buildings" are buildings with zero energy demand (only generation is taken into account)
-        #  Add building node to graph (node_type='building')
-        node_number = self.add_building(name=name, position=position, is_supply_electricity=is_supply_electricity,
-                                        is_supply_heating=is_supply_heating, is_supply_cooling=is_supply_cooling,
-                                        is_supply_gas=is_supply_gas, is_supply_other=is_supply_other)
+        #  Use add_building method of uesgraph (in ues graph, every demand
+        #  and every supplier is linked to a building). PV or wec "buildings"
+        #  are buildings with zero energy demand (only generation is taken
+        #  into account). Add building node to graph (node_type='building')
+        node_number = self.add_building(name=name, position=position,
+                                        is_supply_electricity=
+                                        is_supply_electricity,
+                                        is_supply_heating=is_supply_heating,
+                                        is_supply_cooling=is_supply_cooling,
+                                        is_supply_gas=is_supply_gas,
+                                        is_supply_other=is_supply_other)
 
         #  Add entity as attribute to node with returned node_number
         self.add_node(node_number, entity=entity)
@@ -123,7 +142,8 @@ class CityDistrict(ues.UESGraph):
         entities_tuple : List-like
             List (or tuple) of entities that are added to the city district
         positions : List-like
-            List (or tuple) of positions (of entities) that are added to city district
+            List (or tuple) of positions (of entities) that are added to city
+            district
             (list of sympy.geometry.Point objects)
             
         Example
@@ -132,11 +152,12 @@ class CityDistrict(ues.UESGraph):
         >>> myPV  = PV(...)
         >>> myWEC = WindEnergyConverter(...)
         >>> myCityDistrict = CityDistrict(...)
-        >>> position_1 = point.Point(0, 0)
-        >>> position_2 = point.Point(0, 10)
-        >>> myCityDistrict.addMultipleEntities([myPV, myWEC], [position_1, position_2])
+        >>> pos_1 = point.Point(0, 0)
+        >>> pos_2 = point.Point(0, 10)
+        >>> myCityDistrict.addMultipleEntities([myPV, myWEC], [pos_1, pos_2])
         """
-        assert len(entities) == len(positions), 'Number of entities must match to number of positions'
+        assert len(entities) == len(positions), ('Number of entities must ' +
+                                                'match to number of positions')
 
         for i in range(len(entities)):
             curr_entity = entities[i]

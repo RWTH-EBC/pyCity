@@ -6,7 +6,7 @@ import numpy as np
 
 import pycity.classes.demand.ElectricalDemand as ED
 import pytest
-from pycity.test.pycity_fixtures import create_environment
+from pycity.test.pycity_fixtures import create_environment, create_occupancy
 
 
 class Test_ElectricalDemand(object):
@@ -44,17 +44,28 @@ class Test_ElectricalDemand(object):
         el_en_demand_value = np.sum(el_en_demand_curve)
 
         #  Check if sum of energy demand values is (almost) equal to input
-        assert abs(el_en_demand_value - 3000) <= 0.01
+        assert abs(el_en_demand_value - 3000) <= 0.001 * 3000
 
-    def test_method2(self, create_environment):  # Stochastic load profile
+    def test_method2(self, create_environment, create_occupancy):
+        """
+        Pytest method for stochastic load profiles.
+
+        Parameters
+        ----------
+        create_environment : object
+            Environment object (as fixture of pytest)
+        create_occupancy : object
+            occupancy object
+        """
 
         #  Occupancy profile
-        occupancy_profile = np.ones((365 * 24 * 60,), dtype=np.int)
+        occupancy_profile = create_occupancy.occupancy
+        max_occ = np.max(occupancy_profile)
 
         el_dem_stochastic = ED.ElectricalDemand(create_environment,
                                                 annualDemand=3000,
                                                 method=2,
-                                                total_nb_occupants=1,
+                                                total_nb_occupants=max_occ,
                                                 randomizeAppliances=False,
                                                 lightConfiguration=10,
                                                 occupancy=occupancy_profile)

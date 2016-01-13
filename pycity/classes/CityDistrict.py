@@ -48,6 +48,10 @@ class CityDistrict(ues.UESGraph):
         #  Add pointer to environment
         self.environment = environment
 
+        #  List of possible entity names (might be extended by user
+        #  when using own entity._kind)
+        self.entity_name_list = ['building', 'pv', 'windenergyconverter']
+
         #  Define object type
         self._kind = 'citydistrict'
 
@@ -115,6 +119,10 @@ class CityDistrict(ues.UESGraph):
                                  ' or clearly define parameter ' +
                                  'is_supply_electricity, when using own ' +
                                  'entity type.')
+
+        #  If entity._kind is new, extend entities list
+        if entity._kind not in self.entity_name_list:
+            self.entity_name_list.append(entity._kind)
 
         #  Use add_building method of uesgraph (in ues graph, every demand
         #  and every supplier is linked to a building). PV or wec "buildings"
@@ -274,3 +282,90 @@ class CityDistrict(ues.UESGraph):
                         flowTemperature = np.maximum(flowTemperature, flow_temp)
 
         return flowTemperature
+
+    def get_nb_of_entities(self, entity_name):
+        """
+        Returns number of nodes of specific entity (e.g. "building", "pv",
+        "windenergyconverter")
+
+        Parameters
+        ----------
+        entity_name: str
+            Standard entity names (building, windenergyconverter or pv)
+
+        Returns
+        -------
+        nb_of_entities : int
+            Number of nodes holding specific entity
+        """
+        assert entity_name in self.entity_name_list
+
+        nb_of_entities = 0
+
+        for n in self:
+            #  If node holds attribute 'node_type'
+            if 'node_type' in self.node[n]:
+                #  If node_type is building
+                if self.node[n]['node_type'] == 'building':
+                    if 'entity' in self.node[n]:
+                        #  If entity is of kind entity_name
+                        if self.node[n]['entity']._kind == entity_name:
+                            nb_of_entities += 1
+        return nb_of_entities
+
+    def get_node_numbers_of_entities(self, entity_name):
+        """
+        Returns list with node numbers, which hold specific kind of entity
+        (e.g. "building", "pv", "windenergyconverter")
+
+        Parameters
+        ----------
+        entity_name: str
+            Standard entity names (building, windenergyconverter or pv)
+
+        Returns
+        -------
+        node_nb_list : list (of ints)
+            List holding node numbers
+        """
+        assert entity_name in self.entity_name_list
+
+        node_nb_list = []
+
+        for n in self:
+            #  If node holds attribute 'node_type'
+            if 'node_type' in self.node[n]:
+                #  If node_type is building
+                if self.node[n]['node_type'] == 'building':
+                    if 'entity' in self.node[n]:
+                        #  If entity is of kind entity_name
+                        if self.node[n]['entity']._kind == entity_name:
+                            node_nb_list.append(n)
+        return node_nb_list
+
+    def get_nb_of_building_entities(self):
+        """
+        Returns number of nodes holding entities of kind "building"
+        (without PV- and windfarms).
+
+        Returns
+        -------
+        nb_buildings : int
+            Number of buildings
+        """
+        nb_buildings = self.get_nb_of_entities(entity_name='building')
+        return nb_buildings
+
+    def get_list_build_entity_node_ids(self):
+        """
+        Returns list with node ids holding building entities.
+        (without PV- and windfarms)
+
+        Returns
+        -------
+        build_node_id_list : list (of ints)
+            List holding building entity node ids
+        """
+        build_node_id_list = self.get_node_numbers_of_entities(entity_name=
+                                                               'building')
+        return build_node_id_list

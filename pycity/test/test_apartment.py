@@ -3,7 +3,8 @@ from __future__ import division
 import numpy as np
 
 import pycity.classes.demand.Apartment as Apartment
-from pycity.test.pycity_fixtures import create_environment, create_demands
+from pycity.test.pycity_fixtures import create_environment, create_demands, \
+    create_apartment
 
 
 class Test_apartment(object):
@@ -40,7 +41,8 @@ class Test_apartment(object):
                               create_environment.timer.timeDiscretization /\
                               (1000*3600)
 
-        assert abs(np.sum(th_energy_demand_values) - 100*150) <= 0.01
+        assert abs(np.sum(th_energy_demand_values) - 100*150) <= 0.001 * \
+                                                                 100 * 150
 
     def test_addMultipleEntities(self, create_environment, create_demands):
         el_demand = create_demands[1]
@@ -60,7 +62,7 @@ class Test_apartment(object):
                               create_environment.timer.timeDiscretization / \
                               (1000*3600)
 
-        assert abs(np.sum(el_energy_demand_values) - 3000) <= 0.01
+        assert abs(np.sum(el_energy_demand_values) - 3000) <= 0.001 * 3000
 
         #  Return thermal power
         dhw_heat_load_curve = test_apartment.getTotalThermalDemand(
@@ -80,4 +82,50 @@ class Test_apartment(object):
         reference_value = daily_consumption * 365 * 4180 * \
                           (t_flow - supply_temp) / (1000 * 3600)
 
-        assert abs(np.sum(dhw_annual_demand) - reference_value) <= 0.01
+        assert abs(np.sum(dhw_annual_demand) - reference_value) \
+               <= 0.001 * reference_value
+
+    def test_get_demands(self, create_apartment):
+        space_heat_power = create_apartment.getDemands(getElectrical=False,
+                                                   getDomesticHotWater=False,
+                                                   getSpaceheating=True,
+                                                   currentValues=False)[0]
+        el_power = create_apartment.getDemands(getElectrical=True,
+                                               getDomesticHotWater=False,
+                                               getSpaceheating=False,
+                                               currentValues=False)[0]
+        dhw_power = create_apartment.getDemands(getElectrical=False,
+                                               getDomesticHotWater=True,
+                                               getSpaceheating=False,
+                                               currentValues=False)[0]
+
+        th_energy_demand_values = space_heat_power * \
+                    create_apartment.environment.timer.timeDiscretization /\
+                              (1000*3600)
+
+        assert abs(np.sum(th_energy_demand_values) - 100*150) <= 0.001 * \
+                                                                 100 * 150
+
+        #  Convert to energy values (in kWh)
+        el_energy_demand_values = el_power * \
+                    create_apartment.environment.timer.timeDiscretization / \
+                              (1000*3600)
+
+        assert abs(np.sum(el_energy_demand_values) - 3000) <= 0.01 * 3000
+
+        daily_consumption = 70
+        t_flow = 70
+        supply_temp = 25
+
+        #  Convert to energy values (in kWh)
+        th_energy_demand_values = dhw_power * \
+                    create_apartment.environment.timer.timeDiscretization / \
+                              (1000*3600)
+        #  Annual energyy demand value (in kWh)
+        dhw_annual_demand = np.sum(th_energy_demand_values)
+        #  Reference value in kWh
+        reference_value = daily_consumption * 365 * 4180 * \
+                          (t_flow - supply_temp) / (1000 * 3600)
+
+        assert abs(np.sum(dhw_annual_demand) - reference_value) \
+               <= 0.001 * reference_value

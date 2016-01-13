@@ -99,11 +99,9 @@ def create_occupancy(create_environment, nb_occupants=1):
     create_occupancy : object
         occupancy object
     """
-    occupancy_object = \
+    create_occupancy = \
         pycity.classes.demand.Occupancy.Occupancy(create_environment,
                                                   number_occupants=nb_occupants)
-
-    create_occupancy = occupancy_object.occupancy
 
     return create_occupancy
 

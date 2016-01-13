@@ -64,14 +64,14 @@ class TestDomesticHotWater(object):
         create_environment : object
             Environment object (pytest fixture)
         """
-        occupancy = create_occupancy
+        occupancy_profile = create_occupancy.occupancy
 
         dhw_stochastical = dhw.DomesticHotWater(create_environment,
                                                 tFlow=60,
                                                 thermal=True,
                                                 method=2,
                                                 supplyTemperature=20,
-                                                occupancy=occupancy)
+                                                occupancy=occupancy_profile)
 
         #  DHW volume flow curve in liters/hour
         volume_flow_curve = dhw_stochastical.water

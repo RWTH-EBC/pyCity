@@ -67,6 +67,9 @@ def run_test():
 
     #  Generate city district object
     cityDistrict = CityDistrict.CityDistrict(environment)
+    #  Annotations: To prevent some methods of subclasses uesgraph / nx.Graph
+    #  from failing (e.g. '.subgraph()) environment is optional input
+    #  parameter.
 
     #  Generate sympy point positions
     position_1 = point.Point(0, 0)

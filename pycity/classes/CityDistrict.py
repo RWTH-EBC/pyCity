@@ -21,26 +21,30 @@ class CityDistrict(ues.UESGraph):
     City district class. Inheritance from urban energy system graph (uesgraph).
     """
 
-    def __init__(self, environment):
+    def __init__(self, environment=None):
         """
         Constructor of city district object.
 
         Parameters
         ----------
         environment : object
-            Environmental object of PyCity (common to all other objects)
+            Environment object of pycity
 
-        Atributes
-        ---------
+        Attributes
+        ----------
         _kind : str
-            Type of object ("citydistrict")
-        buildings : list
-            List holding building objects
-        wec : list
-            List holding wind energy converters of city district
-        pv : list
-            List holding central PV farms of city district
+            Type of object ('citydistrict')
+        environemnt : object
+            Environment object of pycity (default: None)
+
+        Annotations
+        -----------
+        To prevent different methods of subclass nx.Graph from failing
+        the environment object is used as optional input for __init__
+        (not as fix input). E.g. when generating subgraph via .subgraph()
+        method, user has to add environment after initialization.
         """
+
         #  Initialize super class
         super(CityDistrict, self).__init__()
 
@@ -102,7 +106,11 @@ class CityDistrict(ues.UESGraph):
         >>> myCityDistrict.addDevice(myBuilding)
         """
 
-        #  Automatically decide via entity._kind
+        if self.environment is None:
+            #  Extract environment from entity
+            self.environment = entity.environment
+
+        # Automatically decide via entity._kind
         if is_supply_electricity is None:
             if entity._kind == "building":
                 is_supply_electricity = False
@@ -119,11 +127,11 @@ class CityDistrict(ues.UESGraph):
                                  'is_supply_electricity, when using own ' +
                                  'entity type.')
 
-        #  If entity._kind is new, extend entities list
+        # If entity._kind is new, extend entities list
         if entity._kind not in self.entity_name_list:
             self.entity_name_list.append(entity._kind)
 
-        #  Use add_building method of uesgraph (in ues graph, every demand
+        # Use add_building method of uesgraph (in ues graph, every demand
         #  and every supplier is linked to a building). PV or wec "buildings"
         #  are buildings with zero energy demand (only generation is taken
         #  into account). Add building node to graph (node_type='building')
@@ -164,7 +172,7 @@ class CityDistrict(ues.UESGraph):
         >>> myCityDistrict.addMultipleEntities([myPV, myWEC], [pos_1, pos_2])
         """
         assert len(entities) == len(positions), ('Number of entities must ' +
-                                                'match to number of positions')
+                                                 'match to number of positions')
 
         for i in range(len(entities)):
             curr_entity = entities[i]
@@ -269,7 +277,7 @@ class CityDistrict(ues.UESGraph):
         timesteps = self.environment.timer.timestepsHorizon
         flowTemperature = np.zeros(timesteps)
 
-         #  Loop over all nodes
+        #  Loop over all nodes
         for n in self:
             #  If node holds attribute 'node_type'
             if 'node_type' in self.node[n]:
@@ -278,7 +286,8 @@ class CityDistrict(ues.UESGraph):
                     #  If entity is kind building
                     if self.node[n]['entity']._kind == 'building':
                         flow_temp = self.node[n]['entity'].getFlowTemperature()
-                        flowTemperature = np.maximum(flowTemperature, flow_temp)
+                        flowTemperature = np.maximum(flowTemperature,
+                                                     flow_temp)
 
         return flowTemperature
 

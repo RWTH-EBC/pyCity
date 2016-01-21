@@ -15,11 +15,11 @@ from pycity.test.pycity_fixtures import create_environment, create_building, \
 
 class Test_CityDistrict(object):
 
-    def test_init(self, create_environment):
+    def test_init(self):
         """
         Test initialization of citydistrict object
         """
-        city_object = citydist.CityDistrict(environment=create_environment)
+        city_object = citydist.CityDistrict()
 
         assert city_object._kind == 'citydistrict'
 

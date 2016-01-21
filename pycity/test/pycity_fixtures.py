@@ -121,8 +121,11 @@ def create_empty_citydist(create_environment):
     create_empty_citydist : object
         CityDistrict object of PyCity
     """
-    create_empty_citydist = citydist.CityDistrict(environment=
-                                                  create_environment)
+    create_empty_citydist = citydist.CityDistrict()
+
+    #  Add environment
+    create_empty_citydist.environment = create_environment
+
     return create_empty_citydist
 
 
@@ -142,8 +145,10 @@ def create_citydist(create_environment, create_building):
     create_citydistrict : object
         CityDistrict object of PyCity
     """
-    create_citydist = citydist.CityDistrict(environment=
-                                            create_environment)
+    create_citydist = citydist.CityDistrict()
+
+    #  Add environment
+    create_empty_citydist.environment = create_environment
 
     create_citydist.addEntity(entity=create_building,
                               position=Point(0, 0))

@@ -21,9 +21,14 @@ class CityDistrict(ues.UESGraph):
     City district class. Inheritance from urban energy system graph (uesgraph).
     """
 
-    def __init__(self):
+    def __init__(self, environment=None):
         """
         Constructor of city district object.
+
+        Parameters
+        ----------
+        environment : object
+            Environment object of pycity
 
         Attributes
         ----------
@@ -34,16 +39,17 @@ class CityDistrict(ues.UESGraph):
 
         Annotations
         -----------
-        To enable usage of __class__ methods of subclass uesgraph and nx.Graph
-        the environment object is NOT used as input for __init__! User
-        has to add environment pointer AFTER generation of CityDistrict object!
+        To prevent different methods of subclass nx.Graph from failing
+        the environment object is used as optional input for __init__
+        (not as fix input). E.g. when generating subgraph via .subgraph()
+        method, user has to add environment after initialization.
         """
 
         #  Initialize super class
         super(CityDistrict, self).__init__()
 
         #  Add pointer to environment
-        self.environment = None
+        self.environment = environment
 
         #  List of possible entity names (might be extended by user
         #  when using own entity._kind)

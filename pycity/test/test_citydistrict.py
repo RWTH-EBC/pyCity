@@ -19,7 +19,7 @@ class Test_CityDistrict(object):
         """
         Test initialization of citydistrict object
         """
-        city_object = citydist.CityDistrict()
+        city_object = citydist.CityDistrict(environment=create_environment)
 
         assert city_object._kind == 'citydistrict'
 

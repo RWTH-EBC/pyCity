@@ -112,7 +112,51 @@ class Building(object):
 
 
         return (demandElectrical, demandThermal)
-        
+
+    def get_space_heating_power_curve(self):
+        """
+        Returns space heating power curve
+
+        Returns
+        -------
+        space_heat_power : array-like
+            Space heating power curve in W
+        """
+
+        #  Initialize array with zeros
+        space_heat_power = np.zeros(len(self.apartments[0].demandSpaceheating.
+            getDemand(currentValues=False)))
+
+        # Get power curves of each apartment
+        for apartment in self.apartments:
+
+            space_heat_power += apartment.demandSpaceheating.getDemand(
+                    currentValues=False)
+
+        return space_heat_power
+
+    def get_electric_power_curve(self):
+        """
+        Returns electric power curve
+
+        Returns
+        -------
+        el_power_curve : array-like
+           Electrical power curve in W
+        """
+
+        #  Initialize array with zeros
+        el_power_curve = np.zeros(len(self.apartments[0].demandElectrical.
+            getDemand(currentValues=False)))
+
+        # Get power curves of each apartment
+        for apartment in self.apartments:
+
+            el_power_curve += apartment.demandElectrical.getDemand(
+                    currentValues=False)
+
+        return el_power_curve
+
     def getFlowTemperature(self):
         """ Get the required flow temperature of this building. """
         

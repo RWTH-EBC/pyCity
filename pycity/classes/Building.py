@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Created on Sun Feb 15 17:01:21 2015
-
-@author: Thomas
+Building object of pycity
 """
 
 from __future__ import division
 import numpy as np
+import warnings
 
 
 class Building(object):
@@ -113,7 +112,51 @@ class Building(object):
 
 
         return (demandElectrical, demandThermal)
-        
+
+    def get_space_heating_power_curve(self):
+        """
+        Returns space heating power curve
+
+        Returns
+        -------
+        space_heat_power : array-like
+            Space heating power curve in W
+        """
+
+        #  Initialize array with zeros
+        space_heat_power = np.zeros(len(self.apartments[0].demandSpaceheating.
+            getDemand(currentValues=False)))
+
+        # Get power curves of each apartment
+        for apartment in self.apartments:
+
+            space_heat_power += apartment.demandSpaceheating.getDemand(
+                    currentValues=False)
+
+        return space_heat_power
+
+    def get_electric_power_curve(self):
+        """
+        Returns electric power curve
+
+        Returns
+        -------
+        el_power_curve : array-like
+           Electrical power curve in W
+        """
+
+        #  Initialize array with zeros
+        el_power_curve = np.zeros(len(self.apartments[0].demandElectrical.
+            getDemand(currentValues=False)))
+
+        # Get power curves of each apartment
+        for apartment in self.apartments:
+
+            el_power_curve += apartment.demandElectrical.getDemand(
+                    currentValues=False)
+
+        return el_power_curve
+
     def getFlowTemperature(self):
         """ Get the required flow temperature of this building. """
         
@@ -170,3 +213,58 @@ class Building(object):
         """
         tFlow = self.getFlowTemperature()
         return self.bes.heatpump.getNominalValues(tFlow)
+
+    def get_number_of_apartments(self):
+        """
+        Returns number of apartments within chosen building. Of no apartment
+        exists, returns None.
+
+        Returns
+        -------
+        number_of_apartments : int
+            Number of apartments within building
+        """
+        number_of_apartments = None
+        if len(self.apartments) > 0:
+            number_of_apartments = len(self.apartments)
+        return number_of_apartments
+
+    def get_number_of_occupants(self):
+        """
+        Returns number of occupants of all apartments within building.
+        If no occupants exist within building/apartment(s), returns None.
+
+        Returns
+        -------
+        occupants_total : int
+            Total number of occupants
+        """
+        occupants_total = None  # default value
+        if len(self.apartments) != 0:
+            occupants_total = 0  # Initial value, if apartments exist
+            for apartment in self.apartments:
+                if apartment.occupancy is not None:
+                    occupants_total += apartment.occupancy.number_occupants
+        return occupants_total
+
+    def get_net_floor_area_of_building(self):
+        """
+        Returns net floor area of building. If undefined (within apartments)
+        returns None.
+
+        Returns
+        -------
+        nfa : float
+            Net floor area of building in m^2
+        """
+        nfa = None
+        if len(self.apartments) != 0:
+            nfa = 0  # Initial value
+            for apartment in self.apartments:
+                if apartment.net_floor_area is not None:
+                    nfa += apartment.net_floor_area
+                else:
+                    warnings.warn('Net floor area of one apartment is' +
+                                  'defined as None. Please check if this' +
+                                  'is correct.')
+        return nfa

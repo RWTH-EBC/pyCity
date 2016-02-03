@@ -40,9 +40,14 @@ class Occupancy(object):
             Sunday
         """
 
-        # Adjust number_occupants to be between 1 and 5 (as inputs are only
-        # available for these numbers)
-        number_occupants = max(1, min(5, number_occupants))
+        assert number_occupants > 0, ('At least 1 person has to be defined ' +
+                                       'as occupant')
+        assert number_occupants <= 5, ('Max. allowed number of occupants ' +
+                                       'per apartment is 5')
+
+        self._kind = 'occupancy'
+        self.number_occupants = number_occupants
+        self.environment = environment
 
         src_path = os.path.dirname(os.path.dirname(os.path.dirname
                                                    (os.path.abspath(__file__))))
@@ -76,10 +81,6 @@ class Occupancy(object):
         start_probs = start_states[self.type_weekday[self.weekend]]
         get_state = self._get_start_state
         self.initial_occupancy = get_state(start_probs[:][number_occupants])
-
-        # Save input
-        self.number_occupants = number_occupants
-        self.environment = environment
         
         # Make a full year occupancy computation
         occupancy = []        

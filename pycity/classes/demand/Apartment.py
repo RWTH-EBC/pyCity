@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Created on Tue Feb 10 13:30:09 2015
-
-@author: tsz
+Apartment class of pycity
 """
 
 from __future__ import division
+import warnings
+
 import pycity.classes.demand.DomesticHotWater as DHW
 import pycity.classes.demand.ElectricalDemand as ElecDemand
 import pycity.classes.demand.SpaceHeating as SpaceHeat
@@ -18,25 +18,21 @@ class Apartment(object):
         Electricity, domestic hot water and space heating demand
     """
 
-    def __init__(self, environment, nb_of_occupants=None, net_floor_area=None,
-                 occupancy_profile=None):
+    def __init__(self, environment, net_floor_area=None, occupancy=None):
         """
         Parameter
         ---------
         environment : Environment object
             Common to all other objects. Includes time and weather instances
-        nb_of_occupants : int, optional
-            Maximum number of occupants living within apartment (default: None)
         net_floor_area : float, optional
             Net floor area of apartment in m^2 (default: None)
-        occupancy_profile : array-like, optional
-            Occupancy profile of apartment (default: None)
+        occupancy : object
+            Occupancy object of pycity (default: None)
         """
         self.environment = environment
         self._kind = "apartment"
-        self.nb_of_occupants = nb_of_occupants
         self.net_floor_area = net_floor_area
-        self.occupancy_profile = occupancy_profile
+        self.occupancy = occupancy
 
         # Create empty demands
         self.demandElectrical = ElecDemand.ElectricalDemand(environment,
@@ -54,7 +50,16 @@ class Apartment(object):
 
     def addEntity(self, entity):
         """
-        Add an entity
+        Add an entity to apartment.
+
+        Parameters
+        ----------
+        entity : object
+            Entity. Possible objects:
+            - Electrical demand (entity._kind == "electricaldemand")
+            - Domestic hot water demand (entity._kind == "domestichotwater")
+            - Space heating demand (entity._kind == "spaceheating")
+            - Occupancy (entity._kind == 'occupancy')
         
         Example
         -------
@@ -71,6 +76,13 @@ class Apartment(object):
 
         elif entity._kind == "spaceheating":
             self.demandSpaceheating = entity
+
+        elif entity._kind == 'occupancy':
+            self.occupancy = entity
+
+        else:
+            warnings.warn('Kind of entity is unknown. Entity has not been ' +
+                          'added')
 
     def addMultipleEntities(self, entities):
         """
@@ -151,3 +163,31 @@ class Apartment(object):
             return (demandDHW[0] + demandSpaceHeating, demandDHW[1])
         else:
             return (demandDHW + demandSpaceHeating)
+
+    def get_max_nb_occupants(self):
+        """
+        Returns maximum number of occupants within apartment
+
+        Returns
+        -------
+        max_nb_occupants : int
+            Maximum number of occupants
+        """
+        max_nb_occupants = None
+        if self.occupancy is not None:
+            max_nb_occupants = self.occupancy.number_occupants
+        return max_nb_occupants
+
+    def get_occupancy_profile(self):
+        """
+        Returns occupancy profile (if occupancy object exists)
+
+        Returns
+        -------
+        occupancy_profile : array-like
+            1d array-like list with number of occupants per timestep
+        """
+        occupancy_profile = None
+        if self.occupancy is not None:
+            occupancy_profile = self.occupancy.occupancy
+        return occupancy_profile

@@ -157,6 +157,30 @@ class Building(object):
 
         return el_power_curve
 
+    def get_dhw_power_curve(self):
+        """
+        Returns domestic hot water (dhw) power curve
+
+        Returns
+        -------
+        dhw_heat_power : array-like
+            DHW power curve in W
+        """
+
+        #  Initialize array with zeros
+        dhw_heat_power = \
+            np.zeros(len(self.apartments[0].demandDomesticHotWater.
+                         getDemand(currentValues=False,
+                                   returnTemperature=False)))
+
+        # Get power curves of each apartment
+        for apartment in self.apartments:
+
+            dhw_heat_power += apartment.demandDomesticHotWater.getDemand(
+                    currentValues=False, returnTemperature=False)
+
+        return dhw_heat_power
+
     def getFlowTemperature(self):
         """ Get the required flow temperature of this building. """
         

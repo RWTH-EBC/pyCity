@@ -109,6 +109,9 @@ def run_test():
     print()
     print(building.flowTemperature)
 
+    print(building.get_space_heating_power_curve())
+    print(len(building.get_space_heating_power_curve()))
+
 if __name__ == '__main__':
     #  Run program
     run_test()

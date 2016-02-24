@@ -15,6 +15,8 @@ except:
     ImportError('Package uesgraphs is not found. Please install uesgraphs' +
                 'first. https://github.com/RWTH-EBC/uesgraphs')
 
+import pycity.functions.changeResolution as chres
+
 
 class CityDistrict(ues.UESGraph):
     """
@@ -280,6 +282,7 @@ class CityDistrict(ues.UESGraph):
             Space heating thermal power curve in W per timestep
         """
         timestepsTotal = self.environment.timer.timestepsTotal
+        timestep = self.environment.timer.timeDiscretization
         agg_th_p_curve = np.zeros(timestepsTotal)
 
         #  Loop over all nodes
@@ -290,8 +293,16 @@ class CityDistrict(ues.UESGraph):
                 if self.node[n]['node_type'] == 'building':
                     #  If entity is kind building
                     if self.node[n]['entity']._kind == 'building':
-                        agg_th_p_curve += self.node[n]['entity'].\
+                        th_power_curve = self.node[n]['entity']. \
                             get_space_heating_power_curve()
+                        #  Get old timestep
+                        old_timestep = timestep * len(th_power_curve) / \
+                                       timestepsTotal
+                        #  Convert timestep, if necessary
+                        th_power_curve = \
+                            chres.changeResolution(th_power_curve,
+                                                   old_timestep, timestep)
+                        agg_th_p_curve += th_power_curve
 
         return agg_th_p_curve
 
@@ -306,6 +317,7 @@ class CityDistrict(ues.UESGraph):
             Electrical power curve in W per timestep
         """
         timestepsTotal = self.environment.timer.timestepsTotal
+        timestep = self.environment.timer.timeDiscretization
         agg_el_p_curve = np.zeros(timestepsTotal)
 
         #  Loop over all nodes
@@ -316,8 +328,16 @@ class CityDistrict(ues.UESGraph):
                 if self.node[n]['node_type'] == 'building':
                     #  If entity is kind building
                     if self.node[n]['entity']._kind == 'building':
-                        agg_el_p_curve += self.node[n]['entity'].\
+                        el_power_curve = self.node[n]['entity']. \
                             get_electric_power_curve()
+                        #  Get old timestep
+                        old_timestep = timestep * timestepsTotal / \
+                                       len(el_power_curve)
+                        #  Convert timestep, if necessary
+                        el_power_curve = chres.changeResolution(el_power_curve,
+                                                                old_timestep,
+                                                                timestep)
+                        agg_el_p_curve += el_power_curve
 
         return agg_el_p_curve
 
@@ -332,6 +352,7 @@ class CityDistrict(ues.UESGraph):
             DHW power curve in W per timestep
         """
         timestepsTotal = self.environment.timer.timestepsTotal
+        timestep = self.environment.timer.timeDiscretization
         agg_dhw_p_curve = np.zeros(timestepsTotal)
 
         #  Loop over all nodes
@@ -342,8 +363,17 @@ class CityDistrict(ues.UESGraph):
                 if self.node[n]['node_type'] == 'building':
                     #  If entity is kind building
                     if self.node[n]['entity']._kind == 'building':
-                        agg_dhw_p_curve += self.node[n]['entity'].\
+                        dhw_power_curve = self.node[n]['entity']. \
                             get_dhw_power_curve()
+                        #  Get old timestep
+                        old_timestep = timestep * timestepsTotal / \
+                                       len(dhw_power_curve)
+                        #  Convert timestep, if necessary
+                        dhw_power_curve = \
+                            chres.changeResolution(dhw_power_curve,
+                                                   old_timestep,
+                                                   timestep)
+                        agg_dhw_p_curve += dhw_power_curve
 
         return agg_dhw_p_curve
 

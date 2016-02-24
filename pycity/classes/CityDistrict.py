@@ -269,6 +269,84 @@ class CityDistrict(ues.UESGraph):
 
         return (demandElectrical, demandThermal)
 
+    def get_aggr_space_h_power_curve(self):
+        """
+        Returns aggregated space heating power curve for all buildings
+        within city district.
+
+        Returns
+        -------
+        agg_th_p_curve : np.array
+            Space heating thermal power curve in W per timestep
+        """
+        timestepsTotal = self.environment.timer.timestepsTotal
+        agg_th_p_curve = np.zeros(timestepsTotal)
+
+        #  Loop over all nodes
+        for n in self:
+            #  If node holds attribute 'node_type'
+            if 'node_type' in self.node[n]:
+                #  If node_type is building
+                if self.node[n]['node_type'] == 'building':
+                    #  If entity is kind building
+                    if self.node[n]['entity']._kind == 'building':
+                        agg_th_p_curve += self.node[n]['entity'].\
+                            get_space_heating_power_curve()
+
+        return agg_th_p_curve
+
+    def get_aggr_el_power_curve(self):
+        """
+        Returns aggregated electrical power curve for all buildings
+        within city district.
+
+        Returns
+        -------
+        agg_el_p_curve : np.array
+            Electrical power curve in W per timestep
+        """
+        timestepsTotal = self.environment.timer.timestepsTotal
+        agg_el_p_curve = np.zeros(timestepsTotal)
+
+        #  Loop over all nodes
+        for n in self:
+            #  If node holds attribute 'node_type'
+            if 'node_type' in self.node[n]:
+                #  If node_type is building
+                if self.node[n]['node_type'] == 'building':
+                    #  If entity is kind building
+                    if self.node[n]['entity']._kind == 'building':
+                        agg_el_p_curve += self.node[n]['entity'].\
+                            get_electric_power_curve()
+
+        return agg_el_p_curve
+
+    def get_aggr_dhw_power_curve(self):
+        """
+        Returns aggregated domestic hot water (dhw) power curve for all
+        buildings within city district.
+
+        Returns
+        -------
+        agg_dhw_p_curve : np.array
+            DHW power curve in W per timestep
+        """
+        timestepsTotal = self.environment.timer.timestepsTotal
+        agg_dhw_p_curve = np.zeros(timestepsTotal)
+
+        #  Loop over all nodes
+        for n in self:
+            #  If node holds attribute 'node_type'
+            if 'node_type' in self.node[n]:
+                #  If node_type is building
+                if self.node[n]['node_type'] == 'building':
+                    #  If entity is kind building
+                    if self.node[n]['entity']._kind == 'building':
+                        agg_dhw_p_curve += self.node[n]['entity'].\
+                            get_dhw_power_curve()
+
+        return agg_dhw_p_curve
+
     def getFlowTemperatures(self):
         """ 
         Get the aggregated flow temperature forecast.

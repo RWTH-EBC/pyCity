@@ -15,8 +15,6 @@ except:
     ImportError('Package uesgraphs is not found. Please install uesgraphs' +
                 'first. https://github.com/RWTH-EBC/uesgraphs')
 
-import pycity.functions.changeResolution as chres
-
 
 class CityDistrict(ues.UESGraph):
     """
@@ -271,18 +269,30 @@ class CityDistrict(ues.UESGraph):
 
         return (demandElectrical, demandThermal)
 
-    def get_aggr_space_h_power_curve(self):
+    def get_aggr_space_h_power_curve(self, current_values=False):
         """
         Returns aggregated space heating power curve for all buildings
         within city district.
+
+        Parameters
+        ----------
+        current_values : bool, optional
+            Defines, if only current horizon or all timesteps should be used.
+            (default: False)
+            False - Use complete number of timesteps
+            True - Use horizon
 
         Returns
         -------
         agg_th_p_curve : np.array
             Space heating thermal power curve in W per timestep
         """
-        timestepsTotal = self.environment.timer.timestepsTotal
-        agg_th_p_curve = np.zeros(timestepsTotal)
+
+        if current_values:  # Use horizon
+            size = self.environment.timer.timestepsHorizon
+        else:  # Use all timesteps
+            size = self.environment.timer.timestepsTotal
+        agg_th_p_curve = np.zeros(size)
 
         #  Loop over all nodes
         for n in self:
@@ -293,23 +303,36 @@ class CityDistrict(ues.UESGraph):
                     #  If entity is kind building
                     if self.node[n]['entity']._kind == 'building':
                         th_power_curve = self.node[n]['entity']. \
-                            get_space_heating_power_curve()
+                            get_space_heating_power_curve(
+                            current_values=current_values)
                         agg_th_p_curve += th_power_curve
 
         return agg_th_p_curve
 
-    def get_aggr_el_power_curve(self):
+    def get_aggr_el_power_curve(self, current_values=False):
         """
         Returns aggregated electrical power curve for all buildings
         within city district.
+
+        Parameters
+        ----------
+        current_values : bool, optional
+            Defines, if only current horizon or all timesteps should be used.
+            (default: False)
+            False - Use complete number of timesteps
+            True - Use horizon
 
         Returns
         -------
         agg_el_p_curve : np.array
             Electrical power curve in W per timestep
         """
-        timestepsTotal = self.environment.timer.timestepsTotal
-        agg_el_p_curve = np.zeros(timestepsTotal)
+
+        if current_values:  # Use horizon
+            size = self.environment.timer.timestepsHorizon
+        else:  # Use all timesteps
+            size = self.environment.timer.timestepsTotal
+        agg_el_p_curve = np.zeros(size)
 
         #  Loop over all nodes
         for n in self:
@@ -320,23 +343,36 @@ class CityDistrict(ues.UESGraph):
                     #  If entity is kind building
                     if self.node[n]['entity']._kind == 'building':
                         el_power_curve = self.node[n]['entity']. \
-                            get_electric_power_curve()
+                            get_electric_power_curve(
+                            current_values=current_values)
                         agg_el_p_curve += el_power_curve
 
         return agg_el_p_curve
 
-    def get_aggr_dhw_power_curve(self):
+    def get_aggr_dhw_power_curve(self, current_values=False):
         """
         Returns aggregated domestic hot water (dhw) power curve for all
         buildings within city district.
+
+        Parameters
+        ----------
+        current_values : bool, optional
+            Defines, if only current horizon or all timesteps should be used.
+            (default: False)
+            False - Use complete number of timesteps
+            True - Use horizon
 
         Returns
         -------
         agg_dhw_p_curve : np.array
             DHW power curve in W per timestep
         """
-        timestepsTotal = self.environment.timer.timestepsTotal
-        agg_dhw_p_curve = np.zeros(timestepsTotal)
+
+        if current_values:  # Use horizon
+            size = self.environment.timer.timestepsHorizon
+        else:  # Use all timesteps
+            size = self.environment.timer.timestepsTotal
+        agg_dhw_p_curve = np.zeros(size)
 
         #  Loop over all nodes
         for n in self:
@@ -347,7 +383,8 @@ class CityDistrict(ues.UESGraph):
                     #  If entity is kind building
                     if self.node[n]['entity']._kind == 'building':
                         dhw_power_curve = self.node[n]['entity']. \
-                            get_dhw_power_curve()
+                            get_dhw_power_curve(
+                            current_values=current_values)
                         agg_dhw_p_curve += dhw_power_curve
 
         return agg_dhw_p_curve

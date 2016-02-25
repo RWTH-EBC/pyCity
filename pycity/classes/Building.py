@@ -113,9 +113,17 @@ class Building(object):
 
         return (demandElectrical, demandThermal)
 
-    def get_space_heating_power_curve(self):
+    def get_space_heating_power_curve(self, current_values=False):
         """
         Returns space heating power curve
+
+        Parameters
+        ----------
+        current_values : bool, optional
+            Defines, if only current horizon or all timesteps should be used.
+            (default: False)
+            False - Use complete number of timesteps
+            True - Use horizon
 
         Returns
         -------
@@ -125,19 +133,27 @@ class Building(object):
 
         #  Initialize array with zeros
         space_heat_power = np.zeros(len(self.apartments[0].demandSpaceheating.
-            getDemand(currentValues=False)))
+            getDemand(currentValues=current_values)))
 
         # Get power curves of each apartment
         for apartment in self.apartments:
 
             space_heat_power += apartment.demandSpaceheating.getDemand(
-                    currentValues=False)
+                    currentValues=current_values)
 
         return space_heat_power
 
-    def get_electric_power_curve(self):
+    def get_electric_power_curve(self, current_values=False):
         """
         Returns electric power curve
+
+        Parameters
+        ----------
+        current_values : bool, optional
+            Defines, if only current horizon or all timesteps should be used.
+            (default: False)
+            False - Use complete number of timesteps
+            True - Use horizon
 
         Returns
         -------
@@ -147,19 +163,27 @@ class Building(object):
 
         #  Initialize array with zeros
         el_power_curve = np.zeros(len(self.apartments[0].demandElectrical.
-            getDemand(currentValues=False)))
+            getDemand(currentValues=current_values)))
 
         # Get power curves of each apartment
         for apartment in self.apartments:
 
             el_power_curve += apartment.demandElectrical.getDemand(
-                    currentValues=False)
+                    currentValues=current_values)
 
         return el_power_curve
 
-    def get_dhw_power_curve(self):
+    def get_dhw_power_curve(self, current_values=False):
         """
         Returns domestic hot water (dhw) power curve
+
+        Parameters
+        ----------
+        current_values : bool, optional
+            Defines, if only current horizon or all timesteps should be used.
+            (default: False)
+            False - Use complete number of timesteps
+            True - Use horizon
 
         Returns
         -------
@@ -170,14 +194,14 @@ class Building(object):
         #  Initialize array with zeros
         dhw_heat_power = \
             np.zeros(len(self.apartments[0].demandDomesticHotWater.
-                         getDemand(currentValues=False,
+                         getDemand(currentValues=current_values,
                                    returnTemperature=False)))
 
         # Get power curves of each apartment
         for apartment in self.apartments:
 
             dhw_heat_power += apartment.demandDomesticHotWater.getDemand(
-                    currentValues=False, returnTemperature=False)
+                    currentValues=current_values, returnTemperature=False)
 
         return dhw_heat_power
 

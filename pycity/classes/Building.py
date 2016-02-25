@@ -84,23 +84,36 @@ class Building(object):
         for entity in entities:
             self.addEntity(entity)    
     
-    def getDemands(self):
+    def getDemands(self, current_values=True):
         """
         Get the entire electrical and thermal demand of all apartments in this 
         building.
-        
+
+        Parameters
+        ----------
+        current_values : bool, optional
+            Defines, if only current horizon or all timesteps should be used.
+            (default: True)
+            False - Use complete number of timesteps
+            True - Use horizon
+
         Order: (resultElectrical, resultThermal)
         """
         # Initialization
         # Demands are zero
-        demandElectrical = np.zeros(self.environment.timer.timestepsHorizon)
-        demandThermal    = np.zeros(self.environment.timer.timestepsHorizon)
+        if current_values:
+            timesteps = self.environment.timer.timestepsHorizon
+        else:
+            timesteps = self.environment.timer.timestepsTotal
+        demandElectrical = np.zeros(timesteps)
+        demandThermal    = np.zeros(timesteps)
         
         # Add demands of each apartment
         for apartment in self.apartments:
             # Get entire electrical, domestic hot water and space heating 
             # demand
-            (tempEl, tempDhw, tempSh) = apartment.getDemands()
+            (tempEl, tempDhw, tempSh) = apartment.getDemands(currentValues=
+                                                             current_values)
             dhwThermal = apartment.demandDomesticHotWater.thermal
             
             if dhwThermal:

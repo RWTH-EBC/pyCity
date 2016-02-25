@@ -179,20 +179,56 @@ class CityDistrict(ues.UESGraph):
             curr_pos = positions[i]
             self.addEntity(entity=curr_entity, position=curr_pos)
 
-    def _getRESPower(self, generators):
+    def _getRESPower(self, generators, current_values=True):
         """
         Get the (aggregated) forecast of all renewable electricity generators.
+
+        Parameters
+        ----------
+        current_values : bool, optional
+            Defines, if only current horizon or all timesteps should be used.
+            (default: True)
+            False - Use complete number of timesteps
+            True - Use horizon
+
+        Returns
+        -------
+        power : np.array
+            Power curve
         """
-        power = np.zeros(self.environment.timer.timestepsHorizon)
+        if current_values:
+            timesteps = self.environment.timer.timestepsHorizon
+        else:
+            timesteps = self.environment.timer.timestepsTotal
+
+        power = np.zeros(timesteps)
         for generator in generators:
-            power += generator.getPower()
+            power += generator.getPower(currentValues=current_values)
 
         return power
 
-    def getPVPower(self):
+    def getPVPower(self, current_values=True):
         """
-        Get the (aggregated) forecast of all (stand alone) pv units.
+        Get the (aggregated) forecast of all (stand alone) pv units / pv farms.
+
+        Parameters
+        ----------
+        current_values : bool, optional
+            Defines, if only current horizon or all timesteps should be used.
+            (default: True)
+            False - Use complete number of timesteps
+            True - Use horizon
+
+        Returns
+        -------
+        pv_res_power : np.array
+            Array with pv power values of all pv farms
         """
+
+        if current_values:
+            timesteps = self.environment.timer.timestepsHorizon
+        else:
+            timesteps = self.environment.timer.timestepsTotal
 
         #  Create empty list of pv entities
         pv_entities = []
@@ -209,14 +245,33 @@ class CityDistrict(ues.UESGraph):
                         pv_entities.append(self.node[n]['entity'])
 
         if len(pv_entities) == 0:
-            return np.zeros(self.environment.timer.timestepsHorizon)
+            return np.zeros(timesteps)
         else:
-            return self._getRESPower(pv_entities)
+            return self._getRESPower(pv_entities, current_values=
+                                     current_values)
 
-    def getWindEnergyConverterPower(self):
+    def getWindEnergyConverterPower(self, current_values=True):
         """
         Get the (aggregated) forecast of all wind energy converters.
+
+        Parameters
+        ----------
+        current_values : bool, optional
+            Defines, if only current horizon or all timesteps should be used.
+            (default: True)
+            False - Use complete number of timesteps
+            True - Use horizon
+
+        Returns
+        -------
+        wind_res_power : np.array
+            Array with wind power values of all wind farms
         """
+
+        if current_values:
+            timesteps = self.environment.timer.timestepsHorizon
+        else:
+            timesteps = self.environment.timer.timestepsTotal
 
         #  Create empty list of pv entities
         wind_entities = []
@@ -233,16 +288,25 @@ class CityDistrict(ues.UESGraph):
                         wind_entities.append(self.node[n]['entity'])
 
         if len(wind_entities) == 0:
-            return np.zeros(self.environment.timer.timestepsHorizon)
+            return np.zeros(timesteps)
         else:
-            return self._getRESPower(wind_entities)
+            return self._getRESPower(wind_entities, current_values=
+                                     current_values)
 
-    def getDemands(self):
+    def getDemands(self, current_values=True):
         """ 
         Get the aggregated electricity and heat demand forecast of all
         buildings.
 
         Returns tuple of electrical and thermal demand array
+
+        Parameters
+        ----------
+        current_values : bool, optional
+            Defines, if only current horizon or all timesteps should be used.
+            (default: True)
+            False - Use complete number of timesteps
+            True - Use horizon
 
         Order
         -----
@@ -251,7 +315,10 @@ class CityDistrict(ues.UESGraph):
         HeatDemand : Array_like
             Aggregated heat demand
         """
-        timesteps = self.environment.timer.timestepsHorizon
+        if current_values:
+            timesteps = self.environment.timer.timestepsHorizon
+        else:
+            timesteps = self.environment.timer.timestepsTotal
         demandElectrical = np.zeros(timesteps)
         demandThermal = np.zeros(timesteps)
 
@@ -263,7 +330,8 @@ class CityDistrict(ues.UESGraph):
                 if self.node[n]['node_type'] == 'building':
                     #  If entity is kind building
                     if self.node[n]['entity']._kind == 'building':
-                        temp = self.node[n]['entity'].getDemands()
+                        temp = self.node[n]['entity'].getDemands(
+                            current_values=current_values)
                         demandElectrical += temp[0]
                         demandThermal += temp[1]
 

@@ -33,9 +33,13 @@ def get_subcity(city, nodelist):
     for node in nodelist:
         assert node in city.nodelist_building
 
-    #  Initialize street_graph as deepcoy of self.city
+    #  Initialize street_graph as deepcopy of self.city
     city_copy = copy.deepcopy(city)
 
+    #  Get subgraph (only holding nodes within nodelist)
     subcity = city_copy.subgraph(nodelist)
+
+    #  Readd environment pointer
+    subcity.environment = city.environment
 
     return subcity

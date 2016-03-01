@@ -27,7 +27,7 @@ def run_test():
                                        livingArea=146,
                                        specificDemand=166)
 
-    results = hd_slp.getDemand()
+    results = hd_slp.get_power()
 
     print()
     print("Heat demand: " + str(results))

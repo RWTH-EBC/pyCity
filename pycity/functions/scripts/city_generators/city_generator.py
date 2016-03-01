@@ -200,7 +200,7 @@ if __name__ == '__main__':
     print(city_district.nodes(data=True))
     print('\n')
 
-    demand_tuple = city_district.node[1001]['entity'].getDemands()
+    demand_tuple = city_district.node[1001]['entity'].get_power_curves()
     print('Building 1001 thermal energy demand:')
     print(demand_tuple[0])
     print('Building 1001 electrical energy demand:')

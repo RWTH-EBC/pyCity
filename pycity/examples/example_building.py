@@ -101,7 +101,7 @@ def run_test():
 
 
     print()
-    print(building.getDemands())
+    print(building.get_power_curves())
 
     print()
     print(building.getHeatpumpNominals())

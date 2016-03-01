@@ -104,7 +104,7 @@ def run_test():
     print('\n')
 
     print('Power curves of all building objects:')
-    print(cityDistrict.getDemands())
+    print(cityDistrict.get_power_curves())
 
     print('Flow temperatures:')
     print(cityDistrict.getFlowTemperatures())

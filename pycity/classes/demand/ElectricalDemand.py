@@ -170,8 +170,20 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
         self._kind = "electricaldemand"
         self.method = method
         
-    def getDemand(self, currentValues=True):
+    def get_power(self, currentValues=True):
         """
+        Return electrical power curve
+
+        Parameters
+        ----------
+        currentValues : bool, optional
+            Return only current values (True) or the entire load (False)
+            (default: True)
+
+        Return
+        ------
+        loadcurve : np.array
+            Electrical power curve
         """
         if self.method in (0, 1, 2):
             return self._getLoadcurve(currentValues)

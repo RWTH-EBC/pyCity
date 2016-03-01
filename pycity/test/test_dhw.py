@@ -32,7 +32,7 @@ class TestDomesticHotWater(object):
                                            supplyTemperature=supplyTemperature)
 
         #  Thermal power in W (per 15 minute timestep)
-        load_curve = dhw_annex42.getDemand(currentValues=False,
+        load_curve = dhw_annex42.get_power(currentValues=False,
                                            returnTemperature=False)
 
         #  Convert power to energy demand values for dhw (in kWh)

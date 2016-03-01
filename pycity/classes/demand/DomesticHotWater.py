@@ -123,16 +123,29 @@ class DomesticHotWater(pycity.classes.demand.Load.Load):
         self.tFlow = tFlow
         self.thermal = thermal
     
-    def getDemand(self, currentValues=True, returnTemperature=True):
+    def get_power(self, currentValues=True, returnTemperature=True):
         """
-        Get the domestic hot water demand (and the required flow temperature).
+        Get the domestic hot water power curve
+        (and the required flow temperature).
         
         Parameters
         ----------
         currentValues : Boolean, optional
             Return only current values (True) or the entire load (False)
+            (default: True)
         returnTemperature : Boolean, optional
             Also return the required flow temperature (True)
+            (default: True)
+
+        Return
+        ------
+        If returnTemperature is True:
+        result_tuple : tuple (load, tFlow)
+            Result tuple with thermal power curve and return temperature curve
+
+        else (returnTemperature is False):
+        load : np.array
+            Thermal hot water power curve
         """
         if self.method in (0, 1, 2):
             load = self._getLoadcurve(currentValues)

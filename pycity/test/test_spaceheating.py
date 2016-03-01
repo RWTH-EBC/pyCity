@@ -18,7 +18,7 @@ class Test_SpaceHeating(object):
                                                  loadcurve=load_array)
 
         #  Return load curve of space heating object
-        space_heat_load_curve = spaceheating.getDemand(currentValues=False)
+        space_heat_load_curve = spaceheating.get_power(currentValues=False)
 
         #  Compare arrays
         np.testing.assert_equal(space_heat_load_curve, load_array)
@@ -32,7 +32,7 @@ class Test_SpaceHeating(object):
                                                  specificDemand=150)
 
         #  Get space heating load curve (in W) per timestep
-        space_heat_load_curve = spaceheating.getDemand(currentValues=False)
+        space_heat_load_curve = spaceheating.get_power(currentValues=False)
         #  Convert to energy demand values (in kWh)
         th_energy_demand_curve = space_heat_load_curve * \
                                  create_environment.timer.timeDiscretization / \

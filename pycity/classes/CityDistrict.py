@@ -19,6 +19,8 @@ except:
 class CityDistrict(ues.UESGraph):
     """
     City district class. Inheritance from urban energy system graph (uesgraph).
+
+    See: https://github.com/RWTH-EBC/uesgraphs for further information
     """
 
     def __init__(self, environment=None):
@@ -293,12 +295,12 @@ class CityDistrict(ues.UESGraph):
             return self._getRESPower(wind_entities, current_values=
                                      current_values)
 
-    def getDemands(self, current_values=True):
+    def get_power_curves(self, current_values=True):
         """ 
-        Get the aggregated electricity and heat demand forecast of all
+        Get the aggregated electricity and heat power forecast of all
         buildings.
 
-        Returns tuple of electrical and thermal demand array
+        Returns tuple of electrical and thermal power array
 
         Parameters
         ----------
@@ -319,8 +321,8 @@ class CityDistrict(ues.UESGraph):
             timesteps = self.environment.timer.timestepsHorizon
         else:
             timesteps = self.environment.timer.timestepsTotal
-        demandElectrical = np.zeros(timesteps)
-        demandThermal = np.zeros(timesteps)
+        power_el = np.zeros(timesteps)
+        power_th = np.zeros(timesteps)
 
         #  Loop over all nodes
         for n in self:
@@ -330,12 +332,12 @@ class CityDistrict(ues.UESGraph):
                 if self.node[n]['node_type'] == 'building':
                     #  If entity is kind building
                     if self.node[n]['entity']._kind == 'building':
-                        temp = self.node[n]['entity'].getDemands(
+                        temp = self.node[n]['entity'].get_power_curves(
                             current_values=current_values)
-                        demandElectrical += temp[0]
-                        demandThermal += temp[1]
+                        power_el += temp[0]
+                        power_th += temp[1]
 
-        return (demandElectrical, demandThermal)
+        return (power_el, power_th)
 
     def get_aggr_space_h_power_curve(self, current_values=False):
         """

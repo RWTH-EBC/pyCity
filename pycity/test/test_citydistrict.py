@@ -77,7 +77,7 @@ class Test_CityDistrict(object):
 
     def test_get_demands(self, create_citydist):
 
-        demand_tuple = create_citydist.getDemands()
+        demand_tuple = create_citydist.get_power_curves()
 
         #  Convert power values in W to energy values in kWh
         el_demand = np.sum(demand_tuple[0]) * \

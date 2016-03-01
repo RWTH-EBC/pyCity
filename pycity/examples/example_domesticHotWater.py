@@ -36,7 +36,7 @@ def run_test():
                                                     dailyConsumption=100,
                                                     supplyTemperature=25)
 
-    results = dhw_annex42.getDemand(currentValues=False)
+    results = dhw_annex42.get_power(currentValues=False)
 
     print('Results for Annex42 profile:')
     print()
@@ -64,7 +64,7 @@ def run_test():
                                                          supplyTemperature=20,
                                                          occupancy=occupancy)
 
-    dhw_power_curve = dhw_stochastical.getDemand(currentValues=False,
+    dhw_power_curve = dhw_stochastical.get_power(currentValues=False,
                                                  returnTemperature=False)
     #  Convert into energy values in kWh
     dhw_energy_curve = dhw_power_curve * timeDiscretization / (3600*1000)

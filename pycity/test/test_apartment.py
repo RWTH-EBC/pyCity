@@ -14,8 +14,8 @@ class Test_apartment(object):
         test_apartment = Apartment.Apartment(create_environment)
 
         #  Return all demands
-        el_load_curve = test_apartment.getTotalElectricalDemand()
-        th_load_curves = test_apartment.getTotalThermalDemand()
+        el_load_curve = test_apartment.get_total_el_power()
+        th_load_curves = test_apartment.get_total_th_power()
 
         assert np.sum(el_load_curve) == 0
         assert np.sum(th_load_curves[0]) == 0
@@ -32,7 +32,7 @@ class Test_apartment(object):
         test_apartment.addEntity(heat_demand)
 
         #  Return heat power (in W)
-        heat_load_curve = test_apartment.getTotalThermalDemand(currentValues=
+        heat_load_curve = test_apartment.get_total_th_power(currentValues=
                                                        False,
                                                        returnTemperature=False)
 
@@ -55,7 +55,7 @@ class Test_apartment(object):
         test_apartment.addMultipleEntities([el_demand, dhw_annex42])
 
         #  Return electrical power (in W)
-        el_load_curve = test_apartment.getTotalElectricalDemand(currentValues=
+        el_load_curve = test_apartment.get_total_el_power(currentValues=
                                                                 False)
         #  Convert to energy values (in kWh)
         el_energy_demand_values = el_load_curve * \
@@ -65,7 +65,7 @@ class Test_apartment(object):
         assert abs(np.sum(el_energy_demand_values) - 3000) <= 0.001 * 3000
 
         #  Return thermal power
-        dhw_heat_load_curve = test_apartment.getTotalThermalDemand(
+        dhw_heat_load_curve = test_apartment.get_total_th_power(
             currentValues=False, returnTemperature=False)
         #  Convert to energy values (in kWh)
         th_energy_demand_values = dhw_heat_load_curve * \
@@ -86,15 +86,15 @@ class Test_apartment(object):
                <= 0.001 * reference_value
 
     def test_get_demands(self, create_apartment):
-        space_heat_power = create_apartment.getDemands(getElectrical=False,
+        space_heat_power = create_apartment.get_power_curves(getElectrical=False,
                                                    getDomesticHotWater=False,
                                                    getSpaceheating=True,
                                                    currentValues=False)[0]
-        el_power = create_apartment.getDemands(getElectrical=True,
+        el_power = create_apartment.get_power_curves(getElectrical=True,
                                                getDomesticHotWater=False,
                                                getSpaceheating=False,
                                                currentValues=False)[0]
-        dhw_power = create_apartment.getDemands(getElectrical=False,
+        dhw_power = create_apartment.get_power_curves(getElectrical=False,
                                                getDomesticHotWater=True,
                                                getSpaceheating=False,
                                                currentValues=False)[0]

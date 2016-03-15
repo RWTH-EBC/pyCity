@@ -44,20 +44,20 @@ def run_test():
     apartment = Apartment.Apartment(environment)
 
     print(apartment.demandDomesticHotWater)
-    print(apartment.demandElectrical)
+    print(apartment.power_el)
     print(apartment.demandSpaceheating)
 
     entities = [heat_demand, el_demand, dhw_annex42]
     apartment.addMultipleEntities(entities)
 
     print()
-    print(apartment.getDemands())
+    print(apartment.get_power_curves())
 
     print()
-    print(apartment.getTotalElectricalDemand())
+    print(apartment.get_total_el_power())
 
     print()
-    print(apartment.getTotalThermalDemand())
+    print(apartment.get_total_th_power())
 
 if __name__ == '__main__':
     #  Run program

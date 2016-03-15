@@ -160,8 +160,20 @@ class SpaceHeating(pycity.classes.demand.Load.Load):
             
         self._kind = "spaceheating"
         
-    def getDemand(self, currentValues=True):
+    def get_power(self, currentValues=True):
         """
+        Return space heating power curve
+
+        Parameters
+        ----------
+        currentValues : bool, optional
+            Return only current values (True) or the entire load (False)
+            (default: True)
+
+        Return
+        ------
+        loadcurve : np.array
+            Power curve of space heating
         """
         if self.method in (0, 1, 2):
             return self._getLoadcurve(currentValues)

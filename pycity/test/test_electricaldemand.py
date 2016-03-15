@@ -21,7 +21,7 @@ class Test_ElectricalDemand(object):
         el_demand_object = ED.ElectricalDemand(create_environment, method=0,
                                                loadcurve=load_array)
 
-        el_load_curve = el_demand_object.getDemand()
+        el_load_curve = el_demand_object.get_power()
 
         #  Compare arrays
         np.testing.assert_equal(el_load_curve, load_array)
@@ -33,7 +33,7 @@ class Test_ElectricalDemand(object):
                                                annualDemand=3000)
 
         #  Get space heating load curve (in W) per timestep
-        el_load_curve = el_demand_object.getDemand(currentValues=False)
+        el_load_curve = el_demand_object.get_power(currentValues=False)
 
         #  Convert power to energy values (W to Ws)
         el_en_demand_curve = create_environment.timer.timeDiscretization * \
@@ -71,7 +71,7 @@ class Test_ElectricalDemand(object):
                                                 occupancy=occupancy_profile)
 
         #  Get space heating load curve (in W) per timestep (1 minute)
-        el_load_curve = el_dem_stochastic.getDemand(currentValues=False)
+        el_load_curve = el_dem_stochastic.get_power(currentValues=False)
 
         #  Convert power to energy values (W to Ws)
         el_en_demand_curve = create_environment.timer.timeDiscretization * \

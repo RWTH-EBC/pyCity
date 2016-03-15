@@ -19,6 +19,8 @@ except:
 class CityDistrict(ues.UESGraph):
     """
     City district class. Inheritance from urban energy system graph (uesgraph).
+
+    See: https://github.com/RWTH-EBC/uesgraphs for further information
     """
 
     def __init__(self, environment=None):
@@ -179,20 +181,56 @@ class CityDistrict(ues.UESGraph):
             curr_pos = positions[i]
             self.addEntity(entity=curr_entity, position=curr_pos)
 
-    def _getRESPower(self, generators):
+    def _getRESPower(self, generators, current_values=True):
         """
         Get the (aggregated) forecast of all renewable electricity generators.
+
+        Parameters
+        ----------
+        current_values : bool, optional
+            Defines, if only current horizon or all timesteps should be used.
+            (default: True)
+            False - Use complete number of timesteps
+            True - Use horizon
+
+        Returns
+        -------
+        power : np.array
+            Power curve
         """
-        power = np.zeros(self.environment.timer.timestepsHorizon)
+        if current_values:
+            timesteps = self.environment.timer.timestepsHorizon
+        else:
+            timesteps = self.environment.timer.timestepsTotal
+
+        power = np.zeros(timesteps)
         for generator in generators:
-            power += generator.getPower()
+            power += generator.getPower(currentValues=current_values)
 
         return power
 
-    def getPVPower(self):
+    def getPVPower(self, current_values=True):
         """
-        Get the (aggregated) forecast of all (stand alone) pv units.
+        Get the (aggregated) forecast of all (stand alone) pv units / pv farms.
+
+        Parameters
+        ----------
+        current_values : bool, optional
+            Defines, if only current horizon or all timesteps should be used.
+            (default: True)
+            False - Use complete number of timesteps
+            True - Use horizon
+
+        Returns
+        -------
+        pv_res_power : np.array
+            Array with pv power values of all pv farms
         """
+
+        if current_values:
+            timesteps = self.environment.timer.timestepsHorizon
+        else:
+            timesteps = self.environment.timer.timestepsTotal
 
         #  Create empty list of pv entities
         pv_entities = []
@@ -209,14 +247,33 @@ class CityDistrict(ues.UESGraph):
                         pv_entities.append(self.node[n]['entity'])
 
         if len(pv_entities) == 0:
-            return np.zeros(self.environment.timer.timestepsHorizon)
+            return np.zeros(timesteps)
         else:
-            return self._getRESPower(pv_entities)
+            return self._getRESPower(pv_entities, current_values=
+                                     current_values)
 
-    def getWindEnergyConverterPower(self):
+    def getWindEnergyConverterPower(self, current_values=True):
         """
         Get the (aggregated) forecast of all wind energy converters.
+
+        Parameters
+        ----------
+        current_values : bool, optional
+            Defines, if only current horizon or all timesteps should be used.
+            (default: True)
+            False - Use complete number of timesteps
+            True - Use horizon
+
+        Returns
+        -------
+        wind_res_power : np.array
+            Array with wind power values of all wind farms
         """
+
+        if current_values:
+            timesteps = self.environment.timer.timestepsHorizon
+        else:
+            timesteps = self.environment.timer.timestepsTotal
 
         #  Create empty list of pv entities
         wind_entities = []
@@ -233,16 +290,25 @@ class CityDistrict(ues.UESGraph):
                         wind_entities.append(self.node[n]['entity'])
 
         if len(wind_entities) == 0:
-            return np.zeros(self.environment.timer.timestepsHorizon)
+            return np.zeros(timesteps)
         else:
-            return self._getRESPower(wind_entities)
+            return self._getRESPower(wind_entities, current_values=
+                                     current_values)
 
-    def getDemands(self):
+    def get_power_curves(self, current_values=True):
         """ 
-        Get the aggregated electricity and heat demand forecast of all
+        Get the aggregated electricity and heat power forecast of all
         buildings.
 
-        Returns tuple of electrical and thermal demand array
+        Returns tuple of electrical and thermal power array
+
+        Parameters
+        ----------
+        current_values : bool, optional
+            Defines, if only current horizon or all timesteps should be used.
+            (default: True)
+            False - Use complete number of timesteps
+            True - Use horizon
 
         Order
         -----
@@ -251,9 +317,12 @@ class CityDistrict(ues.UESGraph):
         HeatDemand : Array_like
             Aggregated heat demand
         """
-        timesteps = self.environment.timer.timestepsHorizon
-        demandElectrical = np.zeros(timesteps)
-        demandThermal = np.zeros(timesteps)
+        if current_values:
+            timesteps = self.environment.timer.timestepsHorizon
+        else:
+            timesteps = self.environment.timer.timestepsTotal
+        power_el = np.zeros(timesteps)
+        power_th = np.zeros(timesteps)
 
         #  Loop over all nodes
         for n in self:
@@ -263,11 +332,132 @@ class CityDistrict(ues.UESGraph):
                 if self.node[n]['node_type'] == 'building':
                     #  If entity is kind building
                     if self.node[n]['entity']._kind == 'building':
-                        temp = self.node[n]['entity'].getDemands()
-                        demandElectrical += temp[0]
-                        demandThermal += temp[1]
+                        temp = self.node[n]['entity'].get_power_curves(
+                            current_values=current_values)
+                        power_el += temp[0]
+                        power_th += temp[1]
 
-        return (demandElectrical, demandThermal)
+        return (power_el, power_th)
+
+    def get_aggr_space_h_power_curve(self, current_values=False):
+        """
+        Returns aggregated space heating power curve for all buildings
+        within city district.
+
+        Parameters
+        ----------
+        current_values : bool, optional
+            Defines, if only current horizon or all timesteps should be used.
+            (default: False)
+            False - Use complete number of timesteps
+            True - Use horizon
+
+        Returns
+        -------
+        agg_th_p_curve : np.array
+            Space heating thermal power curve in W per timestep
+        """
+
+        if current_values:  # Use horizon
+            size = self.environment.timer.timestepsHorizon
+        else:  # Use all timesteps
+            size = self.environment.timer.timestepsTotal
+        agg_th_p_curve = np.zeros(size)
+
+        #  Loop over all nodes
+        for n in self:
+            #  If node holds attribute 'node_type'
+            if 'node_type' in self.node[n]:
+                #  If node_type is building
+                if self.node[n]['node_type'] == 'building':
+                    #  If entity is kind building
+                    if self.node[n]['entity']._kind == 'building':
+                        th_power_curve = self.node[n]['entity']. \
+                            get_space_heating_power_curve(
+                            current_values=current_values)
+                        agg_th_p_curve += th_power_curve
+
+        return agg_th_p_curve
+
+    def get_aggr_el_power_curve(self, current_values=False):
+        """
+        Returns aggregated electrical power curve for all buildings
+        within city district.
+
+        Parameters
+        ----------
+        current_values : bool, optional
+            Defines, if only current horizon or all timesteps should be used.
+            (default: False)
+            False - Use complete number of timesteps
+            True - Use horizon
+
+        Returns
+        -------
+        agg_el_p_curve : np.array
+            Electrical power curve in W per timestep
+        """
+
+        if current_values:  # Use horizon
+            size = self.environment.timer.timestepsHorizon
+        else:  # Use all timesteps
+            size = self.environment.timer.timestepsTotal
+        agg_el_p_curve = np.zeros(size)
+
+        #  Loop over all nodes
+        for n in self:
+            #  If node holds attribute 'node_type'
+            if 'node_type' in self.node[n]:
+                #  If node_type is building
+                if self.node[n]['node_type'] == 'building':
+                    #  If entity is kind building
+                    if self.node[n]['entity']._kind == 'building':
+                        el_power_curve = self.node[n]['entity']. \
+                            get_electric_power_curve(
+                            current_values=current_values)
+                        agg_el_p_curve += el_power_curve
+
+        return agg_el_p_curve
+
+    def get_aggr_dhw_power_curve(self, current_values=False):
+        """
+        Returns aggregated domestic hot water (dhw) power curve for all
+        buildings within city district.
+
+        Parameters
+        ----------
+        current_values : bool, optional
+            Defines, if only current horizon or all timesteps should be used.
+            (default: False)
+            False - Use complete number of timesteps
+            True - Use horizon
+
+        Returns
+        -------
+        agg_dhw_p_curve : np.array
+            DHW power curve in W per timestep
+        """
+
+        if current_values:  # Use horizon
+            size = self.environment.timer.timestepsHorizon
+        else:  # Use all timesteps
+            size = self.environment.timer.timestepsTotal
+        agg_dhw_p_curve = np.zeros(size)
+
+        #  Loop over all nodes
+        for n in self:
+            #  If node holds attribute 'node_type'
+            if 'node_type' in self.node[n]:
+                #  If node_type is building
+                if self.node[n]['node_type'] == 'building':
+                    #  If entity is kind building
+                    if self.node[n]['entity']._kind == 'building':
+                        dhw_power_curve = self.node[n]['entity']. \
+                            get_dhw_power_curve(
+                            current_values=current_values)
+                        agg_dhw_p_curve += dhw_power_curve
+
+        return agg_dhw_p_curve
 
     def getFlowTemperatures(self):
         """ 

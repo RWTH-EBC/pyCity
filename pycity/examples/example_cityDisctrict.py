@@ -103,14 +103,17 @@ def run_test():
 
     print('\n')
 
-    print('Energy demands of building objects:')
-    print(cityDistrict.getDemands())
+    print('Power curves of all building objects:')
+    print(cityDistrict.get_power_curves())
 
     print('Flow temperatures:')
     print(cityDistrict.getFlowTemperatures())
 
     print('PV power:')
     print(cityDistrict.getPVPower())
+
+    print('Return aggregated space heating power curves:')
+    print(cityDistrict.get_aggr_space_h_power_curve())
 
 if __name__ == '__main__':
     #  Run program

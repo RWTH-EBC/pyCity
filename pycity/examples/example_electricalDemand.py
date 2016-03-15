@@ -30,7 +30,7 @@ def run_test():
                                     profileType="H0",
                                     annualDemand=3000)
 
-    results = el_demand.getDemand()
+    results = el_demand.get_power()
 
     print()
     print("Electrical demand: " + str(results))

@@ -31,7 +31,7 @@ class Controller(object):
         self.flowTemperature = np.zeros(self.environment.getTimestepsHorizon())
         self._kind = "controller"
         
-    def getDemands(self, apartments):
+    def get_power_curves(self, apartments):
         """
         Get the entire thermal and electrical demand of all apartments in this 
         building.
@@ -44,8 +44,8 @@ class Controller(object):
         
         # Initialization
         # Demands are zero
-        demandElectrical = np.zeros(self.environment.getTimestepsHorizon())
-        demandThermal    = np.zeros(self.environment.getTimestepsHorizon())
+        power_el = np.zeros(self.environment.getTimestepsHorizon())
+        power_th    = np.zeros(self.environment.getTimestepsHorizon())
         
         # Add demands of each apartment
         for apartment in apartments:
@@ -54,18 +54,18 @@ class Controller(object):
             
             # Get entire electrical, domestic hot water and space heating 
             # demand
-            (tempEl, tempDhw, tempSh) = apartment.getDemands()
+            (tempEl, tempDhw, tempSh) = apartment.get_power_curves()
             dhwThermal = apartment.getDomesticHotWaterThermal()
             
             if dhwThermal:
-                demandThermal    += tempSh + tempDhw
-                demandElectrical += tempEl
+                power_th    += tempSh + tempDhw
+                power_el += tempEl
             else:
-                demandThermal    += tempSh
-                demandElectrical += tempEl + tempDhw
+                power_th    += tempSh
+                power_el += tempEl + tempDhw
 
 
-        return (demandElectrical, demandThermal)
+        return (power_el, power_th)
         
     def getFlowTemperature(self, apartments):
         """

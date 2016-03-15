@@ -34,8 +34,8 @@ class Apartment(object):
         self.net_floor_area = net_floor_area
         self.occupancy = occupancy
 
-        # Create empty demands
-        self.demandElectrical = ElecDemand.ElectricalDemand(environment,
+        # Create empty power curves
+        self.power_el = ElecDemand.ElectricalDemand(environment,
                                                             method=0,
                                                             annualDemand=0)
         self.demandDomesticHotWater = DHW.DomesticHotWater(environment,
@@ -69,7 +69,7 @@ class Apartment(object):
         """
 
         if entity._kind == "electricaldemand":
-            self.demandElectrical = entity
+            self.power_el = entity
 
         elif entity._kind == "domestichotwater":
             self.demandDomesticHotWater = entity
@@ -103,13 +103,13 @@ class Apartment(object):
         for entity in entities:
             self.addEntity(entity)
 
-    def getDemands(self,
+    def get_power_curves(self,
                    getElectrical=True,
                    getDomesticHotWater=True,
                    getSpaceheating=True,
                    currentValues=True):
         """
-        Get apartment's current demands
+        Get apartment's current power curves
         
         Parameters
         ----------
@@ -125,44 +125,85 @@ class Apartment(object):
             
         Return
         ------
-        Current demands. Order: electrical, domestic hot water, space heating
+        Current power curves. Order: electrical, domestic hot water,
+        space heating
         """
         result = ()
         if getElectrical:
-            result += (self.demandElectrical.getDemand(currentValues),)
+            result += (self.power_el.get_power(currentValues),)
         if getDomesticHotWater:
-            result += (self.demandDomesticHotWater.getDemand(currentValues,
+            result += (self.demandDomesticHotWater.get_power(currentValues,
                                                              False),)
         if getSpaceheating:
-            result += (self.demandSpaceheating.getDemand(currentValues),)
+            result += (self.demandSpaceheating.get_power(currentValues),)
 
         return result
 
-    def getTotalElectricalDemand(self, currentValues=True):
+    def get_total_el_power(self, currentValues=True):
         """
-        """
-        demandElectrical = self.demandElectrical.getDemand(currentValues)
-        if not self.demandDomesticHotWater.thermal:
-            demandDHW = self.demandDomesticHotWater.getDemand(currentValues,
-                                                              False)
-            return (demandDHW + demandElectrical)
-        else:
-            return demandElectrical
+        Returns current el. power curve of building (net electric power plus
+        electric hot water, if electric hot water device is installed).
 
-    def getTotalThermalDemand(self,
+        Parameters
+        ----------
+        currentValues : bool, optional
+            Return the current values (True) or return values for all time
+            steps (False).
+
+        Return
+        ------
+        If dhw is supplied by electrical supply:
+        result_tuple : tuple (power_dhw + power_el)
+            Result tuple with power curve
+
+        else (no dhw via electrical device):
+        power_el : np.array
+            Electrical power curve of apartment
+        """
+        power_el = self.power_el.get_power(currentValues)
+        if not self.demandDomesticHotWater.thermal:
+            power_dhw = self.demandDomesticHotWater.get_power(currentValues,
+                                                              False)
+            return (power_dhw + power_el)
+        else:
+            return power_el
+
+    def get_total_th_power(self,
                               currentValues=True,
                               returnTemperature=True):
         """
+        Returns current thermal power curve of building (space heating
+        plus thermal hot water, if thermal hot water device is installed).
+
+        Parameters
+        ----------
+        currentValues : bool, optional
+            Return the current values (True) or return values for all time
+            steps (False).
+            (default: True)
+        returnTemperature : bool, optional
+            Defines, if return temperature should be returned
+            (default: True)
+
+        Return
+        ------
+        If returnTemperature is True:
+        result_tuple : tuple (power_dhw[0] + demandSpaceHeating, power_dhw[1])
+            Result tuple with thermal power curve and return temperature curve
+
+        else (returnTemperature is False):
+        result_tuple : tuple (power_dhw + demandSpaceHeating)
+            Thermal power curve of apartment
         """
-        demandSpaceHeating = self.demandSpaceheating.getDemand(currentValues)
+        demandSpaceHeating = self.demandSpaceheating.get_power(currentValues)
         if self.demandDomesticHotWater.thermal:
-            function = self.demandDomesticHotWater.getDemand
-            demandDHW = function(currentValues, returnTemperature)
+            function = self.demandDomesticHotWater.get_power
+            power_dhw = function(currentValues, returnTemperature)
 
         if returnTemperature:
-            return (demandDHW[0] + demandSpaceHeating, demandDHW[1])
+            return (power_dhw[0] + demandSpaceHeating, power_dhw[1])
         else:
-            return (demandDHW + demandSpaceHeating)
+            return (power_dhw + demandSpaceHeating)
 
     def get_max_nb_occupants(self):
         """

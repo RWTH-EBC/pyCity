@@ -42,4 +42,7 @@ def get_subcity(city, nodelist):
     #  Readd environment pointer
     subcity.environment = city.environment
 
+    #  Readd building node list
+    subcity.nodelist_building = nodelist
+
     return subcity

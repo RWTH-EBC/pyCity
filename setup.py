@@ -52,5 +52,5 @@ setup(name='pycity',
       author_email='tschuetz@eonerc.rwth-aachen.de',
       license='GNU General Public License',
       packages=['pycity'],
-      install_requires=['numpy', 'pandas', 'sympy', 'pytest', 'xlrd'],
+      install_requires=['numpy', 'pandas', 'sympy', 'pytest', 'xlrd', 'uesgraphs'],
       cmdclass={'test': PyTest})

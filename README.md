@@ -35,6 +35,13 @@ Second, you can install pycity via pip:
 
 `pip install -e 'your_path_to_pycity_setup'`
 
+## Tutorial
+
+PyCity has a jupyter notebook tutorial script under pycity/examples/tutorials/... 
+To open the jupyter notebook, open a command/terminal window and change your directory to the directory, 
+where tutorial_pycity.ipynb is stored. Then type 'jupyter notebook' (without '' signs) and press Enter.
+Jupyter notebook should open within your browser (such as Firefox). Click on one notebook to start.
+
 ## License
 
 PyCity is released by RWTH Aachen University's Institute for Energy Efficient Buildings and Indoor Climate (EBC) 

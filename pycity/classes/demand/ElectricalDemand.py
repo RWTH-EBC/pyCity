@@ -188,5 +188,3 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
         """
         if self.method in (0, 1, 2):
             return self._getLoadcurve(currentValues)
-        else:
-            pass

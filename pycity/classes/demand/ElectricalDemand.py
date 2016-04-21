@@ -97,7 +97,8 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
         elif method == 1:
             if not ElectricalDemand.loaded_slp:
                 filename = os.path.join(src_path, 'inputs', 'standard_load_profile', 'slp_electrical.xlsx')
-                ElectricalDemand.slp = slp_el.load(filename)
+                ElectricalDemand.slp = slp_el.load(filename,
+                                                   time_discretization=environment.timer.timeDiscretization)
                 ElectricalDemand.loaded_slp = True
             
             loadcurve = slp_el.get_demand(annualDemand, 

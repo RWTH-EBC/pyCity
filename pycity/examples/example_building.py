@@ -112,6 +112,12 @@ def run_test():
     print(building.get_space_heating_power_curve())
     print(len(building.get_space_heating_power_curve()))
 
+    print(building.get_electric_power_curve())
+    print(len(building.get_electric_power_curve()))
+
+    print(building.get_dhw_power_curve())
+    print(len(building.get_dhw_power_curve()))
+
 if __name__ == '__main__':
     #  Run program
     run_test()

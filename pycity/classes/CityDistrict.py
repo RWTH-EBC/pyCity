@@ -374,7 +374,7 @@ class CityDistrict(ues.UESGraph):
                     if self.node[n]['entity']._kind == 'building':
                         th_power_curve = self.node[n]['entity']. \
                             get_space_heating_power_curve(
-                            current_values=current_values)
+                            current_values=current_values)[0:size]
                         agg_th_p_curve += th_power_curve
 
         return agg_th_p_curve
@@ -414,7 +414,7 @@ class CityDistrict(ues.UESGraph):
                     if self.node[n]['entity']._kind == 'building':
                         el_power_curve = self.node[n]['entity']. \
                             get_electric_power_curve(
-                            current_values=current_values)
+                            current_values=current_values)[0:size]
                         agg_el_p_curve += el_power_curve
 
         return agg_el_p_curve
@@ -454,7 +454,7 @@ class CityDistrict(ues.UESGraph):
                     if self.node[n]['entity']._kind == 'building':
                         dhw_power_curve = self.node[n]['entity']. \
                             get_dhw_power_curve(
-                            current_values=current_values)
+                            current_values=current_values)[0:size]
                         agg_dhw_p_curve += dhw_power_curve
 
         return agg_dhw_p_curve

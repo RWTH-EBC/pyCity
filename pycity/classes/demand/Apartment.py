@@ -36,8 +36,8 @@ class Apartment(object):
 
         # Create empty power curves
         self.power_el = ElecDemand.ElectricalDemand(environment,
-                                                            method=0,
-                                                            annualDemand=0)
+                                                    method=0,
+                                                    annualDemand=0)
         self.demandDomesticHotWater = DHW.DomesticHotWater(environment,
                                                            tFlow=0,
                                                            method=1,
@@ -104,10 +104,10 @@ class Apartment(object):
             self.addEntity(entity)
 
     def get_power_curves(self,
-                   getElectrical=True,
-                   getDomesticHotWater=True,
-                   getSpaceheating=True,
-                   currentValues=True):
+                         getElectrical=True,
+                         getDomesticHotWater=True,
+                         getSpaceheating=True,
+                         currentValues=True):
         """
         Get apartment's current power curves
         
@@ -169,8 +169,8 @@ class Apartment(object):
             return power_el
 
     def get_total_th_power(self,
-                              currentValues=True,
-                              returnTemperature=True):
+                           currentValues=True,
+                           returnTemperature=True):
         """
         Returns current thermal power curve of building (space heating
         plus thermal hot water, if thermal hot water device is installed).

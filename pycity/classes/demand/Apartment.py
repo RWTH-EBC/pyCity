@@ -47,6 +47,7 @@ class Apartment(object):
                                                          method=1,
                                                          livingArea=0,
                                                          specificDemand=0)
+        self.rooms = []
 
     def addEntity(self, entity):
         """
@@ -60,6 +61,7 @@ class Apartment(object):
             - Domestic hot water demand (entity._kind == "domestichotwater")
             - Space heating demand (entity._kind == "spaceheating")
             - Occupancy (entity._kind == 'occupancy')
+            - Room (entity._kind == "room"
         
         Example
         -------
@@ -79,6 +81,9 @@ class Apartment(object):
 
         elif entity._kind == 'occupancy':
             self.occupancy = entity
+
+        elif entity._kind == "room":
+            self.rooms.append(entity)
 
         else:
             warnings.warn('Kind of entity is unknown. Entity has not been ' +

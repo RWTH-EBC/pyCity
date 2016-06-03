@@ -217,6 +217,34 @@ class Building(object):
                     currentValues=current_values, returnTemperature=False)
 
         return dhw_heat_power
+        
+    def get_occupancy_profile(self):
+        """
+        Returns occupancy profile of the whole building
+
+        Parameters
+        ----------
+        current_values : bool, optional
+            Defines, if only current horizon or all timesteps should be used.
+            (default: False)
+            False - Use complete number of timesteps
+            True - Use horizon
+
+        Returns
+        -------
+        occupancy_profile : array-like
+        """
+
+        #  Initialize array with zeros
+        occupancy_profile = \
+            np.zeros(len(self.apartments[0].get_occupancy_profile()))
+
+        # Get power curves of each apartment
+        for apartment in self.apartments:
+
+            occupancy_profile += apartment.get_occupancy_profile()
+
+        return occupancy_profile
 
     def getFlowTemperature(self):
         """ Get the required flow temperature of this building. """

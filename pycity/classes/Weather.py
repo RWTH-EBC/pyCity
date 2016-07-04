@@ -20,7 +20,7 @@ class Weather(pycity.classes.Sun.Sun):
     weather forecast.
     """
         
-    def __init__(self, timer, 
+    def __init__(self, timer, weather_scenario='normal',
                  pathTRY=None, pathTMY3=None,
                  pathTemperature="", pathDirectRadiation="", 
                  pathDiffuseRadiation="", pathWindspeed="", pathHumidity="", 
@@ -97,12 +97,21 @@ class Weather(pycity.classes.Sun.Sun):
 
         if useTRY:
             # Generate TRY path (if path is None) and use TRY2010_05_Jahr.dat
-            if pathTRY is None:
+            if weather_scenario is 'normal':
                 src_path = os.path.dirname(os.path.dirname(__file__))
                 pathTRY = os.path.join(src_path,
                                        'inputs',
                                        'weather',
                                        'TRY2010_05_Jahr.dat')
+                print ("Normal weather data used.")
+            # Generate TRY path (if path is 'Winter') and use TRY2010_05_Wint.dat
+            if weather_scenario is 'cold':
+                src_path = os.path.dirname(os.path.dirname(__file__))
+                pathTRY = os.path.join(src_path,
+                                       'inputs',
+                                       'weather',
+                                       'TRY2010_05_Wint.dat')
+                print ("Extreme winter weather data used.")
 
             # Read TRY data
             TRYData = np.loadtxt(pathTRY, skiprows=38)

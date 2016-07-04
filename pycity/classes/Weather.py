@@ -19,11 +19,11 @@ class Weather(pycity.classes.Sun.Sun):
     In a real world setting, this would be the interface to a web-based
     weather forecast.
     """
-        
-    def __init__(self, timer, 
+
+    def __init__(self, timer,
                  pathTRY=None, pathTMY3=None,
-                 pathTemperature="", pathDirectRadiation="", 
-                 pathDiffuseRadiation="", pathWindspeed="", pathHumidity="", 
+                 pathTemperature="", pathDirectRadiation="",
+                 pathDiffuseRadiation="", pathWindspeed="", pathHumidity="",
                  pathPressure="", pathCloudiness="",
                  timeDiscretization=3600, delimiter="\t",
                  useTRY=True, useTMY3=False,
@@ -82,17 +82,17 @@ class Weather(pycity.classes.Sun.Sun):
         """
 
         super(Weather, self).__init__(timer, location, timeZone, altitude)
-        self._kind  = "weather"
-        
+        self._kind = "weather"
+
         self.heightVelocityMeasurement = heightVelocityMeasurement
-        
+
         # Initialize current weather conditions
-        self.currentTAmbient   = np.zeros(timer.timestepsHorizon)
-        self.currentPAmbient   = np.zeros(timer.timestepsHorizon)
+        self.currentTAmbient = np.zeros(timer.timestepsHorizon)
+        self.currentPAmbient = np.zeros(timer.timestepsHorizon)
         self.currentPhiAmbient = np.zeros(timer.timestepsHorizon)
-        self.currentVWind      = np.zeros(timer.timestepsHorizon)
-        self.currentQDiffuse   = np.zeros(timer.timestepsHorizon)
-        self.currentQDirect    = np.zeros(timer.timestepsHorizon)
+        self.currentVWind = np.zeros(timer.timestepsHorizon)
+        self.currentQDiffuse = np.zeros(timer.timestepsHorizon)
+        self.currentQDirect = np.zeros(timer.timestepsHorizon)
         self.currentCloudiness = np.zeros(timer.timestepsHorizon)
 
         if useTRY:
@@ -108,14 +108,14 @@ class Weather(pycity.classes.Sun.Sun):
             TRYData = np.loadtxt(pathTRY, skiprows=38)
 
             # Save relevant weather data
-            self.pAmbient   = TRYData[:, 9]
+            self.pAmbient = TRYData[:, 9]
             self.phiAmbient = TRYData[:, 11]
-            self.qDirect    = TRYData[:, 13]
-            self.qDiffuse   = TRYData[:, 14]
-            self.tAmbient   = TRYData[:, 8]
-            self.vWind      = TRYData[:, 7]
+            self.qDirect = TRYData[:, 13]
+            self.qDiffuse = TRYData[:, 14]
+            self.tAmbient = TRYData[:, 8]
+            self.vWind = TRYData[:, 7]
             self.cloudiness = TRYData[:, 5]
-            
+
             # Read TRY number
             with open(pathTRY, "rb") as data:
                 first_line = data.readline()
@@ -132,26 +132,26 @@ class Weather(pycity.classes.Sun.Sun):
                                         'tmy3_744860_new_york_jfk_airport.csv')
 
             weather_data = np.loadtxt(pathTMY3, skiprows=2, delimiter=",",
-                                      usecols=(4,7,10,25,31,37,40,46))
+                                      usecols=(4, 7, 10, 25, 31, 37, 40, 46))
 
-            self.pAmbient   = weather_data[:,6]
-            self.phiAmbient = weather_data[:,5]
-            self.tAmbient   = weather_data[:,4]
-            self.vWind      = weather_data[:,7]
-            self.cloudiness = weather_data[:,3]
-            
-            globalHorIrrad = weather_data[:,0]
-            directNormalIrrad = weather_data[:,1]
-            
+            self.pAmbient = weather_data[:, 6]
+            self.phiAmbient = weather_data[:, 5]
+            self.tAmbient = weather_data[:, 4]
+            self.vWind = weather_data[:, 7]
+            self.cloudiness = weather_data[:, 3]
+
+            globalHorIrrad = weather_data[:, 0]
+            directNormalIrrad = weather_data[:, 1]
+
             self.computeGeometry(allTimeSteps=True)
             changeRes = changeResolution.changeResolution
-            thetaZ = changeRes(self.thetaZ, 
-                               self.timer.timeDiscretization, 
+            thetaZ = changeRes(self.thetaZ,
+                               self.timer.timeDiscretization,
                                timeDiscretization)
-            self.qDirect  = directNormalIrrad * np.cos(np.radians(thetaZ))
+            self.qDirect = directNormalIrrad * np.cos(np.radians(thetaZ))
             self.qDiffuse = np.maximum(0, globalHorIrrad - self.qDirect)
             self.try_number = "00"
-            
+
         else:
             # If the data is not provided via TRY, load each file separately
             def readTXT(path, delimiter):
@@ -160,37 +160,36 @@ class Weather(pycity.classes.Sun.Sun):
                 else:
                     result = np.zeros(timer.timestepsTotal)
                 return result
-            
-            self.tAmbient   = readTXT(pathTemperature, delimiter)
-            self.qDirect    = readTXT(pathDirectRadiation, delimiter)
-            self.qDiffuse   = readTXT(pathDiffuseRadiation, delimiter)
-            self.vWind      = readTXT(pathWindspeed, delimiter)
+
+            self.tAmbient = readTXT(pathTemperature, delimiter)
+            self.qDirect = readTXT(pathDirectRadiation, delimiter)
+            self.qDiffuse = readTXT(pathDiffuseRadiation, delimiter)
+            self.vWind = readTXT(pathWindspeed, delimiter)
             self.phiAmbient = readTXT(pathHumidity, delimiter)
-            self.pAmbient   = readTXT(pathPressure, delimiter)
+            self.pAmbient = readTXT(pathPressure, delimiter)
             self.cloudiness = readTXT(pathCloudiness, delimiter)
             self.try_number = "00"
 
-                           
         if not timeDiscretization == self.timer.timeDiscretization:
             # If there is a difference between the standard time discretization
             # and the discretization of the input data, convert the inputs
             # to the desired time discretization
             changeRes = changeResolution.changeResolution
-            self.tAmbient = changeRes(self.tAmbient, timeDiscretization, 
+            self.tAmbient = changeRes(self.tAmbient, timeDiscretization,
                                       self.timer.timeDiscretization)
-            self.qDirect = changeRes(self.qDirect, timeDiscretization, 
+            self.qDirect = changeRes(self.qDirect, timeDiscretization,
                                      self.timer.timeDiscretization)
-            self.qDiffuse = changeRes(self.qDiffuse, timeDiscretization, 
+            self.qDiffuse = changeRes(self.qDiffuse, timeDiscretization,
                                       self.timer.timeDiscretization)
-            self.vWind = changeRes(self.vWind, timeDiscretization, 
+            self.vWind = changeRes(self.vWind, timeDiscretization,
                                    self.timer.timeDiscretization)
-            self.phiAmbient = changeRes(self.phiAmbient, timeDiscretization, 
+            self.phiAmbient = changeRes(self.phiAmbient, timeDiscretization,
                                         self.timer.timeDiscretization)
-            self.pAmbient = changeRes(self.pAmbient, timeDiscretization, 
+            self.pAmbient = changeRes(self.pAmbient, timeDiscretization,
                                       self.timer.timeDiscretization)
-            self.cloudiness = changeRes(self.cloudiness, timeDiscretization, 
-                                      self.timer.timeDiscretization)
-    
+            self.cloudiness = changeRes(self.cloudiness, timeDiscretization,
+                                        self.timer.timeDiscretization)
+
     def getRadiationTiltedSurface(self, beta, gamma, albedo=0.3, update=False):
         """
         beta : float
@@ -213,23 +212,23 @@ class Weather(pycity.classes.Sun.Sun):
         # Get radiation
         radiation = self.getWeatherForecast(getQDirect=True, getQDiffuse=True)
         (beam, diffuse) = radiation
-        
+
         # Return total radiation on a given tilted surface
         return self.getTotalRadiationTiltedSurface(beamRadiation=beam,
                                                    diffuseRadiation=diffuse,
-                                                   beta=beta, 
-                                                   gamma=gamma, 
-                                                   albedo=albedo, 
+                                                   beta=beta,
+                                                   gamma=gamma,
+                                                   albedo=albedo,
                                                    update=update)
-    
-    def _getWeatherData(self, 
-                        fromTimestep, 
-                        toTimestep, 
-                        getTAmbient, 
-                        getQDirect, 
-                        getQDiffuse, 
-                        getVWind, 
-                        getPhiAmbient, 
+
+    def _getWeatherData(self,
+                        fromTimestep,
+                        toTimestep,
+                        getTAmbient,
+                        getQDirect,
+                        getQDiffuse,
+                        getVWind,
+                        getPhiAmbient,
                         getPAmbient,
                         getCloudiness):
         """
@@ -257,44 +256,44 @@ class Weather(pycity.classes.Sun.Sun):
             If Ture, return cloudiness
         """
         # Initialize results tuple
-        result = ()        
-        
+        result = ()
+
         # Append values to the 'result' if required
         def requireValue(request, current_values, total_values):
             if request:
-                current_values = total_values[fromTimestep : toTimestep]
+                current_values = total_values[fromTimestep: toTimestep]
                 return (current_values,)
-            else:                    
+            else:
                 return ()
-        
+
         # Check if value is required
         result += requireValue(getTAmbient,
-                               self.currentTAmbient,   
+                               self.currentTAmbient,
                                self.tAmbient)
-        result += requireValue(getQDirect,    
-                               self.currentQDirect,    
+        result += requireValue(getQDirect,
+                               self.currentQDirect,
                                self.qDirect)
-        result += requireValue(getQDiffuse,   
-                               self.currentQDiffuse,   
+        result += requireValue(getQDiffuse,
+                               self.currentQDiffuse,
                                self.qDiffuse)
-        result += requireValue(getVWind,      
-                               self.currentVWind,      
+        result += requireValue(getVWind,
+                               self.currentVWind,
                                self.vWind)
-        result += requireValue(getPhiAmbient, 
-                               self.currentPhiAmbient, 
+        result += requireValue(getPhiAmbient,
+                               self.currentPhiAmbient,
                                self.phiAmbient)
-        result += requireValue(getPAmbient,   
-                               self.currentPAmbient,   
+        result += requireValue(getPAmbient,
+                               self.currentPAmbient,
                                self.pAmbient)
-        
+
         # Return results
         return result
-        
-    def getWeatherForecast(self, 
-                           getTAmbient=False, 
-                           getQDirect=False, 
-                           getQDiffuse=False, 
-                           getVWind=False, 
+
+    def getWeatherForecast(self,
+                           getTAmbient=False,
+                           getQDirect=False,
+                           getQDiffuse=False,
+                           getVWind=False,
                            getPhiAmbient=False,
                            getPAmbient=False,
                            getCloudiness=False):
@@ -325,26 +324,26 @@ class Weather(pycity.classes.Sun.Sun):
         # Get current and final position
         currentPosition = self.timer.currentTimestep
         finalPosition = currentPosition + self.timer.timestepsHorizon
-        
-        return self._getWeatherData(currentPosition, 
-                                    finalPosition, 
-                                    getTAmbient, 
-                                    getQDirect, 
-                                    getQDiffuse, 
-                                    getVWind, 
-                                    getPhiAmbient, 
+
+        return self._getWeatherData(currentPosition,
+                                    finalPosition,
+                                    getTAmbient,
+                                    getQDirect,
+                                    getQDiffuse,
+                                    getVWind,
+                                    getPhiAmbient,
                                     getPAmbient,
                                     getCloudiness)
-        
-    def getPreviousWeather(self, 
-                           fromTimestep=0, 
-                           numberTimesteps=0, 
-                           useTimesteps=True, 
-                           getTAmbient=False, 
-                           getQDirect=False, 
-                           getQDiffuse=False, 
-                           getVWind=False, 
-                           getPhiAmbient=False, 
+
+    def getPreviousWeather(self,
+                           fromTimestep=0,
+                           numberTimesteps=0,
+                           useTimesteps=True,
+                           getTAmbient=False,
+                           getQDirect=False,
+                           getQDiffuse=False,
+                           getVWind=False,
+                           getPhiAmbient=False,
                            getPAmbient=False,
                            getCloudiness=False):
         """
@@ -381,13 +380,12 @@ class Weather(pycity.classes.Sun.Sun):
         """
         if not useTimesteps:
             fromTimestep = max(0, self.timer.currentTimestep - numberTimesteps)
-        return self._getWeatherData(fromTimestep, 
-                                    self.timer.currentTimestep, 
-                                    getTAmbient, 
-                                    getQDirect, 
-                                    getQDiffuse, 
-                                    getVWind, 
-                                    getPhiAmbient, 
+        return self._getWeatherData(fromTimestep,
+                                    self.timer.currentTimestep,
+                                    getTAmbient,
+                                    getQDirect,
+                                    getQDiffuse,
+                                    getVWind,
+                                    getPhiAmbient,
                                     getPAmbient,
                                     getCloudiness)
-        

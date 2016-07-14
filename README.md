@@ -35,6 +35,34 @@ Second, you can install pycity via pip:
 
 `pip install -e 'your_path_to_pycity_setup'`
 
+In case you are using different Python distributions on your machine and your currently used distribution is not in the Python path, 
+you can open a Python command window within your Python path (e.g. Winpython cmd window) and type
+
+`python`
+
+and press enter to open the python environment (the Python version number should be shown within cmd prompt).
+Then type
+
+`import pip`
+
+enter, then type
+
+`exit()`
+
+and press enter to exit the Python environment. Then you should be able to install the missing Python packages locally to your specific Python distribution
+via pip, e.g.
+
+`pip install -e 'your_path_to_uesgraph_setup'`
+
+You can check if installation / adding packages to python has been successful
+by adding new .py file and trying to import uesgraphs and pycity.
+
+`import uesgraphs`
+
+`import pycity`
+
+Import should be possible without errors.
+
 ## Tutorial
 
 PyCity has a jupyter notebook tutorial script under pycity/examples/tutorials/... 

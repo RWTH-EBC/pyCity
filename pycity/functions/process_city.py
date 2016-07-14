@@ -39,10 +39,10 @@ def get_subcity(city, nodelist):
     #  Get subgraph (only holding nodes within nodelist)
     subcity = city_copy.subgraph(nodelist)
 
-    #  Readd environment pointer
+    #  Read environment pointer
     subcity.environment = city.environment
 
-    #  Readd building node list
+    #  Read building node list
     subcity.nodelist_building = nodelist
 
     return subcity

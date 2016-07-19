@@ -87,3 +87,47 @@ class Test_ElectricalDemand(object):
         #  Plausibility check
         assert el_en_demand_value >= 1000, 'Electric energy demand is very low.'
         assert el_en_demand_value <= 3500, 'El. energy demand is very high.'
+
+    def test_method3(self, create_environment, create_occupancy):
+        """
+        Pytest method for stochastic load profiles with normalization to
+        annual demand
+
+        Parameters
+        ----------
+        create_environment : object
+            Environment object (as fixture of pytest)
+        create_occupancy : object
+            occupancy object
+        """
+
+        ann_demand = 3000
+
+        #  Occupancy profile
+        occupancy_profile = create_occupancy.occupancy
+        max_occ = np.max(occupancy_profile)
+
+        el_dem_stochastic = ED.ElectricalDemand(create_environment,
+                                                annualDemand=ann_demand,
+                                                method=2,
+                                                total_nb_occupants=max_occ,
+                                                randomizeAppliances=False,
+                                                lightConfiguration=10,
+                                                occupancy=occupancy_profile,
+                                                do_normalization=True)
+
+        #  Get space heating load curve (in W) per timestep (1 minute)
+        el_load_curve = el_dem_stochastic.get_power(currentValues=False)
+
+        #  Convert power to energy values (W to Ws)
+        el_en_demand_curve = create_environment.timer.timeDiscretization * \
+                             el_load_curve
+
+        #  Calculate electric energy demand value in kWh
+        el_en_demand_curve = el_en_demand_curve / (1000 * 3600)
+        el_en_demand_value = sum(el_en_demand_curve)
+        print('Electrical demand value for 1 person apartment for ' +
+              'one year in kWh/a')
+        print(el_en_demand_value)
+
+        assert ann_demand - el_en_demand_value <= 0.001 * ann_demand

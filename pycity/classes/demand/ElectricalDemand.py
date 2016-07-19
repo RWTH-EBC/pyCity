@@ -41,7 +41,8 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
                  loadcurve=[], 
                  annualDemand=0, profileType="H0",
                  singleFamilyHouse=True, total_nb_occupants=0,
-                 randomizeAppliances=True, lightConfiguration=0, occupancy=[]):
+                 randomizeAppliances=True, lightConfiguration=0, occupancy=[],
+                 do_normalization=False):
         """
         Parameters
         ----------
@@ -80,6 +81,12 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
             Stochastic model. Select one by entering an integer in [0, ..., 99]
         occupancy : Array-like (optional, but recommended in method 2)
             Occupancy given at 10-minute intervals for a full year
+        do_normalization : bool, optional
+            Defines, if stochastic profile (method=2) should be normalized to
+            given annualDemand value (default: False).
+            If set to False, annual el. demand depends on stochastic el. load
+            profile generation. If set to True, does normalization with
+            annualDemand
             
         Info
         ----
@@ -165,6 +172,20 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
             res = np.reshape(res, res.size)
             
             loadcurve = cr.changeResolution(res, 60, timeDis)
+
+            #  Normalize el. load profile to annualDemand
+            if do_normalization:
+
+                #  Convert power to energy values
+                energy_curve = loadcurve * timeDis  # in Ws
+
+                #  Sum up energy values (plus conversion from Ws to kWh)
+                curr_el_dem = sum(energy_curve) / (3600 * 1000)
+
+                con_factor = annualDemand/curr_el_dem
+
+                #  Rescale load curve
+                loadcurve *= con_factor
             
             super(ElectricalDemand,self).__init__(environment, loadcurve)
         

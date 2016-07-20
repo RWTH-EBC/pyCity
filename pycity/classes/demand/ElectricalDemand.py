@@ -28,6 +28,9 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
     loaded_weekly_data = False
     weekly_data = None
 
+    load_ann_data = False
+    ann_data = None
+
     standard_consumption = {"SFH": {1: 2700,
                                     2: 3200,
                                     3: 4000,
@@ -46,7 +49,8 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
                  annualDemand=0, profileType="H0",
                  singleFamilyHouse=True, total_nb_occupants=0,
                  randomizeAppliances=True, lightConfiguration=0, occupancy=[],
-                 do_normalization=False, method_3_type=None):
+                 do_normalization=False, method_3_type=None,
+                 method_4_type=None):
         """
         Parameters
         ----------
@@ -88,8 +92,8 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
         occupancy : Array-like (optional, but recommended in method 2)
             Occupancy given at 10-minute intervals for a full year
         do_normalization : bool, optional
-            Defines, if stochastic profile (method=2, 3) should be normalized
-            to given annualDemand value (default: False).
+            Defines, if stochastic profile (method=2, 3, 4) should be
+            normalized to given annualDemand value (default: False).
             If set to False, annual el. demand depends on stochastic el. load
             profile generation. If set to True, does normalization with
             annualDemand
@@ -101,7 +105,12 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
             - 'rest': Restaurant (with large cooling load)
             - 'sports': Sports hall
             - 'repair': Repair / metal shop
-            
+        method_4_type : str, optional
+            Defines type of profile for method=4 (default: None)
+            - 'metal_1' : Metal company with smooth profile
+            - 'metal_2' : Metal company with fluctuation in profile
+            - 'warehouse' : Warehouse
+
         Info
         ----
         The standard load profile can be downloaded here:
@@ -229,6 +238,32 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
                 ElectricalDemand.weekly_data,
                 type=method_3_type,
                 start_wd=environment.timer.currentWeekday,
+                annual_demand=annualDemand)
+
+            loadcurve = cr.changeResolution(loadcurve,
+                                            oldResolution=900,
+                                            newResolution=
+                                            environment.timer.timeDiscretization)
+
+            super(ElectricalDemand, self).__init__(environment, loadcurve)
+
+        #  Generate el. load based on measured, annual profiles
+        elif method == 4:
+
+            assert type is not None, 'You need to define a valid type for method 4!'
+            assert annualDemand > 0, 'annualDemand has to be larger than 0!'
+
+            if not ElectricalDemand.load_ann_data:
+                fpath = os.path.join(src_path, 'inputs',
+                                     'measured_el_loads',
+                                     'non_res_annual_el_profiles.txt')
+                ElectricalDemand.ann_data = \
+                    eloader.load_non_res_load_data_annual(fpath)
+                ElectricalDemand.load_ann_data = True
+
+            loadcurve = eloader.get_annual_el_load(
+                ElectricalDemand.ann_data,
+                type=method_4_type,
                 annual_demand=annualDemand)
 
             loadcurve = cr.changeResolution(loadcurve,

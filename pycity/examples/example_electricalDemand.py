@@ -131,6 +131,33 @@ def run_test():
     plt.plot(results4[:672])
     plt.show()
 
+    print('Generate el. profile based on annual measurement data')
+    print('########################################################')
+
+    el_demand = ED.ElectricalDemand(environment,
+                                    method=4,  # Annual measurement profiles
+                                    do_normalization=True,
+                                    annualDemand=5000,
+                                    method_4_type='metal_2')
+
+    results5 = el_demand.loadcurve
+
+    #  Convert to energy_curve in kWh
+    energy_curve5 = results5 * timer.timeDiscretization / (3600 * 1000)
+
+    energy_value5 = sum(energy_curve5)
+
+    print()
+    print("Electrical power in W: " + str(results5))
+
+    print('Sum of consumed energy in kWh: ', energy_value5)
+
+    plt.plot(results5[:672])
+    plt.show()
+
+    plt.plot(results5)
+    plt.show()
+
 if __name__ == '__main__':
     #  Run program
     run_test()

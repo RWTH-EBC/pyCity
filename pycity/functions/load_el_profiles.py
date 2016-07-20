@@ -24,7 +24,6 @@ def load_non_res_load_data_weekly(path):
     -------
     data_array : np.array
         ND-Array with data
-        (El. power in watt per company over timesteps;
         900 seconds timestep; length for one week;
         starting on monday (00:00:00)
         first column: food production
@@ -40,11 +39,37 @@ def load_non_res_load_data_weekly(path):
     return data_array
 
 
+def load_non_res_load_data_annual(path):
+    """
+    Load measured annual electrical load profiles for non-residential buildings
+
+    Parameters
+    ----------
+    path : str
+        Path to file
+
+    Returns
+    -------
+    data_array : np.array
+        ND-Array with data
+        900 seconds timestep; length for one year (365 days)
+        starting on monday (00:00:00)
+        first column: metal 1 (smoother profile)
+        second column: metal 2 (more fluctuation)
+        third column: warehouse
+    """
+
+    data_array = np.genfromtxt(path, delimiter='\t', skip_header=2,
+                               usecols=(2, 3, 4))
+
+    return data_array
+
+
 def gen_annual_el_load(data_array, type, start_wd, annual_demand=None):
     """
     Generate annual el. power curve depending on type and start weekday.
     Based on measured weekly, el. load profiles of non residential buildings.
-    Weekly profiles are appended to annual profile.
+    Weekly profiles are appended to annual profile. (900 seconds timestep)
 
     Parameters
     ----------
@@ -79,15 +104,19 @@ def gen_annual_el_load(data_array, type, start_wd, annual_demand=None):
         Numpy array with el. power curve in Watt
     """
 
-    assert type is not None, 'You need to define a valid type for method 3!'
+    assert type in ['food_pro', 'metal', 'rest',
+                    'sports', 'repair'], 'You need to define a valid type'
+    assert start_wd >= 1
+    assert start_wd <= 7
 
     #  Type dictionary; Type as key; column number as value
     dict_type = {'food_pro': 0, 'metal': 1, 'rest': 2, 'sports': 3,
                  'repair': 4}
 
     #  Weekday dictionary; Weekday int as key; row index as value
-    dict_wd = {1: 0, 2: 1*24*4, 3: 2*24*4, 4: 3*24*4, 5: 4*24*4, 6: 5*24*4,
-               7: 6*24*4}
+    dict_wd = {1: 0, 2: 1 * 24 * 4, 3: 2 * 24 * 4, 4: 3 * 24 * 4,
+               5: 4 * 24 * 4, 6: 5 * 24 * 4,
+               7: 6 * 24 * 4}
 
     #  Get column and row index
     column_idx = dict_type[type]
@@ -109,7 +138,7 @@ def gen_annual_el_load(data_array, type, start_wd, annual_demand=None):
     for i in range(52):
         el_load_curve = np.append(el_load_curve, extr_array)
 
-    #  Add missing values to el_load_curve
+    # Add missing values to el_load_curve
     el_load_curve = np.append(el_load_curve, extr_array[:96])
 
     #  Rescale profile
@@ -120,7 +149,61 @@ def gen_annual_el_load(data_array, type, start_wd, annual_demand=None):
         energy_curve = el_load_curve * 900 / (3600 * 1000)
 
         #  Conversion factor
-        con_fac = annual_demand/sum(energy_curve)
+        con_fac = annual_demand / sum(energy_curve)
+
+        el_load_curve *= con_fac
+
+    return el_load_curve
+
+def get_annual_el_load(data_array, type, annual_demand=None):
+    """
+    Get annual electrical load profile based on measurement data for
+    non-residential buildings (900 seconds timestep)
+
+    Parameters
+    ----------
+    data_array : np.array
+        ND-Array with data
+        900 seconds timestep; length for one year (365 days)
+        starting on monday (00:00:00)
+        first column: metal 1 (smoother profile)
+        second column: metal 2 (more fluctuation)
+        third column: warehouse
+    type : str
+        Type of chosen measured profile. Options:
+        - 'metal_1' : Metal company with smooth profile
+        - 'metal_2' : Metal company with fluctuation in profile
+        - 'warehouse' : Warehouse
+    annual_demand : float, optional
+        Annual el. energy demand in kWh to rescale profile (default: None).
+        If set to None, does not perform rescaling.
+
+    Returns
+    -------
+    el_load_curve : np.array
+        Numpy array with el. power curve in Watt
+    """
+
+    assert type in ['metal_1', 'metal_2', 'warehouse'], 'You need to define a valid type'
+
+    #  Type dictionary; Type as key; column number as value
+    dict_type = {'metal_1': 0, 'metal_2': 1, 'warehouse': 2}
+
+    #  Get column index
+    column_idx = dict_type[type]
+
+    #  Extract weekly array depending on type
+    el_load_curve = data_array[:, column_idx]
+
+    #  Rescale profile
+    if annual_demand is not None:
+        assert annual_demand > 0, 'Annual el. demand must be larger than 0!'
+
+        #  Convert to energy values in kWh
+        energy_curve = el_load_curve * 900 / (3600 * 1000)
+
+        #  Conversion factor
+        con_fac = annual_demand / sum(energy_curve)
 
         el_load_curve *= con_fac
 
@@ -161,7 +244,7 @@ if __name__ == '__main__':
     print(el_load_curve)
 
     print('Energy demand in kWh:')
-    print(sum(el_load_curve)*900/(3600 * 1000))
+    print(sum(el_load_curve) * 900 / (3600 * 1000))
 
     plt.plot(el_load_curve[:672])
     plt.show()

@@ -59,8 +59,10 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
         method : Integer, optional
             - `0` : Provide load curve directly (for all timesteps!)
             - `1` : Standard load profile
-            - `2` : Stochastic electrical load model (residential)
+            - `2` : Stochastic electrical load model (only residential)
             - `3` : Annual profile based on measured weekly profiles
+                    (non-residential)
+            - `4` : Annual profile based on measured annual profiles
                     (non-residential)
         loadcurve : Array-like, optional
             Load curve for all investigated time steps
@@ -124,6 +126,8 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
 
         if method == 0:
             super(ElectricalDemand, self).__init__(environment, loadcurve)
+
+        #  Use standardized load profiles (SLP)
         elif method == 1:
             if not ElectricalDemand.loaded_slp:
                 filename = os.path.join(src_path, 'inputs',
@@ -138,6 +142,8 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
                                           environment.timer.timeDiscretization)
 
             super(ElectricalDemand, self).__init__(environment, loadcurve)
+
+        #  Usage of stochastic, el. profile generator for residential buildings
         elif method == 2:
             # Initialize appliances and lights
             if annualDemand == 0:

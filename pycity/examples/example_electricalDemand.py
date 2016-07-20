@@ -5,13 +5,13 @@ Created on Fri May 22 08:43:12 2015
 """
 
 from __future__ import division
-import pycity.classes.demand.ElectricalDemand as ED
+import matplotlib.pyplot as plt
 
+import pycity.classes.demand.ElectricalDemand as ED
 import pycity.classes.Timer
 import pycity.classes.Weather
 import pycity.classes.Environment
 import pycity.classes.Prices
-
 import pycity.classes.demand.Occupancy
 
 
@@ -44,6 +44,9 @@ def run_test():
 
     print('Sum of consumed energy in kWh: ', energy_value)
 
+    plt.plot(results[:672])
+    plt.show()
+
     print()
     print('Generate stochastic, el. profile')
     print('########################################################')
@@ -69,6 +72,9 @@ def run_test():
     print("Electrical power in W: " + str(results))
 
     print('Sum of consumed energy in kWh: ', energy_value2)
+
+    plt.plot(results2[:672])
+    plt.show()
 
     print()
     print('Generate normalized stochastic profile')
@@ -98,6 +104,32 @@ def run_test():
     print('Sum of consumed energy in kWh: ', energy_value3)
     assert energy_input - energy_value3 <= 0.001 * energy_input
 
+    plt.plot(results3[:672])
+    plt.show()
+
+    print('Generate el. profile based on weekly measurement data')
+    print('########################################################')
+
+    el_demand = ED.ElectricalDemand(environment,
+                                    method=3,  # Weekly profile
+                                    do_normalization=True,
+                                    annualDemand=3000,
+                                    method_3_type='metal')
+
+    results4 = el_demand.loadcurve
+
+    #  Convert to energy_curve in kWh
+    energy_curve4 = results4 * timer.timeDiscretization / (3600 * 1000)
+
+    energy_value4 = sum(energy_curve4)
+
+    print()
+    print("Electrical power in W: " + str(results4))
+
+    print('Sum of consumed energy in kWh: ', energy_value4)
+
+    plt.plot(results4[:672])
+    plt.show()
 
 if __name__ == '__main__':
     #  Run program

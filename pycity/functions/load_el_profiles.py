@@ -68,7 +68,7 @@ def gen_annual_el_load(data_array, type, start_wd, annual_demand=None):
         - 'sports': Sports hall
         - 'repair': Repair / metal shop
     start_wd : int
-        Integer to define start weekday of year, e.g. 0 means monday, 6 sunday
+        Integer to define start weekday of year, e.g. 1 means monday, 7 sunday
     annual_demand : float, optional
         Annual el. energy demand in kWh to rescale profile (default: None).
         If set to None, does not perform rescaling.
@@ -79,13 +79,15 @@ def gen_annual_el_load(data_array, type, start_wd, annual_demand=None):
         Numpy array with el. power curve in Watt
     """
 
+    assert type is not None, 'You need to define a valid type for method 3!'
+
     #  Type dictionary; Type as key; column number as value
     dict_type = {'food_pro': 0, 'metal': 1, 'rest': 2, 'sports': 3,
                  'repair': 4}
 
     #  Weekday dictionary; Weekday int as key; row index as value
-    dict_wd = {0: 0, 1: 1*24*4, 2: 2*24*4, 3: 3*24*4, 4: 4*24*4, 5: 5*24*4,
-               6: 6*24*4}
+    dict_wd = {1: 0, 2: 1*24*4, 3: 2*24*4, 4: 3*24*4, 5: 4*24*4, 6: 5*24*4,
+               7: 6*24*4}
 
     #  Get column and row index
     column_idx = dict_type[type]
@@ -141,7 +143,7 @@ if __name__ == '__main__':
     type = 'metal'
 
     #  start weekday
-    start_wd = 2  # 0 - Monday; 6 - Sunday
+    start_wd = 3  # 1 - Monday; 7 - Sunday
 
     #  Annual el. demand in kWh
     ann_demand = 4000

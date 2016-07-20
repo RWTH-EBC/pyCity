@@ -95,6 +95,9 @@ class Weather(pycity.classes.Sun.Sun):
         self.currentQDirect = np.zeros(timer.timestepsHorizon)
         self.currentCloudiness = np.zeros(timer.timestepsHorizon)
 
+        #  Calculate number of rows, which should be loaded into weather class
+        nb_rows = 8760 * 3600 / timeDiscretization
+
         if useTRY:
             # Generate TRY path (if path is None) and use TRY2010_05_Jahr.dat
             if pathTRY is None:
@@ -107,14 +110,14 @@ class Weather(pycity.classes.Sun.Sun):
             # Read TRY data
             TRYData = np.loadtxt(pathTRY, skiprows=38)
 
-            # Save relevant weather data
-            self.pAmbient = TRYData[:, 9]
-            self.phiAmbient = TRYData[:, 11]
-            self.qDirect = TRYData[:, 13]
-            self.qDiffuse = TRYData[:, 14]
-            self.tAmbient = TRYData[:, 8]
-            self.vWind = TRYData[:, 7]
-            self.cloudiness = TRYData[:, 5]
+            # Save relevant weather data (only extract row 0 to 8760)
+            self.pAmbient = TRYData[0:nb_rows, 9]
+            self.phiAmbient = TRYData[0:nb_rows, 11]
+            self.qDirect = TRYData[0:nb_rows, 13]
+            self.qDiffuse = TRYData[0:nb_rows, 14]
+            self.tAmbient = TRYData[0:nb_rows, 8]
+            self.vWind = TRYData[0:nb_rows, 7]
+            self.cloudiness = TRYData[0:nb_rows, 5]
 
             # Read TRY number
             with open(pathTRY, "rb") as data:
@@ -134,20 +137,24 @@ class Weather(pycity.classes.Sun.Sun):
             weather_data = np.loadtxt(pathTMY3, skiprows=2, delimiter=",",
                                       usecols=(4, 7, 10, 25, 31, 37, 40, 46))
 
-            self.pAmbient = weather_data[:, 6]
-            self.phiAmbient = weather_data[:, 5]
-            self.tAmbient = weather_data[:, 4]
-            self.vWind = weather_data[:, 7]
-            self.cloudiness = weather_data[:, 3]
+            self.pAmbient = weather_data[0:nb_rows, 6]
+            self.phiAmbient = weather_data[0:nb_rows, 5]
+            self.tAmbient = weather_data[0:nb_rows, 4]
+            self.vWind = weather_data[0:nb_rows, 7]
+            self.cloudiness = weather_data[0:nb_rows, 3]
 
-            globalHorIrrad = weather_data[:, 0]
-            directNormalIrrad = weather_data[:, 1]
+            globalHorIrrad = weather_data[0:nb_rows, 0]
+            directNormalIrrad = weather_data[0:nb_rows, 1]
 
             self.computeGeometry(allTimeSteps=True)
             changeRes = changeResolution.changeResolution
+
+            old_res = (3600 * 24 * 365)/len(self.thetaZ)
+
             thetaZ = changeRes(self.thetaZ,
-                               self.timer.timeDiscretization,
-                               timeDiscretization)
+                               oldResolution=old_res,
+                               newResolution=timeDiscretization)
+
             self.qDirect = directNormalIrrad * np.cos(np.radians(thetaZ))
             self.qDiffuse = np.maximum(0, globalHorIrrad - self.qDirect)
             self.try_number = "00"

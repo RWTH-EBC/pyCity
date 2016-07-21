@@ -53,6 +53,7 @@ class Occupancy(object):
         self._kind = 'occupancy'
         self.number_occupants = number_occupants
         self.environment = environment
+        self.occupancy = None  # Occupancy profile
 
         if do_profile:
 

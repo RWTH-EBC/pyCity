@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Created on Tue Nov 03 16:09:06 2015
-
-@author: tsz
+Occupancy class. Holds information about number of occupants and their
+occupancy profile.
 """
 
 from __future__ import division
@@ -54,60 +53,68 @@ class Occupancy(object):
         self.number_occupants = number_occupants
         self.environment = environment
         self.occupancy = None  # Occupancy profile
+        self.initial_day = initial_day
 
         if do_profile:
+            self.gen_occ_profile()
 
-            src_path = os.path.dirname(os.path.dirname(os.path.dirname
-                                                       (os.path.abspath(
-                                                           __file__))))
-            folder_path = os.path.join(src_path, 'inputs',
-                                       'stochastic_electrical_load',
-                                       'constants')
-            if not Occupancy.occ_start_states_loaded:
-                # Load start states matrixes
-                Occupancy.occ_start_states_loaded = True
+    def gen_occ_profile(self):
+        """
+        Generate stochastic occupancy profile based on number of occupants
+        and weekday.
+        """
+        src_path = os.path.dirname(os.path.dirname(os.path.dirname
+            (os.path.abspath(
+            __file__))))
+        folder_path = os.path.join(src_path, 'inputs',
+                                   'stochastic_electrical_load',
+                                   'constants')
+        if not Occupancy.occ_start_states_loaded:
+            # Load start states matrixes
+            Occupancy.occ_start_states_loaded = True
 
-                for weekday in self.type_weekday:
-                    filename = str("occ_start_states_" + weekday + ".csv")
-                    file_path = os.path.join(folder_path, filename)
-                    temp = (np.loadtxt(file_path, delimiter=";")).tolist()
-                    Occupancy.occ_start_states[weekday] = temp
+            for weekday in self.type_weekday:
+                filename = str("occ_start_states_" + weekday + ".csv")
+                file_path = os.path.join(folder_path, filename)
+                temp = (np.loadtxt(file_path, delimiter=";")).tolist()
+                Occupancy.occ_start_states[weekday] = temp
 
-            if not (number_occupants, "wd") in list(Occupancy.tpm.keys()):
-                # Load transition probability matrixes
-                for weekday in self.type_weekday:
-                    fname = str(
-                        "tpm" + str(number_occupants) + "_" + weekday + ".csv")
-                    file_path = os.path.join(folder_path, fname)
-                    temp = (np.loadtxt(file_path, delimiter=";")).tolist()
-                    Occupancy.tpm[number_occupants, weekday] = temp
+        if not (self.number_occupants, "wd") in list(Occupancy.tpm.keys()):
+            # Load transition probability matrixes
+            for weekday in self.type_weekday:
+                fname = str(
+                    "tpm" + str(
+                        self.number_occupants) + "_" + weekday + ".csv")
+                file_path = os.path.join(folder_path, fname)
+                temp = (np.loadtxt(file_path, delimiter=";")).tolist()
+                Occupancy.tpm[self.number_occupants, weekday] = temp
 
-            # Determine initial occupancy:
-            # Determine if the current day is a weekend-day
-            if initial_day <= 5:
-                self.weekend = False
+        # Determine initial occupancy:
+        # Determine if the current day is a weekend-day
+        if self.initial_day <= 5:
+            self.weekend = False
+        else:
+            self.weekend = True
+        # Get starting states and starting probabilities
+        start_states = Occupancy.occ_start_states
+        start_probs = start_states[self.type_weekday[self.weekend]]
+        get_state = self._get_start_state
+        self.initial_occupancy = get_state(
+            start_probs[:][self.number_occupants])
+
+        # Make a full year occupancy computation
+        occupancy = []
+        # Loop over all days
+        for i in range(self.environment.timer.totalDays):
+            if (i + self.initial_day) % 7 in (0, 6):
+                weekend = True
             else:
-                self.weekend = True
-            # Get starting states and starting probabilities
-            start_states = Occupancy.occ_start_states
-            start_probs = start_states[self.type_weekday[self.weekend]]
-            get_state = self._get_start_state
-            self.initial_occupancy = get_state(
-                start_probs[:][number_occupants])
+                weekend = False
 
-            # Make a full year occupancy computation
-            occupancy = []
-            # Loop over all days
-            for i in range(environment.timer.totalDays):
-                if (i + initial_day) % 7 in (0, 6):
-                    weekend = True
-                else:
-                    weekend = False
+            occupancy.append(self._get_occupancy(weekend))
 
-                occupancy.append(self._get_occupancy(weekend))
-
-            occupancy = np.array(occupancy)
-            self.occupancy = np.reshape(occupancy, occupancy.size)
+        occupancy = np.array(occupancy)
+        self.occupancy = np.reshape(occupancy, occupancy.size)
 
     def _get_start_state(self, start_probabilities):
         """

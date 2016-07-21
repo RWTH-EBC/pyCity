@@ -94,7 +94,7 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
         occupancy : Array-like (optional, but recommended in method 2)
             Occupancy given at 10-minute intervals for a full year
         do_normalization : bool, optional
-            Defines, if stochastic profile (method=2, 3, 4) should be
+            Defines, if stochastic profile (method=2) should be
             normalized to given annualDemand value (default: False).
             If set to False, annual el. demand depends on stochastic el. load
             profile generation. If set to True, does normalization with

@@ -218,7 +218,7 @@ class SpaceHeating(pycity.classes.demand.Load.Load):
         loadcurve : np.array
             Power curve of space heating
         """
-        if self.method in (0, 1, 2):
+        if self.method in (0, 1, 2, 3):
             return self._getLoadcurve(currentValues)
 #        elif self.method == 2:
 #            if currentValues:

@@ -297,5 +297,5 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
         loadcurve : np.array
             Electrical power curve
         """
-        if self.method in (0, 1, 2):
+        if self.method in (0, 1, 2, 3, 4):
             return self._getLoadcurve(currentValues)

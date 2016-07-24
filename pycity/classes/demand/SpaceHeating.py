@@ -8,6 +8,7 @@ Created on Sat Feb 14 09:12:35 2015
 
 from __future__ import division
 import os
+import copy
 import numpy as np
 import pycity.classes.demand.Load
 import pycity.classes.demand.ZoneInputs as zi
@@ -188,7 +189,7 @@ class SpaceHeating(pycity.classes.demand.Load.Load):
             annual_demand = livingArea * specificDemand  # kWh
 
             #  Extract first profile
-            loadcurve = SpaceHeating.sim_prof_data[:, 1]
+            loadcurve = copy.deepcopy(SpaceHeating.sim_prof_data[:, 1])
 
             #  Rescale profile to annual_demand
             con_factor = (1000 * annual_demand) / sum(loadcurve)

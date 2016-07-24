@@ -123,7 +123,7 @@ def gen_annual_el_load(data_array, type, start_wd, annual_demand=None):
     row_idx = dict_wd[start_wd]
 
     #  Extract weekly array depending on type
-    extr_array = data_array[:, column_idx]
+    extr_array = copy.deepcopy(data_array[:, column_idx])
 
     #  Resort array to start with desired weekday
     start_array = extr_array[row_idx:]
@@ -193,7 +193,7 @@ def get_annual_el_load(data_array, type, annual_demand=None):
     column_idx = dict_type[type]
 
     #  Extract weekly array depending on type
-    el_load_curve = data_array[:, column_idx]
+    el_load_curve = copy.deepcopy(data_array[:, column_idx])
 
     #  Rescale profile
     if annual_demand is not None:

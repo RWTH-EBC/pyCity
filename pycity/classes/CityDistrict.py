@@ -339,7 +339,8 @@ class CityDistrict(ues.UESGraph):
 
         return (power_el, power_th)
 
-    def get_aggr_space_h_power_curve(self, current_values=False):
+    def get_aggr_space_h_power_curve(self, current_values=False,
+                                     nodelist=None):
         """
         Returns aggregated space heating power curve for all buildings
         within city district.
@@ -351,6 +352,11 @@ class CityDistrict(ues.UESGraph):
             (default: False)
             False - Use complete number of timesteps
             True - Use horizon
+        nodelist : list (of ints), optional
+            Defines which nodes should be used to return annual space
+            heating demand in kWh (default: None).
+            If nodelist is None, all nodes with building entities will
+            be used.
 
         Returns
         -------
@@ -364,8 +370,16 @@ class CityDistrict(ues.UESGraph):
             size = self.environment.timer.timestepsTotal
         agg_th_p_curve = np.zeros(size)
 
+        if nodelist is None:
+            use_nodes = self
+        else:
+            for n in nodelist:
+                assert n in self.nodes(), ('Node ' + str(n) + 'is not '
+                                           'within city object!')
+            use_nodes = nodelist
+
         #  Loop over all nodes
-        for n in self:
+        for n in use_nodes:
             #  If node holds attribute 'node_type'
             if 'node_type' in self.node[n]:
                 #  If node_type is building
@@ -379,7 +393,8 @@ class CityDistrict(ues.UESGraph):
 
         return agg_th_p_curve
 
-    def get_aggr_el_power_curve(self, current_values=False):
+    def get_aggr_el_power_curve(self, current_values=False,
+                                     nodelist=None):
         """
         Returns aggregated electrical power curve for all buildings
         within city district.
@@ -391,6 +406,11 @@ class CityDistrict(ues.UESGraph):
             (default: False)
             False - Use complete number of timesteps
             True - Use horizon
+        nodelist : list (of ints), optional
+            Defines which nodes should be used to return annual space
+            heating demand in kWh (default: None).
+            If nodelist is None, all nodes with building entities will
+            be used.
 
         Returns
         -------
@@ -404,8 +424,16 @@ class CityDistrict(ues.UESGraph):
             size = self.environment.timer.timestepsTotal
         agg_el_p_curve = np.zeros(size)
 
+        if nodelist is None:
+            use_nodes = self
+        else:
+            for n in nodelist:
+                assert n in self.nodes(), ('Node ' + str(n) + 'is not '
+                                           'within city object!')
+            use_nodes = nodelist
+
         #  Loop over all nodes
-        for n in self:
+        for n in use_nodes:
             #  If node holds attribute 'node_type'
             if 'node_type' in self.node[n]:
                 #  If node_type is building
@@ -419,7 +447,8 @@ class CityDistrict(ues.UESGraph):
 
         return agg_el_p_curve
 
-    def get_aggr_dhw_power_curve(self, current_values=False):
+    def get_aggr_dhw_power_curve(self, current_values=False,
+                                     nodelist=None):
         """
         Returns aggregated domestic hot water (dhw) power curve for all
         buildings within city district.
@@ -431,6 +460,11 @@ class CityDistrict(ues.UESGraph):
             (default: False)
             False - Use complete number of timesteps
             True - Use horizon
+        nodelist : list (of ints), optional
+            Defines which nodes should be used to return annual space
+            heating demand in kWh (default: None).
+            If nodelist is None, all nodes with building entities will
+            be used.
 
         Returns
         -------
@@ -444,8 +478,16 @@ class CityDistrict(ues.UESGraph):
             size = self.environment.timer.timestepsTotal
         agg_dhw_p_curve = np.zeros(size)
 
+        if nodelist is None:
+            use_nodes = self
+        else:
+            for n in nodelist:
+                assert n in self.nodes(), ('Node ' + str(n) + 'is not '
+                                           'within city object!')
+            use_nodes = nodelist
+
         #  Loop over all nodes
-        for n in self:
+        for n in use_nodes:
             #  If node holds attribute 'node_type'
             if 'node_type' in self.node[n]:
                 #  If node_type is building

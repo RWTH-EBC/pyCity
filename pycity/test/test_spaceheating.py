@@ -33,10 +33,29 @@ class Test_SpaceHeating(object):
 
         #  Get space heating load curve (in W) per timestep
         space_heat_load_curve = spaceheating.get_power(currentValues=False)
+
         #  Convert to energy demand values (in kWh)
         th_energy_demand_curve = space_heat_load_curve * \
                                  create_environment.timer.timeDiscretization / \
                                  (1000 * 3600)
 
         #  Check if sum of energy demand values is (almost) equal to input
-        assert abs(np.sum(th_energy_demand_curve) - 150 * 100) <= 0.01
+        assert abs(np.sum(th_energy_demand_curve) - 150 * 100) <= 0.001 * 150 * 100
+
+    def test_method3(self, create_environment):  # Modelica profile
+
+        #  Generate space heating object
+        spaceheating = SpaceHeating.SpaceHeating(create_environment, method=3,
+                                                 livingArea=100,
+                                                 specificDemand=150)
+
+        #  Get space heating load curve (in W) per timestep
+        space_heat_load_curve = spaceheating.loadcurve
+
+        #  Convert to energy demand values (in kWh)
+        th_energy_demand_curve = space_heat_load_curve * \
+                                 create_environment.timer.timeDiscretization / \
+                                 (1000 * 3600)
+
+        #  Check if sum of energy demand values is (almost) equal to input
+        assert abs(np.sum(th_energy_demand_curve) - 150 * 100) <= 0.001 * 150 * 100

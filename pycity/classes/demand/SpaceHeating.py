@@ -8,11 +8,13 @@ Created on Sat Feb 14 09:12:35 2015
 
 from __future__ import division
 import os
+import copy
 import numpy as np
 import pycity.classes.demand.Load
 import pycity.classes.demand.ZoneInputs as zi
 import pycity.functions.slp_thermal as slp_th
 import pycity.functions.zoneModel
+import pycity.functions.changeResolution as chres
 
 
 class SpaceHeating(pycity.classes.demand.Load.Load):
@@ -24,6 +26,9 @@ class SpaceHeating(pycity.classes.demand.Load.Load):
     slp_hour = []
     slp_prof = []
     slp_week = []
+
+    loaded_sim_profile = False
+    sim_prof_data = None
     
     def __init__(self, environment, method=0,
                  loadcurve=[], 
@@ -40,6 +45,10 @@ class SpaceHeating(pycity.classes.demand.Load.Load):
             - `0` : Provide load curve directly
             - `1` : Use thermal standard load profile
             - `2` : Use ISO 13790 standard to compute thermal load
+            - `3` : Use example thermal load profiles, generated with
+                    Modelica AixLib low order model (only valid for residential
+                    building and test reference year weather file for 2010,
+                    region 5!)
         loadcurve : Array-like, optional
             Load curve for all investigated time steps
             Requires ``method=0``.
@@ -103,8 +112,11 @@ class SpaceHeating(pycity.classes.demand.Load.Load):
         self.method = method
         
         if method == 0:
+            #  Hand over own power curve
             super(SpaceHeating, self).__init__(environment, loadcurve)
+
         elif method == 1:
+            #  Generate standardized thermal load profile (SLP)
             timeDis = environment.timer.timeDiscretization
             if not SpaceHeating.loaded_slp:
                 src_path = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
@@ -119,8 +131,8 @@ class SpaceHeating(pycity.classes.demand.Load.Load):
                                 
                 SpaceHeating.loaded_slp = True
             
-            annual_demand = livingArea * specificDemand # kWh
-            profile = 3
+            annual_demand = livingArea * specificDemand  # kWh
+            profile = 1
     
             fun = slp_th.calculate
             loadcurve = fun(environment.weather.tAmbient,
@@ -133,6 +145,7 @@ class SpaceHeating(pycity.classes.demand.Load.Load):
             super(SpaceHeating, self).__init__(environment, loadcurve)
             
         elif method == 2:
+            #  Generate thermal load with ISO model
             self.zoneParameters = zoneParameters
             # Create zoneInputs (this already creates the full year inputs!)
             self.zoneInputs = zi.ZoneInputs(environment,
@@ -157,6 +170,36 @@ class SpaceHeating(pycity.classes.demand.Load.Load):
             self.T_m = res[2]
             self.T_i = res[3]
             self.T_s = res[4]
+
+        elif method == 3:
+            #  Use Modelica thermal load profile for residential building
+
+            if not SpaceHeating.loaded_sim_profile:
+                src_path = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+                folder = os.path.join(src_path, 'inputs', 'simulated_profiles',
+                                      'res_building')
+                dpath = os.path.join(folder, 'res_b_modelica_th_load_try_2010_5.txt')
+
+                SpaceHeating.sim_prof_data = np.genfromtxt(dpath,
+                                                           delimiter='\t',
+                                                           skip_header=2)
+
+                SpaceHeating.loaded_sim_profile = True
+
+            annual_demand = livingArea * specificDemand  # kWh
+
+            #  Extract first profile
+            loadcurve = copy.deepcopy(SpaceHeating.sim_prof_data[:, 1])
+
+            #  Rescale profile to annual_demand
+            con_factor = (1000 * annual_demand) / sum(loadcurve)
+            loadcurve *= con_factor
+
+            #  Change resolution
+            loadcurve = chres.changeResolution(loadcurve, oldResolution=3600,
+                                               newResolution=environment.timer.timeDiscretization)
+
+            super(SpaceHeating, self).__init__(environment, loadcurve)
             
         self._kind = "spaceheating"
         
@@ -175,7 +218,7 @@ class SpaceHeating(pycity.classes.demand.Load.Load):
         loadcurve : np.array
             Power curve of space heating
         """
-        if self.method in (0, 1, 2):
+        if self.method in (0, 1, 2, 3):
             return self._getLoadcurve(currentValues)
 #        elif self.method == 2:
 #            if currentValues:

@@ -1,3 +1,5 @@
+# coding=utf-8
+
 import pytest
 import shapely.geometry.point as point
 
@@ -151,11 +153,11 @@ def create_citydist(create_environment, create_building):
     create_empty_citydist.environment = create_environment
 
     create_citydist.addEntity(entity=create_building,
-                              position=Point(0, 0))
+                              position=point.Point(0, 0))
     create_citydist.addEntity(entity=create_building,
-                              position=Point(0, 10))
+                              position=point.Point(0, 10))
     create_citydist.addEntity(entity=create_building,
-                              position=Point(10, 10))
+                              position=point.Point(10, 10))
 
     return create_citydist
 

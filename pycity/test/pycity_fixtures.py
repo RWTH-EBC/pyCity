@@ -1,5 +1,5 @@
 import pytest
-from sympy.geometry.point import Point
+import shapely.geometry.point as point
 
 import pycity.classes.Timer
 import pycity.classes.Weather

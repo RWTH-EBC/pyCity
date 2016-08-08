@@ -16,14 +16,15 @@ Python package for data handling and scenario generation of city districts.
 
 PyCity requires the following Python packages:
 - numpy
+- matplotlib
 - pandas
-- sympy
 - pytest
 - xlrd
+- shapely (due to uesgraphs usage)
 
 as well as the python package
 
-- uesgraphs
+- uesgraphs (and its dependencies shapely, pyproj, 'cmocean', 'iapws')
 
 which is available under [https://github.com/RWTH-EBC/uesgraphs](https://github.com/RWTH-EBC/uesgraphs)
 

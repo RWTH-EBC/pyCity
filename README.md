@@ -6,11 +6,14 @@ Python package for data handling and scenario generation of city districts.
 
 # Contributing
 
-1. Clone repository: `git clone https://github.com/RWTH-EBC/pyCity.git`
-2. Create your feature branch: `git checkout -b my-new-feature`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request
+1. Clone repository: `git clone git@github.com:RWTH-EBC/pyCity.git` (for SSH usage)
+2. Open an issue at [https://github.com/RWTH-EBC/pyCity/issues](https://github.com/RWTH-EBC/pyCity/issues)
+3. Checkout development branch: `git checkout development` 
+4. Update local development branch (if necessary): `git pull origin development`
+5. Create your feature branch: `git checkout -b issueXY_explanation`
+6. Commit your changes: `git commit -am 'Add some feature (#XY)'`
+7. Push to the branch: `git push origin issueXY_explanation`
+8. Submit a pull request from issueXY_explanation to development branch via [https://github.com/RWTH-EBC/pyCity/pulls](https://github.com/RWTH-EBC/pyCity/pulls)
 
 # Installation
 
@@ -77,8 +80,6 @@ open a Python command window within your Python path (e.g. Winpython cmd window)
 Install the wheel files with pip. 
 
 `pip install SomePackage-1.0-py2.whl`
-
-
 
 # Tutorial
 

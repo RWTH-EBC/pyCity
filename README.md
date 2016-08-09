@@ -1,10 +1,10 @@
 <snippet>
   <content>
-## PyCity
+# PyCity
 
 Python package for data handling and scenario generation of city districts.
 
-## Contributing
+# Contributing
 
 1. Clone repository: `git clone https://github.com/RWTH-EBC/pyCity.git`
 2. Create your feature branch: `git checkout -b my-new-feature`
@@ -12,7 +12,7 @@ Python package for data handling and scenario generation of city districts.
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request
 
-## Installation
+# Installation
 
 PyCity requires the following Python packages:
 - numpy
@@ -28,7 +28,7 @@ as well as the python package
 
 which is available under [https://github.com/RWTH-EBC/uesgraphs](https://github.com/RWTH-EBC/uesgraphs)
 
-# Instructions for uesgraphs and pycity
+### Instructions for uesgraphs and pycity
 
 First, you should download and install uesgraph. Local installation is possible via pip:
 
@@ -66,7 +66,7 @@ by adding new .py file and trying to import uesgraphs and pycity.
 
 Import should be possible without errors.
 
-# Instructions for shapely
+### Instructions for shapely
 
 shapely is required for uesgraphs and pycity usage. A pre-compiled version of shapely for Windows (Windows Binaries for Python Extension Packages) 
 can be found at: [http://www.lfd.uci.edu/~gohlke/pythonlibs/](http://www.lfd.uci.edu/~gohlke/pythonlibs/)
@@ -80,19 +80,19 @@ Install the wheel files with pip.
 
 
 
-## Tutorial
+# Tutorial
 
 PyCity has a jupyter notebook tutorial script under pycity/examples/tutorials/... 
 To open the jupyter notebook, open a command/terminal window and change your directory to the directory, 
 where tutorial_pycity.ipynb is stored. Then type 'jupyter notebook' (without '' signs) and press Enter.
 Jupyter notebook should open within your browser (such as Firefox). Click on one notebook to start.
 
-## License
+# License
 
 PyCity is released by RWTH Aachen University's Institute for Energy Efficient Buildings and Indoor Climate (EBC) 
 under the [GNU General Public License](http://www.gnu.org/licenses/gpl.html)
 
-## Acknowledgements
+# Acknowledgements
 
 We gratefully acknowledge the financial support for parts of PyCity by BMWi (German Federal Ministry for Economic Affairs and Energy)
 

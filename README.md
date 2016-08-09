@@ -20,13 +20,15 @@ PyCity requires the following Python packages:
 - pandas
 - pytest
 - xlrd
-- shapely (due to uesgraphs usage)
+- shapely
 
 as well as the python package
 
 - uesgraphs (and its dependencies shapely, pyproj, 'cmocean', 'iapws')
 
 which is available under [https://github.com/RWTH-EBC/uesgraphs](https://github.com/RWTH-EBC/uesgraphs)
+
+# Instructions for uesgraphs and pycity
 
 First, you should download and install uesgraph. Local installation is possible via pip:
 
@@ -63,6 +65,20 @@ by adding new .py file and trying to import uesgraphs and pycity.
 `import pycity`
 
 Import should be possible without errors.
+
+# Instructions for shapely
+
+shapely is required for uesgraphs and pycity usage. A pre-compiled version of shapely for Windows (Windows Binaries for Python Extension Packages) 
+can be found at: [http://www.lfd.uci.edu/~gohlke/pythonlibs/](http://www.lfd.uci.edu/~gohlke/pythonlibs/)
+
+Download shapely (version according to your system and Python version, such as 64 bit and Python 3.4)
+
+open a Python command window within your Python path (e.g. Winpython cmd window).
+Install the wheel files with pip. 
+
+`pip install SomePackage-1.0-py2.whl`
+
+
 
 ## Tutorial
 

@@ -12,7 +12,7 @@ import numpy as np
 try:
     import uesgraphs.uesgraph as ues
 except:
-    ImportError('Package uesgraphs is not found. Please install uesgraphs' +
+    raise ImportError('Package uesgraphs is not found. Please install uesgraphs' +
                 'first. https://github.com/RWTH-EBC/uesgraphs')
 
 
@@ -71,7 +71,7 @@ class CityDistrict(ues.UESGraph):
         ----------
         entity : object
             Standard entity object (building, windenergyconverter or pv)
-        position : sympy.geometry.Point object
+        position : shapely.geometry.Point object
             New node's position
         name : str, optional
             Name of entity (default: None)
@@ -161,11 +161,11 @@ class CityDistrict(ues.UESGraph):
         positions : List-like
             List (or tuple) of positions (of entities) that are added to city
             district
-            (list of sympy.geometry.Point objects)
+            (list of shapely.geometry.Point objects)
             
         Example
         -------
-        >>> import sympy.geometry.point as point
+        >>> import shapely.geometry.point as point
         >>> myPV  = PV(...)
         >>> myWEC = WindEnergyConverter(...)
         >>> myCityDistrict = CityDistrict(...)

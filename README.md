@@ -1,31 +1,37 @@
 <snippet>
   <content>
-## PyCity
+# PyCity
 
 Python package for data handling and scenario generation of city districts.
 
-## Contributing
+# Contributing
 
-1. Clone repository: `git clone https://github.com/RWTH-EBC/pyCity.git`
-2. Create your feature branch: `git checkout -b my-new-feature`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request
+1. Clone repository: `git clone git@github.com:RWTH-EBC/pyCity.git` (for SSH usage)
+2. Open an issue at [https://github.com/RWTH-EBC/pyCity/issues](https://github.com/RWTH-EBC/pyCity/issues)
+3. Checkout development branch: `git checkout development` 
+4. Update local development branch (if necessary): `git pull origin development`
+5. Create your feature branch: `git checkout -b issueXY_explanation`
+6. Commit your changes: `git commit -am 'Add some feature (#XY)'`
+7. Push to the branch: `git push origin issueXY_explanation`
+8. Submit a pull request from issueXY_explanation to development branch via [https://github.com/RWTH-EBC/pyCity/pulls](https://github.com/RWTH-EBC/pyCity/pulls)
 
-## Installation
+# Installation
 
 PyCity requires the following Python packages:
 - numpy
+- matplotlib
 - pandas
-- sympy
 - pytest
 - xlrd
+- shapely
 
 as well as the python package
 
-- uesgraphs
+- uesgraphs (and its dependencies shapely, pyproj, 'cmocean', 'iapws')
 
 which is available under [https://github.com/RWTH-EBC/uesgraphs](https://github.com/RWTH-EBC/uesgraphs)
+
+### Instructions for uesgraphs and pycity
 
 First, you should download and install uesgraph. Local installation is possible via pip:
 
@@ -63,19 +69,31 @@ by adding new .py file and trying to import uesgraphs and pycity.
 
 Import should be possible without errors.
 
-## Tutorial
+### Instructions for shapely
+
+shapely is required for uesgraphs and pycity usage. A pre-compiled version of shapely for Windows (Windows Binaries for Python Extension Packages) 
+can be found at: [http://www.lfd.uci.edu/~gohlke/pythonlibs/](http://www.lfd.uci.edu/~gohlke/pythonlibs/)
+
+Download shapely (version according to your system and Python version, such as 64 bit and Python 3.4)
+
+open a Python command window within your Python path (e.g. Winpython cmd window).
+Install the wheel files with pip. 
+
+`pip install SomePackage-1.0-py2.whl`
+
+# Tutorial
 
 PyCity has a jupyter notebook tutorial script under pycity/examples/tutorials/... 
 To open the jupyter notebook, open a command/terminal window and change your directory to the directory, 
 where tutorial_pycity.ipynb is stored. Then type 'jupyter notebook' (without '' signs) and press Enter.
 Jupyter notebook should open within your browser (such as Firefox). Click on one notebook to start.
 
-## License
+# License
 
 PyCity is released by RWTH Aachen University's Institute for Energy Efficient Buildings and Indoor Climate (EBC) 
 under the [GNU General Public License](http://www.gnu.org/licenses/gpl.html)
 
-## Acknowledgements
+# Acknowledgements
 
 We gratefully acknowledge the financial support for parts of PyCity by BMWi (German Federal Ministry for Economic Affairs and Energy)
 

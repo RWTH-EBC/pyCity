@@ -4,8 +4,8 @@
 Pytest script for CityDistrict class of pycity
 """
 
-from sympy.geometry.point import Point
 import numpy as np
+import shapely.geometry.point as point
 
 import pycity.classes.CityDistrict as citydist
 
@@ -29,7 +29,7 @@ class Test_CityDistrict(object):
 
         #  Create building
         building = create_building
-        position_1 = Point(0, 0)
+        position_1 = point.Point(0, 0)
 
         #  Add entity
         node_nb = city.addEntity(entity=building, position=position_1)
@@ -46,8 +46,8 @@ class Test_CityDistrict(object):
 
         #  Create building
         building = create_building
-        position_1 = Point(0, 0)
-        position_2 = Point(0, 10)
+        position_1 = point.Point(0, 0)
+        position_2 = point.Point(0, 10)
         pos_list = [position_1, position_2]
 
         #  Add entity

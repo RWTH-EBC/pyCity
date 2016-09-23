@@ -1,6 +1,6 @@
 <snippet>
   <content>
-# PyCity
+# pyCity
 
 Python package for data handling and scenario generation of city districts.
 
@@ -17,7 +17,7 @@ Python package for data handling and scenario generation of city districts.
 
 # Installation
 
-PyCity requires the following Python packages:
+pyCity requires the following Python packages:
 - numpy
 - matplotlib
 - pandas
@@ -31,13 +31,13 @@ as well as the python package
 
 which is available under [https://github.com/RWTH-EBC/uesgraphs](https://github.com/RWTH-EBC/uesgraphs)
 
-### Instructions for uesgraphs and pycity
+### Instructions for uesgraphs and pyCity
 
 First, you should download and install uesgraph. Local installation is possible via pip:
 
 `pip install -e 'your_path_to_uesgraphs_setup'`
 
-Second, you can install pycity via pip:
+Second, you can install pyCity via pip:
 
 `pip install -e 'your_path_to_pycity_setup'`
 
@@ -61,7 +61,7 @@ via pip, e.g.
 `pip install -e 'your_path_to_uesgraph_setup'`
 
 You can check if installation / adding packages to python has been successful
-by adding new .py file and trying to import uesgraphs and pycity.
+by adding new .py file and trying to import uesgraphs and pyCity.
 
 `import uesgraphs`
 
@@ -83,19 +83,19 @@ Install the wheel files with pip.
 
 # Tutorial
 
-PyCity has a jupyter notebook tutorial script under pycity/examples/tutorials/... 
+pyCity has a jupyter notebook tutorial script under pycity/examples/tutorials/... 
 To open the jupyter notebook, open a command/terminal window and change your directory to the directory, 
 where tutorial_pycity.ipynb is stored. Then type 'jupyter notebook' (without '' signs) and press Enter.
 Jupyter notebook should open within your browser (such as Firefox). Click on one notebook to start.
 
 # License
 
-PyCity is released by RWTH Aachen University's Institute for Energy Efficient Buildings and Indoor Climate (EBC) 
-under the [GNU General Public License](http://www.gnu.org/licenses/gpl.html)
+pyCity is released by RWTH Aachen University's Institute for Energy Efficient Buildings and Indoor Climate (EBC) 
+under the [MIT License](https://opensource.org/licenses/MIT)
 
 # Acknowledgements
 
-We gratefully acknowledge the financial support for parts of PyCity by BMWi (German Federal Ministry for Economic Affairs and Energy)
+We gratefully acknowledge the financial support for parts of pyCity by BMWi (German Federal Ministry for Economic Affairs and Energy)
 
  </content>
 </snippet>

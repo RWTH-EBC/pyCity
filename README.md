@@ -72,8 +72,8 @@ Jupyter notebook should open within your browser (such as Firefox). Click on one
 
 ## License
 
-PyCity is released by RWTH Aachen University's Institute for Energy Efficient Buildings and Indoor Climate (EBC) 
-under the [GNU General Public License](http://www.gnu.org/licenses/gpl.html)
+pyCity is released by RWTH Aachen University's Institute for Energy Efficient Buildings and Indoor Climate (EBC) 
+under the [MIT License](https://opensource.org/licenses/MIT)
 
 ## Acknowledgements
 

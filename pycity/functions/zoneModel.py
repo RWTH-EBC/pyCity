@@ -54,10 +54,14 @@ def _calculateNoHeat(zoneParameters, zoneInputs, T_m_init, q=0, timestep=0):
     A_t     = zoneParameters.A_t            # in m2
     H_tr_is = zoneParameters.H_tr_is        # in W/K
     H_tr_ms = zoneParameters.H_tr_ms        # in W/K
-    H_tr_em = zoneParameters.H_tr_em        # in W/K
     H_tr_w  = zoneParameters.H_tr_w         # in W/K
     H_ve    = zoneParameters.H_ve[timestep] # in W/K
     C_m     = zoneParameters.C_m            # in J/K
+    
+    if len(zoneParameters.H_tr_em) > 1:
+        H_tr_em = zoneParameters.H_tr_em[timestep] # in W/K
+    else:
+        H_tr_em = zoneParameters.H_tr_em            # in W/K
 
     dt      = zoneParameters.samplingRate # in s
     
@@ -144,10 +148,14 @@ def _calculateHeat(zoneParameters, zoneInputs, T_m_init, T_set, timestep=0):
     A_t     = zoneParameters.A_t            # in m2
     H_tr_is = zoneParameters.H_tr_is        # in W/K
     H_tr_ms = zoneParameters.H_tr_ms        # in W/K
-    H_tr_em = zoneParameters.H_tr_em        # in W/K
     H_tr_w  = zoneParameters.H_tr_w         # in W/K
     H_ve    = zoneParameters.H_ve[timestep] # in W/K
     C_m     = zoneParameters.C_m            # in J/K
+
+    if len(zoneParameters.H_tr_em) > 1:
+        H_tr_em = zoneParameters.H_tr_em[timestep] # in W/K
+    else:
+        H_tr_em = zoneParameters.H_tr_em            # in W/K
 
     dt      = zoneParameters.samplingRate # in s
     
@@ -176,8 +184,9 @@ def _calculateHeat(zoneParameters, zoneInputs, T_m_init, T_set, timestep=0):
     A[2,1] = - H_tr_is
     A[2,2] = H_ve + H_tr_is
     A[2,3] = -1
-    A[3,2] = 0.3
-    A[3,1] = 1 - A[3,2]  
+#    A[3,2] = 0.3
+#    A[3,1] = 1 - A[3,2]
+    A[3,2] = 1
     
     b[0] = Phi_m + H_tr_em * T_e + C_m * T_m_init / dt
     b[1] = Phi_st + H_tr_w * T_e

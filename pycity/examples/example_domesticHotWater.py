@@ -16,6 +16,7 @@ import pycity.classes.Timer
 import pycity.classes.Weather
 import pycity.classes.Environment
 import pycity.classes.Prices
+import pycity.classes.demand.Occupancy
 
 
 def run_test():
@@ -54,8 +55,11 @@ def run_test():
     #  #---------------------------------------------------------------------
     #  Compute active occupants for one year
     #  Max. occupancy is 5 people simultaneously
-    occupancy = np.random.geometric(p=0.8, size=6 * 24 * 365) - 1
-    occupancy = np.minimum(5, occupancy)
+#    occupancy = np.random.geometric(p=0.8, size=6 * 24 * 365) - 1
+#    occupancy = np.minimum(5, occupancy)
+    occup_obj = pycity.classes.demand.Occupancy.Occupancy(environment,
+                                                          number_occupants=3)
+    occupancy = occup_obj.occupancy
 
     dhw_stochastical = DomesticHotWater.DomesticHotWater(environment,
                                                          tFlow=60,

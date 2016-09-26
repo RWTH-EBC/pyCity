@@ -334,7 +334,7 @@ def plotJanuary4(results):
              "k--", label="ref_jan4_min")
     ax1.plot(time, np.max(ref_jan4, axis=0), 
              "k--", label="ref_jan4_max")
-    ax1.legend()
+    ax1.legend(loc=3)
     
 #plotResults(results)
  

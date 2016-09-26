@@ -97,28 +97,94 @@ U_windows = np.array([3, 3, 3, 3, 3, 3])  # table 5.6, page 19
 g_gln = 0.789  # (solar heat gain coefficient) table 5.6, page 19
 
 # Computation of the specific heat capacity of each wall
-specificHeatCapacity = lambda d, rho, cp: np.sum(d * rho * cp)
+def specificHeatCapacity(d, d_iso, density, cp):
+    """ 
+    ISO 13786:2007 A.2
+    Computation of (specific) heat capacity of each wall-type-surface
+    
+    Result is in J/m2K
+    """
+    d_t = min(0.5 * np.sum(d), d_iso , 0.1)
+    sum_d_i = d[0]
+    i = 0 
+    kappa = 0       
+    while sum_d_i <= d_t:
+        kappa += d[i] * density[i] * cp[i]
+        i += 1
+        sum_d_i += d[i]
+    else:
+        sum_d_i -=  d[i]
+        d_part = d_t - sum_d_i          
+        kappa += d_part * density[i] * cp[i]
+
+    return kappa
+
 # Data: Table 5.1, page 17
 # Exterior wall (South, West, East, North)
 d_extWall = np.array([0.012, 0.066, 0.009])
 rho_extWall = np.array([950, 12, 530])
 cp_extWall = np.array([840, 840, 900])
-c_extWall = specificHeatCapacity(d_extWall, rho_extWall, cp_extWall)
+c_extWall = specificHeatCapacity(d_extWall, 0.012, rho_extWall, cp_extWall)
+
+U_extWall = 0.514
 
 # Floor
 d_floor = np.array([0.025, 1.003])
 rho_floor = np.array([650, 0])
 cp_floor = np.array([1200, 0])
-c_floor = specificHeatCapacity(d_floor, rho_floor, cp_floor)
+c_floor = specificHeatCapacity(d_floor, 0.025, rho_floor, cp_floor)
+
+U_floor = 0.039
 
 # Roof
 d_roof = np.array([0.0100, 0.1118, 0.019])
 rho_roof = np.array([950, 12, 530])
 cp_roof = np.array([840, 840, 900])
-c_roof = specificHeatCapacity(d_roof, rho_roof, cp_roof)
+c_roof = specificHeatCapacity(d_roof, 0.01, rho_roof, cp_roof)
+
+U_roof = 0.318
 
 R_se_op = [0.034, 0.034, 0.034, 0.034, 0.034, 0]  # Table 5.1, page 17
 R_se_w = [0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0]  # Table 5.6, page 19
+
+
+months = np.array([31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31])
+monthsCum = np.cumsum(months)
+monthsCum0 = np.append(np.array([0]),monthsCum)
+T_aver_mon = []
+b_m = []    # Anpassungsfaktor ground p.44 ISO 13790
+
+for i in range(12):
+    T_aver_mon = np.append(T_aver_mon, 
+                           sum(environment.weather.tAmbient[monthsCum0[i]*24:monthsCum0[i+1]*24]) / months[i] / 24 )
+T_i_year = 22.917 
+# Heizperiode von Anfang Oktober bis Ende April
+for i in range(4):
+    for k in range(months[i]*24):
+        b_m = np.append(b_m, (T_i_year - 9.71)/(20 - T_aver_mon[i]))
+for i in range(5):
+    for k in range(months[4+i]*24):
+        b_m = np.append(b_m, (T_i_year - 9.71)/(27 - T_aver_mon[4+i]))
+for i in range(3):
+    for k in range(months[9+i]*24):
+        b_m = np.append(b_m, (T_i_year - 9.71)/(20 - T_aver_mon[9+i]))
+
+#Abfangen von extrem großen/kleinen Korrekturfaktoren       
+for i in range(8760):
+    b_m[i] = np.minimum(b_m[i], 10)
+    b_m[i] = np.maximum(b_m[i], -10)
+
+U_floor = 0.039
+
+U_floor_bm = np.multiply(U_floor, b_m)
+
+
+
+U_walls_ext_bm = [U_extWall, U_extWall, U_extWall, U_extWall, U_roof, np.mean(U_floor_bm[i])]
+
+U_walls_ext_bm = []
+for i in range(8760):
+    U_walls_ext_bm.append(np.array([U_extWall, U_extWall, U_extWall, U_extWall, U_roof, U_floor_bm[i]])) # air-air
 
 c = np.array([c_extWall, c_extWall, c_extWall, c_extWall, c_roof, c_floor])
 
@@ -129,7 +195,8 @@ zoneParameters = zp.ZoneParameters(A_f=A_f,
                                    epsilon_w=infraredEmittance,
                                    R_se_w=R_se_w,
                                    A_op=A_walls,
-                                   U_op=U_walls,
+#                                   U_op=U_walls,
+                                   U_op=U_walls_ext_bm,
                                    alpha_Sc=solarAbsorptance,
                                    R_se_op=R_se_op,
                                    epsilon_op=infraredEmittance,
@@ -149,7 +216,7 @@ ventilationFactor = 0.822  # Adjustment factor, see Table 5.2, page 18
 ventilation = ventilation * ventilationFactor  # Final adjustment factor, see
 # Footnote at Table 5.2, page 18
 zoneParameters.updateVentilation(ventilationRate=ventilation,
-                                 ventilationRateMinimum=0)
+                                 ventilationRateMinimum=0.41)
 
 
 # Set points (section 5.2.1.13.1.1, page 19)
@@ -262,9 +329,9 @@ print("Solar gains windows (South): " + str(round(
 print("Reference: min: 914, max: 1051, mean: 962")
 
 
-# plotCase600.plotResults(results)
+plotCase600.plotResults(results)
 
 plotCase600.plotWestSurface(results)
-# plotCase600.plotSouthSurface(results)
+plotCase600.plotSouthSurface(results)
 
-# plotCase600.plotJanuary4(results)
+plotCase600.plotJanuary4(results)

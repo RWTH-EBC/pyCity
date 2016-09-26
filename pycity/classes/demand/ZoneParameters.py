@@ -222,34 +222,54 @@ class ZoneParameters(object):
         self.Psi_r_windows = (R_se_w * self.U_windows * self.A_windows 
                             * h_r_windows * Delta_theta_er)
         
+        # H_tr_ms, based on equation 64, section 12.2.2, page 79
+        h_ms = 9.1                      # W/m2K, section 12.2.2, page 79
+        self.H_tr_ms = h_ms * self.A_m  # W/K
+
         # Compute heat transmission through opaque parts (walls, roof)
         # Compute total heat transmission through opaque parts
         # Same source as for heat transmissions through windows and same 
         # simplifications (no 0-dimensional and 1-dimensional heat transfer)
         self.A_opaque = np.array(A_op)
         self.U_opaque = np.array(U_op)
-        self.H_tr_op = np.sum(self.A_opaque * self.U_opaque)
+        
+        if len(self.U_opaque.shape) > 1:
+            self.H_tr_op = np.zeros(self.U_opaque.shape[0])
+            self.H_tr_em = np.zeros(self.U_opaque.shape[0])
+        
+            for i in range(len(self.H_tr_op)):
+                self.H_tr_op[i] = np.sum(self.A_opaque * self.U_opaque[i,:])
+#                H_tr_em, based on equation 63, section 12.2.2, page 79
+                self.H_tr_em[i] = 1 / (1 / self.H_tr_op[i] - 1 / self.H_tr_ms)
+        else:
+            self.H_tr_op = np.sum(self.A_opaque * self.U_opaque)
+            self.H_tr_em = 1 / (1 / self.H_tr_op - 1 / self.H_tr_ms)
+        
         
         # Save effective area and radiative heat losses to the sky of opaque 
         # components.
         # DIN EN ISO 13790:2008, section 11.4.2, equation 45, page 68
         alpha_Sc = np.array(alpha_Sc)
         R_se_op = np.array(R_se_op)
-        self.A_opaque_sol = alpha_Sc * R_se_op * self.U_opaque * self.A_opaque
+        
         # Simplification of external radiative heat exchange coefficient
         # Slightly below DIN EN ISO 13790, section 11.4.6, equation 51, page 73
         epsilon_op = np.array(epsilon_op)
         h_r_opaque = 5 * epsilon_op
-        # DIN EN ISO 13790, section 11.3.5, equation 46, page 69
-        self.Psi_r_opaque = (R_se_op * self.U_opaque * self.A_opaque
-                           * h_r_opaque * Delta_theta_er)
         
-        # H_tr_ms, based on equation 64, section 12.2.2, page 79
-        h_ms = 9.1                      # W/m2K, section 12.2.2, page 79
-        self.H_tr_ms = h_ms * self.A_m  # W/K
-
+        if len(self.U_opaque.shape) > 1:
+            self.A_opaque_sol = alpha_Sc * R_se_op * self.U_opaque[0] * self.A_opaque
+            # DIN EN ISO 13790, section 11.3.5, equation 46, page 69
+            self.Psi_r_opaque = (R_se_op * self.U_opaque[0] * self.A_opaque
+                               * h_r_opaque * Delta_theta_er)
+        else:
+            self.A_opaque_sol = alpha_Sc * R_se_op * self.U_opaque * self.A_opaque
+            # DIN EN ISO 13790, section 11.3.5, equation 46, page 69
+            self.Psi_r_opaque = (R_se_op * self.U_opaque * self.A_opaque
+                               * h_r_opaque * Delta_theta_er)
+        
         # H_tr_em, based on equation 63, section 12.2.2, page 79
-        self.H_tr_em = 1 / (1 / self.H_tr_op - 1 / self.H_tr_ms)
+#        self.H_tr_em = 1 / (1 / self.H_tr_op - 1 / self.H_tr_ms)
         
         # Save zone's volume for later computing the ventilation
         # As ventilation is a dynamic effect, a scalar heat transfer 

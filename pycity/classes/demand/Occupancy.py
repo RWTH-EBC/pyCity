@@ -98,9 +98,8 @@ class Occupancy(object):
         # Get starting states and starting probabilities
         start_states = Occupancy.occ_start_states
         start_probs = start_states[self.type_weekday[self.weekend]]
-        get_state = self._get_start_state
-        self.initial_occupancy = get_state(
-            start_probs[:][self.number_occupants])
+        self.initial_occupancy = self._get_start_state(
+                                      start_probs[:][self.number_occupants])
 
         # Make a full year occupancy computation
         occupancy = []

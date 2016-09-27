@@ -96,7 +96,7 @@ class Weather(pycity.classes.Sun.Sun):
         self.currentCloudiness = np.zeros(timer.timestepsHorizon)
 
         #  Calculate number of rows, which should be loaded into weather class
-        nb_rows = 8760 * 3600 / timeDiscretization
+        nb_rows = int(8760 * 3600 / timeDiscretization)
 
         if useTRY:
             # Generate TRY path (if path is None) and use TRY2010_05_Jahr.dat

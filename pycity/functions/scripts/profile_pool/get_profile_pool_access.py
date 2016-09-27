@@ -18,6 +18,7 @@ npz internal arrays should hold name labels:
 """
 
 import os
+import random
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -103,6 +104,59 @@ class ProfilePool(object):
             key = i + 1
             self.dict_data[key] = npz_data
 
+    def get_random_number(self):
+        """
+        Returns random number in the interval of number of different npz
+        profiles.
+
+        Returns
+        -------
+        rand_nb : int
+            Random number
+        """
+
+        if len(self.dict_data) == 0:
+            raise AssertionError('self.dict_data is empty. Load data first!')
+
+        nb_profiles = len(self.dict_data[0]['occ'])
+
+        return random.randint(0, nb_profiles-1)
+
+    def get_random_profile(self, nb_occupants, type, rand_number=None):
+        """
+        Returns copy of random occupancy profile with 600 second resolution
+
+        Parameters
+        ----------
+        nb_occupants : int
+            Number of occupants for profile (between 1 - 5)
+        type : str
+            Type of profile. Options: 'occ', 'el', 'dhw'
+        rand_number = int, optional
+            Random number to select profile
+
+        Return
+        ------
+        profile : array-like
+            Selected profile
+        """
+
+        if nb_occupants > 5 or nb_occupants <= 0:
+            msg = 'Number of occupants must be between 1 and 5!'
+            raise AssertionError(msg)
+
+        if type not in ['occ', 'el', 'dhw']:
+            msg = "Type must be ['occ', 'el', 'dhw']!"
+            raise AssertionError(msg)
+
+        if rand_number is None:
+            #  Choose random number
+            rand_number = self.get_random_number()
+            print('Choosen random number: ', rand_number)
+
+        return self.dict_data[nb_occupants][type][rand_number]
+
+
 
 if __name__ == '__main__':
 
@@ -114,7 +168,8 @@ if __name__ == '__main__':
     prof_pool = ProfilePool(path_to_npz_folder=search_path)
 
     #  Access (first) occupancy profile for 3 person apartment
-    occ_profile = prof_pool.dict_data[3]['occ'][0]
+    occ_profile = prof_pool.get_random_profile(nb_occupants=3, type='occ',
+                                               rand_number=0)
 
     print('Occupancy profile:')
     print(occ_profile)

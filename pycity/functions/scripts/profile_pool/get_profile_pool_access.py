@@ -22,6 +22,8 @@ import random
 import numpy as np
 import matplotlib.pyplot as plt
 
+import pycity.functions.changeResolution as chres
+
 
 def get_list_of_npz_files(path):
     """
@@ -91,7 +93,6 @@ class ProfilePool(object):
         list_npz = get_list_of_npz_files(path)
 
         for i in range(len(list_npz)):
-
             elem = list_npz[i]
 
             #  Construct path to load data
@@ -118,9 +119,9 @@ class ProfilePool(object):
         if len(self.dict_data) == 0:
             raise AssertionError('self.dict_data is empty. Load data first!')
 
-        nb_profiles = len(self.dict_data[0]['occ'])
+        nb_profiles = len(self.dict_data[1]['occ'])
 
-        return random.randint(0, nb_profiles-1)
+        return random.randint(0, nb_profiles - 1)
 
     def get_random_profile(self, nb_occupants, type, rand_number=None):
         """
@@ -133,7 +134,9 @@ class ProfilePool(object):
         type : str
             Type of profile. Options: 'occ', 'el', 'dhw'
         rand_number = int, optional
-            Random number to select profile
+            Random number to select profile (default: None). If set to None,
+            going to select random integer. If integer is given, this integer
+            is goint to be used.
 
         Return
         ------
@@ -154,12 +157,57 @@ class ProfilePool(object):
             rand_number = self.get_random_number()
             print('Choosen random number: ', rand_number)
 
-        return self.dict_data[nb_occupants][type][rand_number]
+        return np.copy(self.dict_data[nb_occupants][type][rand_number])
 
+    def get_occ_el_dhw_profile(self, nb_occupants, rand_number=None):
+        """
+        Returns tuply with occupancy, electrical load and hot water profile
+
+        Parameters
+        ----------
+        nb_occupants : int
+            Number of occupants for profile (between 1 - 5)
+        type : str
+            Type of profile. Options: 'occ', 'el', 'dhw'
+        rand_number = int, optional
+            Random number to select profile (default: None). If set to None,
+            going to select random integer. If integer is given, this integer
+            is goint to be used.
+
+        Returns
+        -------
+        tuple_profiles : tuple (of array-like structures)
+            Tuple with occupancy, electrical load and hot water profile
+        """
+
+        if nb_occupants > 5 or nb_occupants <= 0:
+            msg = 'Number of occupants must be between 1 and 5!'
+            raise AssertionError(msg)
+
+        if rand_number is None:
+            #  Choose random number
+            rand_number = self.get_random_number()
+            print('Choosen random number: ', rand_number)
+
+        # Get occupancy profile
+        occ_profile = self.get_random_profile(nb_occupants=nb_occupants,
+                                              type='occ',
+                                              rand_number=rand_number)
+
+        #  Get el. load profile
+        el_profile = self.get_random_profile(nb_occupants=nb_occupants,
+                                             type='el',
+                                             rand_number=rand_number)
+
+        #  Get dhw load profile
+        dhw_profile = self.get_random_profile(nb_occupants=nb_occupants,
+                                              type='dhw',
+                                              rand_number=rand_number)
+
+        return (occ_profile, el_profile, dhw_profile)
 
 
 if __name__ == '__main__':
-
     this_path = os.path.dirname(os.path.abspath(__file__))
 
     search_path = os.path.join(this_path, 'profiles')
@@ -167,13 +215,35 @@ if __name__ == '__main__':
     #  Generate ProfilePool object
     prof_pool = ProfilePool(path_to_npz_folder=search_path)
 
-    #  Access (first) occupancy profile for 3 person apartment
-    occ_profile = prof_pool.get_random_profile(nb_occupants=3, type='occ',
-                                               rand_number=0)
+    #  Get occ, el. and dhw profile
+    (occ_profile, el_profile, dhw_profile) = \
+        prof_pool.get_occ_el_dhw_profile(nb_occupants=3)
 
-    print('Occupancy profile:')
-    print(occ_profile)
-    print('Length of occupancy profile:')
-    print(len(occ_profile))
-    plt.plot(occ_profile)
+    #  Change resolution of occupancy profile from 600 to 60 seconds
+    occ_profile = chres.changeResolution(occ_profile, oldResolution=600,
+                                         newResolution=60)
+
+    el_energy = sum(el_profile) * 60 / (3600 * 1000)
+    print('El. energy in kWh: ', el_energy)
+
+    dhw_energy = sum(dhw_profile) * 60 / (3600 * 1000)
+    print('Hot water net energy in kWh: ', dhw_energy)
+
+    time_array = np.arange(0, 365*24*3600, 60)
+    time_array = time_array / 3600
+
+    fig = plt.figure()
+    plt.subplot(311)
+    plt.plot(time_array, occ_profile)
+    plt.ylabel('Occupancy')
+
+    plt.subplot(312)
+    plt.plot(time_array, el_profile)
+    plt.ylabel('El. load in Watt')
+
+    plt.subplot(313)
+    plt.plot(time_array, dhw_profile)
+    plt.ylabel('Hot water load in Watt')
+
+    plt.xlabel('Time in hours')
     plt.show()

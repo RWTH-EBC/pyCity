@@ -52,7 +52,7 @@ class PyTest(TestCommand):
         sys.exit(errcode)
 
 
-setup(name='pycity',
+setup(name='pyCity',
       version='0.1.0',
       description='Python package for data handling and scenario generation of city districts.',
       url='https://github.com/RWTH-EBC/pyCity',

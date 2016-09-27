@@ -34,6 +34,7 @@ def create_path_if_not_exist(path):
     if not os.path.exists(path):
         os.makedirs(path)
 
+
 def generate_profile_pool(path=None, runs=100, timestep=60):
     """
     Generates profile pool in subfolder profile (if no profile pool exists)
@@ -68,8 +69,11 @@ def generate_profile_pool(path=None, runs=100, timestep=60):
 
     for occ in range(1, 6):  # Loop from 1 to 5 occupants
 
+        print('Number of occupants: ', occ)
+        print('#####################################################')
+
         #  Filenames (Files are going to store 3 arrays ('occ', 'app', 'lig'))
-        file_name = str(occ)+'_person_profiles.npz'
+        file_name = str(occ) + '_person_profiles.npz'
         path_profile_file = os.path.join(path, file_name)
 
         occupancy_profiles = None
@@ -77,6 +81,8 @@ def generate_profile_pool(path=None, runs=100, timestep=60):
         dhw_profiles = None
 
         for i in range(runs):  # Loop over desired number of profiles
+
+            print('Run number: ', i)
 
             #  Generate occupancy object
             occupancy = Occ.Occupancy(environment=env, number_occupants=occ)
@@ -87,9 +93,10 @@ def generate_profile_pool(path=None, runs=100, timestep=60):
             if occupancy_profiles is None:
                 occupancy_profiles = occ_profile
             else:
-                occupancy_profiles = np.vstack((occupancy_profiles, occ_profile))
+                occupancy_profiles = np.vstack(
+                    (occupancy_profiles, occ_profile))
 
-            #  Generate el. load profile
+            # Generate el. load profile
             el_dem_stochastic = \
                 ED.ElectricalDemand(environment=env,
                                     method=2,
@@ -106,7 +113,7 @@ def generate_profile_pool(path=None, runs=100, timestep=60):
             else:
                 el_profiles = np.vstack((el_profiles, el_profile))
 
-            #  Generate hot water profile
+            # Generate hot water profile
             dhw_stochastical = \
                 DomesticHotWater.DomesticHotWater(environment=env,
                                                   tFlow=60,
@@ -123,16 +130,17 @@ def generate_profile_pool(path=None, runs=100, timestep=60):
             else:
                 dhw_profiles = np.vstack((dhw_profiles, dhw_profile))
 
-        #  Save as npz file (3 arrays ('occ', 'el', 'dhw'))
+        # Save as npz file (3 arrays ('occ', 'el', 'dhw'))
         np.savez(path_profile_file, occ=occupancy_profiles,
                  el=el_profiles, dhw=dhw_profiles)
+        print('#####################################################')
+        print()
 
 
 if __name__ == '__main__':
-
     #  Number of loop runs, which should be used to generate individual
     #  profiles
-    runs = 3
+    runs = 100
 
     #  Run profile pool generator
     generate_profile_pool(runs=runs)

@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Created on Thu May 21 22:07:04 2015
-
-@author: Thomas
+Example script for domestic hot water (DHW) class usage
 """
 
 from __future__ import division
@@ -20,6 +18,7 @@ import pycity.classes.demand.Occupancy
 
 
 def run_test():
+    #  Generate environment
     timeDiscretization = 3600
     total_nb_timesteps = 365 * 24 * 60 * 60 / timeDiscretization
     timer = pycity.classes.Timer.Timer(timeDiscretization=timeDiscretization,
@@ -30,6 +29,7 @@ def run_test():
     environment = pycity.classes.Environment.Environment(timer, weather,
                                                          prices)
 
+    #  Generate deterministic hot water profile, based on Annex 42 profiles
     dhw_annex42 = DomesticHotWater.DomesticHotWater(environment,
                                                     tFlow=60,
                                                     thermal=True,
@@ -44,9 +44,9 @@ def run_test():
     print("Thermal demand: " + str(results[0]))
     print("Required flow temperature: " + str(results[1]))
     print()
-    
+
     #  Convert into energy values in kWh
-    dhw_energy_curve = results[0] * timeDiscretization / (3600*1000)
+    dhw_energy_curve = results[0] * timeDiscretization / (3600 * 1000)
     annual_energy_demand = np.sum(dhw_energy_curve)
 
     print('Annual dhw energy demand in kWh: ', annual_energy_demand)
@@ -55,12 +55,15 @@ def run_test():
     #  #---------------------------------------------------------------------
     #  Compute active occupants for one year
     #  Max. occupancy is 5 people simultaneously
-#    occupancy = np.random.geometric(p=0.8, size=6 * 24 * 365) - 1
-#    occupancy = np.minimum(5, occupancy)
+    #    occupancy = np.random.geometric(p=0.8, size=6 * 24 * 365) - 1
+    #    occupancy = np.minimum(5, occupancy)
     occup_obj = pycity.classes.demand.Occupancy.Occupancy(environment,
                                                           number_occupants=3)
+
+    #  Get occupancy profile of occupancy object
     occupancy = occup_obj.occupancy
 
+    #  Generate stochastic hot water profile
     dhw_stochastical = DomesticHotWater.DomesticHotWater(environment,
                                                          tFlow=60,
                                                          thermal=True,
@@ -71,7 +74,7 @@ def run_test():
     dhw_power_curve = dhw_stochastical.get_power(currentValues=False,
                                                  returnTemperature=False)
     #  Convert into energy values in kWh
-    dhw_energy_curve = dhw_power_curve * timeDiscretization / (3600*1000)
+    dhw_energy_curve = dhw_power_curve * timeDiscretization / (3600 * 1000)
     annual_energy_demand = np.sum(dhw_energy_curve)
     #  DHW volume flow curve in liters/hour
     volume_flow_curve = dhw_stochastical.water

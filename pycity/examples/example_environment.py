@@ -12,6 +12,7 @@ import pycity.classes.Weather
 import pycity.classes.Prices
 import pycity.classes.Environment
 
+
 def run_test():
     timer = pycity.classes.Timer.Timer()
     weather = pycity.classes.Weather.Weather(timer, useTRY=True)
@@ -21,7 +22,7 @@ def run_test():
     def printResults(env):
         print(("Current timestep: " + str(env.timer.currentTimestep)))
         print(("Ambient temperature for entire horizon: " +
-              str(env.weather.getWeatherForecast(getTAmbient=True))))
+               str(env.weather.getWeatherForecast(getTAmbient=True))))
 
     print()
     print("Original environment (0 horizons passed)")
@@ -31,6 +32,7 @@ def run_test():
     print()
     print("Updated environment (1 horizon passed)")
     printResults(env)
+
 
 if __name__ == '__main__':
     #  Run program

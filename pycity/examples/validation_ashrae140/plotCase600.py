@@ -321,6 +321,7 @@ def plotSouthSurface(results):
     ax2.plot(time, np.max(ref_jul27_south, axis=0), 
              "k--", label="ref_jul27_max")
     ax2.legend()
+    plt.show()
     
 def plotJanuary4(results):
     jan4 = results.january4
@@ -335,6 +336,7 @@ def plotJanuary4(results):
     ax1.plot(time, np.max(ref_jan4, axis=0), 
              "k--", label="ref_jan4_max")
     ax1.legend(loc=3)
+    plt.show()
     
 #plotResults(results)
  

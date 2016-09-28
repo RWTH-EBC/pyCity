@@ -21,25 +21,27 @@ import pycity.classes.supply.Inverter as Inverter
 import pycity.classes.supply.PV as PV
 import pycity.classes.supply.ThermalEnergyStorage as ThermalEnergyStorage
 
+
 def print_bes_attributes(bes):
     print(("Has Battery: " + str(bes.hasBattery)))
     print(("Has Boiler: " + str(bes.hasBoiler)))
     print(("Has CHP unit: " + str(bes.hasChp)))
-    print(("Has Electrical Heater: " + str(bes.hasElectricalHeater)))    
+    print(("Has Electrical Heater: " + str(bes.hasElectricalHeater)))
     print(("Has AC/DC inverter: " + str(bes.hasInverterAcdc)))
     print(("Has DC/AC inverter: " + str(bes.hasInverterDcac)))
     print(("Has PV: " + str(bes.hasPv)))
-  
-def run_test():
 
+
+def run_test():
     timer = pycity.classes.Timer.Timer()
     weather = pycity.classes.Weather.Weather(timer, useTRY=True)
     prices = pycity.classes.Prices.Prices()
 
-    environment = pycity.classes.Environment.Environment(timer, weather, prices)
+    environment = pycity.classes.Environment.Environment(timer, weather,
+                                                         prices)
 
     # Create appliances
-    battery = Battery.Battery(environment, 0.5, 4*3600*1000)
+    battery = Battery.Battery(environment, 0.5, 4 * 3600 * 1000)
     boiler = Boiler.Boiler(environment, 10000, 0.8)
     chp = CHP.CHP(environment, 1000, 2000, 0.9)
     elHeater = ElectricalHeater.ElectricalHeater(environment, 3000, 0.99)
@@ -82,6 +84,7 @@ def run_test():
     print("Inverter DC to AC: " + str(inverter_dc_ac is bes.inverterDcac))
     print("PV: " + str(pv is bes.pv))
     print("TES: " + str(tes is bes.tes))
+
 
 if __name__ == '__main__':
     #  Run program

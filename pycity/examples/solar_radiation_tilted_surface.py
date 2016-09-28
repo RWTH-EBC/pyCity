@@ -24,8 +24,8 @@ def run_example():
     environment = pycity.classes.Environment.Environment(timer, weather, None)
 
     # Surface definition
-    beta = 30 # Slope, degree (not radians)
-    gamma = 0 # Azimuth angle, degree (not radians)
+    beta = 30  # Slope, degree (not radians)
+    gamma = 0  # Azimuth angle, degree (not radians)
 
     # Compute solar radiation on a tilted surface
     function = weather.getRadiationTiltedSurface
@@ -57,6 +57,7 @@ def run_example():
     plt.plot(reflected_radiation)
     plt.ylabel('reflected_radiation')
     plt.show()
+
 
 if __name__ == '__main__':
     run_example()

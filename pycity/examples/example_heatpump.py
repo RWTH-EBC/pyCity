@@ -19,12 +19,14 @@ import pycity.classes.Environment
 
 import xlrd
 
+
 def run_test():
     # Create environment
     timer = pycity.classes.Timer.Timer()
     weather = pycity.classes.Weather.Weather(timer, useTRY=True)
     prices = pycity.classes.Prices.Prices()
-    environment = pycity.classes.Environment.Environment(timer, weather, prices)
+    environment = pycity.classes.Environment.Environment(timer, weather,
+                                                         prices)
 
     #  Heatpump data path
     src_path = os.path.dirname(os.path.dirname(__file__))
@@ -36,24 +38,24 @@ def run_test():
     number_rows = dimplex_LA12TU._dimnrows
     number_columns = dimplex_LA12TU._dimncols
     # Flow, ambient and max. temperatures
-    tFlow = np.zeros(number_columns-2)
-    tAmbient = np.zeros(int((number_rows-7)/2))
-    tMax = dimplex_LA12TU.cell_value(0,1)
+    tFlow = np.zeros(number_columns - 2)
+    tAmbient = np.zeros(int((number_rows - 7) / 2))
+    tMax = dimplex_LA12TU.cell_value(0, 1)
 
     firstRowCOP = number_rows - len(tAmbient)
 
     qNominal = np.empty((len(tAmbient), len(tFlow)))
     cop = np.empty((len(tAmbient), len(tFlow)))
 
-    for i in range(number_columns-2):
-        tFlow[i] = dimplex_LA12TU.cell_value(3, 2+i)
+    for i in range(number_columns - 2):
+        tFlow[i] = dimplex_LA12TU.cell_value(3, 2 + i)
 
     for col in range(len(tFlow)):
         for row in range(len(tAmbient)):
-            qNominal[row, col] = dimplex_LA12TU.cell_value(int(4+row),
-                                                           int(2+col))
-            cop[row, col] = dimplex_LA12TU.cell_value(int(firstRowCOP+row),
-                                                      int(2+col))
+            qNominal[row, col] = dimplex_LA12TU.cell_value(int(4 + row),
+                                                           int(2 + col))
+            cop[row, col] = dimplex_LA12TU.cell_value(int(firstRowCOP + row),
+                                                      int(2 + col))
 
     pNominal = qNominal / cop
 
@@ -68,7 +70,7 @@ def run_test():
     print(("Type: " + heater._kind))
     print()
     print(("Maximum flow temperature: " + str(heater.tMax)))
-    print(("Lower activation limit: "   + str(heater.lowerActivationLimit)))
+    print(("Lower activation limit: " + str(heater.lowerActivationLimit)))
 
     np.random.seed(0)
     flowTemperature = np.random.rand(timer.timestepsHorizon) * 20 + 35
@@ -78,7 +80,7 @@ def run_test():
     print(("Nominal electricity consumption: " + str(nominals[0])))
     print(("Nominal heat output: " + str(nominals[1])))
     print(("Maximum flow temperature: " + str(nominals[2])))
-    print(("Lower activation limit: "   + str(nominals[3])))
+    print(("Lower activation limit: " + str(nominals[3])))
 
     schedule = np.random.randint(2, size=timer.timestepsUsedHorizon)
     result_p = (nominals[0])[0:96] * schedule
@@ -93,6 +95,7 @@ def run_test():
     print("Heat output: " + str(results[1]))
     print()
     print("Schedule: " + str(results[2]))
+
 
 if __name__ == '__main__':
     #  Run program

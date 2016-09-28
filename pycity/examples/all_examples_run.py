@@ -1,3 +1,4 @@
+# coding=utf-8
 """
 Script executes example files in examples folder
 (except ASHRAE140 validation)

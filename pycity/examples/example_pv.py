@@ -19,25 +19,28 @@ import pycity.classes.Weather
 import pycity.classes.Prices
 import pycity.classes.Environment
 
+
 def run_test():
     # Create environment
     timer = pycity.classes.Timer.Timer()
     timer.reinit(3600, 8760, 8760, 8760, 0, True)
     weather = pycity.classes.Weather.Weather(timer)
     prices = pycity.classes.Prices.Prices()
-    environment = pycity.classes.Environment.Environment(timer, weather, prices)
+    environment = pycity.classes.Environment.Environment(timer, weather,
+                                                         prices)
 
     # Create PV
     src_path = os.path.dirname(os.path.dirname(__file__))
-    pv_data_path = os.path.join(src_path, 'inputs', 'photovoltaic_modules.xlsx')
+    pv_data_path = os.path.join(src_path, 'inputs',
+                                'photovoltaic_modules.xlsx')
     pv_data = xlrd.open_workbook(pv_data_path)
     sw_290 = pv_data.sheet_by_name("SolarWorld_SW290")
-    area = sw_290.cell_value(1,2) # m2, 1 module
-    eta = sw_290.cell_value(6,2)
-    t_cell = sw_290.cell_value(7,2)
-    alpha = sw_290.cell_value(8,2)
+    area = sw_290.cell_value(1, 2)  # m2, 1 module
+    eta = sw_290.cell_value(6, 2)
+    t_cell = sw_290.cell_value(7, 2)
+    alpha = sw_290.cell_value(8, 2)
 
-    beta = 35 # Slope of the PV unit
+    beta = 35  # Slope of the PV unit
 
     pv_simple = PV.PV(environment, area, eta, beta=beta)
     pv_detailed = PV.PV(environment, area, eta, t_cell, alpha, beta=beta)
@@ -50,7 +53,7 @@ def run_test():
     print(("Efficiency: " + str(pv_detailed.eta)))
     print(("Area: " + str(pv_detailed.area)))
     print(("Cell temperature: " + str(pv_detailed.temperature_nominal)))
-    print(("Loss coefficient: "    + str(pv_detailed.alpha)))
+    print(("Loss coefficient: " + str(pv_detailed.alpha)))
 
     print(("Nominal values: " + str(pv_detailed.getNominalValues())))
 
@@ -61,19 +64,20 @@ def run_test():
 
     # Plot PV power
     plot_time = list(range(environment.timer.timestepsHorizon))
-    figure = plt.figure(figsize=(6,6))
+    figure = plt.figure(figsize=(6, 6))
     from matplotlib import gridspec
-    gs = gridspec.GridSpec(2,1, height_ratios=[3,1])
+    gs = gridspec.GridSpec(2, 1, height_ratios=[3, 1])
     ax0 = plt.subplot(gs[0])
     ax0.plot(plot_time, pvPower_detailed, label="PV electricity (detailed")
-    ax0.plot(plot_time, pvPower_simple,   label="PV electricity (simple")
+    ax0.plot(plot_time, pvPower_simple, label="PV electricity (simple")
     plt.ylabel("Power", fontsize=12)
-    plt.xlim((0,environment.timer.timestepsHorizon-1))
+    plt.xlim((0, environment.timer.timestepsHorizon - 1))
 
     ax1 = plt.subplot(gs[1], sharex=ax0)
     ax1.plot(plot_time, pvPower_detailed - pvPower_simple)
     plt.xlabel("Time", fontsize=12)
     plt.ylabel("Error")
+
 
 if __name__ == '__main__':
     #  Run program

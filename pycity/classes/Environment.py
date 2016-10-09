@@ -29,11 +29,21 @@ class Environment(object):
             (longitude, latitude) of the simulated system's position. Standard
             values (50.76, 6.07) represent Aachen, Germany.
         """
-        self._kind    = "environment"
+        self.__kind    = "environment"
         self.timer    = timer
         self.weather  = weather
         self.prices   = prices
         self.location = location
+
+    def __str__(self):
+        return str('<Environment object of pyCity>')
+
+    @property
+    def kind(self):
+        """
+        Return type of pyCity object
+        """
+        return self.__kind
     
     def update(self):
         """ Increase current timestep and current day """

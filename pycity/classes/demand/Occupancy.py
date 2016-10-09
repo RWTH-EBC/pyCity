@@ -49,7 +49,7 @@ class Occupancy(object):
         assert number_occupants <= 5, ('Max. allowed number of occupants ' +
                                        'per apartment is 5')
 
-        self._kind = 'occupancy'
+        self.__kind = 'occupancy'
         self.number_occupants = number_occupants
         self.environment = environment
         self.occupancy = None  # Occupancy profile
@@ -57,6 +57,16 @@ class Occupancy(object):
 
         if do_profile:
             self.gen_occ_profile()
+
+    def __str__(self):
+        return str('<Occupancy object of pyCity>')
+
+    @property
+    def kind(self):
+        """
+        Return type of pyCity object
+        """
+        return self.__kind
 
     def gen_occ_profile(self):
         """

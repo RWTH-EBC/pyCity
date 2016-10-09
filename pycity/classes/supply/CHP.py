@@ -54,10 +54,20 @@ class CHP(HeatingDevice.HeatingDevice):
                                   tMax, 
                                   lowerActivationLimit)
         
-        self._kind = "chp"
+        self.__kind = "chp"
 
         self.totalPOutput   = np.zeros(environment.timer.timestepsTotal)
         self.currentPOutput = np.zeros(environment.timer.timestepsUsedHorizon)
+
+    def __str__(self):
+        return str('<CHP object of pyCity>')
+
+    @property
+    def kind(self):
+        """
+        Return type of pyCity object
+        """
+        return self.__kind
        
 
     def getResults(self, currentValues=True):

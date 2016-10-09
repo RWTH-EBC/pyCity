@@ -279,8 +279,18 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
 
             super(ElectricalDemand, self).__init__(environment, loadcurve)
 
-        self._kind = "electricaldemand"
+        self.__kind = "electricaldemand"
         self.method = method
+
+    def __str__(self):
+        return str('<Electrical load object of pyCity>')
+
+    @property
+    def kind(self):
+        """
+        Return type of pyCity object
+        """
+        return self.__kind
 
     def get_power(self, currentValues=True):
         """

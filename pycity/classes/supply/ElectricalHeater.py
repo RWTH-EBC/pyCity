@@ -42,7 +42,7 @@ class ElectricalHeater(HeatingDevice.HeatingDevice):
                                                qNominal, 
                                                tMax, 
                                                lowerActivationLimit)
-        self._kind = "electricalheater"
+        self.__kind = "electricalheater"
         self.eta = eta
         self.pNominal = qNominal / eta
         
@@ -51,6 +51,16 @@ class ElectricalHeater(HeatingDevice.HeatingDevice):
         
         self.totalPConsumption   = np.zeros(timestepsTotal)
         self.currentPConsumption = np.zeros(timestepsUsedHorizon)
+
+    def __str__(self):
+        return str('<Electrical heater object of pyCity>')
+
+    @property
+    def kind(self):
+        """
+        Return type of pyCity object
+        """
+        return self.__kind
         
     def getResults(self, currentValues=True):
         """

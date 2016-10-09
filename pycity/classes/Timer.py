@@ -42,7 +42,7 @@ class Timer(object):
             Define the initial weekday (`Monday` corresponds to 
             ``initialDay==1``, `Sunday` corresponds to ``initialDay==7``)
         """
-        self._kind = "timer"        
+        self.__kind = "timer"
         
         self.timeDiscretization   = timeDiscretization
         self.timestepsHorizon     = timestepsHorizon
@@ -56,6 +56,16 @@ class Timer(object):
         
         self.currentWeekday = initialDay
         self.currentDayWeekend = self._setWeekend()
+
+    def __str__(self):
+        return str('<Timer object of pyCity>')
+
+    @property
+    def kind(self):
+        """
+        Return type of pyCity object
+        """
+        return self.__kind
 
     def _setWeekend(self):
         """ Determine if the currend day of the week is on a weekend """

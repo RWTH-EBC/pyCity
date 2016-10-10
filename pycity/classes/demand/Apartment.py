@@ -220,65 +220,6 @@ class Apartment(object):
         else:
             return (power_dhw + demandSpaceHeating)
 
-    def get_space_heat_power_curve(self, current_values=True):
-        """
-        Returns space heating power curve of apartment
-
-        Parameters
-        ----------
-        currentValues : bool, optional
-            Return the current values (True) or return values for all time
-            steps (False).
-            (default: True)
-
-        Returns
-        -------
-        space_heat_curve : array-like
-            Space heating power curve
-        """
-
-        return self.demandSpaceheating.get_power(currentValues=current_values)
-
-    def get_el_power_curve(self, current_values=True):
-        """
-        Returns net electrical power curve of apartment (without space heating
-        or hot water demand!)
-
-        Parameters
-        ----------
-        currentValues : bool, optional
-            Return the current values (True) or return values for all time
-            steps (False).
-            (default: True)
-
-        Returns
-        -------
-        el_power_curve : array-like
-            Electrical power curve
-        """
-
-        return self.power_el.get_power(currentValues=current_values)
-
-    def get_dhw_power_curve(self, current_values=True):
-        """
-        Returns hot water power curve of apartment
-
-        Parameters
-        ----------
-        currentValues : bool, optional
-            Return the current values (True) or return values for all time
-            steps (False).
-            (default: True)
-
-        Returns
-        -------
-        el_power_curve : array-like
-            Electrical power curve
-        """
-
-        return self.demandDomesticHotWater.get_power(
-            currentValues=current_values, returnTemperature=False)
-
     def get_max_nb_occupants(self):
         """
         Returns maximum number of occupants within apartment

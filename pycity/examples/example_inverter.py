@@ -16,14 +16,12 @@ import pycity.classes.Weather
 import pycity.classes.Prices
 import pycity.classes.Environment
 
-
 def run_test():
     # Create environment
     timer = pycity.classes.Timer.Timer()
     weather = pycity.classes.Weather.Weather(timer, useTRY=True)
     prices = pycity.classes.Prices.Prices()
-    environment = pycity.classes.Environment.Environment(timer, weather,
-                                                         prices)
+    environment = pycity.classes.Environment.Environment(timer, weather, prices)
 
     # Create Inverter
     p_nominal = 10000
@@ -32,9 +30,9 @@ def run_test():
 
     # Print results
     print()
-    print(("Efficiency: " + str(inverter.eta)))
+    print(("Efficiency: "               + str(inverter.eta)))
     print(("Maximum electrical input: " + str(inverter.pNominal)))
-    print(("Inverter input AC: " + str(inverter)))
+    print(("Inverter input AC: "        + str(inverter)))
 
     print()
     print(("Nominals: " + str(inverter.getNominalValues())))
@@ -49,7 +47,6 @@ def run_test():
     print("Electricity input: " + str(results[0]))
     print()
     print("Electricity output: " + str(results[1]))
-
 
 if __name__ == '__main__':
     #  Run program

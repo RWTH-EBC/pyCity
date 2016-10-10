@@ -15,14 +15,12 @@ import pycity.classes.Weather
 import pycity.classes.Prices
 import pycity.classes.Environment
 
-
 def run_test():
     # Create environment
     timer = pycity.classes.Timer.Timer()
     weather = pycity.classes.Weather.Weather(timer, useTRY=True)
     prices = pycity.classes.Prices.Prices()
-    environment = pycity.classes.Environment.Environment(timer, weather,
-                                                         prices)
+    environment = pycity.classes.Environment.Environment(timer, weather, prices)
 
     # Create Heating Device
     lowerActivationLimit = 0.5
@@ -42,12 +40,11 @@ def run_test():
     print("Lower activation limit: " + str(heater.lowerActivationLimit))
     print("Nominal heat output: " + str(heater.qNominal))
     print("Maximum flow temperature: " + str(heater.tMax))
-    print("Previous schedule: " + str(heater._getSchedule(True)))
+    print("Previous schedule: "      + str(heater._getSchedule(True)))
 
     heater._setSchedule(someSchedule)
     print()
     print("Current schedule: " + str(heater._getSchedule(True)))
-
 
 if __name__ == '__main__':
     #  Run program

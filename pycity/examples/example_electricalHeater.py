@@ -16,14 +16,12 @@ import pycity.classes.Weather
 import pycity.classes.Prices
 import pycity.classes.Environment
 
-
 def run_test():
     # Create environment
     timer = pycity.classes.Timer.Timer()
     weather = pycity.classes.Weather.Weather(timer, useTRY=True)
     prices = pycity.classes.Prices.Prices()
-    environment = pycity.classes.Environment.Environment(timer, weather,
-                                                         prices)
+    environment = pycity.classes.Environment.Environment(timer, weather, prices)
 
     # Create Electrical Heater
     lower_activation_limit = 0.5
@@ -38,10 +36,10 @@ def run_test():
     print(("Type: " + heater.kind))
     print()
     print(("Maximum electricity input: " + str(heater.pNominal)))
-    print(("Maximum heat output: " + str(heater.qNominal)))
-    print(("Efficiency: " + str(heater.eta)))
-    print(("Maximum flow temperature: " + str(heater.tMax)))
-    print(("Lower activation limit: " + str(heater.lowerActivationLimit)))
+    print(("Maximum heat output: "       + str(heater.qNominal)))
+    print(("Efficiency: "                + str(heater.eta)))
+    print(("Maximum flow temperature: "  + str(heater.tMax)))
+    print(("Lower activation limit: "    + str(heater.lowerActivationLimit)))
 
     print()
     print(("Nominals: " + str(heater.getNominalValues())))
@@ -59,7 +57,6 @@ def run_test():
     print("Heat output: " + str(results[1]))
     print()
     print("Schedule: " + str(results[2]))
-
 
 if __name__ == '__main__':
     #  Run program

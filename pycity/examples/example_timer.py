@@ -17,14 +17,13 @@ def printTimer(time):
     print(("Time steps used horizon: " + str(time.timestepsUsedHorizon)))
     print(("Time steps total: " + str(time.timestepsTotal)))
     print(("Current time step: " + str(time.currentTimestep)))
-    print(("Current optimization period: " + str(
-        time.currentOptimizationPeriod)))
+    print(("Current optimization period: " + str(time.currentOptimizationPeriod)))
     print(("Current day: " + str(time.currentDay)))
     print(("Current weekday: " + str(time.currentWeekday)))
     print(("Is the current day on a weekend? " + str(time.currentDayWeekend)))
 
-
 def run_test():
+
     timer = pycity.classes.Timer.Timer()
 
     printTimer(timer)
@@ -34,7 +33,6 @@ def run_test():
 
     timer.update()
     printTimer(timer)
-
 
 if __name__ == '__main__':
     #  Run program

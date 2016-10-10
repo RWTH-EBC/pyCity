@@ -21,14 +21,14 @@ import pycity.classes.supply.PV as PV
 
 
 def run_test():
+
     #  Generate timer, weather and price objects
     timer = pycity.classes.Timer.Timer()
     weather = pycity.classes.Weather.Weather(timer)
     prices = pycity.classes.Prices.Prices()
 
     #  Generate environment
-    environment = pycity.classes.Environment.Environment(timer, weather,
-                                                         prices)
+    environment = pycity.classes.Environment.Environment(timer, weather, prices)
 
     #  Generate city district object
     cityDistrict = CityDistrict.CityDistrict(environment)
@@ -50,30 +50,27 @@ def run_test():
     #  Generate building objects within loop
     #  #-------------------------------------------------------------------
     for i in range(4):
-        #  Generate space heating demand object
-        heat_demand = \
-            SpaceHeating.SpaceHeating(environment,
-                                      method=1,  # Standard load profile
-                                      livingArea=146,
-                                      specificDemand=166)
 
-        #  Generate electrical demand object
-        el_demand = \
-            ElectricalDemand.ElectricalDemand(environment,
-                                              method=1,
-                                              # Standard load profile
-                                              annualDemand=3000)
+        #  Generate heat demand curve for space heating
+        heat_demand = SpaceHeating.SpaceHeating(environment,
+                                                method=1,  # Standard load profile
+                                                livingArea=146,
+                                                specificDemand=166)
 
-        #  Generate domestic hot water demand object
-        dhw_annex42 = \
-            DomesticHotWater.DomesticHotWater(environment,
-                                              tFlow=60,
-                                              thermal=True,
-                                              method=1,  # Annex 42
-                                              dailyConsumption=70,
-                                              supplyTemperature=25)
+        #  Generate electrical demand curve
+        el_demand = ElectricalDemand.ElectricalDemand(environment,
+                                                      method=1,  # Standard load profile
+                                                      annualDemand=3000)
 
-        #  Generate apartment and add demand objects
+        #  Generate domestic hot water demand curve
+        dhw_annex42 = DomesticHotWater.DomesticHotWater(environment,
+                                                        tFlow=60,
+                                                        thermal=True,
+                                                        method=1,  # Annex 42
+                                                        dailyConsumption=70,
+                                                        supplyTemperature=25)
+
+        #  Generate apartment and add demand durves
         apartment = Apartment.Apartment(environment)
         apartment.addEntity(heat_demand)
         apartment.addMultipleEntities([el_demand, dhw_annex42])
@@ -89,16 +86,17 @@ def run_test():
         #  Add buildings to city district
         cityDistrict.addEntity(entity=building, position=dict_pos[i])
 
-    # Generate PV farms within city district within loop
+    #  Generate PV farms within city district within loop
     #  #-------------------------------------------------------------------
     for i in range(2):
+
         #  Generate PV field within city district
         pv = PV.PV(environment, 20, 0.15)
 
         #  Add PV fields to city district
-        cityDistrict.addEntity(entity=pv, position=dict_pos[i + 4])
+        cityDistrict.addEntity(entity=pv, position=dict_pos[i+4])
 
-    # Extract information of city object
+    #  Extract information of city object
     #  #-------------------------------------------------------------------
 
     print('Number of building entities:')
@@ -112,7 +110,8 @@ def run_test():
 
     print('Node information:')
     print(cityDistrict.nodes(data=True))
-    print()
+
+    print('\n')
 
     print('Power curves of all building objects:')
     print(cityDistrict.get_power_curves())
@@ -136,7 +135,6 @@ def run_test():
 
     print('Return hot water power curve:')
     print(cityDistrict.get_aggr_el_power_curve())
-
 
 if __name__ == '__main__':
     #  Run program

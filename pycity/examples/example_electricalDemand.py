@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Example script for electrical demand class usage
+Created on Fri May 22 08:43:12 2015
 """
 
 from __future__ import division

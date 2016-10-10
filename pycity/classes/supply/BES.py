@@ -33,7 +33,7 @@ class BES(object):
         """
         self.environment = environment
         
-        self._kind = "bes"
+        self.__kind = "bes"
         
         # Initialize all devices as empty lists
         self.battery          = []
@@ -56,6 +56,16 @@ class BES(object):
         self.hasInverterDcac     = False
         self.hasPv               = False
         self.hasTes              = False
+
+    def __str__(self):
+        return str('<Building energy system (BES) object of pyCity>')
+
+    @property
+    def kind(self):
+        """
+        Return type of pyCity object
+        """
+        return self.__kind
         
     def addDevice(self, objectInstance):
         """
@@ -67,27 +77,27 @@ class BES(object):
         >>> myBes = BES(...)
         >>> myBes.addDevice(myChp)
         """
-        if objectInstance._kind == "battery":
+        if objectInstance.kind == "battery":
             self.battery = objectInstance
             self.hasBattery = True
         
-        elif objectInstance._kind == "boiler":
+        elif objectInstance.kind == "boiler":
             self.boiler = objectInstance
             self.hasBoiler = True
         
-        elif objectInstance._kind == "chp":
+        elif objectInstance.kind == "chp":
             self.chp = objectInstance
             self.hasChp = True
         
-        elif objectInstance._kind == "electricalheater":
+        elif objectInstance.kind == "electricalheater":
             self.electricalHeater = objectInstance
             self.hasElectricalHeater = True
         
-        elif objectInstance._kind == "heatpump":
+        elif objectInstance.kind == "heatpump":
             self.heatpump = objectInstance
             self.hasHeatpump = True
         
-        elif objectInstance._kind == "inverter":
+        elif objectInstance.kind == "inverter":
             if objectInstance.inputAC:
                 self.inverterAcdc = objectInstance
                 self.hasInverterAcdc = True
@@ -95,11 +105,11 @@ class BES(object):
                 self.inverterDcac = objectInstance
                 self.hasInverterDcac = True
         
-        elif objectInstance._kind == "pv":
+        elif objectInstance.kind == "pv":
             self.pv = objectInstance
             self.hasPv = True
             
-        elif objectInstance._kind == "tes":
+        elif objectInstance.kind == "tes":
             self.tes = objectInstance
             self.hasTes = True
             

@@ -67,7 +67,7 @@ def run_test():
 
     # Print results
     print()
-    print(("Type: " + heater._kind))
+    print(("Type: " + heater.kind))
     print()
     print(("Maximum flow temperature: " + str(heater.tMax)))
     print(("Lower activation limit: " + str(heater.lowerActivationLimit)))

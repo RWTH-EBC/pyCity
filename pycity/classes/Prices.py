@@ -34,7 +34,7 @@ class Prices(object):
         costsGas : float
             costs for gas consumption
         """
-        self._kind = "prices"        
+        self.__kind = "prices"
                 
         kWh_to_J = 3600 * 1000
         Cents_in_Euro = 100
@@ -43,7 +43,17 @@ class Prices(object):
         self.costsEl  = costsElectricity / (kWh_to_J * Cents_in_Euro)
         self.revEl    = revenueElectricity / (kWh_to_J * Cents_in_Euro)
         self.costsGas = costsGas / (kWh_to_J * Cents_in_Euro)
-        
+
+    def __str__(self):
+        return str('<Prices object of pyCity>')
+
+    @property
+    def kind(self):
+        """
+        Return type of pyCity object
+        """
+        return self.__kind
+
     def getAllData(self):
         """
         Return all market information.

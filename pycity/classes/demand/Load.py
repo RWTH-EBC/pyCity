@@ -24,10 +24,20 @@ class Load(object):
         loadcurve: Array like
             Load curve for all time steps
         """
-        self._kind = "load"
+        self.__kind = "load"
         self.environment = environment
         
         self.loadcurve = np.array(loadcurve)
+
+    def __str__(self):
+        return str('<Load object of pyCity>')
+
+    @property
+    def kind(self):
+        """
+        Return type of pyCity object
+        """
+        return self.__kind
         
     def _getLoadcurve(self, currentValues=True):
         """

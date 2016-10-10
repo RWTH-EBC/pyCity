@@ -18,7 +18,7 @@ class ExternalElectricityGrid(object):
     def __init__(self, environment):
         """
         """
-        self._kind = "externalelectricitygrid"
+        self.__kind = "externalelectricitygrid"
         self.environment = environment
         
         # Initialize current and total grid interaction
@@ -29,6 +29,16 @@ class ExternalElectricityGrid(object):
         self.currentPAdditional = np.zeros(timestepsUsedHorizon)
         self.totalPSurplus    = np.zeros(timestepsTotal)
         self.totalPAdditional = np.zeros(timestepsTotal)
+
+    def __str__(self):
+        return str('<External electrical grid object of pyCity>')
+
+    @property
+    def kind(self):
+        """
+        Return type of pyCity object
+        """
+        return self.__kind
         
     def setPSurplus(self, pSurplus):
         """ Save the electrical surplus that is sold to the grid """

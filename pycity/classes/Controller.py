@@ -29,7 +29,17 @@ class Controller(object):
         self.environment = environment
         self.heatingCurve = heatingCurve
         self.flowTemperature = np.zeros(self.environment.getTimestepsHorizon())
-        self._kind = "controller"
+        self.__kind = "controller"
+
+    def __str__(self):
+        return str('<Controller object of pyCity>')
+
+    @property
+    def kind(self):
+        """
+        Return type of pyCity object
+        """
+        return self.__kind
         
     def get_power_curves(self, apartments):
         """

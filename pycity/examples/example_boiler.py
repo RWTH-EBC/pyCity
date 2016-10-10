@@ -39,6 +39,7 @@ def run_test():
     print(("Maximum flow temperature: "   + str(heater.tMax)))
     print(("Lower activation limit: "     + str(heater.lowerActivationLimit)))
 
+
     print()
     print(("Nominals: " + str(heater.getNominalValues())))
 

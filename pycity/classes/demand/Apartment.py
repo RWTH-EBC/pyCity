@@ -30,7 +30,7 @@ class Apartment(object):
             Occupancy object of pycity (default: None)
         """
         self.environment = environment
-        self.__kind = "apartment"
+        self._kind = "apartment"
         self.net_floor_area = net_floor_area
         self.occupancy = occupancy
 
@@ -49,16 +49,6 @@ class Apartment(object):
                                                          specificDemand=0)
         self.rooms = []
 
-    def __str__(self):
-        return str('<Apartment object of pyCity>')
-
-    @property
-    def kind(self):
-        """
-        Return type of pyCity object
-        """
-        return self.__kind
-
     def addEntity(self, entity):
         """
         Add an entity to apartment.
@@ -67,11 +57,11 @@ class Apartment(object):
         ----------
         entity : object
             Entity. Possible objects:
-            - Electrical demand (entity.kind == "electricaldemand")
-            - Domestic hot water demand (entity.kind == "domestichotwater")
-            - Space heating demand (entity.kind == "spaceheating")
-            - Occupancy (entity.kind == 'occupancy')
-            - Room (entity.kind == "room"
+            - Electrical demand (entity._kind == "electricaldemand")
+            - Domestic hot water demand (entity._kind == "domestichotwater")
+            - Space heating demand (entity._kind == "spaceheating")
+            - Occupancy (entity._kind == 'occupancy')
+            - Room (entity._kind == "room"
         
         Example
         -------
@@ -80,19 +70,19 @@ class Apartment(object):
         >>> myApartment.addDevice(myDHW)
         """
 
-        if entity.kind == "electricaldemand":
+        if entity._kind == "electricaldemand":
             self.power_el = entity
 
-        elif entity.kind == "domestichotwater":
+        elif entity._kind == "domestichotwater":
             self.demandDomesticHotWater = entity
 
-        elif entity.kind == "spaceheating":
+        elif entity._kind == "spaceheating":
             self.demandSpaceheating = entity
 
-        elif entity.kind == 'occupancy':
+        elif entity._kind == 'occupancy':
             self.occupancy = entity
 
-        elif entity.kind == "room":
+        elif entity._kind == "room":
             self.rooms.append(entity)
 
         else:

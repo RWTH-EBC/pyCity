@@ -30,7 +30,7 @@ class Inverter(object):
             True if input is AC
             False if input is DC
         """
-        self.__kind = "inverter"
+        self._kind = "inverter"
         self.environment = environment
         self.eta = eta
         self.pNominal = pNominal
@@ -43,16 +43,6 @@ class Inverter(object):
         self.totalPOutput = np.zeros(timestepsTotal)
         self.currentPInput  = np.zeros(timestepsUsedHorizon)
         self.currentPOutput = np.zeros(timestepsUsedHorizon)
-
-    def __str__(self):
-        return str('<Inverter object of pyCity>')
-
-    @property
-    def kind(self):
-        """
-        Return type of pyCity object
-        """
-        return self.__kind
         
     def getResults(self, currentValues=True):
         """

@@ -41,7 +41,7 @@ class ThermalEnergyStorage(object):
         kLosses : Float, optional
             storage's loss factor (area*U_value) in W/K
         """
-        self.__kind = "tes"
+        self._kind = "tes"
         
         self.environment = environment
         self.capacity = capacity
@@ -52,16 +52,6 @@ class ThermalEnergyStorage(object):
         
         self.totalTSto   = np.zeros(environment.timer.timestepsTotal)
         self.currentTSto = np.zeros(environment.timer.timestepsUsedHorizon)
-
-    def __str__(self):
-        return str('<Thermal energy storage (TES) object of pyCity>')
-
-    @property
-    def kind(self):
-        """
-        Return type of pyCity object
-        """
-        return self.__kind
         
     def setResults(self, tSto):
         """ 

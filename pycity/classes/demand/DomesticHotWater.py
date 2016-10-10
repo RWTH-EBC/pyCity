@@ -119,20 +119,10 @@ class DomesticHotWater(pycity.classes.demand.Load.Load):
             self.water = water
             super(DomesticHotWater,self).__init__(environment, heat)
         
-        self.__kind = "domestichotwater"
+        self._kind = "domestichotwater"
         self.tFlow = tFlow
         self.thermal = thermal
-
-    def __str__(self):
-        return str('<Hot water demand object of pyCity>')
-
-    @property
-    def kind(self):
-        """
-        Return type of pyCity object
-        """
-        return self.__kind
-
+    
     def get_power(self, currentValues=True, returnTemperature=True):
         """
         Get the domestic hot water power curve

@@ -33,7 +33,7 @@ def run_test():
 
     # Print results
     print()
-    print(("Type: " + heater.kind))
+    print(("Type: " + heater._kind))
     print(("Efficiency: "                 + str(heater.eta)))
     print(("Maximum heat output: "        + str(heater.qNominal)))
     print(("Maximum flow temperature: "   + str(heater.tMax)))

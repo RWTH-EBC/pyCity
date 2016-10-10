@@ -40,7 +40,7 @@ class WindEnergyConverter(object):
         """
         
         self.environment = environment
-        self.__kind = "windenergyconverter"
+        self._kind = "windenergyconverter"
         
         self.velocity  = velocity
         self.power     = power
@@ -49,16 +49,6 @@ class WindEnergyConverter(object):
         
         self.totalPower   = np.zeros(environment.timer.timestepsTotal)
         self.currentPower = np.zeros(environment.timer.timestepsHorizon)
-
-    def __str__(self):
-        return str('<Wind energy converter object of pyCity>')
-
-    @property
-    def kind(self):
-        """
-        Return type of pyCity object
-        """
-        return self.__kind
     
     def _logWindProfile(self, velocity):
         """

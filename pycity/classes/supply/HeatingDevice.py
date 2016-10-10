@@ -34,7 +34,7 @@ class HeatingDevice(object):
             Linear behavior: lowerActivationLimit = 0
             Two-point controlled: lowerActivationLimit = 1
         """
-        self.__kind = "heatingdevice"
+        self._kind = "heatingdevice"
 
         timestepsTotal = environment.timer.timestepsTotal
         timestepsUsedHorizon = environment.timer.timestepsUsedHorizon
@@ -47,16 +47,6 @@ class HeatingDevice(object):
         self.totalSchedule = np.zeros(timestepsTotal)
         self.currentQOutput  = np.zeros(timestepsUsedHorizon)
         self.currentSchedule = np.zeros(timestepsUsedHorizon)
-
-    def __str__(self):
-        return str('<Heating device object of pyCity>')
-
-    @property
-    def kind(self):
-        """
-        Return type of pyCity object
-        """
-        return self.__kind
         
     def _setSchedule(self, schedule):
         """ Save the computed schedule to the heating device """

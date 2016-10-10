@@ -29,7 +29,7 @@ class Building(object):
         environment : Environment object
             Common to all other objects. Includes time and weather instances
         """
-        self.__kind = "building"
+        self._kind = "building"
         
         self.environment = environment
         
@@ -42,16 +42,6 @@ class Building(object):
         self.hasHeatingCurve = False
         
         self.flowTemperature = np.zeros(environment.timer.timestepsHorizon)
-
-    def __str__(self):
-        return str('<Building object of pyCity>')
-
-    @property
-    def kind(self):
-        """
-        Return type of pyCity object
-        """
-        return self.__kind
     
     def addEntity(self, entity):
         """ 
@@ -63,15 +53,15 @@ class Building(object):
         >>> myBuilding = Building(...)
         >>> myBuilding.addEntity(myBes)
         """
-        if entity.kind == "apartment":
+        if entity._kind == "apartment":
             self.apartments.append(entity)
             self.hasApartments = True
         
-        elif entity.kind == "bes":
+        elif entity._kind == "bes":
             self.bes = entity
             self.hasBes = True
 
-        elif entity.kind == "heatingcurve":
+        elif entity._kind == "heatingcurve":
             self.heatingCurve = entity
             self.hasHeatingCurve = True
 

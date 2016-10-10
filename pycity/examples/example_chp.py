@@ -34,7 +34,7 @@ def run_test():
 
     # Print results
     print()
-    print(("Type: " + heater.kind))
+    print(("Type: " + heater._kind))
     print()
     print(("Maximum electricity output: " + str(heater.pNominal)))
     print(("Total efficiency: "           + str(heater.omega)))

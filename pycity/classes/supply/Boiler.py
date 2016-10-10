@@ -46,17 +46,7 @@ class Boiler(HeatingDevice.HeatingDevice):
                                      qNominal, 
                                      tMax, 
                                      lowerActivationLimit)
-        self.__kind = "boiler"
-
-    def __str__(self):
-        return str('<Boiler object of pyCity>')
-
-    @property
-    def kind(self):
-        """
-        Return type of pyCity object
-        """
-        return self.__kind
+        self._kind = "boiler"
         
     def getResults(self, currentValues=True):
         """

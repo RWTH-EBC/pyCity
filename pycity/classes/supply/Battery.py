@@ -35,7 +35,7 @@ class Battery(object):
             Discharging efficiency (without unit)
             
         """
-        self.__kind = "battery"
+        self._kind = "battery"
         self.environment = environment
         self.capacity = capacity
         self.selfDischarge = selfDischarge
@@ -52,16 +52,6 @@ class Battery(object):
         self.currentSoc        = np.zeros(timestepsUsedHorizon)
         self.currentPCharge    = np.zeros(timestepsUsedHorizon)
         self.currentPDischarge = np.zeros(timestepsUsedHorizon)
-
-    def __str__(self):
-        return str('<Electrical battery object of pyCity>')
-
-    @property
-    def kind(self):
-        """
-        Return type of pyCity object
-        """
-        return self.__kind
 
     def getResults(self, currentValues=True):
         """

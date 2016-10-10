@@ -21,7 +21,7 @@ class Test_CityDistrict(object):
         """
         city_object = citydist.CityDistrict(environment=create_environment)
 
-        assert city_object.kind == 'citydistrict'
+        assert city_object._kind == 'citydistrict'
 
     def test_add_entity_building(self, create_empty_citydist, create_building):
         #  Create empty citydistrict
@@ -34,7 +34,7 @@ class Test_CityDistrict(object):
         #  Add entity
         node_nb = city.addEntity(entity=building, position=position_1)
 
-        assert city.node[node_nb]['entity'].kind == 'building'
+        assert city.node[node_nb]['entity']._kind == 'building'
         assert city.node[node_nb]['position'] == position_1
         #  Check uesgraphs attribute
         assert len(city.nodelist_building) == 1

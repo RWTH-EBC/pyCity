@@ -53,7 +53,7 @@ class Heatpump(HeatingDevice.HeatingDevice):
                                        qNominal,
                                        tMax,
                                        lowerActivationLimit)
-        self.__kind = "heatpump"
+        self._kind = "heatpump"
         
         self.tAmbient = tAmbient
         self.tFlow = tFlow
@@ -64,16 +64,6 @@ class Heatpump(HeatingDevice.HeatingDevice):
         timestepsUsedHorizon = environment.timer.timestepsUsedHorizon
         self.totalPConsumption   = np.zeros(timestepsTotal)
         self.currentPConsumption = np.zeros(timestepsUsedHorizon)
-
-    def __str__(self):
-        return str('<Heat pump object of pyCity>')
-
-    @property
-    def kind(self):
-        """
-        Return type of pyCity object
-        """
-        return self.__kind
         
     def getNominalValues(self, tFlow):
         """

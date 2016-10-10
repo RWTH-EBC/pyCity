@@ -46,7 +46,7 @@ class PV(object):
             According to Duffie, Beckman - Solar Engineering of Thermal 
             Processes (4th ed.), page 758, this value is typically close to 0.9
         """
-        self.__kind = "pv"
+        self._kind = "pv"        
         
         self.environment = environment
         self.area = area
@@ -62,16 +62,6 @@ class PV(object):
         
         self.beta = beta
         self.gamma = gamma
-
-    def __str__(self):
-        return str('<Photovoltaic (PV) object of pyCity>')
-
-    @property
-    def kind(self):
-        """
-        Return type of pyCity object
-        """
-        return self.__kind
 
     def getNominalValues(self):
         """

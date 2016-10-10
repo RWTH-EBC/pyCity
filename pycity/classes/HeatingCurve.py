@@ -40,23 +40,13 @@ class HeatingCurve(object):
         setReturn : integer, optional
             Nominal heater return temperature in °C
         """
-        self.__kind = "heatingcurve"
+        self._kind = "heatingcurve"
         self.environment = environment
         self.m           = m
         self.setRoom     = setRoom
         self.setAmbient  = setAmbient
         self.setFlow     = setFlow
         self.setReturn   = setReturn
-
-    def __str__(self):
-        return str('<Heating curve object of pyCity>')
-
-    @property
-    def kind(self):
-        """
-        Return type of pyCity object
-        """
-        return self.__kind
 
     def computeRequiredFlowTemperature(self, 
                                        ambientTemperature, 

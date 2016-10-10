@@ -82,7 +82,7 @@ class Weather(pycity.classes.Sun.Sun):
         """
 
         super(Weather, self).__init__(timer, location, timeZone, altitude)
-        self.__kind = "weather"
+        self._kind = "weather"
 
         self.heightVelocityMeasurement = heightVelocityMeasurement
 
@@ -196,16 +196,6 @@ class Weather(pycity.classes.Sun.Sun):
                                       self.timer.timeDiscretization)
             self.cloudiness = changeRes(self.cloudiness, timeDiscretization,
                                         self.timer.timeDiscretization)
-
-    def __str__(self):
-        return str('<Weather object of pyCity>')
-
-    @property
-    def kind(self):
-        """
-        Return type of pyCity object
-        """
-        return self.__kind
 
     def getRadiationTiltedSurface(self, beta, gamma, albedo=0.3, update=False):
         """

@@ -26,7 +26,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 """
 
-
 from __future__ import print_function
 from setuptools import setup, find_packages
 from setuptools.command.test import test as TestCommand
@@ -54,12 +53,15 @@ class PyTest(TestCommand):
 
 setup(name='pyCity',
       version='0.1.0',
-      description='Python package for data handling and scenario generation of city districts.',
+      description='Python package for data handling and scenario generation '
+                  'of city districts.',
       url='https://github.com/RWTH-EBC/pyCity',
       author='Thomas Schuetz, Jan Schiefelbein',
-      author_email='tschuetz@eonerc.rwth-aachen.de',
+      author_email='pycity@eonerc.rwth-aachen.de',
       license='MIT License',
       packages=['pycity'],
-	  setup_requires=['numpy', 'pandas', 'pytest', 'xlrd', 'uesgraphs', 'shapely'],
-      install_requires=['numpy', 'pandas', 'pytest', 'xlrd', 'uesgraphs', 'shapely'],
+      setup_requires=['numpy', 'matplotlib', 'pandas', 'pytest', 'xlrd',
+                      'uesgraphs', 'shapely'],
+      install_requires=['numpy', 'matplotlib', 'pandas', 'pytest', 'xlrd',
+                        'uesgraphs', 'shapely'],
       cmdclass={'test': PyTest})

@@ -134,7 +134,7 @@ def run_test():
     print()
 
     print('Return hot water power curve:')
-    print(cityDistrict.get_aggr_el_power_curve())
+    print(cityDistrict.get_aggr_dhw_power_curve())
 
 if __name__ == '__main__':
     #  Run program

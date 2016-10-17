@@ -13,9 +13,9 @@ import pycity.classes.Prices
 import pycity.classes.Environment
 
 def run_test():
-    timer   = pycity.classes.Timer.Timer()
+    timer = pycity.classes.Timer.Timer()
     weather = pycity.classes.Weather.Weather(timer, useTRY=True)
-    prices  = pycity.classes.Prices.Prices()
+    prices = pycity.classes.Prices.Prices()
     env = pycity.classes.Environment.Environment(timer, weather, prices)
 
     def printResults(env):

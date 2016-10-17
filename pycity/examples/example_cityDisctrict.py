@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import division
-import sympy.geometry.point as point
+import shapely.geometry.point as point
 
 import pycity.classes.Timer
 import pycity.classes.Weather
@@ -39,7 +39,7 @@ def run_test():
     #  Empty dictionary for positions
     dict_pos = {}
 
-    #  Generate sympy point positions
+    #  Generate shapely point positions
     dict_pos[0] = point.Point(0, 0)
     dict_pos[1] = point.Point(0, 10)
     dict_pos[2] = point.Point(10, 0)
@@ -134,7 +134,7 @@ def run_test():
     print()
 
     print('Return hot water power curve:')
-    print(cityDistrict.get_aggr_el_power_curve())
+    print(cityDistrict.get_aggr_dhw_power_curve())
 
 if __name__ == '__main__':
     #  Run program

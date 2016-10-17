@@ -74,6 +74,7 @@ def run_test():
     ax1.plot(plot_time, pvPower_detailed - pvPower_simple)
     plt.xlabel("Time", fontsize=12)
     plt.ylabel("Error")
+    plt.show()
 
 if __name__ == '__main__':
     #  Run program

@@ -108,7 +108,7 @@ class Weather(pycity.classes.Sun.Sun):
                                        'TRY2010_05_Jahr.dat')
 
             # Read TRY data
-            TRYData = np.loadtxt(pathTRY, skiprows=38)
+            TRYData = np.genfromtxt(pathTRY, skip_header=38)
 
             # Save relevant weather data (only extract row 0 to 8760)
             self.pAmbient = TRYData[0:nb_rows, 9]
@@ -134,7 +134,7 @@ class Weather(pycity.classes.Sun.Sun):
                                         'weather',
                                         'tmy3_744860_new_york_jfk_airport.csv')
 
-            weather_data = np.loadtxt(pathTMY3, skiprows=2, delimiter=",",
+            weather_data = np.genfromtxt(pathTMY3, skip_header=2, delimiter=",",
                                       usecols=(4, 7, 10, 25, 31, 37, 40, 46))
 
             self.pAmbient = weather_data[0:nb_rows, 6]

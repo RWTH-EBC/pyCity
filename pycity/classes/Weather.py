@@ -11,6 +11,7 @@ import os
 import numpy as np
 import pycity.functions.changeResolution as changeResolution
 import pycity.classes.Sun
+import pycity.classes.Timer as Timer
 
 
 class Weather(pycity.classes.Sun.Sun):
@@ -408,3 +409,12 @@ class Weather(pycity.classes.Sun.Sun):
                                     getPhiAmbient,
                                     getPAmbient,
                                     getCloudiness)
+
+if __name__ == '__main__':
+
+    timer = Timer.Timer(timeDiscretization=3600)
+
+    weather = Weather(timer=timer)
+
+    print('Outdoor temperature in degree Celsius:')
+    print(weather.tAmbient)

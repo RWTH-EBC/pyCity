@@ -11,6 +11,7 @@ import os
 import numpy as np
 import pycity.functions.changeResolution as changeResolution
 import pycity.classes.Sun
+import pycity.classes.Timer as Timer
 
 
 class Weather(pycity.classes.Sun.Sun):
@@ -94,6 +95,8 @@ class Weather(pycity.classes.Sun.Sun):
         self.currentQDiffuse = np.zeros(timer.timestepsHorizon)
         self.currentQDirect = np.zeros(timer.timestepsHorizon)
         self.currentCloudiness = np.zeros(timer.timestepsHorizon)
+        self.current_rad_sky = np.zeros(timer.timestepsHorizon)
+        self.current_rad_earth = np.zeros(timer.timestepsHorizon)
 
         #  Calculate number of rows, which should be loaded into weather class
         nb_rows = int(8760 * 3600 / timeDiscretization)
@@ -118,6 +121,8 @@ class Weather(pycity.classes.Sun.Sun):
             self.tAmbient = TRYData[0:nb_rows, 8]
             self.vWind = TRYData[0:nb_rows, 7]
             self.cloudiness = TRYData[0:nb_rows, 5]
+            self.rad_sky = TRYData[0:nb_rows, 16]
+            self.rad_earth = TRYData[0:nb_rows, 17]
 
             # Read TRY number
             with open(pathTRY, "rb") as data:
@@ -196,6 +201,14 @@ class Weather(pycity.classes.Sun.Sun):
                                       self.timer.timeDiscretization)
             self.cloudiness = changeRes(self.cloudiness, timeDiscretization,
                                         self.timer.timeDiscretization)
+            if useTRY:
+                self.rad_sky = changeRes(self.rad_sky,
+                                         timeDiscretization,
+                                         self.timer.timeDiscretization)
+                self.rad_earth = changeRes(self.rad_earth,
+                                           timeDiscretization,
+                                           self.timer.timeDiscretization)
+
 
     def getRadiationTiltedSurface(self, beta, gamma, albedo=0.3, update=False):
         """
@@ -396,3 +409,12 @@ class Weather(pycity.classes.Sun.Sun):
                                     getPhiAmbient,
                                     getPAmbient,
                                     getCloudiness)
+
+if __name__ == '__main__':
+
+    timer = Timer.Timer(timeDiscretization=3600)
+
+    weather = Weather(timer=timer)
+
+    print('Outdoor temperature in degree Celsius:')
+    print(weather.tAmbient)

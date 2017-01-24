@@ -412,9 +412,143 @@ class Weather(pycity.classes.Sun.Sun):
 
 if __name__ == '__main__':
 
+    #  Define source path
+    src_path = os.path.dirname(os.path.dirname(__file__))
+
+    #  Initialize timer object
     timer = Timer.Timer(timeDiscretization=3600)
 
+    #  Initialize default weather object
     weather = Weather(timer=timer)
 
     print('Outdoor temperature in degree Celsius:')
     print(weather.tAmbient)
+
+    path_try_cold = os.path.join(src_path,
+                           'inputs',
+                           'weather',
+                           'TRY2010_05_Wint.dat')
+
+    #  Initialize cold weather object
+    weather_cold = Weather(timer=timer, pathTRY=path_try_cold)
+
+    path_try_warm = os.path.join(src_path,
+                           'inputs',
+                           'weather',
+                           'TRY2010_05_Somm.dat')
+
+    #  Initialize warm weather object
+    weather_warm = Weather(timer=timer, pathTRY=path_try_warm)
+
+    print('Average temperature TRY regular (2010) in degree Celsius:')
+    print(np.mean(weather.tAmbient))
+    print()
+    print('Average temperature TRY cold (2010) in degree Celsius:')
+    print(np.mean(weather_cold.tAmbient))
+    print()
+    print('Average temperature TRY warm (2010) in degree Celsius:')
+    print(np.mean(weather_warm.tAmbient))
+    print()
+
+    print('Average direct + diffuse radiation TRY regular (2010) in kW/m2:')
+    print(np.mean(weather.qDirect + weather.qDiffuse))
+    print()
+    print('Average direct + diffuse radiation TRY cold (2010) in kW/m2:')
+    print(np.mean(weather_cold.qDirect + weather_cold.qDiffuse))
+    print()
+    print('Average direct + diffuse radiation TRY warm (2010) in kW/m2:')
+    print(np.mean(weather_warm.qDirect + weather_warm.qDiffuse))
+    print()
+
+    import matplotlib.pylab as plt
+
+    fig = plt.figure()
+    plt.plot(weather.tAmbient, label='TRY regular (2010)')
+    plt.plot(weather_cold.tAmbient, label='TRY cold (2010)')
+    plt.plot(weather_warm.tAmbient, label='TRY warm (2010)')
+    plt.xlabel('Time in hours')
+    plt.ylabel('Outdoor temperature\nin degree Celsius')
+    plt.legend()
+    plt.show()
+    plt.close()
+
+    fig2 = plt.figure()
+    plt.plot(weather.qDirect + weather.qDiffuse, label='TRY regular (2010)')
+    plt.plot(weather_cold.qDirect + weather_cold.qDiffuse,
+             label='TRY cold (2010)')
+    plt.plot(weather_warm.qDirect + weather_warm.qDiffuse,
+             label='TRY warm (2010)')
+    plt.xlabel('Time in hours')
+    plt.ylabel('Outdoor temperature\nin degree Celsius')
+    plt.legend()
+    plt.show()
+    plt.close()
+
+    #  2035 TRY
+    #  #########################################
+
+    path_try = os.path.join(src_path,
+                            'inputs',
+                            'weather',
+                            'TRY2035_05_Jahr.dat')
+
+    #  Initialize weather object
+    weather = Weather(timer=timer, pathTRY=path_try)
+
+    path_try_cold = os.path.join(src_path,
+                                 'inputs',
+                                 'weather',
+                                 'TRY2035_05_Wint.dat')
+
+    #  Initialize cold weather object
+    weather_cold = Weather(timer=timer, pathTRY=path_try_cold)
+
+    path_try_warm = os.path.join(src_path,
+                                 'inputs',
+                                 'weather',
+                                 'TRY2035_05_Somm.dat')
+
+    #  Initialize warm weather object
+    weather_warm = Weather(timer=timer, pathTRY=path_try_warm)
+
+    print('Average temperature TRY regular (2035) in degree Celsius:')
+    print(np.mean(weather.tAmbient))
+    print()
+    print('Average temperature TRY cold (2035) in degree Celsius:')
+    print(np.mean(weather_cold.tAmbient))
+    print()
+    print('Average temperature TRY warm (2035) in degree Celsius:')
+    print(np.mean(weather_warm.tAmbient))
+    print()
+
+    print('Average direct + diffuse radiation TRY regular (2035) in kW/m2:')
+    print(np.mean(weather.qDirect + weather.qDiffuse))
+    print()
+    print('Average direct + diffuse radiation TRY cold (2035) in kW/m2:')
+    print(np.mean(weather_cold.qDirect + weather_cold.qDiffuse))
+    print()
+    print('Average direct + diffuse radiation TRY warm (2035) in kW/m2:')
+    print(np.mean(weather_warm.qDirect + weather_warm.qDiffuse))
+    print()
+
+    fig3 = plt.figure()
+    plt.plot(weather.tAmbient, label='TRY regular (2035)')
+    plt.plot(weather_cold.tAmbient, label='TRY cold (2035)')
+    plt.plot(weather_warm.tAmbient, label='TRY warm (2035)')
+    plt.xlabel('Time in hours')
+    plt.ylabel('Outdoor temperature\nin degree Celsius')
+    plt.legend()
+    plt.show()
+    plt.close()
+
+    fig4 = plt.figure()
+    plt.plot(weather.qDirect + weather.qDiffuse, label='TRY regular (2035)')
+    plt.plot(weather_cold.qDirect + weather_cold.qDiffuse,
+             label='TRY cold (2035)')
+    plt.plot(weather_warm.qDirect + weather_warm.qDiffuse,
+             label='TRY warm (2035)')
+    plt.xlabel('Time in hours')
+    plt.ylabel('Outdoor temperature\nin degree Celsius')
+    plt.legend()
+    plt.show()
+    plt.close()

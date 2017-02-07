@@ -238,7 +238,7 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
                                      'Non_res_weekly_el_profiles.txt')
                 ElectricalDemand.weekly_data = \
                     eloader.load_non_res_load_data_weekly(fpath)
-                ElectricalDemand.loaded_slp = True
+                ElectricalDemand.loaded_weekly_data = True
 
             loadcurve = eloader.gen_annual_el_load(
                 ElectricalDemand.weekly_data,

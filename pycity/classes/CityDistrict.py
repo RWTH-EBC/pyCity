@@ -609,3 +609,33 @@ class CityDistrict(ues.UESGraph):
         build_node_id_list = self.get_node_numbers_of_entities(entity_name=
                                                                'building')
         return build_node_id_list
+
+    def get_list_id_of_spec_node_type(self, node_type='building'):
+        """
+        Returns a list of node ids of specific (uesgraph) node_type
+
+        Attention: uesgraph node_type 'building' can be a PV, windfarm or
+        building entity in pyCity!
+
+        Parameters
+        ----------
+        node_type : str, optional
+            Choosen node_type (default: 'building')
+            Options:
+            'building', 'street', 'heating', 'cooling', 'electricity',
+            'gas', 'others'
+
+        Returns
+        -------
+        list_ids : list (of ints)
+            List holding all node ids of specific node_type
+        """
+
+        list_ids = []
+
+        for n in self.nodes():
+            if 'node_type' in self.node[n]:
+                if self.node[n]['node_type'] == node_type:
+                    list_ids.append(n)
+
+        return list_ids

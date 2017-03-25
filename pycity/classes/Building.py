@@ -220,20 +220,26 @@ class Building(object):
         
     def get_occupancy_profile(self):
         """
-        Returns occupancy profile of the whole building
-
-        Parameters
-        ----------
-        current_values : bool, optional
-            Defines, if only current horizon or all timesteps should be used.
-            (default: False)
-            False - Use complete number of timesteps
-            True - Use horizon
+        Returns occupancy profile of the whole building. Returns None,
+        if occupancy object or profile do not exist.
 
         Returns
         -------
         occupancy_profile : array-like
         """
+
+        for ap in self.apartments:
+            if ap.occupancy is None:
+                msg = 'Building has no occupancy object.' \
+                      ' Cannot return profile.'
+                warnings.warn(msg)
+                return None
+            else:
+                if ap.occupancy.occupancy is None:
+                    msg = 'Building occupancy object has no occupancy ' \
+                          'profile. Cannot return profile.'
+                    warnings.warn(msg)
+                    return None
 
         #  Initialize array with zeros
         occupancy_profile = \

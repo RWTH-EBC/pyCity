@@ -18,21 +18,51 @@ import pycity.classes.Prices
 import pycity.classes.demand.Occupancy
 
 
-def run_single_calc(number_of_occupants, randomize_appliances, environment):
+def run_single_calc(number_of_occupants, randomize_appliances, environment,
+                    prev_heat_dev=False, app_filename=None,
+                    light_filename=None):
+    """
+
+    Parameters
+    ----------
+    number_of_occupants
+    randomize_appliances
+    environment
+    prev_heat_dev : bool, optional
+        Defines, if heating devices should be prevented within chosen
+        appliances (default: False). If set to True, DESWH, E-INST,
+        Electric shower, Storage heaters and Other electric space heating
+        are set to zero. Only relevant for method == 2
+    app_filename : str, optional
+        Path to Appliances file
+        (default: None). If set to None, uses default file Appliances.csv
+        in \inputs\stochastic_electrical_load\.
+        Only relevant, if method == 2.
+    light_filename : str, optional
+        Path to Lighting configuration file
+        (default: None). If set to None, uses default file Appliances.csv
+        in \inputs\stochastic_electrical_load\.
+        Only relevant, if method == 2.
+    """
 
     occupancy = pycity.classes.demand.Occupancy.Occupancy(environment,
                                         number_occupants=number_of_occupants)
 
     el_load = ED.ElectricalDemand(environment,
-                                    method=2,
-                                    total_nb_occupants=number_of_occupants,
-                                    randomizeAppliances=randomize_appliances,
-                                    lightConfiguration=10,
-                                    occupancy=occupancy.occupancy)
+                                  method=2,
+                                  total_nb_occupants=number_of_occupants,
+                                  randomizeAppliances=randomize_appliances,
+                                  lightConfiguration=10,
+                                  occupancy=occupancy.occupancy,
+                                  prev_heat_dev=prev_heat_dev,
+                                  app_filename=app_filename,
+                                  light_filename=light_filename)
 
     return el_load
 
-def run_multiple_calc(number_of_occupants, randomize_appliances, nb_of_apartments):
+def run_multiple_calc(number_of_occupants, randomize_appliances,
+                      nb_of_apartments, prev_heat_dev=False,
+                      app_filename=None, light_filename=None):
     """
     Returns average, electrical consumption for multiple apartments.
 
@@ -45,6 +75,21 @@ def run_multiple_calc(number_of_occupants, randomize_appliances, nb_of_apartment
         be loaded from csv file
     nb_of_apartments : int
         Total number of apartments for which profiles should be generated
+    prev_heat_dev : bool, optional
+        Defines, if heating devices should be prevented within chosen
+        appliances (default: False). If set to True, DESWH, E-INST,
+        Electric shower, Storage heaters and Other electric space heating
+        are set to zero. Only relevant for method == 2
+    app_filename : str, optional
+        Path to Appliances file
+        (default: None). If set to None, uses default file Appliances.csv
+        in \inputs\stochastic_electrical_load\.
+        Only relevant, if method == 2.
+    light_filename : str, optional
+        Path to Lighting configuration file
+        (default: None). If set to None, uses default file Appliances.csv
+        in \inputs\stochastic_electrical_load\.
+        Only relevant, if method == 2.
 
     Returns
     -------
@@ -64,8 +109,13 @@ def run_multiple_calc(number_of_occupants, randomize_appliances, nb_of_apartment
     total_el_demand = 0  # Dummy value
 
     for i in range(nb_of_apartments):
-        el_load_object = run_single_calc(number_of_occupants,
-                                         randomize_appliances, environment)
+        el_load_object = \
+            run_single_calc(number_of_occupants=number_of_occupants,
+                            randomize_appliances=randomize_appliances,
+                            environment=environment,
+                            prev_heat_dev=prev_heat_dev,
+                            app_filename=app_filename,
+                            light_filename=light_filename)
 
         #  Convert to demand in kWh
         el_demand_curve = el_load_object.loadcurve * timer.timeDiscretization \
@@ -81,14 +131,51 @@ def run_multiple_calc(number_of_occupants, randomize_appliances, nb_of_apartment
 
     return av_el_demand
 
-def process_multiple_occupant_numbers(randomize_appliances, nb_of_apartments):
+def process_multiple_occupant_numbers(randomize_appliances, nb_of_apartments,
+                                      prev_heat_dev=False,
+                                      app_filename=None, light_filename=None
+                                      ):
+    """
+
+    Parameters
+    ----------
+    randomize_appliances : bool
+        Boolean to define, if appliances should be placed randomly or
+        be loaded from csv file
+    nb_of_apartments : int
+        Total number of apartments for which profiles should be generated
+    prev_heat_dev : bool, optional
+        Defines, if heating devices should be prevented within chosen
+        appliances (default: False). If set to True, DESWH, E-INST,
+        Electric shower, Storage heaters and Other electric space heating
+        are set to zero. Only relevant for method == 2
+    app_filename : str, optional
+        Path to Appliances file
+        (default: None). If set to None, uses default file Appliances.csv
+        in \inputs\stochastic_electrical_load\.
+        Only relevant, if method == 2.
+    light_filename : str, optional
+        Path to Lighting configuration file
+        (default: None). If set to None, uses default file Appliances.csv
+        in \inputs\stochastic_electrical_load\.
+        Only relevant, if method == 2.
+
+    Returns
+    -------
+    occ_en_dict : dict
+    """
 
     occ_en_dict = {}  # Empty dictionary
 
     for i in range(1, 6):
-        av_el_demand = run_multiple_calc(number_of_occupants=i,
-                          randomize_appliances=randomize_appliances,
-                          nb_of_apartments=nb_of_apartments)
+        av_el_demand =\
+            run_multiple_calc(number_of_occupants=i,
+                              randomize_appliances=randomize_appliances,
+                              nb_of_apartments=nb_of_apartments,
+                              prev_heat_dev=prev_heat_dev,
+                              app_filename=app_filename,
+                              light_filename=light_filename
+                              )
 
         print('Number of occupants:')
         print(i)
@@ -107,10 +194,18 @@ if __name__ == '__main__':
     #  User inputs
     nb_of_apartments = 5
     randomize_appliances = True
+    prev_heat_dev = False  # Prevent hot water and space heating el. devices
+    app_filename = None
+    light_filename = None
 
     #  Run program
-    occ_en_dict = process_multiple_occupant_numbers(randomize_appliances,
-                                                     nb_of_apartments)
+    occ_en_dict = \
+        process_multiple_occupant_numbers(
+            randomize_appliances=randomize_appliances,
+            nb_of_apartments=nb_of_apartments,
+            prev_heat_dev=prev_heat_dev,
+            app_filename=app_filename,
+            light_filename=light_filename)
 
     print('Occupants - energy dict:')
     print(occ_en_dict)

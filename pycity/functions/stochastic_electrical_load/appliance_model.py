@@ -119,13 +119,39 @@ class Appliances:
                  annual_consumption=3200,
                  mean_active_occupancy=0.459,
                  randomize_appliances=False,
-                 max_iter=2):
+                 max_iter=2, prev_heat_dev=False):
         """
+        Constructor of appliance object
+
+        Parameters
+        ----------
+        filename : str
+            Path to appliance input file (Appliances.csv)
+        annual_consumption : float, optional
+            Annual el. consumption in kWh (default: 3200)
+        mean_active_occupancy : float
+
+        randomize_appliances : bool, optional
+            Defines, if appliances should be chosen randomly (default: False)
+            If False, uses default settings of Appliances.csv
+        max_iter :
+        prev_heat_dev : bool, optional
+            Defines, if heating devices should be prevented within chosen
+            appliances (default: False). If set to True, DESWH, E-INST,
+            Electric shower, Storage heaters and Other electric space heating
+            are set to zero.
         """
         self.load_appliances(filename)
 
         if randomize_appliances:
             self.randomize()
+
+        if prev_heat_dev:
+            #  Prevent heating devices for water heating and electrical
+            #  space heating
+            for i in range(len(self.data)):  # Loop over app. lists
+                if i in [29, 30, 31, 32, 33]:  # Idx of heating app.
+                    self.data[i][0] = 0  # Set to zero
 
         Bound = namedtuple("bound", ["calibration_factor", "annual_demand"])
         
@@ -141,7 +167,7 @@ class Appliances:
                 ub = Bound(calib_factor, calib_demand)
             else:
                 lb = Bound(calib_factor, calib_demand)
-            
+
             iteration += 1
 
 

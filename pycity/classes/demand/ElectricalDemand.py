@@ -50,7 +50,8 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
                  singleFamilyHouse=True, total_nb_occupants=0,
                  randomizeAppliances=True, lightConfiguration=0, occupancy=[],
                  do_normalization=False, method_3_type=None,
-                 method_4_type=None):
+                 method_4_type=None, prev_heat_dev=False, app_filename=None,
+                 light_filename=None):
         """
         Parameters
         ----------
@@ -112,6 +113,21 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
             - 'metal_1' : Metal company with smooth profile
             - 'metal_2' : Metal company with fluctuation in profile
             - 'warehouse' : Warehouse
+        prev_heat_dev : bool, optional
+            Defines, if heating devices should be prevented within chosen
+            appliances (default: False). If set to True, DESWH, E-INST,
+            Electric shower, Storage heaters and Other electric space heating
+            are set to zero. Only relevant for method == 2
+        app_filename : str, optional
+            Path to Appliances file
+            (default: None). If set to None, uses default file Appliances.csv
+            in \inputs\stochastic_electrical_load\.
+            Only relevant, if method == 2.
+        light_filename : str, optional
+            Path to Lighting configuration file
+            (default: None). If set to None, uses default file Appliances.csv
+            in \inputs\stochastic_electrical_load\.
+            Only relevant, if method == 2.
 
         Info
         ----
@@ -145,6 +161,21 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
 
         #  Usage of stochastic, el. profile generator for residential buildings
         elif method == 2:
+
+            if app_filename is None:   # Use default
+                pathApps = os.path.join(src_path, 'inputs',
+                                        'stochastic_electrical_load',
+                                        'Appliances.csv')
+            else:  # Use user defined path
+                pathApps = app_filename
+
+            if light_filename is None:  # Use default
+                pathLights = os.path.join(src_path, 'inputs',
+                                          'stochastic_electrical_load',
+                                          'LightBulbs.csv')
+            else:  # Use user defined path
+                pathLights = light_filename
+
             # Initialize appliances and lights
             if annualDemand == 0:
                 if singleFamilyHouse:
@@ -160,15 +191,13 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
             # This has to be excluded from the appliances' demand:
             appliancesDemand = 0.91 * annualDemand
 
-            pathApps = os.path.join(src_path, 'inputs',
-                                    'stochastic_electrical_load',
-                                    'Appliances.csv')
+            #  Get appliances
             self.appliances = app_model.Appliances(pathApps,
                                                    annual_consumption=appliancesDemand,
-                                                   randomize_appliances=randomizeAppliances)
-            pathLights = os.path.join(src_path, 'inputs',
-                                      'stochastic_electrical_load',
-                                      'LightBulbs.csv')
+                                                   randomize_appliances=randomizeAppliances,
+                                                   prev_heat_dev=prev_heat_dev)
+
+            #  Get lighting configuration
             self.lights = light_model.load_lighting_profile(pathLights,
                                                             lightConfiguration)
 

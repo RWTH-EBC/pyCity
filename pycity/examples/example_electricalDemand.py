@@ -59,7 +59,8 @@ def run_test():
                                             total_nb_occupants=3,
                                             randomizeAppliances=True,
                                             lightConfiguration=10,
-                                            occupancy=occupancy.occupancy)
+                                            occupancy=occupancy.occupancy,
+                                            prev_heat_dev=True)
 
     results2 = el_dem_stochastic.loadcurve
 

@@ -32,6 +32,7 @@ class Electricity_profile(object):
         ----------
         appliances : list
             List of appliance objects
+        ligthbulbs :
         """
         src_path = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
         folder = os.path.join(src_path, 'inputs', 'stochastic_electrical_load', 'constants')

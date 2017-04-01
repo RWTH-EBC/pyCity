@@ -51,7 +51,8 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
                  randomizeAppliances=True, lightConfiguration=0, occupancy=[],
                  do_normalization=False, method_3_type=None,
                  method_4_type=None, prev_heat_dev=False, app_filename=None,
-                 light_filename=None):
+                 light_filename=None, season_light_mod=False,
+                 light_mod_fac=0.5):
         """
         Parameters
         ----------
@@ -90,7 +91,7 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
             - True : Distribute installed appliances randomly
             - False : Use the standard distribution
         lightConfiguration : Integer (only optional in method 2)
-            There are 100 light bulb configurations predefined for the 
+            There are 100 light bulb configurations predefined for the
             Stochastic model. Select one by entering an integer in [0, ..., 99]
         occupancy : Array-like (optional, but recommended in method 2)
             Occupancy given at 10-minute intervals for a full year
@@ -128,12 +129,21 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
             (default: None). If set to None, uses default file Appliances.csv
             in \inputs\stochastic_electrical_load\.
             Only relevant, if method == 2.
+        season_light_mod : bool, optional
+            Defines, if cosine-wave should be used to strengthen seasonal
+            influence on lighting (default: False). If True, enlarges
+            lighting power demand in winter month and reduces lighting power
+            demand in summer month
+        light_mod_fac : float, optional
+            Define factor, related to maximal lighting power, which is used
+            to implement seasonal influence (default: 0.5). Only relevant,
+            if season_light_mod == True
 
         Info
         ----
         The standard load profile can be downloaded here:
         http://www.ewe-netz.de/strom/1988.php
-        
+
         Average German electricity consumption per household can be found here:
         http://www.die-stromsparinitiative.de/fileadmin/bilder/Stromspiegel/
         Brosch%C3%BCre/Stromspiegel2014web_final.pdf
@@ -210,6 +220,9 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
 
             # Make full year simulation
             demand = []
+            light_load = []
+            app_load = []
+
             beam = environment.weather.qDirect
             diffuse = environment.weather.qDiffuse
             irradiance = beam + diffuse
@@ -230,15 +243,77 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
 
                 current_occupancy = occupancy[144 * i: 144 * (i + 1)]
 
-                demand.append(self.wrapper.demands(current_irradiation,
-                                                   weekend,
-                                                   i,
-                                                   current_occupancy)[0])
+                (el_p_curve, light_p_curve, app_p_curve) = \
+                    self.wrapper.demands(current_irradiation,
+                                         weekend,
+                                         i,
+                                         current_occupancy)
+
+                demand.append(el_p_curve)
+                light_load.append(light_p_curve)
+                app_load.append(app_p_curve)
 
             res = np.array(demand)
-            res = np.reshape(res, res.size)
+            light_load = np.array(light_load)
+            app_load = np.array(app_load)
 
+            res = np.reshape(res, res.size)
+            light_load = np.reshape(light_load, light_load.size)
+            app_load = np.reshape(app_load, app_load.size)
+
+            if season_light_mod:
+                #  Put cosine-wave on lighting over the year to estimate
+                #  seasonal influence
+
+                light_ref = light_load + 0.0
+
+                light_energy = sum(light_load) * 60
+
+                time_array = np.arange(start=0, stop=len(app_load))
+                time_pi_array = time_array * 2 * np.pi / len(app_load)
+
+                cos_array = 0.5 * np.cos(time_pi_array) + 0.5
+
+                ref_light_power = max(light_load)  # np.mean(light_load)
+
+                light_load_new = np.zeros(len(light_load))
+
+                for i in range(len(light_load)):
+                    if light_load[i] == 0:
+                        light_load_new[i] = 0
+                    elif light_load[i] > 0:
+                        light_load_new[i] = light_load[i] + \
+                                            light_mod_fac * ref_light_power \
+                                            * cos_array[i]
+
+                # light_load += light_mod_fac * ref_light_power * cos_array
+
+                light_energy_new = sum(light_load_new) * 60
+
+                #  Rescale to original lighting energy demand
+                light_load_new *= light_energy / light_energy_new
+                #  Overwrite light_load
+                light_load = light_load_new
+
+                res = light_load_new + app_load
+
+            #  Change time resolution
             loadcurve = cr.changeResolution(res, 60, timeDis)
+            light_load = cr.changeResolution(light_load, 60, timeDis)
+            app_load = cr.changeResolution(app_load, 60, timeDis)
+
+            # light_ref = cr.changeResolution(light_ref, 60, timeDis)
+            #
+            # import matplotlib.pyplot as plt
+            #
+            # # plt.plot(cos_array, label='cos')
+            #
+            # plt.plot(app_load, label='app')
+            # plt.plot(light_load, label='light')
+            # plt.plot(light_ref, label='light_ref', alpha=0.5)
+            # plt.legend()
+            # plt.show()
+            # plt.close()
 
             #  Normalize el. load profile to annualDemand
             if do_normalization:

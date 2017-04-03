@@ -52,7 +52,7 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
                  do_normalization=False, method_3_type=None,
                  method_4_type=None, prev_heat_dev=False, app_filename=None,
                  light_filename=None, season_light_mod=False,
-                 light_mod_fac=0.5):
+                 light_mod_fac=0.25):
         """
         Parameters
         ----------
@@ -136,7 +136,7 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
             demand in summer month
         light_mod_fac : float, optional
             Define factor, related to maximal lighting power, which is used
-            to implement seasonal influence (default: 0.5). Only relevant,
+            to implement seasonal influence (default: 0.25). Only relevant,
             if season_light_mod == True
 
         Info
@@ -265,8 +265,6 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
                 #  Put cosine-wave on lighting over the year to estimate
                 #  seasonal influence
 
-                light_ref = light_load + 0.0
-
                 light_energy = sum(light_load) * 60
 
                 time_array = np.arange(start=0, stop=len(app_load))
@@ -274,7 +272,7 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
 
                 cos_array = 0.5 * np.cos(time_pi_array) + 0.5
 
-                ref_light_power = max(light_load)  # np.mean(light_load)
+                ref_light_power = max(light_load)
 
                 light_load_new = np.zeros(len(light_load))
 
@@ -286,34 +284,17 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
                                             light_mod_fac * ref_light_power \
                                             * cos_array[i]
 
-                # light_load += light_mod_fac * ref_light_power * cos_array
-
                 light_energy_new = sum(light_load_new) * 60
 
                 #  Rescale to original lighting energy demand
                 light_load_new *= light_energy / light_energy_new
-                #  Overwrite light_load
-                light_load = light_load_new
 
                 res = light_load_new + app_load
 
             #  Change time resolution
             loadcurve = cr.changeResolution(res, 60, timeDis)
-            light_load = cr.changeResolution(light_load, 60, timeDis)
-            app_load = cr.changeResolution(app_load, 60, timeDis)
-
-            # light_ref = cr.changeResolution(light_ref, 60, timeDis)
-            #
-            # import matplotlib.pyplot as plt
-            #
-            # # plt.plot(cos_array, label='cos')
-            #
-            # plt.plot(app_load, label='app')
-            # plt.plot(light_load, label='light')
-            # plt.plot(light_ref, label='light_ref', alpha=0.5)
-            # plt.legend()
-            # plt.show()
-            # plt.close()
+            # light_load = cr.changeResolution(light_load, 60, timeDis)
+            # app_load = cr.changeResolution(app_load, 60, timeDis)
 
             #  Normalize el. load profile to annualDemand
             if do_normalization:

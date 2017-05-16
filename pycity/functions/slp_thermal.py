@@ -79,7 +79,7 @@ def calculate(temperature, initial_day, profiles, weekly_factors,
     h = np.array([D + A / ((B / (t - theta_0))**C + 1) for t in t_average])
     
     # Compute weekday factors
-    F_factors = np.tile(weekly_factors, math.ceil(len(t_average) / 7))
+    F_factors = np.tile(weekly_factors, int(math.ceil(len(t_average) / 7)))
     F = F_factors[initial_day : initial_day+ len(t_average)]
     
     # Compute customer's value. [1], page 78

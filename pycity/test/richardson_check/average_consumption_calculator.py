@@ -15,7 +15,7 @@ import pycity.classes.Weather
 import pycity.classes.Environment
 import pycity.classes.Prices
 
-import pycity.classes.demand.Occupancy
+import pycity.classes.demand.occupancy as occ
 
 
 def run_single_calc(number_of_occupants, randomize_appliances, environment,
@@ -45,8 +45,8 @@ def run_single_calc(number_of_occupants, randomize_appliances, environment,
         Only relevant, if method == 2.
     """
 
-    occupancy = pycity.classes.demand.Occupancy.Occupancy(environment,
-                                        number_occupants=number_of_occupants)
+    occupancy = occ.Occupancy(environment,
+                              number_occupants=number_of_occupants)
 
     el_load = ED.ElectricalDemand(environment,
                                   method=2,

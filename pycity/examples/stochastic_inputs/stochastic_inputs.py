@@ -16,7 +16,7 @@ import pycity.classes.Weather
 import pycity.classes.Prices
 import pycity.classes.Environment
 
-import pycity.classes.demand.Occupancy
+import pycity.classes.demand.occupancy as occ
 import pycity.classes.demand.ElectricalDemand as ED
 import pycity.classes.demand.DomesticHotWater as DomesticHotWater
 
@@ -60,8 +60,7 @@ environment = pycity.classes.Environment.Environment(timer, weather, prices)
 
 
 # Occupancy and electrical demand
-occupancy = pycity.classes.demand.Occupancy.Occupancy(environment,
-                                                      number_occupants=3)
+occupancy = occ.Occupancy(environment, number_occupants=3)
 
 energy_input = 3000
 

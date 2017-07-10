@@ -145,14 +145,21 @@ class Building(object):
         """
 
         #  Initialize array with zeros
-        space_heat_power = np.zeros(len(self.apartments[0].demandSpaceheating.
-            get_power(currentValues=current_values)))
+        try:
+            # print('Length of heat demand: ', len(self.apartments[0].demandSpaceheating.
+            #         get_power(currentValues=current_values)))
+            space_heat_power = np.zeros(len(self.apartments[0].demandSpaceheating.
+                get_power(currentValues=current_values)))
 
-        # Get power curves of each apartment
-        for apartment in self.apartments:
+            # Get power curves of each apartment
+            for apartment in self.apartments:
 
-            space_heat_power += apartment.demandSpaceheating.get_power(
-                    currentValues=current_values)
+                space_heat_power += apartment.demandSpaceheating.get_power(
+                        currentValues=current_values)
+
+        except (IndexError):
+            print('Hm, for one building, something went wrong.')
+            space_heat_power = np.zeros(8760)
 
         return space_heat_power
 

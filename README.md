@@ -1,3 +1,5 @@
+![E.ON EBC RWTH Aachen University](./documentation/_static/EBC_Logo.png)
+
 # pyCity
 
 Python package for data handling and scenario generation of city districts.

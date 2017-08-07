@@ -639,3 +639,21 @@ class CityDistrict(ues.UESGraph):
                     list_ids.append(n)
 
         return list_ids
+
+    def get_nb_occupants(self):
+        """
+        Returns total number of occupants within city district
+
+        Returns
+        -------
+        nb_occ
+        """
+
+        nb_occ = 0
+
+        list_ids = self.get_list_build_entity_node_ids()
+
+        for n in list_ids:
+            nb_occ += self.node[n]['entity'].get_number_of_occupants()
+
+        return nb_occ

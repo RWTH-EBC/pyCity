@@ -43,3 +43,4 @@ setup(name='pyCity',
                       'networkx'],
       install_requires=['numpy', 'matplotlib', 'pandas', 'pytest', 'xlrd',
                         'networkx'])
+

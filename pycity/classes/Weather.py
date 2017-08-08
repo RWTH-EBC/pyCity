@@ -22,7 +22,7 @@ class Weather(pycity.classes.Sun.Sun):
     """
 
     def __init__(self, timer,
-                 pathTRY=None, pathTMY3=None,
+                 pathTRY=None, pathTMY3=None, new_try=False,
                  pathTemperature="", pathDirectRadiation="",
                  pathDiffuseRadiation="", pathWindspeed="", pathHumidity="",
                  pathPressure="", pathCloudiness="",
@@ -44,6 +44,12 @@ class Weather(pycity.classes.Sun.Sun):
             Default value is None. If default value is set, data for New York 
             City, JFK airport
             Example: "inputs/weather/tmy3_744860_new_york_jfk_airport.csv"
+        new_try : bool, optional
+            Defines, if TRY dataset have been generated after 2017 (default: False)
+            If False, assumes that TRY dataset has been generated before 2017.
+            If True, assumes that TRY dataset has been generated after 2017 and
+            belongs to the new TRY classes. This is important for extracting
+            the correct values from the TRY dataset!
         pathTemperature : String, optional if useTRY=True or useTMY3=True
             Path to the file that holds the ambient temperature values
         pathDirectRadiation : String, optional
@@ -102,32 +108,59 @@ class Weather(pycity.classes.Sun.Sun):
         nb_rows = int(8760 * 3600 / timeDiscretization)
 
         if useTRY:
-            # Generate TRY path (if path is None) and use TRY2010_05_Jahr.dat
-            if pathTRY is None:
-                src_path = os.path.dirname(os.path.dirname(__file__))
-                pathTRY = os.path.join(src_path,
-                                       'inputs',
-                                       'weather',
-                                       'TRY2010_05_Jahr.dat')
 
-            # Read TRY data
-            TRYData = np.genfromtxt(pathTRY, skip_header=38)
+            if new_try is False:
+                # Generate TRY path (if path is None) and use TRY2010_05_Jahr.dat
+                if pathTRY is None:
+                    src_path = os.path.dirname(os.path.dirname(__file__))
+                    pathTRY = os.path.join(src_path,
+                                           'inputs',
+                                           'weather',
+                                           'TRY2010_05_Jahr.dat')
 
-            # Save relevant weather data (only extract row 0 to 8760)
-            self.pAmbient = TRYData[0:nb_rows, 9]
-            self.phiAmbient = TRYData[0:nb_rows, 11]
-            self.qDirect = TRYData[0:nb_rows, 13]
-            self.qDiffuse = TRYData[0:nb_rows, 14]
-            self.tAmbient = TRYData[0:nb_rows, 8]
-            self.vWind = TRYData[0:nb_rows, 7]
-            self.cloudiness = TRYData[0:nb_rows, 5]
-            self.rad_sky = TRYData[0:nb_rows, 16]
-            self.rad_earth = TRYData[0:nb_rows, 17]
+                # Read TRY data
+                TRYData = np.genfromtxt(pathTRY, skip_header=38)
 
-            # Read TRY number
-            with open(pathTRY, "rb") as data:
-                first_line = data.readline()
-            self.try_number = first_line[3] + first_line[4]
+                # Save relevant weather data (only extract row 0 to 8760)
+                self.pAmbient = TRYData[0:nb_rows, 9]
+                self.phiAmbient = TRYData[0:nb_rows, 11]
+                self.qDirect = TRYData[0:nb_rows, 13]
+                self.qDiffuse = TRYData[0:nb_rows, 14]
+                self.tAmbient = TRYData[0:nb_rows, 8]
+                self.vWind = TRYData[0:nb_rows, 7]
+                self.cloudiness = TRYData[0:nb_rows, 5]
+                self.rad_sky = TRYData[0:nb_rows, 16]
+                self.rad_earth = TRYData[0:nb_rows, 17]
+
+                # Read TRY number
+                with open(pathTRY, "rb") as data:
+                    first_line = data.readline()
+                self.try_number = first_line[3] + first_line[4]
+
+            else:
+                #  New TRY dataset (after 2017)
+                if pathTRY is None:
+                    msg = 'pathTRY cannot be None.'
+                    raise AssertionError(msg)
+
+                # Read TRY data
+                TRYData = np.genfromtxt(pathTRY, skip_header=34)
+
+                # Save relevant weather data (only extract row 0 to 8760)
+                self.pAmbient = TRYData[0:nb_rows, 6]
+                self.phiAmbient = TRYData[0:nb_rows, 11]
+                self.qDirect = TRYData[0:nb_rows, 12]
+                self.qDiffuse = TRYData[0:nb_rows, 13]
+                self.tAmbient = TRYData[0:nb_rows, 5]
+                self.vWind = TRYData[0:nb_rows, 8]
+                self.cloudiness = TRYData[0:nb_rows,9]
+                self.rad_sky = TRYData[0:nb_rows, 14]
+                self.rad_earth = TRYData[0:nb_rows, 15]
+
+                # Read TRY number
+                with open(pathTRY, "rb") as data:
+                    first_line = data.readline()
+                self.try_number = first_line[3] + first_line[4]
 
         elif useTMY3:
             # Generate TMY3 path (if path is None) and use 

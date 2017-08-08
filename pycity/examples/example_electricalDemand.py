@@ -12,7 +12,7 @@ import pycity.classes.Timer
 import pycity.classes.Weather
 import pycity.classes.Environment
 import pycity.classes.Prices
-import pycity.classes.demand.Occupancy
+import pycity.classes.demand.occupancy as occ
 
 
 def run_test():
@@ -51,8 +51,7 @@ def run_test():
     print('Generate stochastic, el. profile')
     print('########################################################')
 
-    occupancy = pycity.classes.demand.Occupancy.Occupancy(environment,
-                                                          number_occupants=3)
+    occupancy = occ.Occupancy(environment, number_occupants=3)
 
     el_dem_stochastic = ED.ElectricalDemand(environment,
                                             method=2,

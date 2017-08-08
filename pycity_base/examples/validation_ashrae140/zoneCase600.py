@@ -28,11 +28,11 @@ location = (39.76, -104.86)
 altitude = 1609  # m, section 5.2.1.6.1, page 16
 timeZone = -7
 
-timer = pycity.classes.Timer.Timer(timeDiscretization=3600,
+timer = pycity_base.classes.Timer.Timer(timeDiscretization=3600,
                                    timestepsHorizon=8760,
                                    timestepsUsedHorizon=8760,
                                    timestepsTotal=8760)
-prices = pycity.classes.Prices.Prices()
+prices = pycity_base.classes.Prices.Prices()
 
 #  Define src path
 ashrae_path = os.path.dirname(os.path.abspath(__file__))
@@ -44,7 +44,7 @@ weather_temp_path = os.path.join(ashrae_path, temp_name)
 weather_beam_path = os.path.join(ashrae_path, beam_name)
 weather_diffuse_path = os.path.join(ashrae_path, diffuse_name)
 
-weather = pycity.classes.Weather.Weather(timer,
+weather = pycity_base.classes.Weather.Weather(timer,
                                          pathTemperature=weather_temp_path,
                                          pathDirectRadiation=weather_beam_path,
                                          pathDiffuseRadiation=weather_diffuse_path,
@@ -55,9 +55,9 @@ weather = pycity.classes.Weather.Weather(timer,
                                          altitude=altitude,
                                          timeZone=timeZone)
 
-prices = pycity.classes.Prices.Prices()
+prices = pycity_base.classes.Prices.Prices()
 
-environment = pycity.classes.Environment.Environment(timer, weather, prices)
+environment = pycity_base.classes.Environment.Environment(timer, weather, prices)
 
 # beta: slope angle, gamma: surface azimuth angle
 # S, W, N, E, Roof

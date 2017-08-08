@@ -13,10 +13,10 @@ import pycity_base.classes.Prices
 import pycity_base.classes.Environment
 
 def run_test():
-    timer = pycity.classes.Timer.Timer()
-    weather = pycity.classes.Weather.Weather(timer, useTRY=True)
-    prices = pycity.classes.Prices.Prices()
-    env = pycity.classes.Environment.Environment(timer, weather, prices)
+    timer = pycity_base.classes.Timer.Timer()
+    weather = pycity_base.classes.Weather.Weather(timer, useTRY=True)
+    prices = pycity_base.classes.Prices.Prices()
+    env = pycity_base.classes.Environment.Environment(timer, weather, prices)
 
     def printResults(env):
         print(("Current timestep: " + str(env.timer.currentTimestep)))

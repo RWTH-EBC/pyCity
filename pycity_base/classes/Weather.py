@@ -14,7 +14,7 @@ import pycity_base.classes.Sun
 import pycity_base.classes.Timer as Timer
 
 
-class Weather(pycity.classes.Sun.Sun):
+class Weather(pycity_base.classes.Sun.Sun):
     """
     Weather class keeps track of the weather data.
     In a real world setting, this would be the interface to a web-based

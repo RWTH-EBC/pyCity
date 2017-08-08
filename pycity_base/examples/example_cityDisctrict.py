@@ -23,12 +23,12 @@ import pycity_base.classes.supply.PV as PV
 def run_test():
 
     #  Generate timer, weather and price objects
-    timer = pycity.classes.Timer.Timer()
-    weather = pycity.classes.Weather.Weather(timer)
-    prices = pycity.classes.Prices.Prices()
+    timer = pycity_base.classes.Timer.Timer()
+    weather = pycity_base.classes.Weather.Weather(timer)
+    prices = pycity_base.classes.Prices.Prices()
 
     #  Generate environment
-    environment = pycity.classes.Environment.Environment(timer, weather, prices)
+    environment = pycity_base.classes.Environment.Environment(timer, weather, prices)
 
     #  Generate city district object
     cityDistrict = CityDistrict.CityDistrict(environment)

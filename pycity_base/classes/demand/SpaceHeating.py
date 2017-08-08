@@ -17,7 +17,7 @@ import pycity_base.functions.zoneModel
 import pycity_base.functions.changeResolution as chres
 
 
-class SpaceHeating(pycity.classes.demand.Load.Load):
+class SpaceHeating(pycity_base.classes.demand.Load.Load):
     """
     Implementation of the space heating object
     """
@@ -156,7 +156,7 @@ class SpaceHeating(pycity.classes.demand.Load.Load):
                                             appliances=appliances,
                                             lighting=lighting)
             
-            calc = pycity.functions.zoneModel.calc
+            calc = pycity_base.functions.zoneModel.calc
             res = calc(zoneParameters=self.zoneParameters,
                            zoneInputs=self.zoneInputs, 
                            TCoolingSet=TCoolingSet,
@@ -223,7 +223,7 @@ class SpaceHeating(pycity.classes.demand.Load.Load):
 #        elif self.method == 2:
 #            if currentValues:
 #                self.zoneInputs.update(occupancy, appliances, lighting)
-#                calc = pycity.functions.zoneModel.calc
+#                calc = pycity_base.functions.zoneModel.calc
 #                res = calc(zoneParameters=self.zoneParameters,
 #                           zoneInputs=self.zoneInputs, 
 #                           TCoolingSet=TCoolingSet,

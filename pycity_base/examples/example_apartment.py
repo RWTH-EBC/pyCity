@@ -19,11 +19,11 @@ import pycity_base.classes.demand.SpaceHeating as SpaceHeating
 
 def run_test():
     #  Generate environment
-    timer = pycity.classes.Timer.Timer()
-    weather = pycity.classes.Weather.Weather(timer)
-    prices = pycity.classes.Prices.Prices()
+    timer = pycity_base.classes.Timer.Timer()
+    weather = pycity_base.classes.Weather.Weather(timer)
+    prices = pycity_base.classes.Prices.Prices()
 
-    environment = pycity.classes.Environment.Environment(timer, weather,
+    environment = pycity_base.classes.Environment.Environment(timer, weather,
                                                          prices)
 
     #  Generate heat demand object

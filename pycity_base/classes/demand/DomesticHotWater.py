@@ -14,7 +14,7 @@ import pycity_base.functions.changeResolution as cr
 import pycity_base.functions.dhw_stochastical as dhw_sto
 
 
-class DomesticHotWater(pycity.classes.demand.Load.Load):
+class DomesticHotWater(pycity_base.classes.demand.Load.Load):
     """
     Implementation of the domestic hot water (DHW) object
     """

@@ -31,13 +31,13 @@ def create_environment(timestep=900):
     -------
     create_environment : environment object
     """
-    timer = pycity.classes.Timer.Timer(timeDiscretization=timestep,
+    timer = pycity_base.classes.Timer.Timer(timeDiscretization=timestep,
                                        timestepsTotal=365 * 24 * 4,
                                        initialDay=1)
-    weather = pycity.classes.Weather.Weather(timer, useTRY=True)
-    prices = pycity.classes.Prices.Prices()
+    weather = pycity_base.classes.Weather.Weather(timer, useTRY=True)
+    prices = pycity_base.classes.Prices.Prices()
 
-    create_environment = pycity.classes.Environment.Environment(timer, weather,
+    create_environment = pycity_base.classes.Environment.Environment(timer, weather,
                                                                 prices)
     return create_environment
 
@@ -102,7 +102,7 @@ def create_occupancy(create_environment, nb_occupants=1):
         occupancy object
     """
     create_occupancy = \
-        pycity.classes.demand.Occupancy.Occupancy(create_environment,
+        pycity_base.classes.demand.Occupancy.Occupancy(create_environment,
                                                   number_occupants=nb_occupants)
 
     return create_occupancy

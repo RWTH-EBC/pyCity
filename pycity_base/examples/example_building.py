@@ -26,11 +26,11 @@ import pycity_base.classes.HeatingCurve as HeatingCurve
 import pycity_base.classes.Building as Building
 
 def run_test():
-    timer = pycity.classes.Timer.Timer()
-    weather = pycity.classes.Weather.Weather(timer)
-    prices = pycity.classes.Prices.Prices()
+    timer = pycity_base.classes.Timer.Timer()
+    weather = pycity_base.classes.Weather.Weather(timer)
+    prices = pycity_base.classes.Prices.Prices()
 
-    environment = pycity.classes.Environment.Environment(timer, weather, prices)
+    environment = pycity_base.classes.Environment.Environment(timer, weather, prices)
 
     heat_demand = SpaceHeating.SpaceHeating(environment,
                                             method=1, # Standard load profile

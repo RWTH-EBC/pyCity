@@ -19,9 +19,9 @@ def run_example():
     # Create environment
     # Initialize the timer object for a full year computation, without rolling
     # horizon and hourly time discretization
-    timer = pycity.classes.Timer.Timer(3600, 8760, 8760, 8760)
-    weather = pycity.classes.Weather.Weather(timer)
-    environment = pycity.classes.Environment.Environment(timer, weather, None)
+    timer = pycity_base.classes.Timer.Timer(3600, 8760, 8760, 8760)
+    weather = pycity_base.classes.Weather.Weather(timer)
+    environment = pycity_base.classes.Environment.Environment(timer, weather, None)
 
     # Surface definition
     beta = 30 # Slope, degree (not radians)

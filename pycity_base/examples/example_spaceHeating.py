@@ -18,11 +18,11 @@ import pycity_base.classes.Prices
 
 
 def run_test():
-    timer = pycity.classes.Timer.Timer()
-    weather = pycity.classes.Weather.Weather(timer, useTRY=True)
-    prices = pycity.classes.Prices.Prices()
+    timer = pycity_base.classes.Timer.Timer()
+    weather = pycity_base.classes.Weather.Weather(timer, useTRY=True)
+    prices = pycity_base.classes.Prices.Prices()
 
-    environment = pycity.classes.Environment.Environment(timer, weather,
+    environment = pycity_base.classes.Environment.Environment(timer, weather,
                                                          prices)
 
     #  Use standardized thermal load profile

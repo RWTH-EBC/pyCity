@@ -22,12 +22,12 @@ import pycity_base.classes.demand.Occupancy
 def run_test():
     timeDiscretization = 3600
     total_nb_timesteps = 365 * 24 * 60 * 60 / timeDiscretization
-    timer = pycity.classes.Timer.Timer(timeDiscretization=timeDiscretization,
+    timer = pycity_base.classes.Timer.Timer(timeDiscretization=timeDiscretization,
                                        timestepsTotal=total_nb_timesteps)
-    weather = pycity.classes.Weather.Weather(timer, useTRY=True)
-    prices = pycity.classes.Prices.Prices()
+    weather = pycity_base.classes.Weather.Weather(timer, useTRY=True)
+    prices = pycity_base.classes.Prices.Prices()
 
-    environment = pycity.classes.Environment.Environment(timer, weather,
+    environment = pycity_base.classes.Environment.Environment(timer, weather,
                                                          prices)
 
     dhw_annex42 = DomesticHotWater.DomesticHotWater(environment,
@@ -57,7 +57,7 @@ def run_test():
     #  Max. occupancy is 5 people simultaneously
 #    occupancy = np.random.geometric(p=0.8, size=6 * 24 * 365) - 1
 #    occupancy = np.minimum(5, occupancy)
-    occup_obj = pycity.classes.demand.Occupancy.Occupancy(environment,
+    occup_obj = pycity_base.classes.demand.Occupancy.Occupancy(environment,
                                                           number_occupants=3)
     occupancy = occup_obj.occupancy
 

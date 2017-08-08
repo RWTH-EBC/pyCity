@@ -91,6 +91,6 @@ class WindEnergyConverter(object):
             self.totalPower[currentTimestep : (currentTimestep + 
                                                timesteps)] = currentPower
        
-        return pycity.functions.handleData.getValues(currentValues,
+        return pycity_base.functions.handleData.getValues(currentValues,
                                               self.currentPower, 
                                               self.totalPower)  

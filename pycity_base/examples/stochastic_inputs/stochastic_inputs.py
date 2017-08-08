@@ -30,11 +30,11 @@ location = (39.76, -104.86)
 altitude = 1609  # m
 timeZone = -7
 
-timer = pycity.classes.Timer.Timer(timeDiscretization=3600,
+timer = pycity_base.classes.Timer.Timer(timeDiscretization=3600,
                                    timestepsHorizon=8760,
                                    timestepsUsedHorizon=8760,
                                    timestepsTotal=8760)
-prices = pycity.classes.Prices.Prices()
+prices = pycity_base.classes.Prices.Prices()
 
 #  Define src path
 ashrae_path = os.path.dirname(os.path.abspath(__file__))
@@ -43,7 +43,7 @@ weather_temp_path = os.path.join(ashrae_path, 'weather_temperature.csv')
 weather_beam_path = os.path.join(ashrae_path, 'weather_beam.csv')
 weather_diffuse_path = os.path.join(ashrae_path, 'weather_diffuse.csv')
 
-weather = pycity.classes.Weather.Weather(timer,
+weather = pycity_base.classes.Weather.Weather(timer,
                                          pathTemperature=weather_temp_path,
                                          pathDirectRadiation=weather_beam_path,
                                          pathDiffuseRadiation=weather_diffuse_path,
@@ -54,13 +54,13 @@ weather = pycity.classes.Weather.Weather(timer,
                                          altitude=altitude,
                                          timeZone=timeZone)
 
-prices = pycity.classes.Prices.Prices()
+prices = pycity_base.classes.Prices.Prices()
 
-environment = pycity.classes.Environment.Environment(timer, weather, prices)
+environment = pycity_base.classes.Environment.Environment(timer, weather, prices)
 
 
 # Occupancy and electrical demand
-occupancy = pycity.classes.demand.Occupancy.Occupancy(environment,
+occupancy = pycity_base.classes.demand.Occupancy.Occupancy(environment,
                                                       number_occupants=3)
 
 energy_input = 3000

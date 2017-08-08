@@ -21,10 +21,10 @@ import pycity_base.classes.Environment
 
 def run_test():
     # Create environment
-    timer = pycity.classes.Timer.Timer()
-    weather = pycity.classes.Weather.Weather(timer, useTRY=True)
-    prices = pycity.classes.Prices.Prices()
-    environment = pycity.classes.Environment.Environment(timer, weather, prices)
+    timer = pycity_base.classes.Timer.Timer()
+    weather = pycity_base.classes.Weather.Weather(timer, useTRY=True)
+    prices = pycity_base.classes.Prices.Prices()
+    environment = pycity_base.classes.Environment.Environment(timer, weather, prices)
 
     # Create Wind Energy Converter (ENERCON E-126)
     src_path = os.path.dirname(os.path.dirname(__file__))

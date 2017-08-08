@@ -20,11 +20,11 @@ def run_test():
     print('Generate slp profile')
     print('########################################################')
 
-    timer = pycity.classes.Timer.Timer()
-    weather = pycity.classes.Weather.Weather(timer)  # , useTRY=True)
-    prices = pycity.classes.Prices.Prices()
+    timer = pycity_base.classes.Timer.Timer()
+    weather = pycity_base.classes.Weather.Weather(timer)  # , useTRY=True)
+    prices = pycity_base.classes.Prices.Prices()
 
-    environment = pycity.classes.Environment.Environment(timer, weather,
+    environment = pycity_base.classes.Environment.Environment(timer, weather,
                                                          prices)
 
     el_demand = ED.ElectricalDemand(environment,
@@ -51,7 +51,7 @@ def run_test():
     print('Generate stochastic, el. profile')
     print('########################################################')
 
-    occupancy = pycity.classes.demand.Occupancy.Occupancy(environment,
+    occupancy = pycity_base.classes.demand.Occupancy.Occupancy(environment,
                                                           number_occupants=3)
 
     el_dem_stochastic = ED.ElectricalDemand(environment,

@@ -16,15 +16,15 @@ import pycity_base.classes.demand.Occupancy
 
 def exampe_occupancy():
     time_discretization = 60
-    timer = pycity.classes.Timer.Timer(timeDiscretization=time_discretization,
+    timer = pycity_base.classes.Timer.Timer(timeDiscretization=time_discretization,
                                  timestepsTotal=int(8760*3600/time_discretization))
-    weather = pycity.classes.Weather.Weather(timer)  # , useTRY=True)
-    prices = pycity.classes.Prices.Prices()
+    weather = pycity_base.classes.Weather.Weather(timer)  # , useTRY=True)
+    prices = pycity_base.classes.Prices.Prices()
     
-    environment = pycity.classes.Environment.Environment(timer, weather,
+    environment = pycity_base.classes.Environment.Environment(timer, weather,
                                                          prices)
     
-    occupancy_object = pycity.classes.demand.Occupancy.Occupancy(environment,
+    occupancy_object = pycity_base.classes.demand.Occupancy.Occupancy(environment,
                                                           number_occupants=1)
     occupancy_profile = occupancy_object.occupancy
     print('Occupancy profile:')

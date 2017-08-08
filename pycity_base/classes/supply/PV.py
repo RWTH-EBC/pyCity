@@ -136,6 +136,6 @@ class PV(object):
             self.totalRadiation[currentTimestep : (currentTimestep + 
                                                timesteps)] = currentRadiation
             
-        return pycity.functions.handleData.getValues(currentValues,
+        return pycity_base.functions.handleData.getValues(currentValues,
                                               self.currentPower, 
                                               self.totalPower)        

@@ -32,11 +32,11 @@ def print_bes_attributes(bes):
   
 def run_test():
 
-    timer = pycity.classes.Timer.Timer()
-    weather = pycity.classes.Weather.Weather(timer, useTRY=True)
-    prices = pycity.classes.Prices.Prices()
+    timer = pycity_base.classes.Timer.Timer()
+    weather = pycity_base.classes.Weather.Weather(timer, useTRY=True)
+    prices = pycity_base.classes.Prices.Prices()
 
-    environment = pycity.classes.Environment.Environment(timer, weather, prices)
+    environment = pycity_base.classes.Environment.Environment(timer, weather, prices)
 
     # Create appliances
     battery = Battery.Battery(environment, 0.5, 4*3600*1000)

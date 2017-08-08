@@ -61,11 +61,11 @@ def generate_profile_pool(path=None, runs=100, timestep=60):
     timestepsTotal = 365 * 24 * 3600 / timestep
 
     #  Generate environment
-    timer = pycity.classes.Timer.Timer(timeDiscretization=timestep,
+    timer = pycity_base.classes.Timer.Timer(timeDiscretization=timestep,
                                        timestepsTotal=timestepsTotal)
-    weather = pycity.classes.Weather.Weather(timer, useTRY=True)
-    prices = pycity.classes.Prices.Prices()
-    env = pycity.classes.Environment.Environment(timer, weather, prices)
+    weather = pycity_base.classes.Weather.Weather(timer, useTRY=True)
+    prices = pycity_base.classes.Prices.Prices()
+    env = pycity_base.classes.Environment.Environment(timer, weather, prices)
 
     for occ in range(1, 6):  # Loop from 1 to 5 occupants
 

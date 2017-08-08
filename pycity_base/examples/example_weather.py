@@ -12,8 +12,8 @@ import pycity_base.classes.Timer
 import pycity_base.classes.Weather
 
 def run_test():
-    time = pycity.classes.Timer.Timer()
-    weather = pycity.classes.Weather.Weather(time, useTRY=True)
+    time = pycity_base.classes.Timer.Timer()
+    weather = pycity_base.classes.Weather.Weather(time, useTRY=True)
 
     (tamb, qdif, vw, phiamb, pamb) = weather.getWeatherForecast(getTAmbient=True,
                                                                 getQDirect=True,
@@ -32,7 +32,7 @@ def run_test():
            str((weather.getRadiationTiltedSurface(beta=30, gamma=45,
                                                   update=True))[0])))
 
-    w2 = pycity.classes.Weather.Weather(time, useTRY=False, useTMY3=True)
+    w2 = pycity_base.classes.Weather.Weather(time, useTRY=False, useTMY3=True)
     (tamb2, qdif2, vw2, phiamb2, pamb2) = w2.getWeatherForecast(getTAmbient=True,
                                                                 getQDirect=True,
                                                                 getQDiffuse=False,

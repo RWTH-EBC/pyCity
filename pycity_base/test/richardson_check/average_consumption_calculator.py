@@ -45,7 +45,7 @@ def run_single_calc(number_of_occupants, randomize_appliances, environment,
         Only relevant, if method == 2.
     """
 
-    occupancy = pycity.classes.demand.Occupancy.Occupancy(environment,
+    occupancy = pycity_base.classes.demand.Occupancy.Occupancy(environment,
                                         number_occupants=number_of_occupants)
 
     el_load = ED.ElectricalDemand(environment,
@@ -97,13 +97,13 @@ def run_multiple_calc(number_of_occupants, randomize_appliances,
         Average electric energy demand in kWh/a
     """
 
-    timer = pycity.classes.Timer.Timer(timeDiscretization=60,
+    timer = pycity_base.classes.Timer.Timer(timeDiscretization=60,
                                        timestepsTotal=365*24*60,
                                        initialDay=1)
-    weather = pycity.classes.Weather.Weather(timer)  # , useTRY=True)
-    prices = pycity.classes.Prices.Prices()
+    weather = pycity_base.classes.Weather.Weather(timer)  # , useTRY=True)
+    prices = pycity_base.classes.Prices.Prices()
 
-    environment = pycity.classes.Environment.Environment(timer, weather,
+    environment = pycity_base.classes.Environment.Environment(timer, weather,
                                                          prices)
 
     total_el_demand = 0  # Dummy value

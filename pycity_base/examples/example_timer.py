@@ -24,7 +24,7 @@ def printTimer(time):
 
 def run_test():
 
-    timer = pycity.classes.Timer.Timer()
+    timer = pycity_base.classes.Timer.Timer()
 
     printTimer(timer)
 

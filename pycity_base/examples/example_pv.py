@@ -21,11 +21,11 @@ import pycity_base.classes.Environment
 
 def run_test():
     # Create environment
-    timer = pycity.classes.Timer.Timer()
+    timer = pycity_base.classes.Timer.Timer()
     timer.reinit(3600, 8760, 8760, 8760, 0, True)
-    weather = pycity.classes.Weather.Weather(timer)
-    prices = pycity.classes.Prices.Prices()
-    environment = pycity.classes.Environment.Environment(timer, weather, prices)
+    weather = pycity_base.classes.Weather.Weather(timer)
+    prices = pycity_base.classes.Prices.Prices()
+    environment = pycity_base.classes.Environment.Environment(timer, weather, prices)
 
     # Create PV
     src_path = os.path.dirname(os.path.dirname(__file__))

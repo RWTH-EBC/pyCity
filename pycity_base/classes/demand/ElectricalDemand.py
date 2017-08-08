@@ -17,7 +17,7 @@ import \
 import pycity_base.classes.demand.StochasticElectricalLoadWrapper as wrapper
 
 
-class ElectricalDemand(pycity.classes.demand.Load.Load):
+class ElectricalDemand(pycity_base.classes.demand.Load.Load):
     """
     Implementation of the electrical demand object
     """

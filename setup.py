@@ -1,11 +1,12 @@
-# coding=utf-8
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 pyCity: Python package for data handling and scenario generation of
 city districts.
 
 The MIT License
 
-Copyright (C) 2015-2017  Thomas Schütz, Jan Schiefelbein
+Copyright (C) 2015-2017  Thomas Schuetz, Jan Schiefelbein
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,29 +27,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 """
 
-from __future__ import print_function
-from setuptools import setup, find_packages
-from setuptools.command.test import test as TestCommand
-import io
-import codecs
-import os
-import sys
-
-import pycity
-
-here = os.path.abspath(os.path.dirname(__file__))
-
-
-class PyTest(TestCommand):
-    def finalize_options(self):
-        TestCommand.finalize_options(self)
-        self.test_args = []
-        self.test_suite = True
-
-    def run_tests(self):
-        import pytest
-        errcode = pytest.main(self.test_args)
-        sys.exit(errcode)
+from setuptools import setup
 
 
 setup(name='pyCity',
@@ -61,5 +40,7 @@ setup(name='pyCity',
       license='MIT License',
       packages=['pycity'],
       setup_requires=['numpy', 'matplotlib', 'pandas', 'pytest', 'xlrd',
-                      'richardsonpy', 'uesgraphs', 'shapely'],
-      install_requires=['numpy', 'matplotlib', 'pandas', 'pytest', 'xlrd'])
+                      'networkx'],
+      install_requires=['numpy', 'matplotlib', 'pandas', 'pytest', 'xlrd',
+                        'networkx'])
+

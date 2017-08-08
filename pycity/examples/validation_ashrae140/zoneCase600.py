@@ -11,16 +11,16 @@ from __future__ import division
 import os
 import numpy as np
 
-import pycity.classes.Timer
-import pycity.classes.Sun
-import pycity.classes.Weather
-import pycity.classes.Prices
-import pycity.classes.Environment
+import pycity_base.classes.Timer
+import pycity_base.classes.Sun
+import pycity_base.classes.Weather
+import pycity_base.classes.Prices
+import pycity_base.classes.Environment
 
-import pycity.classes.demand.SpaceHeating as sh
-import pycity.classes.demand.ZoneParameters as zp
+import pycity_base.classes.demand.SpaceHeating as sh
+import pycity_base.classes.demand.ZoneParameters as zp
 
-import pycity.examples.validation_ashrae140.plotCase600 as plotCase600
+import pycity_base.examples.validation_ashrae140.plotCase600 as plotCase600
 
 
 location = (39.76, -104.86)

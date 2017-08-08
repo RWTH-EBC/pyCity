@@ -9,9 +9,9 @@ Created on Fri Feb 06 17:11:19 2015
 from __future__ import division
 import os
 import numpy as np
-import pycity.functions.changeResolution as changeResolution
-import pycity.classes.Sun
-import pycity.classes.Timer as Timer
+import pycity_base.functions.changeResolution as changeResolution
+import pycity_base.classes.Sun
+import pycity_base.classes.Timer as Timer
 
 
 class Weather(pycity.classes.Sun.Sun):

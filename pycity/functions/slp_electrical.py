@@ -10,7 +10,7 @@ from __future__ import division
 import os
 import numpy as np
 import xlrd
-import pycity.functions.changeResolution as cr
+import pycity_base.functions.changeResolution as cr
 
 
 def load(filename, time_discretization=900):

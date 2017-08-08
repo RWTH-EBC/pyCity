@@ -7,12 +7,12 @@ Created on Fri May 22 08:43:12 2015
 from __future__ import division
 import matplotlib.pyplot as plt
 
-import pycity.classes.demand.ElectricalDemand as ED
-import pycity.classes.Timer
-import pycity.classes.Weather
-import pycity.classes.Environment
-import pycity.classes.Prices
-import pycity.classes.demand.Occupancy
+import pycity_base.classes.demand.ElectricalDemand as ED
+import pycity_base.classes.Timer
+import pycity_base.classes.Weather
+import pycity_base.classes.Environment
+import pycity_base.classes.Prices
+import pycity_base.classes.demand.Occupancy
 
 
 def run_test():

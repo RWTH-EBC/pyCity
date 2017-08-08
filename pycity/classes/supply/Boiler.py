@@ -7,7 +7,7 @@ Created on Fri Feb 06 16:50:30 2015
 """
 
 from __future__ import division
-import pycity.classes.supply.HeatingDevice as HeatingDevice
+import pycity_base.classes.supply.HeatingDevice as HeatingDevice
 
 
 class Boiler(HeatingDevice.HeatingDevice):

@@ -4,7 +4,7 @@ from __future__ import division
 
 import numpy as np
 
-import pycity.classes.demand.ElectricalDemand as ED
+import pycity_base.classes.demand.ElectricalDemand as ED
 import pytest
 from pycity.test.pycity_fixtures import create_environment, create_occupancy
 

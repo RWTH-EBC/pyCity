@@ -10,12 +10,12 @@ from __future__ import division
 import os
 import numpy as np
 
-import pycity.classes.supply.HeatPump as HP
+import pycity_base.classes.supply.HeatPump as HP
 
-import pycity.classes.Timer
-import pycity.classes.Weather
-import pycity.classes.Prices
-import pycity.classes.Environment
+import pycity_base.classes.Timer
+import pycity_base.classes.Weather
+import pycity_base.classes.Prices
+import pycity_base.classes.Environment
 
 import xlrd
 

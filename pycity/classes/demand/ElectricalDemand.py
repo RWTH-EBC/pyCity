@@ -6,15 +6,15 @@ Electrical demand class
 
 from __future__ import division
 import os
-import pycity.classes.demand.Load
+import pycity_base.classes.demand.Load
 import numpy as np
-import pycity.functions.slp_electrical as slp_el
-import pycity.functions.changeResolution as cr
-import pycity.functions.stochastic_electrical_load.appliance_model as app_model
-import pycity.functions.load_el_profiles as eloader
+import pycity_base.functions.slp_electrical as slp_el
+import pycity_base.functions.changeResolution as cr
+import pycity_base.functions.stochastic_electrical_load.appliance_model as app_model
+import pycity_base.functions.load_el_profiles as eloader
 import \
     pycity.functions.stochastic_electrical_load.lighting_model as light_model
-import pycity.classes.demand.StochasticElectricalLoadWrapper as wrapper
+import pycity_base.classes.demand.StochasticElectricalLoadWrapper as wrapper
 
 
 class ElectricalDemand(pycity.classes.demand.Load.Load):

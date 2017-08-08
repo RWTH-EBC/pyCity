@@ -7,10 +7,10 @@ Created on Fri Feb 13 11:01:43 2015
 env."""
 
 from __future__ import division
-import pycity.classes.Timer
-import pycity.classes.Weather
-import pycity.classes.Prices
-import pycity.classes.Environment
+import pycity_base.classes.Timer
+import pycity_base.classes.Weather
+import pycity_base.classes.Prices
+import pycity_base.classes.Environment
 
 def run_test():
     timer = pycity.classes.Timer.Timer()

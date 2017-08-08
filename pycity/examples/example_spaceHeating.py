@@ -9,12 +9,12 @@ Created on Fri May 22 11:29:11 2015
 from __future__ import division
 import matplotlib.pyplot as plt
 
-import pycity.classes.demand.SpaceHeating as SpaceHeating
+import pycity_base.classes.demand.SpaceHeating as SpaceHeating
 
-import pycity.classes.Timer
-import pycity.classes.Weather
-import pycity.classes.Environment
-import pycity.classes.Prices
+import pycity_base.classes.Timer
+import pycity_base.classes.Weather
+import pycity_base.classes.Environment
+import pycity_base.classes.Prices
 
 
 def run_test():

@@ -11,7 +11,7 @@ import os
 import numpy as np
 import math
 import xlrd
-import pycity.functions.changeResolution as cr
+import pycity_base.functions.changeResolution as cr
 
 
 # Sources:

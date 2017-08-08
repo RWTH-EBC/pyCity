@@ -10,13 +10,13 @@ from __future__ import division
 import numpy as np
 import matplotlib.pyplot as plt
 
-import pycity.classes.demand.DomesticHotWater as DomesticHotWater
+import pycity_base.classes.demand.DomesticHotWater as DomesticHotWater
 
-import pycity.classes.Timer
-import pycity.classes.Weather
-import pycity.classes.Environment
-import pycity.classes.Prices
-import pycity.classes.demand.Occupancy
+import pycity_base.classes.Timer
+import pycity_base.classes.Weather
+import pycity_base.classes.Environment
+import pycity_base.classes.Prices
+import pycity_base.classes.demand.Occupancy
 
 
 def run_test():

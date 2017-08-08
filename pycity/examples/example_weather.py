@@ -8,8 +8,8 @@ Created on Wed Feb 11 14:12:12 2015
 
 from __future__ import division
 
-import pycity.classes.Timer
-import pycity.classes.Weather
+import pycity_base.classes.Timer
+import pycity_base.classes.Weather
 
 def run_test():
     time = pycity.classes.Timer.Timer()

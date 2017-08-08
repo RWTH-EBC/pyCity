@@ -2,7 +2,7 @@
 
 import pytest
 
-import pycity.functions.changeResolution as chres
+import pycity_base.functions.changeResolution as chres
 
 
 class Test_ChangeResolution(object):

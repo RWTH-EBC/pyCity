@@ -10,18 +10,18 @@ from __future__ import division
 import os
 import numpy as np
 
-import pycity.classes.Timer
-import pycity.classes.Sun
-import pycity.classes.Weather
-import pycity.classes.Prices
-import pycity.classes.Environment
+import pycity_base.classes.Timer
+import pycity_base.classes.Sun
+import pycity_base.classes.Weather
+import pycity_base.classes.Prices
+import pycity_base.classes.Environment
 
-import pycity.classes.demand.Occupancy
-import pycity.classes.demand.ElectricalDemand as ED
-import pycity.classes.demand.DomesticHotWater as DomesticHotWater
+import pycity_base.classes.demand.Occupancy
+import pycity_base.classes.demand.ElectricalDemand as ED
+import pycity_base.classes.demand.DomesticHotWater as DomesticHotWater
 
-import pycity.classes.demand.SpaceHeating as sh
-import pycity.classes.demand.ZoneParameters as zp
+import pycity_base.classes.demand.SpaceHeating as sh
+import pycity_base.classes.demand.ZoneParameters as zp
 
 
 # Location: Denver (weather inputs from ASHRAE 140 verification)

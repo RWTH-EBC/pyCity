@@ -7,7 +7,7 @@ Pytest script for CityDistrict class of pycity
 import numpy as np
 import shapely.geometry.point as point
 
-import pycity.classes.CityDistrict as citydist
+import pycity_base.classes.CityDistrict as citydist
 
 from pycity.test.pycity_fixtures import create_environment, create_building, \
     create_apartment, create_demands, create_empty_citydist, create_citydist

@@ -7,9 +7,9 @@ Apartment class of pycity
 from __future__ import division
 import warnings
 
-import pycity.classes.demand.DomesticHotWater as DHW
-import pycity.classes.demand.ElectricalDemand as ElecDemand
-import pycity.classes.demand.SpaceHeating as SpaceHeat
+import pycity_base.classes.demand.DomesticHotWater as DHW
+import pycity_base.classes.demand.ElectricalDemand as ElecDemand
+import pycity_base.classes.demand.SpaceHeating as SpaceHeat
 
 
 class Apartment(object):

@@ -12,7 +12,7 @@ import numpy as np
 import xlrd
 import math
 import random
-import pycity.functions.changeResolution as cr
+import pycity_base.functions.changeResolution as cr
 
 
 def load_profiles(filename):

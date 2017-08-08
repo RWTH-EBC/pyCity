@@ -10,11 +10,11 @@ from __future__ import division
 import os
 import copy
 import numpy as np
-import pycity.classes.demand.Load
-import pycity.classes.demand.ZoneInputs as zi
-import pycity.functions.slp_thermal as slp_th
-import pycity.functions.zoneModel
-import pycity.functions.changeResolution as chres
+import pycity_base.classes.demand.Load
+import pycity_base.classes.demand.ZoneInputs as zi
+import pycity_base.functions.slp_thermal as slp_th
+import pycity_base.functions.zoneModel
+import pycity_base.functions.changeResolution as chres
 
 
 class SpaceHeating(pycity.classes.demand.Load.Load):

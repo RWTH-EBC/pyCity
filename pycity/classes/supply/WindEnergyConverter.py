@@ -8,7 +8,7 @@ Created on Tue Mar 03 14:38:14 2015
 
 from __future__ import division
 import numpy as np
-import pycity.functions.handleData
+import pycity_base.functions.handleData
 
 
 class WindEnergyConverter(object):

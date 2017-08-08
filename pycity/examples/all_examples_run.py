@@ -3,28 +3,28 @@ Script executes example files in examples folder
 (except ASHRAE140 validation)
 """
 
-import pycity.examples.solar_radiation_tilted_surface as sol
-import pycity.examples.example_apartment as ap
-import pycity.examples.example_battery as batt
-import pycity.examples.example_bes as bes
-import pycity.examples.example_boiler as boil
-import pycity.examples.example_building as build
-import pycity.examples.example_chp as chp
-import pycity.examples.example_cityDisctrict as city
-import pycity.examples.example_domesticHotWater as dhw
-import pycity.examples.example_electricalDemand as eld
-import pycity.examples.example_electricalHeater as elh
-import pycity.examples.example_environment as env
-import pycity.examples.example_heatingDevice as heatd
-import pycity.examples.example_heatpump as hp
-import pycity.examples.example_inverter as inv
-import pycity.examples.example_pv as pv
-import pycity.examples.example_spaceHeating as sph
-import pycity.examples.example_tes as tes
-import pycity.examples.example_timer as timer
-import pycity.examples.example_weather as weat
-import pycity.examples.example_windEnergyConverter as wind
-import pycity.examples.example_occupancy as occ
+import pycity_base.examples.solar_radiation_tilted_surface as sol
+import pycity_base.examples.example_apartment as ap
+import pycity_base.examples.example_battery as batt
+import pycity_base.examples.example_bes as bes
+import pycity_base.examples.example_boiler as boil
+import pycity_base.examples.example_building as build
+import pycity_base.examples.example_chp as chp
+import pycity_base.examples.example_cityDisctrict as city
+import pycity_base.examples.example_domesticHotWater as dhw
+import pycity_base.examples.example_electricalDemand as eld
+import pycity_base.examples.example_electricalHeater as elh
+import pycity_base.examples.example_environment as env
+import pycity_base.examples.example_heatingDevice as heatd
+import pycity_base.examples.example_heatpump as hp
+import pycity_base.examples.example_inverter as inv
+import pycity_base.examples.example_pv as pv
+import pycity_base.examples.example_spaceHeating as sph
+import pycity_base.examples.example_tes as tes
+import pycity_base.examples.example_timer as timer
+import pycity_base.examples.example_weather as weat
+import pycity_base.examples.example_windEnergyConverter as wind
+import pycity_base.examples.example_occupancy as occ
 
 
 def run_all_examples():

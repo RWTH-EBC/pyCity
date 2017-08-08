@@ -9,8 +9,8 @@ Created on Tue Jul 21 14:09:28 2015
 from __future__ import division
 import os
 import numpy as np
-import pycity.functions.stochastic_electrical_load.lighting_model as lighting_model
-import pycity.functions.stochastic_electrical_load.appliance_model as appliance_model
+import pycity_base.functions.stochastic_electrical_load.lighting_model as lighting_model
+import pycity_base.functions.stochastic_electrical_load.appliance_model as appliance_model
 
 
 class Electricity_profile(object):

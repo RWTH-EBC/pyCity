@@ -8,8 +8,8 @@ Created on Fri Feb 06 16:16:07 2015
 
 from __future__ import division
 import numpy as np
-import pycity.classes.supply.HeatingDevice as HeatingDevice
-import pycity.functions.handleData as handleData
+import pycity_base.classes.supply.HeatingDevice as HeatingDevice
+import pycity_base.functions.handleData as handleData
 
 
 class CHP(HeatingDevice.HeatingDevice):

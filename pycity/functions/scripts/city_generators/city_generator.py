@@ -12,19 +12,19 @@ import pickle
 
 import shapely.geometry.point as point
 
-import pycity.classes.Timer
-import pycity.classes.Weather
-import pycity.classes.Prices
-import pycity.classes.Environment
+import pycity_base.classes.Timer
+import pycity_base.classes.Weather
+import pycity_base.classes.Prices
+import pycity_base.classes.Environment
 
-import pycity.classes.demand.Apartment as Apartment
-import pycity.classes.demand.DomesticHotWater as DomesticHotWater
-import pycity.classes.demand.ElectricalDemand as ElectricalDemand
-import pycity.classes.demand.SpaceHeating as SpaceHeating
-import pycity.classes.HeatingCurve as HeatingCurve
-import pycity.classes.Building as Building
-import pycity.classes.CityDistrict as citydis
-import pycity.classes.demand.Occupancy as occu
+import pycity_base.classes.demand.Apartment as Apartment
+import pycity_base.classes.demand.DomesticHotWater as DomesticHotWater
+import pycity_base.classes.demand.ElectricalDemand as ElectricalDemand
+import pycity_base.classes.demand.SpaceHeating as SpaceHeating
+import pycity_base.classes.HeatingCurve as HeatingCurve
+import pycity_base.classes.Building as Building
+import pycity_base.classes.CityDistrict as citydis
+import pycity_base.classes.demand.Occupancy as occu
 
 
 def run_city_generator(gen_mo=0, input_name='test_city_only_buildings.txt',

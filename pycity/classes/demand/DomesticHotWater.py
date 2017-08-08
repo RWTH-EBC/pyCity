@@ -9,9 +9,9 @@ Created on Sun Feb 08 22:39:15 2015
 from __future__ import division
 import os
 import numpy as np
-import pycity.classes.demand.Load
-import pycity.functions.changeResolution as cr
-import pycity.functions.dhw_stochastical as dhw_sto
+import pycity_base.classes.demand.Load
+import pycity_base.functions.changeResolution as cr
+import pycity_base.functions.dhw_stochastical as dhw_sto
 
 
 class DomesticHotWater(pycity.classes.demand.Load.Load):

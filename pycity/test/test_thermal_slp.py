@@ -3,7 +3,7 @@
 from __future__ import division
 
 import numpy as np
-import pycity.functions.slp_thermal as slp_thermal
+import pycity_base.functions.slp_thermal as slp_thermal
 
 class Test_ThermalSLP(object):
     """

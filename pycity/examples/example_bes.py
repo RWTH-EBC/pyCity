@@ -7,19 +7,19 @@ Created on Tue Feb 10 15:35:37 2015
 """
 
 from __future__ import division
-import pycity.classes.Timer
-import pycity.classes.Weather
-import pycity.classes.Environment
-import pycity.classes.Prices
+import pycity_base.classes.Timer
+import pycity_base.classes.Weather
+import pycity_base.classes.Environment
+import pycity_base.classes.Prices
 
-import pycity.classes.supply.Battery as Battery
-import pycity.classes.supply.BES as BES
-import pycity.classes.supply.Boiler as Boiler
-import pycity.classes.supply.CHP as CHP
-import pycity.classes.supply.ElectricalHeater as ElectricalHeater
-import pycity.classes.supply.Inverter as Inverter
-import pycity.classes.supply.PV as PV
-import pycity.classes.supply.ThermalEnergyStorage as ThermalEnergyStorage
+import pycity_base.classes.supply.Battery as Battery
+import pycity_base.classes.supply.BES as BES
+import pycity_base.classes.supply.Boiler as Boiler
+import pycity_base.classes.supply.CHP as CHP
+import pycity_base.classes.supply.ElectricalHeater as ElectricalHeater
+import pycity_base.classes.supply.Inverter as Inverter
+import pycity_base.classes.supply.PV as PV
+import pycity_base.classes.supply.ThermalEnergyStorage as ThermalEnergyStorage
 
 def print_bes_attributes(bes):
     print(("Has Battery: " + str(bes.hasBattery)))

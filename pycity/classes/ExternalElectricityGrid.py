@@ -8,7 +8,7 @@ Created on Sat Mar 14 08:52:56 2015
 
 from __future__ import division
 import numpy as np
-import pycity.functions.handleData as handleData
+import pycity_base.functions.handleData as handleData
 
 
 class ExternalElectricityGrid(object):

@@ -10,7 +10,7 @@ import os
 import numpy as np
 import random
 
-import pycity.functions.occupancy_model as occupancy_model
+import pycity_base.functions.occupancy_model as occupancy_model
 
 
 class Occupancy(object):

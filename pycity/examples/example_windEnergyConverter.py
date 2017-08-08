@@ -8,16 +8,16 @@ Created on Tue Mar 03 15:50:08 2015
 
 from __future__ import division
 import os
-import pycity.classes.supply.WindEnergyConverter as WindEnergyConverter
+import pycity_base.classes.supply.WindEnergyConverter as WindEnergyConverter
 
 import numpy as np
 import matplotlib.pyplot as plt
 import xlrd
 
-import pycity.classes.Timer
-import pycity.classes.Weather
-import pycity.classes.Prices
-import pycity.classes.Environment
+import pycity_base.classes.Timer
+import pycity_base.classes.Weather
+import pycity_base.classes.Prices
+import pycity_base.classes.Environment
 
 def run_test():
     # Create environment

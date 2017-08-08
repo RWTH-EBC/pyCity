@@ -10,9 +10,9 @@ from __future__ import division
 
 import matplotlib.pyplot as plt
 
-import pycity.classes.Timer
-import pycity.classes.Weather
-import pycity.classes.Environment
+import pycity_base.classes.Timer
+import pycity_base.classes.Weather
+import pycity_base.classes.Environment
 
 
 def run_example():

@@ -3,7 +3,7 @@ from __future__ import division
 import numpy as np
 import pytest
 
-import pycity.classes.demand.SpaceHeating as SpaceHeating
+import pycity_base.classes.demand.SpaceHeating as SpaceHeating
 from pycity.test.pycity_fixtures import create_environment
 
 

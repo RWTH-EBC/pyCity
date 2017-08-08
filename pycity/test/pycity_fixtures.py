@@ -3,18 +3,18 @@
 import pytest
 import shapely.geometry.point as point
 
-import pycity.classes.Timer
-import pycity.classes.Weather
-import pycity.classes.Environment
-import pycity.classes.Prices
+import pycity_base.classes.Timer
+import pycity_base.classes.Weather
+import pycity_base.classes.Environment
+import pycity_base.classes.Prices
 
-import pycity.classes.demand.DomesticHotWater as DomesticHotWater
-import pycity.classes.demand.ElectricalDemand as ElectricalDemand
-import pycity.classes.demand.SpaceHeating as SpaceHeating
-import pycity.classes.demand.Occupancy as Occupanc
-import pycity.classes.demand.Apartment as App
-import pycity.classes.Building as Build
-import pycity.classes.CityDistrict as citydist
+import pycity_base.classes.demand.DomesticHotWater as DomesticHotWater
+import pycity_base.classes.demand.ElectricalDemand as ElectricalDemand
+import pycity_base.classes.demand.SpaceHeating as SpaceHeating
+import pycity_base.classes.demand.Occupancy as Occupanc
+import pycity_base.classes.demand.Apartment as App
+import pycity_base.classes.Building as Build
+import pycity_base.classes.CityDistrict as citydist
 
 
 @pytest.fixture(scope='module')

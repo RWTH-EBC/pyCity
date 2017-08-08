@@ -7,9 +7,9 @@ Created on Thu Feb 19 16:45:15 2015
 """
 
 from __future__ import division
-import pycity.classes.supply.HeatingDevice as HeatingDevice
+import pycity_base.classes.supply.HeatingDevice as HeatingDevice
 import numpy as np
-import pycity.functions.handleData as handleData
+import pycity_base.functions.handleData as handleData
 
 
 class Heatpump(HeatingDevice.HeatingDevice):

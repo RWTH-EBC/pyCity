@@ -6,15 +6,15 @@ demand objects
 """
 
 from __future__ import division
-import pycity.classes.Timer
-import pycity.classes.Weather
-import pycity.classes.Prices
-import pycity.classes.Environment
+import pycity_base.classes.Timer
+import pycity_base.classes.Weather
+import pycity_base.classes.Prices
+import pycity_base.classes.Environment
 
-import pycity.classes.demand.Apartment as Apartment
-import pycity.classes.demand.DomesticHotWater as DomesticHotWater
-import pycity.classes.demand.ElectricalDemand as ElectricalDemand
-import pycity.classes.demand.SpaceHeating as SpaceHeating
+import pycity_base.classes.demand.Apartment as Apartment
+import pycity_base.classes.demand.DomesticHotWater as DomesticHotWater
+import pycity_base.classes.demand.ElectricalDemand as ElectricalDemand
+import pycity_base.classes.demand.SpaceHeating as SpaceHeating
 
 
 def run_test():

@@ -7,7 +7,7 @@ Created on Wed May 20 22:20:15 2015
 """
 
 from __future__ import division
-import pycity.classes.Timer
+import pycity_base.classes.Timer
 
 
 def printTimer(time):

@@ -30,7 +30,7 @@ THE SOFTWARE.
 from setuptools import setup
 
 
-setup(name='pyCity',
+setup(name='pycity_base',
       version='0.1.0',
       description='Python package for data handling and scenario generation '
                   'of city districts.',
@@ -38,7 +38,7 @@ setup(name='pyCity',
       author='Thomas Schuetz, Jan Schiefelbein',
       author_email='pycity@eonerc.rwth-aachen.de',
       license='MIT License',
-      packages=['pycity'],
+      packages=['pycity_base'],
       setup_requires=['numpy', 'matplotlib', 'pandas', 'pytest', 'xlrd',
                       'networkx', 'richardsonpy'],
       install_requires=['numpy', 'matplotlib', 'pandas', 'pytest', 'xlrd',

@@ -40,7 +40,7 @@ setup(name='pyCity',
       license='MIT License',
       packages=['pycity'],
       setup_requires=['numpy', 'matplotlib', 'pandas', 'pytest', 'xlrd',
-                      'networkx'],
+                      'networkx', 'richardsonpy'],
       install_requires=['numpy', 'matplotlib', 'pandas', 'pytest', 'xlrd',
-                        'networkx'])
+                        'networkx', 'richardsonpy'])
 

@@ -4,7 +4,7 @@ import numpy as np
 import pytest
 
 import pycity_base.classes.demand.SpaceHeating as SpaceHeating
-from pycity.test.pycity_fixtures import create_environment
+from pycity_base.test.pycity_fixtures import create_environment
 
 
 class Test_SpaceHeating(object):

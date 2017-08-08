@@ -6,7 +6,7 @@ import numpy as np
 
 import pycity_base.classes.demand.ElectricalDemand as ED
 import pytest
-from pycity.test.pycity_fixtures import create_environment, create_occupancy
+from pycity_base.test.pycity_fixtures import create_environment, create_occupancy
 
 
 class Test_ElectricalDemand(object):

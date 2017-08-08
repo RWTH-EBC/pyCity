@@ -13,7 +13,7 @@ import pycity_base.functions.changeResolution as cr
 import pycity_base.functions.stochastic_electrical_load.appliance_model as app_model
 import pycity_base.functions.load_el_profiles as eloader
 import \
-    pycity.functions.stochastic_electrical_load.lighting_model as light_model
+    pycity_base.functions.stochastic_electrical_load.lighting_model as light_model
 import pycity_base.classes.demand.StochasticElectricalLoadWrapper as wrapper
 
 

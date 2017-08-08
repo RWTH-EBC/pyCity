@@ -3,7 +3,7 @@ from __future__ import division
 import numpy as np
 
 import pycity_base.classes.demand.Apartment as Apartment
-from pycity.test.pycity_fixtures import create_environment, create_demands, \
+from pycity_base.test.pycity_fixtures import create_environment, create_demands, \
     create_apartment
 
 

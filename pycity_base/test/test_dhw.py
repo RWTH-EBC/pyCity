@@ -3,7 +3,7 @@ from __future__ import division
 import numpy as np
 
 import pycity_base.classes.demand.DomesticHotWater as dhw
-from pycity.test.pycity_fixtures import create_environment, create_occupancy
+from pycity_base.test.pycity_fixtures import create_environment, create_occupancy
 
 
 class TestDomesticHotWater(object):

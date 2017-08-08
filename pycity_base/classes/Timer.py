@@ -53,7 +53,8 @@ class Timer(object):
         self.currentTimestep = 0 # max. 365 * 24 * 3600 / timeDiscretization
         self.currentOptimizationPeriod = 0
         self.currentDay      = 0 # max. 365
-        
+
+        self.initialDay = initialDay
         self.currentWeekday = initialDay
         self.currentDayWeekend = self._setWeekend()
 

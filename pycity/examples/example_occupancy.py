@@ -11,7 +11,7 @@ import pycity.classes.Weather
 import pycity.classes.Environment
 import pycity.classes.Prices
 
-import pycity.classes.demand.occupancy as occ
+import pycity.classes.demand.Occupancy
 
 
 def exampe_occupancy():
@@ -24,7 +24,8 @@ def exampe_occupancy():
     environment = pycity.classes.Environment.Environment(timer, weather,
                                                          prices)
     
-    occupancy_object = occ.Occupancy(environment, number_occupants=1)
+    occupancy_object = pycity.classes.demand.Occupancy.Occupancy(environment,
+                                                          number_occupants=1)
     occupancy_profile = occupancy_object.occupancy
     print('Occupancy profile:')
     print(occupancy_profile)

@@ -24,7 +24,7 @@ import pycity.classes.demand.SpaceHeating as SpaceHeating
 import pycity.classes.HeatingCurve as HeatingCurve
 import pycity.classes.Building as Building
 import pycity.classes.CityDistrict as citydis
-import pycity.classes.demand.occupancy as occ
+import pycity.classes.demand.Occupancy as occu
 
 
 def run_city_generator(gen_mo=0, input_name='test_city_only_buildings.txt',
@@ -134,8 +134,8 @@ def run_city_generator(gen_mo=0, input_name='test_city_only_buildings.txt',
                 el_method = 2
                 #  Generate stochastic occupancy profile
                 occupancy_object = \
-                    occ.Occupancy(environment,
-                                  number_occupants=curr_total_nb_occupants)
+                    occu.Occupancy(environment,
+                                   number_occupants=curr_total_nb_occupants)
                 occupancy_profile = occupancy_object.occupancy
 
             # Generate electrical demand curve

@@ -6,13 +6,15 @@ Electrical demand class
 
 from __future__ import division
 import os
-
 import pycity.classes.demand.Load
+import numpy as np
 import pycity.functions.slp_electrical as slp_el
 import pycity.functions.changeResolution as cr
+import pycity.functions.stochastic_electrical_load.appliance_model as app_model
 import pycity.functions.load_el_profiles as eloader
-
-import richardsonpy.classes.electric_load as eload
+import \
+    pycity.functions.stochastic_electrical_load.lighting_model as light_model
+import pycity.classes.demand.StochasticElectricalLoadWrapper as wrapper
 
 
 class ElectricalDemand(pycity.classes.demand.Load.Load):
@@ -148,8 +150,6 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
         """
         src_path = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
-        self.eload_obj = None  # El. load object of richardsonpy
-
         if method == 0:
             super(ElectricalDemand, self).__init__(environment, loadcurve)
 
@@ -159,9 +159,8 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
                 filename = os.path.join(src_path, 'inputs',
                                         'standard_load_profile',
                                         'slp_electrical.xlsx')
-                ElectricalDemand.slp = \
-                    slp_el.load(filename,
-                                time_discretization=environment.timer.timeDiscretization)
+                ElectricalDemand.slp = slp_el.load(filename,
+                                                   time_discretization=environment.timer.timeDiscretization)
                 ElectricalDemand.loaded_slp = True
 
             loadcurve = slp_el.get_demand(annualDemand,
@@ -173,34 +172,142 @@ class ElectricalDemand(pycity.classes.demand.Load.Load):
         #  Usage of stochastic, el. profile generator for residential buildings
         elif method == 2:
 
-            q_dir = environment.weather.qDirect
-            q_diff = environment.weather.qDiffuse
-            timestep = environment.timer.timeDiscretization
-            initial_day = environment.timer.currentWeekday
+            if app_filename is None:   # Use default
+                pathApps = os.path.join(src_path, 'inputs',
+                                        'stochastic_electrical_load',
+                                        'Appliances.csv')
+            else:  # Use user defined path
+                pathApps = app_filename
 
-            #  Generate electric load object of richardsonpy
-            self.eload_obj = \
-                eload.ElectricLoad(occ_profile=occupancy,
-                                   total_nb_occ=total_nb_occupants,
-                                   q_direct=q_dir,
-                                   q_diffuse=q_diff,
-                                   annual_demand=annualDemand,
-                                   is_sfh=singleFamilyHouse,
-                                   path_app=app_filename,
-                                   path_light=light_filename,
-                                   randomize_appliances=randomizeAppliances,
-                                   prev_heat_dev=prev_heat_dev,
-                                   light_config=lightConfiguration,
-                                   timestep=timestep,
-                                   initial_day=initial_day,
-                                   season_light_mod=season_light_mod,
-                                   light_mod_fac=light_mod_fac,
-                                   do_normalization=do_normalization,
-                                   calc_profile=True,
-                                   save_app_light=False)
+            if light_filename is None:  # Use default
+                pathLights = os.path.join(src_path, 'inputs',
+                                          'stochastic_electrical_load',
+                                          'LightBulbs.csv')
+            else:  # Use user defined path
+                pathLights = light_filename
 
-            #  Pointer to loadcurve of richardsonpy el. load object
-            loadcurve = self.eload_obj.loadcurve
+            # Initialize appliances and lights
+            if annualDemand == 0:
+                if singleFamilyHouse:
+                    annualDemand = self.standard_consumption["SFH"][
+                        total_nb_occupants]
+                else:
+                    annualDemand = self.standard_consumption["MFH"][
+                        total_nb_occupants]
+
+            # According to http://www.die-stromsparinitiative.de/fileadmin/
+            # bilder/Stromspiegel/Brosch%C3%BCre/Stromspiegel2014web_final.pdf
+            # roughly 9% of the electricity consumption are due to lighting.
+            # This has to be excluded from the appliances' demand:
+            appliancesDemand = 0.91 * annualDemand
+
+            #  Get appliances
+            self.appliances = app_model.Appliances(pathApps,
+                                                   annual_consumption=appliancesDemand,
+                                                   randomize_appliances=randomizeAppliances,
+                                                   prev_heat_dev=prev_heat_dev)
+
+            #  Get lighting configuration
+            self.lights = light_model.load_lighting_profile(pathLights,
+                                                            lightConfiguration)
+
+            # Create wrapper object
+            timeDis = environment.timer.timeDiscretization
+            timestepsDay = int(86400 / timeDis)
+            day = environment.timer.currentWeekday
+            self.wrapper = wrapper.Electricity_profile(self.appliances,
+                                                       self.lights)
+
+            # Make full year simulation
+            demand = []
+            light_load = []
+            app_load = []
+
+            beam = environment.weather.qDirect
+            diffuse = environment.weather.qDiffuse
+            irradiance = beam + diffuse
+            required_timestamp = np.arange(1440)
+            given_timestamp = timeDis * np.arange(timestepsDay)
+
+            # Loop over all days
+            for i in range(int(len(irradiance) * timeDis / 86400)):
+                if (i + day) % 7 in (0, 6):
+                    weekend = True
+                else:
+                    weekend = False
+
+                irrad_day = irradiance[
+                            timestepsDay * i: timestepsDay * (i + 1)]
+                current_irradiation = np.interp(required_timestamp,
+                                                given_timestamp, irrad_day)
+
+                current_occupancy = occupancy[144 * i: 144 * (i + 1)]
+
+                (el_p_curve, light_p_curve, app_p_curve) = \
+                    self.wrapper.demands(current_irradiation,
+                                         weekend,
+                                         i,
+                                         current_occupancy)
+
+                demand.append(el_p_curve)
+                light_load.append(light_p_curve)
+                app_load.append(app_p_curve)
+
+            res = np.array(demand)
+            light_load = np.array(light_load)
+            app_load = np.array(app_load)
+
+            res = np.reshape(res, res.size)
+            light_load = np.reshape(light_load, light_load.size)
+            app_load = np.reshape(app_load, app_load.size)
+
+            if season_light_mod:
+                #  Put cosine-wave on lighting over the year to estimate
+                #  seasonal influence
+
+                light_energy = sum(light_load) * 60
+
+                time_array = np.arange(start=0, stop=len(app_load))
+                time_pi_array = time_array * 2 * np.pi / len(app_load)
+
+                cos_array = 0.5 * np.cos(time_pi_array) + 0.5
+
+                ref_light_power = max(light_load)
+
+                light_load_new = np.zeros(len(light_load))
+
+                for i in range(len(light_load)):
+                    if light_load[i] == 0:
+                        light_load_new[i] = 0
+                    elif light_load[i] > 0:
+                        light_load_new[i] = light_load[i] + \
+                                            light_mod_fac * ref_light_power \
+                                            * cos_array[i]
+
+                light_energy_new = sum(light_load_new) * 60
+
+                #  Rescale to original lighting energy demand
+                light_load_new *= light_energy / light_energy_new
+
+                res = light_load_new + app_load
+
+            #  Change time resolution
+            loadcurve = cr.changeResolution(res, 60, timeDis)
+            # light_load = cr.changeResolution(light_load, 60, timeDis)
+            # app_load = cr.changeResolution(app_load, 60, timeDis)
+
+            #  Normalize el. load profile to annualDemand
+            if do_normalization:
+                #  Convert power to energy values
+                energy_curve = loadcurve * timeDis  # in Ws
+
+                #  Sum up energy values (plus conversion from Ws to kWh)
+                curr_el_dem = sum(energy_curve) / (3600 * 1000)
+
+                con_factor = annualDemand / curr_el_dem
+
+                #  Rescale load curve
+                loadcurve *= con_factor
 
             super(ElectricalDemand, self).__init__(environment, loadcurve)
 

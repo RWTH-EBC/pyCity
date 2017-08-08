@@ -40,6 +40,6 @@ setup(name='pyCity',
       license='MIT License',
       packages=['pycity'],
       setup_requires=['numpy', 'matplotlib', 'pandas', 'pytest', 'xlrd',
-                      'richardsonpy', 'uesgraphs', 'shapely'],
-      install_requires=['numpy', 'matplotlib', 'pandas', 'pytest', 'xlrd'],
-      cmdclass={'test': PyTest})
+                      'networkx'],
+      install_requires=['numpy', 'matplotlib', 'pandas', 'pytest', 'xlrd',
+                        'networkx'])

@@ -11,7 +11,7 @@ import pycity.classes.Prices
 import pycity.classes.demand.DomesticHotWater as DomesticHotWater
 import pycity.classes.demand.ElectricalDemand as ElectricalDemand
 import pycity.classes.demand.SpaceHeating as SpaceHeating
-import pycity.classes.demand.occupancy as occ
+import pycity.classes.demand.Occupancy as Occupanc
 import pycity.classes.demand.Apartment as App
 import pycity.classes.Building as Build
 import pycity.classes.CityDistrict as citydist
@@ -102,7 +102,8 @@ def create_occupancy(create_environment, nb_occupants=1):
         occupancy object
     """
     create_occupancy = \
-        occ.Occupancy(create_environment, number_occupants=nb_occupants)
+        pycity.classes.demand.Occupancy.Occupancy(create_environment,
+                                                  number_occupants=nb_occupants)
 
     return create_occupancy
 

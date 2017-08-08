@@ -17,7 +17,7 @@ import pycity.classes.Timer
 import pycity.classes.Weather
 import pycity.classes.Prices
 import pycity.classes.Environment
-import pycity.classes.demand.Occupancy as Occ
+import pycity.classes.demand.occupancy as Occ
 import pycity.classes.demand.DomesticHotWater as DomesticHotWater
 import pycity.classes.demand.ElectricalDemand as ED
 

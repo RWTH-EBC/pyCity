@@ -19,7 +19,7 @@ import pycity_base.classes.Prices
 import pycity_base.classes.demand.Occupancy
 
 
-def run_test():
+def run_test(do_plot=False):
     timeDiscretization = 3600
     total_nb_timesteps = 365 * 24 * 60 * 60 / timeDiscretization
     timer = pycity_base.classes.Timer.Timer(timeDiscretization=timeDiscretization,
@@ -86,22 +86,23 @@ def run_test():
     print('Average daily domestic hot water volume in liters:',
           av_daily_dhw_volume)
 
-    ax1 = plt.subplot(2, 1, 1)
-    plt.step(np.arange(8760) + 1, dhw_stochastical.loadcurve, linewidth=2)
-    plt.ylabel("Heat demand in Watt")
-    plt.xlim((0, 8760))
+    if do_plot:
+        ax1 = plt.subplot(2, 1, 1)
+        plt.step(np.arange(8760) + 1, dhw_stochastical.loadcurve, linewidth=2)
+        plt.ylabel("Heat demand in Watt")
+        plt.xlim((0, 8760))
 
-    plt.subplot(2, 1, 2, sharex=ax1)
-    plt.step((np.arange(len(occupancy)) * 10 + 10) / 60, occupancy,
-             linewidth=2)
-    plt.ylabel("Active occupants")
-    offset = 0.2
-    plt.ylim((-offset, max(occupancy) + offset))
-    plt.yticks(list(range(int(max(occupancy) + 1))))
+        plt.subplot(2, 1, 2, sharex=ax1)
+        plt.step((np.arange(len(occupancy)) * 10 + 10) / 60, occupancy,
+                 linewidth=2)
+        plt.ylabel("Active occupants")
+        offset = 0.2
+        plt.ylim((-offset, max(occupancy) + offset))
+        plt.yticks(list(range(int(max(occupancy) + 1))))
 
-    plt.show()
+        plt.show()
 
 
 if __name__ == '__main__':
     #  Run program
-    run_test()
+    run_test(do_plot=True)

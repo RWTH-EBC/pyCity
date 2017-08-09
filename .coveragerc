@@ -21,6 +21,7 @@ exclude_lines =
     if __name__ == .__main__.:
 	
 	if do_plot:
+	if run_stoch:
 
 ignore_errors = True
 

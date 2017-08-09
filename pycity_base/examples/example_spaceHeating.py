@@ -37,8 +37,9 @@ def run_test(do_plot=False):
     print()
     print("Heat power curve: " + str(results))
 
-    plt.plot(hd_slp.loadcurve, label="SLP", color="b")
-    plt.show()
+    if do_plot:
+        plt.plot(hd_slp.loadcurve, label="SLP", color="b")
+        plt.show()
 
     #  Use simulated profile
     #  #---------------------------------------

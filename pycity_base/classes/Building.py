@@ -229,13 +229,13 @@ class Building(object):
         """
 
         for ap in self.apartments:
-            if ap.occupancy is None:
+            if ap.occupancy is None:  # pragma: no cover
                 msg = 'Building has no occupancy object.' \
                       ' Cannot return profile.'
                 warnings.warn(msg)
                 return None
             else:
-                if ap.occupancy.occupancy is None:
+                if ap.occupancy.occupancy is None:  # pragma: no cover
                     msg = 'Building occupancy object has no occupancy ' \
                           'profile. Cannot return profile.'
                     warnings.warn(msg)

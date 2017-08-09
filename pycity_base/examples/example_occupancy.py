@@ -41,6 +41,23 @@ def exampe_occupancy(do_plot=False):
     print(counter)
     print('Time share per year, when one person is within apartment:')
     print(counter/len(occupancy_profile))
+    print()
+
+    print('Return occupancy profile with adjusted timestep of 3600 seconds'
+          '(without integer conversion):')
+    occ_profile = \
+        occupancy_object.get_occ_profile_in_curr_timestep(timestep=3600,
+                                                          int_con=False)
+    print(occ_profile)
+    print()
+
+    print('Return occupancy profile with adjusted timestep of 3600 seconds'
+          '(with integer conversion):')
+    occ_profile = \
+        occupancy_object.get_occ_profile_in_curr_timestep(timestep=3600,
+                                                          int_con=True)
+    print(occ_profile)
+    print()
 
     if do_plot:
         plt.figure()

@@ -27,7 +27,7 @@ import pycity_base.classes.CityDistrict as citydis
 import pycity_base.classes.demand.Occupancy as occu
 
 
-def run_city_generator(gen_mo=0, input_name='test_city_only_buildings.txt',
+def run_city_generator(gen_mo=0, input_name='test_city_mixed_buildings.txt',
                        output_name=None, use_el_slp=True,
                        gen_dhw_profile=False):
     """
@@ -210,7 +210,6 @@ if __name__ == '__main__':
     gen_dhw_profile = True
 
     #  Define input data filename
-    #  filename = 'test_city_only_residential_buildings.txt'
     filename = 'test_city_mixed_buildings.txt'
 
     #  Define ouput data filename (pickled city object)

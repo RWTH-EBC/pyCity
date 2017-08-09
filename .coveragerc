@@ -23,6 +23,11 @@ exclude_lines =
 	if do_plot:
 	if run_stoch:
 
+omit =
+    # omit everything in gui and example packages
+    pycity_base/test/richardson_check/*
+    pycity_base/functions/scripts/profile_pool/*
+	
 ignore_errors = True
 
 [html]

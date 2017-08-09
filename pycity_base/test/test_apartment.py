@@ -1,3 +1,8 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+
+"""
 from __future__ import division
 
 import numpy as np
@@ -129,3 +134,6 @@ class Test_apartment(object):
 
         assert abs(np.sum(dhw_annual_demand) - reference_value) \
                <= 0.001 * reference_value
+
+    def test_get_max_nb_occupants(self, create_apartment):
+        create_apartment.get_max_nb_occupants()

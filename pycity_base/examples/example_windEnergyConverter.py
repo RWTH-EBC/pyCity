@@ -19,7 +19,7 @@ import pycity_base.classes.Weather
 import pycity_base.classes.Prices
 import pycity_base.classes.Environment
 
-def run_test():
+def run_test(do_plot=False):
     # Create environment
     timer = pycity_base.classes.Timer.Timer()
     weather = pycity_base.classes.Weather.Weather(timer, useTRY=True)
@@ -49,20 +49,21 @@ def run_test():
     (currentWind,) = weather.getWeatherForecast(getVWind=True) # in m/s
     currentPower = wec.getPower() / 1000 # in kW
 
-    # Plot wind and WEC power
-    figure = plt.figure(figsize=(8,6))
-    ax1 = plt.subplot(211)
-    ax1.plot(list(range(environment.timer.timestepsHorizon)), currentWind)
-    plt.xlim((0,environment.timer.timestepsHorizon-1))
-    plt.ylim((0,12))
-    plt.ylabel("Wind velocity in m/s", fontsize=12)
-    ax2 = plt.subplot(212)
-    ax2.plot(list(range(environment.timer.timestepsHorizon)), currentPower)
-    plt.xlim((0,environment.timer.timestepsHorizon-1))
-    plt.xlabel("Timesteps", fontsize=12)
-    plt.ylabel("Electricity generation in kW", fontsize=12)
-    plt.show()
+    if do_plot:
+        # Plot wind and WEC power
+        figure = plt.figure(figsize=(8,6))
+        ax1 = plt.subplot(211)
+        ax1.plot(list(range(environment.timer.timestepsHorizon)), currentWind)
+        plt.xlim((0,environment.timer.timestepsHorizon-1))
+        plt.ylim((0,12))
+        plt.ylabel("Wind velocity in m/s", fontsize=12)
+        ax2 = plt.subplot(212)
+        ax2.plot(list(range(environment.timer.timestepsHorizon)), currentPower)
+        plt.xlim((0,environment.timer.timestepsHorizon-1))
+        plt.xlabel("Timesteps", fontsize=12)
+        plt.ylabel("Electricity generation in kW", fontsize=12)
+        plt.show()
 
 if __name__ == '__main__':
     #  Run program
-    run_test()
+    run_test(do_plot=True)

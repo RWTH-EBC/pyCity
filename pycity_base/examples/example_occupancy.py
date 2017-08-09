@@ -14,7 +14,7 @@ import pycity_base.classes.Prices
 import pycity_base.classes.demand.Occupancy
 
 
-def exampe_occupancy():
+def exampe_occupancy(do_plot=False):
     time_discretization = 60
     timer = pycity_base.classes.Timer.Timer(timeDiscretization=time_discretization,
                                  timestepsTotal=int(8760*3600/time_discretization))
@@ -41,12 +41,30 @@ def exampe_occupancy():
     print(counter)
     print('Time share per year, when one person is within apartment:')
     print(counter/len(occupancy_profile))
-    
-    plt.figure()
-    plt.plot(occupancy_object.occupancy[:200])
-    plt.ylabel('Occupancy')
-    plt.show()
+    print()
+
+    print('Return occupancy profile with adjusted timestep of 3600 seconds'
+          '(without integer conversion):')
+    occ_profile = \
+        occupancy_object.get_occ_profile_in_curr_timestep(timestep=3600,
+                                                          int_con=False)
+    print(occ_profile)
+    print()
+
+    print('Return occupancy profile with adjusted timestep of 3600 seconds'
+          '(with integer conversion):')
+    occ_profile = \
+        occupancy_object.get_occ_profile_in_curr_timestep(timestep=3600,
+                                                          int_con=True)
+    print(occ_profile)
+    print()
+
+    if do_plot:
+        plt.figure()
+        plt.plot(occupancy_object.occupancy[:200])
+        plt.ylabel('Occupancy')
+        plt.show()
 
 if __name__ == '__main__':
     #  Run program
-    exampe_occupancy()
+    exampe_occupancy(do_plot=True)

@@ -15,7 +15,7 @@ import pycity_base.classes.Weather
 import pycity_base.classes.Environment
 
 
-def run_example():
+def run_example(do_plot=False):
     # Create environment
     # Initialize the timer object for a full year computation, without rolling
     # horizon and hourly time discretization
@@ -43,20 +43,21 @@ def run_example():
     direct_radiation = solar_radiation_tilted_surface[2]
     reflected_radiation = solar_radiation_tilted_surface[3]
 
-    fig = plt.figure()
-    fig.add_subplot(411)
-    plt.plot(total_radiation)
-    plt.ylabel('total_radiation')
-    fig.add_subplot(412)
-    plt.plot(diffuse_radiation)
-    plt.ylabel('diffuse_radiation')
-    fig.add_subplot(413)
-    plt.plot(direct_radiation)
-    plt.ylabel('direct_radiation')
-    fig.add_subplot(414)
-    plt.plot(reflected_radiation)
-    plt.ylabel('reflected_radiation')
-    plt.show()
+    if do_plot:
+        fig = plt.figure()
+        fig.add_subplot(411)
+        plt.plot(total_radiation)
+        plt.ylabel('total_radiation')
+        fig.add_subplot(412)
+        plt.plot(diffuse_radiation)
+        plt.ylabel('diffuse_radiation')
+        fig.add_subplot(413)
+        plt.plot(direct_radiation)
+        plt.ylabel('direct_radiation')
+        fig.add_subplot(414)
+        plt.plot(reflected_radiation)
+        plt.ylabel('reflected_radiation')
+        plt.show()
 
 if __name__ == '__main__':
-    run_example()
+    run_example(do_plot=True)

@@ -53,10 +53,6 @@ def run_test():
     entities = [heat_demand, el_demand, dhw_annex42]
     apartment.addMultipleEntities(entities)
 
-    print('Get all power curves of apartment (for current horizon):')
-    print(apartment.get_power_curves())
-    print()
-
     print('Get space heating power curve for whole year:')
     print(apartment.get_space_heat_power_curve(current_values=False))
     print()

@@ -32,6 +32,8 @@
 #####################
 .cache/
 __pycache__/
+.coverage
+coverage_html_report/
 
 #pip install #
 #####################

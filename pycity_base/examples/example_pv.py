@@ -19,7 +19,7 @@ import pycity_base.classes.Weather
 import pycity_base.classes.Prices
 import pycity_base.classes.Environment
 
-def run_test():
+def run_test(do_plot=False):
     # Create environment
     timer = pycity_base.classes.Timer.Timer()
     timer.reinit(3600, 8760, 8760, 8760, 0, True)
@@ -59,23 +59,24 @@ def run_test():
     print()
     print(("PV power (detailed model): " + np.str(pvPower_detailed)))
 
-    # Plot PV power
-    plot_time = list(range(environment.timer.timestepsHorizon))
-    figure = plt.figure(figsize=(6,6))
-    from matplotlib import gridspec
-    gs = gridspec.GridSpec(2,1, height_ratios=[3,1])
-    ax0 = plt.subplot(gs[0])
-    ax0.plot(plot_time, pvPower_detailed, label="PV electricity (detailed")
-    ax0.plot(plot_time, pvPower_simple,   label="PV electricity (simple")
-    plt.ylabel("Power", fontsize=12)
-    plt.xlim((0,environment.timer.timestepsHorizon-1))
+    if do_plot:
+        # Plot PV power
+        plot_time = list(range(environment.timer.timestepsHorizon))
+        figure = plt.figure(figsize=(6,6))
+        from matplotlib import gridspec
+        gs = gridspec.GridSpec(2,1, height_ratios=[3,1])
+        ax0 = plt.subplot(gs[0])
+        ax0.plot(plot_time, pvPower_detailed, label="PV electricity (detailed")
+        ax0.plot(plot_time, pvPower_simple,   label="PV electricity (simple")
+        plt.ylabel("Power", fontsize=12)
+        plt.xlim((0,environment.timer.timestepsHorizon-1))
 
-    ax1 = plt.subplot(gs[1], sharex=ax0)
-    ax1.plot(plot_time, pvPower_detailed - pvPower_simple)
-    plt.xlabel("Time", fontsize=12)
-    plt.ylabel("Error")
-    plt.show()
+        ax1 = plt.subplot(gs[1], sharex=ax0)
+        ax1.plot(plot_time, pvPower_detailed - pvPower_simple)
+        plt.xlabel("Time", fontsize=12)
+        plt.ylabel("Error")
+        plt.show()
 
 if __name__ == '__main__':
     #  Run program
-    run_test()
+    run_test(do_plot=True)

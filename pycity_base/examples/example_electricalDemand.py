@@ -15,7 +15,7 @@ import pycity_base.classes.Prices
 import pycity_base.classes.demand.Occupancy
 
 
-def run_test():
+def run_test(do_plot=False, run_stoch=False):
 
     print('Generate slp profile')
     print('########################################################')
@@ -44,69 +44,74 @@ def run_test():
 
     print('Sum of consumed energy in kWh: ', energy_value)
 
-    plt.plot(results[:672])
-    plt.show()
+    if do_plot:
+        plt.plot(results[:672])
+        plt.show()
 
-    print()
-    print('Generate stochastic, el. profile')
-    print('########################################################')
+    if run_stoch:
 
-    occupancy = pycity_base.classes.demand.Occupancy.Occupancy(environment,
-                                                          number_occupants=3)
+        print()
+        print('Generate stochastic, el. profile')
+        print('########################################################')
 
-    el_dem_stochastic = ED.ElectricalDemand(environment,
-                                            method=2,
-                                            total_nb_occupants=3,
-                                            randomizeAppliances=True,
-                                            lightConfiguration=10,
-                                            occupancy=occupancy.occupancy,
-                                            prev_heat_dev=True)
+        occupancy = pycity_base.classes.demand.Occupancy.Occupancy(environment,
+                                                              number_occupants=3)
 
-    results2 = el_dem_stochastic.loadcurve
+        el_dem_stochastic = ED.ElectricalDemand(environment,
+                                                method=2,
+                                                total_nb_occupants=3,
+                                                randomizeAppliances=True,
+                                                lightConfiguration=10,
+                                                occupancy=occupancy.occupancy,
+                                                prev_heat_dev=True)
 
-    #  Convert to energy_curve in kWh
-    energy_curve2 = results2 * timer.timeDiscretization / (3600 * 1000)
+        results2 = el_dem_stochastic.loadcurve
 
-    energy_value2 = sum(energy_curve2)
+        #  Convert to energy_curve in kWh
+        energy_curve2 = results2 * timer.timeDiscretization / (3600 * 1000)
 
-    print()
-    print("Electrical power in W: " + str(results))
+        energy_value2 = sum(energy_curve2)
 
-    print('Sum of consumed energy in kWh: ', energy_value2)
+        print()
+        print("Electrical power in W: " + str(results))
 
-    plt.plot(results2[:672])
-    plt.show()
+        print('Sum of consumed energy in kWh: ', energy_value2)
 
-    print()
-    print('Generate normalized stochastic profile')
-    print('########################################################')
+        if do_plot:
+            plt.plot(results2[:672])
+            plt.show()
 
-    energy_input = 3000
+        print()
+        print('Generate normalized stochastic profile')
+        print('########################################################')
 
-    el_dem_stochastic2 = ED.ElectricalDemand(environment,
-                                             method=2,
-                                             annualDemand=energy_input,
-                                             total_nb_occupants=3,
-                                             randomizeAppliances=True,
-                                             lightConfiguration=10,
-                                             occupancy=occupancy.occupancy,
-                                             do_normalization=True)
+        energy_input = 3000
 
-    results3 = el_dem_stochastic2.loadcurve
+        el_dem_stochastic2 = ED.ElectricalDemand(environment,
+                                                 method=2,
+                                                 annualDemand=energy_input,
+                                                 total_nb_occupants=3,
+                                                 randomizeAppliances=True,
+                                                 lightConfiguration=10,
+                                                 occupancy=occupancy.occupancy,
+                                                 do_normalization=True)
 
-    #  Convert to energy_curve in kWh
-    energy_curve3 = results3 * timer.timeDiscretization / (3600 * 1000)
+        results3 = el_dem_stochastic2.loadcurve
 
-    energy_value3 = sum(energy_curve3)
+        #  Convert to energy_curve in kWh
+        energy_curve3 = results3 * timer.timeDiscretization / (3600 * 1000)
 
-    print()
-    print("Electrical power in W: " + str(results3))
+        energy_value3 = sum(energy_curve3)
 
-    print('Sum of consumed energy in kWh: ', energy_value3)
-    assert energy_input - energy_value3 <= 0.001 * energy_input
+        print()
+        print("Electrical power in W: " + str(results3))
 
-    plt.plot(results3[:672])
-    plt.show()
+        print('Sum of consumed energy in kWh: ', energy_value3)
+        assert energy_input - energy_value3 <= 0.001 * energy_input
+
+        if do_plot:
+            plt.plot(results3[:672])
+            plt.show()
 
     print('Generate el. profile based on weekly measurement data')
     print('########################################################')
@@ -129,8 +134,9 @@ def run_test():
 
     print('Sum of consumed energy in kWh: ', energy_value4)
 
-    plt.plot(results4[:672])
-    plt.show()
+    if do_plot:
+        plt.plot(results4[:672])
+        plt.show()
 
     print('Generate el. profile based on annual measurement data')
     print('########################################################')
@@ -153,12 +159,13 @@ def run_test():
 
     print('Sum of consumed energy in kWh: ', energy_value5)
 
-    plt.plot(results5[:672])
-    plt.show()
+    if do_plot:
+        plt.plot(results5[:672])
+        plt.show()
 
-    plt.plot(results5)
-    plt.show()
+        plt.plot(results5)
+        plt.show()
 
 if __name__ == '__main__':
     #  Run program
-    run_test()
+    run_test(do_plot=True, run_stoch=True)

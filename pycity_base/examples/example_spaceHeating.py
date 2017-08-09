@@ -17,7 +17,7 @@ import pycity_base.classes.Environment
 import pycity_base.classes.Prices
 
 
-def run_test():
+def run_test(do_plot=False):
     timer = pycity_base.classes.Timer.Timer()
     weather = pycity_base.classes.Weather.Weather(timer, useTRY=True)
     prices = pycity_base.classes.Prices.Prices()
@@ -37,8 +37,9 @@ def run_test():
     print()
     print("Heat power curve: " + str(results))
 
-    plt.plot(hd_slp.loadcurve, label="SLP", color="b")
-    plt.show()
+    if do_plot:
+        plt.plot(hd_slp.loadcurve, label="SLP", color="b")
+        plt.show()
 
     #  Use simulated profile
     #  #---------------------------------------
@@ -50,14 +51,16 @@ def run_test():
     sim_th_loadcurve = sim_th_load.loadcurve
 
     print('Thermal power load in W:', sim_th_loadcurve)
-    plt.plot(sim_th_loadcurve, label="Simulated power curve", color="b")
-    plt.show()
 
-    plt.plot(sim_th_loadcurve, label="Simulated power curve")
-    plt.plot(hd_slp.loadcurve, label="SLP")
-    plt.legend()
-    plt.show()
+    if do_plot:
+        plt.plot(sim_th_loadcurve, label="Simulated power curve", color="b")
+        plt.show()
+
+        plt.plot(sim_th_loadcurve, label="Simulated power curve")
+        plt.plot(hd_slp.loadcurve, label="SLP")
+        plt.legend()
+        plt.show()
 
 if __name__ == '__main__':
     #  Run program
-    run_test()
+    run_test(do_plot=True)

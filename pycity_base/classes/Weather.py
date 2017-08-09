@@ -197,7 +197,7 @@ class Weather(pycity_base.classes.Sun.Sun):
             self.qDiffuse = np.maximum(0, globalHorIrrad - self.qDirect)
             self.try_number = "00"
 
-        else:
+        else:  # pragma: no cover
             # If the data is not provided via TRY, load each file separately
             def readTXT(path, delimiter):
                 if not path == "":

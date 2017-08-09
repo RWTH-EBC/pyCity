@@ -63,9 +63,8 @@ def run_test():
     bes.addDevice(elHeater)
     bes.addDevice(inverter_ac_dc)
     bes.addDevice(inverter_dc_ac)
-    bes.addDevice(pv)
 
-    bes.addDevice(tes)
+    bes.addMultipleDevices([pv, tes])
 
     # Print current status
     print()
@@ -82,6 +81,19 @@ def run_test():
     print("Inverter DC to AC: " + str(inverter_dc_ac is bes.inverterDcac))
     print("PV: " + str(pv is bes.pv))
     print("TES: " + str(tes is bes.tes))
+
+    bes.getHasDevices(allDevices=True)
+
+    bes.getHasDevices(allDevices=False,
+                      battery=True,
+                      boiler=True,
+                      chp=True,
+                      electricalHeater=True,
+                      heatpump=True,
+                      inverterAcdc=True,
+                      inverterDcac=True,
+                      pv=True,
+                      tes=True)
 
 if __name__ == '__main__':
     #  Run program

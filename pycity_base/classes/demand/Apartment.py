@@ -82,10 +82,10 @@ class Apartment(object):
         elif entity._kind == 'occupancy':
             self.occupancy = entity
 
-        elif entity._kind == "room":
+        elif entity._kind == "room":  # pragma: no cover
             self.rooms.append(entity)
 
-        else:
+        else:  # pragma: no cover
             warnings.warn('Kind of entity is unknown. Entity has not been ' +
                           'added')
 

@@ -2,6 +2,9 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import division
+import os
+import xlrd
+import numpy as np
 import shapely.geometry.point as point
 
 import pycity_base.classes.Timer
@@ -16,8 +19,8 @@ import pycity_base.classes.demand.SpaceHeating as SpaceHeating
 import pycity_base.classes.HeatingCurve as HeatingCurve
 import pycity_base.classes.Building as Building
 import pycity_base.classes.CityDistrict as CityDistrict
-
 import pycity_base.classes.supply.PV as PV
+import pycity_base.classes.supply.WindEnergyConverter as Wind
 
 
 def run_test():
@@ -96,6 +99,33 @@ def run_test():
         #  Add PV fields to city district
         cityDistrict.addEntity(entity=pv, position=dict_pos[i+4])
 
+    #  Add wind energy converter
+    #  #-------------------------------------------------------------------
+    # Create Wind Energy Converter (ENERCON E-126)
+    src_path = os.path.dirname(os.path.dirname(__file__))
+    wind_data_path = os.path.join(src_path, 'inputs',
+                                  'wind_energy_converters.xlsx')
+    wecDatasheets = xlrd.open_workbook(wind_data_path)
+    ENERCON_E_126 = wecDatasheets.sheet_by_name("ENERCON_E_126")
+    hubHeight = ENERCON_E_126.cell_value(0, 1)
+    mapWind = []
+    mapPower = []
+    counter = 0
+    while ENERCON_E_126._dimnrows > 3 + counter:
+        mapWind.append(ENERCON_E_126.cell_value(3 + counter, 0))
+        mapPower.append(ENERCON_E_126.cell_value(3 + counter, 1))
+        counter += 1
+
+    mapWind = np.array(mapWind)
+    mapPower = np.array(mapPower) * 1000
+
+    wec = Wind.WindEnergyConverter(environment=environment,
+                                   velocity=mapWind,
+                                   power=mapPower,
+                                   hubHeight=hubHeight)
+
+    cityDistrict.addEntity(entity=wec, position=point.Point(100, 100))
+
     #  Extract information of city object
     #  #-------------------------------------------------------------------
 
@@ -135,6 +165,18 @@ def run_test():
 
     print('Return hot water power curve:')
     print(cityDistrict.get_aggr_dhw_power_curve())
+    print()
+
+    print('Get wind energy converter power:')
+    print(cityDistrict.getWindEnergyConverterPower())
+    print()
+
+    print('Get list of nodes of type building:')
+    print(cityDistrict.get_list_id_of_spec_node_type(node_type='building'))
+    print()
+
+    print('Get total number of occupants within city district:')
+    print(cityDistrict.get_nb_occupants())
 
 if __name__ == '__main__':
     #  Run program

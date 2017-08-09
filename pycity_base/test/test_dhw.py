@@ -1,6 +1,7 @@
 from __future__ import division
 
 import numpy as np
+import copy
 
 import pycity_base.classes.demand.DomesticHotWater as dhw
 from pycity_base.test.pycity_fixtures import create_environment, create_occupancy
@@ -84,3 +85,36 @@ class TestDomesticHotWater(object):
         #  Check if av_daily_dhw_volume is within sufficient limits
         assert (av_daily_dhw_volume <= 250)
         assert (av_daily_dhw_volume >= 45)
+
+    def test_method3(self, create_environment):
+        """
+        Test method for IEA annex 42 domestic hot water profile generator
+
+        Parameters
+        ----------
+        create_environment : object
+            Environment object (pytest fixture)
+        """
+        tFlow = 60
+        supplyTemperature = 25
+        dailyConsumption = 200
+
+        environment = copy.deepcopy(create_environment)
+
+        environment.timer.timeDiscretization = 3600
+
+        dhw_annex42 = dhw.DomesticHotWater(create_environment,
+                                           tFlow=tFlow,
+                                           thermal=True,
+                                           method=1,
+                                           dailyConsumption=dailyConsumption,
+                                           supplyTemperature=supplyTemperature)
+
+        dailyConsumption = 300
+
+        dhw_annex42 = dhw.DomesticHotWater(create_environment,
+                                           tFlow=tFlow,
+                                           thermal=False,
+                                           method=1,
+                                           dailyConsumption=dailyConsumption,
+                                           supplyTemperature=supplyTemperature)

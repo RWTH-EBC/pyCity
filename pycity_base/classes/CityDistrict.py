@@ -11,7 +11,7 @@ import numpy as np
 
 try:
     import uesgraphs.uesgraph as ues
-except:
+except:  # pragma: no cover
     raise ImportError('Package uesgraphs is not found. Please install uesgraphs' +
                 'first. https://github.com/RWTH-EBC/uesgraphs')
 

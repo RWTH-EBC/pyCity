@@ -30,13 +30,19 @@ pyCity requires the following Python packages:
 - pytest
 - xlrd
 
-as well as the python package
+as well as the EBC Python packages:
 
 - uesgraphs
 (with dependencies to shapely and pyproj)
 
 which is available under 
 [https://github.com/RWTH-EBC/uesgraphs](https://github.com/RWTH-EBC/uesgraphs)
+
+and
+
+- richardsonpy 
+
+which is available under [https://github.com/RWTH-EBC/richardsonpy](https://github.com/RWTH-EBC/richardsonpy)
 
 ### Installation of uesgraph and its dependencies
 
@@ -95,7 +101,7 @@ by adding new .py file and trying to import uesgraphs and pyCity.
 
 `import uesgraphs`
 
-`import pycity`
+`import pycity_base`
 
 Import should be possible without errors.
 

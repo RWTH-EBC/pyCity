@@ -4,8 +4,6 @@
 Functions to help processing city district graphs
 """
 
-import copy
-
 
 def get_subcity(city, nodelist):
     """
@@ -33,11 +31,8 @@ def get_subcity(city, nodelist):
     for node in nodelist:
         assert node in city.nodelist_building
 
-    #  Initialize street_graph as deepcopy of self.city
-    city_copy = copy.deepcopy(city)
-
-    #  Get subgraph (only holding nodes within nodelist)
-    subcity = city_copy.subgraph(nodelist)
+    # Get subgraph (only holding nodes within nodelist)
+    subcity = city.subgraph(nodelist).copy()
 
     #  Read environment pointer
     subcity.environment = city.environment

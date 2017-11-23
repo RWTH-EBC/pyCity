@@ -9,8 +9,9 @@ import shapely.geometry.point as point
 
 import pycity_base.classes.CityDistrict as citydist
 
-from pycity_base.test.pycity_fixtures import create_environment, create_building, \
-    create_apartment, create_demands, create_empty_citydist, create_citydist
+from pycity_base.test.pycity_fixtures import create_environment, \
+    create_building, create_apartment, create_demands, \
+    create_empty_citydist, create_citydist
 
 
 class Test_CityDistrict(object):

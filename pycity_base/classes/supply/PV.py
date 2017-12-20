@@ -70,13 +70,28 @@ class PV(object):
         """
         return (self.area, self.eta, self.temperature_nominal, self.alpha)
 
-    def _computePower(self):
+    def _computePower(self, current_values=True):
         """
+        Compute PV electric output power
+
+        Parameters
+        ----------
+        current_values : bool, optional
+            If True, returns values of current horizon (default: True).
+            If False, returns annual values.
+
+        Returns
+        -------
+        res_tuple : tuple
+            2d tuple holding power array in Watt and radiation array in W/m2
         """
         # Get radiation on a tilted surface
-        getRadiation = self.environment.weather.getRadiationTiltedSurface
-        radiation = getRadiation(beta=self.beta, gamma=self.gamma, update=True)
-        
+        radiation = self.environment.\
+            weather.getRadiationTiltedSurface(beta=self.beta,
+                                              gamma=self.gamma,
+                                              update=True,
+                                              current_values=current_values)
+
         # If no temperature coefficient is given, a simple PV model is applied
         if self.alpha == 0:
             power = self.area * self.eta * radiation[0]
@@ -126,16 +141,23 @@ class PV(object):
             - True: Compute the PV generation forecast for the upcoming horizon
             - False: Do not compute a new PV generation forecast
         """
+        currentTimestep = self.environment.timer.currentTimestep
+        timesteps = self.environment.timer.timestepsHorizon
+
         if updatePower:
-            currentTimestep = self.environment.timer.currentTimestep
-            (currentPower, currentRadiation) = self._computePower()
-            self.currentPower = currentPower
-            timesteps = self.environment.timer.timestepsHorizon
-            self.totalPower[currentTimestep : (currentTimestep + 
-                                               timesteps)] = currentPower
-            self.totalRadiation[currentTimestep : (currentTimestep + 
-                                               timesteps)] = currentRadiation
-            
-        return pycity_base.functions.handleData.getValues(currentValues,
-                                              self.currentPower, 
-                                              self.totalPower)        
+            (currentPower, currentRadiation) = self._computePower\
+                (current_values=currentValues)
+
+            if currentValues:
+                self.currentPower = currentPower
+
+                self.totalPower[currentTimestep : (currentTimestep +
+                                                   timesteps)] = currentPower
+                self.totalRadiation[currentTimestep : (currentTimestep +
+                                                   timesteps)] = currentRadiation
+                return self.currentPower
+
+            else:
+                self.totalPower = currentPower
+                self.totalRadiation = currentRadiation
+                return self.totalPower

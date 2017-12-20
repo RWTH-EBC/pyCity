@@ -243,8 +243,13 @@ class Weather(pycity_base.classes.Sun.Sun):
                                            self.timer.timeDiscretization)
 
 
-    def getRadiationTiltedSurface(self, beta, gamma, albedo=0.3, update=False):
+    def getRadiationTiltedSurface(self, beta, gamma, albedo=0.3, update=False,
+                                  current_values=True):
         """
+        Calculates radiation on tilted surface
+
+        Parameters
+        ----------
         beta : float
             Slope, the angle (in degree) between the plane of the surface in 
             question and the horizontal. 0 <= beta <= 180. If beta > 90, the 
@@ -261,9 +266,13 @@ class Weather(pycity_base.classes.Sun.Sun):
             If True, air mass, extraterrestrial radiation, delta, omega and 
             thetaZ are updated before computing the total radiation on the
             tilted surface.
+        current_values : bool, optional
+            If True, returns values of current horizon (default: True).
+            If False, returns annual values.
         """
         # Get radiation
-        radiation = self.getWeatherForecast(getQDirect=True, getQDiffuse=True)
+        radiation = self.getWeatherForecast(getQDirect=True, getQDiffuse=True,
+                                            current_values=current_values)
         (beam, diffuse) = radiation
 
         # Return total radiation on a given tilted surface
@@ -272,7 +281,8 @@ class Weather(pycity_base.classes.Sun.Sun):
                                                    beta=beta,
                                                    gamma=gamma,
                                                    albedo=albedo,
-                                                   update=update)
+                                                   update=update,
+                                                   current_values=current_values)
 
     def _getWeatherData(self,
                         fromTimestep,
@@ -349,7 +359,8 @@ class Weather(pycity_base.classes.Sun.Sun):
                            getVWind=False,
                            getPhiAmbient=False,
                            getPAmbient=False,
-                           getCloudiness=False):
+                           getCloudiness=False,
+                           current_values=True):
         """
         Get the current weather forecast
         
@@ -368,15 +379,22 @@ class Weather(pycity_base.classes.Sun.Sun):
         getPAmbient : Boolean, optional
             If True, return ambient pressure
         getCloudiness : Boolean
-            If Ture, return cloudiness
+            If True, return cloudiness
+        current_values : bool, optional
+            If True, returns values of current horizon (default: True).
+            If False, returns annual values.
             
         Return
         ------
         The result is returned as a tuple
         """
         # Get current and final position
-        currentPosition = self.timer.currentTimestep
-        finalPosition = currentPosition + self.timer.timestepsHorizon
+        if current_values:
+            currentPosition = self.timer.currentTimestep
+            finalPosition = currentPosition + self.timer.timestepsHorizon
+        else:
+            currentPosition = 0
+            finalPosition = self.timer.timestepsTotal
 
         return self._getWeatherData(currentPosition,
                                     finalPosition,

@@ -43,3 +43,38 @@ class TestPV():
 
         assert pv_energy_out > 900
         assert pv_energy_out < 1000
+
+    def test_pv_check_annual_energy2(self):
+        """
+        Test to check annual energy output of PV object instance
+        """
+
+        pv_area = 8  # in m2
+        eta = 0.12  #  Efficiency
+        beta = 0
+
+        timer = pycity_base.classes.Timer.Timer()
+        #  Overwrite horizon with total number of timesteps
+        timer.timestepsHorizon = timer.timestepsTotal
+        timer.timestepsUsedHorizon = timer.timestepsTotal
+
+        weather = pycity_base.classes.Weather.Weather(timer)
+
+        prices = pycity_base.classes.Prices.Prices()
+
+        environment = pycity_base.classes.Environment.\
+            Environment(timer=timer,
+                        weather=weather,
+                        prices=prices)
+
+        pv = PV.PV(environment=environment,
+                   area=pv_area, eta=eta, beta=beta)
+
+        pv_pow_array = pv.getPower(currentValues=True, updatePower=True)
+
+        pv_energy_out = sum(pv_pow_array) * timer.timeDiscretization / \
+                        (1000 * 3600)  # in kWh
+
+        assert pv_energy_out > 900
+        assert pv_energy_out < 1000
+

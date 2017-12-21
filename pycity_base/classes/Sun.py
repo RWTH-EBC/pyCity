@@ -63,7 +63,7 @@ class Sun(object):
         self.altitude = altitude
         self.timeZone = timeZone
     
-    def update(self):
+    def update(self, current_values=True):
         """ 
         Update attributes (for example because a new optimization period just
         started).
@@ -74,8 +74,14 @@ class Sun(object):
         - Delta
         - Omega
         - ThetaZ
+
+        Parameters
+        ----------
+        current_values : bool, optional
+            If True, returns values of current horizon (default: True).
+            If False, returns annual values.
         """
-        self.computeGeometry()
+        self.computeGeometry(allTimeSteps=not current_values)
     
     def computeGeometry(self, allTimeSteps=False):
         """
@@ -284,12 +290,19 @@ class Sun(object):
         return theta
         
     def getTotalRadiationTiltedSurface(self, beamRadiation, diffuseRadiation, 
-                                       beta, gamma, albedo=0.3, update=False):
-        """ 
+                                       beta, gamma, albedo=0.3, update=False,
+                                       current_values=True):
+        """
+
+        Parameters
+        ----------
+        current_values : bool, optional
+            If True, returns values of current horizon (default: True).
+            If False, returns annual values.
         """
         # Update common angles
         if update:
-            self.update()
+            self.update(current_values=current_values)
         
         # Get incidence angle
         theta = self.getIncidenceAngle(beta, gamma)

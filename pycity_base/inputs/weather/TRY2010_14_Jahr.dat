@@ -1,12 +1,12 @@
-TRY14   Schw‰bische Alb und Baar                                           (Klimaregion 14)
+TRY14   Schw√§bische Alb und Baar                                           (Klimaregion 14)
 Station: Stoetten                        WMO-Nummer: 10836
-Lage: 48∞40'N <- B.   9∞52'O <- L.   734 Meter ¸ber NN
+Lage: 48¬∞40'N <- B.   9¬∞52'O <- L.   734 Meter √ºber NN
 Zeitpunkt der Erstellung: November 2010
 
 Art des TRY    : mittleres Jahr
 Bezugszeitraum : 1988-2007
 Stadteffekt    : -----
-Hˆhenkorrektur : -----
+H√∂henkorrektur : -----
 
 Datenbasis : Beobachtungsdaten Zeitraum 1988-2007
 
@@ -19,19 +19,19 @@ MM Monat                                                                {1..12}
 DD Tag                                                                  {1..28,30,31}
 HH Stunde (MEZ)                                                         {1..24}
 N  Bedeckungsgrad                                              [Achtel] {0..8;9}
-WR Windrichtung in 10 m Hˆhe ¸ber Grund                        [∞]      {0;10..360;999}
-WG Windgeschwindigkeit in 10 m Hˆhe ¸ber Grund                 [m/s]
-t  Lufttemperatur in 2m Hˆhe ¸ber Grund                        [∞C]
-p  Luftdruck in Stationshˆhe                                   [hPa]
-x  Wasserdampfgehalt, Mischungsverh‰ltnis                      [g/kg]
-RF Relative Feuchte in 2 m Hˆhe ¸ber Grund                     [%]      {1..100}
+WR Windrichtung in 10 m H√∂he √ºber Grund                        [¬∞]      {0;10..360;999}
+WG Windgeschwindigkeit in 10 m H√∂he √ºber Grund                 [m/s]
+t  Lufttemperatur in 2m H√∂he √ºber Grund                        [¬∞C]
+p  Luftdruck in Stationsh√∂he                                   [hPa]
+x  Wasserdampfgehalt, Mischungsverh√§ltnis                      [g/kg]
+RF Relative Feuchte in 2 m H√∂he √ºber Grund                     [%]      {1..100}
 W  Wetterereignis der aktuellen Stunde                                  {0..99}
-B  Direkte Sonnenbestrahlungsst‰rke (horiz. Ebene)             [W/m≤]   abw‰rts gerichtet: positiv
-D  Difuse Sonnenbetrahlungsst‰rke (horiz. Ebene)               [W/m≤]   abw‰rts gerichtet: positiv
+B  Direkte Sonnenbestrahlungsst√§rke (horiz. Ebene)             [W/m¬≤]   abw√§rts gerichtet: positiv
+D  Difuse Sonnenbetrahlungsst√§rke (horiz. Ebene)               [W/m¬≤]   abw√§rts gerichtet: positiv
 IK Information, ob B und oder D Messwert/Rechenwert                     {1;2;3;4;9}
-A  Bestrahlungsst‰rke d. atm. W‰rmestrahlung (horiz. Ebene)    [W/m≤]   abw‰rts gerichtet: positiv
-E  Bestrahlungsst‰rke d. terr. W‰rmestrahlung                  [W/m≤]   aufw‰rts gerichtet: negativ
-IL Qualit‰tsbit f¸r die langwelligen Strahlungsgrˆﬂen                   {1;2;3;4;5;6;7;8;9}
+A  Bestrahlungsst√§rke d. atm. W√§rmestrahlung (horiz. Ebene)    [W/m¬≤]   abw√§rts gerichtet: positiv
+E  Bestrahlungsst√§rke d. terr. W√§rmestrahlung                  [W/m¬≤]   aufw√§rts gerichtet: negativ
+IL Qualit√§tsbit f√ºr die langwelligen Strahlungsgr√∂√üen                   {1;2;3;4;5;6;7;8;9}
 
 
 RG    IS  MM  DD  HH  N   WR      WG       t       p        x   RF   W     B     D IK    A      E IL

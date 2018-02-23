@@ -175,8 +175,8 @@ class Building(object):
         """
 
         #  Initialize array with zeros
-        el_power_curve = np.zeros(len(self.apartments[0].power_el.
-            get_power(currentValues=current_values)))
+        el_power_curve = np.zeros((self.apartments[0].power_el.
+            get_power(currentValues=current_values)).shape)
 
         # Get power curves of each apartment
         for apartment in self.apartments:

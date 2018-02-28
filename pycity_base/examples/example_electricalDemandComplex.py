@@ -78,7 +78,7 @@ def run_test(do_plot=False, run_stoch=False):
         energy_value2 = sum(energy_curve2)
 
         print()
-        print("Electrical power in W: " + str(results))
+        print("Electrical power in W: " + str(results2))
 
         print('Sum of consumed energy in kWh: ', energy_value2)
 
@@ -128,8 +128,8 @@ def run_test(do_plot=False, run_stoch=False):
     print('########################################################')
 
     # generate a random loadcurve for active and reactive power
-    profile_p=np.random.randn(35040)
-    profile_q=profile_p*0.74
+    profile_p = np.random.randn(35040)
+    profile_q = profile_p*0.74
 
     el_dem_read = ED.ElectricalDemandComplex(environment,
                                                     method=0, loadcurve=profile_p, loadcurve_q=profile_q,
@@ -137,6 +137,12 @@ def run_test(do_plot=False, run_stoch=False):
 
     results0_p = el_dem_read.loadcurve
     results0_q = el_dem_read.loadcurve_q
+
+    if do_plot:
+        plt.plot(results0_p[:672], label='El. load P')
+        plt.plot(results0_q[:672], label='El. load Q')
+        plt.legend()
+        plt.show()
 
     print('Generate el. profile based on weekly measurement data')
     print('########################################################')

@@ -6,6 +6,7 @@ Electrical demand class
 
 from __future__ import division
 import os
+import numpy as np
 import pycity_base.classes.demand.LoadComplex
 import pycity_base.functions.slp_electrical as slp_el
 import pycity_base.functions.changeResolution as cr
@@ -42,14 +43,14 @@ class ElectricalDemandComplex(pycity_base.classes.demand.LoadComplex.LoadComplex
     def __init__(self,
                  environment,
                  method=0,
-                 loadcurve=[],
+                 loadcurve=[], loadcurve_q=[],
                  annualDemand=None, profileType="H0",
                  singleFamilyHouse=True, total_nb_occupants=0,
                  randomizeAppliances=True, lightConfiguration=0, occupancy=[],
                  do_normalization=False, method_3_type=None,
                  method_4_type=None, prev_heat_dev=False, app_filename=None,
                  light_filename=None, season_light_mod=False,
-                 light_mod_fac=0.25):
+                 light_mod_fac=0.25, reactive_power=False):
         """
         Parameters
         ----------
@@ -149,7 +150,12 @@ class ElectricalDemandComplex(pycity_base.classes.demand.LoadComplex.LoadComplex
         src_path = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
         if method == 0:
-            super(ElectricalDemandComplex, self).__init__(environment, loadcurve)
+            if reactive_power == False:
+                super(ElectricalDemandComplex, self).__init__(environment, loadcurve)
+            else:
+                super(ElectricalDemandComplex, self).__init__(environment, loadcurve)
+                self.loadcurve_q = loadcurve_q
+
 
         #  Use standardized load profiles (SLP)
         elif method == 1:
@@ -165,7 +171,10 @@ class ElectricalDemandComplex(pycity_base.classes.demand.LoadComplex.LoadComplex
                                           ElectricalDemandComplex.slp[profileType],
                                           environment.timer.timeDiscretization)
 
+            loadcurve_q = np.zeros(np.shape(loadcurve))
+
             super(ElectricalDemandComplex, self).__init__(environment, loadcurve)
+            self.loadcurve_q = loadcurve_q
 
         #  Usage of stochastic, el. profile generator for residential buildings
         elif method == 2:
@@ -179,6 +188,10 @@ class ElectricalDemandComplex(pycity_base.classes.demand.LoadComplex.LoadComplex
 
             #  Get timestep
             timestep = environment.timer.timeDiscretization
+
+            if timestep != 3600:
+                q_direct = cr.changeResolution(q_direct, timestep, 3600, method='mean')
+                q_diffuse = cr.changeResolution(q_diffuse, timestep, 3600, method='mean')
 
             #  Generate Richadsonpy el. load object instance
             electr_lodad = \
@@ -201,8 +214,14 @@ class ElectricalDemandComplex(pycity_base.classes.demand.LoadComplex.LoadComplex
                                    calc_profile=True,
                                    save_app_light=False)
 
-            super(ElectricalDemandComplex, self).__init__(environment,
-                                                   electr_lodad.loadcurve)
+            if reactive_power==False:
+                super(ElectricalDemandComplex, self).__init__(environment,
+                                                       electr_lodad.loadcurve)
+                self.loadcurve_q = np.zeros(np.shape(electr_lodad.loadcurve))
+            else:
+                super(ElectricalDemandComplex, self).__init__(environment,
+                                                       electr_lodad.loadcurve)
+                self.loadcurve_q = electr_lodad.loadcurve_q
 
         #  Generate el. load based on measured, weekly profile
         elif method == 3:
@@ -230,6 +249,7 @@ class ElectricalDemandComplex(pycity_base.classes.demand.LoadComplex.LoadComplex
                                             environment.timer.timeDiscretization)
 
             super(ElectricalDemandComplex, self).__init__(environment, loadcurve)
+            self.loadcurve_q = np.zeros(np.shape(loadcurve))
 
         #  Generate el. load based on measured, annual profiles
         elif method == 4:
@@ -256,6 +276,7 @@ class ElectricalDemandComplex(pycity_base.classes.demand.LoadComplex.LoadComplex
                                             environment.timer.timeDiscretization)
 
             super(ElectricalDemandComplex, self).__init__(environment, loadcurve)
+            self.loadcurve_q = np.zeros(np.shape(loadcurve))
 
         self._kind = "electricaldemand"
         self.method = method
@@ -277,6 +298,24 @@ class ElectricalDemandComplex(pycity_base.classes.demand.LoadComplex.LoadComplex
         """
         if self.method in (0, 1, 2, 3, 4):
             return self._getLoadcurve(currentValues)
+
+    def get_power_q(self, currentValues=True):
+        """
+        Return electrical reactive power curve
+
+        Parameters
+        ----------
+        currentValues : bool, optional
+            Return only current values (True) or the entire load (False)
+            (default: True)
+
+        Return
+        ------
+        loadcurve : np.array
+            Electrical power curve
+        """
+        if self.method in (0, 1, 2, 3, 4):
+            return self._getLoadcurve_q(currentValues)
 
     # def __init__(self, environment, method=0, loadcurve=[]):
     #     #  Initialize superclass

@@ -156,7 +156,7 @@ class Building(object):
 
         return space_heat_power
 
-    def get_electric_power_curve(self, current_values=False):
+    def get_electric_power_curve(self, current_values=False, reactive_power=False):
         """
         Returns electric power curve
 
@@ -167,16 +167,22 @@ class Building(object):
             (default: False)
             False - Use complete number of timesteps
             True - Use horizon
+        reactive_power: bool, optional
+            returns reactive power curve
 
         Returns
         -------
-        el_power_curve : array-like
-           Electrical power curve in W
+        el_power_curves : array-like
+           Electrical power curves in W (loadcurve - active power) and in VAr (loadcurve_q - reactive power)
         """
 
-        #  Initialize array with zeros
+        #  Initialize array with zeros for active power P
         el_power_curve = np.zeros((self.apartments[0].power_el.
             get_power(currentValues=current_values)).shape)
+
+        #  Initialize array with zeros for reactive power Q
+        el_power_curve_q = np.zeros((self.apartments[0].power_el.
+                                     get_power(currentValues=current_values)).shape)
 
         # Get power curves of each apartment
         for apartment in self.apartments:
@@ -184,7 +190,13 @@ class Building(object):
             el_power_curve += apartment.power_el.get_power(
                     currentValues=current_values)
 
-        return el_power_curve
+        if reactive_power==True:
+
+            for apartment in self.apartments:
+                el_power_curve_q += apartment.power_el.get_power_q(
+                    currentValues=current_values)
+
+        return el_power_curve, el_power_curve_q
 
     def get_dhw_power_curve(self, current_values=False):
         """

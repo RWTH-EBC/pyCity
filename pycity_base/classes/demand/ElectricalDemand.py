@@ -179,6 +179,10 @@ class ElectricalDemand(pycity_base.classes.demand.Load.Load):
             #  Get timestep
             timestep = environment.timer.timeDiscretization
 
+            if timestep != 3600:
+                q_direct = cr.changeResolution(q_direct, timestep, 3600, method='mean')
+                q_diffuse = cr.changeResolution(q_diffuse, timestep, 3600, method='mean')
+
             #  Generate Richadsonpy el. load object instance
             electr_lodad = \
                 eload.ElectricLoad(occ_profile=occupancy,

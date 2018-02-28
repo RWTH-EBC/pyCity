@@ -22,7 +22,7 @@ class LoadComplex(pycity_base.classes.demand.Load.Load):
         environment : Environment object
             Common to all other objects. Includes time and weather instances
         loadcurve_complex: Array like
-            Load curve for all time steps with active and reactive power
+            Load curve for all time steps with active (loadcurve) and reactive power (loadcurve_q)
         """
 
         super(LoadComplex, self).__init__(environment, loadcurve_complex)
@@ -40,3 +40,17 @@ class LoadComplex(pycity_base.classes.demand.Load.Load):
             return self.loadcurve[initialPosition: finalPosition]
         else:
             return self.loadcurve
+
+    def _getLoadcurve_q(self, currentValues=True):
+        """
+        Return the reactive load curve for the upcoming scheduling period
+        (currentValues==True) or return the entire load curve
+        (currentValues==False)
+        """
+        if currentValues:
+            initialPosition = self.environment.timer.currentTimestep
+            timestepsHorizon = self.environment.timer.timestepsHorizon
+            finalPosition = initialPosition + timestepsHorizon
+            return self.loadcurve_q[initialPosition: finalPosition]
+        else:
+            return self.loadcurve_q

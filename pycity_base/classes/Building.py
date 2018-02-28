@@ -192,11 +192,18 @@ class Building(object):
 
         if reactive_power==True:
 
+            #  Initialize array with zeros for reactive power Q
+            el_power_curve_q = np.zeros((self.apartments[0].power_el.
+                                         get_power(currentValues=current_values)).shape)
+
             for apartment in self.apartments:
                 el_power_curve_q += apartment.power_el.get_power_q(
                     currentValues=current_values)
 
-        return el_power_curve, el_power_curve_q
+        if reactive_power:
+            return el_power_curve, el_power_curve_q
+        else:
+            return el_power_curve
 
     def get_dhw_power_curve(self, current_values=False):
         """

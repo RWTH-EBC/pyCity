@@ -26,7 +26,6 @@ import pycity_base.classes.supply.HeatPump as HeatPump
 import pycity_base.classes.HeatingCurve as HeatingCurve
 import pycity_base.classes.Building as Building
 import pycity_base.classes.demand.Occupancy
-import richardsonpy.functions.load_radiation as loadrad
 
 
 def run_test():
@@ -43,12 +42,6 @@ def run_test():
 
     occupancy = pycity_base.classes.demand.Occupancy.Occupancy(environment,
                                                                number_occupants=3)
-
-    #  Get radiation
-    (q_direct, q_diffuse) = loadrad.get_rad_from_try_path()
-
-    weather.qDirect = q_direct
-    weather.qDiffuse = q_diffuse
 
     el_demand = ElectricalDemand.ElectricalDemandComplex(environment,total_nb_occupants=3,
                                                          method=2,

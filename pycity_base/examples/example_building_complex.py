@@ -3,7 +3,7 @@
 """
 Created on Tue Feb 27 07:24:34 2018
 
-@author: tsz
+@author: tsl, adapted from example_building.py by tsz
 """
 
 from __future__ import division

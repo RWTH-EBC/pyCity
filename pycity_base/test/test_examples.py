@@ -26,6 +26,8 @@ import pycity_base.examples.example_timer as timer
 import pycity_base.examples.example_weather as weat
 import pycity_base.examples.example_windEnergyConverter as wind
 import pycity_base.examples.example_occupancy as occ
+import pycity_base.examples.example_coolingDevice as cd
+
 
 class Test_Examples():
 
@@ -74,3 +76,5 @@ class Test_Examples():
         weat.run_test()
 
         wind.run_test()
+
+        cd.run_test()

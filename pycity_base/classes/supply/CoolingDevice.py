@@ -17,7 +17,7 @@ class CoolingDevice(object):
     def __init__(self,
                  environment,
                  qNominal,
-                 tMin=85,
+                 tMin=4,
                  lowerActivationLimit=1):
         """
         Parameters

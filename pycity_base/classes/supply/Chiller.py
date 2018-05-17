@@ -15,7 +15,6 @@ class Chiller(CoolingDevice.CoolingDevice):
 
     def __init__(self,
                  environment,
-                 t_ambient,
                  q_nominal,
                  epsilon,
                  t_min=4,
@@ -46,7 +45,6 @@ class Chiller(CoolingDevice.CoolingDevice):
                                       lower_activation_limit)
         self._kind = "chiller"
         self.epsilon = epsilon
-        self.t_ambient = t_ambient
 
     def getResults(self, currentValues=True):
         """

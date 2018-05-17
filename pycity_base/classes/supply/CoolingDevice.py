@@ -16,25 +16,25 @@ class CoolingDevice(object):
 
     def __init__(self,
                  environment,
-                 qNominal,
-                 tMin=4,
-                 lowerActivationLimit=1):
+                 q_nominal,
+                 t_min=4,
+                 lower_activation_limit=1):
         """
         Parameters
         ----------
         environment : Environment object
             Common to all other objects. Includes time and weather instances
-        qNominal : Array of float
+        q_nominal : Array of float
             Nominal cooling output in Watt
-        tMin : Float, optional
+        t_min : Float, optional
             Minimum provided temperature in °C
-        lowerActivationLimit : float (0 <= lowerActivationLimit <= 1)
+        lower_activation_limit : float (0 <= lower_activation_limit <= 1)
             Define the lower activation limit. For example, heat pumps are
             typically able to operate between 50 % part load and rated load.
-            In this case, lowerActivationLimit would be 0.5
+            In this case, lower_activation_limit would be 0.5
             Two special cases:
-            Linear behavior: lowerActivationLimit = 0
-            Two-point controlled: lowerActivationLimit = 1
+            Linear behavior: lower_activation_limit = 0
+            Two-point controlled: lower_activation_limit = 1
         """
 
         self._kind = "coolingdevice"
@@ -43,9 +43,9 @@ class CoolingDevice(object):
         timestepsUsedHorizon = environment.timer.timestepsUsedHorizon
 
         self.environment = environment
-        self.qNominal = qNominal
-        self.tMin = tMin
-        self.lowerActivationLimit = lowerActivationLimit
+        self.q_nominal = q_nominal
+        self.t_min = t_min
+        self.lower_activation_limit = lower_activation_limit
         self.totalQOutput = np.zeros(timestepsTotal)
         self.totalSchedule = np.zeros(timestepsTotal)
         self.currentQOutput = np.zeros(timestepsUsedHorizon)

@@ -35,9 +35,9 @@ def run_test():
     print()
     print(("Type: " + chiller._kind))
     print(("Efficiency: " + str(chiller.epsilon)))
-    print(("Maximum cooling output: " + str(chiller.qNominal)))
-    print(("Minimal flow temperature: " + str(chiller.tMin)))
-    print(("Lower activation limit: " + str(chiller.lowerActivationLimit)))
+    print(("Maximum cooling output: " + str(chiller.q_nominal)))
+    print(("Minimal flow temperature: " + str(chiller.t_min)))
+    print(("Lower activation limit: " + str(chiller.lower_activation_limit)))
 
     print()
     print(("Nominals: " + str(chiller.getNominalValues())))

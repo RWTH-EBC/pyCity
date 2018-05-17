@@ -39,48 +39,48 @@ class CoolingDevice(object):
 
         self._kind = "coolingdevice"
 
-        timestepsTotal = environment.timer.timestepsTotal
-        timestepsUsedHorizon = environment.timer.timestepsUsedHorizon
+        timesteps_total = environment.timer.timestepsTotal
+        timesteps_used_horizon = environment.timer.timestepsUsedHorizon
 
         self.environment = environment
         self.q_nominal = q_nominal
         self.t_min = t_min
         self.lower_activation_limit = lower_activation_limit
-        self.totalQOutput = np.zeros(timestepsTotal)
-        self.totalSchedule = np.zeros(timestepsTotal)
-        self.currentQOutput = np.zeros(timestepsUsedHorizon)
-        self.currentSchedule = np.zeros(timestepsUsedHorizon)
+        self.total_q_output = np.zeros(timesteps_total)
+        self.total_schedule = np.zeros(timesteps_total)
+        self.current_q_output = np.zeros(timesteps_used_horizon)
+        self.current_schedule = np.zeros(timesteps_used_horizon)
 
-    def _setSchedule(self, schedule):
+    def _set_schedule(self, schedule):
         """ Save the computed schedule to the cooling device """
         results = handleData.saveResult(self.environment.timer,
-                                        self.currentSchedule,
-                                        self.totalSchedule,
+                                        self.current_schedule,
+                                        self.total_schedule,
                                         schedule)
-        (self.currentSchedule, self.totalSchedule) = results
+        (self.current_schedule, self.total_schedule) = results
 
-    def _setQOutput(self, qOutput):
+    def _set_q_output(self, q_output):
         """ Save the computed heat output to the cooling device """
         results = handleData.saveResult(self.environment.timer,
-                                        self.currentQOutput,
-                                        self.totalQOutput,
-                                        qOutput)
-        (self.currentQOutput, self.totalQOutput) = results
+                                        self.current_q_output,
+                                        self.total_q_output,
+                                        q_output)
+        (self.current_q_output, self.total_q_output) = results
 
-    def _getSchedule(self, currentValues=True):
+    def _get_schedule(self, current_values=True):
         """
-        Return the schedule. If currentValues=True: current values,
+        Return the schedule. If current_values=True: current values,
         else: total values
         """
-        return handleData.getValues(currentValues,
-                                    self.currentSchedule,
-                                    self.totalSchedule)
+        return handleData.getValues(current_values,
+                                    self.current_schedule,
+                                    self.total_schedule)
 
-    def _getQOutput(self, currentValues=True):
+    def _get_q_output(self, current_values=True):
         """
-        Return the heat output. If currentValues=True: current values,
+        Return the heat output. If current_values=True: current values,
         else: total values
         """
-        return handleData.getValues(currentValues,
-                                    self.currentQOutput,
-                                    self.totalQOutput)
+        return handleData.getValues(current_values,
+                                    self.current_q_output,
+                                    self.total_q_output)

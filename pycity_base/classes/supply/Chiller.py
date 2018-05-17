@@ -5,10 +5,10 @@ Cooling demand class
 """
 
 from __future__ import division
-import pycity_base.classes.supply.CoolingDevice as CoolingDevice
+import pycity_base.classes.supply.coolingdevice as coolingdevice
 
 
-class Chiller(CoolingDevice.CoolingDevice):
+class Chiller(coolingdevice.CoolingDevice):
     """
     Implementation of the chiller
     """
@@ -46,34 +46,34 @@ class Chiller(CoolingDevice.CoolingDevice):
         self._kind = "chiller"
         self.epsilon = epsilon
 
-    def getResults(self, currentValues=True):
+    def get_results(self, current_values=True):
         """
         Return results.
 
         Parameter
         ---------
-        currentValues : boolean, optional
+        current_values : boolean, optional
             - True : Return only values for this scheduling period
             - False : Return values for all scheduling periods
 
         Order
         -----
-        qOutput : array_like
+        q_output : array_like
             cooling production of the chiller
         schedule : array_like
             Operational schedule
         """
-        return (self._getQOutput(currentValues),
-                self._getSchedule(currentValues))
+        return (self._get_q_output(current_values),
+                self._get_schedule(current_values))
 
-    def setResults(self, qOutput, schedule):
+    def set_results(self, q_output, schedule):
         """
         Save resulting cooling output and operational schedule.
         """
-        self._setSchedule(schedule)
-        self._setQOutput(qOutput)
+        self._set_schedule(schedule)
+        self._set_q_output(q_output)
 
-    def getNominalValues(self):
+    def get_nominal_values(self):
         """
         Get the chiller's efficiency, nominal cooling output, minimal flow
         temperature and lower activation limit.

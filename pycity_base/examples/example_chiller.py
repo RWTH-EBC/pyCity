@@ -12,7 +12,7 @@ import pycity_base.classes.Weather
 import pycity_base.classes.Environment
 import pycity_base.classes.Prices
 
-import pycity_base.classes.supply.Chiller as Chiller
+import pycity_base.classes.supply.chiller as chill
 
 
 def run_test():
@@ -28,7 +28,7 @@ def run_test():
     q_nominal = 10000
     t_min = 4
     epsilon = 4.5
-    chiller = Chiller.Chiller(
+    chiller = chill.Chiller(
         environment, q_nominal, epsilon, t_min, lower_activation_limit)
 
     # Print results
@@ -40,14 +40,14 @@ def run_test():
     print(("Lower activation limit: " + str(chiller.lower_activation_limit)))
 
     print()
-    print(("Nominals: " + str(chiller.getNominalValues())))
+    print(("Nominals: " + str(chiller.get_nominal_values())))
 
     np.random.seed(0)
     result_q = np.random.rand(timer.timestepsUsedHorizon) * q_nominal
     result_schedule = np.random.randint(2, size=timer.timestepsUsedHorizon)
-    chiller.setResults(result_q, result_schedule)
+    chiller.set_results(result_q, result_schedule)
 
-    results = chiller.getResults(True)
+    results = chiller.get_results(True)
     print()
     print("Cooling output: " + str(results[0]))
     print()

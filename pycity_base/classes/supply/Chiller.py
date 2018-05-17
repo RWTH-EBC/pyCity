@@ -15,38 +15,38 @@ class Chiller(CoolingDevice.CoolingDevice):
 
     def __init__(self,
                  environment,
-                 tAmbient,
-                 qNominal,
+                 t_ambient,
+                 q_nominal,
                  epsilon,
-                 tMin=4,
-                 lowerActivationLimit=1):
+                 t_min=4,
+                 lower_activation_limit=1):
         """
         Parameter
         ---------
         environment : Environment object
             Common to all other objects. Includes time and weather instances
-        qNominal : array of float
+        q_nominal : array of float
             nominal cooling output in Watt
         epsilon : array of float
             efficiency (without unit)
-        tMin : Integer, optional
+        t_min : Integer, optional
             minimum provided temperature in °C
-        lowerActivationLimit : Float (0 <= lowerActivationLimit <= 1)
+        lower_activation_limit : Float (0 <= lower_activation_limit <= 1)
             Define the lower activation limit. For example, heat pumps are
             typically able to operate between 50 % part load and rated load.
-            In this case, lowerActivationLimit would be 0.5
+            In this case, lower_activation_limit would be 0.5
             Two special cases:
-            Linear behavior: lowerActivationLimit = 0
-            Two-point controlled: lowerActivationLimit = 1
+            Linear behavior: lower_activation_limit = 0
+            Two-point controlled: lower_activation_limit = 1
         """
 
         super(Chiller, self).__init__(environment,
-                                      qNominal,
-                                      tMin,
-                                      lowerActivationLimit)
+                                      q_nominal,
+                                      t_min,
+                                      lower_activation_limit)
         self._kind = "chiller"
         self.epsilon = epsilon
-        self.tAmbient = tAmbient
+        self.t_ambient = t_ambient
 
     def getResults(self, currentValues=True):
         """
@@ -81,4 +81,7 @@ class Chiller(CoolingDevice.CoolingDevice):
         temperature and lower activation limit.
         """
         return (
-            self.epsilon, self.qNominal, self.tMin, self.lowerActivationLimit)
+            self.epsilon,
+            self.q_nominal,
+            self.t_min,
+            self.lower_activation_limit)

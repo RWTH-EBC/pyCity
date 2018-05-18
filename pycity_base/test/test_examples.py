@@ -28,6 +28,7 @@ import pycity_base.examples.example_windEnergyConverter as wind
 import pycity_base.examples.example_occupancy as occ
 import pycity_base.examples.example_coolingDevice as cd
 import pycity_base.examples.example_compressionchiller as ch
+import pycity_base.examples.example_absorptionchiller as ach
 
 
 class Test_Examples():
@@ -81,3 +82,5 @@ class Test_Examples():
         cd.run_test()
 
         ch.run_test()
+
+        ach.run_test()

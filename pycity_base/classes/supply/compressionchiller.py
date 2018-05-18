@@ -44,7 +44,7 @@ class CompressionChiller(coolingdevice.CoolingDevice):
             q_nominal,
             t_min,
             lower_activation_limit)
-        self._kind = "chiller"
+        self._kind = "compressionchiller"
         self.epsilon = epsilon
 
     def get_results(self, current_values=True):

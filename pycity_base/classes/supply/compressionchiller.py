@@ -8,7 +8,7 @@ from __future__ import division
 import pycity_base.classes.supply.coolingdevice as coolingdevice
 
 
-class Chiller(coolingdevice.CoolingDevice):
+class CompressionChiller(coolingdevice.CoolingDevice):
     """
     Implementation of the chiller
     """
@@ -39,10 +39,11 @@ class Chiller(coolingdevice.CoolingDevice):
             Two-point controlled: lower_activation_limit = 1
         """
 
-        super(Chiller, self).__init__(environment,
-                                      q_nominal,
-                                      t_min,
-                                      lower_activation_limit)
+        super(CompressionChiller, self).__init__(
+            environment,
+            q_nominal,
+            t_min,
+            lower_activation_limit)
         self._kind = "chiller"
         self.epsilon = epsilon
 

@@ -12,7 +12,7 @@ import pycity_base.classes.Weather
 import pycity_base.classes.Environment
 import pycity_base.classes.Prices
 
-import pycity_base.classes.supply.chiller as chill
+import pycity_base.classes.supply.compressionchiller as chill
 
 
 def run_test():
@@ -28,7 +28,7 @@ def run_test():
     q_nominal = 10000
     t_min = 4
     epsilon = 4.5
-    chiller = chill.Chiller(
+    chiller = chill.CompressionChiller(
         environment, q_nominal, epsilon, t_min, lower_activation_limit)
 
     # Print results

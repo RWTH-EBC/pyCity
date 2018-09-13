@@ -1,0 +1,610 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>pycity_base.classes.supply package &#8212; pycity_base 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="pycity-base-classes-supply-package">
+<h1>pycity_base.classes.supply package<a class="headerlink" href="#pycity-base-classes-supply-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-pycity_base.classes.supply.BES">
+<span id="pycity-base-classes-supply-bes-module"></span><h2>pycity_base.classes.supply.BES module<a class="headerlink" href="#module-pycity_base.classes.supply.BES" title="Permalink to this headline">¶</a></h2>
+<p>Created on Mon Feb 09 12:26:24 2015</p>
+<p>&#64;author: tsz</p>
+<dl class="class">
+<dt id="pycity_base.classes.supply.BES.BES">
+<em class="property">class </em><code class="descclassname">pycity_base.classes.supply.BES.</code><code class="descname">BES</code><span class="sig-paren">(</span><em>environment</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.BES.BES" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="docutils">
+<dt>Building Energy System (BES) is able to contain the following devices:</dt>
+<dd>Battery, Boiler, Combined Heat and Power (CHP) unit, Electrical
+heater, Heatpump, Inverter (AC/DC and DC/AC), Photovoltaics (PV) and
+Thermal Energy Storage (TES) unit</dd>
+</dl>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="pycity_base.classes.supply.BES.BES.addDevice">
+<code class="descname">addDevice</code><span class="sig-paren">(</span><em>objectInstance</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.BES.BES.addDevice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a device object</p>
+<p class="rubric">Example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">myChp</span> <span class="o">=</span> <span class="n">CHP</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myBes</span> <span class="o">=</span> <span class="n">BES</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myBes</span><span class="o">.</span><span class="n">addDevice</span><span class="p">(</span><span class="n">myChp</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.supply.BES.BES.addMultipleDevices">
+<code class="descname">addMultipleDevices</code><span class="sig-paren">(</span><em>devices</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.BES.BES.addMultipleDevices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add multiple devices to the existing BES</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.supply.BES.BES.getHasDevices">
+<code class="descname">getHasDevices</code><span class="sig-paren">(</span><em>allDevices=True</em>, <em>battery=False</em>, <em>boiler=False</em>, <em>chp=False</em>, <em>electricalHeater=False</em>, <em>heatpump=False</em>, <em>inverterAcdc=False</em>, <em>inverterDcac=False</em>, <em>pv=False</em>, <em>tes=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.BES.BES.getHasDevices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get information if certain devices are installed devices.
+The result is in alphabetical order, starting with “battery”</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>allDevices</strong> (<em>boolean</em><em>, </em><em>optional</em>) – If true: Return all installed devices
+If false: Only return the specified devices</li>
+<li><strong>battery</strong> (<em>boolean</em><em>, </em><em>optional</em>) – Return information on the battery?</li>
+<li><strong>boiler</strong> (<em>boolean</em><em>, </em><em>optional</em>) – Return information on the boiler?</li>
+<li><strong>chp</strong> (<em>boolean</em><em>, </em><em>optional</em>) – Return information on the chp unit?</li>
+<li><strong>electricalHeater</strong> (<em>boolean</em><em>, </em><em>optional</em>) – Return information on the electrical heater?</li>
+<li><strong>heatpump</strong> (<em>boolean</em><em>, </em><em>optional</em>) – Return information on the heat pump?</li>
+<li><strong>inverterAcdc</strong> (<em>boolean</em><em>, </em><em>optional</em>) – Return information on the AC-DC inverter?</li>
+<li><strong>inverterDcac</strong> (<em>boolean</em><em>, </em><em>optional</em>) – Return information on the DC-AC inverter?</li>
+<li><strong>pv</strong> (<em>boolean</em><em>, </em><em>optional</em>) – Return information on the PV modules?</li>
+<li><strong>tes</strong> (<em>boolean</em><em>, </em><em>optional</em>) – Return information on the thermal energy storage?</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.classes.supply.Battery">
+<span id="pycity-base-classes-supply-battery-module"></span><h2>pycity_base.classes.supply.Battery module<a class="headerlink" href="#module-pycity_base.classes.supply.Battery" title="Permalink to this headline">¶</a></h2>
+<p>Created on Fri Feb 06 20:01:19 2015</p>
+<p>&#64;author: Thomas</p>
+<dl class="class">
+<dt id="pycity_base.classes.supply.Battery.Battery">
+<em class="property">class </em><code class="descclassname">pycity_base.classes.supply.Battery.</code><code class="descname">Battery</code><span class="sig-paren">(</span><em>environment</em>, <em>socInit</em>, <em>capacity</em>, <em>selfDischarge=0.01</em>, <em>etaCharge=0.95</em>, <em>etaDischarge=0.95</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.Battery.Battery" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Implementation of the battery</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="pycity_base.classes.supply.Battery.Battery.getNominalValues">
+<code class="descname">getNominalValues</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.Battery.Battery.getNominalValues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get battery’s capacity, rate of self discharge, charging and
+discharging efficiency.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.supply.Battery.Battery.getResults">
+<code class="descname">getResults</code><span class="sig-paren">(</span><em>currentValues=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.Battery.Battery.getResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return results.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.supply.Battery.Battery.setResults">
+<code class="descname">setResults</code><span class="sig-paren">(</span><em>soc</em>, <em>charge</em>, <em>discharge</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.Battery.Battery.setResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save resulting state of charge, charging and discharging powers.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.classes.supply.Boiler">
+<span id="pycity-base-classes-supply-boiler-module"></span><h2>pycity_base.classes.supply.Boiler module<a class="headerlink" href="#module-pycity_base.classes.supply.Boiler" title="Permalink to this headline">¶</a></h2>
+<p>Created on Fri Feb 06 16:50:30 2015</p>
+<p>&#64;author: tsz</p>
+<dl class="class">
+<dt id="pycity_base.classes.supply.Boiler.Boiler">
+<em class="property">class </em><code class="descclassname">pycity_base.classes.supply.Boiler.</code><code class="descname">Boiler</code><span class="sig-paren">(</span><em>environment</em>, <em>qNominal</em>, <em>eta</em>, <em>tMax=85</em>, <em>lowerActivationLimit=1</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.Boiler.Boiler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pycity_base.classes.supply.HeatingDevice.HeatingDevice" title="pycity_base.classes.supply.HeatingDevice.HeatingDevice"><code class="xref py py-class docutils literal notranslate"><span class="pre">pycity_base.classes.supply.HeatingDevice.HeatingDevice</span></code></a></p>
+<p>Implementation of the boiler</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="pycity_base.classes.supply.Boiler.Boiler.getNominalValues">
+<code class="descname">getNominalValues</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.Boiler.Boiler.getNominalValues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the boiler’s efficiency, nominal heat output, maximum flow
+temperature and lower activation limit.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.supply.Boiler.Boiler.getResults">
+<code class="descname">getResults</code><span class="sig-paren">(</span><em>currentValues=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.Boiler.Boiler.getResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return results.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.supply.Boiler.Boiler.setResults">
+<code class="descname">setResults</code><span class="sig-paren">(</span><em>qOutput</em>, <em>schedule</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.Boiler.Boiler.setResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save resulting heat output and operational schedule.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.classes.supply.CHP">
+<span id="pycity-base-classes-supply-chp-module"></span><h2>pycity_base.classes.supply.CHP module<a class="headerlink" href="#module-pycity_base.classes.supply.CHP" title="Permalink to this headline">¶</a></h2>
+<p>Created on Fri Feb 06 16:16:07 2015</p>
+<p>&#64;author: tsz</p>
+<dl class="class">
+<dt id="pycity_base.classes.supply.CHP.CHP">
+<em class="property">class </em><code class="descclassname">pycity_base.classes.supply.CHP.</code><code class="descname">CHP</code><span class="sig-paren">(</span><em>environment</em>, <em>pNominal</em>, <em>qNominal</em>, <em>omega</em>, <em>tMax=85</em>, <em>lowerActivationLimit=1</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.CHP.CHP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pycity_base.classes.supply.HeatingDevice.HeatingDevice" title="pycity_base.classes.supply.HeatingDevice.HeatingDevice"><code class="xref py py-class docutils literal notranslate"><span class="pre">pycity_base.classes.supply.HeatingDevice.HeatingDevice</span></code></a></p>
+<p>Implementation of the CHP unit</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="pycity_base.classes.supply.CHP.CHP.getNominalValues">
+<code class="descname">getNominalValues</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.CHP.CHP.getNominalValues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the CHP unit’s nominal values as a tuple.</p>
+<p>Order: Overall efficiency, power to heat ratio, nominal electricity
+output, nominal heat output, maximum flow temperature and lower
+activation limit.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.supply.CHP.CHP.getResults">
+<code class="descname">getResults</code><span class="sig-paren">(</span><em>currentValues=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.CHP.CHP.getResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return results.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.supply.CHP.CHP.setResults">
+<code class="descname">setResults</code><span class="sig-paren">(</span><em>pOutput</em>, <em>qOutput</em>, <em>schedule</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.CHP.CHP.setResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save resulting electricty, heat output and operational schedule.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.classes.supply.ElectricalHeater">
+<span id="pycity-base-classes-supply-electricalheater-module"></span><h2>pycity_base.classes.supply.ElectricalHeater module<a class="headerlink" href="#module-pycity_base.classes.supply.ElectricalHeater" title="Permalink to this headline">¶</a></h2>
+<p>Created on Fri Feb 06 17:01:58 2015</p>
+<p>&#64;author: tsz</p>
+<dl class="class">
+<dt id="pycity_base.classes.supply.ElectricalHeater.ElectricalHeater">
+<em class="property">class </em><code class="descclassname">pycity_base.classes.supply.ElectricalHeater.</code><code class="descname">ElectricalHeater</code><span class="sig-paren">(</span><em>environment</em>, <em>qNominal</em>, <em>eta</em>, <em>tMax=85</em>, <em>lowerActivationLimit=1</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.ElectricalHeater.ElectricalHeater" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pycity_base.classes.supply.HeatingDevice.HeatingDevice" title="pycity_base.classes.supply.HeatingDevice.HeatingDevice"><code class="xref py py-class docutils literal notranslate"><span class="pre">pycity_base.classes.supply.HeatingDevice.HeatingDevice</span></code></a></p>
+<p>Implementation of the electrical heater</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="pycity_base.classes.supply.ElectricalHeater.ElectricalHeater.getNominalValues">
+<code class="descname">getNominalValues</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.ElectricalHeater.ElectricalHeater.getNominalValues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the electrical heater’s nominal values as a tuple.</p>
+<p>Order: Electrical efficiency, nominal electricity consumption, nominal
+heat output, maximum flow temperature and lower activation limit.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.supply.ElectricalHeater.ElectricalHeater.getResults">
+<code class="descname">getResults</code><span class="sig-paren">(</span><em>currentValues=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.ElectricalHeater.ElectricalHeater.getResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return results.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.supply.ElectricalHeater.ElectricalHeater.setResults">
+<code class="descname">setResults</code><span class="sig-paren">(</span><em>pConsumption</em>, <em>qOutput</em>, <em>schedule</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.ElectricalHeater.ElectricalHeater.setResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save resulting electricty consumption, heat output and
+operational schedule.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.classes.supply.HeatPump">
+<span id="pycity-base-classes-supply-heatpump-module"></span><h2>pycity_base.classes.supply.HeatPump module<a class="headerlink" href="#module-pycity_base.classes.supply.HeatPump" title="Permalink to this headline">¶</a></h2>
+<p>Created on Thu Feb 19 16:45:15 2015</p>
+<p>&#64;author: tsz</p>
+<dl class="class">
+<dt id="pycity_base.classes.supply.HeatPump.Heatpump">
+<em class="property">class </em><code class="descclassname">pycity_base.classes.supply.HeatPump.</code><code class="descname">Heatpump</code><span class="sig-paren">(</span><em>environment</em>, <em>tAmbient</em>, <em>tFlow</em>, <em>heat</em>, <em>power</em>, <em>cop</em>, <em>tMax</em>, <em>lowerActivationLimit=1</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.HeatPump.Heatpump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pycity_base.classes.supply.HeatingDevice.HeatingDevice" title="pycity_base.classes.supply.HeatingDevice.HeatingDevice"><code class="xref py py-class docutils literal notranslate"><span class="pre">pycity_base.classes.supply.HeatingDevice.HeatingDevice</span></code></a></p>
+<p>Implementation of the heat pump.</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="pycity_base.classes.supply.HeatPump.Heatpump.getNominalValues">
+<code class="descname">getNominalValues</code><span class="sig-paren">(</span><em>tFlow</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.HeatPump.Heatpump.getNominalValues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the nominal electricity consumption, heat output and lower
+activation limit.</p>
+<p>The electricity consumption and heat output are computed by two
+dimensional interpolation with the ambient temperature and required
+flow temperature as well as the heat pump’s characteristics.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tFlow</strong> (<em>Array_like</em>) – Required flow temperature</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><strong>pNominal</strong> (<em>Array_like</em>) – Nominal electricity consumption at the given flow temperatures and
+the forecast of the current ambient temperature</li>
+<li><strong>qNominal</strong> (<em>Array_like</em>) – Nominal heat output at the given flow temperatures and the
+forecast of the current ambient temperature</li>
+<li><strong>tMax</strong> (<em>float</em>) – Maximum flow temperature that can be provided by the heat pump</li>
+<li><strong>lowerActivationLimit</strong> (<em>float (0 &lt;= lowerActivationLimit &lt;= 1)</em>) – Define the lower activation limit. For example, heat pumps are
+typically able to operate between 50 % part load and rated load.
+In this case, lowerActivationLimit would be 0.5
+Two special cases:
+Linear behavior: lowerActivationLimit = 0
+Two-point controlled: lowerActivationLimit = 1</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tFlow</span> <span class="o">=</span> <span class="n">building</span><span class="o">.</span><span class="n">getFlowTemperature</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">pNominal</span><span class="p">,</span> <span class="n">qNominal</span><span class="p">,</span> <span class="n">lowerActivationLimit</span><span class="p">)</span> <span class="o">=</span> <span class="n">hp</span><span class="o">.</span><span class="n">getNominals</span><span class="p">(</span><span class="n">tFlow</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.supply.HeatPump.Heatpump.getResults">
+<code class="descname">getResults</code><span class="sig-paren">(</span><em>currentValues=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.HeatPump.Heatpump.getResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return results.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.supply.HeatPump.Heatpump.setResults">
+<code class="descname">setResults</code><span class="sig-paren">(</span><em>pConsumption</em>, <em>qOutput</em>, <em>schedule</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.HeatPump.Heatpump.setResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save resulting electricty consumption, heat output and
+operational schedule.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.classes.supply.HeatingDevice">
+<span id="pycity-base-classes-supply-heatingdevice-module"></span><h2>pycity_base.classes.supply.HeatingDevice module<a class="headerlink" href="#module-pycity_base.classes.supply.HeatingDevice" title="Permalink to this headline">¶</a></h2>
+<p>Created on Fri Feb 06 15:57:15 2015</p>
+<p>&#64;author: tsz</p>
+<dl class="class">
+<dt id="pycity_base.classes.supply.HeatingDevice.HeatingDevice">
+<em class="property">class </em><code class="descclassname">pycity_base.classes.supply.HeatingDevice.</code><code class="descname">HeatingDevice</code><span class="sig-paren">(</span><em>environment</em>, <em>qNominal</em>, <em>tMax=85</em>, <em>lowerActivationLimit=1</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.HeatingDevice.HeatingDevice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Superclass of all heating devices.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.classes.supply.Inverter">
+<span id="pycity-base-classes-supply-inverter-module"></span><h2>pycity_base.classes.supply.Inverter module<a class="headerlink" href="#module-pycity_base.classes.supply.Inverter" title="Permalink to this headline">¶</a></h2>
+<p>Created on Fri Feb 06 17:44:16 2015</p>
+<p>&#64;author: tsz</p>
+<dl class="class">
+<dt id="pycity_base.classes.supply.Inverter.Inverter">
+<em class="property">class </em><code class="descclassname">pycity_base.classes.supply.Inverter.</code><code class="descname">Inverter</code><span class="sig-paren">(</span><em>environment</em>, <em>eta</em>, <em>pNominal</em>, <em>inputAC=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.Inverter.Inverter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Implementation of the AC-DC / DC-AC inverter</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="pycity_base.classes.supply.Inverter.Inverter.getNominalValues">
+<code class="descname">getNominalValues</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.Inverter.Inverter.getNominalValues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the inverter’s nominal values as a tuple.</p>
+<p>Order: Type of inverter, electrical efficiency and nominal input power.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.supply.Inverter.Inverter.getResults">
+<code class="descname">getResults</code><span class="sig-paren">(</span><em>currentValues=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.Inverter.Inverter.getResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return results.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.supply.Inverter.Inverter.setResults">
+<code class="descname">setResults</code><span class="sig-paren">(</span><em>pInput</em>, <em>pOutput</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.Inverter.Inverter.setResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save electricity input and output of the inverter.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.classes.supply.PV">
+<span id="pycity-base-classes-supply-pv-module"></span><h2>pycity_base.classes.supply.PV module<a class="headerlink" href="#module-pycity_base.classes.supply.PV" title="Permalink to this headline">¶</a></h2>
+<p>Created on Fri Feb 06 17:39:01 2015</p>
+<p>&#64;author: tsz</p>
+<dl class="class">
+<dt id="pycity_base.classes.supply.PV.PV">
+<em class="property">class </em><code class="descclassname">pycity_base.classes.supply.PV.</code><code class="descname">PV</code><span class="sig-paren">(</span><em>environment</em>, <em>area</em>, <em>eta</em>, <em>temperature_nominal=45</em>, <em>alpha=0</em>, <em>beta=0</em>, <em>gamma=0</em>, <em>tau_alpha=0.9</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.PV.PV" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Implementation of the PV class.</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="pycity_base.classes.supply.PV.PV.getNominalValues">
+<code class="descname">getNominalValues</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.PV.PV.getNominalValues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return collector’s area, efficiency, nominal cell temperature and
+loss coefficient.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.supply.PV.PV.getPower">
+<code class="descname">getPower</code><span class="sig-paren">(</span><em>currentValues=True</em>, <em>updatePower=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.PV.PV.getPower" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the PV generation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>currentValues</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – <ul>
+<li><dl class="first docutils">
+<dt>True <span class="classifier-delimiter">:</span> <span class="classifier">Return the PV generation array for the current forecasting</span></dt>
+<dd>horizon</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>False <span class="classifier-delimiter">:</span> <span class="classifier">Return the entire PV generation array for all previous</span></dt>
+<dd>time steps</dd>
+</dl>
+</li>
+</ul>
+</li>
+<li><strong>updatePower</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – <ul>
+<li>True: Compute the PV generation forecast for the upcoming horizon</li>
+<li>False: Do not compute a new PV generation forecast</li>
+</ul>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.classes.supply.ThermalEnergyStorage">
+<span id="pycity-base-classes-supply-thermalenergystorage-module"></span><h2>pycity_base.classes.supply.ThermalEnergyStorage module<a class="headerlink" href="#module-pycity_base.classes.supply.ThermalEnergyStorage" title="Permalink to this headline">¶</a></h2>
+<p>Created on Fri Feb 06 23:00:27 2015</p>
+<p>&#64;author: Thomas</p>
+<dl class="class">
+<dt id="pycity_base.classes.supply.ThermalEnergyStorage.ThermalEnergyStorage">
+<em class="property">class </em><code class="descclassname">pycity_base.classes.supply.ThermalEnergyStorage.</code><code class="descname">ThermalEnergyStorage</code><span class="sig-paren">(</span><em>environment</em>, <em>tInit</em>, <em>capacity</em>, <em>tMax</em>, <em>tSurroundings=20</em>, <em>kLosses=3</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.ThermalEnergyStorage.ThermalEnergyStorage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Implementation of the thermal energy storage unit</p>
+<p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="pycity_base.classes.supply.ThermalEnergyStorage.ThermalEnergyStorage.cWater">
+<code class="descname">cWater</code><em class="property"> = 4180</em><a class="headerlink" href="#pycity_base.classes.supply.ThermalEnergyStorage.ThermalEnergyStorage.cWater" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.supply.ThermalEnergyStorage.ThermalEnergyStorage.getNominalValues">
+<code class="descname">getNominalValues</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.ThermalEnergyStorage.ThermalEnergyStorage.getNominalValues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple with the storage’s constant parameters</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><strong>capacity</strong> (<em>Integer</em>) – storage mass in kg</li>
+<li><strong>tMax</strong> (<em>Integer, optional</em>) – maximum storage temperature in °C</li>
+<li><strong>tSurroundings</strong> (<em>Integer, optional</em>) – temperature of the storage’s surroundings in °C</li>
+<li><strong>kLosses</strong> (<em>Float, optional</em>) – storage’s loss factor (area*U_value) in W/K</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.supply.ThermalEnergyStorage.ThermalEnergyStorage.getResults">
+<code class="descname">getResults</code><span class="sig-paren">(</span><em>currentValues=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.ThermalEnergyStorage.ThermalEnergyStorage.getResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the storage’s temperature. If currentValues=True: current
+values, else: total values</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.supply.ThermalEnergyStorage.ThermalEnergyStorage.setResults">
+<code class="descname">setResults</code><span class="sig-paren">(</span><em>tSto</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.ThermalEnergyStorage.ThermalEnergyStorage.setResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the computed storage temperature and update new initial
+temperature</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.classes.supply.WindEnergyConverter">
+<span id="pycity-base-classes-supply-windenergyconverter-module"></span><h2>pycity_base.classes.supply.WindEnergyConverter module<a class="headerlink" href="#module-pycity_base.classes.supply.WindEnergyConverter" title="Permalink to this headline">¶</a></h2>
+<p>Created on Tue Mar 03 14:38:14 2015</p>
+<p>&#64;author: tsz</p>
+<dl class="class">
+<dt id="pycity_base.classes.supply.WindEnergyConverter.WindEnergyConverter">
+<em class="property">class </em><code class="descclassname">pycity_base.classes.supply.WindEnergyConverter.</code><code class="descname">WindEnergyConverter</code><span class="sig-paren">(</span><em>environment</em>, <em>velocity</em>, <em>power</em>, <em>hubHeight=10</em>, <em>roughness=0.1</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.WindEnergyConverter.WindEnergyConverter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="pycity_base.classes.supply.WindEnergyConverter.WindEnergyConverter.getPower">
+<code class="descname">getPower</code><span class="sig-paren">(</span><em>currentValues=True</em>, <em>updatePower=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.WindEnergyConverter.WindEnergyConverter.getPower" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the expected power output of the wind energy converter for the
+current optimization period.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>currentPower</strong> – Output power in Watt.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Array_like</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.classes.supply.absorptionchiller">
+<span id="pycity-base-classes-supply-absorptionchiller-module"></span><h2>pycity_base.classes.supply.absorptionchiller module<a class="headerlink" href="#module-pycity_base.classes.supply.absorptionchiller" title="Permalink to this headline">¶</a></h2>
+<p>Absorption Supply Class</p>
+<dl class="class">
+<dt id="pycity_base.classes.supply.absorptionchiller.AbsorptionChiller">
+<em class="property">class </em><code class="descclassname">pycity_base.classes.supply.absorptionchiller.</code><code class="descname">AbsorptionChiller</code><span class="sig-paren">(</span><em>environment</em>, <em>q_nominal</em>, <em>epsilon</em>, <em>t_min=4</em>, <em>lower_activation_limit=1</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.absorptionchiller.AbsorptionChiller" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pycity_base.classes.supply.coolingdevice.CoolingDevice" title="pycity_base.classes.supply.coolingdevice.CoolingDevice"><code class="xref py py-class docutils literal notranslate"><span class="pre">pycity_base.classes.supply.coolingdevice.CoolingDevice</span></code></a></p>
+<p>Implementation of the chiller</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="pycity_base.classes.supply.absorptionchiller.AbsorptionChiller.get_nominal_values">
+<code class="descname">get_nominal_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.absorptionchiller.AbsorptionChiller.get_nominal_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the chiller’s efficiency, nominal cooling output, minimal flow
+temperature and lower activation limit.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.supply.absorptionchiller.AbsorptionChiller.get_results">
+<code class="descname">get_results</code><span class="sig-paren">(</span><em>current_values=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.absorptionchiller.AbsorptionChiller.get_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return results.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.supply.absorptionchiller.AbsorptionChiller.set_results">
+<code class="descname">set_results</code><span class="sig-paren">(</span><em>q_output</em>, <em>schedule</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.absorptionchiller.AbsorptionChiller.set_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save resulting cooling output and operational schedule.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.classes.supply.compressionchiller">
+<span id="pycity-base-classes-supply-compressionchiller-module"></span><h2>pycity_base.classes.supply.compressionchiller module<a class="headerlink" href="#module-pycity_base.classes.supply.compressionchiller" title="Permalink to this headline">¶</a></h2>
+<p>Cooling demand class</p>
+<dl class="class">
+<dt id="pycity_base.classes.supply.compressionchiller.CompressionChiller">
+<em class="property">class </em><code class="descclassname">pycity_base.classes.supply.compressionchiller.</code><code class="descname">CompressionChiller</code><span class="sig-paren">(</span><em>environment</em>, <em>q_nominal</em>, <em>epsilon</em>, <em>t_min=4</em>, <em>lower_activation_limit=1</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.compressionchiller.CompressionChiller" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pycity_base.classes.supply.coolingdevice.CoolingDevice" title="pycity_base.classes.supply.coolingdevice.CoolingDevice"><code class="xref py py-class docutils literal notranslate"><span class="pre">pycity_base.classes.supply.coolingdevice.CoolingDevice</span></code></a></p>
+<p>Implementation of the chiller</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="pycity_base.classes.supply.compressionchiller.CompressionChiller.get_nominal_values">
+<code class="descname">get_nominal_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.compressionchiller.CompressionChiller.get_nominal_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the chiller’s efficiency, nominal cooling output, minimal flow
+temperature and lower activation limit.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.supply.compressionchiller.CompressionChiller.get_results">
+<code class="descname">get_results</code><span class="sig-paren">(</span><em>current_values=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.compressionchiller.CompressionChiller.get_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return results.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.supply.compressionchiller.CompressionChiller.set_results">
+<code class="descname">set_results</code><span class="sig-paren">(</span><em>q_output</em>, <em>schedule</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.compressionchiller.CompressionChiller.set_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save resulting cooling output and operational schedule.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.classes.supply.coolingdevice">
+<span id="pycity-base-classes-supply-coolingdevice-module"></span><h2>pycity_base.classes.supply.coolingdevice module<a class="headerlink" href="#module-pycity_base.classes.supply.coolingdevice" title="Permalink to this headline">¶</a></h2>
+<p>Cooling demand class</p>
+<dl class="class">
+<dt id="pycity_base.classes.supply.coolingdevice.CoolingDevice">
+<em class="property">class </em><code class="descclassname">pycity_base.classes.supply.coolingdevice.</code><code class="descname">CoolingDevice</code><span class="sig-paren">(</span><em>environment</em>, <em>q_nominal</em>, <em>t_min=4</em>, <em>lower_activation_limit=1</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.supply.coolingdevice.CoolingDevice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Superclass of all cooling devices.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.classes.supply">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pycity_base.classes.supply" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">pycity_base</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Institute for Energy Efficient Buildings and Indoor Climate, Institute for Automation of Complex Power Systems, E.ON Energy Research Center, RWTH Aachen University.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.9</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/pycity_base.classes.supply.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

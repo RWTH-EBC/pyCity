@@ -7,11 +7,10 @@ import xlrd
 import numpy as np
 import shapely.geometry.point as point
 
-import pycity_base.classes.Timer
-import pycity_base.classes.Weather
-import pycity_base.classes.Prices
-import pycity_base.classes.Environment
-
+import pycity_base.classes.Timer as Time
+import pycity_base.classes.Weather as Weath
+import pycity_base.classes.Prices as Price
+import pycity_base.classes.Environment as Env
 import pycity_base.classes.demand.Apartment as Apartment
 import pycity_base.classes.demand.DomesticHotWater as DomesticHotWater
 import pycity_base.classes.demand.ElectricalDemand as ElectricalDemand
@@ -24,14 +23,16 @@ import pycity_base.classes.supply.WindEnergyConverter as Wind
 
 
 def run_test():
+    timestep = 900  # in seconds
 
-    #  Generate timer, weather and price objects
-    timer = pycity_base.classes.Timer.Timer()
-    weather = pycity_base.classes.Weather.Weather(timer)
-    prices = pycity_base.classes.Prices.Prices()
+    nb_timesteps = int(365 * 24 * 3600 / timestep)
 
-    #  Generate environment
-    environment = pycity_base.classes.Environment.Environment(timer, weather, prices)
+    #  Generate environment with timer, weather, and prices objects
+    timer = Time.Timer(timeDiscretization=timestep,
+                       timestepsTotal=nb_timesteps)
+    weather = Weath.Weather(timer)
+    prices = Price.Prices()
+    environment = Env.Environment(timer, weather, prices)
 
     #  Generate city district object
     cityDistrict = CityDistrict.CityDistrict(environment)
@@ -72,6 +73,14 @@ def run_test():
                                                         method=1,  # Annex 42
                                                         dailyConsumption=70,
                                                         supplyTemperature=25)
+        #  Annotation: The usage of the deterministic IEA Annex 42 hot water
+        #  profile is fine for a single apartment. However, try to use
+        #  stochastic dhw profiles (method = 2 --> Requires occupancy
+        #  input profile) on city district scale. The usage of Annex 42
+        #  profiles on city district scale will produce illogical peak loads /
+        #  peak loads at the same point in time!
+        #  Thus, this section is for example purpose, only (executes faster
+        #  than generating multiple, stochastic profiles)
 
         #  Generate apartment and add demand durves
         apartment = Apartment.Apartment(environment)

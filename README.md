@@ -1,10 +1,11 @@
-![E.ON EBC RWTH Aachen University](./documentation/_static/EBC_Logo.png)
+![E.ON EBC RWTH Aachen University](./doc/_static/EBC_Logo.png)
 
 
 [![Build Status](https://travis-ci.com/RWTH-EBC/pyCity.svg?token=ssfy4ps1Qm5kvs5yAxfm&branch=master)](https://travis-ci.com/RWTH-EBC/pyCity.svg?token=ssfy4ps1Qm5kvs5yAxfm&branch=master)
+[![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
 
 
-# pyCity
+# pyCity_base
 
 Python package for data handling and scenario generation of city districts.
 
@@ -22,7 +23,11 @@ Alternatively: Clone via https: `git clone https://github.com/RWTH-EBC/pyCity.gi
 
 ## Installation
 
-pyCity requires the following Python packages:
+*One important issue at the beginning: Please do NOT confuse pyCity_base with
+the pycity package on pypi! This (other) pycity package is installable via 
+pip. However, if you want to install pycity_base, follow this instruction.*
+
+pyCity_base requires the following Python packages:
 - numpy
 - matplotlib
 - networkX
@@ -32,65 +37,28 @@ pyCity requires the following Python packages:
 
 as well as the EBC Python packages:
 
+- richardsonpy 
+
+which is available under [https://github.com/RWTH-EBC/richardsonpy](https://github.com/RWTH-EBC/richardsonpy)
+
 - uesgraphs
 (with dependencies to shapely and pyproj)
 
 which is available under 
 [https://github.com/RWTH-EBC/uesgraphs](https://github.com/RWTH-EBC/uesgraphs)
 
-and
+richardsonpy can be installed via pip.
+uesgraphs can be installed via pip on Linux or Mac OS distributions.
+In contrast, uesgraphs installation might not be possible via pip on Windows
+machines, due to compiler issues with the dependencies to shapely and pyproj.
+In this case, follow the instructions of the uesgraphs installation:
+[https://github.com/RWTH-EBC/uesgraphs/blob/master/README.md](https://github.com/RWTH-EBC/uesgraphs/blob/master/README.md)
+(see Install uesgraphs)
 
-- richardsonpy 
-
-which is available under [https://github.com/RWTH-EBC/richardsonpy](https://github.com/RWTH-EBC/richardsonpy)
-
-### Installation of uesgraph and its dependencies
-
-If you have not installed uesgraphs and its dependencies yet, you should do 
-the uesgraphs installation as first step.
-
-If you are working with Linux or Mac OS, you should be able to directly 
-install uesgraphs via pip. Therefore, clone the uesgraphs repository to one 
-local folder and install it via pip:
-
-`pip install -e '<your_path_to_uesgraph_setup_folder>'`
-
-The `-e` generates an egglink from your Python distribution to your local
-uesgraphs repository.
-
-If you are working with Windows OS, you might run into compiler problems 
-when trying to install uesgraphs, as the uesgraphs setup.py tries to install
-shapely and pyprof, too. 
-As a workaround, you can download precompiled Windows binaries for shapely 
-and pyproj from:
-[http://www.lfd.uci.edu/~gohlke/pythonlibs/](http://www.lfd.uci.edu/~gohlke/pythonlibs/)
-
-Select the wheel file, which matches your Python installation 
-(version e.g. 2.7 or 3.6) (system infrastructure, e.g. 32 bit or 64 bit)
-
-Now you should be able to install the wheel files via pip:
-
-`pip install <path_to_your_shapely_file>\shapely.whl`
-
-`pip install <path_to_your_pyproj_file>\pyproj.whl`
-
-Now you should be able to install uesgraphs via pip:
-
-`pip install -e '<your_path_to_uesgraph_setup_folder>'`
-
-In case the Python path does not point at your Python distribution and you
-do not have admin rights (might be the case for some of E.ON ERC students),
-you can directly call the Python interpreter of your distribution to install
-packages via pip:
-
-`<path_to_your_python_dist\Python.exe> -m pip install <package_name>'`
-
-`<path_to_your_python_dist\Python.exe> -m pip install -e '<your_path_to_local_package_setup_folder>'`
-
-### Installation of pyCity
+### Installation of pyCity_base
 
 When uesgraph and its dependencies are installed, you should be able to install
-pyCity via pip:
+pyCity_base via pip:
 
 `pip install -e '<your_path_to_pycity_setup_folder>'`
 

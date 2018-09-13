@@ -16,12 +16,14 @@ import pycity_base.classes.Prices
 
 import pycity_base.classes.supply.Boiler as Boiler
 
+
 def run_test():
     # Create environment
     timer = pycity_base.classes.Timer.Timer()
     weather = pycity_base.classes.Weather.Weather(timer, useTRY=True)
     prices = pycity_base.classes.Prices.Prices()
-    environment = pycity_base.classes.Environment.Environment(timer, weather, prices)
+    environment = pycity_base.classes.Environment.Environment(timer, weather,
+                                                              prices)
 
     # Create Boiler
     lower_activation_limit = 0.5
@@ -34,11 +36,10 @@ def run_test():
     # Print results
     print()
     print(("Type: " + heater._kind))
-    print(("Efficiency: "                 + str(heater.eta)))
-    print(("Maximum heat output: "        + str(heater.qNominal)))
-    print(("Maximum flow temperature: "   + str(heater.tMax)))
-    print(("Lower activation limit: "     + str(heater.lowerActivationLimit)))
-
+    print(("Efficiency: " + str(heater.eta)))
+    print(("Maximum heat output: " + str(heater.qNominal)))
+    print(("Maximum flow temperature: " + str(heater.tMax)))
+    print(("Lower activation limit: " + str(heater.lowerActivationLimit)))
 
     print()
     print(("Nominals: " + str(heater.getNominalValues())))
@@ -53,6 +54,7 @@ def run_test():
     print("Heat output: " + str(results[0]))
     print()
     print("Schedule: " + str(results[1]))
+
 
 if __name__ == '__main__':
     #  Run program

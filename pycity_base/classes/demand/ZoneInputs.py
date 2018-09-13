@@ -128,9 +128,17 @@ class ZoneInputs(object):
                               gamma=self.zoneParameters.gamma[i],
                               albedo=groundReflectance)[0]
             solarOpaque.append(radTilt)
-            solarWindows.append((A_windows_sol * radTilt
-                               - Psi_r_windows * self.zoneParameters.F_r[i]) 
-                               / A_windows)
+
+            if A_windows > 0:
+                solarWindows.append((A_windows_sol * radTilt
+                                   - Psi_r_windows * self.zoneParameters.F_r[i])
+                                   / A_windows)
+            elif A_windows == 0:
+                solarWindows.append(0)
+            else:
+                msg = 'A_windows cannot be negative!'
+                raise AssertionError(msg)
+
             solarGains += (A_total * radTilt 
                          - Psi_r_total * self.zoneParameters.F_r[i])
 

@@ -12,9 +12,9 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import os
+import sys
+sys.path.insert(0, os.path.abspath('.'))
 
 
 # -- Project information -----------------------------------------------------
@@ -24,9 +24,9 @@ copyright = '2018, Institute for Energy Efficient Buildings and Indoor Climate, 
 author = 'Institute for Energy Efficient Buildings and Indoor Climate, Institute for Automation of Complex Power Systems, E.ON Energy Research Center, RWTH Aachen University'
 
 # The short X.Y version
-version = ''
+version = '0.1'
 # The full version, including alpha/beta/rc tags
-release = ''
+release = '0.1'
 
 
 # -- General configuration ---------------------------------------------------
@@ -45,7 +45,10 @@ extensions = [
     'sphinx.ext.coverage',
     'sphinx.ext.imgmath',
     'sphinx.ext.githubpages',
-]
+    'sphinx.ext.napoleon',  # Add napoleon to the extensions list
+    'numpydoc'
+	#'sphinxcontrib.bibtex'
+	]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -167,3 +170,17 @@ texinfo_documents = [
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'https://docs.python.org/': None}
+
+
+# Napoleon settings
+napoleon_google_docstring = False
+napoleon_numpy_docstring = True
+napoleon_include_init_with_doc = False
+napoleon_include_private_with_doc = False
+napoleon_include_special_with_doc = True
+napoleon_use_admonition_for_examples = False
+napoleon_use_admonition_for_notes = False
+napoleon_use_admonition_for_references = False
+napoleon_use_ivar = False
+napoleon_use_param = True
+napoleon_use_rtype = True

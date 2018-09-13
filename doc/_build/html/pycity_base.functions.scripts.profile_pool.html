@@ -1,0 +1,274 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>pycity_base.functions.scripts.profile_pool package &#8212; pycity_base 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="pycity-base-functions-scripts-profile-pool-package">
+<h1>pycity_base.functions.scripts.profile_pool package<a class="headerlink" href="#pycity-base-functions-scripts-profile-pool-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-pycity_base.functions.scripts.profile_pool.gen_profile_pool">
+<span id="pycity-base-functions-scripts-profile-pool-gen-profile-pool-module"></span><h2>pycity_base.functions.scripts.profile_pool.gen_profile_pool module<a class="headerlink" href="#module-pycity_base.functions.scripts.profile_pool.gen_profile_pool" title="Permalink to this headline">¶</a></h2>
+<p>Script to generate profile pool for parametrization of large number of
+buildings with (stochastic) profiles (occupancy, electrical, dhw)</p>
+<p>npz internal arrays should hold name labels:
+- occ (600 second resolution)
+- el (60 second resolution)
+- dhw (60 second resolution)</p>
+<dl class="function">
+<dt id="pycity_base.functions.scripts.profile_pool.gen_profile_pool.create_path_if_not_exist">
+<code class="descclassname">pycity_base.functions.scripts.profile_pool.gen_profile_pool.</code><code class="descname">create_path_if_not_exist</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.scripts.profile_pool.gen_profile_pool.create_path_if_not_exist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create path if not existent.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Input path</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pycity_base.functions.scripts.profile_pool.gen_profile_pool.generate_profile_pool">
+<code class="descclassname">pycity_base.functions.scripts.profile_pool.gen_profile_pool.</code><code class="descname">generate_profile_pool</code><span class="sig-paren">(</span><em>path=None</em>, <em>runs=100</em>, <em>timestep=60</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.scripts.profile_pool.gen_profile_pool.generate_profile_pool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates profile pool in subfolder profile (if no profile pool exists)
+(occupancy, electrical, dhw)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Path to save profile pool to (default: None).
+If set to None, uses subfolder …/profiles/ to store profiles to</li>
+<li><strong>runs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) – Number of loops used to generate profile pool (default: 100)</li>
+<li><strong>timestep</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) – Time discretization for environment in seconds (default: 60)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.functions.scripts.profile_pool.get_profile_pool_access">
+<span id="pycity-base-functions-scripts-profile-pool-get-profile-pool-access-module"></span><h2>pycity_base.functions.scripts.profile_pool.get_profile_pool_access module<a class="headerlink" href="#module-pycity_base.functions.scripts.profile_pool.get_profile_pool_access" title="Permalink to this headline">¶</a></h2>
+<p>Script to load and select (random) profiles of profile pool.</p>
+<p>Able to load occupancy, el. load and hot water profiles, depending on number
+of occupants within apartments.</p>
+<p>Requires gen_profile_pool run, first.
+Expecting the following name structure:
+[‘1_person_profiles.npz’, ‘2_person_profiles.npz’, ‘3_person_profiles.npz’,
+‘4_person_profiles.npz’, ‘5_person_profiles.npz’]</p>
+<p>npz internal arrays should hold name labels:
+- occ (600 second resolution)
+- el (60 second resolution)
+- dhw (60 second resolution)</p>
+<dl class="class">
+<dt id="pycity_base.functions.scripts.profile_pool.get_profile_pool_access.ProfilePool">
+<em class="property">class </em><code class="descclassname">pycity_base.functions.scripts.profile_pool.get_profile_pool_access.</code><code class="descname">ProfilePool</code><span class="sig-paren">(</span><em>path_to_npz_folder=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.scripts.profile_pool.get_profile_pool_access.ProfilePool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Class to hold profile pool</p>
+<dl class="attribute">
+<dt id="pycity_base.functions.scripts.profile_pool.get_profile_pool_access.ProfilePool.dict_data">
+<code class="descname">dict_data</code><a class="headerlink" href="#pycity_base.functions.scripts.profile_pool.get_profile_pool_access.ProfilePool.dict_data" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dict</em> – Dictionary with number of occupants as key and numpy nd-array with
+profiles as values</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="pycity_base.functions.scripts.profile_pool.get_profile_pool_access.ProfilePool.get_occ_el_dhw_profile">
+<code class="descname">get_occ_el_dhw_profile</code><span class="sig-paren">(</span><em>nb_occupants</em>, <em>rand_number=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.scripts.profile_pool.get_profile_pool_access.ProfilePool.get_occ_el_dhw_profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns tuply with occupancy, electrical load and hot water profile</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>nb_occupants</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – Number of occupants for profile (between 1 - 5)</li>
+<li><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Type of profile. Options: ‘occ’, ‘el’, ‘dhw’</li>
+<li><strong>= int</strong><strong>, </strong><strong>optional</strong> (<em>rand_number</em>) – Random number to select profile (default: None). If set to None,
+going to select random integer. If integer is given, this integer
+is goint to be used.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>tuple_profiles</strong> – Tuple with occupancy, electrical load and hot water profile</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.7)">tuple</a> (of array-like structures)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.functions.scripts.profile_pool.get_profile_pool_access.ProfilePool.get_random_number">
+<code class="descname">get_random_number</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.scripts.profile_pool.get_profile_pool_access.ProfilePool.get_random_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns random number in the interval of number of different npz
+profiles.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>rand_nb</strong> – Random number</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.functions.scripts.profile_pool.get_profile_pool_access.ProfilePool.get_random_profile">
+<code class="descname">get_random_profile</code><span class="sig-paren">(</span><em>nb_occupants</em>, <em>type</em>, <em>rand_number=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.scripts.profile_pool.get_profile_pool_access.ProfilePool.get_random_profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns copy of random occupancy profile with 600 second resolution</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>nb_occupants</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – Number of occupants for profile (between 1 - 5)</li>
+<li><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Type of profile. Options: ‘occ’, ‘el’, ‘dhw’</li>
+<li><strong>= int</strong><strong>, </strong><strong>optional</strong> (<em>rand_number</em>) – Random number to select profile (default: None). If set to None,
+going to select random integer. If integer is given, this integer
+is goint to be used.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>profile</strong> – Selected profile</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">array-like</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.functions.scripts.profile_pool.get_profile_pool_access.ProfilePool.load_profile_npz">
+<code class="descname">load_profile_npz</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.scripts.profile_pool.get_profile_pool_access.ProfilePool.load_profile_npz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load all npz numpy arrays into ProfilePool object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Path to folder, where profile pool npz files are stored</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="pycity_base.functions.scripts.profile_pool.get_profile_pool_access.get_list_of_npz_files">
+<code class="descclassname">pycity_base.functions.scripts.profile_pool.get_profile_pool_access.</code><code class="descname">get_list_of_npz_files</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.scripts.profile_pool.get_profile_pool_access.get_list_of_npz_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns list of npz files found in path (only one level, no os.walk!)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Path to folder, which should be searched through</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>list_npz</strong> – List of npz file names found in path</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)">list</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.functions.scripts.profile_pool">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pycity_base.functions.scripts.profile_pool" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">pycity_base</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Institute for Energy Efficient Buildings and Indoor Climate, Institute for Automation of Complex Power Systems, E.ON Energy Research Center, RWTH Aachen University.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.9</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/pycity_base.functions.scripts.profile_pool.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

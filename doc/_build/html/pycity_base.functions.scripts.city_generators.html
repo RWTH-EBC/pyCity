@@ -1,0 +1,156 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>pycity_base.functions.scripts.city_generators package &#8212; pycity_base 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="pycity-base-functions-scripts-city-generators-package">
+<h1>pycity_base.functions.scripts.city_generators package<a class="headerlink" href="#pycity-base-functions-scripts-city-generators-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pycity_base.functions.scripts.city_generators.input.html">pycity_base.functions.scripts.city_generators.input package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.functions.scripts.city_generators.input.html#module-pycity_base.functions.scripts.city_generators.input">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pycity_base.functions.scripts.city_generators.output.html">pycity_base.functions.scripts.city_generators.output package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.functions.scripts.city_generators.output.html#module-pycity_base.functions.scripts.city_generators.output">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-pycity_base.functions.scripts.city_generators.city_generator">
+<span id="pycity-base-functions-scripts-city-generators-city-generator-module"></span><h2>pycity_base.functions.scripts.city_generators.city_generator module<a class="headerlink" href="#module-pycity_base.functions.scripts.city_generators.city_generator" title="Permalink to this headline">¶</a></h2>
+<p>Script to generate city district (building objects with demand and position;
+Without energy systems)
+This script assumes buildings with single zoning.</p>
+<dl class="function">
+<dt id="pycity_base.functions.scripts.city_generators.city_generator.run_city_generator">
+<code class="descclassname">pycity_base.functions.scripts.city_generators.city_generator.</code><code class="descname">run_city_generator</code><span class="sig-paren">(</span><em>gen_mo=0</em>, <em>input_name='test_city_mixed_buildings.txt'</em>, <em>output_name=None</em>, <em>use_el_slp=True</em>, <em>gen_dhw_profile=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.scripts.city_generators.city_generator.run_city_generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to generate and return city district object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>gen_mo</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) – Generation mode number:
+0 - Use data from input file (default)</li>
+<li><strong>input_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Name of input data file (default: ‘test_city_only_buildings.txt’)</li>
+<li><strong>output_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Name of output file (default: None)
+If output_name is None, no output file is generated.
+Else: Pickled output file is saved to output folder</li>
+<li><strong>use_el_slp</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Boolean to define, how electrical load profile should be generated
+(default: True)
+True: Generate el. load profile via el. slp
+False: Use stochastic profile generator (
+only valid for residential buildings!)</li>
+<li><strong>gen_dhw_profile</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Boolean to define, if domestic hot water profile should be generated
+(default: False)
+True: Generate dhw profile (valid for residential buildings!)
+False: Do not generate dhw profile</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>city_district</strong> – CityDistrict object of PyCity</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)">object</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.functions.scripts.city_generators">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pycity_base.functions.scripts.city_generators" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">pycity_base</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Institute for Energy Efficient Buildings and Indoor Climate, Institute for Automation of Complex Power Systems, E.ON Energy Research Center, RWTH Aachen University.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.9</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/pycity_base.functions.scripts.city_generators.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

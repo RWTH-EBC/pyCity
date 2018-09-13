@@ -1,0 +1,668 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>pycity_base.functions package &#8212; pycity_base 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="pycity-base-functions-package">
+<h1>pycity_base.functions package<a class="headerlink" href="#pycity-base-functions-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pycity_base.functions.scripts.html">pycity_base.functions.scripts package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.functions.scripts.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pycity_base.functions.scripts.city_generators.html">pycity_base.functions.scripts.city_generators package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pycity_base.functions.scripts.city_generators.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="pycity_base.functions.scripts.city_generators.input.html">pycity_base.functions.scripts.city_generators.input package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="pycity_base.functions.scripts.city_generators.input.html#module-pycity_base.functions.scripts.city_generators.input">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="pycity_base.functions.scripts.city_generators.output.html">pycity_base.functions.scripts.city_generators.output package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="pycity_base.functions.scripts.city_generators.output.html#module-pycity_base.functions.scripts.city_generators.output">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="pycity_base.functions.scripts.city_generators.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pycity_base.functions.scripts.city_generators.html#module-pycity_base.functions.scripts.city_generators.city_generator">pycity_base.functions.scripts.city_generators.city_generator module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pycity_base.functions.scripts.city_generators.html#module-pycity_base.functions.scripts.city_generators">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pycity_base.functions.scripts.profile_pool.html">pycity_base.functions.scripts.profile_pool package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pycity_base.functions.scripts.profile_pool.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pycity_base.functions.scripts.profile_pool.html#module-pycity_base.functions.scripts.profile_pool.gen_profile_pool">pycity_base.functions.scripts.profile_pool.gen_profile_pool module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pycity_base.functions.scripts.profile_pool.html#module-pycity_base.functions.scripts.profile_pool.get_profile_pool_access">pycity_base.functions.scripts.profile_pool.get_profile_pool_access module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pycity_base.functions.scripts.profile_pool.html#module-pycity_base.functions.scripts.profile_pool">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.functions.scripts.html#module-pycity_base.functions.scripts">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-pycity_base.functions.changeResolution">
+<span id="pycity-base-functions-changeresolution-module"></span><h2>pycity_base.functions.changeResolution module<a class="headerlink" href="#module-pycity_base.functions.changeResolution" title="Permalink to this headline">¶</a></h2>
+<p>Script to change resolution of timeseries values with constant
+sampling rate.</p>
+<dl class="function">
+<dt id="pycity_base.functions.changeResolution.changeResolution">
+<code class="descclassname">pycity_base.functions.changeResolution.</code><code class="descname">changeResolution</code><span class="sig-paren">(</span><em>values</em>, <em>oldResolution</em>, <em>newResolution</em>, <em>method='mean'</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.changeResolution.changeResolution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change the temporal resolution of values that have a constant sampling rate</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>values</strong> (<em>array-like</em>) – data points</li>
+<li><strong>oldResolution</strong> (<em>integer</em>) – temporal resolution of the given values. oldResolution=3600 means
+hourly sampled data</li>
+<li><strong>newResolution</strong> (<em>integer</em>) – temporal resolution of the given data shall be converted to</li>
+<li><strong>method</strong> (<code class="docutils literal notranslate"><span class="pre">{&quot;mean&quot;;</span> <span class="pre">&quot;sum&quot;}</span></code>, optional) – <ul>
+<li><code class="docutils literal notranslate"><span class="pre">&quot;mean&quot;</span></code> : compute mean values while resampling (e.g. for power).</li>
+<li><code class="docutils literal notranslate"><span class="pre">&quot;sum&quot;</span></code>  : compute sum values while resampling (e.g. for energy).</li>
+</ul>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.functions.dhw_stochastical">
+<span id="pycity-base-functions-dhw-stochastical-module"></span><h2>pycity_base.functions.dhw_stochastical module<a class="headerlink" href="#module-pycity_base.functions.dhw_stochastical" title="Permalink to this headline">¶</a></h2>
+<p>Created on Tue Jul 14 12:18:14 2015</p>
+<p>&#64;author: tsz</p>
+<dl class="function">
+<dt id="pycity_base.functions.dhw_stochastical.compute_daily_demand">
+<code class="descclassname">pycity_base.functions.dhw_stochastical.</code><code class="descname">compute_daily_demand</code><span class="sig-paren">(</span><em>probability_profiles</em>, <em>average_profile</em>, <em>occupancy</em>, <em>current_day</em>, <em>temperature_difference=35</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.dhw_stochastical.compute_daily_demand" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>probability_profiles</strong> (<em>array_like</em>) – Minute-wise sampled probability distribution.
+“Haushaltewd” and “Haushaltewe” in Lion’s thesis.
+This input should also be equivalent to “pwd” and “pwe”, because only
+one household is taken into account.</li>
+<li><strong>average_profile</strong> (<em>array_like</em>) – Minute-wise sampled average tap water profiles (in liters per hour).
+“mwwd” and “mwwe” in Lion’s thesis.</li>
+<li><strong>occupancy</strong> (<em>array_like</em>) – 10-Minute-wise sampled occupancy of the considered building/apartment.</li>
+<li><strong>current_day</strong> (<em>integer</em>) – Current day of the year (January 1st -&gt; 0, February 1st -&gt; 31, …)</li>
+<li><strong>temperature_difference</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – How much does the tap water has to be heated up? Either enter a float
+or an array with the same dimension as probability_profiles.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li><strong>water</strong> (<em>array_like</em>) – Tap water volume flow in liters per hour.</li>
+<li><strong>heat</strong> (<em>array_like</em>) – Resulting minute-wise sampled heat demand in Watt.
+The heat capacity of water is assumed to be 4180 J/(kg.K) and the
+density is assumed to be 980 kg/m3</li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pycity_base.functions.dhw_stochastical.full_year_computation">
+<code class="descclassname">pycity_base.functions.dhw_stochastical.</code><code class="descname">full_year_computation</code><span class="sig-paren">(</span><em>occupancy</em>, <em>profiles</em>, <em>time_dis=3600</em>, <em>initial_day=0</em>, <em>temperature_difference=35</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.dhw_stochastical.full_year_computation" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>occupancy</strong> (<em>array_like</em>) – Full year, 10-minute-wise sampled occupancy profile. All values have
+to be integers.</li>
+<li><strong>profiles</strong> (<em>dictionary</em>) – <p>All probability distributions. The dictionary has to have the
+following structure:</p>
+<blockquote>
+<div><ul>
+<li>Top level: [<cite>wd_mw</cite>, <cite>we_mw</cite>, <cite>wd</cite>, <cite>we</cite>] (strings)</li>
+<li>Within <cite>we</cite> and <cite>wd</cite>: [<cite>1</cite>, <cite>2</cite>, <cite>3</cite>, <cite>4</cite>, <cite>5</cite>, <cite>6</cite>] (integers)</li>
+</ul>
+</div></blockquote>
+</li>
+<li><strong>time_dis</strong> (<em>integer</em>) – Time discretization in seconds.</li>
+<li><strong>initial_day</strong> (<em>integer</em>) – <ul>
+<li>0 : Monday</li>
+<li>1 : Tuesday</li>
+<li>2 : Wednesday</li>
+<li>3 : Thursday</li>
+<li>4 : Friday</li>
+<li>5 : Saturday</li>
+<li>6 : Sunday</li>
+</ul>
+</li>
+<li><strong>temperature_difference</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – How much does the tap water has to be heated up? Either enter a float
+or an array with the same dimension as probability_profiles.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li><strong>water</strong> (<em>array_like</em>) – Tap water volume flow in liters per hour.</li>
+<li><strong>heat</strong> (<em>array_like</em>) – Resulting minute-wise sampled heat demand in Watt.
+The heat capacity of water is assumed to be 4180 J/(kg.K) and the
+density is assumed to be 980 kg/m3</li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pycity_base.functions.dhw_stochastical.load_profiles">
+<code class="descclassname">pycity_base.functions.dhw_stochastical.</code><code class="descname">load_profiles</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.dhw_stochastical.load_profiles" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.functions.handleData">
+<span id="pycity-base-functions-handledata-module"></span><h2>pycity_base.functions.handleData module<a class="headerlink" href="#module-pycity_base.functions.handleData" title="Permalink to this headline">¶</a></h2>
+<p>Created on Wed Feb 11 14:19:13 2015</p>
+<p>&#64;author: tsz</p>
+<dl class="function">
+<dt id="pycity_base.functions.handleData.getValues">
+<code class="descclassname">pycity_base.functions.handleData.</code><code class="descname">getValues</code><span class="sig-paren">(</span><em>currentValues</em>, <em>current</em>, <em>total</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.handleData.getValues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return either the current values (for this horizon) or all computed results</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>currentValues</strong> (<em>Boolean</em>) – True: return ‘current’, False: return ‘total’</li>
+<li><strong>current</strong> (<em>Pointer</em>) – Pointer to the current values</li>
+<li><strong>total</strong> (<em>Pointer</em>) – Pointer to the total values</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pycity_base.functions.handleData.saveResult">
+<code class="descclassname">pycity_base.functions.handleData.</code><code class="descname">saveResult</code><span class="sig-paren">(</span><em>timer</em>, <em>currentAttribute</em>, <em>totalAttribute</em>, <em>currentResult</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.handleData.saveResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the current result in currentAttribute and append to totalAttribute</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>timer</strong> (<em>Timer instance</em>) – Pointer to the common timer instance</li>
+<li><strong>currentAttribute</strong> (<em>Array-like</em>) – Attribute for the results of the current optimization period</li>
+<li><strong>totalAttribute</strong> (<em>Array-like</em>) – Attribute for the results of all optimization periods</li>
+<li><strong>currentResult</strong> (<em>Array-like</em>) – Results of the current optimization period</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Returns a tuple of updated currentAttribute and totalAttribute</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Save the results of a scheduling optimization</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Due to limited space, the variable names are shortened</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># cS --&gt; currentSchedule, tS --&gt; totalSchedule</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">schedule</span> <span class="o">=</span> <span class="n">optimizer</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cS</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tS</span><span class="p">)</span> <span class="o">=</span> <span class="n">saveResult</span><span class="p">(</span><span class="n">timer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cS</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tS</span><span class="p">,</span> <span class="n">schedule</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="pycity_base.functions.handleData.saveResultInit">
+<code class="descclassname">pycity_base.functions.handleData.</code><code class="descname">saveResultInit</code><span class="sig-paren">(</span><em>timer</em>, <em>currentAttribute</em>, <em>totalAttribute</em>, <em>currentResult</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.handleData.saveResultInit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the current result in currentAttribute, append it to totalAttribute
+and return the new initial value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>timer</strong> (<em>Timer instance</em>) – Pointer to the common timer instance</li>
+<li><strong>currentAttribute</strong> (<em>Array-like</em>) – Attribute for the results of the current optimization period</li>
+<li><strong>totalAttribute</strong> (<em>Array-like</em>) – Attribute for the results of all optimization periods</li>
+<li><strong>currentResult</strong> (<em>Array-like</em>) – Results of the current optimization period</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li><em>Returns a tuple of updated currentAttribute and totalAttribute as well as</em></li>
+<li><em>a new initial value</em></li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Save the resulting storage temperature</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Due to limited space, the variable names are shortened</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># cT --&gt; currentTSto, tT --&gt; totalTSto, tI --&gt; tInit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tSto</span> <span class="o">=</span> <span class="n">optimizer</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cT</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tT</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tI</span><span class="p">)</span> <span class="o">=</span> <span class="n">saveResult</span><span class="p">(</span><span class="n">timer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cT</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tT</span><span class="p">,</span> <span class="n">tSto</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.functions.load_el_profiles">
+<span id="pycity-base-functions-load-el-profiles-module"></span><h2>pycity_base.functions.load_el_profiles module<a class="headerlink" href="#module-pycity_base.functions.load_el_profiles" title="Permalink to this headline">¶</a></h2>
+<p>Script to load el. profiles</p>
+<dl class="function">
+<dt id="pycity_base.functions.load_el_profiles.gen_annual_el_load">
+<code class="descclassname">pycity_base.functions.load_el_profiles.</code><code class="descname">gen_annual_el_load</code><span class="sig-paren">(</span><em>data_array</em>, <em>type</em>, <em>start_wd</em>, <em>annual_demand=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.load_el_profiles.gen_annual_el_load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate annual el. power curve depending on type and start weekday.
+Based on measured weekly, el. load profiles of non residential buildings.
+Weekly profiles are appended to annual profile. (900 seconds timestep)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data_array</strong> (<em>np.array</em>) – ND-Array with data
+(El. power in watt per company over timesteps;
+900 seconds timestep; length for one week;
+starting on monday (00:00:00)
+first column: food production
+second column: metal company
+third column: restaurant (high cooling load)
+fourth column: sports hall
+fifth column: repair / metal shop</li>
+<li><strong>annual_demand</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Annual el. energy demand in kWh to rescale profile</li>
+<li><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Possible types of profiles. Options:
+- ‘food_pro’: Food production
+- ‘metal’: Metal company
+- ‘rest’: Restaurant
+- ‘sports’: Sports hall
+- ‘repair’: Repair / metal shop</li>
+<li><strong>start_wd</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – Integer to define start weekday of year, e.g. 1 means monday, 7 sunday</li>
+<li><strong>annual_demand</strong> – Annual el. energy demand in kWh to rescale profile (default: None).
+If set to None, does not perform rescaling.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>el_load_curve</strong> – Numpy array with el. power curve in Watt</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">np.array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pycity_base.functions.load_el_profiles.get_annual_el_load">
+<code class="descclassname">pycity_base.functions.load_el_profiles.</code><code class="descname">get_annual_el_load</code><span class="sig-paren">(</span><em>data_array</em>, <em>type</em>, <em>annual_demand=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.load_el_profiles.get_annual_el_load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get annual electrical load profile based on measurement data for
+non-residential buildings (900 seconds timestep)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data_array</strong> (<em>np.array</em>) – ND-Array with data
+900 seconds timestep; length for one year (365 days)
+starting on monday (00:00:00)
+first column: metal 1 (smoother profile)
+second column: metal 2 (more fluctuation)
+third column: warehouse</li>
+<li><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Type of chosen measured profile. Options:
+- ‘metal_1’ : Metal company with smooth profile
+- ‘metal_2’ : Metal company with fluctuation in profile
+- ‘warehouse’ : Warehouse</li>
+<li><strong>annual_demand</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Annual el. energy demand in kWh to rescale profile (default: None).
+If set to None, does not perform rescaling.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>el_load_curve</strong> – Numpy array with el. power curve in Watt</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">np.array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pycity_base.functions.load_el_profiles.load_non_res_load_data_annual">
+<code class="descclassname">pycity_base.functions.load_el_profiles.</code><code class="descname">load_non_res_load_data_annual</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.load_el_profiles.load_non_res_load_data_annual" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load measured annual electrical load profiles for non-residential buildings</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Path to file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>data_array</strong> – ND-Array with data
+900 seconds timestep; length for one year (365 days)
+starting on monday (00:00:00)
+first column: metal 1 (smoother profile)
+second column: metal 2 (more fluctuation)
+third column: warehouse</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">np.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pycity_base.functions.load_el_profiles.load_non_res_load_data_weekly">
+<code class="descclassname">pycity_base.functions.load_el_profiles.</code><code class="descname">load_non_res_load_data_weekly</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.load_el_profiles.load_non_res_load_data_weekly" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load electrical load profiles for non-residential buildings
+(weekly profiles; Mo - Su)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Path to load profile data file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>data_array</strong> – ND-Array with data
+900 seconds timestep; length for one week;
+starting on monday (00:00:00)
+first column: food production
+second column: metal company
+third column: restaurant (high cooling load)
+fourth column: sports hall
+fifth column: repair / metal shop</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">np.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.functions.process_city">
+<span id="pycity-base-functions-process-city-module"></span><h2>pycity_base.functions.process_city module<a class="headerlink" href="#module-pycity_base.functions.process_city" title="Permalink to this headline">¶</a></h2>
+<p>Functions to help processing city district graphs</p>
+<dl class="function">
+<dt id="pycity_base.functions.process_city.get_subcity">
+<code class="descclassname">pycity_base.functions.process_city.</code><code class="descname">get_subcity</code><span class="sig-paren">(</span><em>city</em>, <em>nodelist</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.process_city.get_subcity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns (copied) subgraph of city object, only holding building nodes
+within nodelist building.
+Important: Returned subgraph is copy of (sub)graph!</p>
+<p>Raises assertion error, if nodes in nodelist are not
+building nodes. Does not include network or street nodes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>city</strong> (<em>city object</em>) – City object of pycity</li>
+<li><strong>nodelist</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) – List of building node ids, which should be extracted</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>subcity</strong> – City object (only including chosen building nodes)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">city object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.functions.slp_electrical">
+<span id="pycity-base-functions-slp-electrical-module"></span><h2>pycity_base.functions.slp_electrical module<a class="headerlink" href="#module-pycity_base.functions.slp_electrical" title="Permalink to this headline">¶</a></h2>
+<p>Created on Tue Jul 21 16:50:36 2015</p>
+<p>&#64;author: tsz</p>
+<dl class="function">
+<dt id="pycity_base.functions.slp_electrical.get_demand">
+<code class="descclassname">pycity_base.functions.slp_electrical.</code><code class="descname">get_demand</code><span class="sig-paren">(</span><em>annual_demand</em>, <em>profile</em>, <em>time_discretization</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.slp_electrical.get_demand" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="pycity_base.functions.slp_electrical.load">
+<code class="descclassname">pycity_base.functions.slp_electrical.</code><code class="descname">load</code><span class="sig-paren">(</span><em>filename</em>, <em>time_discretization=900</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.slp_electrical.load" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.functions.slp_thermal">
+<span id="pycity-base-functions-slp-thermal-module"></span><h2>pycity_base.functions.slp_thermal module<a class="headerlink" href="#module-pycity_base.functions.slp_thermal" title="Permalink to this headline">¶</a></h2>
+<p>Created on Fri Jul 10 16:44:44 2015</p>
+<p>&#64;author: tsz</p>
+<dl class="function">
+<dt id="pycity_base.functions.slp_thermal.calculate">
+<code class="descclassname">pycity_base.functions.slp_thermal.</code><code class="descname">calculate</code><span class="sig-paren">(</span><em>temperature</em>, <em>initial_day</em>, <em>profiles</em>, <em>weekly_factors</em>, <em>hourly_factors</em>, <em>total_demand</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.slp_thermal.calculate" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>temperature</strong> (<em>array_like</em>) – Full year temperature profile with hourly discretization.</li>
+<li><strong>initial_day</strong> (<em>integer</em>) – <ul>
+<li>0 : Monday</li>
+<li>1 : Tuesday</li>
+<li>2 : Wednesday</li>
+<li>3 : Thursday</li>
+<li>4 : Friday</li>
+<li>5 : Saturday</li>
+<li>6 : Sunday</li>
+</ul>
+</li>
+<li><strong>profiles</strong> (<em>array_like</em>) – Dictionary containing all profile factors (A, B, C, D) for all types
+of houses.
+Index order: 0 - A, 1 - B, 2 - C, 3 - D</li>
+<li><strong>weekly_factors</strong> (<em>array_like</em>) – Week day modifiers for each day. Indexes correspond to the description
+of initial_day (0 - Monday, …, 6 - Sunday)</li>
+<li><strong>hourly_factors</strong> (<em>dictionary</em>) – Dictionary containing all hourly profile factors for types of houses.
+First dimension holds the day of the week (see <code class="docutils literal notranslate"><span class="pre">initial_day</span></code>), the
+second dimension holds the temperature range
+(-15; -10; -5; 0; 5; 10; 15; 20; 25; else). The values at this level
+are arrays containing the factors for one day, starting with the
+time interval from 00:00 until 01:00.</li>
+<li><strong>house_type</strong> (<em>string</em>) – <ul>
+<li><cite>HEF</cite> : Single family household</li>
+<li><cite>HMF</cite> : Multi family household</li>
+<li><cite>GBA</cite> : Bakeries</li>
+<li><cite>GBD</cite> : Other services</li>
+<li><cite>GBH</cite> : Accomodations</li>
+<li><cite>GGA</cite> : Restaurants</li>
+<li><cite>GGB</cite> : Gardening</li>
+<li><cite>GHA</cite> : Retailers</li>
+<li><cite>GHD</cite> : Summed load profile business, trade and services</li>
+<li><cite>GKO</cite> : Banks, insurances, public institutions</li>
+<li><cite>GMF</cite> : Household similar businesses</li>
+<li><cite>GMK</cite> : Automotive</li>
+<li><cite>GPD</cite> : Paper and printing</li>
+<li><cite>GWA</cite> : Laundries</li>
+</ul>
+</li>
+<li><strong>total_demand</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Total yearly demand in kWh</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pycity_base.functions.slp_thermal.load_hourly_factors">
+<code class="descclassname">pycity_base.functions.slp_thermal.</code><code class="descname">load_hourly_factors</code><span class="sig-paren">(</span><em>filename</em>, <em>time_discretization=3600</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.slp_thermal.load_hourly_factors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="pycity_base.functions.slp_thermal.load_profile_factors">
+<code class="descclassname">pycity_base.functions.slp_thermal.</code><code class="descname">load_profile_factors</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.slp_thermal.load_profile_factors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="pycity_base.functions.slp_thermal.load_week_day_factors">
+<code class="descclassname">pycity_base.functions.slp_thermal.</code><code class="descname">load_week_day_factors</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.slp_thermal.load_week_day_factors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.functions.zoneModel">
+<span id="pycity-base-functions-zonemodel-module"></span><h2>pycity_base.functions.zoneModel module<a class="headerlink" href="#module-pycity_base.functions.zoneModel" title="Permalink to this headline">¶</a></h2>
+<p>Created on Tue Mar 24 21:24:23 2015</p>
+<p>&#64;author: Thomas</p>
+<dl class="function">
+<dt id="pycity_base.functions.zoneModel.calc">
+<code class="descclassname">pycity_base.functions.zoneModel.</code><code class="descname">calc</code><span class="sig-paren">(</span><em>zoneParameters</em>, <em>zoneInputs</em>, <em>TCoolingSet</em>, <em>THeatingSet</em>, <em>limitHeating=inf</em>, <em>limitCooling=-inf</em>, <em>beQuiet=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.zoneModel.calc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute heating/cooling demand for the thermal zone.
+Deadbands between heating and cooling temperatures are considered.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>zoneParameters</strong> (<a class="reference internal" href="pycity_base.classes.demand.html#pycity_base.classes.demand.ZoneParameters.ZoneParameters" title="pycity_base.classes.demand.ZoneParameters.ZoneParameters"><em>ZoneParameters</em></a>) – Resistances and capacity</li>
+<li><strong>zoneInputs</strong> (<a class="reference internal" href="pycity_base.classes.demand.html#pycity_base.classes.demand.ZoneInputs.ZoneInputs" title="pycity_base.classes.demand.ZoneInputs.ZoneInputs"><em>ZoneInputs</em></a>) – External inputs (solar, internal gains, set temperatures)</li>
+<li><strong>TCoolingSet</strong> (<em>array_like</em>) – Cooling set temperatures in degC.</li>
+<li><strong>THeatingSet</strong> (<em>array_like</em>) – Heating set temperatures in degC.</li>
+<li><strong>limitHeating</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum available heating power in Watt.</li>
+<li><strong>limitCooling</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum available cooling power in Watt.</li>
+<li><strong>beQuiet</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – Print current progress (False) or be quiet (True)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li><strong>Q_HC</strong> (<em>array_like</em>) – Heating/cooling demand. Positive values indicate heating demand,
+negative values cooling demand.</li>
+<li><strong>T_op</strong> (<em>array_like</em>) – Operating temperature inside the thermal zone in degC. This
+temperature serves as actual temperature for the zone controller.</li>
+<li><strong>T_m</strong> (<em>array_like</em>) – Temperature of the thermal mass in degC.</li>
+<li><strong>T_i</strong> (<em>array_like</em>) – Air temperature in degC.</li>
+<li><strong>T_s</strong> (<em>array_like</em>) – Average temperature of internal components in degC (radiative
+temperature).</li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pycity_base.functions.zoneModel.calculate">
+<code class="descclassname">pycity_base.functions.zoneModel.</code><code class="descname">calculate</code><span class="sig-paren">(</span><em>zoneParameters</em>, <em>zoneInputs</em>, <em>T_set</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.zoneModel.calculate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute heating/cooling demand.
+There is no difference between heating and cooling set temperatures. No
+deadband is considered.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>zoneParameters</strong> (<a class="reference internal" href="pycity_base.classes.demand.html#pycity_base.classes.demand.ZoneParameters.ZoneParameters" title="pycity_base.classes.demand.ZoneParameters.ZoneParameters"><em>ZoneParameters</em></a>) – Resistances and capacity</li>
+<li><strong>zoneInputs</strong> (<a class="reference internal" href="pycity_base.classes.demand.html#pycity_base.classes.demand.ZoneInputs.ZoneInputs" title="pycity_base.classes.demand.ZoneInputs.ZoneInputs"><em>ZoneInputs</em></a>) – External inputs (solar, internal gains, set temperatures)</li>
+<li><strong>T_set</strong> (<em>array_like</em>) – Set value for operating temperature in degC.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.functions">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pycity_base.functions" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">pycity_base</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Institute for Energy Efficient Buildings and Indoor Climate, Institute for Automation of Complex Power Systems, E.ON Energy Research Center, RWTH Aachen University.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.9</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/pycity_base.functions.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

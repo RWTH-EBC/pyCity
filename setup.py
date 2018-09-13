@@ -54,6 +54,7 @@ setup(name='pycity_base',
       long_description=long_description,
       url='https://github.com/RWTH-EBC/pyCity',
       author='Institute of Energy Efficient Buildings and Indoor Climate, '
+             'Institute for Automation of Complex Power Systems'
              'E.ON Energy Research Center, RWTH Aachen University',
       author_email='pycity@eonerc.rwth-aachen.de',
       license='MIT License',

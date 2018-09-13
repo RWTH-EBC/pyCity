@@ -23,7 +23,11 @@ Alternatively: Clone via https: `git clone https://github.com/RWTH-EBC/pyCity.gi
 
 ## Installation
 
-pyCity requires the following Python packages:
+*One important issue at the beginning: Please do NOT confuse pyCity_base with
+the pycity package on pypi! This (other) pycity package is installable via 
+pip. However, if you want to install pycity_base, follow this instruction.*
+
+pyCity_base requires the following Python packages:
 - numpy
 - matplotlib
 - networkX
@@ -53,12 +57,8 @@ In this case, follow the instructions of the uesgraphs installation:
 
 ### Installation of pyCity_base
 
-*One important issue at the beginning: Please do NOT confuse pyCity_base with
-the pycity package on pypi! This (other) pycity package is installable via 
-pip. However, if you want to install pycity_base, follow this instruction.*
-
 When uesgraph and its dependencies are installed, you should be able to install
-pyCity via pip:
+pyCity_base via pip:
 
 `pip install -e '<your_path_to_pycity_setup_folder>'`
 

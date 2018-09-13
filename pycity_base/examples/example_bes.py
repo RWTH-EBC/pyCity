@@ -4,6 +4,8 @@
 Created on Tue Feb 10 15:35:37 2015
 
 @author: tsz
+
+Script on how to generate and use building energy system (BES) object instance)
 """
 
 from __future__ import division
@@ -21,25 +23,27 @@ import pycity_base.classes.supply.Inverter as Inverter
 import pycity_base.classes.supply.PV as PV
 import pycity_base.classes.supply.ThermalEnergyStorage as ThermalEnergyStorage
 
+
 def print_bes_attributes(bes):
     print(("Has Battery: " + str(bes.hasBattery)))
     print(("Has Boiler: " + str(bes.hasBoiler)))
     print(("Has CHP unit: " + str(bes.hasChp)))
-    print(("Has Electrical Heater: " + str(bes.hasElectricalHeater)))    
+    print(("Has Electrical Heater: " + str(bes.hasElectricalHeater)))
     print(("Has AC/DC inverter: " + str(bes.hasInverterAcdc)))
     print(("Has DC/AC inverter: " + str(bes.hasInverterDcac)))
     print(("Has PV: " + str(bes.hasPv)))
-  
-def run_test():
 
+
+def run_test():
+    #  Generate environment
     timer = pycity_base.classes.Timer.Timer()
     weather = pycity_base.classes.Weather.Weather(timer, useTRY=True)
     prices = pycity_base.classes.Prices.Prices()
+    environment = pycity_base.classes.Environment.Environment(timer, weather,
+                                                              prices)
 
-    environment = pycity_base.classes.Environment.Environment(timer, weather, prices)
-
-    # Create appliances
-    battery = Battery.Battery(environment, 0.5, 4*3600*1000)
+    # Create different energy systems
+    battery = Battery.Battery(environment, 0.5, 4 * 3600 * 1000)
     boiler = Boiler.Boiler(environment, 10000, 0.8)
     chp = CHP.CHP(environment, 1000, 2000, 0.9)
     elHeater = ElectricalHeater.ElectricalHeater(environment, 3000, 0.99)
@@ -94,6 +98,7 @@ def run_test():
                       inverterDcac=True,
                       pv=True,
                       tes=True)
+
 
 if __name__ == '__main__':
     #  Run program

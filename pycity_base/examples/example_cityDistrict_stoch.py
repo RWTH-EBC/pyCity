@@ -89,6 +89,10 @@ def run_test():
             prev_heat_dev=True,  # Prevent space heating and hot water devices
             annualDemand=None,  # Annual el. demand in kWh could be used for
             do_normalization=False)  # rescaling (if do_normalization is True)
+        #  Annotation: The calculation of stochastic electric load profiles
+        #  is time consuming. If you prefer a faster method, you can either
+        #  hand over an own array-like load curve (method=0) or generate a
+        #  standardized load profile (SLP) (method=1)
 
         #  Generate domestic hot water demand object
         dhw_obj = dhw.DomesticHotWater(
@@ -171,7 +175,7 @@ def run_test():
     #  Add bes to building 1001
     building_1001.addEntity(entity=bes)
 
-    print('Does building 1001 has a building energy system?')
+    print('Does building 1001 has a building energy system (BES)?')
     print(building_1001.hasBes)
 
     #  Access boiler nominal thermal power

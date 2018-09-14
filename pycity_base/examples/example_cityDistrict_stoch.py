@@ -146,6 +146,7 @@ def run_test():
 
     print('Get building 1001 electric load curve:')
     print(building_1001.get_electric_power_curve())
+    print()
 
     #  Add energy systems to buildings
     #  ######################################################################
@@ -173,8 +174,9 @@ def run_test():
     print('Does building 1001 has a building energy system?')
     print(building_1001.hasBes)
 
-    #  Pointer to boiler system
-    boiler = building_1001.bes.boiler
+    #  Access boiler nominal thermal power
+    print('Nominal thermal power of boiler in kW:')
+    print(building_1001.bes.boiler.qNominal / 1000)
 
 if __name__ == '__main__':
     #  Run program

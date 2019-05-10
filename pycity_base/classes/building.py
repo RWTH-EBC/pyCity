@@ -182,7 +182,11 @@ class Building(object):
         """
 
         #  Initialize array with zeros
-        space_heat_power = np.zeros(len(self.apartments[0].demand_space_heating.get_power(currentValues=currentValues)))
+        if currentValues:
+            timesteps = self.environment.timer.timesteps_horizon
+        else:
+            timesteps = self.environment.timer.timesteps_total
+        space_heat_power = np.zeros(timesteps)
 
         # Get power curves of each apartment
         for apartment in self.apartments:
@@ -209,8 +213,11 @@ class Building(object):
         """
 
         #  Initialize array with zeros
-        space_cooling_power = np.zeros(len(self.apartments[0].demand_space_cooling.
-                                           get_power(currentValues=currentValues)))
+        if currentValues:
+            timesteps = self.environment.timer.timesteps_horizon
+        else:
+            timesteps = self.environment.timer.timesteps_total
+        space_cooling_power = np.zeros(timesteps)
 
         # Get power curves of each apartment
         for apartment in self.apartments:
@@ -237,7 +244,11 @@ class Building(object):
         """
 
         #  Initialize array with zeros
-        el_power_curve = np.zeros(len(self.apartments[0].power_el.get_power(currentValues=currentValues)))
+        if currentValues:
+            timesteps = self.environment.timer.timesteps_horizon
+        else:
+            timesteps = self.environment.timer.timesteps_total
+        el_power_curve = np.zeros(timesteps)
 
         # Get power curves of each apartment
         for apartment in self.apartments:
@@ -264,9 +275,11 @@ class Building(object):
         """
 
         #  Initialize array with zeros
-        dhw_heat_power = \
-            np.zeros(len(self.apartments[0].demand_domestic_hot_water.
-                         get_power(currentValues=currentValues, returnTemperature=False)))
+        if currentValues:
+            timesteps = self.environment.timer.timesteps_horizon
+        else:
+            timesteps = self.environment.timer.timesteps_total
+        dhw_heat_power = np.zeros(timesteps)
 
         # Get power curves of each apartment
         for apartment in self.apartments:

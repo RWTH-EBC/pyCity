@@ -21,7 +21,8 @@ def run_test():
     timer = pycity_base.classes.Timer.Timer()
     weather = pycity_base.classes.Weather.Weather(timer)
     prices = pycity_base.classes.Prices.Prices()
-    environment = pycity_base.classes.Environment.Environment(timer, weather, prices)
+    environment = pycity_base.classes.Environment.Environment(timer, weather,
+                                                              prices)
 
     # Create Boiler
     capacity = 4 * 3600 * 1000 # 4 kWh = 4 * 3600*1000 J

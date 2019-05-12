@@ -1,0 +1,1118 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>pycity_base.classes package &#8212; pycity_base 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="pycity-base-classes-package">
+<h1>pycity_base.classes package<a class="headerlink" href="#pycity-base-classes-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pycity_base.classes.demand.html">pycity_base.classes.demand package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.classes.demand.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.classes.demand.html#module-pycity_base.classes.demand.Apartment">pycity_base.classes.demand.Apartment module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.classes.demand.html#module-pycity_base.classes.demand.CoolingDemand">pycity_base.classes.demand.CoolingDemand module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.classes.demand.html#module-pycity_base.classes.demand.DomesticHotWater">pycity_base.classes.demand.DomesticHotWater module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.classes.demand.html#module-pycity_base.classes.demand.ElectricalDemand">pycity_base.classes.demand.ElectricalDemand module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.classes.demand.html#module-pycity_base.classes.demand.Load">pycity_base.classes.demand.Load module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.classes.demand.html#module-pycity_base.classes.demand.Occupancy">pycity_base.classes.demand.Occupancy module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.classes.demand.html#module-pycity_base.classes.demand.Room">pycity_base.classes.demand.Room module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.classes.demand.html#module-pycity_base.classes.demand.SpaceHeating">pycity_base.classes.demand.SpaceHeating module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.classes.demand.html#module-pycity_base.classes.demand.ZoneInputs">pycity_base.classes.demand.ZoneInputs module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.classes.demand.html#module-pycity_base.classes.demand.ZoneParameters">pycity_base.classes.demand.ZoneParameters module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.classes.demand.html#module-pycity_base.classes.demand">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pycity_base.classes.supply.html">pycity_base.classes.supply package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.classes.supply.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.classes.supply.html#module-pycity_base.classes.supply.BES">pycity_base.classes.supply.BES module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.classes.supply.html#module-pycity_base.classes.supply.Battery">pycity_base.classes.supply.Battery module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.classes.supply.html#module-pycity_base.classes.supply.Boiler">pycity_base.classes.supply.Boiler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.classes.supply.html#module-pycity_base.classes.supply.CHP">pycity_base.classes.supply.CHP module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.classes.supply.html#module-pycity_base.classes.supply.ElectricalHeater">pycity_base.classes.supply.ElectricalHeater module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.classes.supply.html#module-pycity_base.classes.supply.HeatPump">pycity_base.classes.supply.HeatPump module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.classes.supply.html#module-pycity_base.classes.supply.HeatingDevice">pycity_base.classes.supply.HeatingDevice module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.classes.supply.html#module-pycity_base.classes.supply.Inverter">pycity_base.classes.supply.Inverter module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.classes.supply.html#module-pycity_base.classes.supply.PV">pycity_base.classes.supply.PV module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.classes.supply.html#module-pycity_base.classes.supply.ThermalEnergyStorage">pycity_base.classes.supply.ThermalEnergyStorage module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.classes.supply.html#module-pycity_base.classes.supply.WindEnergyConverter">pycity_base.classes.supply.WindEnergyConverter module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.classes.supply.html#module-pycity_base.classes.supply.absorptionchiller">pycity_base.classes.supply.absorptionchiller module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.classes.supply.html#module-pycity_base.classes.supply.compressionchiller">pycity_base.classes.supply.compressionchiller module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.classes.supply.html#module-pycity_base.classes.supply.coolingdevice">pycity_base.classes.supply.coolingdevice module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pycity_base.classes.supply.html#module-pycity_base.classes.supply">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-pycity_base.classes.Building">
+<span id="pycity-base-classes-building-module"></span><h2>pycity_base.classes.Building module<a class="headerlink" href="#module-pycity_base.classes.Building" title="Permalink to this headline">¶</a></h2>
+<p>Building object of pycity</p>
+<dl class="class">
+<dt id="pycity_base.classes.Building.Building">
+<em class="property">class </em><code class="descclassname">pycity_base.classes.Building.</code><code class="descname">Building</code><span class="sig-paren">(</span><em>environment</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Building.Building" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Implementation of a building that consists of a single Building Energy
+System (BES), one controller and multiple apartments</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="pycity_base.classes.Building.Building.addEntity">
+<code class="descname">addEntity</code><span class="sig-paren">(</span><em>entity</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Building.Building.addEntity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an entity (apartment, BES or heating curve) to the building</p>
+<p class="rubric">Example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">myBes</span> <span class="o">=</span> <span class="n">BES</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myBuilding</span> <span class="o">=</span> <span class="n">Building</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myBuilding</span><span class="o">.</span><span class="n">addEntity</span><span class="p">(</span><span class="n">myBes</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.Building.Building.addMultipleEntities">
+<code class="descname">addMultipleEntities</code><span class="sig-paren">(</span><em>entities</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Building.Building.addMultipleEntities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add multiple entities to the existing building</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.Building.Building.getFlowTemperature">
+<code class="descname">getFlowTemperature</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Building.Building.getFlowTemperature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the required flow temperature of this building.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.Building.Building.getHeatpumpNominals">
+<code class="descname">getHeatpumpNominals</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Building.Building.getHeatpumpNominals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the nominal electricity consumption, heat output and lower
+activation limit.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><strong>pNominal</strong> (<em>Array_like</em>) – Nominal electricity consumption at the given flow temperatures and
+the forecast of the current ambient temperature</li>
+<li><strong>qNominal</strong> (<em>Array_like</em>) – Nominal heat output at the given flow temperatures and the
+forecast of the current ambient temperature</li>
+<li><strong>lowerActivationLimit</strong> (<em>float (0 &lt;= lowerActivationLimit &lt;= 1)</em>) – Define the lower activation limit. For example, heat pumps are
+typically able to operate between 50 % part load and rated load.
+In this case, lowerActivationLimit would be 0.5
+Two special cases:
+Linear behavior: lowerActivationLimit = 0
+Two-point controlled: lowerActivationLimit = 1</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.Building.Building.get_dhw_power_curve">
+<code class="descname">get_dhw_power_curve</code><span class="sig-paren">(</span><em>current_values=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Building.Building.get_dhw_power_curve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns domestic hot water (dhw) power curve</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>current_values</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Defines, if only current horizon or all timesteps should be used.
+(default: False)
+False - Use complete number of timesteps
+True - Use horizon</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>dhw_heat_power</strong> – DHW power curve in W</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array-like</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.Building.Building.get_electric_power_curve">
+<code class="descname">get_electric_power_curve</code><span class="sig-paren">(</span><em>current_values=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Building.Building.get_electric_power_curve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns electric power curve</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>current_values</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Defines, if only current horizon or all timesteps should be used.
+(default: False)
+False - Use complete number of timesteps
+True - Use horizon</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>el_power_curve</strong> – Electrical power curve in W</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array-like</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.Building.Building.get_net_floor_area_of_building">
+<code class="descname">get_net_floor_area_of_building</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Building.Building.get_net_floor_area_of_building" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns net floor area of building. If undefined (within apartments)
+returns None.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>nfa</strong> – Net floor area of building in m^2</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.Building.Building.get_number_of_apartments">
+<code class="descname">get_number_of_apartments</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Building.Building.get_number_of_apartments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns number of apartments within chosen building. Of no apartment
+exists, returns None.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>number_of_apartments</strong> – Number of apartments within building</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.Building.Building.get_number_of_occupants">
+<code class="descname">get_number_of_occupants</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Building.Building.get_number_of_occupants" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns number of occupants of all apartments within building.
+If no occupants exist within building/apartment(s), returns None.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>occupants_total</strong> – Total number of occupants</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.Building.Building.get_occupancy_profile">
+<code class="descname">get_occupancy_profile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Building.Building.get_occupancy_profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns occupancy profile of the whole building. Returns None,
+if occupancy object or profile do not exist.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>occupancy_profile</strong></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">array-like</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.Building.Building.get_power_curves">
+<code class="descname">get_power_curves</code><span class="sig-paren">(</span><em>current_values=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Building.Building.get_power_curves" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the entire electrical and thermal power curves of all apartments
+in this building.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>current_values</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Defines, if only current horizon or all timesteps should be used.
+(default: True)
+False - Use complete number of timesteps
+True - Use horizon</li>
+<li><strong>Order</strong> (<em>(</em><em>resultElectrical</em><em>, </em><em>resultThermal</em><em>)</em>) – </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.Building.Building.get_space_heating_power_curve">
+<code class="descname">get_space_heating_power_curve</code><span class="sig-paren">(</span><em>current_values=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Building.Building.get_space_heating_power_curve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns space heating power curve</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>current_values</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Defines, if only current horizon or all timesteps should be used.
+(default: False)
+False - Use complete number of timesteps
+True - Use horizon</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>space_heat_power</strong> – Space heating power curve in W</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array-like</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.classes.CityDistrict">
+<span id="pycity-base-classes-citydistrict-module"></span><h2>pycity_base.classes.CityDistrict module<a class="headerlink" href="#module-pycity_base.classes.CityDistrict" title="Permalink to this headline">¶</a></h2>
+<p>Python code with city district class. Usage requires installation of uesgraphs
+Python package.
+uesgraphs can be downloaded on Github: <a class="reference external" href="https://github.com/RWTH-EBC/uesgraphs">https://github.com/RWTH-EBC/uesgraphs</a></p>
+<dl class="class">
+<dt id="pycity_base.classes.CityDistrict.CityDistrict">
+<em class="property">class </em><code class="descclassname">pycity_base.classes.CityDistrict.</code><code class="descname">CityDistrict</code><span class="sig-paren">(</span><em>environment=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.CityDistrict.CityDistrict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">uesgraphs.uesgraph.UESGraph</span></code></p>
+<p>City district class. Inheritance from urban energy system graph (uesgraph).</p>
+<p>See: <a class="reference external" href="https://github.com/RWTH-EBC/uesgraphs">https://github.com/RWTH-EBC/uesgraphs</a> for further information</p>
+<p class="rubric">Attributes</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="pycity_base.classes.CityDistrict.CityDistrict.addEntity">
+<code class="descname">addEntity</code><span class="sig-paren">(</span><em>entity</em>, <em>position</em>, <em>name=None</em>, <em>is_supply_electricity=None</em>, <em>is_supply_heating=False</em>, <em>is_supply_cooling=False</em>, <em>is_supply_gas=False</em>, <em>is_supply_other=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.CityDistrict.CityDistrict.addEntity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method adds entity (e.g. building object) to city district object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>entity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><em>object</em></a>) – Standard entity object (building, windenergyconverter or pv)</li>
+<li><strong>position</strong> (<em>shapely.geometry.Point object</em>) – New node’s position</li>
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Name of entity (default: None)</li>
+<li><strong>is_supply_electricity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Boolean to define, if entity is of kind electrical supply
+(default: None)
+True - Entity is electric supplier
+False - Entity is not an electric supplier
+When initialized as “None”, method automatically decides if value
+is True or False, based on _kind of entity
+(“building” - False; “windenergyconverter” - True; “pv” - True)</li>
+<li><strong>is_supply_heating</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Boolean to define, if entity is of kind heating supply
+(default: False)</li>
+<li><strong>is_supply_cooling</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Boolean to define, if entity is of kind cooling supply
+(default: False)</li>
+<li><strong>is_supply_gas</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Boolean to define, if entity is of kind gas supply
+(default: False)</li>
+<li><strong>is_supply_other</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Boolean to define, if entity is of kind other supply
+(default: False)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>node_number</strong> – Node number</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">myBuilding</span> <span class="o">=</span> <span class="n">Building</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myCityDistrict</span> <span class="o">=</span> <span class="n">CityDistrict</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myCityDistrict</span><span class="o">.</span><span class="n">addDevice</span><span class="p">(</span><span class="n">myBuilding</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.CityDistrict.CityDistrict.addMultipleEntities">
+<code class="descname">addMultipleEntities</code><span class="sig-paren">(</span><em>entities</em>, <em>positions</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.CityDistrict.CityDistrict.addMultipleEntities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add multiple entities to the existing city district.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.CityDistrict.CityDistrict.getFlowTemperatures">
+<code class="descname">getFlowTemperatures</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.CityDistrict.CityDistrict.getFlowTemperatures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the aggregated flow temperature forecast.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.CityDistrict.CityDistrict.getPVPower">
+<code class="descname">getPVPower</code><span class="sig-paren">(</span><em>current_values=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.CityDistrict.CityDistrict.getPVPower" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the (aggregated) forecast of all (stand alone) pv units / pv farms.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>current_values</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Defines, if only current horizon or all timesteps should be used.
+(default: True)
+False - Use complete number of timesteps
+True - Use horizon</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>pv_res_power</strong> – Array with pv power values of all pv farms</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">np.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.CityDistrict.CityDistrict.getWindEnergyConverterPower">
+<code class="descname">getWindEnergyConverterPower</code><span class="sig-paren">(</span><em>current_values=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.CityDistrict.CityDistrict.getWindEnergyConverterPower" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the (aggregated) forecast of all wind energy converters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>current_values</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Defines, if only current horizon or all timesteps should be used.
+(default: True)
+False - Use complete number of timesteps
+True - Use horizon</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>wind_res_power</strong> – Array with wind power values of all wind farms</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">np.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.CityDistrict.CityDistrict.get_aggr_dhw_power_curve">
+<code class="descname">get_aggr_dhw_power_curve</code><span class="sig-paren">(</span><em>current_values=False</em>, <em>nodelist=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.CityDistrict.CityDistrict.get_aggr_dhw_power_curve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns aggregated domestic hot water (dhw) power curve for all
+buildings within city district.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>current_values</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Defines, if only current horizon or all timesteps should be used.
+(default: False)
+False - Use complete number of timesteps
+True - Use horizon</li>
+<li><strong>nodelist</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> (</em><em>of ints</em><em>)</em><em>, </em><em>optional</em>) – Defines which nodes should be used to return annual space
+heating demand in kWh (default: None).
+If nodelist is None, all nodes with building entities will
+be used.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>agg_dhw_p_curve</strong> – DHW power curve in W per timestep</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">np.array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.CityDistrict.CityDistrict.get_aggr_el_power_curve">
+<code class="descname">get_aggr_el_power_curve</code><span class="sig-paren">(</span><em>current_values=False</em>, <em>nodelist=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.CityDistrict.CityDistrict.get_aggr_el_power_curve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns aggregated electrical power curve for all buildings
+within city district.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>current_values</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Defines, if only current horizon or all timesteps should be used.
+(default: False)
+False - Use complete number of timesteps
+True - Use horizon</li>
+<li><strong>nodelist</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> (</em><em>of ints</em><em>)</em><em>, </em><em>optional</em>) – Defines which nodes should be used to return annual space
+heating demand in kWh (default: None).
+If nodelist is None, all nodes with building entities will
+be used.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>agg_el_p_curve</strong> – Electrical power curve in W per timestep</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">np.array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.CityDistrict.CityDistrict.get_aggr_space_h_power_curve">
+<code class="descname">get_aggr_space_h_power_curve</code><span class="sig-paren">(</span><em>current_values=False</em>, <em>nodelist=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.CityDistrict.CityDistrict.get_aggr_space_h_power_curve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns aggregated space heating power curve for all buildings
+within city district.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>current_values</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Defines, if only current horizon or all timesteps should be used.
+(default: False)
+False - Use complete number of timesteps
+True - Use horizon</li>
+<li><strong>nodelist</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> (</em><em>of ints</em><em>)</em><em>, </em><em>optional</em>) – Defines which nodes should be used to return annual space
+heating demand in kWh (default: None).
+If nodelist is None, all nodes with building entities will
+be used.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>agg_th_p_curve</strong> – Space heating thermal power curve in W per timestep</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">np.array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.CityDistrict.CityDistrict.get_list_build_entity_node_ids">
+<code class="descname">get_list_build_entity_node_ids</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.CityDistrict.CityDistrict.get_list_build_entity_node_ids" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns list with node ids holding building entities.
+(without PV- and windfarms)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>build_node_id_list</strong> – List holding building entity node ids</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)">list</a> (of ints)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.CityDistrict.CityDistrict.get_list_id_of_spec_node_type">
+<code class="descname">get_list_id_of_spec_node_type</code><span class="sig-paren">(</span><em>node_type='building'</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.CityDistrict.CityDistrict.get_list_id_of_spec_node_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of node ids of specific (uesgraph) node_type</p>
+<p>Attention: uesgraph node_type ‘building’ can be a PV, windfarm or
+building entity in pyCity!</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Choosen node_type (default: ‘building’)
+Options:
+‘building’, ‘street’, ‘heating’, ‘cooling’, ‘electricity’,
+‘gas’, ‘others’</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>list_ids</strong> – List holding all node ids of specific node_type</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)">list</a> (of ints)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.CityDistrict.CityDistrict.get_nb_occupants">
+<code class="descname">get_nb_occupants</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.CityDistrict.CityDistrict.get_nb_occupants" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns total number of occupants within city district</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">nb_occ</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.CityDistrict.CityDistrict.get_nb_of_building_entities">
+<code class="descname">get_nb_of_building_entities</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.CityDistrict.CityDistrict.get_nb_of_building_entities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns number of nodes holding entities of kind “building”
+(without PV- and windfarms).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>nb_buildings</strong> – Number of buildings</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.CityDistrict.CityDistrict.get_nb_of_entities">
+<code class="descname">get_nb_of_entities</code><span class="sig-paren">(</span><em>entity_name</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.CityDistrict.CityDistrict.get_nb_of_entities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns number of nodes of specific entity (e.g. “building”, “pv”,
+“windenergyconverter”)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>entity_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Standard entity names (building, windenergyconverter or pv)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>nb_of_entities</strong> – Number of nodes holding specific entity</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.CityDistrict.CityDistrict.get_node_numbers_of_entities">
+<code class="descname">get_node_numbers_of_entities</code><span class="sig-paren">(</span><em>entity_name</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.CityDistrict.CityDistrict.get_node_numbers_of_entities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns list with node numbers, which hold specific kind of entity
+(e.g. “building”, “pv”, “windenergyconverter”)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>entity_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Standard entity names (building, windenergyconverter or pv)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>node_nb_list</strong> – List holding node numbers</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)">list</a> (of ints)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.CityDistrict.CityDistrict.get_power_curves">
+<code class="descname">get_power_curves</code><span class="sig-paren">(</span><em>current_values=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.CityDistrict.CityDistrict.get_power_curves" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the aggregated electricity and heat power forecast of all
+buildings.</p>
+<p>Returns tuple of electrical and thermal power array</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>current_values</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Defines, if only current horizon or all timesteps should be used.
+(default: True)
+False - Use complete number of timesteps
+True - Use horizon</li>
+<li><strong>Order</strong> – </li>
+<li><strong>-----</strong> – </li>
+<li><strong>ElectricityDemand</strong> (<em>Array_like</em>) – Aggregated electrical demand</li>
+<li><strong>HeatDemand</strong> (<em>Array_like</em>) – Aggregated heat demand</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.classes.Controller">
+<span id="pycity-base-classes-controller-module"></span><h2>pycity_base.classes.Controller module<a class="headerlink" href="#module-pycity_base.classes.Controller" title="Permalink to this headline">¶</a></h2>
+<p>Created on Wed Feb 11 16:01:38 2015</p>
+<p>&#64;author: tsz</p>
+</div>
+<div class="section" id="module-pycity_base.classes.Environment">
+<span id="pycity-base-classes-environment-module"></span><h2>pycity_base.classes.Environment module<a class="headerlink" href="#module-pycity_base.classes.Environment" title="Permalink to this headline">¶</a></h2>
+<p>Created on Thu Feb 12 20:26:30 2015</p>
+<p>&#64;author: Thomas</p>
+<dl class="class">
+<dt id="pycity_base.classes.Environment.Environment">
+<em class="property">class </em><code class="descclassname">pycity_base.classes.Environment.</code><code class="descname">Environment</code><span class="sig-paren">(</span><em>timer</em>, <em>weather</em>, <em>prices</em>, <em>location=(50.76</em>, <em>6.07)</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Environment.Environment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>This class keeps track of the simulation time and the weather conditions</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="pycity_base.classes.Environment.Environment.update">
+<code class="descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Environment.Environment.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Increase current timestep and current day</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.classes.ExternalElectricityGrid">
+<span id="pycity-base-classes-externalelectricitygrid-module"></span><h2>pycity_base.classes.ExternalElectricityGrid module<a class="headerlink" href="#module-pycity_base.classes.ExternalElectricityGrid" title="Permalink to this headline">¶</a></h2>
+<p>Created on Sat Mar 14 08:52:56 2015</p>
+<p>&#64;author: Thomas</p>
+</div>
+<div class="section" id="module-pycity_base.classes.HeatingCurve">
+<span id="pycity-base-classes-heatingcurve-module"></span><h2>pycity_base.classes.HeatingCurve module<a class="headerlink" href="#module-pycity_base.classes.HeatingCurve" title="Permalink to this headline">¶</a></h2>
+<p>Created on Wed Feb 11 16:01:52 2015</p>
+<p>&#64;author: tsz</p>
+<dl class="class">
+<dt id="pycity_base.classes.HeatingCurve.HeatingCurve">
+<em class="property">class </em><code class="descclassname">pycity_base.classes.HeatingCurve.</code><code class="descname">HeatingCurve</code><span class="sig-paren">(</span><em>environment</em>, <em>m=0.33</em>, <em>setRoom=20</em>, <em>setAmbient=-10</em>, <em>setFlow=55</em>, <em>setReturn=45</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.HeatingCurve.HeatingCurve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>The heating curve presents a functional relationship between ambient
+temperature and required flow temperature</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="pycity_base.classes.HeatingCurve.HeatingCurve.computeRequiredFlowTemperature">
+<code class="descname">computeRequiredFlowTemperature</code><span class="sig-paren">(</span><em>ambientTemperature</em>, <em>smoothingPeriod=1</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.HeatingCurve.HeatingCurve.computeRequiredFlowTemperature" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is a straight-forward implementation of the heatingCurve
+algorithm of our Modelica library
+(Cities.Supply.BaseClasses.heatingCurve)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ambientTemperature</strong> (<em>Array-like</em>) – Temperature time series in °C</li>
+<li><strong>smoothingPeriod</strong> (<em>Integer</em><em>, </em><em>optional</em>) – Over how many days (not time steps!) the moving average is
+computed</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>flowTemperature</strong> – Temperature time series in °C</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Array-like</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.HeatingCurve.HeatingCurve.doubleExponentialMovingAverage">
+<code class="descname">doubleExponentialMovingAverage</code><span class="sig-paren">(</span><em>timeseries</em>, <em>smoothingPeriod=1</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.HeatingCurve.HeatingCurve.doubleExponentialMovingAverage" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div>This function implements the double exponential moving average (DEMA),
+as eplained here:</div></blockquote>
+<p><a class="reference external" href="http://etfhq.com/blog/2010/11/17/double-and-triple-exponential-moving-average/">http://etfhq.com/blog/2010/11/17/double-and-triple-exponential-moving-average/</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>timeseries</strong> : Array-like</p>
+<blockquote class="last">
+<div><blockquote>
+<div><p>Array that represents the “unsmoothed”, original data</p>
+</div></blockquote>
+<dl class="docutils">
+<dt>smoothingPeriod <span class="classifier-delimiter">:</span> <span class="classifier">Integer, optional</span></dt>
+<dd><p class="first last">Over how many days (not time steps!) the moving average is
+computed</p>
+</dd>
+</dl>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.HeatingCurve.HeatingCurve.exponential_moving_average">
+<code class="descname">exponential_moving_average</code><span class="sig-paren">(</span><em>timeseries</em>, <em>alpha</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.HeatingCurve.HeatingCurve.exponential_moving_average" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the exponential moving average of a given timeseries</p>
+<dl class="docutils">
+<dt>Explanation of the statistics behind exponential moving average:</dt>
+<dd><a class="reference external" href="http://etfhq.com/blog/2010/11/08/exponential-moving-average/">http://etfhq.com/blog/2010/11/08/exponential-moving-average/</a></dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.classes.Prices">
+<span id="pycity-base-classes-prices-module"></span><h2>pycity_base.classes.Prices module<a class="headerlink" href="#module-pycity_base.classes.Prices" title="Permalink to this headline">¶</a></h2>
+<p>Created on Mon Feb 09 16:19:18 2015</p>
+<p>&#64;author: tsz</p>
+<dl class="class">
+<dt id="pycity_base.classes.Prices.Prices">
+<em class="property">class </em><code class="descclassname">pycity_base.classes.Prices.</code><code class="descname">Prices</code><span class="sig-paren">(</span><em>revenueChp=5.41</em>, <em>costsElectricity=30</em>, <em>revenueElectricity=10</em>, <em>costsGas=6.6</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Prices.Prices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Class that keeps track of the current market conditions (prices and
+remuneration)</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="pycity_base.classes.Prices.Prices.getAllData">
+<code class="descname">getAllData</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Prices.Prices.getAllData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all market information.</p>
+<p>Order: Electricity costs, gas costs, CHP revenue, feed-in remuneration</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.Prices.Prices.setAllData">
+<code class="descname">setAllData</code><span class="sig-paren">(</span><em>costsEl=None</em>, <em>costsGas=None</em>, <em>revChp=None</em>, <em>revEl=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Prices.Prices.setAllData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update multiple market data.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.classes.Sun">
+<span id="pycity-base-classes-sun-module"></span><h2>pycity_base.classes.Sun module<a class="headerlink" href="#module-pycity_base.classes.Sun" title="Permalink to this headline">¶</a></h2>
+<p>Created on Fri Mar 27 16:47:12 2015</p>
+<p>&#64;author: tsz</p>
+<dl class="class">
+<dt id="pycity_base.classes.Sun.Sun">
+<em class="property">class </em><code class="descclassname">pycity_base.classes.Sun.</code><code class="descname">Sun</code><span class="sig-paren">(</span><em>timer</em>, <em>location=(50.76</em>, <em>6.07)</em>, <em>timeZone=1</em>, <em>altitude=0</em>, <em>TRY=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Sun.Sun" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="pycity_base.classes.Sun.Sun.computeGeometry">
+<code class="descname">computeGeometry</code><span class="sig-paren">(</span><em>allTimeSteps=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Sun.Sun.computeGeometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function computes hour angle, declination, zenith angle of the
+sun for the forecasting horizon.</p>
+<p>The implemented equations can be found in:
+Duffie, Beckman - Solar Engineering of Thermal Processes, 2013 (4th
+ed.)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>allTimeSteps</strong> (<em>boolean</em><em>, </em><em>optional</em>) – <ul>
+<li>True: Compute the results for all time steps</li>
+<li>False: Compute the results only for the upcoming horizon</li>
+</ul>
+</li>
+<li><strong>Updates</strong> – </li>
+<li><strong>-------</strong> – </li>
+<li><strong>omega</strong> (<em>array_like</em>) – Hour angle. The angular displacement of the sun east or west of
+the local meridian due to rotation of the earth on its axis at
+15 degrees per hour; morning negative, afternoon positive</li>
+<li><strong>delta</strong> (<em>array_like</em>) – Declination. The angular position of the sun at solar noon (i.e.,
+when the sun is on the local meridian) with respect to the plane
+of the equator, north positive; −23.45 &lt;= delta &lt;= 23.45</li>
+<li><strong>thetaZ</strong> (<em>array_like</em>) – Zenith angle. The angle between the vertical and the line to the
+sun, that is, the angle of incidence of beam radiation on a
+horizontal surface; 0 &lt;= thetaZ &lt;= 90</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.Sun.Sun.getIncidenceAngle">
+<code class="descname">getIncidenceAngle</code><span class="sig-paren">(</span><em>beta</em>, <em>gamma</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Sun.Sun.getIncidenceAngle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the incidence angle on a tilted surface.</p>
+<p>All inputs/outputs are supposed to be in degrees!</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>beta</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Slope, the angle (in degree) between the plane of the surface in
+question and the horizontal. 0 &lt;= beta &lt;= 180. If beta &gt; 90, the
+surface faces downwards.</li>
+<li><strong>gamma</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Surface azimuth angle. The deviation of the projection on a
+horizontal plane of the normal to the surface from the local
+meridian, with zero due south, east negative, and west positive.
+-180 &lt;= gamma &lt;= 180</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.Sun.Sun.getTotalRadiationTiltedSurface">
+<code class="descname">getTotalRadiationTiltedSurface</code><span class="sig-paren">(</span><em>beamRadiation</em>, <em>diffuseRadiation</em>, <em>beta</em>, <em>gamma</em>, <em>albedo=0.3</em>, <em>update=False</em>, <em>current_values=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Sun.Sun.getTotalRadiationTiltedSurface" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>current_values</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, returns values of current horizon (default: True).
+If False, returns annual values.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.Sun.Sun.setLocation">
+<code class="descname">setLocation</code><span class="sig-paren">(</span><em>location=(50.76</em>, <em>6.07)</em>, <em>timeZone=1</em>, <em>altitude=0</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Sun.Sun.setLocation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update location (latitude and longitude), time zone and altitude.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.Sun.Sun.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>current_values=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Sun.Sun.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update attributes (for example because a new optimization period just
+started).</p>
+<p><code class="docutils literal notranslate"><span class="pre">update</span></code> updates the following parameters:
+- Air mass
+- Extraterrestrial radiation
+- Delta
+- Omega
+- ThetaZ</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>current_values</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, returns values of current horizon (default: True).
+If False, returns annual values.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.classes.Timer">
+<span id="pycity-base-classes-timer-module"></span><h2>pycity_base.classes.Timer module<a class="headerlink" href="#module-pycity_base.classes.Timer" title="Permalink to this headline">¶</a></h2>
+<p>Created on Fri Feb 06 17:05:44 2015</p>
+<p>&#64;author: tsz</p>
+<dl class="class">
+<dt id="pycity_base.classes.Timer.Timer">
+<em class="property">class </em><code class="descclassname">pycity_base.classes.Timer.</code><code class="descname">Timer</code><span class="sig-paren">(</span><em>timeDiscretization=900</em>, <em>timestepsHorizon=192</em>, <em>timestepsUsedHorizon=96</em>, <em>timestepsTotal=35040</em>, <em>initialDay=1</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Timer.Timer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>This class just holds the time discretization and the total number of time
+steps. Both are important to initialize the result-storing arrays of most
+other classes.</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="pycity_base.classes.Timer.Timer.reinit">
+<code class="descname">reinit</code><span class="sig-paren">(</span><em>timeDiscretization</em>, <em>timestepsHorizon</em>, <em>timestepsUsedHorizon</em>, <em>timestepsTotal</em>, <em>initialDay</em>, <em>overwriteCurrentValues=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Timer.Timer.reinit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the timer’s attributes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>timeDiscretization</strong> (<em>Scalar value</em><em> (</em><em>preferably integer</em><em>)</em>) – A value of 3600 corresponds to one hour.</li>
+<li><strong>timestepsHorizon</strong> (<em>Scalar integer value</em>) – How many timesteps are in one forecasting horizon?
+If timeDiscretization=3600, timestepsHorizon=10 would require
+forecasts for the next 10 hours.</li>
+<li><strong>timestepsUsedHorizon</strong> (<em>Scalar integer value</em>) – How many timesteps are shifted/accepted in each horizon?
+1 &lt;= timestepsUsedHorizon &lt;= timestepsHorizon</li>
+<li><strong>timestepsTotal</strong> (<em>Scalar integer value.</em>) – How long is the entire scheduling period?
+If timeDiscretization=3600, timestepsTotal=8760 is equivalent to a
+full year simulation.</li>
+<li><strong>initialDay</strong> (<em>Integer</em><em>, </em><em>optional</em>) – Define the initial weekday (<cite>Monday</cite> corresponds to
+<code class="docutils literal notranslate"><span class="pre">initialDay==1</span></code>, <cite>Sunday</cite> corresponds to <code class="docutils literal notranslate"><span class="pre">initialDay==7</span></code>)</li>
+<li><strong>overwriteCurrentValues</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – If True: reset currentDay and currentTimestep to 0
+If False: keep values for currentDay and currentTimestep</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.Timer.Timer.setCurrentValues">
+<code class="descname">setCurrentValues</code><span class="sig-paren">(</span><em>currentDay</em>, <em>currentTimestep</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Timer.Timer.setCurrentValues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set values for the current day and current time step</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.Timer.Timer.update">
+<code class="descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Timer.Timer.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Increase currentDay and currentTimestep</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.classes.Weather">
+<span id="pycity-base-classes-weather-module"></span><h2>pycity_base.classes.Weather module<a class="headerlink" href="#module-pycity_base.classes.Weather" title="Permalink to this headline">¶</a></h2>
+<p>Created on Fri Feb 06 17:11:19 2015</p>
+<p>&#64;author: tsz</p>
+<dl class="class">
+<dt id="pycity_base.classes.Weather.Weather">
+<em class="property">class </em><code class="descclassname">pycity_base.classes.Weather.</code><code class="descname">Weather</code><span class="sig-paren">(</span><em>timer</em>, <em>pathTRY=None</em>, <em>pathTMY3=None</em>, <em>new_try=False</em>, <em>pathTemperature=''</em>, <em>pathDirectRadiation=''</em>, <em>pathDiffuseRadiation=''</em>, <em>pathWindspeed=''</em>, <em>pathHumidity=''</em>, <em>pathPressure=''</em>, <em>pathCloudiness=''</em>, <em>timeDiscretization=3600</em>, <em>delimiter='t'</em>, <em>useTRY=True</em>, <em>useTMY3=False</em>, <em>location=(50.76</em>, <em>6.07)</em>, <em>heightVelocityMeasurement=10</em>, <em>altitude=0</em>, <em>timeZone=1</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Weather.Weather" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pycity_base.classes.Sun.Sun" title="pycity_base.classes.Sun.Sun"><code class="xref py py-class docutils literal notranslate"><span class="pre">pycity_base.classes.Sun.Sun</span></code></a></p>
+<p>Weather class keeps track of the weather data.
+In a real world setting, this would be the interface to a web-based
+weather forecast.</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="pycity_base.classes.Weather.Weather.getPreviousWeather">
+<code class="descname">getPreviousWeather</code><span class="sig-paren">(</span><em>fromTimestep=0</em>, <em>numberTimesteps=0</em>, <em>useTimesteps=True</em>, <em>getTAmbient=False</em>, <em>getQDirect=False</em>, <em>getQDiffuse=False</em>, <em>getVWind=False</em>, <em>getPhiAmbient=False</em>, <em>getPAmbient=False</em>, <em>getCloudiness=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Weather.Weather.getPreviousWeather" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get previous weather data from <code class="docutils literal notranslate"><span class="pre">fromTimestep</span></code> up to the current
+timestep</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>fromTimestep</strong> (<em>Integer</em><em>, </em><em>optional</em>) – Get weather data from THIS timestep until the current timestep</li>
+<li><strong>numberTimesteps</strong> (<em>Integer</em><em>, </em><em>optional</em>) – Get weather data for the last numberTimesteps days</li>
+<li><strong>useTimesteps</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – True: use fromTimestep
+False: use numberTimesteps</li>
+<li><strong>getTAmbient</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – If True, return current ambient temperature</li>
+<li><strong>getQDirect</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – If True, return current direct radiation</li>
+<li><strong>getQDiffuse</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – If True, return current diffuse radiation</li>
+<li><strong>getVWind</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – If True, return current wind velocity</li>
+<li><strong>getPhiAmbient</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – If True, return relative humidity</li>
+<li><strong>getPAmbient</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – If True, return ambient pressure</li>
+<li><strong>getCloudiness</strong> (<em>Boolean</em>) – If Ture, return cloudiness</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">The result is returned as a tuple</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.Weather.Weather.getRadiationTiltedSurface">
+<code class="descname">getRadiationTiltedSurface</code><span class="sig-paren">(</span><em>beta</em>, <em>gamma</em>, <em>albedo=0.3</em>, <em>update=False</em>, <em>current_values=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Weather.Weather.getRadiationTiltedSurface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates radiation on tilted surface</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>beta</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Slope, the angle (in degree) between the plane of the surface in
+question and the horizontal. 0 &lt;= beta &lt;= 180. If beta &gt; 90, the
+surface faces downwards.</li>
+<li><strong>gamma</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Surface azimuth angle. The deviation of the projection on a
+horizontal plane of the normal to the surface from the local
+meridian, with zero due south, east negative, and west positive.
+-180 &lt;= gamma &lt;= 180</li>
+<li><strong>albedo</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Average value on earth: 0.3
+Ground reflectance. 0 &lt;= albedo &lt;= 1</li>
+<li><strong>update</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – If True, air mass, extraterrestrial radiation, delta, omega and
+thetaZ are updated before computing the total radiation on the
+tilted surface.</li>
+<li><strong>current_values</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, returns values of current horizon (default: True).
+If False, returns annual values.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pycity_base.classes.Weather.Weather.getWeatherForecast">
+<code class="descname">getWeatherForecast</code><span class="sig-paren">(</span><em>getTAmbient=False</em>, <em>getQDirect=False</em>, <em>getQDiffuse=False</em>, <em>getVWind=False</em>, <em>getPhiAmbient=False</em>, <em>getPAmbient=False</em>, <em>getCloudiness=False</em>, <em>current_values=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.Weather.Weather.getWeatherForecast" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current weather forecast</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>getTAmbient</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – If True, return current ambient temperature</li>
+<li><strong>getQDirect</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – If True, return current direct radiation</li>
+<li><strong>getQDiffuse</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – If True, return current diffuse radiation</li>
+<li><strong>getVWind</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – If True, return current wind velocity</li>
+<li><strong>getPhiAmbient</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – If True, return relative humidity</li>
+<li><strong>getPAmbient</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – If True, return ambient pressure</li>
+<li><strong>getCloudiness</strong> (<em>Boolean</em>) – If True, return cloudiness</li>
+<li><strong>current_values</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, returns values of current horizon (default: True).
+If False, returns annual values.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">The result is returned as a tuple</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.classes">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pycity_base.classes" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">pycity_base</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Institute for Energy Efficient Buildings and Indoor Climate, Institute for Automation of Complex Power Systems, E.ON Energy Research Center, RWTH Aachen University.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.9</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/pycity_base.classes.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

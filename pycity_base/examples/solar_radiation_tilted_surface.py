@@ -21,11 +21,12 @@ def run_example(do_plot=False):
     # horizon and hourly time discretization
     timer = pycity_base.classes.Timer.Timer(3600, 8760, 8760, 8760)
     weather = pycity_base.classes.Weather.Weather(timer)
-    environment = pycity_base.classes.Environment.Environment(timer, weather, None)
+    environment = pycity_base.classes.Environment.Environment(timer, weather,
+                                                              None)
 
     # Surface definition
-    beta = 30 # Slope, degree (not radians)
-    gamma = 0 # Azimuth angle, degree (not radians)
+    beta = 30  # Slope, degree (not radians)
+    gamma = 0  # Azimuth angle, degree (not radians)
 
     # Compute solar radiation on a tilted surface
     function = weather.getRadiationTiltedSurface
@@ -58,6 +59,7 @@ def run_example(do_plot=False):
         plt.plot(reflected_radiation)
         plt.ylabel('reflected_radiation')
         plt.show()
+
 
 if __name__ == '__main__':
     run_example(do_plot=True)

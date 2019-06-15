@@ -267,6 +267,22 @@ Jupyter notebook should open within your browser (such as Firefox). Click on one
 If your Pyhton path does not point at your Python installation, you have to
 open jupyter notebook directly, e.g. by looking for the jupyter.exe in your distribution.
 
+## How to cite pyCity_base
+
++ Schiefelbein, J., Rudnick, J., Scholl, A., Remmen, P., Fuchs, M., Müller, D. (2019),
+Automated urban energy system modeling and thermal building simulation based on OpenStreetMap data sets,
+Building and Environment,
+Volume 149,
+Pages 630-639,
+ISSN 0360-1323
+[pdf](https://doi.org/10.1016/j.buildenv.2018.12.025),
+[bibtex](https://github.com/RWTH-EBC/pyCity/tree/master/doc/S0360132318307686.bib)
+
+If you require a citation in German language:
++ Schiefelbein, J. , Javadi, A. , Fuchs, M. , Müller, D. , Monti, A. and Diekerhof, M. (2017), Modellierung und Optimierung von Mischgebieten. Bauphysik, 39: 23-32. doi:10.1002/bapi.201710001
+[pdf](https://doi.org/10.1002/bapi.201710001),
+[bibtex](https://github.com/RWTH-EBC/pyCity/tree/master/doc/pericles_1437098039.bib)
+
 ## License
 
 pyCity is released by RWTH Aachen University's E.ON Energy Research Center (E.ON ERC),

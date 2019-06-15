@@ -1,7 +1,7 @@
 ![E.ON EBC RWTH Aachen University](./doc/_static/EBC_Logo.png)
 
 
-[![Build Status](https://travis-ci.com/RWTH-EBC/pyCity.svg?token=ssfy4ps1Qm5kvs5yAxfm&branch=master)](https://travis-ci.com/RWTH-EBC/pyCity.svg?token=ssfy4ps1Qm5kvs5yAxfm&branch=master)
+[![Build Status](https://travis-ci.org/RWTH-EBC/pyCity.svg?branch=master)](https://travis-ci.org/RWTH-EBC/pyCity)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
 
 

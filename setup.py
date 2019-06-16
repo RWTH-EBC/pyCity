@@ -6,7 +6,7 @@ city districts.
 
 The MIT License
 
-Copyright (C) 2015-2017  Thomas Schuetz, Jan Schiefelbein
+Copyright (C) 2015-2019  Thomas Schuetz, Jan Schiefelbein
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -44,14 +44,16 @@ def read(*filenames, **kwargs):
             buf.append(f.read())
     return sep.join(buf)
 
-long_description = read('README.md')
+#long_description = read('README.md')
 
 
 setup(name='pycity_base',
       version='0.1',
       description='Python package for data handling and scenario generation '
                   'of city districts.',
-      long_description=long_description,
+      #long_description=long_description,
+      long_description='Python package for data handling and scenario generation '
+                    'of city districts.',
       url='https://github.com/RWTH-EBC/pyCity',
       author='Institute of Energy Efficient Buildings and Indoor Climate, '
              'Institute for Automation of Complex Power Systems'

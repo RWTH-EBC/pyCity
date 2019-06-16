@@ -2,6 +2,7 @@
 
 
 [![Build Status](https://travis-ci.org/RWTH-EBC/pyCity.svg?branch=master)](https://travis-ci.org/RWTH-EBC/pyCity)
+[![Coverage Status](https://coveralls.io/repos/github/RWTH-EBC/pyCity/badge.svg)](https://coveralls.io/github/RWTH-EBC/pyCity)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
 
 

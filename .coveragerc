@@ -29,6 +29,3 @@ omit =
     pycity_base/functions/scripts/profile_pool/*
 	
 ignore_errors = True
-
-[html]
-directory = coverage_html_report

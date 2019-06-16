@@ -14,7 +14,7 @@ install:
   - pip install shapely
   - pip install pyproj
   - pip install uesgraphs
-  - pip install richardsonpy
+  - pip install -e git+git@github.com:RWTH-EBC/richardsonpy.git#egg=richardsonpy
   - pip install -e .
   - pip install pytest-cov
   - pip install coveralls

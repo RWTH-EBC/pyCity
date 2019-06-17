@@ -40,3 +40,11 @@ coverage_html_report/
 *.egg-info/
 *.egg/
 *.eggs
+
+dist
+*.pypirc
+
+#ignore docs#
+#####################
+
+doc/_build

@@ -31,3 +31,12 @@ script:
 
 after_success:
   - coveralls
+
+deploy:
+  provider: pypi
+  user: uesgraphs-deploy
+  password:
+    secure: AY57asUhfzL0sZkX9+ebSIjNZ9qwvtUD3PmWqnsB9AAKvodmtzgzz/R8FVSIZDiFAngAUpQJFl66hB44wBiIYewVh6KP7IGq89a1OjTlh2J9M12Fb6ZkLSO/2sLg05Qe33ndVfach4wNqMzu+cE/Mw1d6EkHtjMCuqam9gO56bYh0h8du1+jhTc3KYDJi38w1r9Qo0yzNu55nVcLK+pFjJBCMz5zKerKiZfxQuzu4mUPGlQ/2aXFWcV3I55m1O//1Tyo/pgoaLA8GCJULlyarTyM+LwyxerL7VLKmb4DnlJE15ibZQSviaIDpXMXLrNv89tMufslIjxWb1cPcKUpnaNhzdWekpJ7oAjlf4LrJ80w4NSghLqaoxoWFBaRhheqyWdvKn/j3JJgRFVplrso86vSbwa24YlDuKFfUqzJ3fRKeliDreBAzTZSqP8tz33MpWyiLz7gSlXUAjY5uPJJ0m/OoRbL84uTEEEYGuM8NFovEK+xvosOuazaQ5mFEqw/rJa18vtRtwO46MmcG9CWQOlAlRMabu/dlsNEwLRRYoTCnXYUxF1/aYOIsYKSeK5XyFcJgKjY65gkjTAhhCC3L0kshNMKKwnXfJ5LanKftdxbJyDe2CsDLcICid0B8EnVcw7buT3Vy9SxTbwyfOmEHdNknLnQSTxC2RuBVspyx8I=
+  on:
+    tags: true
+all_branches: true

@@ -48,7 +48,7 @@ def read(*filenames, **kwargs):
 
 
 setup(name='pycity_base',
-      version='0.1',
+      version='0.2.1',
       description='Python package for data handling and scenario generation '
                   'of city districts.',
       #long_description=long_description,

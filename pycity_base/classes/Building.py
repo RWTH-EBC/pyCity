@@ -11,42 +11,42 @@ import warnings
 
 class Building(object):
     """
-    Implementation of a building that consists of a single Building Energy 
+    Implementation of a building that consists of a single Building Energy
     System (BES), one controller and multiple apartments
     """
-    
+
     def __init__(self, environment):
         """
         Workflow
         --------
-        1 : Create an empty building that only contains the environment 
+        1 : Create an empty building that only contains the environment
             pointer
-        2 : Add entities such as heating curve or BES, by invoking the 
+        2 : Add entities such as heating curve or BES, by invoking the
             addEntity or addMultipleEntities methods.
-        
+
         Parameter
         ---------
         environment : Environment object
             Common to all other objects. Includes time and weather instances
         """
         self._kind = "building"
-        
+
         self.environment = environment
-        
+
         self.apartments = []
-        self.bes        = []        
+        self.bes        = []
         self.heatingCurve = []
-        
+
         self.hasApartments   = False
         self.hasBes          = False
         self.hasHeatingCurve = False
-        
+
         self.flowTemperature = np.zeros(environment.timer.timestepsHorizon)
-    
+
     def addEntity(self, entity):
-        """ 
-        Add an entity (apartment, BES or heating curve) to the building 
-        
+        """
+        Add an entity (apartment, BES or heating curve) to the building
+
         Example
         -------
         >>> myBes = BES(...)
@@ -56,7 +56,7 @@ class Building(object):
         if entity._kind == "apartment":
             self.apartments.append(entity)
             self.hasApartments = True
-        
+
         elif entity._kind == "bes":
             self.bes = entity
             self.hasBes = True
@@ -68,12 +68,12 @@ class Building(object):
     def addMultipleEntities(self, entities):
         """
         Add multiple entities to the existing building
-        
+
         Parameter
         ---------
         entities: List-like
             List (or tuple) of entities that are added to the building
-            
+
         Example
         -------
         >>> myBes = BES(...)
@@ -82,8 +82,8 @@ class Building(object):
         >>> myBuilding.addEntity([myBes, myHeatingCurve])
         """
         for entity in entities:
-            self.addEntity(entity)    
-    
+            self.addEntity(entity)
+
     def get_power_curves(self, current_values=True):
         """
         Get the entire electrical and thermal power curves of all apartments
@@ -107,15 +107,15 @@ class Building(object):
             timesteps = self.environment.timer.timestepsTotal
         power_el = np.zeros(timesteps)
         power_th    = np.zeros(timesteps)
-        
+
         # Add demands of each apartment
         for apartment in self.apartments:
-            # Get entire electrical, domestic hot water and space heating 
+            # Get entire electrical, domestic hot water and space heating
             # demand
             (tempEl, tempDhw, tempSh) = apartment.get_power_curves(currentValues=
                                                              current_values)
             dhwThermal = apartment.demandDomesticHotWater.thermal
-            
+
             if dhwThermal:
                 power_th    += tempSh + tempDhw
                 power_el += tempEl
@@ -186,6 +186,36 @@ class Building(object):
 
         return el_power_curve
 
+    def get_cool_power_curve(self, current_values=False):
+        """
+        Returns cooling power curve
+
+        Parameters
+        ----------
+        current_values : bool, optional
+            Defines, if only current horizon or all timesteps should be used.
+            (default: False)
+            False - Use complete number of timesteps
+            True - Use horizon
+
+        Returns
+        -------
+        cool_power_curve : array-like
+           Cooling power curve in W
+        """
+
+        #  Initialize array with zeros
+        cool_power_curve = np.zeros(len(self.apartments[0].demandCooling.
+            get_power(currentValues=current_values)))
+
+        # Get power curves of each apartment
+        for apartment in self.apartments:
+
+            cool_power_curve += apartment.demandCooling.get_power(
+                    currentValues=current_values)
+
+        return cool_power_curve
+
     def get_dhw_power_curve(self, current_values=False):
         """
         Returns domestic hot water (dhw) power curve
@@ -217,7 +247,7 @@ class Building(object):
                     currentValues=current_values, returnTemperature=False)
 
         return dhw_heat_power
-        
+
     def get_occupancy_profile(self):
         """
         Returns occupancy profile of the whole building. Returns None,
@@ -254,20 +284,20 @@ class Building(object):
 
     def getFlowTemperature(self):
         """ Get the required flow temperature of this building. """
-        
+
         # Get ambient temperature
-        relevantPreviousDays = 1 # Number of previous days' weather forecast 
+        relevantPreviousDays = 1 # Number of previous days' weather forecast
                                  # relevant to the heating curve
-        numberTimesteps = (relevantPreviousDays * 24 / 
+        numberTimesteps = (relevantPreviousDays * 24 /
                            self.environment.timer.timeDiscretization * 3600)
         function = self.environment.weather.getPreviousWeather
-        (tAmbientPrevious,) = function(numberTimesteps=numberTimesteps, 
+        (tAmbientPrevious,) = function(numberTimesteps=numberTimesteps,
                                        useTimesteps=True, getTAmbient=True)
-                                       
+
         function = self.environment.weather.getWeatherForecast
         (tAmbientForecast,) = function(getTAmbient=True)
         tAmbient = np.concatenate((tAmbientPrevious, tAmbientForecast))
-        
+
         # Get flow temperature according to heating curve
         function = self.heatingCurve.computeRequiredFlowTemperature
         rawTFlow = function(tAmbient, smoothingPeriod=relevantPreviousDays)
@@ -275,34 +305,34 @@ class Building(object):
         firstIndex = len(rawTFlow) - timestepsHorizon
         lastIndex  = firstIndex + timestepsHorizon
         tFlow = rawTFlow[firstIndex : lastIndex]
-        
-        # Check if this flow temperature has to be increased at certain time 
+
+        # Check if this flow temperature has to be increased at certain time
         # steps due to domestic hot water
         for apartment in self.apartments:
             tFlowDHW = (apartment.get_total_th_power())[1]
             tFlow = np.maximum(tFlow, tFlowDHW)
-        
+
         self.flowTemperature = tFlow
         return tFlow
-        
+
     def getHeatpumpNominals(self):
         """
-        Return the nominal electricity consumption, heat output and lower 
+        Return the nominal electricity consumption, heat output and lower
         activation limit.
-            
+
         Returns
         -------
         pNominal : Array_like
-            Nominal electricity consumption at the given flow temperatures and 
+            Nominal electricity consumption at the given flow temperatures and
             the forecast of the current ambient temperature
         qNominal : Array_like
-            Nominal heat output at the given flow temperatures and the 
+            Nominal heat output at the given flow temperatures and the
             forecast of the current ambient temperature
         lowerActivationLimit : float (0 <= lowerActivationLimit <= 1)
-            Define the lower activation limit. For example, heat pumps are 
-            typically able to operate between 50 % part load and rated load. 
+            Define the lower activation limit. For example, heat pumps are
+            typically able to operate between 50 % part load and rated load.
             In this case, lowerActivationLimit would be 0.5
-            Two special cases: 
+            Two special cases:
             Linear behavior: lowerActivationLimit = 0
             Two-point controlled: lowerActivationLimit = 1
         """

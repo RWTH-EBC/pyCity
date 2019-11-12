@@ -6,10 +6,11 @@ Cooling demand class
 
 from __future__ import division
 
-import pycity_base.classes.demand.Load as Load
+# import pycity_base.classes.demand.Load as Load
+import pycity_base.classes.demand.Load
 
 
-class CoolingDemand(Load.Load):
+class CoolingDemand(pycity_base.classes.demand.Load.Load):
     """
     Implementation of the cooling demand object
     """
@@ -32,6 +33,9 @@ class CoolingDemand(Load.Load):
             Load curve for all investigated time steps in Watt
             (default: []).
         """
+        self.method = method
+        self._kind = "cooling" # todo: _kind = 'cooling' cannot be used, didn't
+        # find the reason for it.
 
         if method not in [0]:
             msg = 'Method ' + str(method) + ' has not been implemented!'

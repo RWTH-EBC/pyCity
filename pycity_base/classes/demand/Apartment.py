@@ -10,6 +10,7 @@ import warnings
 import pycity_base.classes.demand.DomesticHotWater as DHW
 import pycity_base.classes.demand.ElectricalDemand as ElecDemand
 import pycity_base.classes.demand.SpaceHeating as SpaceHeat
+import pycity_base.classes.demand.CoolingDemand as CoolDemand
 
 
 class Apartment(object):
@@ -36,7 +37,7 @@ class Apartment(object):
 
         # Create empty power curves
         self.power_el = ElecDemand.ElectricalDemand(environment,
-                                                    method=0,
+                                                    method=1,
                                                     annualDemand=0)
         self.demandDomesticHotWater = DHW.DomesticHotWater(environment,
                                                            tFlow=0,
@@ -47,6 +48,9 @@ class Apartment(object):
                                                          method=1,
                                                          livingArea=0,
                                                          specificDemand=0)
+        self.demandCooling = CoolDemand.CoolingDemand(environment,
+                                                    method=0,
+                                                    loadcurve=[0]*8760)
         self.rooms = []
 
     def addEntity(self, entity):
@@ -62,7 +66,7 @@ class Apartment(object):
             - Space heating demand (entity._kind == "spaceheating")
             - Occupancy (entity._kind == 'occupancy')
             - Room (entity._kind == "room"
-        
+
         Example
         -------
         >>> myDHW = DomesticHotWater(...)
@@ -85,6 +89,9 @@ class Apartment(object):
         elif entity._kind == "room":  # pragma: no cover
             self.rooms.append(entity)
 
+        elif entity._kind == "load":
+            self.demandCooling = entity
+
         else:  # pragma: no cover
             warnings.warn('Kind of entity is unknown. Entity has not been ' +
                           'added')
@@ -92,12 +99,12 @@ class Apartment(object):
     def addMultipleEntities(self, entities):
         """
         Add multiple entities to the existing apartment
-        
+
         Parameter
         ---------
         entities: List-like
             List (or tuple) of entities that are added to the apartment
-            
+
         Example
         -------
         >>> myDHW = DomesticHotWater(...)
@@ -115,7 +122,7 @@ class Apartment(object):
                          currentValues=True):
         """
         Get apartment's current power curves
-        
+
         Parameters
         ----------
         getElectrical : Boolean, optional
@@ -125,9 +132,9 @@ class Apartment(object):
         getSpaceheating : Boolean, optional
             Also return current space heating demand
         currentValues : Boolean, optional
-            Return the current values (True) or return values for all time 
+            Return the current values (True) or return values for all time
             steps (False).
-            
+
         Return
         ------
         Current power curves. Order: electrical, domestic hot water,
@@ -244,6 +251,23 @@ class Apartment(object):
         """
 
         return self.power_el.get_power(currentValues=current_values)
+
+    def get_cool_power_curve(self, current_values=True):
+        """
+        Returns net cooling power curve of apartment
+        Parameters
+        ----------
+        currentValues : bool, optional
+            Return the current values (True) or return values for all time
+            steps (False).
+            (default: True)
+        Returns
+        -------
+        cool_power_curve : array-like
+            Cooling power curve
+        """
+
+        return self.demandCooling.get_power(currentValues=current_values)
 
     def get_dhw_power_curve(self, current_values=True):
         """

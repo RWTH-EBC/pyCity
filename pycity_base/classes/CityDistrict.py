@@ -153,7 +153,7 @@ class CityDistrict(ues.UESGraph):
     def addMultipleEntities(self, entities, positions):
         """
         Add multiple entities to the existing city district.
-        
+
         Parameter
         ---------
         entities_tuple : List-like
@@ -162,7 +162,7 @@ class CityDistrict(ues.UESGraph):
             List (or tuple) of positions (of entities) that are added to city
             district
             (list of shapely.geometry.Point objects)
-            
+
         Example
         -------
         >>> import shapely.geometry.point as point
@@ -296,7 +296,7 @@ class CityDistrict(ues.UESGraph):
                                      current_values)
 
     def get_power_curves(self, current_values=True):
-        """ 
+        """
         Get the aggregated electricity and heat power forecast of all
         buildings.
 
@@ -447,6 +447,59 @@ class CityDistrict(ues.UESGraph):
 
         return agg_el_p_curve
 
+    def get_aggr_cool_power_curve(self, current_values=False,
+                                     nodelist=None):
+        """
+        Returns aggregated cooling power curve for all buildings
+        within city district.
+
+        Parameters
+        ----------
+        current_values : bool, optional
+            Defines, if only current horizon or all timesteps should be used.
+            (default: False)
+            False - Use complete number of timesteps
+            True - Use horizon
+        nodelist : list (of ints), optional
+            Defines which nodes should be used to return annual cooling demand
+            in kWh (default: None).
+            If nodelist is None, all nodes with building entities will be used.
+
+        Returns
+        -------
+        agg_cool_p_curve : np.array
+            Electrical power curve in W per timestep
+        """
+
+        if current_values:  # Use horizon
+            size = self.environment.timer.timestepsHorizon
+        else:  # Use all timesteps
+            size = self.environment.timer.timestepsTotal
+        agg_cool_p_curve = np.zeros(size)
+
+        if nodelist is None:
+            use_nodes = self
+        else:
+            for n in nodelist:
+                assert n in self.nodes(), ('Node ' + str(n) + 'is not '
+                                           'within city object!')
+            use_nodes = nodelist
+
+        #  Loop over all nodes
+        for n in use_nodes:
+            #  If node holds attribute 'node_type'
+            if 'node_type' in self.node[n]:
+                #  If node_type is building
+                if self.node[n]['node_type'] == 'building':
+                    #  If entity is kind building
+                    if self.node[n]['entity']._kind == 'building':
+                        cool_power_curve = self.node[n]['entity']. \
+                            get_cool_power_curve(
+                            current_values=current_values)[0:size]
+                        agg_cool_p_curve += cool_power_curve
+
+        return agg_cool_p_curve
+
     def get_aggr_dhw_power_curve(self, current_values=False,
                                      nodelist=None):
         """
@@ -502,7 +555,7 @@ class CityDistrict(ues.UESGraph):
         return agg_dhw_p_curve
 
     def getFlowTemperatures(self):
-        """ 
+        """
         Get the aggregated flow temperature forecast.
         """
 

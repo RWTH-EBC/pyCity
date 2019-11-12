@@ -16,10 +16,10 @@ class Timer(object):
     other classes.
     """
 
-    def __init__(self, 
-                 timeDiscretization=900, 
-                 timestepsHorizon=192, 
-                 timestepsUsedHorizon=96, 
+    def __init__(self,
+                 timeDiscretization=900,
+                 timestepsHorizon=192,
+                 timestepsUsedHorizon=96,
                  timestepsTotal=35040,
                  initialDay=1):
         """
@@ -27,29 +27,29 @@ class Timer(object):
         ----------
         timeDiscretization : Scalar value (preferably integer)
             A value of 3600 corresponds to one hour.
-        timestepsHorizon : Scalar integer value 
+        timestepsHorizon : Scalar integer value
             How many timesteps are in one forecasting horizon?
-            If timeDiscretization=3600, timestepsHorizon=10 would require 
+            If timeDiscretization=3600, timestepsHorizon=10 would require
             forecasts for the next 10 hours.
         timestepsUsedHorizon : Scalar integer value
             How many timesteps are shifted/accepted in each horizon?
             1 <= timestepsUsedHorizon <= timestepsHorizon
         timestepsTotal : Scalar integer value.
             How long is the entire scheduling period?
-            If timeDiscretization=3600, timestepsTotal=8760 is equivalent to a 
+            If timeDiscretization=3600, timestepsTotal=8760 is equivalent to a
             full year simulation.
         initialDay : Integer, optional
-            Define the initial weekday (`Monday` corresponds to 
+            Define the initial weekday (`Monday` corresponds to
             ``initialDay==1``, `Sunday` corresponds to ``initialDay==7``)
         """
-        self._kind = "timer"        
-        
+        self._kind = "timer"
+
         self.timeDiscretization   = timeDiscretization
         self.timestepsHorizon     = timestepsHorizon
         self.timestepsUsedHorizon = timestepsUsedHorizon
         self.timestepsTotal       = timestepsTotal
         self.totalDays = int(timestepsTotal * timeDiscretization / 86400)
-    
+
         self.currentTimestep = 0 # max. 365 * 24 * 3600 / timeDiscretization
         self.currentOptimizationPeriod = 0
         self.currentDay      = 0 # max. 365
@@ -70,6 +70,8 @@ class Timer(object):
         self.currentOptimizationPeriod += 1
         self.currentTimestep += self.timestepsUsedHorizon
         newDay = int(self.currentTimestep * 150 / self.timeDiscretization)
+        # todo : question_yni newDay = int(self.currentTimestep *
+        # self.timeDiscretization / 86400)
         # 150 = 3600 / 24
         if  newDay > self.currentDay:
             self.currentDay += 1
@@ -77,47 +79,47 @@ class Timer(object):
             if self.currentWeekday > 7:
                 self.currentWeekday = 1
             self.currentDayWeekend = self._setWeekend()
-        
+
     def setCurrentValues(self, currentDay, currentTimestep):
         """
         Set values for the current day and current time step
         """
         self.currentDay      = currentDay
         self.currentTimestep = currentTimestep
-    
-    def reinit(self, 
-               timeDiscretization, 
-               timestepsHorizon, 
-               timestepsUsedHorizon, 
-               timestepsTotal, 
+
+    def reinit(self,
+               timeDiscretization,
+               timestepsHorizon,
+               timestepsUsedHorizon,
+               timestepsTotal,
                initialDay,
                overwriteCurrentValues=True):
-        """ 
+        """
         Reset the timer's attributes
-            
+
         Parameters
         ----------
         timeDiscretization : Scalar value (preferably integer)
             A value of 3600 corresponds to one hour.
-        timestepsHorizon : Scalar integer value 
+        timestepsHorizon : Scalar integer value
             How many timesteps are in one forecasting horizon?
-            If timeDiscretization=3600, timestepsHorizon=10 would require 
+            If timeDiscretization=3600, timestepsHorizon=10 would require
             forecasts for the next 10 hours.
         timestepsUsedHorizon : Scalar integer value
             How many timesteps are shifted/accepted in each horizon?
             1 <= timestepsUsedHorizon <= timestepsHorizon
         timestepsTotal : Scalar integer value.
             How long is the entire scheduling period?
-            If timeDiscretization=3600, timestepsTotal=8760 is equivalent to a 
+            If timeDiscretization=3600, timestepsTotal=8760 is equivalent to a
             full year simulation.
         initialDay : Integer, optional
-            Define the initial weekday (`Monday` corresponds to 
+            Define the initial weekday (`Monday` corresponds to
             ``initialDay==1``, `Sunday` corresponds to ``initialDay==7``)
         overwriteCurrentValues : Boolean, optional
             If True: reset currentDay and currentTimestep to 0
             If False: keep values for currentDay and currentTimestep
         """
-        
+
         self.timeDiscretization   = timeDiscretization
         self.timestepsHorizon     = timestepsHorizon
         self.timestepsUsedHorizon = timestepsUsedHorizon
@@ -125,7 +127,7 @@ class Timer(object):
         self.currentWeekday       = initialDay
         self.totalDays = int(timestepsTotal * timeDiscretization / 86400)
         self._setWeekend()
-        
+
         if overwriteCurrentValues:
             self.currentDay                = 0
             self.currentTimestep           = 0

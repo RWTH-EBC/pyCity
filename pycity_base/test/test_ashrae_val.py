@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-
+Ashrae test.
 """
 
-import pycity_base.examples.validation_ashrae140.zoneCase600 as zoneCase600
+import pycity_base.examples.validation_ashrae140.zone_case_600 as zone_case_600
 
-class Test_Ashrae140():
+class TestAshrae140():
 
     def test_ashrae140(self):
-        zoneCase600.run_validation()
+        zone_case_600.run_validation()

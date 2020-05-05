@@ -22,7 +22,7 @@ import random
 import numpy as np
 import matplotlib.pyplot as plt
 
-import pycity_base.functions.changeResolution as chres
+import pycity_base.functions.change_resolution as chres
 
 
 def get_list_of_npz_files(path):

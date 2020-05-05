@@ -7,11 +7,12 @@ Created on Fri Jul 10 16:44:44 2015
 """
 
 from __future__ import division
+
 import os
 import numpy as np
 import math
 import xlrd
-import pycity_base.functions.changeResolution as cr
+import pycity_base.functions.change_resolution as cr
 
 
 # Sources:
@@ -70,7 +71,7 @@ def calculate(temperature, initial_day, profiles, weekly_factors,
     t_average = _average_temperature(temperature, timesteps_day)
 
     # Compute h-factors. [1], page 38
-    theta_0 = 40 # [1], page 38
+    theta_0 = 40  # [1], page 38
     A = profiles[0]
     B = profiles[1]
     C = profiles[2]
@@ -80,7 +81,7 @@ def calculate(temperature, initial_day, profiles, weekly_factors,
     
     # Compute weekday factors
     F_factors = np.tile(weekly_factors, int(math.ceil(len(t_average) / 7)))
-    F = F_factors[initial_day : initial_day+ len(t_average)]
+    F = F_factors[initial_day:initial_day+len(t_average)]
     
     # Compute customer's value. [1], page 78
     KW = total_demand / np.sum(h * F)
@@ -94,14 +95,12 @@ def calculate(temperature, initial_day, profiles, weekly_factors,
 
 
 def _average_temperature(temperature, timesteps_day=24):
-    """
-    """
     t_ambient_average = []
     t = 0
     day = 0
     while t+timesteps_day <= len(temperature):
         if day < 3:
-            t_ambient_average.append(np.mean(temperature[t : t+timesteps_day]))
+            t_ambient_average.append(np.mean(temperature[t:t+timesteps_day]))
         else:
             t_prev = np.zeros(4)
             for d in range(4):
@@ -163,6 +162,7 @@ def _daily_profiles(temperatures, KW, h, F, hourly_factors, initial_day):
     # Transform result into 1-d array
     return np.reshape(result, -1)
 
+
 def load_week_day_factors(filename):
     """
     """
@@ -175,14 +175,15 @@ def load_week_day_factors(filename):
         sheet = book_weekday.sheet_by_name(sheetname)
         
         # Read values
-        values = [sheet.cell_value(1,d) for d in range(7)]
+        values = [sheet.cell_value(1, d) for d in range(7)]
 
         # Store values in dictionary
         profiles[sheetname] = np.array(values)
     
     # Return results
     return profiles
-    
+
+
 def load_hourly_factors(filename, time_discretization=3600):
     """
     """
@@ -195,7 +196,7 @@ def load_hourly_factors(filename, time_discretization=3600):
     for sheetname in book_hourly.sheet_names():
         sheet = book_hourly.sheet_by_name(sheetname)
         
-        temp_factors = {} # Create temporary dictionary for each sheet
+        temp_factors = {}  # Create temporary dictionary for each sheet
         for d in range(7):
             for t in range(len(temperature_range)):
                 # Read values
@@ -211,10 +212,9 @@ def load_hourly_factors(filename, time_discretization=3600):
     
     # Return final results
     return hourly_factors
-    
+
+
 def load_profile_factors(filename):
-    """
-    """
     # Initialization
     profile_factors = {}
     book_profiles = xlrd.open_workbook(filename)
@@ -223,13 +223,12 @@ def load_profile_factors(filename):
     for sheetname in book_profiles.sheet_names():
         sheet = book_profiles.sheet_by_name(sheetname)
         
-        temp_factors = {} # Create temporary dictionary for each sheet
-        for demand in range(5): # Iterate over all demand types (1-5)
+        temp_factors = {}  # Create temporary dictionary for each sheet
+        for demand in range(5):  # Iterate over all demand types (1-5)
             # Read values. 
             # Note: Demand types are stored in the wrong order (5-1)
             # Note: Letters: 0 - A, 1 - B, 2 - C, 3 - D
-            values = [sheet.cell_value(5-demand, letter+1) 
-                    for letter in range(4)]
+            values = [sheet.cell_value(5-demand, letter+1) for letter in range(4)]
             
             temp_factors[demand+1] = np.array(values)
         
@@ -238,7 +237,8 @@ def load_profile_factors(filename):
     
     # Return final results
     return profile_factors
-    
+
+
 # Test script
 if __name__ == "__main__":
     #  Define src path
@@ -264,8 +264,8 @@ if __name__ == "__main__":
     week_day_factors = load_week_day_factors(f_week)
     
     # Exemplary building
-    annual_demand = 20000 # kWh
-    profile_type = "HEF" # Single family dwelling
+    annual_demand = 20000  # kWh
+    profile_type = "HEF"  # Single family dwelling
     profile = 3
     
     result = calculate(temperature,

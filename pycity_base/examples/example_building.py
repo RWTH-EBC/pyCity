@@ -1,59 +1,57 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Created on Fri May 22 14:39:29 2015
-
-@author: tsz
+Example of the building class.
 """
 
 from __future__ import division
+
 import os
 import xlrd
 import numpy as np
 import matplotlib.pyplot as plt
 
-import pycity_base.classes.Timer as Time
-import pycity_base.classes.Weather as Weath
-import pycity_base.classes.Prices as Price
-import pycity_base.classes.Environment as Env
-import pycity_base.classes.demand.Apartment as Apartment
-import pycity_base.classes.demand.DomesticHotWater as DomesticHotWater
-import pycity_base.classes.demand.ElectricalDemand as ElectricalDemand
-import pycity_base.classes.demand.SpaceHeating as SpaceHeating
-import pycity_base.classes.supply.BES as BES
-import pycity_base.classes.supply.HeatPump as HeatPump
-import pycity_base.classes.HeatingCurve as HeatingCurve
-import pycity_base.classes.Building as Building
+import pycity_base.classes.timer as time
+import pycity_base.classes.weather as we
+import pycity_base.classes.prices as pr
+import pycity_base.classes.environment as env
+import pycity_base.classes.demand.apartment as ap
+import pycity_base.classes.demand.domestic_hot_water as dhw
+import pycity_base.classes.demand.electrical_demand as ed
+import pycity_base.classes.demand.space_heating as sh
+import pycity_base.classes.supply.building_energy_system as build_es
+import pycity_base.classes.supply.heat_pump as hp
+import pycity_base.classes.heating_curve as hc
+import pycity_base.classes.building as build
 
 
-def run_test(do_plot=False):
+def run_example(do_plot=False):
     timestep = 900  # in seconds
 
     nb_timesteps = int(365 * 24 * 3600 / timestep)
 
     #  Generate environment with timer, weather, and prices objects
-    timer = Time.Timer(timeDiscretization=timestep,
+    timer = time.Timer(timeDiscretization=timestep,
                        timestepsTotal=nb_timesteps)
-    weather = Weath.Weather(timer)
-    prices = Price.Prices()
-    environment = Env.Environment(timer, weather, prices)
+    weather = we.Weather(timer)
+    prices = pr.Prices()
+    environment = env.Environment(timer, weather, prices)
 
-    heat_demand = SpaceHeating.SpaceHeating(environment,
-                                            method=1,  # Standard load profile
-                                            livingArea=146,
-                                            specificDemand=166)
+    heat_demand = sh.SpaceHeating(environment,
+                                  method=1,  # Standard load profile
+                                  livingArea=146,
+                                  specificDemand=166)
 
-    el_demand = ElectricalDemand.ElectricalDemand(environment,
-                                                  method=1,
-                                                  # Standard load profile
-                                                  annualDemand=3000)
+    el_demand = ed.ElectricalDemand(environment,
+                                    method=1,  # Standard load profile
+                                    annualDemand=3000)
 
-    dhw_annex42 = DomesticHotWater.DomesticHotWater(environment,
-                                                    tFlow=60,
-                                                    thermal=True,
-                                                    method=1,  # Annex 42
-                                                    dailyConsumption=70,
-                                                    supplyTemperature=25)
+    dhw_annex42 = dhw.DomesticHotWater(environment,
+                                       tFlow=60,
+                                       thermal=True,
+                                       method=1,  # Annex 42
+                                       dailyConsumption=70,
+                                       supplyTemperature=25)
     #  Annotation: The usage of the deterministic IEA Annex 42 hot water
     #  profile is fine for a single apartment. However, try to use stochastic
     #  dhw profiles (method = 2 --> Requires occupancy input profile) on
@@ -62,9 +60,9 @@ def run_test(do_plot=False):
     #  in time!
 
     #  Initialize apartment object
-    apartment = Apartment.Apartment(environment=environment,
-                                    net_floor_area=120,  # Net floor area in m2
-                                    occupancy=None)
+    apartment = ap.Apartment(environment=environment,
+                             net_floor_area=120,  # Net floor area in m^2
+                             occupancy=None)
     #  Occuants object (optional)
 
     #  Add heat demand as entity to apartment
@@ -109,20 +107,19 @@ def run_test(do_plot=False):
     lower_activation_limit = 0.5
 
     #  Generate complex heat pump energy system object
-    heatpump = HeatPump.Heatpump(environment, tAmbient, tFlow, qNominal,
-                                 pNominal, cop, tMax, lower_activation_limit)
+    heatpump = hp.Heatpump(environment, tAmbient, tFlow, qNominal, pNominal, cop, tMax, lower_activation_limit)
 
     #  Generate building energy system (BES) object instance
-    bes = BES.BES(environment)
+    bes = build_es.BES(environment)
 
     #  Add heat pump object to BES
     bes.addDevice(heatpump)
 
     #  Generate heating curve object for building
-    heatingCurve = HeatingCurve.HeatingCurve(environment)
+    heatingCurve = hc.HeatingCurve(environment)
 
     #  Generate building object instance
-    building = Building.Building(environment)
+    building = build.Building(environment)
 
     #  Add entities to building object
     entities = [apartment, bes, heatingCurve]
@@ -139,7 +136,7 @@ def run_test(do_plot=False):
     print('Get number of apartments:')
     print(building.get_number_of_apartments())
 
-    print('Get net floor area of building in m2:')
+    print('Get net floor area of building in m^2:')
     print(building.get_net_floor_area_of_building())
 
     #  Get space heating power curve for whole year:
@@ -178,4 +175,4 @@ def run_test(do_plot=False):
 
 if __name__ == '__main__':
     #  Run program
-    run_test(do_plot=True)
+    run_example(do_plot=True)

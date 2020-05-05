@@ -5,6 +5,7 @@ This script assumes buildings with single zoning.
 """
 
 from __future__ import division
+
 import os
 import math
 import pandas
@@ -12,19 +13,19 @@ import pickle
 
 import shapely.geometry.point as point
 
-import pycity_base.classes.Timer
-import pycity_base.classes.Weather
-import pycity_base.classes.Prices
-import pycity_base.classes.Environment
+import pycity_base.classes.timer
+import pycity_base.classes.weather
+import pycity_base.classes.prices
+import pycity_base.classes.environment
 
-import pycity_base.classes.demand.Apartment as Apartment
-import pycity_base.classes.demand.DomesticHotWater as DomesticHotWater
-import pycity_base.classes.demand.ElectricalDemand as ElectricalDemand
-import pycity_base.classes.demand.SpaceHeating as SpaceHeating
-import pycity_base.classes.HeatingCurve as HeatingCurve
-import pycity_base.classes.Building as Building
-import pycity_base.classes.CityDistrict as citydis
-import pycity_base.classes.demand.Occupancy as occu
+import pycity_base.classes.demand.apartment as Apartment
+import pycity_base.classes.demand.domestic_hot_water as DomesticHotWater
+import pycity_base.classes.demand.electrical_demand as ElectricalDemand
+import pycity_base.classes.demand.space_heating as SpaceHeating
+import pycity_base.classes.heating_curve as HeatingCurve
+import pycity_base.classes.building as Building
+import pycity_base.classes.city_district as citydis
+import pycity_base.classes.demand.occupancy as occu
 
 
 def run_city_generator(gen_mo=0, input_name='test_city_mixed_buildings.txt',
@@ -63,13 +64,12 @@ def run_city_generator(gen_mo=0, input_name='test_city_mixed_buildings.txt',
     """
 
     #  Generate timer, weather and price objects
-    timer = pycity_base.classes.Timer.Timer()
-    weather = pycity_base.classes.Weather.Weather(timer)
-    prices = pycity_base.classes.Prices.Prices()
+    timer = pycity_base.classes.timer.Timer()
+    weather = pycity_base.classes.weather.Weather(timer)
+    prices = pycity_base.classes.prices.Prices()
 
     #  Generate environment
-    environment = pycity_base.classes.Environment.Environment(timer, weather,
-                                                         prices)
+    environment = pycity_base.classes.environment.Environment(timer, weather, prices)
 
     #  Generate city district object
     city_district = citydis.CityDistrict(environment)
@@ -88,10 +88,10 @@ def run_city_generator(gen_mo=0, input_name='test_city_mixed_buildings.txt',
             curr_y = row['y_coord / m']  # Building y coordinate in m
             curr_area = row[
                 'living_area / m2']
-            #  Net floor area (respectively living area) in m2
+            #  Net floor area (respectively living area) in m^2
             curr_th_spec_demand = row[
                 'specific_th_demand / kWh/m2a']
-            #  Spec. thermal energy demand in kWh/m2a
+            #  Spec. thermal energy demand in kWh/m^2a
             curr_el_demand = row[
                 'an_el_demand / kWh/a']
             #  Annual electric energy demand in kWh/a

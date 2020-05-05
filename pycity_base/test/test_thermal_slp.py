@@ -1,14 +1,16 @@
-# coding=utf-8
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+Test case for thermal standardized load profile generation (SLP)
+"""
 
 from __future__ import division
 
 import numpy as np
 import pycity_base.functions.slp_thermal as slp_thermal
 
-class Test_ThermalSLP(object):
-    """
-    Test class for thermal standardized load profile generation (SLP)
-    """
+
+class TestThermalSLP(object):
 
     def test_average_temperature(self):
         """

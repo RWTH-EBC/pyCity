@@ -82,20 +82,20 @@ import matplotlib.pyplot as plt
 
 import uesgraphs.visuals as uesvis
 
-import pycity_base.classes.Timer as time
-import pycity_base.classes.Weather as weath
-import pycity_base.classes.Prices as price
-import pycity_base.classes.Environment as env
-import pycity_base.classes.demand.Apartment as apart
-import pycity_base.classes.demand.Occupancy as occ
-import pycity_base.classes.demand.DomesticHotWater as dhw
-import pycity_base.classes.demand.ElectricalDemand as eldem
-import pycity_base.classes.demand.SpaceHeating as spaceheat
-import pycity_base.classes.Building as build
-import pycity_base.classes.CityDistrict as citydist
-import pycity_base.classes.supply.BES as besys
-import pycity_base.classes.supply.Boiler as boil
-import pycity_base.classes.supply.PV as pvsys
+import pycity_base.classes.timer as time
+import pycity_base.classes.weather as weath
+import pycity_base.classes.prices as price
+import pycity_base.classes.environment as env
+import pycity_base.classes.demand.apartment as apart
+import pycity_base.classes.demand.occupancy as occ
+import pycity_base.classes.demand.domestic_hot_water as dhw
+import pycity_base.classes.demand.electrical_demand as eldem
+import pycity_base.classes.demand.space_heating as spaceheat
+import pycity_base.classes.building as build
+import pycity_base.classes.city_district as citydist
+import pycity_base.classes.supply.building_energy_system as besys
+import pycity_base.classes.supply.boiler as boil
+import pycity_base.classes.supply.photovoltaic as pvsys
 
 
 def main():
@@ -133,8 +133,8 @@ def main():
     #  district
     #  ######################################################################
     for i in range(2):
-        living_area = 200  # in m2
-        spec_sh_dem = 160  # Specific space heating demand in kWh/m2
+        living_area = 200  # in m^2
+        spec_sh_dem = 160  # Specific space heating demand in kWh/m^2
         number_occupants = 3  # Total number of occupants
 
         #  Generate space heating demand object (holding loadcurve attribute
@@ -142,8 +142,8 @@ def main():
         heat_demand = spaceheat.SpaceHeating(
             environment=environment,
             method=1,  # Standard load profile
-            livingArea=living_area,  # in m2
-            specificDemand=spec_sh_dem)  # in kWh/m2
+            livingArea=living_area,  # in m^2
+            specificDemand=spec_sh_dem)  # in kWh/m^2
 
         #  Generate occupancy object with stochastic user profile
         occupancy = occ.Occupancy(environment=environment,
@@ -156,7 +156,7 @@ def main():
             total_nb_occupants=number_occupants,  # Number of occupants
             randomizeAppliances=True,  # Random choice of installed appliances
             lightConfiguration=10,  # Light bulb configuration nb.
-            occupancy=occupancy.occupancy,  # Occupancy profile (600 s resol.)
+            occupancy=occupancy.occupancy,  # Occupancy profile (600 sec resolution)
             prev_heat_dev=True,  # Prevent space heating and hot water devices
             annualDemand=None,  # Annual el. demand in kWh could be used for
             do_normalization=False)  # rescaling (if do_normalization is True)
@@ -171,9 +171,9 @@ def main():
             tFlow=60,  # DHW output temperature in degree Celsius
             method=2,  # Stochastic dhw profile
             supplyTemperature=25,  # DHW inlet flow temperature in degree C.
-            occupancy=occupancy.occupancy)  # Occupancy profile (600 s resol.)
+            occupancy=occupancy.occupancy)  # Occupancy profile (600 sec resolution)
 
-        #  Generate apartment and add demand durves
+        #  Generate apartment and add demand curves
         apartment = apart.Apartment(environment)
         apartment.addMultipleEntities([heat_demand,
                                        el_dem_stochastic,
@@ -198,7 +198,7 @@ def main():
     print()
 
     print('Get city district overall space heating power load curve:')
-    print(city_district.get_aggr_space_h_power_curve())
+    print(city_district.get_aggr_space_h_power_curve(current_values=True))
     print()
 
     #  We can use the Visuals class of uesgraphs to plot the city district
@@ -229,12 +229,12 @@ def main():
 
     #  Generate boiler object
     boiler = boil.Boiler(environment=environment,
-                         qNominal=10000, # Boiler thermal power in Watt
+                         qNominal=10000,  # Boiler thermal power in Watt
                          eta=0.85)  # Boiler efficiency
 
     #  Generate PV module object
     pv = pvsys.PV(environment=environment,
-                  area=30, #  Area in m2
+                  area=30,  # Area in m^2
                   eta=0.15)  # Electrical efficiency at NOCT conditions
 
     # Instantiate BES (container object for all energy systems)
@@ -252,6 +252,7 @@ def main():
     #  Access boiler nominal thermal power
     print('Nominal thermal power of boiler in kW:')
     print(building_1001.bes.boiler.qNominal / 1000)
+
 
 if __name__ == '__main__':
     #  Run program
@@ -279,7 +280,7 @@ ISSN 0360-1323
 [pdf](https://doi.org/10.1016/j.buildenv.2018.12.025),
 [bibtex](https://github.com/RWTH-EBC/pyCity/tree/master/doc/S0360132318307686.bib)
 
-If you require a citation in German language:
+If you require a reference in German language:
 + Schiefelbein, J. , Javadi, A. , Fuchs, M. , Müller, D. , Monti, A. and Diekerhof, M. (2017), Modellierung und Optimierung von Mischgebieten. Bauphysik, 39: 23-32. doi:10.1002/bapi.201710001
 [pdf](https://doi.org/10.1002/bapi.201710001),
 [bibtex](https://github.com/RWTH-EBC/pyCity/tree/master/doc/pericles_1437098039.bib)
@@ -297,4 +298,4 @@ We gratefully acknowledge the financial support by BMWi
 (German Federal Ministry for Economic Affairs and Energy) 
 under promotional references 03ET1138D and 03ET1381A.
 
-<img src="http://www.innovation-beratung-foerderung.de/INNO/Redaktion/DE/Bilder/Titelbilder/titel_foerderlogo_bmwi.jpg;jsessionid=4BD60B6CD6337CDB6DE21DC1F3D6FEC5?__blob=poster&v=2)" width="200">
+<img src="https://www.innovation-beratung-foerderung.de/INNO/Redaktion/DE/Bilder/Titelbilder/titel_foerderlogo_bmwi.jpg?__blob=normal&v=3" width="200">

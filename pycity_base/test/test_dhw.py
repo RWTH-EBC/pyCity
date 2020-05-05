@@ -1,9 +1,15 @@
+#!/usr/bin/env python
+# coding=utf-8
+"""
+Domestic hot water test.
+"""
+
 from __future__ import division
 
 import numpy as np
 import copy
 
-import pycity_base.classes.demand.DomesticHotWater as dhw
+import pycity_base.classes.demand.domestic_hot_water as dhw
 from pycity_base.test.pycity_fixtures import create_environment, create_occupancy
 
 
@@ -54,7 +60,6 @@ class TestDomesticHotWater(object):
         print('DHW annual energy demand in kWh: ', annual_dhw_energy_demand)
 
         assert abs(annual_dhw_energy_demand - reference_value) <= 0.01
-
 
     def test_method2(self, create_environment, create_occupancy):
         """

@@ -1,27 +1,27 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Created on Tue Feb 10 14:59:48 2015
-
-@author: tsz
+Example of the battery class.
 """
 
 from __future__ import division
+
 import numpy as np
 
-import pycity_base.classes.supply.Battery as Battery
-import pycity_base.classes.Timer
-import pycity_base.classes.Weather
-import pycity_base.classes.Prices
-import pycity_base.classes.Environment
+import pycity_base.classes.supply.battery as bat
+import pycity_base.classes.timer
+import pycity_base.classes.weather
+import pycity_base.classes.prices
+import pycity_base.classes.environment
 
-def run_test():
+
+def run_example():
 
     # Create environment
-    timer = pycity_base.classes.Timer.Timer()
-    weather = pycity_base.classes.Weather.Weather(timer)
-    prices = pycity_base.classes.Prices.Prices()
-    environment = pycity_base.classes.Environment.Environment(timer, weather,
+    timer = pycity_base.classes.timer.Timer()
+    weather = pycity_base.classes.weather.Weather(timer)
+    prices = pycity_base.classes.prices.Prices()
+    environment = pycity_base.classes.environment.Environment(timer, weather,
                                                               prices)
 
     # Create Boiler
@@ -30,8 +30,7 @@ def run_test():
     selfDischarge = 0.02
     etaCharge = 0.96
     etaDischarge = 0.95
-    battery = Battery.Battery(environment, socInit, capacity,
-                              selfDischarge, etaCharge, etaDischarge)
+    battery = bat.Battery(environment, socInit, capacity, selfDischarge, etaCharge, etaDischarge)
 
     # Print results
     print()
@@ -47,7 +46,7 @@ def run_test():
     np.random.seed(0)
     soc = np.random.rand(timer.timestepsUsedHorizon)
     charge = np.random.rand(timer.timestepsUsedHorizon) * capacity / 3600.0
-    discharge = np.random.rand(timer.timestepsUsedHorizon)  * capacity / 3600.0
+    discharge = np.random.rand(timer.timestepsUsedHorizon) * capacity / 3600.0
     battery.setResults(soc, charge, discharge)
 
     results = battery.getResults(True)
@@ -58,6 +57,7 @@ def run_test():
     print()
     print(("Disharging power: " + str(results[2])))
 
+
 if __name__ == '__main__':
     #  Run program
-    run_test()
+    run_example()

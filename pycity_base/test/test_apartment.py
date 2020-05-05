@@ -1,22 +1,23 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-
+Apartment test.
 """
+
 from __future__ import division
 
 import numpy as np
 
-import pycity_base.classes.demand.Apartment as Apartment
+import pycity_base.classes.demand.apartment as apartment
 from pycity_base.test.pycity_fixtures import create_environment, create_demands, \
     create_apartment
 
 
-class Test_apartment(object):
+class TestApartment(object):
 
     def test_init(self, create_environment):
         #  Generate apartment object
-        test_apartment = Apartment.Apartment(create_environment)
+        test_apartment = apartment.Apartment(create_environment)
 
         #  Return all demands
         el_load_curve = test_apartment.get_total_el_power()
@@ -31,7 +32,7 @@ class Test_apartment(object):
         heat_demand = create_demands[0]
 
         #  Generate apartment object
-        test_apartment = Apartment.Apartment(create_environment)
+        test_apartment = apartment.Apartment(create_environment)
 
         #  Add entity
         test_apartment.addEntity(heat_demand)
@@ -55,7 +56,7 @@ class Test_apartment(object):
         dhw_annex42 = create_demands[2]
 
         #  Generate apartment object
-        test_apartment = Apartment.Apartment(create_environment)
+        test_apartment = apartment.Apartment(create_environment)
         #  Add multiple entities
         test_apartment.addMultipleEntities([el_demand, dhw_annex42])
 

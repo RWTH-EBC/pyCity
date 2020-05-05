@@ -1,33 +1,34 @@
 # coding=utf-8
 """
-Example script for occupancy usage
+Example script for occupancy usage.
 """
 
 import numpy as np
 import matplotlib.pyplot as plt
 
-import pycity_base.classes.Timer
-import pycity_base.classes.Weather
-import pycity_base.classes.Environment
-import pycity_base.classes.Prices
+import pycity_base.classes.timer
+import pycity_base.classes.weather
+import pycity_base.classes.environment
+import pycity_base.classes.prices
 
-import pycity_base.classes.demand.Occupancy
+import pycity_base.classes.demand.occupancy
 
 
-def exampe_occupancy(do_plot=False):
+def run_example(do_plot=False):
     time_discretization = 60
-    timer = pycity_base.classes.Timer.Timer(
+    timer = pycity_base.classes.timer.Timer(
         timeDiscretization=time_discretization,
-        timestepsTotal=int(8760 * 3600 / time_discretization))
-    weather = pycity_base.classes.Weather.Weather(timer)  # , useTRY=True)
-    prices = pycity_base.classes.Prices.Prices()
+        timestepsTotal=int(8760 * 3600 / time_discretization)
+    )
+    weather = pycity_base.classes.weather.Weather(timer)
+    prices = pycity_base.classes.prices.Prices()
 
-    environment = pycity_base.classes.Environment.Environment(timer, weather,
-                                                              prices)
+    environment = pycity_base.classes.environment.Environment(timer, weather, prices)
 
-    occupancy_object = pycity_base.classes.demand.Occupancy.Occupancy(
+    occupancy_object = pycity_base.classes.demand.occupancy.Occupancy(
         environment,
-        number_occupants=1)
+        number_occupants=1
+    )
     occupancy_profile = occupancy_object.occupancy
     print('Occupancy profile:')
     print(occupancy_profile)
@@ -70,4 +71,4 @@ def exampe_occupancy(do_plot=False):
 
 if __name__ == '__main__':
     #  Run program
-    exampe_occupancy(do_plot=True)
+    run_example(do_plot=True)

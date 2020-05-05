@@ -33,9 +33,7 @@ def load_non_res_load_data_weekly(path):
         fifth column: repair / metal shop
     """
 
-    data_array = np.genfromtxt(path, delimiter='\t', skip_header=2,
-                               usecols=(3, 4, 5, 6, 7))
-
+    data_array = np.genfromtxt(path, delimiter='\t', skip_header=2, usecols=(3, 4, 5, 6, 7))
     return data_array
 
 
@@ -59,9 +57,7 @@ def load_non_res_load_data_annual(path):
         third column: warehouse
     """
 
-    data_array = np.genfromtxt(path, delimiter='\t', skip_header=2,
-                               usecols=(2, 3, 4))
-
+    data_array = np.genfromtxt(path, delimiter='\t', skip_header=2, usecols=(2, 3, 4))
     return data_array
 
 
@@ -154,6 +150,7 @@ def gen_annual_el_load(data_array, type, start_wd, annual_demand=None):
         el_load_curve *= con_fac
 
     return el_load_curve
+
 
 def get_annual_el_load(data_array, type, annual_demand=None):
     """

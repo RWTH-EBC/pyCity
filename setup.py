@@ -48,7 +48,7 @@ def read(*filenames, **kwargs):
 
 
 setup(name='pycity_base',
-      version='0.2.1',
+      version='0.3.0',
       description='Python package for data handling and scenario generation '
                   'of city districts.',
       #long_description=long_description,
@@ -68,14 +68,13 @@ setup(name='pycity_base',
                         'networkx', 'richardsonpy', 'uesgraphs'],
       tests_require=['pytest'],
       platforms='any',
-	  classifiers=[
+      classifiers=[
           'License :: OSI Approved :: MIT License',
           'Programming Language :: Python :: 2.7',
           'Programming Language :: Python :: 3.5',
           'Programming Language :: Python :: 3.6',
-		  'Natural Language :: English',
+          'Natural Language :: English',
           'Intended Audience :: Science/Research',
           'Topic :: Scientific/Engineering',
           'Topic :: Utilities']
       )
-

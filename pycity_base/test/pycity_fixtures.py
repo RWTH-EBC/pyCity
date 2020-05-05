@@ -1,20 +1,21 @@
-# coding=utf-8
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import pytest
 import shapely.geometry.point as point
 
-import pycity_base.classes.Timer
-import pycity_base.classes.Weather
-import pycity_base.classes.Environment
-import pycity_base.classes.Prices
+import pycity_base.classes.timer
+import pycity_base.classes.weather
+import pycity_base.classes.environment
+import pycity_base.classes.prices
 
-import pycity_base.classes.demand.DomesticHotWater as DomesticHotWater
-import pycity_base.classes.demand.ElectricalDemand as ElectricalDemand
-import pycity_base.classes.demand.SpaceHeating as SpaceHeating
-import pycity_base.classes.demand.Occupancy as Occupanc
-import pycity_base.classes.demand.Apartment as App
-import pycity_base.classes.Building as Build
-import pycity_base.classes.CityDistrict as citydist
+import pycity_base.classes.demand.domestic_hot_water as DomesticHotWater
+import pycity_base.classes.demand.electrical_demand as ElectricalDemand
+import pycity_base.classes.demand.space_heating as SpaceHeating
+import pycity_base.classes.demand.occupancy as Occupanc
+import pycity_base.classes.demand.apartment as App
+import pycity_base.classes.building as Build
+import pycity_base.classes.city_district as citydist
 
 
 @pytest.fixture(scope='module')
@@ -31,14 +32,14 @@ def create_environment(timestep=900):
     -------
     create_environment : environment object
     """
-    timer = pycity_base.classes.Timer.Timer(timeDiscretization=timestep,
-                                       timestepsTotal=365 * 24 * 4,
-                                       initialDay=1)
-    weather = pycity_base.classes.Weather.Weather(timer, useTRY=True)
-    prices = pycity_base.classes.Prices.Prices()
+    timer = pycity_base.classes.timer.Timer(timeDiscretization=timestep,
+                                            timestepsTotal=365 * 24 * 4,
+                                            initialDay=1)
+    weather = pycity_base.classes.weather.Weather(timer, useTRY=True)
+    prices = pycity_base.classes.prices.Prices()
 
-    create_environment = pycity_base.classes.Environment.Environment(timer, weather,
-                                                                prices)
+    create_environment = pycity_base.classes.environment.Environment(timer, weather,
+                                                                     prices)
     return create_environment
 
 
@@ -102,8 +103,8 @@ def create_occupancy(create_environment, nb_occupants=1):
         occupancy object
     """
     create_occupancy = \
-        pycity_base.classes.demand.Occupancy.Occupancy(create_environment,
-                                                  number_occupants=nb_occupants)
+        pycity_base.classes.demand.occupancy.Occupancy(create_environment,
+                                                       number_occupants=nb_occupants)
 
     return create_occupancy
 

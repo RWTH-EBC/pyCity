@@ -1,37 +1,34 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Created on Tue Feb 10 14:32:46 2015
-
-@author: tsz
+Example of the boiler class.
 """
 
 from __future__ import division
+
 import numpy as np
 
-import pycity_base.classes.Timer
-import pycity_base.classes.Weather
-import pycity_base.classes.Environment
-import pycity_base.classes.Prices
+import pycity_base.classes.timer
+import pycity_base.classes.weather
+import pycity_base.classes.environment
+import pycity_base.classes.prices
 
-import pycity_base.classes.supply.Boiler as Boiler
+import pycity_base.classes.supply.boiler as boiler
 
 
-def run_test():
+def run_example():
     # Create environment
-    timer = pycity_base.classes.Timer.Timer()
-    weather = pycity_base.classes.Weather.Weather(timer, useTRY=True)
-    prices = pycity_base.classes.Prices.Prices()
-    environment = pycity_base.classes.Environment.Environment(timer, weather,
-                                                              prices)
+    timer = pycity_base.classes.timer.Timer()
+    weather = pycity_base.classes.weather.Weather(timer, useTRY=True)
+    prices = pycity_base.classes.prices.Prices()
+    environment = pycity_base.classes.environment.Environment(timer, weather, prices)
 
     # Create Boiler
     lower_activation_limit = 0.5
     q_nominal = 10000
     t_max = 90
     eta = 0.9
-    heater = Boiler.Boiler(environment, q_nominal, eta, t_max,
-                           lower_activation_limit)
+    heater = boiler.Boiler(environment, q_nominal, eta, t_max, lower_activation_limit)
 
     # Print results
     print()
@@ -58,4 +55,4 @@ def run_test():
 
 if __name__ == '__main__':
     #  Run program
-    run_test()
+    run_example()

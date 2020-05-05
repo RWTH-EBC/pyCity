@@ -1,17 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-
+Prices test.
 """
 
-import pycity_base.classes.Prices as Prices
+import pycity_base.classes.prices as prices
 
 
-class Test_Prices():
+class TestPrices():
 
     def test_prices(self):
 
-        price = Prices.Prices()
+        price = prices.Prices()
 
         price.getAllData()
 

@@ -10,18 +10,18 @@ from __future__ import division
 import os
 import numpy as np
 
-import pycity_base.classes.Timer
-import pycity_base.classes.Sun
-import pycity_base.classes.Weather
-import pycity_base.classes.Prices
-import pycity_base.classes.Environment
+import pycity_base.classes.timer
+import pycity_base.classes.sun
+import pycity_base.classes.weather
+import pycity_base.classes.prices
+import pycity_base.classes.environment
 
-import pycity_base.classes.demand.Occupancy
-import pycity_base.classes.demand.ElectricalDemand as ED
-import pycity_base.classes.demand.DomesticHotWater as DomesticHotWater
+import pycity_base.classes.demand.occupancy
+import pycity_base.classes.demand.electrical_demand as ED
+import pycity_base.classes.demand.domestic_hot_water as DomesticHotWater
 
-import pycity_base.classes.demand.SpaceHeating as sh
-import pycity_base.classes.demand.ZoneParameters as zp
+import pycity_base.classes.demand.space_heating as sh
+import pycity_base.classes.demand.zone_parameters as zp
 
 
 # Location: Denver (weather inputs from ASHRAE 140 verification)
@@ -30,11 +30,11 @@ location = (39.76, -104.86)
 altitude = 1609  # m
 timeZone = -7
 
-timer = pycity_base.classes.Timer.Timer(timeDiscretization=3600,
-                                   timestepsHorizon=8760,
-                                   timestepsUsedHorizon=8760,
-                                   timestepsTotal=8760)
-prices = pycity_base.classes.Prices.Prices()
+timer = pycity_base.classes.timer.Timer(timeDiscretization=3600,
+                                        timestepsHorizon=8760,
+                                        timestepsUsedHorizon=8760,
+                                        timestepsTotal=8760)
+prices = pycity_base.classes.prices.Prices()
 
 #  Define src path
 ashrae_path = os.path.dirname(os.path.abspath(__file__))
@@ -43,25 +43,25 @@ weather_temp_path = os.path.join(ashrae_path, 'weather_temperature.csv')
 weather_beam_path = os.path.join(ashrae_path, 'weather_beam.csv')
 weather_diffuse_path = os.path.join(ashrae_path, 'weather_diffuse.csv')
 
-weather = pycity_base.classes.Weather.Weather(timer,
-                                         pathTemperature=weather_temp_path,
-                                         pathDirectRadiation=weather_beam_path,
-                                         pathDiffuseRadiation=weather_diffuse_path,
-                                         timeDiscretization=3600,
-                                         delimiter="\t",
-                                         useTRY=False,
-                                         location=location,
-                                         altitude=altitude,
-                                         timeZone=timeZone)
+weather = pycity_base.classes.weather.Weather(timer,
+                                              pathTemperature=weather_temp_path,
+                                              pathDirectRadiation=weather_beam_path,
+                                              pathDiffuseRadiation=weather_diffuse_path,
+                                              timeDiscretization=3600,
+                                              delimiter="\t",
+                                              useTRY=False,
+                                              location=location,
+                                              altitude=altitude,
+                                              timeZone=timeZone)
 
-prices = pycity_base.classes.Prices.Prices()
+prices = pycity_base.classes.prices.Prices()
 
-environment = pycity_base.classes.Environment.Environment(timer, weather, prices)
+environment = pycity_base.classes.environment.Environment(timer, weather, prices)
 
 
 # Occupancy and electrical demand
-occupancy = pycity_base.classes.demand.Occupancy.Occupancy(environment,
-                                                      number_occupants=3)
+occupancy = pycity_base.classes.demand.occupancy.Occupancy(environment,
+                                                           number_occupants=3)
 
 energy_input = 3000
 
@@ -96,7 +96,7 @@ albedo = 0.2
 internalGains = 0.3 * demand_electricity
 
 # Heated floor area
-A_f = 150  # m2
+A_f = 150  # m^2
 
 heightWalls = 3.0  # m
 volume = A_f * heightWalls
@@ -122,7 +122,7 @@ def specificHeatCapacity(d, d_iso, density, cp):
     ISO 13786:2007 A.2
     Computation of (specific) heat capacity of each wall-type-surface
     
-    Result is in J/m2K
+    Result is in J/m^2K
     """
     d_t = min(0.5 * np.sum(d), d_iso , 0.1)
     sum_d_i = d[0]

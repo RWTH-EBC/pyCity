@@ -7,26 +7,25 @@ Created on Tue Jul 21 16:50:36 2015
 """
 
 from __future__ import division
+
 import os
 import numpy as np
 import xlrd
-import pycity_base.functions.changeResolution as cr
+import pycity_base.functions.change_resolution as cr
 
 
 def load(filename, time_discretization=900):
-    """
-    """
     # Open the workbook and get the sheet with all profiles
     book = xlrd.open_workbook(filename)
     sheet = book.sheet_by_name("Profiles")
     
     # Fill all values into one dictionary
     profiles = {}
-    for c in range(1,sheet.ncols):
+    for c in range(1, sheet.ncols):
         # Get each key
-        key = sheet.cell_value(0,c)
+        key = sheet.cell_value(0, c)
         # Get the corresponding values
-        values = [sheet.cell_value(r,c) for r in range(2, sheet.nrows)]
+        values = [sheet.cell_value(r, c) for r in range(2, sheet.nrows)]
         
         # Adjust sampling time
         if time_discretization != 900:
@@ -41,11 +40,11 @@ def load(filename, time_discretization=900):
     # Return the results
     return profiles
 
+
 def get_demand(annual_demand, profile, time_discretization):
-    """
-    """
     scaling = 4000 / 1000000 * annual_demand / time_discretization * 900
     return scaling * profile
+
 
 if __name__ == "__main__":
     time_dis = 3600

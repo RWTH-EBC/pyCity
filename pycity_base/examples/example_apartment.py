@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Script to initialize apartment object and add heat, electrical and hot water
-demand objects
+demand objects.
 """
 
 from __future__ import division
@@ -10,47 +10,46 @@ from __future__ import division
 import numpy as np
 import matplotlib.pyplot as plt
 
-import pycity_base.classes.Timer as Time
-import pycity_base.classes.Weather as Weath
-import pycity_base.classes.Prices as Price
-import pycity_base.classes.Environment as Env
-import pycity_base.classes.demand.Apartment as Apartment
-import pycity_base.classes.demand.DomesticHotWater as DomesticHotWater
-import pycity_base.classes.demand.ElectricalDemand as ElectricalDemand
-import pycity_base.classes.demand.SpaceHeating as SpaceHeating
+import pycity_base.classes.timer as time
+import pycity_base.classes.weather as we
+import pycity_base.classes.prices as pr
+import pycity_base.classes.environment as env
+import pycity_base.classes.demand.apartment as ap
+import pycity_base.classes.demand.domestic_hot_water as dhw
+import pycity_base.classes.demand.electrical_demand as ed
+import pycity_base.classes.demand.space_heating as sh
 
 
-def run_test(do_plot=False):
+def run_example(do_plot=False):
     timestep = 900  # in seconds
 
     nb_timesteps = int(365 * 24 * 3600 / timestep)
 
     #  Generate environment
-    timer = Time.Timer(timeDiscretization=timestep,
+    timer = time.Timer(timeDiscretization=timestep,
                        timestepsTotal=nb_timesteps)
-    weather = Weath.Weather(timer)
-    prices = Price.Prices()
-    environment = Env.Environment(timer, weather, prices)
+    weather = we.Weather(timer)
+    prices = pr.Prices()
+    environment = env.Environment(timer, weather, prices)
 
     #  Generate heat demand object
-    heat_demand = SpaceHeating.SpaceHeating(environment,
-                                            method=1,  # Standard load profile
-                                            livingArea=146,
-                                            specificDemand=166)
+    heat_demand = sh.SpaceHeating(environment,
+                                  method=1,  # Standard load profile
+                                  livingArea=146,
+                                  specificDemand=166)
 
     #  Generate electrical demand object
-    el_demand = ElectricalDemand.ElectricalDemand(environment,
-                                                  method=1,
-                                                  # Standard load profile
-                                                  annualDemand=3000)
+    el_demand = ed.ElectricalDemand(environment,
+                                    method=1,  # Standard load profile
+                                    annualDemand=3000)
 
     #  Generate hot water demand object (based on Annex 42 profiles)
-    dhw_annex42 = DomesticHotWater.DomesticHotWater(environment,
-                                                    tFlow=60,
-                                                    thermal=True,
-                                                    method=1,  # Annex 42
-                                                    dailyConsumption=70,
-                                                    supplyTemperature=25)
+    dhw_annex42 = dhw.DomesticHotWater(environment,
+                                       tFlow=60,
+                                       thermal=True,
+                                       method=1,  # Annex 42
+                                       dailyConsumption=70,
+                                       supplyTemperature=25)
     #  Annotation: The usage of the deterministic IEA Annex 42 hot water
     #  profile is fine for a single apartment. However, try to use stochastic
     #  dhw profiles (method = 2 --> Requires occupancy input profile) on
@@ -59,10 +58,9 @@ def run_test(do_plot=False):
     #  in time!
 
     #  Initialize apartment object
-    apartment = Apartment.Apartment(environment=environment,
-                                    net_floor_area=80,  #  Net floor area in m2
-                                    occupancy=None)
-                                    #  Occuants object (optional)
+    apartment = ap.Apartment(environment=environment,
+                             net_floor_area=80,  # Net floor area in m^2
+                             occupancy=None)  # Occupants object (optional)
 
     #  Add entities to apartment object
     entities = [heat_demand, el_demand, dhw_annex42]
@@ -104,4 +102,4 @@ def run_test(do_plot=False):
 
 if __name__ == '__main__':
     #  Run program
-    run_test(do_plot=True)
+    run_example(do_plot=True)

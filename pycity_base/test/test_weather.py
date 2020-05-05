@@ -1,24 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-
+Weather test.
 """
 
 import os
 
-import pycity_base.classes.Timer as Timer
-import pycity_base.classes.Weather as Weather
+import pycity_base.classes.timer as ti
+import pycity_base.classes.weather as we
 
 
-
-
-class Test_Weather():
+class TestWeather():
 
     def test_weather(self):
 
-        timer = Timer.Timer()
+        timer = ti.Timer()
 
-        weather = Weather.Weather(timer=timer)
+        weather = we.Weather(timer=timer)
 
         weather.setLocation(location=(50.76, 6.07),
                             timeZone=1,

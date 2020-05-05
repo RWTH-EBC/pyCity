@@ -1,14 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-
+Test for processing a city district.
 """
+
 from __future__ import division
 
 import copy
 import shapely.geometry.point as point
 
-import pycity_base.classes.Building as Building
+import pycity_base.classes.building as building
 import pycity_base.functions.process_city as processcity
 
 from pycity_base.test.pycity_fixtures import create_environment, \
@@ -21,9 +22,9 @@ class TestProcessCity():
 
         city = copy.deepcopy(create_empty_citydist)
 
-        building1 = Building.Building(environment=create_environment)
-        building2 = Building.Building(environment=create_environment)
-        building3 = Building.Building(environment=create_environment)
+        building1 = building.Building(environment=create_environment)
+        building2 = building.Building(environment=create_environment)
+        building3 = building.Building(environment=create_environment)
 
         pos1 = point.Point(0, 0)
         pos2 = point.Point(0, 20)

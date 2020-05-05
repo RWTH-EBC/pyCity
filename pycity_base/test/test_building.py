@@ -1,39 +1,40 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-
+Building test.
 """
+
 from __future__ import division
 
-import pycity_base.classes.demand.Apartment as Apart
-import pycity_base.classes.Building as Build
-import pycity_base.classes.supply.BES as BES
-import pycity_base.classes.HeatingCurve as Hcurve
+import pycity_base.classes.demand.apartment as apart
+import pycity_base.classes.building as build
+import pycity_base.classes.supply.building_energy_system as bes
+import pycity_base.classes.heating_curve as hcurve
 
-import pycity_base.classes.demand.Apartment as Apartment
+import pycity_base.classes.demand.apartment as Apartment
 from pycity_base.test.pycity_fixtures import create_environment, create_demands, \
     create_apartment, create_building, create_occupancy
 
 
-class Test_Building():
+class TestBuilding():
 
     def test_init_building(self, create_environment):
 
-        Build.Building(environment=create_environment)
+        build.Building(environment=create_environment)
 
     def test_add_entity(self, create_environment,
                         create_apartment):
-        building = Build.Building(environment=create_environment)
+        building = build.Building(environment=create_environment)
 
         building.addEntity(entity=create_apartment)
 
-        bes = BES.BES(environment=create_environment)
+        bes_unit = bes.BES(environment=create_environment)
 
-        building.addEntity(entity=bes)
+        building.addEntity(entity=bes_unit)
 
-        hcurve = Hcurve.HeatingCurve(environment=create_environment)
+        heatingcurve = hcurve.HeatingCurve(environment=create_environment)
 
-        building.addEntity(entity=hcurve)
+        building.addEntity(entity=heatingcurve)
 
         building.getFlowTemperature()
 
@@ -54,14 +55,14 @@ class Test_Building():
         create_building.get_dhw_power_curve(current_values=True)
 
     def test_get_occupancy_profile(self, create_occupancy, create_environment):
-        building = Build.Building(environment=create_environment)
+        building = build.Building(environment=create_environment)
 
         assert building.get_number_of_apartments() == None
         assert building.get_number_of_occupants() == None
         assert building.get_net_floor_area_of_building() == None
 
-        apartment = Apart.Apartment(environment=create_environment)
-        apartment2 = Apart.Apartment(environment=create_environment)
+        apartment = apart.Apartment(environment=create_environment)
+        apartment2 = apart.Apartment(environment=create_environment)
 
         apartment.addEntity(entity=create_occupancy)
         apartment2.addEntity(entity=create_occupancy)

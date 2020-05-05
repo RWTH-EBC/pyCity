@@ -1,21 +1,26 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+Space heating test.
+"""
+
 from __future__ import division
 
 import numpy as np
 import pytest
 
-import pycity_base.classes.demand.SpaceHeating as SpaceHeating
+import pycity_base.classes.demand.space_heating as sh
 from pycity_base.test.pycity_fixtures import create_environment
 
 
-class Test_SpaceHeating(object):
+class TestSpaceHeating(object):
 
-    def test_method0(self, create_environment):
+    def test_method0(self, create_environment):  # User-defined load profile
         #  energy comparison array
         load_array = np.array([10, 10, 10, 10, 20, 20, 20, 20])
 
         #  Space heating object
-        spaceheating = SpaceHeating.SpaceHeating(create_environment, method=0,
-                                                 loadcurve=load_array)
+        spaceheating = sh.SpaceHeating(create_environment, method=0, loadcurve=load_array)
 
         #  Return load curve of space heating object
         space_heat_load_curve = spaceheating.get_power(currentValues=False)
@@ -23,13 +28,13 @@ class Test_SpaceHeating(object):
         #  Compare arrays
         np.testing.assert_equal(space_heat_load_curve, load_array)
 
-
     def test_method1(self, create_environment):  # Standard load profile
 
         #  Generate space heating object
-        spaceheating = SpaceHeating.SpaceHeating(create_environment, method=1,
-                                                 livingArea=100,
-                                                 specificDemand=150)
+        spaceheating = sh.SpaceHeating(create_environment,
+                                       method=1,
+                                       livingArea=100,
+                                       specificDemand=150)
 
         #  Get space heating load curve (in W) per timestep
         space_heat_load_curve = spaceheating.get_power(currentValues=False)
@@ -45,9 +50,10 @@ class Test_SpaceHeating(object):
     def test_method3(self, create_environment):  # Modelica profile
 
         #  Generate space heating object
-        spaceheating = SpaceHeating.SpaceHeating(create_environment, method=3,
-                                                 livingArea=100,
-                                                 specificDemand=150)
+        spaceheating = sh.SpaceHeating(create_environment,
+                                       method=3,
+                                       livingArea=100,
+                                       specificDemand=150)
 
         #  Get space heating load curve (in W) per timestep
         space_heat_load_curve = spaceheating.loadcurve

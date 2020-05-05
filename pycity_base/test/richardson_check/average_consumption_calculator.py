@@ -5,17 +5,18 @@ apartments with stochastic, electrical load profiles
 """
 
 from __future__ import division
+
 import numpy as np
 import timeit
 
-import pycity_base.classes.demand.ElectricalDemand as ED
+import pycity_base.classes.demand.electrical_demand as ed
 
-import pycity_base.classes.Timer
-import pycity_base.classes.Weather
-import pycity_base.classes.Environment
-import pycity_base.classes.Prices
+import pycity_base.classes.timer
+import pycity_base.classes.weather
+import pycity_base.classes.environment
+import pycity_base.classes.prices
 
-import pycity_base.classes.demand.Occupancy
+import pycity_base.classes.demand.occupancy
 
 
 def run_single_calc(number_of_occupants, randomize_appliances, environment,
@@ -45,10 +46,10 @@ def run_single_calc(number_of_occupants, randomize_appliances, environment,
         Only relevant, if method == 2.
     """
 
-    occupancy = pycity_base.classes.demand.Occupancy.Occupancy(environment,
-                                        number_occupants=number_of_occupants)
+    occupancy = pycity_base.classes.demand.occupancy.Occupancy(environment,
+                                                               number_occupants=number_of_occupants)
 
-    el_load = ED.ElectricalDemand(environment,
+    el_load = ed.ElectricalDemand(environment,
                                   method=2,
                                   total_nb_occupants=number_of_occupants,
                                   randomizeAppliances=randomize_appliances,
@@ -59,6 +60,7 @@ def run_single_calc(number_of_occupants, randomize_appliances, environment,
                                   light_filename=light_filename)
 
     return el_load
+
 
 def run_multiple_calc(number_of_occupants, randomize_appliances,
                       nb_of_apartments, prev_heat_dev=False,
@@ -97,14 +99,14 @@ def run_multiple_calc(number_of_occupants, randomize_appliances,
         Average electric energy demand in kWh/a
     """
 
-    timer = pycity_base.classes.Timer.Timer(timeDiscretization=60,
-                                       timestepsTotal=365*24*60,
-                                       initialDay=1)
-    weather = pycity_base.classes.Weather.Weather(timer)  # , useTRY=True)
-    prices = pycity_base.classes.Prices.Prices()
+    timer = pycity_base.classes.timer.Timer(timeDiscretization=60,
+                                            timestepsTotal=365*24*60,
+                                            initialDay=1)
+    weather = pycity_base.classes.weather.Weather(timer)  # , useTRY=True)
+    prices = pycity_base.classes.prices.Prices()
 
-    environment = pycity_base.classes.Environment.Environment(timer, weather,
-                                                         prices)
+    environment = pycity_base.classes.environment.Environment(timer, weather,
+                                                              prices)
 
     total_el_demand = 0  # Dummy value
 
@@ -131,10 +133,10 @@ def run_multiple_calc(number_of_occupants, randomize_appliances,
 
     return av_el_demand
 
+
 def process_multiple_occupant_numbers(randomize_appliances, nb_of_apartments,
                                       prev_heat_dev=False,
-                                      app_filename=None, light_filename=None
-                                      ):
+                                      app_filename=None, light_filename=None):
     """
 
     Parameters
@@ -187,6 +189,7 @@ def process_multiple_occupant_numbers(randomize_appliances, nb_of_apartments,
         occ_en_dict[i] = av_el_demand
 
     return occ_en_dict
+
 
 if __name__ == '__main__':
     start = timeit.default_timer()

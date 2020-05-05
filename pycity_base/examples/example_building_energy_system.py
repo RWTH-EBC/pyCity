@@ -1,0 +1,102 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+Script on how to generate and use building energy system (BES) object instances.
+"""
+
+from __future__ import division
+
+import pycity_base.classes.timer
+import pycity_base.classes.weather
+import pycity_base.classes.environment
+import pycity_base.classes.prices
+
+import pycity_base.classes.supply.battery as bat
+import pycity_base.classes.supply.building_energy_system as build_es
+import pycity_base.classes.supply.boiler as boil
+import pycity_base.classes.supply.combined_heat_power as chp
+import pycity_base.classes.supply.electrical_heater as eh
+import pycity_base.classes.supply.inverter as inv
+import pycity_base.classes.supply.photovoltaic as pv
+import pycity_base.classes.supply.thermal_energy_storage as tes
+
+
+def print_bes_attributes(bes):
+    print(("Has Battery: " + str(bes.hasBattery)))
+    print(("Has Boiler: " + str(bes.hasBoiler)))
+    print(("Has CHP unit: " + str(bes.hasChp)))
+    print(("Has Electrical Heater: " + str(bes.hasElectricalHeater)))
+    print(("Has AC/DC inverter: " + str(bes.hasInverterAcdc)))
+    print(("Has DC/AC inverter: " + str(bes.hasInverterDcac)))
+    print(("Has PV: " + str(bes.hasPv)))
+
+
+def run_example():
+    #  Generate environment
+    timer = pycity_base.classes.timer.Timer()
+    weather = pycity_base.classes.weather.Weather(timer, useTRY=True)
+    prices = pycity_base.classes.prices.Prices()
+    environment = pycity_base.classes.environment.Environment(timer, weather,
+                                                              prices)
+
+    # Create different energy systems
+    battery = bat.Battery(environment, 0.5, 4 * 3600 * 1000)
+    boiler = boil.Boiler(environment, 10000, 0.8)
+    chp_unit = chp.CHP(environment, 1000, 2000, 0.9)
+    elh = eh.ElectricalHeater(environment, 3000, 0.99)
+    inverter_ac_dc = inv.Inverter(environment, 0.98, 10000, True)
+    inverter_dc_ac = inv.Inverter(environment, 0.98, 10000, False)
+    pv_unit = pv.PV(environment, 50, 0.15)
+    thermal_storage = tes.ThermalEnergyStorage(environment, 50, 1000, 85)
+
+    # Instantiate BES
+    bes = build_es.BES(environment)
+
+    # Print "status quo"
+    print()
+    print("Original BES - before adding devices")
+    print_bes_attributes(bes)
+
+    # Add appliances to bes
+    bes.addDevice(battery)
+    bes.addDevice(boiler)
+    bes.addDevice(chp_unit)
+    bes.addDevice(elh)
+    bes.addDevice(inverter_ac_dc)
+    bes.addDevice(inverter_dc_ac)
+
+    bes.addMultipleDevices([pv_unit, thermal_storage])
+
+    # Print current status
+    print()
+    print("Final BES - after adding devices")
+    print_bes_attributes(bes)
+
+    # Check if objects stored in BES are the same as the original objects:
+    print()
+    print("Battery: " + str(battery is bes.battery))
+    print("Boiler: " + str(boiler is bes.boiler))
+    print("CHP: " + str(chp is bes.chp))
+    print("Electrical heater: " + str(elh is bes.electricalHeater))
+    print("Inverter AC to DC: " + str(inverter_ac_dc is bes.inverterAcdc))
+    print("Inverter DC to AC: " + str(inverter_dc_ac is bes.inverterDcac))
+    print("PV: " + str(pv is bes.pv))
+    print("TES: " + str(tes is bes.tes))
+
+    bes.getHasDevices(allDevices=True)
+
+    bes.getHasDevices(allDevices=False,
+                      battery=True,
+                      boiler=True,
+                      chp=True,
+                      electricalHeater=True,
+                      heatpump=True,
+                      inverterAcdc=True,
+                      inverterDcac=True,
+                      pv=True,
+                      tes=True)
+
+
+if __name__ == '__main__':
+    #  Run program
+    run_example()

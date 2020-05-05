@@ -7,19 +7,20 @@ Created on Tue Jul 14 12:18:14 2015
 """
 
 from __future__ import division
+
 import os
 import numpy as np
 import xlrd
 import math
 import random
-import pycity_base.functions.changeResolution as cr
+import pycity_base.functions.change_resolution as cr
 
 
 def load_profiles(filename):
     """
     """
     # Initialization
-    profiles = {"we":{}, "wd":{}} 
+    profiles = {"we": {}, "wd": {}}
     book = xlrd.open_workbook(filename)
     
     # Iterate over all sheets    
@@ -39,6 +40,7 @@ def load_profiles(filename):
     
     # Return results
     return profiles
+
 
 def compute_daily_demand(probability_profiles, average_profile, occupancy,
                          current_day, temperature_difference=35):
@@ -101,14 +103,15 @@ def compute_daily_demand(probability_profiles, average_profile, occupancy,
             water.append(0)
 
     # Transform to array and compute resulting heat demand
-    water = np.array(water) # l/h
-    c = 4180                # J/(kg.K)
-    rho = 980 / 1000        # kg/l
-    sampling_time = 3600    # s
+    water = np.array(water)  # l/h
+    c = 4180                 # J/(kg.K)
+    rho = 980 / 1000         # kg/l
+    sampling_time = 3600     # s
     heat = water * rho * c * temperature_difference / sampling_time  # W
     
     # Return results
     return (water, heat)
+
 
 def full_year_computation(occupancy, 
                           profiles, 
@@ -167,14 +170,14 @@ def full_year_computation(occupancy,
         # Get water and heat demand for the current day
         res = compute_daily_demand(probability_profiles, 
                                    average_profile,
-                                   occupancy[day*144 : (day+1)*144],
+                                   occupancy[day*144:(day+1)*144],
                                    day, 
                                    temperature_difference)
         (current_water, current_heat) = res
         
         # Include current_water and current_heat in water and heat
-        water[day*1440 : (day+1)*1440] = current_water
-        heat[day*1440 : (day+1)*1440] = current_heat
+        water[day*1440:(day+1)*1440] = current_water
+        heat[day*1440:(day+1)*1440] = current_heat
     
     # Change sampling time to the given input
     water = cr.changeResolution(water, 60, time_dis, "sum") / time_dis * 60
@@ -182,6 +185,7 @@ def full_year_computation(occupancy,
 
     # Return results
     return (water, heat)
+
 
 if __name__ == "__main__":
 
@@ -212,13 +216,13 @@ if __name__ == "__main__":
 
     # Plot heat demand
     import matplotlib.pyplot as plt
-    ax1=plt.subplot(2,1,1)
+    ax1=plt.subplot(2, 1, 1)
     plt.plot(np.arange(len(heat))/60, heat, color="b", linewidth=2)
     plt.step((np.arange(len(hd)) * dt+dt)/60, hd, color="r", linewidth=2)
     plt.ylabel("Heat demand in Watt")
-    plt.xlim((0,8760))
+    plt.xlim((0, 8760))
     
-    plt.subplot(2,1,2, sharex=ax1)
+    plt.subplot(2, 1, 2, sharex=ax1)
     plt.step((np.arange(len(occupancy)) * 10+10)/60, occupancy, linewidth=2)
     plt.ylabel("Active occupants")
     offset = 0.2
@@ -226,4 +230,3 @@ if __name__ == "__main__":
     plt.yticks(list(range(int(max(occupancy)+1))))
     
     plt.show()
-    

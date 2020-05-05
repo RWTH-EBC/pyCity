@@ -13,13 +13,13 @@ npz internal arrays should hold name labels:
 import os
 import numpy as np
 
-import pycity_base.classes.Timer
-import pycity_base.classes.Weather
-import pycity_base.classes.Prices
-import pycity_base.classes.Environment
-import pycity_base.classes.demand.Occupancy as Occ
-import pycity_base.classes.demand.DomesticHotWater as DomesticHotWater
-import pycity_base.classes.demand.ElectricalDemand as ED
+import pycity_base.classes.timer
+import pycity_base.classes.weather
+import pycity_base.classes.prices
+import pycity_base.classes.environment
+import pycity_base.classes.demand.occupancy as occ
+import pycity_base.classes.demand.domestic_hot_water as dhw
+import pycity_base.classes.demand.electrical_demand as ed
 
 
 def create_path_if_not_exist(path):
@@ -61,19 +61,19 @@ def generate_profile_pool(path=None, runs=100, timestep=60):
     timestepsTotal = 365 * 24 * 3600 / timestep
 
     #  Generate environment
-    timer = pycity_base.classes.Timer.Timer(timeDiscretization=timestep,
-                                       timestepsTotal=timestepsTotal)
-    weather = pycity_base.classes.Weather.Weather(timer, useTRY=True)
-    prices = pycity_base.classes.Prices.Prices()
-    env = pycity_base.classes.Environment.Environment(timer, weather, prices)
+    timer = pycity_base.classes.timer.Timer(timeDiscretization=timestep,
+                                            timestepsTotal=timestepsTotal)
+    weather = pycity_base.classes.weather.Weather(timer, useTRY=True)
+    prices = pycity_base.classes.prices.Prices()
+    env = pycity_base.classes.environment.Environment(timer, weather, prices)
 
-    for occ in range(1, 6):  # Loop from 1 to 5 occupants
+    for occ_index in range(1, 6):  # Loop from 1 to 5 occupants
 
-        print('Number of occupants: ', occ)
+        print('Number of occupants: ', occ_index)
         print('#####################################################')
 
         #  Filenames (Files are going to store 3 arrays ('occ', 'app', 'lig'))
-        file_name = str(occ) + '_person_profiles.npz'
+        file_name = str(occ_index) + '_person_profiles.npz'
         path_profile_file = os.path.join(path, file_name)
 
         occupancy_profiles = None
@@ -85,7 +85,7 @@ def generate_profile_pool(path=None, runs=100, timestep=60):
             print('Run number: ', i)
 
             #  Generate occupancy object
-            occupancy = Occ.Occupancy(environment=env, number_occupants=occ)
+            occupancy = occ.Occupancy(environment=env, number_occupants=occ_index)
 
             #  Get profile
             occ_profile = occupancy.occupancy
@@ -98,9 +98,9 @@ def generate_profile_pool(path=None, runs=100, timestep=60):
 
             # Generate el. load profile
             el_dem_stochastic = \
-                ED.ElectricalDemand(environment=env,
+                ed.ElectricalDemand(environment=env,
                                     method=2,
-                                    total_nb_occupants=occ,
+                                    total_nb_occupants=occ_index,
                                     randomizeAppliances=True,
                                     lightConfiguration=10,
                                     occupancy=occupancy.occupancy)
@@ -115,12 +115,12 @@ def generate_profile_pool(path=None, runs=100, timestep=60):
 
             # Generate hot water profile
             dhw_stochastical = \
-                DomesticHotWater.DomesticHotWater(environment=env,
-                                                  tFlow=60,
-                                                  thermal=True,
-                                                  method=2,
-                                                  supplyTemperature=20,
-                                                  occupancy=occ_profile)
+                dhw.DomesticHotWater(environment=env,
+                                     tFlow=60,
+                                     thermal=True,
+                                     method=2,
+                                     supplyTemperature=20,
+                                     occupancy=occ_profile)
 
             #  Get dhw curve
             dhw_profile = dhw_stochastical.loadcurve

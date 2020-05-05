@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-
+City generator test.
 """
 
 import pycity_base.functions.scripts.city_generators.city_generator as citygen
 
 
-class Test_CityGen():
+class TestCityGen():
 
     def test_city_gen(self):
 

@@ -58,6 +58,10 @@ class Timer(object):
         self.currentWeekday = initialDay
         self.currentDayWeekend = self._setWeekend()
 
+    @property
+    def kind(self):
+        return self._kind
+
     def _setWeekend(self):
         """ Determine if the currend day of the week is on a weekend """
         if self.currentWeekday < 6:

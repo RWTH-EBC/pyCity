@@ -64,6 +64,10 @@ class PV(object):
         self.beta = beta
         self.gamma = gamma
 
+    @property
+    def kind(self):
+        return self._kind
+
     def getNominalValues(self):
         """
         Return collector's area, efficiency, nominal cell temperature and 

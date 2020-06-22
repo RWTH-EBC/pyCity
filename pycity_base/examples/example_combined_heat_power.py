@@ -33,7 +33,7 @@ def run_example():
 
     # Print results
     print()
-    print(("Type: " + heater._kind))
+    print(("Type: " + heater.kind))
     print()
     print(("Maximum electricity output: " + str(heater.pNominal)))
     print(("Total efficiency: "           + str(heater.omega)))

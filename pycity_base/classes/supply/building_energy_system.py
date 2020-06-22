@@ -56,6 +56,10 @@ class BES(object):
         self.hasInverterDcac = False
         self.hasPv = False
         self.hasTes = False
+
+    @property
+    def kind(self):
+        return self._kind
         
     def addDevice(self, objectInstance):
         """
@@ -67,27 +71,27 @@ class BES(object):
         >>> myBes = BES(...)
         >>> myBes.addDevice(myChp)
         """
-        if objectInstance._kind == "battery":
+        if objectInstance.kind == "battery":
             self.battery.append(objectInstance)
             self.hasBattery = True
         
-        elif objectInstance._kind == "boiler":
+        elif objectInstance.kind == "boiler":
             self.boiler.append(objectInstance)
             self.hasBoiler = True
         
-        elif objectInstance._kind == "chp":
+        elif objectInstance.kind == "chp":
             self.chp.append(objectInstance)
             self.hasChp = True
         
-        elif objectInstance._kind == "electricalheater":
+        elif objectInstance.kind == "electricalheater":
             self.electricalHeater.append(objectInstance)
             self.hasElectricalHeater = True
         
-        elif objectInstance._kind == "heatpump":
+        elif objectInstance.kind == "heatpump":
             self.heatpump.append(objectInstance)
             self.hasHeatpump = True
         
-        elif objectInstance._kind == "inverter":
+        elif objectInstance.kind == "inverter":
             if objectInstance.inputAC:
                 self.inverterAcdc.append(objectInstance)
                 self.hasInverterAcdc = True
@@ -95,11 +99,11 @@ class BES(object):
                 self.inverterDcac.append(objectInstance)
                 self.hasInverterDcac = True
         
-        elif objectInstance._kind == "pv":
+        elif objectInstance.kind == "pv":
             self.pv.append(objectInstance)
             self.hasPv = True
             
-        elif objectInstance._kind == "tes":
+        elif objectInstance.kind == "tes":
             self.tes.append(objectInstance)
             self.hasTes = True
             

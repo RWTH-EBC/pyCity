@@ -46,6 +46,8 @@ class ZoneInputs(object):
             Internal gains from lighting in Watt.
             Requires ``method=2``.
         """
+        self._kind = "zoneinputs"
+
         self.environment = environment
         self.zoneParameters = zoneParameters
         self.T_m_init = T_m_init
@@ -59,6 +61,10 @@ class ZoneInputs(object):
         
         # UNDER CONSTRUCTION
         self.Phi_sol, self.solarOpaque, self.solarWindow = self.getSolarGains()
+
+    @property
+    def kind(self):
+        return self._kind
 
     def getInternalGains(self, occupancy=0, appliances=0, lighting=0):
         """

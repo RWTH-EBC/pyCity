@@ -31,7 +31,7 @@ def run_example():
 
     # Print results
     print()
-    print(("Type: " + chiller._kind))
+    print(("Type: " + chiller.kind))
     print(("Efficiency: " + str(chiller.epsilon)))
     print(("Maximum cooling output: " + str(chiller.q_nominal)))
     print(("Minimal flow temperature: " + str(chiller.t_min)))

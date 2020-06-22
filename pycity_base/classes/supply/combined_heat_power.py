@@ -60,6 +60,10 @@ class CHP(HeatingDevice.HeatingDevice):
         self.totalPOutput = np.zeros(environment.timer.timestepsTotal)
         self.currentPOutput = np.zeros(environment.timer.timestepsUsedHorizon)
 
+    @property
+    def kind(self):
+        return self._kind
+
     def getResults(self, currentValues=True):
         """
         Return results.

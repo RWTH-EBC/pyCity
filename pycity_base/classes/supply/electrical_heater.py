@@ -52,6 +52,10 @@ class ElectricalHeater(HeatingDevice.HeatingDevice):
         
         self.totalPConsumption   = np.zeros(timestepsTotal)
         self.currentPConsumption = np.zeros(timestepsUsedHorizon)
+
+    @property
+    def kind(self):
+        return self._kind
         
     def getResults(self, currentValues=True):
         """

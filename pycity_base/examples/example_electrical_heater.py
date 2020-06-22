@@ -32,7 +32,7 @@ def run_example():
 
     # Print results
     print()
-    print(("Type: " + heater._kind))
+    print(("Type: " + heater.kind))
     print()
     print(("Maximum electricity input: " + str(heater.pNominal)))
     print(("Maximum heat output: "       + str(heater.qNominal)))

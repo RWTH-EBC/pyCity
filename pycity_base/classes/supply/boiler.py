@@ -48,6 +48,10 @@ class Boiler(HeatingDevice.HeatingDevice):
                                      tMax, 
                                      lowerActivationLimit)
         self._kind = "boiler"
+
+    @property
+    def kind(self):
+        return self._kind
         
     def getResults(self, currentValues=True):
         """

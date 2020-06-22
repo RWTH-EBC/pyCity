@@ -48,6 +48,10 @@ class AbsorptionChiller(coolingdevice.CoolingDevice):
         self._kind = "absorptionchiller"
         self.epsilon = epsilon
 
+    @property
+    def kind(self):
+        return self._kind
+
     def get_results(self, current_values=True):
         """
         Return results.

@@ -50,6 +50,10 @@ class WindEnergyConverter(object):
         
         self.totalPower = np.zeros(environment.timer.timestepsTotal)
         self.currentPower = np.zeros(environment.timer.timestepsHorizon)
+
+    @property
+    def kind(self):
+        return self._kind
     
     def _logWindProfile(self, velocity):
         """

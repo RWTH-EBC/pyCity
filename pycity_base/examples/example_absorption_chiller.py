@@ -33,7 +33,7 @@ def run_example():
 
     # Print results
     print()
-    print(("Type: " + achiller._kind))
+    print(("Type: " + achiller.kind))
     print(("Efficiency: " + str(achiller.epsilon)))
     print(("Maximum cooling output: " + str(achiller.q_nominal)))
     print(("Minimal flow temperature: " + str(achiller.t_min)))

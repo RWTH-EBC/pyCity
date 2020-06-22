@@ -144,7 +144,8 @@ class ZoneParameters(object):
         beta : array_like, optional
             Slope angle. 0 stands for horizontal surfaces and 90 for vertical.
         """
-        
+        self._kind = "zoneparameters"
+
         # Note: We are not consequently using CamelCase in this function, 
         # because many variables introduced in ISO 13790 have short indices,
         # which makes CamelCase not harder to read.
@@ -289,6 +290,10 @@ class ZoneParameters(object):
         # 0.5 describes vertical walls and 1 horizontal roofs 
         # (see DIN EN ISO 13790:2008, section 11.4.6, page 73)
         self.F_r = [0.5 if beta[i] > 0 else 1 for i in range(5)]
+
+    @property
+    def kind(self):
+        return self._kind
 
     def updateVentilation(self, 
                           ventilationRate, 

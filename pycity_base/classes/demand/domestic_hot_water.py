@@ -123,6 +123,10 @@ class DomesticHotWater(pycity_base.classes.demand.load.Load):
         self._kind = "domestichotwater"
         self.tFlow = tFlow
         self.thermal = thermal
+
+    @property
+    def kind(self):
+        return self._kind
     
     def get_power(self, currentValues=True, returnTemperature=True):
         """

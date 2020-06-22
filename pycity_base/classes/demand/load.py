@@ -29,6 +29,10 @@ class Load(object):
         self.environment = environment
         
         self.loadcurve = np.array(loadcurve)
+
+    @property
+    def kind(self):
+        return self._kind
         
     def _getLoadcurve(self, currentValues=True):
         """

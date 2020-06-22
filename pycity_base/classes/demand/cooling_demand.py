@@ -32,6 +32,7 @@ class CoolingDemand(Load.Load):
             Load curve for all investigated time steps in Watt
             (default: []).
         """
+        self._kind = "coolingdemand"
 
         if method not in [0]:
             msg = 'Method ' + str(method) + ' has not been implemented!'
@@ -40,6 +41,10 @@ class CoolingDemand(Load.Load):
         if method == 0:
             super(CoolingDemand, self).__init__(environment=environment,
                                                 loadcurve=loadcurve)
+
+    @property
+    def kind(self):
+        return self._kind
 
     def get_power(self, currentValues=True):
         """

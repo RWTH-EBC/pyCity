@@ -48,6 +48,10 @@ class HeatingDevice(object):
         self.totalSchedule = np.zeros(timestepsTotal)
         self.currentQOutput  = np.zeros(timestepsUsedHorizon)
         self.currentSchedule = np.zeros(timestepsUsedHorizon)
+
+    @property
+    def kind(self):
+        return self._kind
         
     def _setSchedule(self, schedule):
         """ Save the computed schedule to the heating device """

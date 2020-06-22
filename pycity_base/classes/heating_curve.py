@@ -49,6 +49,10 @@ class HeatingCurve(object):
         self.setFlow = setFlow
         self.setReturn = setReturn
 
+    @property
+    def kind(self):
+        return self._kind
+
     def computeRequiredFlowTemperature(self, 
                                        ambientTemperature, 
                                        smoothingPeriod=1):

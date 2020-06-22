@@ -54,6 +54,10 @@ class Battery(object):
         self.currentPCharge = np.zeros(timestepsUsedHorizon)
         self.currentPDischarge = np.zeros(timestepsUsedHorizon)
 
+    @property
+    def kind(self):
+        return self._kind
+
     def getResults(self, currentValues=True):
         """
         Return results.

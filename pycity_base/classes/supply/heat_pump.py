@@ -65,6 +65,10 @@ class Heatpump(HeatingDevice.HeatingDevice):
         timestepsUsedHorizon = environment.timer.timestepsUsedHorizon
         self.totalPConsumption = np.zeros(timestepsTotal)
         self.currentPConsumption = np.zeros(timestepsUsedHorizon)
+
+    @property
+    def kind(self):
+        return self._kind
         
     def getNominalValues(self, tFlow):
         """

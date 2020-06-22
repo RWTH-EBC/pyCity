@@ -179,7 +179,7 @@ def main(do_plot=True):
 
     #  Access boiler nominal thermal power
     print('Nominal thermal power of boiler in kW:')
-    print(building_1001.bes.boiler.qNominal / 1000)
+    print(building_1001.bes.boiler[0].qNominal / 1000)
 
 
 def run_example():

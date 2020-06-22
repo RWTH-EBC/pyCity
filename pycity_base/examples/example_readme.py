@@ -34,8 +34,8 @@ def main(do_plot=True):
 
     #  Generate environment with timer, weather, and prices objects
     #  ######################################################################
-    timer = time.Timer(timeDiscretization=timestep,
-                       timestepsTotal=nb_timesteps)
+    timer = time.Timer(time_discretization=timestep,
+                       timesteps_total=nb_timesteps)
     weather = weath.Weather(timer=timer)
     prices = price.Prices()
 
@@ -69,8 +69,8 @@ def main(do_plot=True):
         heat_demand = spaceheat.SpaceHeating(
             environment=environment,
             method=1,  # Standard load profile
-            livingArea=living_area,  # in m^2
-            specificDemand=spec_sh_dem)  # in kWh/m^2
+            living_area=living_area,  # in m^2
+            specific_demand=spec_sh_dem)  # in kWh/m^2
 
         #  Generate occupancy object with stochastic user profile
         occupancy = occ.Occupancy(environment=environment,
@@ -81,11 +81,11 @@ def main(do_plot=True):
             environment=environment,
             method=2,  # stochastic Richardson profile (richardsonpy)
             total_nb_occupants=number_occupants,  # Number of occupants
-            randomizeAppliances=True,  # Random choice of installed appliances
-            lightConfiguration=10,  # Light bulb configuration nb.
+            randomize_appliances=True,  # Random choice of installed appliances
+            light_configuration=10,  # Light bulb configuration nb.
             occupancy=occupancy.occupancy,  # Occupancy profile (600 sec resolution)
             prev_heat_dev=True,  # Prevent space heating and hot water devices
-            annualDemand=None,  # Annual el. demand in kWh could be used for
+            annual_demand=None,  # Annual el. demand in kWh could be used for
             do_normalization=False)  # rescaling (if do_normalization is True)
         #  Annotation: The calculation of stochastic electric load profiles
         #  is time consuming. If you prefer a faster method, you can either
@@ -95,9 +95,9 @@ def main(do_plot=True):
         #  Generate domestic hot water demand object
         dhw_obj = dhw.DomesticHotWater(
             environment=environment,
-            tFlow=60,  # DHW output temperature in degree Celsius
+            t_flow=60,  # DHW output temperature in degree Celsius
             method=2,  # Stochastic dhw profile
-            supplyTemperature=25,  # DHW inlet flow temperature in degree C.
+            supply_temperature=25,  # DHW inlet flow temperature in degree C.
             occupancy=occupancy.occupancy)  # Occupancy profile (600 sec resolution)
 
         #  Generate apartment and add demand curves
@@ -157,7 +157,7 @@ def main(do_plot=True):
 
     #  Generate boiler object
     boiler = boil.Boiler(environment=environment,
-                         qNominal=10000,  # Boiler thermal power in Watt
+                         q_nominal=10000,  # Boiler thermal power in Watt
                          eta=0.85)  # Boiler efficiency
 
     #  Generate PV module object
@@ -175,11 +175,11 @@ def main(do_plot=True):
     building_1001.addEntity(entity=bes)
 
     print('Does building 1001 has a building energy system (BES)?')
-    print(building_1001.hasBes)
+    print(building_1001.has_bes)
 
     #  Access boiler nominal thermal power
     print('Nominal thermal power of boiler in kW:')
-    print(building_1001.bes.boiler[0].qNominal / 1000)
+    print(building_1001.bes.boiler[0].q_nominal / 1000)
 
 
 def run_example():

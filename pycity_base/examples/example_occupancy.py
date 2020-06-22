@@ -17,8 +17,8 @@ import pycity_base.classes.demand.occupancy
 def run_example(do_plot=False):
     time_discretization = 60
     timer = pycity_base.classes.timer.Timer(
-        timeDiscretization=time_discretization,
-        timestepsTotal=int(8760 * 3600 / time_discretization)
+        time_discretization=time_discretization,
+        timesteps_total=int(8760 * 3600 / time_discretization)
     )
     weather = pycity_base.classes.weather.Weather(timer)
     prices = pycity_base.classes.prices.Prices()

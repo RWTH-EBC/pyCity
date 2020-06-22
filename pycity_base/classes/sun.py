@@ -20,14 +20,14 @@ class Sun(object):
     def __init__(self, 
                  timer, 
                  location=(50.76, 6.07), 
-                 timeZone=1, 
+                 time_zone=1,
                  altitude=0, 
                  TRY=True):
         """
         location : tuple, optional
             (latitude, longitude) of the simulated system's position. Standard
             values (50.76, 6.07) represent Aachen, Germany.
-        timeZone : integer, optional
+        time_zone : integer, optional
             Shift between the location's time and GMT in hours. CET is 1.
             Daylight savings time is neglected.
         altitude : float, optional
@@ -40,7 +40,7 @@ class Sun(object):
 
         self.timer = timer
         self.altitude = altitude
-        self.timeZone = timeZone
+        self.time_zone = time_zone
         
         # Split location into latitude (phi) and longitude (lambda).
         (self.latitude, self.longitude) = location
@@ -51,7 +51,7 @@ class Sun(object):
     def kind(self):
         return self._kind
     
-    def setLocation(self, location=(50.76, 6.07), timeZone=1, altitude=0):
+    def setLocation(self, location=(50.76, 6.07), time_zone=1, altitude=0):
         """ 
         Update location (latitude and longitude), time zone and altitude. 
         
@@ -60,7 +60,7 @@ class Sun(object):
         location : tuple, optional
             (latitude, longitude) of the simulated system's position. Standard
             values (50.76, 6.07) represent Aachen, Germany.
-        timeZone : integer, optional
+        time_zone : integer, optional
             Shift between the location's time and GMT in hours. CET is 1.
             Daylight savings time is neglected.
         altitude : float, optional
@@ -68,7 +68,7 @@ class Sun(object):
         """
         (self.latitude, self.longitude) = location
         self.altitude = altitude
-        self.timeZone = timeZone
+        self.time_zone = time_zone
     
     def update(self, current_values=True):
         """ 
@@ -107,27 +107,27 @@ class Sun(object):
         
         Updates
         -------
-        omega : array_like
+        omega : array-like
             Hour angle. The angular displacement of the sun east or west of 
             the local meridian due to rotation of the earth on its axis at 
             15 degrees per hour; morning negative, afternoon positive
-        delta : array_like
+        delta : array-like
             Declination. The angular position of the sun at solar noon (i.e., 
             when the sun is on the local meridian) with respect to the plane 
             of the equator, north positive; −23.45 <= delta <= 23.45
-        thetaZ : array_like
+        thetaZ : array-like
             Zenith angle. The angle between the vertical and the line to the 
             sun, that is, the angle of incidence of beam radiation on a 
             horizontal surface; 0 <= thetaZ <= 90
         """
         # Get timer-relevant data
-        timeDiscretization = self.timer.timeDiscretization
-        initialTime = self.timer.currentTimestep * timeDiscretization
+        time_discretization = self.timer.time_discretization
+        initialTime = self.timer.current_timestep * time_discretization
         
         if allTimeSteps:
-            timesteps = self.timer.timestepsTotal
+            timesteps = self.timer.timesteps_total
         else:
-            timesteps = self.timer.timestepsHorizon
+            timesteps = self.timer.timesteps_horizon
         
         # Define pi
         pi = math.pi
@@ -142,7 +142,7 @@ class Sun(object):
     
         # Create time array
         time = ((np.linspace(0, timesteps-1, num=timesteps)) 
-                * timeDiscretization + initialTime)
+                * time_discretization + initialTime)
     
         # Determine the day's number and standard time (neglect daylight 
         # savings time)
@@ -170,7 +170,7 @@ class Sun(object):
         
         # Compute standard meridian
         # Footnote 5 of chapter 1. Can be found on page 11.
-        lambdaStandard = self.timeZone * 15
+        lambdaStandard = self.time_zone * 15
         
         # Compute solar time
         # Equation 1.5.2, page 11 (conversion to hours instead of minutes)
@@ -327,12 +327,12 @@ class Sun(object):
     
         Parameters
         ----------
-        theta : array_like
+        theta : array-like
             Incidence angle.
-        beamRadiation : array_like
+        beamRadiation : array-like
             The solar radiation received from the sun without having been
             scattered by the atmosphere (also often named direct radiation)
-        diffuseRadiation : array_like
+        diffuseRadiation : array-like
             The solar radiation received from the sun after its direction has 
             been changed by scattering by the atmosphere.
         beta : float

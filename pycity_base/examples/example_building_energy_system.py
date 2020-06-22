@@ -22,19 +22,19 @@ import pycity_base.classes.supply.thermal_energy_storage as tes
 
 
 def print_bes_attributes(bes):
-    print(("Has Battery: " + str(bes.hasBattery)))
-    print(("Has Boiler: " + str(bes.hasBoiler)))
-    print(("Has CHP unit: " + str(bes.hasChp)))
-    print(("Has Electrical Heater: " + str(bes.hasElectricalHeater)))
-    print(("Has AC/DC inverter: " + str(bes.hasInverterAcdc)))
-    print(("Has DC/AC inverter: " + str(bes.hasInverterDcac)))
-    print(("Has PV: " + str(bes.hasPv)))
+    print(("Has Battery: " + str(bes.has_battery)))
+    print(("Has Boiler: " + str(bes.has_boiler)))
+    print(("Has CHP unit: " + str(bes.has_chp)))
+    print(("Has Electrical Heater: " + str(bes.has_electrical_heater)))
+    print(("Has AC/DC inverter: " + str(bes.has_inverter_acdc)))
+    print(("Has DC/AC inverter: " + str(bes.has_inverter_dcac)))
+    print(("Has PV: " + str(bes.has_pv)))
 
 
 def run_example():
     #  Generate environment
     timer = pycity_base.classes.timer.Timer()
-    weather = pycity_base.classes.weather.Weather(timer, useTRY=True)
+    weather = pycity_base.classes.weather.Weather(timer, use_TRY=True)
     prices = pycity_base.classes.prices.Prices()
     environment = pycity_base.classes.environment.Environment(timer, weather,
                                                               prices)

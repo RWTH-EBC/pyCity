@@ -32,10 +32,10 @@ def create_environment(timestep=900):
     -------
     create_environment : environment object
     """
-    timer = pycity_base.classes.timer.Timer(timeDiscretization=timestep,
-                                            timestepsTotal=365 * 24 * 4,
-                                            initialDay=1)
-    weather = pycity_base.classes.weather.Weather(timer, useTRY=True)
+    timer = pycity_base.classes.timer.Timer(time_discretization=timestep,
+                                            timesteps_total=365 * 24 * 4,
+                                            initial_day=1)
+    weather = pycity_base.classes.weather.Weather(timer, use_TRY=True)
     prices = pycity_base.classes.prices.Prices()
 
     create_environment = pycity_base.classes.environment.Environment(timer, weather,
@@ -62,23 +62,23 @@ def create_demands(create_environment):
     #  Generate heating demand
     heat_demand = SpaceHeating.SpaceHeating(create_environment,
                                             method=1,  # Standard load profile
-                                            livingArea=100,
-                                            specificDemand=150)
+                                            living_area=100,
+                                            specific_demand=150)
 
     el_demand = ElectricalDemand.ElectricalDemand(create_environment,
                                                   method=1,
                                                   # Standard load profile
-                                                  annualDemand=3000)
+                                                  annual_demand=3000)
 
     daily_consumption = 70
     t_flow = 70
     supply_temp = 25
     dhw_annex42 = DomesticHotWater.DomesticHotWater(create_environment,
-                                                    tFlow=t_flow,
+                                                    t_flow=t_flow,
                                                     thermal=True,
                                                     method=1,  # Annex 42
-                                                    dailyConsumption=daily_consumption,
-                                                    supplyTemperature=supply_temp)
+                                                    daily_consumption=daily_consumption,
+                                                    supply_temperature=supply_temp)
 
     create_demands = (heat_demand, el_demand, dhw_annex42)
 

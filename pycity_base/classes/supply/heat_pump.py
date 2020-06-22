@@ -19,58 +19,58 @@ class Heatpump(HeatingDevice.HeatingDevice):
     """
     
     def __init__(self, environment, 
-                 tAmbient, tFlow, 
+                 t_ambient, t_flow,
                  heat, power, cop,
-                 tMax, 
-                 lowerActivationLimit=1):
+                 t_max, lower_activation_limit=1):
         """
         Parameters
         ----------
-        environment : Environment object
+        environment : environment object
             Common to all other objects. Includes time and weather instances
-        tAmbient : Array_like
+        t_ambient : array-like
             DESCRIPTION
-        tFlow : Array_like
+        t_flow : array-like
             DESCRIPTION
-        heat : Array_like (2 dimensional)
+        heat : array-like (2 dimensional)
             DESCRIPTION
-        power : Array_like (2 dimensional)
+        power : array-like (2 dimensional)
             DESCRIPTION
-        cop : Array_like (2 dimensional)
+        cop : array-like (2 dimensional)
             DESCRIPTION
-        tMax : Float
+        t_max : float
             DESCRIPTION
-        lowerActivationLimit : float (0 <= lowerActivationLimit <= 1)
+        lower_activation_limit : float (0 <= lower_activation_limit <= 1)
             Define the lower activation limit. For example, heat pumps are 
             typically able to operate between 50 % part load and rated load. 
-            In this case, lowerActivationLimit would be 0.5
+            In this case, lower_activation_limit would be 0.5
             Two special cases: 
-            Linear behavior: lowerActivationLimit = 0
-            Two-point controlled: lowerActivationLimit = 1 
+            Linear behavior: lower_activation_limit = 0
+            Two-point controlled: lower_activation_limit = 1
         """
         
-        qNominal=np.zeros(environment.timer.timestepsHorizon)
+        q_nominal=np.zeros(environment.timer.timesteps_horizon)
         super(Heatpump, self).__init__(environment, 
-                                       qNominal,
-                                       tMax,
-                                       lowerActivationLimit)
+                                       q_nominal,
+                                       t_max,
+                                       lower_activation_limit)
         self._kind = "heatpump"
         
-        self.tAmbient = tAmbient
-        self.tFlow = tFlow
+        self.t_ambient = t_ambient
+        self.t_flow = t_flow
         self.heat = heat
         self.power = power
+        self.cop = cop
         
-        timestepsTotal = environment.timer.timestepsTotal
-        timestepsUsedHorizon = environment.timer.timestepsUsedHorizon
-        self.totalPConsumption = np.zeros(timestepsTotal)
-        self.currentPConsumption = np.zeros(timestepsUsedHorizon)
+        timesteps_total = environment.timer.timesteps_total
+        timesteps_used_horizon = environment.timer.timesteps_used_horizon
+        self.total_p_consumption = np.zeros(timesteps_total)
+        self.current_p_consumption = np.zeros(timesteps_used_horizon)
 
     @property
     def kind(self):
         return self._kind
         
-    def getNominalValues(self, tFlow):
+    def getNominalValues(self, t_flow):
         """
         Return the nominal electricity consumption, heat output and lower 
         activation limit.
@@ -81,57 +81,57 @@ class Heatpump(HeatingDevice.HeatingDevice):
         
         Parameters
         ----------
-        tFlow : Array_like
+        t_flow : array-like
             Required flow temperature
             
         Returns
         -------
-        pNominal : Array_like
+        p_nominal : array-like
             Nominal electricity consumption at the given flow temperatures and
             the forecast of the current ambient temperature
-        qNominal : Array_like
+        q_nominal : array-like
             Nominal heat output at the given flow temperatures and the 
             forecast of the current ambient temperature
-        tMax : float
+        t_max : float
             Maximum flow temperature that can be provided by the heat pump
-        lowerActivationLimit : float (0 <= lowerActivationLimit <= 1)
+        lower_activation_limit : float (0 <= lower_activation_limit <= 1)
             Define the lower activation limit. For example, heat pumps are 
             typically able to operate between 50 % part load and rated load. 
-            In this case, lowerActivationLimit would be 0.5
+            In this case, lower_activation_limit would be 0.5
             Two special cases: 
-            Linear behavior: lowerActivationLimit = 0
-            Two-point controlled: lowerActivationLimit = 1
+            Linear behavior: lower_activation_limit = 0
+            Two-point controlled: lower_activation_limit = 1
             
         Example
         -------
-        >>> tFlow = building.getFlowTemperature()
-        >>> (pNominal, qNominal, lowerActivationLimit) = hp.getNominals(tFlow)
+        >>> t_flow = building.getFlowTemperature()
+        >>> (p_nominal, q_nominal, lower_activation_limit) = hp.getNominals(t_flow)
         """
         # Get weather forecast
         weatherForecast = self.environment.weather.getWeatherForecast
-        (tAmbient,) = weatherForecast(getTAmbient=True)
+        (t_ambient,) = weatherForecast(getTAmbient=True)
         
         # Two dimensional interpolation is required.
         # Initialize temporary results of the first interpolation
-        timestepsHorizon = self.environment.timer.timestepsHorizon
-        heat  = np.zeros((timestepsHorizon, len(self.tFlow)))
-        power = np.zeros((timestepsHorizon, len(self.tFlow)))
+        timesteps_horizon = self.environment.timer.timesteps_horizon
+        heat = np.zeros((timesteps_horizon, len(self.t_flow)))
+        power = np.zeros((timesteps_horizon, len(self.t_flow)))
         
         # Compute first interpolation
-        for i in range(len(self.tFlow)):
-            heat[:,i]  = np.interp(tAmbient, self.tAmbient, self.heat[:,i])
-            power[:,i] = np.interp(tAmbient, self.tAmbient, self.power[:,i])
+        for i in range(len(self.t_flow)):
+            heat[:,i] = np.interp(t_ambient, self.t_ambient, self.heat[:,i])
+            power[:,i] = np.interp(t_ambient, self.t_ambient, self.power[:,i])
         
         # Initialize final results
-        heatNominal  = np.zeros(timestepsHorizon)
-        powerNominal = np.zeros(timestepsHorizon)
-        for j in range(timestepsHorizon):
-            heatNominal[j]  = np.interp(tFlow[j], self.tFlow, heat[j,:])
-            powerNominal[j] = np.interp(tFlow[j], self.tFlow, power[j,:])
+        heatNominal  = np.zeros(timesteps_horizon)
+        powerNominal = np.zeros(timesteps_horizon)
+        for j in range(timesteps_horizon):
+            heatNominal[j] = np.interp(t_flow[j], self.t_flow, heat[j,:])
+            powerNominal[j] = np.interp(t_flow[j], self.t_flow, power[j,:])
             
         # Return results
         return (powerNominal, heatNominal, 
-                self.tMax, self.lowerActivationLimit)
+                self.t_max, self.lower_activation_limit)
         
     def getResults(self, currentValues=True):
         """
@@ -145,16 +145,16 @@ class Heatpump(HeatingDevice.HeatingDevice):
         
         Order
         -----
-        pConsumption : array_like
+        pConsumption : array-like
             Electricity consumption of the heat pump
-        qOutput : array_like
+        qOutput : array-like
             Heat production of the heat pump
-        schedule : array_like
+        schedule : array-like
             Operational schedule
         """
         pConsumption = handleData.getValues(currentValues, 
-                                            self.currentPConsumption, 
-                                            self.totalPConsumption)
+                                            self.current_p_consumption,
+                                            self.total_p_consumption)
         
         return (pConsumption,
                 self._getQOutput(currentValues), 
@@ -168,7 +168,7 @@ class Heatpump(HeatingDevice.HeatingDevice):
         self._setSchedule(schedule)
         self._setQOutput(qOutput)
         result = handleData.saveResult(self.environment.timer, 
-                                       self.currentPConsumption, 
-                                       self.totalPConsumption, 
+                                       self.current_p_consumption,
+                                       self.total_p_consumption,
                                        pConsumption)
-        (self.currentPConsumption, self.totalPConsumption) = result
+        (self.current_p_consumption, self.total_p_consumption) = result

@@ -17,9 +17,7 @@ class Occupancy(object):
     """
     """
 
-    def __init__(self, environment, number_occupants, initial_day=1,
-                 nb_days=365,
-                 do_profile=True):
+    def __init__(self, environment, number_occupants, initial_day=1, nb_days=365, do_profile=True):
         """
         Constructor of occupancy object.
 
@@ -103,7 +101,7 @@ class Occupancy(object):
         occ_profile = copy.copy(self.occupancy)
 
         if timestep is None:
-            timestep = self.environment.timer.timeDiscretization
+            timestep = self.environment.timer.time_discretization
 
         occ_profile = chres.changeResolution(values=occ_profile,
                                              oldResolution=600,

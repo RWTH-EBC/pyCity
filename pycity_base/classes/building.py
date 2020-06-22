@@ -36,13 +36,13 @@ class Building(object):
         
         self.apartments = []
         self.bes = None
-        self.heatingCurve = None
+        self.heating_curve = None
         
-        self.hasApartments = False
-        self.hasBes = False
-        self.hasHeatingCurve = False
+        self.has_apartment = False
+        self.has_bes = False
+        self.has_heating_curve = False
         
-        self.flowTemperature = np.zeros(environment.timer.timestepsHorizon)
+        self.flow_temperature = np.zeros(environment.timer.timesteps_horizon)
 
     @property
     def kind(self):
@@ -60,15 +60,15 @@ class Building(object):
         """
         if entity.kind == "apartment":
             self.apartments.append(entity)
-            self.hasApartments = True
+            self.has_apartment = True
         
         elif entity.kind == "bes":
             self.bes = entity
-            self.hasBes = True
+            self.has_bes = True
 
         elif entity.kind == "heatingcurve":
-            self.heatingCurve = entity
-            self.hasHeatingCurve = True
+            self.heating_curve = entity
+            self.has_heating_curve = True
 
     def addMultipleEntities(self, entities):
         """
@@ -107,9 +107,9 @@ class Building(object):
         # Initialization
         # Demands are zero
         if current_values:
-            timesteps = self.environment.timer.timestepsHorizon
+            timesteps = self.environment.timer.timesteps_horizon
         else:
-            timesteps = self.environment.timer.timestepsTotal
+            timesteps = self.environment.timer.timesteps_total
         power_el = np.zeros(timesteps)
         power_th = np.zeros(timesteps)
         
@@ -118,7 +118,7 @@ class Building(object):
             # Get entire electrical, domestic hot water and space heating 
             # demand
             (tempEl, tempDhw, tempSh) = apartment.get_power_curves(currentValues=current_values)
-            dhwThermal = apartment.demandDomesticHotWater.thermal
+            dhwThermal = apartment.demand_domestic_hot_water.thermal
             
             if dhwThermal:
                 power_th += tempSh + tempDhw
@@ -148,11 +148,11 @@ class Building(object):
         """
 
         #  Initialize array with zeros
-        space_heat_power = np.zeros(len(self.apartments[0].demandSpaceheating.get_power(currentValues=current_values)))
+        space_heat_power = np.zeros(len(self.apartments[0].demand_space_heating.get_power(currentValues=current_values)))
 
         # Get power curves of each apartment
         for apartment in self.apartments:
-            space_heat_power += apartment.demandSpaceheating.get_power(currentValues=current_values)
+            space_heat_power += apartment.demand_space_heating.get_power(currentValues=current_values)
 
         return space_heat_power
 
@@ -203,14 +203,14 @@ class Building(object):
 
         #  Initialize array with zeros
         dhw_heat_power = \
-            np.zeros(len(self.apartments[0].demandDomesticHotWater.
+            np.zeros(len(self.apartments[0].demand_domestic_hot_water.
                          get_power(currentValues=current_values,
                                    returnTemperature=False)))
 
         # Get power curves of each apartment
         for apartment in self.apartments:
 
-            dhw_heat_power += apartment.demandDomesticHotWater.get_power(
+            dhw_heat_power += apartment.demand_domestic_hot_water.get_power(
                     currentValues=current_values, returnTemperature=False)
 
         return dhw_heat_power
@@ -256,31 +256,31 @@ class Building(object):
         relevantPreviousDays = 1  # Number of previous days' weather forecast
                                   # relevant to the heating curve
         numberTimesteps = (relevantPreviousDays * 24 / 
-                           self.environment.timer.timeDiscretization * 3600)
+                           self.environment.timer.time_discretization * 3600)
         function = self.environment.weather.getPreviousWeather
-        (tAmbientPrevious,) = function(numberTimesteps=numberTimesteps, 
+        (t_ambient_previous,) = function(numberTimesteps=numberTimesteps,
                                        useTimesteps=True, getTAmbient=True)
                                        
         function = self.environment.weather.getWeatherForecast
-        (tAmbientForecast,) = function(getTAmbient=True)
-        tAmbient = np.concatenate((tAmbientPrevious, tAmbientForecast))
+        (t_ambient_forecast,) = function(getTAmbient=True)
+        t_ambient = np.concatenate((t_ambient_previous, t_ambient_forecast))
         
         # Get flow temperature according to heating curve
-        function = self.heatingCurve.computeRequiredFlowTemperature
-        rawTFlow = function(tAmbient, smoothingPeriod=relevantPreviousDays)
-        timestepsHorizon = self.environment.timer.timestepsHorizon
-        firstIndex = len(rawTFlow) - timestepsHorizon
-        lastIndex = firstIndex + timestepsHorizon
-        tFlow = rawTFlow[firstIndex:lastIndex]
+        function = self.heating_curve.computeRequiredFlowTemperature
+        rawTFlow = function(t_ambient, smoothingPeriod=relevantPreviousDays)
+        timesteps_horizon = self.environment.timer.timesteps_horizon
+        firstIndex = len(rawTFlow) - timesteps_horizon
+        lastIndex = firstIndex + timesteps_horizon
+        t_flow = rawTFlow[firstIndex:lastIndex]
         
         # Check if this flow temperature has to be increased at certain time 
         # steps due to domestic hot water
         for apartment in self.apartments:
-            tFlowDHW = (apartment.get_total_th_power())[1]
-            tFlow = np.maximum(tFlow, tFlowDHW)
+            t_flow_DHW = (apartment.get_total_th_power())[1]
+            t_flow = np.maximum(t_flow, t_flow_DHW)
         
-        self.flowTemperature = tFlow
-        return tFlow
+        self.flow_temperature = t_flow
+        return t_flow
         
     def getHeatpumpNominals(self):
         """
@@ -289,24 +289,24 @@ class Building(object):
             
         Returns
         -------
-        pNominal : Array_like
+        p_nominal : Array_like
             Nominal electricity consumption at the given flow temperatures and 
             the forecast of the current ambient temperature
-        qNominal : Array_like
+        q_nominal : Array_like
             Nominal heat output at the given flow temperatures and the 
             forecast of the current ambient temperature
-        lowerActivationLimit : float (0 <= lowerActivationLimit <= 1)
+        lower_activation_limit : float (0 <= lower_activation_limit <= 1)
             Define the lower activation limit. For example, heat pumps are 
             typically able to operate between 50 % part load and rated load. 
-            In this case, lowerActivationLimit would be 0.5
+            In this case, lower_activation_limit would be 0.5
             Two special cases: 
-            Linear behavior: lowerActivationLimit = 0
-            Two-point controlled: lowerActivationLimit = 1
+            Linear behavior: lower_activation_limit = 0
+            Two-point controlled: lower_activation_limit = 1
         """
-        tFlow = self.getFlowTemperature()
+        t_flow = self.getFlowTemperature()
         heatpump_nominals = []
         for heatpump in self.bes.heatpump:
-            heatpump_nominals.append(heatpump.getNominalValues(tFlow))
+            heatpump_nominals.append(heatpump.getNominalValues(t_flow))
         return heatpump_nominals
 
     def get_number_of_apartments(self):

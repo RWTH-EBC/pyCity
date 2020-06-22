@@ -14,12 +14,12 @@ import pycity_base.classes.environment
 
 def run_example():
     timer = pycity_base.classes.timer.Timer()
-    weather = pycity_base.classes.weather.Weather(timer, useTRY=True)
+    weather = pycity_base.classes.weather.Weather(timer, use_TRY=True)
     prices = pycity_base.classes.prices.Prices()
     env = pycity_base.classes.environment.Environment(timer, weather, prices)
 
     def print_results(e):
-        print(("Current timestep: " + str(e.timer.currentTimestep)))
+        print(("Current timestep: " + str(e.timer.current_timestep)))
         print(("Ambient temperature for entire horizon: " +
               str(e.weather.getWeatherForecast(getTAmbient=True))))
 

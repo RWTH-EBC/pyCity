@@ -20,38 +20,38 @@ class ElectricalHeater(HeatingDevice.HeatingDevice):
     
     def __init__(self, 
                  environment, 
-                 qNominal, 
+                 q_nominal,
                  eta, 
-                 tMax=85, 
-                 lowerActivationLimit=1):
+                 t_max=85,
+                 lower_activation_limit=1):
         """
         Parameters
         ----------
-        environment : Environment object
+        environment : environment object
             Common to all other objects. Includes time and weather instances
-        qNominal : array of float
+        q_nominal : array of float
             nominal heat production in Watt
         eta : array of float
             nominal efficiency (without unit)
-        tMax : float, optional
+        t_max : float, optional
             maximum provided temperature in °C
-        lowerActivationLimit : float, optional
+        lower_activation_limit : float, optional
             see HeatingDevice
         """
         
         super(ElectricalHeater, self).__init__(environment, 
-                                               qNominal, 
-                                               tMax, 
-                                               lowerActivationLimit)
+                                               q_nominal,
+                                               t_max,
+                                               lower_activation_limit)
         self._kind = "electricalheater"
         self.eta = eta
-        self.pNominal = qNominal / eta
+        self.p_nominal = q_nominal / eta
         
-        timestepsTotal = environment.timer.timestepsTotal
-        timestepsUsedHorizon = environment.timer.timestepsUsedHorizon
+        timesteps_total = environment.timer.timesteps_total
+        timesteps_used_horizon = environment.timer.timesteps_used_horizon
         
-        self.totalPConsumption   = np.zeros(timestepsTotal)
-        self.currentPConsumption = np.zeros(timestepsUsedHorizon)
+        self.total_p_consumption = np.zeros(timesteps_total)
+        self.current_p_consumption = np.zeros(timesteps_used_horizon)
 
     @property
     def kind(self):
@@ -69,16 +69,16 @@ class ElectricalHeater(HeatingDevice.HeatingDevice):
         
         Order
         -----
-        pConsumption : array_like
+        pConsumption : array-like
             Electricity consumption of the electrical heater
-        qOutput : array_like
+        qOutput : array-like
             Heat production of the electrical heater
-        schedule : array_like
+        schedule : array-like
             Operational schedule
         """
         pConsumption = handleData.getValues(currentValues, 
-                                            self.currentPConsumption, 
-                                            self.totalPConsumption)
+                                            self.current_p_consumption,
+                                            self.total_p_consumption)
         
         return (pConsumption,
                 self._getQOutput(currentValues), 
@@ -92,10 +92,10 @@ class ElectricalHeater(HeatingDevice.HeatingDevice):
         self._setSchedule(schedule)
         self._setQOutput(qOutput)
         result = handleData.saveResult(self.environment.timer, 
-                                       self.currentPConsumption, 
-                                       self.totalPConsumption, 
+                                       self.current_p_consumption,
+                                       self.total_p_consumption,
                                        pConsumption)
-        (self.currentPConsumption, self.totalPConsumption) = result
+        (self.current_p_consumption, self.total_p_consumption) = result
         
     def getNominalValues(self):
         """
@@ -104,5 +104,5 @@ class ElectricalHeater(HeatingDevice.HeatingDevice):
         Order: Electrical efficiency, nominal electricity consumption, nominal 
         heat output, maximum flow temperature and lower activation limit.
         """
-        return (self.eta, self.pNominal, self.qNominal, self.tMax, 
-                self.lowerActivationLimit)
+        return (self.eta, self.p_nominal, self.q_nominal, self.t_max,
+                self.lower_activation_limit)

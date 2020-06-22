@@ -23,7 +23,7 @@ class Apartment(object):
         """
         Parameter
         ---------
-        environment : Environment object
+        environment : environment object
             Common to all other objects. Includes time and weather instances
         net_floor_area : float, optional
             Net floor area of apartment in m^2 (default: None)
@@ -38,16 +38,16 @@ class Apartment(object):
         # Create empty power curves using dummy devices
         self.power_el = ElecDemand.ElectricalDemand(environment,
                                                     method=0,
-                                                    annualDemand=0)
-        self.demandDomesticHotWater = DHW.DomesticHotWater(environment,
-                                                           tFlow=0,
+                                                    annual_demand=0)
+        self.demand_domestic_hot_water = DHW.DomesticHotWater(environment,
+                                                              t_flow=0,
+                                                              method=1,
+                                                              daily_consumption=0,
+                                                              supply_temperature=0)
+        self.demand_space_heating = SpaceHeat.SpaceHeating(environment,
                                                            method=1,
-                                                           dailyConsumption=0,
-                                                           supplyTemperature=0)
-        self.demandSpaceheating = SpaceHeat.SpaceHeating(environment,
-                                                         method=1,
-                                                         livingArea=0,
-                                                         specificDemand=0)
+                                                           living_area=0,
+                                                           specific_demand=0)
         self.rooms = []
 
     @property
@@ -79,10 +79,10 @@ class Apartment(object):
             self.power_el = entity
 
         elif entity.kind == "domestichotwater":
-            self.demandDomesticHotWater = entity
+            self.demand_domestic_hot_water = entity
 
         elif entity.kind == "spaceheating":
-            self.demandSpaceheating = entity
+            self.demand_space_heating = entity
 
         elif entity.kind == 'occupancy':
             self.occupancy = entity
@@ -91,8 +91,7 @@ class Apartment(object):
             self.rooms.append(entity)
 
         else:  # pragma: no cover
-            warnings.warn('Kind of entity is unknown. Entity has not been ' +
-                          'added')
+            warnings.warn('Kind of entity is unknown. Entity has not been added!')
 
     def addMultipleEntities(self, entities):
         """
@@ -142,10 +141,9 @@ class Apartment(object):
         if getElectrical:
             result += (self.power_el.get_power(currentValues),)
         if getDomesticHotWater:
-            result += (self.demandDomesticHotWater.get_power(currentValues,
-                                                             False),)
+            result += (self.demand_domestic_hot_water.get_power(currentValues, False),)
         if getSpaceheating:
-            result += (self.demandSpaceheating.get_power(currentValues),)
+            result += (self.demand_space_heating.get_power(currentValues),)
 
         return result
 
@@ -171,9 +169,8 @@ class Apartment(object):
             Electrical power curve of apartment
         """
         power_el = self.power_el.get_power(currentValues)
-        if not self.demandDomesticHotWater.thermal:
-            power_dhw = self.demandDomesticHotWater.get_power(currentValues,
-                                                              False)
+        if not self.demand_domestic_hot_water.thermal:
+            power_dhw = self.demand_domestic_hot_water.get_power(currentValues, False)
             return (power_dhw + power_el)
         else:
             return power_el
@@ -205,9 +202,9 @@ class Apartment(object):
         result_tuple : tuple (power_dhw + demandSpaceHeating)
             Thermal power curve of apartment
         """
-        demandSpaceHeating = self.demandSpaceheating.get_power(currentValues)
-        if self.demandDomesticHotWater.thermal:
-            function = self.demandDomesticHotWater.get_power
+        demandSpaceHeating = self.demand_space_heating.get_power(currentValues)
+        if self.demand_domestic_hot_water.thermal:
+            function = self.demand_domestic_hot_water.get_power
             power_dhw = function(currentValues, returnTemperature)
 
         if returnTemperature:
@@ -230,7 +227,7 @@ class Apartment(object):
             Space heating power curve
         """
 
-        return self.demandSpaceheating.get_power(currentValues=current_values)
+        return self.demand_space_heating.get_power(currentValues=current_values)
 
     def get_el_power_curve(self, current_values=True):
         """
@@ -265,7 +262,7 @@ class Apartment(object):
             Electrical power curve
         """
 
-        return self.demandDomesticHotWater.get_power(
+        return self.demand_domestic_hot_water.get_power(
             currentValues=current_values, returnTemperature=False)
 
     def get_max_nb_occupants(self):

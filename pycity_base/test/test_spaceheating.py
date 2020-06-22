@@ -33,15 +33,15 @@ class TestSpaceHeating(object):
         #  Generate space heating object
         spaceheating = sh.SpaceHeating(create_environment,
                                        method=1,
-                                       livingArea=100,
-                                       specificDemand=150)
+                                       living_area=100,
+                                       specific_demand=150)
 
         #  Get space heating load curve (in W) per timestep
         space_heat_load_curve = spaceheating.get_power(currentValues=False)
 
         #  Convert to energy demand values (in kWh)
         th_energy_demand_curve = space_heat_load_curve * \
-                                 create_environment.timer.timeDiscretization / \
+                                 create_environment.timer.time_discretization / \
                                  (1000 * 3600)
 
         #  Check if sum of energy demand values is (almost) equal to input
@@ -52,15 +52,15 @@ class TestSpaceHeating(object):
         #  Generate space heating object
         spaceheating = sh.SpaceHeating(create_environment,
                                        method=3,
-                                       livingArea=100,
-                                       specificDemand=150)
+                                       living_area=100,
+                                       specific_demand=150)
 
         #  Get space heating load curve (in W) per timestep
         space_heat_load_curve = spaceheating.loadcurve
 
         #  Convert to energy demand values (in kWh)
         th_energy_demand_curve = space_heat_load_curve * \
-                                 create_environment.timer.timeDiscretization / \
+                                 create_environment.timer.time_discretization / \
                                  (1000 * 3600)
 
         #  Check if sum of energy demand values is (almost) equal to input

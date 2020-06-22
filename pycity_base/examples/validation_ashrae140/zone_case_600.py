@@ -27,12 +27,12 @@ def run_validation(do_plot=False):
     location = (39.76, -104.86)
 
     altitude = 1609  # m, section 5.2.1.6.1, page 16
-    timeZone = -7
+    time_zone = -7
 
-    timer = pycity_base.classes.timer.Timer(timeDiscretization=3600,
-                                            timestepsHorizon=8760,
-                                            timestepsUsedHorizon=8760,
-                                            timestepsTotal=8760)
+    timer = pycity_base.classes.timer.Timer(time_discretization=3600,
+                                            timesteps_horizon=8760,
+                                            timesteps_used_horizon=8760,
+                                            timesteps_total=8760)
     prices = pycity_base.classes.prices.Prices()
 
     #  Define src path
@@ -46,15 +46,15 @@ def run_validation(do_plot=False):
     weather_diffuse_path = os.path.join(ashrae_path, diffuse_name)
 
     weather = pycity_base.classes.weather.Weather(timer,
-                                                  pathTemperature=weather_temp_path,
-                                                  pathDirectRadiation=weather_beam_path,
-                                                  pathDiffuseRadiation=weather_diffuse_path,
-                                                  timeDiscretization=3600,
+                                                  path_temperature=weather_temp_path,
+                                                  path_direct_radiation=weather_beam_path,
+                                                  path_diffuse_radiation=weather_diffuse_path,
+                                                  time_discretization=3600,
                                                   delimiter="\t",
-                                                  useTRY=False,
+                                                  use_TRY=False,
                                                   location=location,
                                                   altitude=altitude,
-                                                  timeZone=timeZone)
+                                                  time_zone=time_zone)
 
     prices = pycity_base.classes.prices.Prices()
 
@@ -68,7 +68,7 @@ def run_validation(do_plot=False):
     albedo = 0.2  # Ground reflectance, section 5.2.1.1.2, page 16
 
     internalGains = 200 * np.ones(
-        timer.timestepsTotal)  # W, section 5.2.1.7, page 16
+        timer.timesteps_total)  # W, section 5.2.1.7, page 16
 
     # Data from ASHRAE 140 : 2011
     A_f = 48  # m^2, section 5.2.1.3, page 16 (48 m^2 floor area)
@@ -159,7 +159,7 @@ def run_validation(do_plot=False):
 
     for i in range(12):
         T_aver_mon = np.append(T_aver_mon,
-                               sum(environment.weather.tAmbient[
+                               sum(environment.weather.t_ambient[
                                    monthsCum0[i] * 24:monthsCum0[
                                                           i + 1] * 24]) /
                                months[i] / 24)
@@ -195,7 +195,7 @@ def run_validation(do_plot=False):
 
     c = np.array([c_extWall, c_extWall, c_extWall, c_extWall, c_roof, c_floor])
 
-    zoneParameters = zp.ZoneParameters(A_f=A_f,
+    zone_parameters = zp.ZoneParameters(A_f=A_f,
                                        A_w=A_windows,
                                        U_w=U_windows,
                                        g_gln=g_gln,
@@ -208,38 +208,38 @@ def run_validation(do_plot=False):
                                        R_se_op=R_se_op,
                                        epsilon_op=infraredEmittance,
                                        V=volume,
-                                       samplingRate=timer.timeDiscretization,
+                                       sampling_rate=timer.time_discretization,
                                        kappa_j=c,
                                        A_j=A_walls,
-                                       simplifiedCapacity=False,
+                                       simplified_capacity=False,
                                        albedo=albedo,
                                        beta=beta,
                                        gamma=gamma)
 
     # Ventilation
     ventilation = np.ones(
-        timer.timestepsTotal) * 0.5  # section 5.2.1.6, page 16
+        timer.timesteps_total) * 0.5  # section 5.2.1.6, page 16
 
     ventilationFactor = 0.822  # Adjustment factor, see Table 5.2, page 18
     ventilation = ventilation * ventilationFactor  # Final adjustment factor, see
     # Footnote at Table 5.2, page 18
-    zoneParameters.updateVentilation(ventilationRate=ventilation,
+    zone_parameters.updateVentilation(ventilationRate=ventilation,
                                      ventilationRateMinimum=0.41)
 
     # Set points (section 5.2.1.13.1.1, page 19)
-    T_set_heating = np.ones(timer.timestepsTotal) * 20
-    T_set_cooling = np.ones(timer.timestepsTotal) * 27
+    T_set_heating = np.ones(timer.timesteps_total) * 20
+    T_set_cooling = np.ones(timer.timesteps_total) * 27
 
     # Initialize T_m
-    T_m_init = 20
+    t_m_init = 20
 
     spaceHeating = sh.SpaceHeating(environment,
                                    method=2,
-                                   zoneParameters=zoneParameters,
-                                   T_m_init=T_m_init,
+                                   zone_parameters=zone_parameters,
+                                   t_m_init=t_m_init,
                                    appliances=internalGains,
-                                   TCoolingSet=T_set_cooling,
-                                   THeatingSet=T_set_heating)
+                                   t_cooling_set=T_set_cooling,
+                                   t_heating_set=T_set_heating)
 
     # Retrieve results
     Q_HC = spaceHeating.loadcurve

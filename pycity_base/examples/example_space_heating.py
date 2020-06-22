@@ -18,7 +18,7 @@ import pycity_base.classes.prices
 
 def run_example(do_plot=False):
     timer = pycity_base.classes.timer.Timer()
-    weather = pycity_base.classes.weather.Weather(timer, useTRY=True)
+    weather = pycity_base.classes.weather.Weather(timer, use_TRY=True)
     prices = pycity_base.classes.prices.Prices()
 
     environment = pycity_base.classes.environment.Environment(timer, weather, prices)
@@ -27,8 +27,8 @@ def run_example(do_plot=False):
     #  #---------------------------------------
     hd_slp = sh.SpaceHeating(environment,
                              method=1,  # Standard load profile
-                             livingArea=150,
-                             specificDemand=100)
+                             living_area=150,
+                             specific_demand=100)
 
     results = hd_slp.get_power()
 
@@ -43,8 +43,8 @@ def run_example(do_plot=False):
     #  #---------------------------------------
     sim_th_load = sh.SpaceHeating(environment,
                                   method=3,  # simulated profile
-                                  livingArea=150,
-                                  specificDemand=100)
+                                  living_area=150,
+                                  specific_demand=100)
 
     sim_th_loadcurve = sim_th_load.loadcurve
 

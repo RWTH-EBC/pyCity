@@ -18,7 +18,7 @@ import pycity_base.classes.environment
 def run_example():
     # Create environment
     timer = pycity_base.classes.timer.Timer()
-    weather = pycity_base.classes.weather.Weather(timer, useTRY=True)
+    weather = pycity_base.classes.weather.Weather(timer, use_TRY=True)
     prices = pycity_base.classes.prices.Prices()
     environment = pycity_base.classes.environment.Environment(timer, weather, prices)
 
@@ -34,7 +34,7 @@ def run_example():
     some_schedule = np.random.randint(
         low=0,
         high=2,
-        size=environment.timer.timestepsUsedHorizon
+        size=environment.timer.timesteps_used_horizon
     )
 
     # Print results

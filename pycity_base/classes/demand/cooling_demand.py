@@ -23,12 +23,12 @@ class CoolingDemand(Load.Load):
 
         Parameters
         ----------
-        environment : Environment object
+        environment : environment object
             Common to all other objects. Includes time and weather instances
-        method : Integer, optional
+        method : integer, optional
             - `0` : Provide load curve directly (for all timesteps!)
             (default: 0)
-        loadcurve : Array-like, optional
+        loadcurve : array-like, optional
             Load curve for all investigated time steps in Watt
             (default: []).
         """

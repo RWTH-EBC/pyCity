@@ -32,8 +32,8 @@ def run_example():
     nb_timesteps = int(365 * 24 * 3600 / timestep)
 
     #  Generate environment with timer, weather, and prices objects
-    timer = time.Timer(timeDiscretization=timestep,
-                       timestepsTotal=nb_timesteps)
+    timer = time.Timer(time_discretization=timestep,
+                       timesteps_total=nb_timesteps)
     weather = we.Weather(timer)
     prices = pr.Prices()
     environment = env.Environment(timer, weather, prices)
@@ -62,21 +62,21 @@ def run_example():
         #  Generate heat demand curve for space heating
         heat_demand = sh.SpaceHeating(environment,
                                       method=1,  # Standard load profile
-                                      livingArea=146,
-                                      specificDemand=166)
+                                      living_area=146,
+                                      specific_demand=166)
 
         #  Generate electrical demand curve
         el_demand = ed.ElectricalDemand(environment,
                                         method=1,  # Standard load profile
-                                        annualDemand=3000)
+                                        annual_demand=3000)
 
         #  Generate domestic hot water demand curve
         dhw_annex42 = dhw.DomesticHotWater(environment,
-                                           tFlow=60,
+                                           t_flow=60,
                                            thermal=True,
                                            method=1,  # Annex 42
-                                           dailyConsumption=70,
-                                           supplyTemperature=25)
+                                           daily_consumption=70,
+                                           supply_temperature=25)
         #  Annotation: The usage of the deterministic IEA Annex 42 hot water
         #  profile is fine for a single apartment. However, try to use
         #  stochastic dhw profiles (method = 2 --> Requires occupancy
@@ -133,9 +133,9 @@ def run_example():
     mapPower = np.array(mapPower) * 1000
 
     turbine = wec.WindEnergyConverter(environment=environment,
-                                   velocity=mapWind,
-                                   power=mapPower,
-                                   hubHeight=hubHeight)
+                                      velocity=mapWind,
+                                      power=mapPower,
+                                      hub_height=hubHeight)
 
     cityDistrict.addEntity(entity=turbine, position=point.Point(100, 100))
 

@@ -23,15 +23,15 @@ class CompressionChiller(coolingdevice.CoolingDevice):
         """
         Parameter
         ---------
-        environment : Environment object
+        environment : environment object
             Common to all other objects. Includes time and weather instances
         q_nominal : array of float
             nominal cooling output in Watt
         epsilon : array of float
             efficiency (without unit)
-        t_min : Integer, optional
+        t_min : integer, optional
             minimum provided temperature in °C
-        lower_activation_limit : Float (0 <= lower_activation_limit <= 1)
+        lower_activation_limit : float (0 <= lower_activation_limit <= 1)
             Define the lower activation limit. For example, heat pumps are
             typically able to operate between 50 % part load and rated load.
             In this case, lower_activation_limit would be 0.5
@@ -64,9 +64,9 @@ class CompressionChiller(coolingdevice.CoolingDevice):
 
         Order
         -----
-        q_output : array_like
+        q_output : array-like
             cooling production of the chiller
-        schedule : array_like
+        schedule : array-like
             Operational schedule
         """
         return (self._get_q_output(current_values),

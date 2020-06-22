@@ -19,7 +19,7 @@ import pycity_base.classes.environment
 def run_example():
     # Create environment
     timer = pycity_base.classes.timer.Timer()
-    weather = pycity_base.classes.weather.Weather(timer, useTRY=True)
+    weather = pycity_base.classes.weather.Weather(timer, use_TRY=True)
     prices = pycity_base.classes.prices.Prices()
     environment = pycity_base.classes.environment.Environment(timer, weather, prices)
 
@@ -34,19 +34,19 @@ def run_example():
     print()
     print(("Type: " + heater.kind))
     print()
-    print(("Maximum electricity input: " + str(heater.pNominal)))
-    print(("Maximum heat output: "       + str(heater.qNominal)))
-    print(("Efficiency: "                + str(heater.eta)))
-    print(("Maximum flow temperature: "  + str(heater.tMax)))
-    print(("Lower activation limit: "    + str(heater.lowerActivationLimit)))
+    print(("Maximum electricity input: " + str(heater.p_nominal)))
+    print(("Maximum heat output: " + str(heater.q_nominal)))
+    print(("Efficiency: " + str(heater.eta)))
+    print(("Maximum flow temperature: " + str(heater.t_max)))
+    print(("Lower activation limit: " + str(heater.lower_activation_limit)))
 
     print()
     print(("Nominals: " + str(heater.getNominalValues())))
 
     np.random.seed(0)
-    result_p = np.random.rand(timer.timestepsUsedHorizon) * heater.pNominal
-    result_q = np.random.rand(timer.timestepsUsedHorizon) * q_nominal
-    result_schedule = np.random.randint(2, size=timer.timestepsUsedHorizon)
+    result_p = np.random.rand(timer.timesteps_used_horizon) * heater.p_nominal
+    result_q = np.random.rand(timer.timesteps_used_horizon) * q_nominal
+    result_schedule = np.random.randint(2, size=timer.timesteps_used_horizon)
     heater.setResults(result_p, result_q, result_schedule)
 
     results = heater.getResults(True)

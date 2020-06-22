@@ -122,8 +122,8 @@ def run_city_generator(gen_mo=0, input_name='test_city_mixed_buildings.txt',
                 SpaceHeating.SpaceHeating(environment,
                                           method=1,
                                           # Standard load profile
-                                          livingArea=curr_area,
-                                          specificDemand=curr_th_spec_demand,
+                                          living_area=curr_area,
+                                          specific_demand=curr_th_spec_demand,
                                           profile_type=curr_th_slp)
 
             if use_el_slp:  # Use el. SLP
@@ -142,12 +142,12 @@ def run_city_generator(gen_mo=0, input_name='test_city_mixed_buildings.txt',
             el_demand = \
                 ElectricalDemand.ElectricalDemand(environment,
                                                   method=el_method,
-                                                  annualDemand=curr_el_demand,
-                                                  profileType=curr_el_slp,
-                                                  singleFamilyHouse=True,
+                                                  annual_demand=curr_el_demand,
+                                                  profile_type=curr_el_slp,
+                                                  single_family_house=True,
                                                   total_nb_occupants=curr_total_nb_occupants,
-                                                  randomizeAppliances=True,
-                                                  lightConfiguration=0,
+                                                  randomize_appliances=True,
+                                                  light_configuration=0,
                                                   occupancy=occupancy_profile)
 
             #  Generate apartment and add demand durves
@@ -158,20 +158,20 @@ def run_city_generator(gen_mo=0, input_name='test_city_mixed_buildings.txt',
                 #  Generate domestic hot water demand curve
                 dhw_annex42 = \
                     DomesticHotWater.DomesticHotWater(environment,
-                                                      tFlow=60,
+                                                      t_flow=60,
                                                       thermal=True,
                                                       method=1,
                                                       # Annex 42
-                                                      dailyConsumption=70,
-                                                      supplyTemperature=25)
+                                                      daily_consumption=70,
+                                                      supply_temperature=25)
                 apartment.addEntity(dhw_annex42)
 
             # Generate heating curve
-            heatingCurve = HeatingCurve.HeatingCurve(environment)
+            heating_curve = HeatingCurve.HeatingCurve(environment)
 
             #  Generate building and add apartment and heating curve
             building = Building.Building(environment)
-            entities = [apartment, heatingCurve]
+            entities = [apartment, heating_curve]
             building.addMultipleEntities(entities)
 
             #  Generate shapely point positions

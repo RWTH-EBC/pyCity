@@ -16,8 +16,8 @@ class ZoneInputs(object):
     """
 
     def __init__(self, environment, 
-                 zoneParameters=None, 
-                 T_m_init=20, 
+                 zone_parameters=None,
+                 t_m_init=20,
                  ventilation=0,
                  occupancy=0,
                  appliances=0, 
@@ -27,10 +27,10 @@ class ZoneInputs(object):
         ----------
         environment : Environment object
             Common to all other objects. Includes time and weather instances
-        zoneParameters : ZoneParameters object
+        zone_parameters : ZoneParameters object
             Holds all relevant parameters of the thermal zone (geometry,
             U-values)
-        T_m_init : Float, optional
+        t_m_init : Float, optional
             Initial temperature of the internal heat capacity.
             Requires ``method=2``.
         ventilation : Array-like, optional
@@ -49,15 +49,15 @@ class ZoneInputs(object):
         self._kind = "zoneinputs"
 
         self.environment = environment
-        self.zoneParameters = zoneParameters
-        self.T_m_init = T_m_init
+        self.zone_parameters = zone_parameters
+        self.t_m_init = t_m_init
 
         # Compute internal and solar gains. Get ambient (supply) temperature.
         self.Phi_int = self.getInternalGains(occupancy=occupancy,
                                              appliances=appliances,
                                              lighting=lighting)
-        self.T_e = environment.weather.tAmbient
-        self.T_sup = environment.weather.tAmbient
+        self.T_e = environment.weather.t_ambient
+        self.T_sup = environment.weather.t_ambient
         
         # UNDER CONSTRUCTION
         self.Phi_sol, self.solarOpaque, self.solarWindow = self.getSolarGains()
@@ -75,14 +75,14 @@ class ZoneInputs(object):
 
         Parameters
         ----------
-        occupancy : array_like
+        occupancy : array-like
             Number of active people at each time step (no unit).
             According to DIN EN ISO 8996, table A.2 (page 21), this number is
             multiplied by 115 Watt/person.
-        appliances : array_like
+        appliances : array-like
             Aggregated electricity consumption of all electrical appliances in
             this zone in Watt.
-        lighting : array_like
+        lighting : array-like
             Aggregated electricity consumption of all installed lights in Watt.
         """
         # Compute gains from people
@@ -98,11 +98,11 @@ class ZoneInputs(object):
         Set the solar gains for the upcoming scheduling period.
         """
         # Get beam and diffuse radiation on a horizontal surface
-        beamRad = self.environment.weather.qDirect
-        diffuseRad = self.environment.weather.qDiffuse
+        beamRad = self.environment.weather.q_direct
+        diffuseRad = self.environment.weather.q_diffuse
 
         # Get ground reflectance
-        groundReflectance = self.zoneParameters.albedo
+        groundReflectance = self.zone_parameters.albedo
 
 
         # Initialize solar gains
@@ -114,31 +114,29 @@ class ZoneInputs(object):
         self.environment.weather.computeGeometry(True)
 
         # Iterate over all surface areas
-        for i in range(len(self.zoneParameters.F_r)):
+        for i in range(len(self.zone_parameters.F_r)):
             # Compute heat flux through each opaque and window-like surface
             # DIN EN ISO 13790:2008, equation 43, section 11.3.2, page 67
             # Note: F_sh_ob, I_sol and F_r are the same for opaque and 
             # window-like components, therefore the total, effective area and 
             # radiative heat exchange with the sky are summed up.
-            A_opaque_sol  = self.zoneParameters.A_opaque_sol[i]
-            A_windows_sol = self.zoneParameters.A_windows_sol[i]
-            A_windows     = self.zoneParameters.A_windows[i]
+            A_opaque_sol  = self.zone_parameters.A_opaque_sol[i]
+            A_windows_sol = self.zone_parameters.A_windows_sol[i]
+            A_windows     = self.zone_parameters.A_windows[i]
             A_total = A_opaque_sol + A_windows_sol
-            Psi_r_windows = self.zoneParameters.Psi_r_windows[i]
-            Psi_r_total = self.zoneParameters.Psi_r_opaque[i] + Psi_r_windows
+            Psi_r_windows = self.zone_parameters.Psi_r_windows[i]
+            Psi_r_total = self.zone_parameters.Psi_r_opaque[i] + Psi_r_windows
         
             radFunc = self.environment.weather.getTotalRadiationTiltedSurface
             radTilt = radFunc(beamRadiation=beamRad,
                               diffuseRadiation=diffuseRad,
-                              beta=self.zoneParameters.beta[i],
-                              gamma=self.zoneParameters.gamma[i],
+                              beta=self.zone_parameters.beta[i],
+                              gamma=self.zone_parameters.gamma[i],
                               albedo=groundReflectance)[0]
             solarOpaque.append(radTilt)
 
             if A_windows > 0:
-                solarWindows.append((A_windows_sol * radTilt
-                                   - Psi_r_windows * self.zoneParameters.F_r[i])
-                                   / A_windows)
+                solarWindows.append((A_windows_sol * radTilt - Psi_r_windows * self.zone_parameters.F_r[i]) / A_windows)
             elif A_windows == 0:
                 solarWindows.append(0)
             else:
@@ -146,7 +144,7 @@ class ZoneInputs(object):
                 raise AssertionError(msg)
 
             solarGains += (A_total * radTilt 
-                         - Psi_r_total * self.zoneParameters.F_r[i])
+                         - Psi_r_total * self.zone_parameters.F_r[i])
 
         # Return results
         return solarGains, solarOpaque, solarWindows

@@ -17,7 +17,7 @@ class Inverter(object):
     Implementation of the AC-DC / DC-AC inverter
     """
     
-    def __init__(self, environment, eta, pNominal, inputAC=True):
+    def __init__(self, environment, eta, p_nominal, input_AC=True):
         """
         Parameters
         ----------
@@ -25,25 +25,25 @@ class Inverter(object):
             Common to all other objects. Includes time and weather instances
         eta : float (0 <= eta <= 1)
             efficiency (without unit)
-        pNominal : float
+        p_nominal : float
             nominal electrical power in Watt
-        inputAC : Boolean, optional
+        input_AC : boolean, optional
             True if input is AC
             False if input is DC
         """
         self._kind = "inverter"
         self.environment = environment
         self.eta = eta
-        self.pNominal = pNominal
-        self.inputAC = inputAC
+        self.p_nominal = p_nominal
+        self.input_AC = input_AC
 
-        timestepsTotal = environment.timer.timestepsTotal
-        timestepsUsedHorizon = environment.timer.timestepsUsedHorizon
+        timesteps_total = environment.timer.timesteps_total
+        timesteps_used_horizon = environment.timer.timesteps_used_horizon
         
-        self.totalPInput = np.zeros(timestepsTotal)
-        self.totalPOutput = np.zeros(timestepsTotal)
-        self.currentPInput = np.zeros(timestepsUsedHorizon)
-        self.currentPOutput = np.zeros(timestepsUsedHorizon)
+        self.total_p_input = np.zeros(timesteps_total)
+        self.total_p_output = np.zeros(timesteps_total)
+        self.current_p_input = np.zeros(timesteps_used_horizon)
+        self.current_p_output = np.zeros(timesteps_used_horizon)
 
     @property
     def kind(self):
@@ -61,18 +61,18 @@ class Inverter(object):
         
         Order
         -----
-        pInput : array_like
+        pInput : array-like
             Electricity input of the inverter
-        pOutput : array_like
+        pOutput : array-like
             Electricity output of the inverter
         """
         pInput = handleData.getValues(currentValues, 
-                                      self.currentPInput, 
-                                      self.totalPInput)
+                                      self.current_p_input,
+                                      self.total_p_input)
         
         pOutput = handleData.getValues(currentValues, 
-                                       self.currentPOutput, 
-                                       self.totalPOutput)
+                                       self.current_p_output,
+                                       self.total_p_output)
         
         return (pInput, pOutput)
 
@@ -81,16 +81,16 @@ class Inverter(object):
         Save electricity input and output of the inverter.
         """
         results = handleData.saveResult(self.environment.timer, 
-                                        self.currentPInput, 
-                                        self.totalPInput, 
+                                        self.current_p_input,
+                                        self.total_p_input,
                                         pInput)
-        (self.currentPInput, self.totalPInput) = results
+        (self.current_p_input, self.total_p_input) = results
         
         results = handleData.saveResult(self.environment.timer, 
-                                        self.currentPOutput, 
-                                        self.totalPOutput, 
+                                        self.current_p_output,
+                                        self.total_p_output,
                                         pOutput)
-        (self.currentPOutput, self.totalPOutput) = results
+        (self.current_p_output, self.total_p_output) = results
         
     def getNominalValues(self):
         """
@@ -98,4 +98,4 @@ class Inverter(object):
         
         Order: Type of inverter, electrical efficiency and nominal input power.
         """
-        return (self.inputAC, self.eta, self.pNominal)
+        return (self.input_AC, self.eta, self.p_nominal)

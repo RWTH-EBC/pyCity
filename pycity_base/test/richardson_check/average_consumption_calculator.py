@@ -52,8 +52,8 @@ def run_single_calc(number_of_occupants, randomize_appliances, environment,
     el_load = ed.ElectricalDemand(environment,
                                   method=2,
                                   total_nb_occupants=number_of_occupants,
-                                  randomizeAppliances=randomize_appliances,
-                                  lightConfiguration=10,
+                                  randomize_appliances=randomize_appliances,
+                                  light_configuration=10,
                                   occupancy=occupancy.occupancy,
                                   prev_heat_dev=prev_heat_dev,
                                   app_filename=app_filename,
@@ -99,10 +99,10 @@ def run_multiple_calc(number_of_occupants, randomize_appliances,
         Average electric energy demand in kWh/a
     """
 
-    timer = pycity_base.classes.timer.Timer(timeDiscretization=60,
-                                            timestepsTotal=365*24*60,
-                                            initialDay=1)
-    weather = pycity_base.classes.weather.Weather(timer)  # , useTRY=True)
+    timer = pycity_base.classes.timer.Timer(time_discretization=60,
+                                            timesteps_total=365*24*60,
+                                            initial_day=1)
+    weather = pycity_base.classes.weather.Weather(timer)  # , use_TRY=True)
     prices = pycity_base.classes.prices.Prices()
 
     environment = pycity_base.classes.environment.Environment(timer, weather,
@@ -120,7 +120,7 @@ def run_multiple_calc(number_of_occupants, randomize_appliances,
                             light_filename=light_filename)
 
         #  Convert to demand in kWh
-        el_demand_curve = el_load_object.loadcurve * timer.timeDiscretization \
+        el_demand_curve = el_load_object.loadcurve * timer.time_discretization \
                           / (3600 * 1000)
 
         #  Current demand in kWh

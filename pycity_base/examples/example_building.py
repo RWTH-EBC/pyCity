@@ -31,27 +31,27 @@ def run_example(do_plot=False):
     nb_timesteps = int(365 * 24 * 3600 / timestep)
 
     #  Generate environment with timer, weather, and prices objects
-    timer = time.Timer(timeDiscretization=timestep,
-                       timestepsTotal=nb_timesteps)
+    timer = time.Timer(time_discretization=timestep,
+                       timesteps_total=nb_timesteps)
     weather = we.Weather(timer)
     prices = pr.Prices()
     environment = env.Environment(timer, weather, prices)
 
     heat_demand = sh.SpaceHeating(environment,
                                   method=1,  # Standard load profile
-                                  livingArea=146,
-                                  specificDemand=166)
+                                  living_area=146,
+                                  specific_demand=166)
 
     el_demand = ed.ElectricalDemand(environment,
                                     method=1,  # Standard load profile
-                                    annualDemand=3000)
+                                    annual_demand=3000)
 
     dhw_annex42 = dhw.DomesticHotWater(environment,
-                                       tFlow=60,
+                                       t_flow=60,
                                        thermal=True,
                                        method=1,  # Annex 42
-                                       dailyConsumption=70,
-                                       supplyTemperature=25)
+                                       daily_consumption=70,
+                                       supply_temperature=25)
     #  Annotation: The usage of the deterministic IEA Annex 42 hot water
     #  profile is fine for a single apartment. However, try to use stochastic
     #  dhw profiles (method = 2 --> Requires occupancy input profile) on
@@ -82,32 +82,32 @@ def run_example(do_plot=False):
     number_columns = dimplex_LA12TU._dimncols
 
     # Flow, ambient and max. temperatures
-    tFlow = np.zeros(number_columns - 2)
-    tAmbient = np.zeros(int((number_rows - 7) / 2))
-    tMax = dimplex_LA12TU.cell_value(0, 1)
+    t_flow = np.zeros(number_columns - 2)
+    t_ambient = np.zeros(int((number_rows - 7) / 2))
+    t_max = dimplex_LA12TU.cell_value(0, 1)
 
-    firstRowCOP = number_rows - len(tAmbient)
+    firstRowCOP = number_rows - len(t_ambient)
 
-    qNominal = np.empty((len(tAmbient), len(tFlow)))
-    cop = np.empty((len(tAmbient), len(tFlow)))
+    q_nominal = np.empty((len(t_ambient), len(t_flow)))
+    cop = np.empty((len(t_ambient), len(t_flow)))
 
     for i in range(number_columns - 2):
-        tFlow[i] = dimplex_LA12TU.cell_value(3, 2 + i)
+        t_flow[i] = dimplex_LA12TU.cell_value(3, 2 + i)
 
-    for col in range(len(tFlow)):
-        for row in range(len(tAmbient)):
-            qNominal[row, col] = dimplex_LA12TU.cell_value(int(4 + row),
+    for col in range(len(t_flow)):
+        for row in range(len(t_ambient)):
+            q_nominal[row, col] = dimplex_LA12TU.cell_value(int(4 + row),
                                                            int(2 + col))
             cop[row, col] = dimplex_LA12TU.cell_value(int(firstRowCOP + row),
                                                       int(2 + col))
 
-    pNominal = qNominal / cop
+    p_nominal = q_nominal / cop
 
     # Create HP
     lower_activation_limit = 0.5
 
     #  Generate complex heat pump energy system object
-    heatpump = hp.Heatpump(environment, tAmbient, tFlow, qNominal, pNominal, cop, tMax, lower_activation_limit)
+    heatpump = hp.Heatpump(environment, t_ambient, t_flow, q_nominal, p_nominal, cop, t_max, lower_activation_limit)
 
     #  Generate building energy system (BES) object instance
     bes = build_es.BES(environment)
@@ -116,13 +116,13 @@ def run_example(do_plot=False):
     bes.addDevice(heatpump)
 
     #  Generate heating curve object for building
-    heatingCurve = hc.HeatingCurve(environment)
+    heating_curve = hc.HeatingCurve(environment)
 
     #  Generate building object instance
     building = build.Building(environment)
 
     #  Add entities to building object
-    entities = [apartment, bes, heatingCurve]
+    entities = [apartment, bes, heating_curve]
     building.addMultipleEntities(entities)
 
     print('Access heat pump nominals:')
@@ -130,7 +130,7 @@ def run_example(do_plot=False):
     print()
 
     print('Access flow temperatures:')
-    print(building.flowTemperature)
+    print(building.flow_temperature)
     print()
 
     print('Get number of apartments:')

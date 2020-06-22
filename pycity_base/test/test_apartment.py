@@ -44,7 +44,7 @@ class TestApartment(object):
 
         #  Convert to energy values (in kWh)
         th_energy_demand_values = heat_load_curve * \
-                              create_environment.timer.timeDiscretization /\
+                              create_environment.timer.time_discretization /\
                               (1000*3600)
 
         assert abs(np.sum(th_energy_demand_values) - 100*150) <= 0.001 * \
@@ -65,7 +65,7 @@ class TestApartment(object):
                                                                 False)
         #  Convert to energy values (in kWh)
         el_energy_demand_values = el_load_curve * \
-                              create_environment.timer.timeDiscretization / \
+                              create_environment.timer.time_discretization / \
                               (1000*3600)
 
         assert abs(np.sum(el_energy_demand_values) - 3000) <= 0.001 * 3000
@@ -75,7 +75,7 @@ class TestApartment(object):
             currentValues=False, returnTemperature=False)
         #  Convert to energy values (in kWh)
         th_energy_demand_values = dhw_heat_load_curve * \
-                              create_environment.timer.timeDiscretization / \
+                              create_environment.timer.time_discretization / \
                               (1000*3600)
 
         daily_consumption = 70
@@ -106,7 +106,7 @@ class TestApartment(object):
                                                currentValues=False)[0]
 
         th_energy_demand_values = space_heat_power * \
-                    create_apartment.environment.timer.timeDiscretization /\
+                    create_apartment.environment.timer.time_discretization /\
                               (1000*3600)
 
         assert abs(np.sum(th_energy_demand_values) - 100*150) <= 0.001 * \
@@ -114,7 +114,7 @@ class TestApartment(object):
 
         #  Convert to energy values (in kWh)
         el_energy_demand_values = el_power * \
-                    create_apartment.environment.timer.timeDiscretization / \
+                    create_apartment.environment.timer.time_discretization / \
                               (1000*3600)
 
         assert abs(np.sum(el_energy_demand_values) - 3000) <= 0.01 * 3000
@@ -125,7 +125,7 @@ class TestApartment(object):
 
         #  Convert to energy values (in kWh)
         th_energy_demand_values = dhw_power * \
-                    create_apartment.environment.timer.timeDiscretization / \
+                    create_apartment.environment.timer.time_discretization / \
                               (1000*3600)
         #  Annual energyy demand value (in kWh)
         dhw_annual_demand = np.sum(th_energy_demand_values)

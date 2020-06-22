@@ -16,33 +16,33 @@ class Prices(object):
     """
     
     def __init__(self, 
-                 revenueChp=5.41, 
-                 costsElectricity=30, 
-                 revenueElectricity=10, 
-                 costsGas=6.6):
+                 revenue_chp=5.41,
+                 costs_electricity=30,
+                 revenue_electricity=10,
+                 costs_gas=6.6):
         """
         Prices and revenue for different goods (all input values in €-ct/kWh)        
         
         Parameters
         ----------
-        revenueChp : float
+        revenue_chp : float
             revenue for generated electricity from CHP
-        costsElectricity : float
+        costs_electricity : float
             costs for electricity imports
-        revenueElectricity : float
+        revenue_electricity : float
             feed-in remuneration
-        costsGas : float
+        costs_gas : float
             costs for gas consumption
         """
         self._kind = "prices"        
                 
         kWh_to_J = 3600 * 1000
-        Cents_in_Euro = 100
+        cents_in_euro = 100
         
-        self.revChp = revenueChp / (kWh_to_J * Cents_in_Euro)
-        self.costsEl = costsElectricity / (kWh_to_J * Cents_in_Euro)
-        self.revEl = revenueElectricity / (kWh_to_J * Cents_in_Euro)
-        self.costsGas = costsGas / (kWh_to_J * Cents_in_Euro)
+        self.rev_chp = revenue_chp / (kWh_to_J * cents_in_euro)
+        self.costs_electricity = costs_electricity / (kWh_to_J * cents_in_euro)
+        self.revenue_electricity = revenue_electricity / (kWh_to_J * cents_in_euro)
+        self.costs_gas = costs_gas / (kWh_to_J * cents_in_euro)
 
     @property
     def kind(self):
@@ -54,17 +54,17 @@ class Prices(object):
         
         Order: Electricity costs, gas costs, CHP revenue, feed-in remuneration
         """
-        return (self.costsEl, self.costsGas, self.revChp, self.revEl)
+        return (self.costs_electricity, self.costs_gas, self.rev_chp, self.revenue_electricity)
     
-    def setAllData(self, costsEl=None, costsGas=None, revChp=None, revEl=None):
+    def setAllData(self, costs_electricity=None, costs_gas=None, rev_chp=None, revenue_electricity=None):
         """
         Update multiple market data.
         """
-        if costsEl != None:
-            self.costsEl = costsEl
-        if costsGas != None:
-            self.costsGas = costsGas
-        if revChp != None:
-            self.revChp = revChp
-        if revEl != None:
-            self.revEl = revEl
+        if costs_electricity != None:
+            self.costs_electricity = costs_electricity
+        if costs_gas != None:
+            self.costs_gas = costs_gas
+        if rev_chp != None:
+            self.rev_chp = rev_chp
+        if revenue_electricity != None:
+            self.revenue_electricity = revenue_electricity

@@ -22,7 +22,7 @@ def run_example(do_plot=False, run_stoch=False):
     print('########################################################')
 
     timer = pycity_base.classes.timer.Timer()
-    weather = pycity_base.classes.weather.Weather(timer)  # , useTRY=True)
+    weather = pycity_base.classes.weather.Weather(timer)  # , use_TRY=True)
     prices = pycity_base.classes.prices.Prices()
 
     environment = pycity_base.classes.environment.Environment(timer, weather,
@@ -30,13 +30,13 @@ def run_example(do_plot=False, run_stoch=False):
 
     el_demand = ed.ElectricalDemand(environment,
                                     method=1,  # Standard load profile
-                                    profileType="H0",
-                                    annualDemand=3000)
+                                    profile_type="H0",
+                                    annual_demand=3000)
 
     results = el_demand.loadcurve
 
     #  Convert to energy_curve in kWh
-    energy_curve = results * timer.timeDiscretization / (3600 * 1000)
+    energy_curve = results * timer.time_discretization / (3600 * 1000)
 
     energy_value = sum(energy_curve)
 
@@ -61,15 +61,15 @@ def run_example(do_plot=False, run_stoch=False):
         el_dem_stochastic = ed.ElectricalDemand(environment,
                                                 method=2,
                                                 total_nb_occupants=3,
-                                                randomizeAppliances=True,
-                                                lightConfiguration=10,
+                                                randomize_appliances=True,
+                                                light_configuration=10,
                                                 occupancy=occupancy.occupancy,
                                                 prev_heat_dev=True)
 
         results2 = el_dem_stochastic.loadcurve
 
         #  Convert to energy_curve in kWh
-        energy_curve2 = results2 * timer.timeDiscretization / (3600 * 1000)
+        energy_curve2 = results2 * timer.time_discretization / (3600 * 1000)
 
         energy_value2 = sum(energy_curve2)
 
@@ -90,17 +90,17 @@ def run_example(do_plot=False, run_stoch=False):
 
         el_dem_stochastic2 = ed.ElectricalDemand(environment,
                                                  method=2,
-                                                 annualDemand=energy_input,
+                                                 annual_demand=energy_input,
                                                  total_nb_occupants=3,
-                                                 randomizeAppliances=True,
-                                                 lightConfiguration=10,
+                                                 randomize_appliances=True,
+                                                 light_configuration=10,
                                                  occupancy=occupancy.occupancy,
                                                  do_normalization=True)
 
         results3 = el_dem_stochastic2.loadcurve
 
         #  Convert to energy_curve in kWh
-        energy_curve3 = results3 * timer.timeDiscretization / (3600 * 1000)
+        energy_curve3 = results3 * timer.time_discretization / (3600 * 1000)
 
         energy_value3 = sum(energy_curve3)
 
@@ -120,13 +120,13 @@ def run_example(do_plot=False, run_stoch=False):
     el_demand = ed.ElectricalDemand(environment,
                                     method=3,  # Weekly profile
                                     do_normalization=True,
-                                    annualDemand=3000,
+                                    annual_demand=3000,
                                     method_3_type='metal')
 
     results4 = el_demand.loadcurve
 
     #  Convert to energy_curve in kWh
-    energy_curve4 = results4 * timer.timeDiscretization / (3600 * 1000)
+    energy_curve4 = results4 * timer.time_discretization / (3600 * 1000)
 
     energy_value4 = sum(energy_curve4)
 
@@ -145,13 +145,13 @@ def run_example(do_plot=False, run_stoch=False):
     el_demand = ed.ElectricalDemand(environment,
                                     method=4,  # Annual measurement profiles
                                     do_normalization=True,
-                                    annualDemand=5000,
+                                    annual_demand=5000,
                                     method_4_type='metal_2')
 
     results5 = el_demand.loadcurve
 
     #  Convert to energy_curve in kWh
-    energy_curve5 = results5 * timer.timeDiscretization / (3600 * 1000)
+    energy_curve5 = results5 * timer.time_discretization / (3600 * 1000)
 
     energy_value5 = sum(energy_curve5)
 

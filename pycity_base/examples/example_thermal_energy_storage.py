@@ -18,7 +18,7 @@ import pycity_base.classes.environment
 def run_example():
     # Create environment
     timer = pycity_base.classes.timer.Timer()
-    weather = pycity_base.classes.weather.Weather(timer, useTRY=True)
+    weather = pycity_base.classes.weather.Weather(timer, use_TRY=True)
     prices = pycity_base.classes.prices.Prices()
     environment = pycity_base.classes.environment.Environment(timer, weather, prices)
 
@@ -35,19 +35,18 @@ def run_example():
                                                t_surroundings,
                                                k_losses)
 
-    (tesCapacity, tesTMax, tesTSurroundings, tesKLosses) = thermal_storage.getNominalValues()
+    (tes_capacity, tes_t_max, tes_t_surroundings, tes_k_losses) = thermal_storage.getNominalValues()
 
     # Print results
     print()
-    print(("Initial temperature: "      + str(thermal_storage.tInit)))
-    print(("Water mass: "               + str(tesCapacity)))
-    print(("Maximum temperature: "      + str(tesTMax)))
-    print(("Surroundings temperature: " + str(tesTSurroundings)))
-    print(("Loss factor: "              + str(tesKLosses)))
+    print(("Initial temperature: " + str(thermal_storage.t_init)))
+    print(("Water mass: " + str(tes_capacity)))
+    print(("Maximum temperature: " + str(tes_t_max)))
+    print(("Surroundings temperature: " + str(tes_t_surroundings)))
+    print(("Loss factor: " + str(tes_k_losses)))
 
     np.random.seed(0)
-    result = (np.random.rand(timer.timestepsUsedHorizon) * (t_max - t_surroundings)
-              + t_surroundings)
+    result = (np.random.rand(timer.timesteps_used_horizon) * (t_max - t_surroundings) + t_surroundings)
     thermal_storage.setResults(result)
 
     print()

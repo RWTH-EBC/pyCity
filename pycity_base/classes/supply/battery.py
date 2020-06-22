@@ -17,42 +17,42 @@ class Battery(object):
     Implementation of the battery
     """
     
-    def __init__(self, environment, socInit, capacity, selfDischarge=0.01, 
-                 etaCharge=0.95, etaDischarge=0.95):
+    def __init__(self, environment, soc_init, capacity, self_discharge=0.01,
+                 eta_charge=0.95, eta_discharge=0.95):
         """
         Parameters
         ----------
-        environment : Environment object
+        environment : environment object
             Common to all other objects. Includes time and weather instances
-        socInit : float (0 <= socInit <= capacity)
+        soc_init : float (0 <= soc_init <= capacity)
             Initial state of charge in Joule
         capacity : float 
             Battery's capacity in Joule
-        selfDischarge : float (0 <= selfDischarge <= 1)
+        self_discharge : float (0 <= self_discharge <= 1)
             Rate of self discharge per time step (without unit)
-        etaCharge : float (0 <= etaCharge <= 1)
+        eta_charge : float (0 <= eta_charge <= 1)
             Charging efficiency (without unit)
-        etaDischarge : float (0 <= etaDischarge <= 1)
+        eta_discharge : float (0 <= eta_discharge <= 1)
             Discharging efficiency (without unit)
             
         """
         self._kind = "battery"
         self.environment = environment
         self.capacity = capacity
-        self.selfDischarge = selfDischarge
-        self.etaCharge = etaCharge
-        self.etaDischarge = etaDischarge
-        self.socInit = socInit
+        self.self_discharge = self_discharge
+        self.eta_charge = eta_charge
+        self.eta_discharge = eta_discharge
+        self.soc_init = soc_init
         
-        timestepsTotal = environment.timer.timestepsTotal
-        timestepsUsedHorizon = environment.timer.timestepsUsedHorizon
+        timesteps_total = environment.timer.timesteps_total
+        timesteps_used_horizon = environment.timer.timesteps_used_horizon
         
-        self.totalSoc = np.zeros(timestepsTotal)
-        self.totalPCharge = np.zeros(timestepsTotal)
-        self.totalPDischarge = np.zeros(timestepsTotal)
-        self.currentSoc = np.zeros(timestepsUsedHorizon)
-        self.currentPCharge = np.zeros(timestepsUsedHorizon)
-        self.currentPDischarge = np.zeros(timestepsUsedHorizon)
+        self.total_soc = np.zeros(timesteps_total)
+        self.total_p_charge = np.zeros(timesteps_total)
+        self.total_p_discharge = np.zeros(timesteps_total)
+        self.current_soc = np.zeros(timesteps_used_horizon)
+        self.current_p_charge = np.zeros(timesteps_used_horizon)
+        self.current_p_discharge = np.zeros(timesteps_used_horizon)
 
     @property
     def kind(self):
@@ -70,19 +70,19 @@ class Battery(object):
         
         Order
         -----
-        soc : array_like
+        soc : array-like
             State of charge
-        charge : array_like
+        charge : array-like
             Charging power
-        discharge : array_like
+        discharge : array-like
             Discharging power
         """
-        soc = handleData.getValues(currentValues, self.currentSoc, 
-                                   self.totalSoc)
-        charge = handleData.getValues(currentValues, self.currentPCharge, 
-                                      self.totalPCharge)
-        discharge = handleData.getValues(currentValues, self.currentPDischarge,
-                                         self.totalPDischarge)
+        soc = handleData.getValues(currentValues, self.current_soc,
+                                   self.total_soc)
+        charge = handleData.getValues(currentValues, self.current_p_charge,
+                                      self.total_p_charge)
+        discharge = handleData.getValues(currentValues, self.current_p_discharge,
+                                         self.total_p_discharge)
         return (soc, charge, discharge)
 
     def setResults(self, soc, charge, discharge):
@@ -91,29 +91,29 @@ class Battery(object):
         """
         # Save state of charge
         results = handleData.saveResultInit(self.environment.timer,
-                                            self.currentSoc, 
-                                            self.totalSoc, 
+                                            self.current_soc,
+                                            self.total_soc,
                                             soc)
-        (self.currentSoc, self.totalSoc, self.socInit) = results
+        (self.current_soc, self.total_soc, self.soc_init) = results
         
         # Save charging power
         results = handleData.saveResult(self.environment.timer, 
-                                        self.currentPCharge, 
-                                        self.totalPCharge, 
+                                        self.current_p_charge,
+                                        self.total_p_charge,
                                         charge)
-        (self.currentPCharge, self.totalPCharge) = results
+        (self.current_p_charge, self.total_p_charge) = results
         
         # Save discharging power
         results = handleData.saveResult(self.environment.timer, 
-                                        self.currentPDischarge, 
-                                        self.totalPDischarge, 
+                                        self.current_p_discharge,
+                                        self.total_p_discharge,
                                         discharge)
-        (self.currentPDischarge, self.totalPDischarge) = results
+        (self.current_p_discharge, self.total_p_discharge) = results
     
     def getNominalValues(self):
         """
         Get battery's capacity, rate of self discharge, charging and 
         discharging efficiency.
         """
-        return (self.capacity, self.selfDischarge, 
-                self.etaCharge, self.etaDischarge)
+        return (self.capacity, self.self_discharge,
+                self.eta_charge, self.eta_discharge)

@@ -39,7 +39,7 @@ class TestPhotovoltaic():
 
         pv_pow_array = pv_unit.getPower(currentValues=False, updatePower=True)
 
-        pv_energy_out = sum(pv_pow_array) * timer.timeDiscretization / \
+        pv_energy_out = sum(pv_pow_array) * timer.time_discretization / \
                         (1000 * 3600)  # in kWh
 
         assert pv_energy_out > 900
@@ -56,8 +56,8 @@ class TestPhotovoltaic():
 
         timer = pycity_base.classes.timer.Timer()
         #  Overwrite horizon with total number of timesteps
-        timer.timestepsHorizon = timer.timestepsTotal
-        timer.timestepsUsedHorizon = timer.timestepsTotal
+        timer.timesteps_horizon = timer.timesteps_total
+        timer.timesteps_used_horizon = timer.timesteps_total
 
         weather = pycity_base.classes.weather.Weather(timer)
 
@@ -72,7 +72,7 @@ class TestPhotovoltaic():
 
         pv_pow_array = pv_unit.getPower(currentValues=True, updatePower=True)
 
-        pv_energy_out = sum(pv_pow_array) * timer.timeDiscretization / \
+        pv_energy_out = sum(pv_pow_array) * timer.time_discretization / \
                         (1000 * 3600)  # in kWh
 
         assert pv_energy_out > 900

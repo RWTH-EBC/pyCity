@@ -21,38 +21,38 @@ class ThermalEnergyStorage(object):
     
     def __init__(self, 
                  environment, 
-                 tInit, 
+                 t_init,
                  capacity, 
-                 tMax, 
-                 tSurroundings=20, 
-                 kLosses=3):
+                 t_max,
+                 t_surroundings=20,
+                 k_losses=3):
         """
         Parameter
         ---------
-        environment : Environment object
+        environment : environment object
             Common to all other objects. Includes time and weather instances
-        tInit : Integer
+        t_init : integer
             initialization temperature in °C
         capacity : Integer
             storage mass in kg
-        tMax : Integer, optional
+        t_max : integer, optional
             maximum storage temperature in °C
-        tSurroundings : Integer, optional
+        t_surroundings : Integer, optional
             temperature of the storage's surroundings in °C
-        kLosses : Float, optional
+        k_losses : float, optional
             storage's loss factor (area*U_value) in W/K
         """
         self._kind = "tes"
         
         self.environment = environment
         self.capacity = capacity
-        self.tSurroundings = tSurroundings
-        self.tMax = tMax
-        self.kLosses = kLosses
-        self.tInit = tInit
+        self.t_surroundings = t_surroundings
+        self.t_max = t_max
+        self.k_losses = k_losses
+        self.t_init = t_init
         
-        self.totalTSto = np.zeros(environment.timer.timestepsTotal)
-        self.currentTSto = np.zeros(environment.timer.timestepsUsedHorizon)
+        self.total_t_sto = np.zeros(environment.timer.timesteps_total)
+        self.current_t_sto = np.zeros(environment.timer.timesteps_used_horizon)
 
     @property
     def kind(self):
@@ -64,10 +64,10 @@ class ThermalEnergyStorage(object):
         temperature 
         """
         results = handleData.saveResultInit(self.environment.timer, 
-                                            self.currentTSto, 
-                                            self.totalTSto, 
+                                            self.current_t_sto,
+                                            self.total_t_sto,
                                             tSto)
-        (self.currentTSto, self.totalTSto, self.tInit) = results 
+        (self.current_t_sto, self.total_t_sto, self.t_init) = results
 
     def getResults(self, currentValues=True):
         """ 
@@ -75,8 +75,8 @@ class ThermalEnergyStorage(object):
         values, else: total values 
         """
         return handleData.getValues(currentValues, 
-                                    self.currentTSto, 
-                                    self.totalTSto)
+                                    self.current_t_sto,
+                                    self.total_t_sto)
     
     def getNominalValues(self):
         """
@@ -84,13 +84,13 @@ class ThermalEnergyStorage(object):
         
         Returns
         -------
-        capacity : Integer
+        capacity : integer
             storage mass in kg
-        tMax : Integer, optional
+        t_max : integer, optional
             maximum storage temperature in °C
-        tSurroundings : Integer, optional
+        tSurroundings : integer, optional
             temperature of the storage's surroundings in °C
-        kLosses : Float, optional
+        kLosses : float, optional
             storage's loss factor (area*U_value) in W/K
         """
-        return (self.capacity, self.tMax, self.tSurroundings, self.kLosses)
+        return (self.capacity, self.t_max, self.t_surroundings, self.k_losses)

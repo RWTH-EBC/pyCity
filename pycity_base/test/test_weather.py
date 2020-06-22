@@ -19,5 +19,5 @@ class TestWeather():
         weather = we.Weather(timer=timer)
 
         weather.setLocation(location=(50.76, 6.07),
-                            timeZone=1,
+                            time_zone=1,
                             altitude=200)

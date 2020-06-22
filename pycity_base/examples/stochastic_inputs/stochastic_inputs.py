@@ -28,12 +28,12 @@ import pycity_base.classes.demand.zone_parameters as zp
 location = (39.76, -104.86)
 
 altitude = 1609  # m
-timeZone = -7
+time_zone = -7
 
-timer = pycity_base.classes.timer.Timer(timeDiscretization=3600,
-                                        timestepsHorizon=8760,
-                                        timestepsUsedHorizon=8760,
-                                        timestepsTotal=8760)
+timer = pycity_base.classes.timer.Timer(time_discretization=3600,
+                                        timesteps_horizon=8760,
+                                        timesteps_used_horizon=8760,
+                                        timesteps_total=8760)
 prices = pycity_base.classes.prices.Prices()
 
 #  Define src path
@@ -44,15 +44,15 @@ weather_beam_path = os.path.join(ashrae_path, 'weather_beam.csv')
 weather_diffuse_path = os.path.join(ashrae_path, 'weather_diffuse.csv')
 
 weather = pycity_base.classes.weather.Weather(timer,
-                                              pathTemperature=weather_temp_path,
-                                              pathDirectRadiation=weather_beam_path,
-                                              pathDiffuseRadiation=weather_diffuse_path,
-                                              timeDiscretization=3600,
+                                              path_temperature=weather_temp_path,
+                                              path_direct_radiation=weather_beam_path,
+                                              path_diffuse_radiation=weather_diffuse_path,
+                                              time_discretization=3600,
                                               delimiter="\t",
-                                              useTRY=False,
+                                              use_TRY=False,
                                               location=location,
                                               altitude=altitude,
-                                              timeZone=timeZone)
+                                              time_zone=time_zone)
 
 prices = pycity_base.classes.prices.Prices()
 
@@ -67,10 +67,10 @@ energy_input = 3000
 
 el_dem_stochastic = ED.ElectricalDemand(environment,
                                         method=2,
-                                        annualDemand=energy_input,
+                                        annual_demand=energy_input,
                                         total_nb_occupants=3,
-                                        randomizeAppliances=True,
-                                        lightConfiguration=10,
+                                        randomize_appliances=True,
+                                        light_configuration=10,
                                         occupancy=occupancy.occupancy,
                                         do_normalization=True)
 
@@ -78,10 +78,10 @@ demand_electricity = el_dem_stochastic.loadcurve
 
 # Domestic hot water demand
 dhw_stochastical = DomesticHotWater.DomesticHotWater(environment,
-                                                     tFlow=60,
+                                                     t_flow=60,
                                                      thermal=True,
                                                      method=2,
-                                                     supplyTemperature=20,
+                                                     supply_temperature=20,
                                                      occupancy=occupancy.occupancy)
 
 demand_hot_water = dhw_stochastical.loadcurve
@@ -183,7 +183,7 @@ Po_m = []
 
 for i in range(12):
     T_aver_mon = np.append(T_aver_mon, 
-                           sum(weather.tAmbient[monthsCum0[i]*24:monthsCum0[i+1]*24]) / months[i] / 24 )
+                           sum(weather.t_ambient[monthsCum0[i]*24:monthsCum0[i+1]*24]) / months[i] / 24 )
 T_i_year = 22.917 
 # Heating period starts in October and ends in April
 for i in range(4):
@@ -226,7 +226,7 @@ U_window = 1 / (1 / alpha_window[0] + sum(d_window / lambda_window) + 1 / alpha_
 
 
 U_walls_ext_bm = []
-for i in range(timer.timestepsTotal):
+for i in range(timer.timesteps_total):
     U_walls_ext_bm.append(np.array([U_extWall, U_extWall, U_extWall, U_extWall, U_roof, U_floor_bm[i]]))
 U_windows = np.array([U_window, U_window, U_window, U_window, U_window, U_window])
 
@@ -236,7 +236,7 @@ R_se_w  = [0.04, 0.04, 0.04, 0.04, 0.04, 0]
 c = np.array([c_extWall, c_extWall, c_extWall, c_extWall, c_roof, c_floor, c_intWall, c_intCeiling, c_intFloor])
 
 
-zoneParameters = zp.ZoneParameters(A_f=A_f,
+zone_parameters = zp.ZoneParameters(A_f=A_f,
                                    A_w=A_windows,
                                    U_w=U_windows,
                                    g_gln=g_gln,
@@ -248,48 +248,48 @@ zoneParameters = zp.ZoneParameters(A_f=A_f,
                                    R_se_op=R_se_op,
                                    epsilon_op=infraredEmittance,
                                    V=volume,
-                                   samplingRate=timer.timeDiscretization,
+                                   sampling_rate=timer.time_discretization,
                                    kappa_j=c,
                                    A_j=A_walls,
-                                   simplifiedCapacity=False,
+                                   simplified_capacity=False,
                                    albedo=albedo,
                                    beta=beta,
                                    gamma=gamma)
 
 # Ventilation
-ventilation = np.ones(timer.timestepsTotal) * 0.5
+ventilation = np.ones(timer.timesteps_total) * 0.5
 
 ventilationFactor = 0.822
 ventilation = ventilation * ventilationFactor
 
-zoneParameters.updateVentilation(ventilationRate=ventilation,
+zone_parameters.updateVentilation(ventilationRate=ventilation,
                                  ventilationRateMinimum=0.41)
 
 
 # Set points
-T_set_cooling = np.ones(timer.timestepsTotal) * 27
+T_set_cooling = np.ones(timer.timesteps_total) * 27
 
 heating_mode = 20
 setback_mode = 18
-dt = len(occupancy.occupancy) / timer.timestepsTotal
+dt = len(occupancy.occupancy) / timer.timesteps_total
 occupancy_reshaped = np.array([np.mean(occupancy.occupancy[dt*i: dt*(i+1)]) 
-                               for i in range(timer.timestepsTotal)])
+                               for i in range(timer.timesteps_total)])
 
-T_set_heating = np.ones(timer.timestepsTotal) * setback_mode
+T_set_heating = np.ones(timer.timesteps_total) * setback_mode
 T_set_heating[occupancy_reshaped>0] += occupancy_reshaped[occupancy_reshaped>0] * (heating_mode - setback_mode)
 T_set_heating = np.minimum(T_set_heating, heating_mode)
 
 
 # Initialize T_m
-T_m_init = 20
+t_m_init = 20
 
 spaceHeating = sh.SpaceHeating(environment,
                                method=2,
-                               zoneParameters=zoneParameters,
-                               T_m_init=T_m_init,
+                               zone_parameters=zone_parameters,
+                               t_m_init=t_m_init,
                                appliances=internalGains,
-                               TCoolingSet=T_set_cooling,
-                               THeatingSet=T_set_heating)
+                               t_cooling_set=T_set_cooling,
+                               t_heating_set=T_set_heating)
 
 demand_spaceheating = spaceHeating.loadcurve
 

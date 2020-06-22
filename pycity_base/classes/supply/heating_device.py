@@ -17,37 +17,37 @@ class HeatingDevice(object):
     Superclass of all heating devices.
     """
    
-    def __init__(self, environment, qNominal, tMax=85, lowerActivationLimit=1):
+    def __init__(self, environment, q_nominal, t_max=85, lower_activation_limit=1):
         """
         Parameters
         ----------
-        environment : Environment object
+        environment : environment object
             Common to all other objects. Includes time and weather instances
-        qNominal : Array of float
+        q_nominal : array of float
             Nominal heat output in Watt
-        tMax : Float, optional 
+        t_max : float, optional
             Maximum provided temperature in °C
-        lowerActivationLimit : float (0 <= lowerActivationLimit <= 1)
+        lower_activation_limit : float (0 <= lower_activation_limit <= 1)
             Define the lower activation limit. For example, heat pumps are 
             typically able to operate between 50 % part load and rated load. 
-            In this case, lowerActivationLimit would be 0.5
+            In this case, lower_activation_limit would be 0.5
             Two special cases: 
-            Linear behavior: lowerActivationLimit = 0
-            Two-point controlled: lowerActivationLimit = 1
+            Linear behavior: lower_activation_limit = 0
+            Two-point controlled: lower_activation_limit = 1
         """
         self._kind = "heatingdevice"
 
-        timestepsTotal = environment.timer.timestepsTotal
-        timestepsUsedHorizon = environment.timer.timestepsUsedHorizon
+        timesteps_total = environment.timer.timesteps_total
+        timesteps_used_horizon = environment.timer.timesteps_used_horizon
         
         self.environment = environment
-        self.qNominal = qNominal
-        self.tMax = tMax
-        self.lowerActivationLimit = lowerActivationLimit
-        self.totalQOutput  = np.zeros(timestepsTotal)
-        self.totalSchedule = np.zeros(timestepsTotal)
-        self.currentQOutput  = np.zeros(timestepsUsedHorizon)
-        self.currentSchedule = np.zeros(timestepsUsedHorizon)
+        self.q_nominal = q_nominal
+        self.t_max = t_max
+        self.lower_activation_limit = lower_activation_limit
+        self.total_q_output = np.zeros(timesteps_total)
+        self.total_device_schedule = np.zeros(timesteps_total)
+        self.current_q_output = np.zeros(timesteps_used_horizon)
+        self.current_device_schedule = np.zeros(timesteps_used_horizon)
 
     @property
     def kind(self):
@@ -56,18 +56,18 @@ class HeatingDevice(object):
     def _setSchedule(self, schedule):
         """ Save the computed schedule to the heating device """
         results = handleData.saveResult(self.environment.timer,
-                                        self.currentSchedule, 
-                                        self.totalSchedule, 
+                                        self.current_device_schedule,
+                                        self.total_device_schedule,
                                         schedule)
-        (self.currentSchedule, self.totalSchedule) = results 
+        (self.current_device_schedule, self.total_device_schedule) = results
 
     def _setQOutput(self, qOutput):
         """ Save the computed heat output to the heating device """
         results = handleData.saveResult(self.environment.timer, 
-                                        self.currentQOutput, 
-                                        self.totalQOutput, 
+                                        self.current_q_output,
+                                        self.total_q_output,
                                         qOutput)
-        (self.currentQOutput, self.totalQOutput) = results
+        (self.current_q_output, self.total_q_output) = results
 
     def _getSchedule(self, currentValues=True):
         """ 
@@ -75,8 +75,8 @@ class HeatingDevice(object):
         else: total values 
         """
         return handleData.getValues(currentValues, 
-                                    self.currentSchedule, 
-                                    self.totalSchedule)
+                                    self.current_device_schedule,
+                                    self.total_device_schedule)
             
     def _getQOutput(self, currentValues=True):
         """ 
@@ -84,5 +84,5 @@ class HeatingDevice(object):
         else: total values 
         """
         return handleData.getValues(currentValues, 
-                                    self.currentQOutput, 
-                                    self.totalQOutput)
+                                    self.current_q_output,
+                                    self.total_q_output)

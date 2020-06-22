@@ -33,15 +33,14 @@ class TestElectricalDemand(object):
     def test_method1(self, create_environment):  # Standard load profile
         #  Generate electrical demand object
         el_demand_object = ed.ElectricalDemand(create_environment, method=1,
-                                               profileType="H0",
-                                               annualDemand=3000)
+                                               profile_type="H0",
+                                               annual_demand=3000)
 
         #  Get space heating load curve (in W) per timestep
         el_load_curve = el_demand_object.get_power(currentValues=False)
 
         #  Convert power to energy values (W to Ws)
-        el_en_demand_curve = create_environment.timer.timeDiscretization * \
-                             el_load_curve
+        el_en_demand_curve = create_environment.timer.time_discretization * el_load_curve
 
         #  Calculate electric energy demand value in kWh
         el_en_demand_curve = el_en_demand_curve / (1000 * 3600)
@@ -67,18 +66,18 @@ class TestElectricalDemand(object):
     #     max_occ = np.max(occupancy_profile)
     #
     #     el_dem_stochastic = ed.ElectricalDemand(create_environment,
-    #                                             annualDemand=3000,
+    #                                             annual_demand=3000,
     #                                             method=2,
     #                                             total_nb_occupants=max_occ,
-    #                                             randomizeAppliances=False,
-    #                                             lightConfiguration=10,
+    #                                             randomize_appliances=False,
+    #                                             light_configuration=10,
     #                                             occupancy=occupancy_profile)
     #
     #     #  Get space heating load curve (in W) per timestep (1 minute)
     #     el_load_curve = el_dem_stochastic.get_power(currentValues=False)
     #
     #     #  Convert power to energy values (W to Ws)
-    #     el_en_demand_curve = create_environment.timer.timeDiscretization * \
+    #     el_en_demand_curve = create_environment.timer.time_discretization * \
     #                          el_load_curve
     #
     #     #  Calculate electric energy demand value in kWh
@@ -112,11 +111,11 @@ class TestElectricalDemand(object):
         max_occ = np.max(occupancy_profile)
 
         el_dem_stochastic = ed.ElectricalDemand(create_environment,
-                                                annualDemand=ann_demand,
+                                                annual_demand=ann_demand,
                                                 method=2,
                                                 total_nb_occupants=max_occ,
-                                                randomizeAppliances=False,
-                                                lightConfiguration=10,
+                                                randomize_appliances=False,
+                                                light_configuration=10,
                                                 occupancy=occupancy_profile,
                                                 do_normalization=True)
 
@@ -124,8 +123,7 @@ class TestElectricalDemand(object):
         el_load_curve = el_dem_stochastic.get_power(currentValues=False)
 
         #  Convert power to energy values (W to Ws)
-        el_en_demand_curve = create_environment.timer.timeDiscretization * \
-                             el_load_curve
+        el_en_demand_curve = create_environment.timer.time_discretization * el_load_curve
 
         #  Calculate electric energy demand value in kWh
         el_en_demand_curve = el_en_demand_curve / (1000 * 3600)

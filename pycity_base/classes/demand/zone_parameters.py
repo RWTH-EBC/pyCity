@@ -37,11 +37,11 @@ class ZoneParameters(object):
                  R_se_op=0.04,
                  epsilon_op=0,
                  V=0,
-                 samplingRate=3600,
-                 buildingClass=0, 
+                 sampling_rate=3600,
+                 building_class=0,
                  kappa_j=[], 
                  A_j=[], 
-                 simplifiedCapacity=True,
+                 simplified_capacity=True,
                  albedo=0.2,
                  gamma=[0, 90, 180, 270, 0, 0],
                  beta=[90, 90, 90, 90, 0, 0]):
@@ -85,63 +85,63 @@ class ZoneParameters(object):
         ----------
         A_f : float
             Used floor area in m^2 (cf. DIN EN ISO 13790, section 6.4, page 30)
-        A_w : array_like
+        A_w : array-like
             Surface area of each window-like component (window, door,...) in m^2
-        U_w : array_like
+        U_w : array-like
             U-values for each window-like component (window, door,...) in W/m^2K
-        g_gln : float or array_like
+        g_gln : float or array-like
             Energy transmittance of window-like components (without unit).
             See DIN EN ISO 13790, section 11.4.2, page 70.
             The fifth entry (floor) is typically 0, since the sun does not 
             directly affect the floor.
-        epsilon_w : float or array_like
+        epsilon_w : float or array-like
             Emissivity of window-like components.
             See DIN EN ISO 13790, section 11.3.4, page 73, equation 51
-        R_se_w : float or array_like
+        R_se_w : float or array-like
             Surface thermal resistance of window-like components.
             See DIN EN ISO 13790, section 11.3.4, page 68 or ISO 6946
-        A_op : array_like
+        A_op : array-like
             Surface area of each opaque component (walls, roof) in m^2
-        U_op : array_like
+        U_op : array-like
             U-values for each opaque component (walls, roof) in W/m^2K
-        alpha_Sc : array_like
+        alpha_Sc : array-like
             Attenuation coefficient for each opaque component, without unit.
             The fifth entry (floor) is typically 0, since the sun does not 
             directly affect the floor.
-        R_se_op : float or array_like
+        R_se_op : float or array-like
             Surface thermal resistance of opaque components.
             See DIN EN ISO 13790, section 11.3.4, page 68 or ISO 6946
-        epsilon_op : float or array_like
+        epsilon_op : float or array-like
             Emissivity of opaque components.
             See DIN EN ISO 13790, section 11.3.4, page 73, equation 51
         V : float
             Zone's volume in m3
-        samplingRate : integer, optional
+        sampling_rate : integer, optional
             Sampling rate required for the computation and converting the 
             ventilation profile
-        buildingClass : integer, optional
+        building_class : integer, optional
             - 0: very light
             - 1: light
             - 2: medium
             - 3: heavy
             - 4: very heavy
-            Optional. Only used if ``simplifiedCapacity==True``
-        kappa_j : array_like, optional
+            Optional. Only used if ``simplified_capacity==True``
+        kappa_j : array-like, optional
             Heat capacity of each component that is in contact with the indoor
-            air in J/m^2K. Optional. Only used if ``simplifiedCapacity==False``
-        A_j : array_like, optional
+            air in J/m^2K. Optional. Only used if ``simplified_capacity==False``
+        A_j : array-like, optional
             Surface area of each component that is in contact with the indoor 
-            air in m^2. Optional. Only used if ``simplifiedCapacity==False``
-        simplifiedCapacity : boolean, optional
+            air in m^2. Optional. Only used if ``simplified_capacity==False``
+        simplified_capacity : boolean, optional
             - ``True``: Simplified computation of effective area and capacity
             - ``False``: Detailed computation of effective area and capacity
         albedo : float, optional
             Average reflectivity of the ground.
             Typical values are between 0.2 and 0.3.
-        gamma : array_like, optional
+        gamma : array-like, optional
             Surface azimuth angle, according to the index convention. 
             0 represents Southern orientation and 90 Western orientation.
-        beta : array_like, optional
+        beta : array-like, optional
             Slope angle. 0 stands for horizontal surfaces and 90 for vertical.
         """
         self._kind = "zoneparameters"
@@ -155,7 +155,7 @@ class ZoneParameters(object):
         # ISO 13790:2008).
 
         # Save sampling rate
-        self.samplingRate = samplingRate
+        self.sampling_rate = sampling_rate
         
         # Compute A_t and H_tr_is
         # Equation 9, section 7.2.2.2 (pages 35, 36)
@@ -167,18 +167,18 @@ class ZoneParameters(object):
         # Compute C_m and A_m
         # Equations 65 and 66, resp. table 12 if the simplified method is used
         # Pages 79-81, sections 12.2.2 and 12.3.1
-        if simplifiedCapacity:
+        if simplified_capacity:
             # Table 12, section 12.3.1.2, page 81
-            if buildingClass == 0:
+            if building_class == 0:
                 self.A_m = 2.5 * A_f
                 self.C_m = 80000 * A_f
-            elif buildingClass == 1:
+            elif building_class == 1:
                 self.A_m = 2.5 * A_f
                 self.C_m = 11000 * A_f
-            elif buildingClass == 2:
+            elif building_class == 2:
                 self.A_m = 2.5 * A_f
                 self.C_m = 165000 * A_f
-            elif buildingClass == 3:
+            elif building_class == 3:
                 self.A_m = 3 * A_f
                 self.C_m = 260000 * A_f
             else:
@@ -276,7 +276,7 @@ class ZoneParameters(object):
         self.V = V
         
         # Initialize ventilation
-        ventilationRate = np.zeros(int(8760 / 3600 * samplingRate))
+        ventilationRate = np.zeros(int(8760 / 3600 * sampling_rate))
         self.updateVentilation(ventilationRate)
         
         # Save Albedo
@@ -302,7 +302,7 @@ class ZoneParameters(object):
         Compute the heat transfer due to ventilation for the given
         ventilationRate.
         
-        ventilationRate : array_like
+        ventilationRate : array-like
             Infiltration due to window opening, etc.
         ventilationRateMinimum : float, optional
             Minimum air exchange rate.
@@ -315,4 +315,4 @@ class ZoneParameters(object):
         
         # Confirm DIN EN ISO 13789:2008-04, page 11, section 5, equation 4.
         self.H_ve = (rhoAir * cPAir * ventilationRate * 
-                     self.V / self.samplingRate)
+                     self.V / self.sampling_rate)

@@ -16,7 +16,7 @@ def _solve(A, b):
     return linalg.solve(A, b)
 
 
-def _calculateNoHeat(zoneParameters, zoneInputs, T_m_init, q=0, timestep=0):
+def _calculateNoHeat(zone_parameters, zoneInputs, t_m_init, q=0, timestep=0):
     """
     Calculate the temperatures (T_op, T_m, T_air, T_s) if neither heating nor
     cooling devices are activated. 
@@ -24,11 +24,11 @@ def _calculateNoHeat(zoneParameters, zoneInputs, T_m_init, q=0, timestep=0):
     
     Parameters
     ----------
-    zoneParameters : ZoneParameters
+    zone_parameters : ZoneParameters
         Resistances and capacity
     zoneInputs : ZoneInputs
         External inputs (solar, internal gains, set temperatures)
-    T_m_init : float
+    t_m_init : float
         Initial temperature of the thermal mass in degree Celsius.
     q : float, optional
         Heating (positive) or cooling (negative) power provided to the zone.
@@ -52,20 +52,20 @@ def _calculateNoHeat(zoneParameters, zoneInputs, T_m_init, q=0, timestep=0):
     # ISO 13790:2008).
     
     # Extract parameters
-    A_m = zoneParameters.A_m  # in m^2
-    A_t = zoneParameters.A_t  # in m^2
-    H_tr_is = zoneParameters.H_tr_is  # in W/K
-    H_tr_ms = zoneParameters.H_tr_ms  # in W/K
-    H_tr_w = zoneParameters.H_tr_w  # in W/K
-    H_ve = zoneParameters.H_ve[timestep]  # in W/K
-    C_m = zoneParameters.C_m  # in J/K
+    A_m = zone_parameters.A_m  # in m^2
+    A_t = zone_parameters.A_t  # in m^2
+    H_tr_is = zone_parameters.H_tr_is  # in W/K
+    H_tr_ms = zone_parameters.H_tr_ms  # in W/K
+    H_tr_w = zone_parameters.H_tr_w  # in W/K
+    H_ve = zone_parameters.H_ve[timestep]  # in W/K
+    C_m = zone_parameters.C_m  # in J/K
     
-    if len(zoneParameters.H_tr_em) > 1:
-        H_tr_em = zoneParameters.H_tr_em[timestep]  # in W/K
+    if len(zone_parameters.H_tr_em) > 1:
+        H_tr_em = zone_parameters.H_tr_em[timestep]  # in W/K
     else:
-        H_tr_em = zoneParameters.H_tr_em  # in W/K
+        H_tr_em = zone_parameters.H_tr_em  # in W/K
 
-    dt = zoneParameters.samplingRate  # in s
+    dt = zone_parameters.sampling_rate  # in s
     
     Phi_int = zoneInputs.Phi_int[timestep]
     Phi_sol = zoneInputs.Phi_sol[timestep]
@@ -92,7 +92,7 @@ def _calculateNoHeat(zoneParameters, zoneInputs, T_m_init, q=0, timestep=0):
     A[2, 1] = - H_tr_is
     A[2, 2] = H_ve + H_tr_is
     
-    b[0] = Phi_m + H_tr_em * T_e + C_m * T_m_init / dt
+    b[0] = Phi_m + H_tr_em * T_e + C_m * t_m_init / dt
     b[1] = Phi_st + H_tr_w * T_e
     b[2] = Phi_ia + H_ve * T_sup + q
 
@@ -108,18 +108,18 @@ def _calculateNoHeat(zoneParameters, zoneInputs, T_m_init, q=0, timestep=0):
     return (T_op, T_m, T_i, T_s)
     
     
-def _calculateHeat(zoneParameters, zoneInputs, T_m_init, T_set, timestep=0):
+def _calculateHeat(zone_parameters, zoneInputs, t_m_init, T_set, timestep=0):
     """
     Calculate the temperatures (Q_HC, T_op, T_m, T_air, T_s) that result when
     reaching a given set temperature T_set. 
     
     Parameters
     ----------
-    zoneParameters : ZoneParameters
+    zone_parameters : ZoneParameters
         Resistances and capacity
     zoneInputs : ZoneInputs
         External inputs (solar, internal gains, set temperatures)
-    T_m_init : float
+    t_m_init : float
         Initial temperature of the thermal mass in degree Celsius.
     T_set : float
         Set temperature in degree Celsius.
@@ -146,20 +146,20 @@ def _calculateHeat(zoneParameters, zoneInputs, T_m_init, T_set, timestep=0):
     # ISO 13790:2008).
     
     # Extract parameters
-    A_m = zoneParameters.A_m  # in m^2
-    A_t = zoneParameters.A_t  # in m^2
-    H_tr_is = zoneParameters.H_tr_is  # in W/K
-    H_tr_ms = zoneParameters.H_tr_ms  # in W/K
-    H_tr_w = zoneParameters.H_tr_w  # in W/K
-    H_ve = zoneParameters.H_ve[timestep]  # in W/K
-    C_m = zoneParameters.C_m  # in J/K
+    A_m = zone_parameters.A_m  # in m^2
+    A_t = zone_parameters.A_t  # in m^2
+    H_tr_is = zone_parameters.H_tr_is  # in W/K
+    H_tr_ms = zone_parameters.H_tr_ms  # in W/K
+    H_tr_w = zone_parameters.H_tr_w  # in W/K
+    H_ve = zone_parameters.H_ve[timestep]  # in W/K
+    C_m = zone_parameters.C_m  # in J/K
 
-    if len(zoneParameters.H_tr_em) > 1:
-        H_tr_em = zoneParameters.H_tr_em[timestep]  # in W/K
+    if len(zone_parameters.H_tr_em) > 1:
+        H_tr_em = zone_parameters.H_tr_em[timestep]  # in W/K
     else:
-        H_tr_em = zoneParameters.H_tr_em  # in W/K
+        H_tr_em = zone_parameters.H_tr_em  # in W/K
 
-    dt = zoneParameters.samplingRate  # in s
+    dt = zone_parameters.sampling_rate  # in s
     
     Phi_int = zoneInputs.Phi_int[timestep]
     Phi_sol = zoneInputs.Phi_sol[timestep]
@@ -190,7 +190,7 @@ def _calculateHeat(zoneParameters, zoneInputs, T_m_init, T_set, timestep=0):
 #    A[3,1] = 1 - A[3,2]
     A[3, 2] = 1
     
-    b[0] = Phi_m + H_tr_em * T_e + C_m * T_m_init / dt
+    b[0] = Phi_m + H_tr_em * T_e + C_m * t_m_init / dt
     b[1] = Phi_st + H_tr_w * T_e
     b[2] = Phi_ia + H_ve * T_sup
     b[3] = T_set
@@ -208,7 +208,7 @@ def _calculateHeat(zoneParameters, zoneInputs, T_m_init, T_set, timestep=0):
     return (Q_HC, T_op, T_m, T_i, T_s)
    
    
-def calc(zoneParameters, zoneInputs, TCoolingSet, THeatingSet,
+def calc(zone_parameters, zoneInputs, t_cooling_set, t_heating_set,
          limitHeating=np.inf, limitCooling=-np.inf, beQuiet=False):
     """
     Compute heating/cooling demand for the thermal zone. 
@@ -216,13 +216,13 @@ def calc(zoneParameters, zoneInputs, TCoolingSet, THeatingSet,
     
     Parameters
     ----------
-    zoneParameters : ZoneParameters
+    zone_parameters : ZoneParameters
         Resistances and capacity
     zoneInputs : ZoneInputs
         External inputs (solar, internal gains, set temperatures)
-    TCoolingSet : array_like
+    t_cooling_set : array-like
         Cooling set temperatures in degC.
-    THeatingSet : array_like
+    t_heating_set : array-like
         Heating set temperatures in degC.
     limitHeating : float, optional
         Maximum available heating power in Watt.
@@ -233,17 +233,17 @@ def calc(zoneParameters, zoneInputs, TCoolingSet, THeatingSet,
     
     Returns
     -------
-    Q_HC : array_like
+    Q_HC : array-like
         Heating/cooling demand. Positive values indicate heating demand,
         negative values cooling demand.
-    T_op : array_like
+    T_op : array-like
         Operating temperature inside the thermal zone in degC. This 
         temperature serves as actual temperature for the zone controller.        
-    T_m : array_like
+    T_m : array-like
         Temperature of the thermal mass in degC.
-    T_i : array_like
+    T_i : array-like
         Air temperature in degC.
-    T_s : array_like
+    T_s : array-like
         Average temperature of internal components in degC (radiative 
         temperature).
     """
@@ -258,40 +258,40 @@ def calc(zoneParameters, zoneInputs, TCoolingSet, THeatingSet,
     for t in range(numberTimesteps):
 
         if t == 0:
-            t_previous = zoneInputs.T_m_init
+            t_previous = zoneInputs.t_m_init
         else:
             t_previous = T_m[t-1]
         
         # Compute what happens without heating (deadband)
-        (t_op, t_m, t_i, t_s) = _calculateNoHeat(zoneParameters, zoneInputs, 
+        (t_op, t_m, t_i, t_s) = _calculateNoHeat(zone_parameters, zoneInputs,
                                                  t_previous, q=0, timestep=t)
-        if t_op < THeatingSet[t]:
+        if t_op < t_heating_set[t]:
             # Compute heat demand
-            (q_hc, t_op, t_m, t_i, t_s) = _calculateHeat(zoneParameters, 
+            (q_hc, t_op, t_m, t_i, t_s) = _calculateHeat(zone_parameters,
                                                          zoneInputs, 
                                                          t_previous, 
-                                                         THeatingSet[t], 
+                                                         t_heating_set[t],
                                                          timestep=t)
 
             if q_hc > limitHeating:
                 q_hc = limitHeating
-                (t_op, t_m, t_i, t_s) = _calculateNoHeat(zoneParameters, 
+                (t_op, t_m, t_i, t_s) = _calculateNoHeat(zone_parameters,
                                                          zoneInputs, 
                                                          t_previous, 
                                                          q=limitHeating, 
                                                          timestep=t)
                 
-        elif t_op > TCoolingSet[t]:
+        elif t_op > t_cooling_set[t]:
             # Compute cooling demand
-            (q_hc, t_op, t_m, t_i, t_s) = _calculateHeat(zoneParameters, 
+            (q_hc, t_op, t_m, t_i, t_s) = _calculateHeat(zone_parameters,
                                                          zoneInputs, 
                                                          t_previous, 
-                                                         TCoolingSet[t], 
+                                                         t_cooling_set[t],
                                                          timestep=t)
             
             if q_hc < limitCooling:
                 q_hc = limitCooling
-                (t_op, t_m, t_i, t_s) = _calculateNoHeat(zoneParameters, 
+                (t_op, t_m, t_i, t_s) = _calculateNoHeat(zone_parameters,
                                                          zoneInputs, 
                                                          t_previous, 
                                                          q=limitCooling, 
@@ -321,7 +321,7 @@ def calc(zoneParameters, zoneInputs, TCoolingSet, THeatingSet,
     return (Q_HC, T_op, T_m, T_i, T_s)
 
 
-def calculate(zoneParameters, zoneInputs, T_set):
+def calculate(zone_parameters, zoneInputs, T_set):
     """
     Compute heating/cooling demand. 
     There is no difference between heating and cooling set temperatures. No 
@@ -329,11 +329,11 @@ def calculate(zoneParameters, zoneInputs, T_set):
  
     Parameters
     ----------
-    zoneParameters : ZoneParameters
+    zone_parameters : ZoneParameters
         Resistances and capacity
     zoneInputs : ZoneInputs
         External inputs (solar, internal gains, set temperatures)
-    T_set : array_like
+    T_set : array-like
         Set value for operating temperature in degC.
     """
     
@@ -342,16 +342,16 @@ def calculate(zoneParameters, zoneInputs, T_set):
     # ISO 13790:2008).
     
     # Extract parameters
-    A_m = zoneParameters.A_m  # in m^2
-    A_t = zoneParameters.A_t  # in m^2
-    H_tr_is = zoneParameters.H_tr_is  # in W/K
-    H_tr_ms = zoneParameters.H_tr_ms  # in W/K
-    H_tr_em = zoneParameters.H_tr_em  # in W/K
-    H_tr_w = zoneParameters.H_tr_w  # in W/K
-    H_ve = zoneParameters.H_ve  # in W/K
-    C_m = zoneParameters.C_m  # in J/K
+    A_m = zone_parameters.A_m  # in m^2
+    A_t = zone_parameters.A_t  # in m^2
+    H_tr_is = zone_parameters.H_tr_is  # in W/K
+    H_tr_ms = zone_parameters.H_tr_ms  # in W/K
+    H_tr_em = zone_parameters.H_tr_em  # in W/K
+    H_tr_w = zone_parameters.H_tr_w  # in W/K
+    H_ve = zone_parameters.H_ve  # in W/K
+    C_m = zone_parameters.C_m  # in J/K
 
-    dt = zoneParameters.samplingRate  # in s
+    dt = zone_parameters.sampling_rate  # in s
     
     Phi_int = zoneInputs.Phi_int
     Phi_sol = zoneInputs.Phi_sol

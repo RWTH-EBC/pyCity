@@ -41,9 +41,9 @@ class Load(object):
         (currentValues==False)
         """
         if currentValues:
-            initialPosition  = self.environment.timer.currentTimestep
-            timestepsHorizon = self.environment.timer.timestepsHorizon
-            finalPosition = initialPosition + timestepsHorizon
-            return self.loadcurve[initialPosition : finalPosition]
+            initial_position = self.environment.timer.current_timestep
+            timesteps_horizon = self.environment.timer.timesteps_horizon
+            final_position = initial_position + timesteps_horizon
+            return self.loadcurve[initial_position:final_position]
         else:
             return self.loadcurve

@@ -73,6 +73,10 @@ class Occupancy(object):
             #  Save occupancy profile
             self.occupancy = copy.copy(occupancy.occupancy)
 
+    @property
+    def kind(self):
+        return self._kind
+
     def get_occ_profile_in_curr_timestep(self, timestep=None, int_con=False):
         """
         Returns occupancy profile in current timestep (as occupancy profile

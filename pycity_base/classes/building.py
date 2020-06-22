@@ -43,6 +43,10 @@ class Building(object):
         self.hasHeatingCurve = False
         
         self.flowTemperature = np.zeros(environment.timer.timestepsHorizon)
+
+    @property
+    def kind(self):
+        return self._kind
     
     def addEntity(self, entity):
         """ 
@@ -54,15 +58,15 @@ class Building(object):
         >>> myBuilding = Building(...)
         >>> myBuilding.addEntity(myBes)
         """
-        if entity._kind == "apartment":
+        if entity.kind == "apartment":
             self.apartments.append(entity)
             self.hasApartments = True
         
-        elif entity._kind == "bes":
+        elif entity.kind == "bes":
             self.bes = entity
             self.hasBes = True
 
-        elif entity._kind == "heatingcurve":
+        elif entity.kind == "heatingcurve":
             self.heatingCurve = entity
             self.hasHeatingCurve = True
 
@@ -266,7 +270,7 @@ class Building(object):
         rawTFlow = function(tAmbient, smoothingPeriod=relevantPreviousDays)
         timestepsHorizon = self.environment.timer.timestepsHorizon
         firstIndex = len(rawTFlow) - timestepsHorizon
-        lastIndex  = firstIndex + timestepsHorizon
+        lastIndex = firstIndex + timestepsHorizon
         tFlow = rawTFlow[firstIndex:lastIndex]
         
         # Check if this flow temperature has to be increased at certain time 

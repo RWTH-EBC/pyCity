@@ -53,6 +53,10 @@ class ThermalEnergyStorage(object):
         
         self.totalTSto = np.zeros(environment.timer.timestepsTotal)
         self.currentTSto = np.zeros(environment.timer.timestepsUsedHorizon)
+
+    @property
+    def kind(self):
+        return self._kind
         
     def setResults(self, tSto):
         """ 

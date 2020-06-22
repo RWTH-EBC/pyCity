@@ -43,6 +43,10 @@ class Prices(object):
         self.costsEl = costsElectricity / (kWh_to_J * Cents_in_Euro)
         self.revEl = revenueElectricity / (kWh_to_J * Cents_in_Euro)
         self.costsGas = costsGas / (kWh_to_J * Cents_in_Euro)
+
+    @property
+    def kind(self):
+        return self._kind
         
     def getAllData(self):
         """

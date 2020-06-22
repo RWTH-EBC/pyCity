@@ -44,6 +44,10 @@ class Inverter(object):
         self.totalPOutput = np.zeros(timestepsTotal)
         self.currentPInput = np.zeros(timestepsUsedHorizon)
         self.currentPOutput = np.zeros(timestepsUsedHorizon)
+
+    @property
+    def kind(self):
+        return self._kind
         
     def getResults(self, currentValues=True):
         """

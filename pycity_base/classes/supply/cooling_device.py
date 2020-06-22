@@ -52,6 +52,10 @@ class CoolingDevice(object):
         self.current_q_output = np.zeros(timesteps_used_horizon)
         self.current_schedule = np.zeros(timesteps_used_horizon)
 
+    @property
+    def kind(self):
+        return self._kind
+
     def _set_schedule(self, schedule):
         """ Save the computed schedule to the cooling device """
         results = handleData.saveResult(self.environment.timer,

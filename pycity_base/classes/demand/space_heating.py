@@ -202,6 +202,10 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
             super(SpaceHeating, self).__init__(environment, loadcurve)
             
         self._kind = "spaceheating"
+
+    @property
+    def kind(self):
+        return self._kind
         
     def get_power(self, currentValues=True):
         """

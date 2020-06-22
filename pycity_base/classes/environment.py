@@ -34,6 +34,10 @@ class Environment(object):
         self.weather = weather
         self.prices = prices
         self.location = location
+
+    @property
+    def kind(self):
+        return self._kind
     
     def update(self):
         """ Increase current timestep and current day """

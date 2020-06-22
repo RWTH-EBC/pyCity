@@ -50,6 +50,10 @@ class Apartment(object):
                                                          specificDemand=0)
         self.rooms = []
 
+    @property
+    def kind(self):
+        return self._kind
+
     def addEntity(self, entity):
         """
         Add an entity to apartment.
@@ -58,11 +62,11 @@ class Apartment(object):
         ----------
         entity : object
             Entity. Possible objects:
-            - Electrical demand (entity._kind == "electricaldemand")
-            - Domestic hot water demand (entity._kind == "domestichotwater")
-            - Space heating demand (entity._kind == "spaceheating")
-            - Occupancy (entity._kind == 'occupancy')
-            - Room (entity._kind == "room"
+            - Electrical demand (entity.kind == "electricaldemand")
+            - Domestic hot water demand (entity.kind == "domestichotwater")
+            - Space heating demand (entity.kind == "spaceheating")
+            - Occupancy (entity.kind == 'occupancy')
+            - Room (entity.kind == "room"
         
         Example
         -------
@@ -71,19 +75,19 @@ class Apartment(object):
         >>> myApartment.addDevice(myDHW)
         """
 
-        if entity._kind == "electricaldemand":
+        if entity.kind == "electricaldemand":
             self.power_el = entity
 
-        elif entity._kind == "domestichotwater":
+        elif entity.kind == "domestichotwater":
             self.demandDomesticHotWater = entity
 
-        elif entity._kind == "spaceheating":
+        elif entity.kind == "spaceheating":
             self.demandSpaceheating = entity
 
-        elif entity._kind == 'occupancy':
+        elif entity.kind == 'occupancy':
             self.occupancy = entity
 
-        elif entity._kind == "room":  # pragma: no cover
+        elif entity.kind == "room":  # pragma: no cover
             self.rooms.append(entity)
 
         else:  # pragma: no cover

@@ -242,6 +242,10 @@ class Weather(pycity_base.classes.sun.Sun):
                                            timeDiscretization,
                                            self.timer.timeDiscretization)
 
+    @property
+    def kind(self):
+        return self._kind
+
     def getRadiationTiltedSurface(self, beta, gamma, albedo=0.3, update=False,
                                   current_values=True):
         """

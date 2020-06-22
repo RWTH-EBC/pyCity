@@ -36,6 +36,8 @@ class Sun(object):
             Is the input data from a test reference year? If yes, the time 
             equation has an offset of 0.5 hours, else 0.
         """
+        self._kind = "sun"
+
         self.timer = timer
         self.altitude = altitude
         self.timeZone = timeZone
@@ -44,6 +46,10 @@ class Sun(object):
         (self.latitude, self.longitude) = location
         
         self.TRY = TRY
+
+    @property
+    def kind(self):
+        return self._kind
     
     def setLocation(self, location=(50.76, 6.07), timeZone=1, altitude=0):
         """ 

@@ -53,11 +53,15 @@ class CityDistrict(ues.UESGraph):
         self.environment = environment
 
         #  List of possible entity names (might be extended by user
-        #  when using own entity._kind)
+        #  when using own entity.kind)
         self.entity_name_list = ['building', 'pv', 'windenergyconverter']
 
         #  Define object type
         self._kind = 'citydistrict'
+
+    @property
+    def kind(self):
+        return self._kind
 
     def addEntity(self, entity, position, name=None,
                   is_supply_electricity=None, is_supply_heating=False,
@@ -111,15 +115,15 @@ class CityDistrict(ues.UESGraph):
             #  Extract environment from entity
             self.environment = entity.environment
 
-        # Automatically decide via entity._kind
+        # Automatically decide via entity.kind
         if is_supply_electricity is None:
-            if entity._kind == "building":
+            if entity.kind == "building":
                 is_supply_electricity = False
 
-            elif entity._kind == "windenergyconverter":
+            elif entity.kind == "windenergyconverter":
                 is_supply_electricity = True
 
-            elif entity._kind == "pv":
+            elif entity.kind == "pv":
                 is_supply_electricity = True
             else:
                 raise ValueError('Unknown kind of entity. Select known ' +
@@ -128,9 +132,9 @@ class CityDistrict(ues.UESGraph):
                                  'is_supply_electricity, when using own ' +
                                  'entity type.')
 
-        # If entity._kind is new, extend entities list
-        if entity._kind not in self.entity_name_list:
-            self.entity_name_list.append(entity._kind)
+        # If entity.kind is new, extend entities list
+        if entity.kind not in self.entity_name_list:
+            self.entity_name_list.append(entity.kind)
 
         # Use add_building method of uesgraph (in ues graph, every demand
         #  and every supplier is linked to a building). PV or wec "buildings"
@@ -241,7 +245,7 @@ class CityDistrict(ues.UESGraph):
                 #  If node_type is building
                 if self.node[n]['node_type'] == 'building':
                     #  If entity is of type pv
-                    if self.node[n]['entity']._kind == 'pv':
+                    if self.node[n]['entity'].kind == 'pv':
                         #  Add pv entity to list
                         pv_entities.append(self.node[n]['entity'])
 
@@ -284,7 +288,7 @@ class CityDistrict(ues.UESGraph):
                 #  If node_type is building
                 if self.node[n]['node_type'] == 'building':
                     #  If entity is of type pv
-                    if self.node[n]['entity']._kind == 'windenergyconverter':
+                    if self.node[n]['entity'].kind == 'windenergyconverter':
                         #  Add pv entity to list
                         wind_entities.append(self.node[n]['entity'])
 
@@ -330,7 +334,7 @@ class CityDistrict(ues.UESGraph):
                 #  If node_type is building
                 if self.node[n]['node_type'] == 'building':
                     #  If entity is kind building
-                    if self.node[n]['entity']._kind == 'building':
+                    if self.node[n]['entity'].kind == 'building':
                         temp = self.node[n]['entity'].get_power_curves(
                             current_values=current_values)
                         power_el += temp[0]
@@ -384,7 +388,7 @@ class CityDistrict(ues.UESGraph):
                 #  If node_type is building
                 if self.node[n]['node_type'] == 'building':
                     #  If entity is kind building
-                    if self.node[n]['entity']._kind == 'building':
+                    if self.node[n]['entity'].kind == 'building':
                         th_power_curve = self.node[n]['entity']. \
                             get_space_heating_power_curve(
                             current_values=current_values)[0:size]
@@ -438,7 +442,7 @@ class CityDistrict(ues.UESGraph):
                 #  If node_type is building
                 if self.node[n]['node_type'] == 'building':
                     #  If entity is kind building
-                    if self.node[n]['entity']._kind == 'building':
+                    if self.node[n]['entity'].kind == 'building':
                         el_power_curve = self.node[n]['entity']. \
                             get_electric_power_curve(
                             current_values=current_values)[0:size]
@@ -492,7 +496,7 @@ class CityDistrict(ues.UESGraph):
                 #  If node_type is building
                 if self.node[n]['node_type'] == 'building':
                     #  If entity is kind building
-                    if self.node[n]['entity']._kind == 'building':
+                    if self.node[n]['entity'].kind == 'building':
                         dhw_power_curve = self.node[n]['entity']. \
                             get_dhw_power_curve(
                             current_values=current_values)[0:size]
@@ -515,7 +519,7 @@ class CityDistrict(ues.UESGraph):
                 #  If node_type is building
                 if self.node[n]['node_type'] == 'building':
                     #  If entity is kind building
-                    if self.node[n]['entity']._kind == 'building':
+                    if self.node[n]['entity'].kind == 'building':
                         flow_temp = self.node[n]['entity'].getFlowTemperature()
                         flowTemperature = np.maximum(flowTemperature,
                                                      flow_temp)
@@ -548,7 +552,7 @@ class CityDistrict(ues.UESGraph):
                 if self.node[n]['node_type'] == 'building':
                     if 'entity' in self.node[n]:
                         #  If entity is of kind entity_name
-                        if self.node[n]['entity']._kind == entity_name:
+                        if self.node[n]['entity'].kind == entity_name:
                             nb_of_entities += 1
         return nb_of_entities
 
@@ -578,7 +582,7 @@ class CityDistrict(ues.UESGraph):
                 if self.node[n]['node_type'] == 'building':
                     if 'entity' in self.node[n]:
                         #  If entity is of kind entity_name
-                        if self.node[n]['entity']._kind == entity_name:
+                        if self.node[n]['entity'].kind == entity_name:
                             node_nb_list.append(n)
         return node_nb_list
 

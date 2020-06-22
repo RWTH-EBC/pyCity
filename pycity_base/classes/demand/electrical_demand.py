@@ -397,6 +397,10 @@ class ElectricalDemand(pycity_base.classes.demand.load.Load):
         self._kind = "electricaldemand"
         self.method = method
 
+    @property
+    def kind(self):
+        return self._kind
+
     def get_power(self, currentValues=True):
         """
         Return electrical power curve

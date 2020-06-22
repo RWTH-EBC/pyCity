@@ -68,39 +68,39 @@ class BES(object):
         >>> myBes.addDevice(myChp)
         """
         if objectInstance._kind == "battery":
-            self.battery = objectInstance
+            self.battery.append(objectInstance)
             self.hasBattery = True
         
         elif objectInstance._kind == "boiler":
-            self.boiler = objectInstance
+            self.boiler.append(objectInstance)
             self.hasBoiler = True
         
         elif objectInstance._kind == "chp":
-            self.chp = objectInstance
+            self.chp.append(objectInstance)
             self.hasChp = True
         
         elif objectInstance._kind == "electricalheater":
-            self.electricalHeater = objectInstance
+            self.electricalHeater.append(objectInstance)
             self.hasElectricalHeater = True
         
         elif objectInstance._kind == "heatpump":
-            self.heatpump = objectInstance
+            self.heatpump.append(objectInstance)
             self.hasHeatpump = True
         
         elif objectInstance._kind == "inverter":
             if objectInstance.inputAC:
-                self.inverterAcdc = objectInstance
+                self.inverterAcdc.append(objectInstance)
                 self.hasInverterAcdc = True
             else:
-                self.inverterDcac = objectInstance
+                self.inverterDcac.append(objectInstance)
                 self.hasInverterDcac = True
         
         elif objectInstance._kind == "pv":
-            self.pv = objectInstance
+            self.pv.append(objectInstance)
             self.hasPv = True
             
         elif objectInstance._kind == "tes":
-            self.tes = objectInstance
+            self.tes.append(objectInstance)
             self.hasTes = True
             
     def addMultipleDevices(self, devices):

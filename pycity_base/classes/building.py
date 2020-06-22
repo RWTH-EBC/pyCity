@@ -107,7 +107,7 @@ class Building(object):
         else:
             timesteps = self.environment.timer.timestepsTotal
         power_el = np.zeros(timesteps)
-        power_th    = np.zeros(timesteps)
+        power_th = np.zeros(timesteps)
         
         # Add demands of each apartment
         for apartment in self.apartments:
@@ -267,7 +267,7 @@ class Building(object):
         timestepsHorizon = self.environment.timer.timestepsHorizon
         firstIndex = len(rawTFlow) - timestepsHorizon
         lastIndex  = firstIndex + timestepsHorizon
-        tFlow = rawTFlow[firstIndex : lastIndex]
+        tFlow = rawTFlow[firstIndex:lastIndex]
         
         # Check if this flow temperature has to be increased at certain time 
         # steps due to domestic hot water
@@ -300,7 +300,10 @@ class Building(object):
             Two-point controlled: lowerActivationLimit = 1
         """
         tFlow = self.getFlowTemperature()
-        return self.bes.heatpump.getNominalValues(tFlow)
+        heatpump_nominals = []
+        for heatpump in self.bes.heatpump:
+            heatpump_nominals.append(heatpump.getNominalValues(tFlow))
+        return heatpump_nominals
 
     def get_number_of_apartments(self):
         """

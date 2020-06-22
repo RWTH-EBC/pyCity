@@ -35,7 +35,7 @@ class Apartment(object):
         self.net_floor_area = net_floor_area
         self.occupancy = occupancy
 
-        # Create empty power curves
+        # Create empty power curves using dummy devices
         self.power_el = ElecDemand.ElectricalDemand(environment,
                                                     method=0,
                                                     annualDemand=0)

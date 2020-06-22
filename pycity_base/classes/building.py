@@ -35,8 +35,8 @@ class Building(object):
         self.environment = environment
         
         self.apartments = []
-        self.bes = []
-        self.heatingCurve = []
+        self.bes = None
+        self.heatingCurve = None
         
         self.hasApartments = False
         self.hasBes = False

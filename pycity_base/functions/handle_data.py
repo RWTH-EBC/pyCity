@@ -32,16 +32,16 @@ def saveResult(timer, currentAttribute, totalAttribute, currentResult):
     -------
     >>> # Save the results of a scheduling optimization
     >>> # Due to limited space, the variable names are shortened
-    >>> # cS --> currentSchedule, tS --> totalSchedule
+    >>> # cS --> current_device_schedule, tS --> total_device_schedule
     >>> schedule = optimizer(...)
     >>> (self.cS, self.tS) = saveResult(timer, self.cS, self.tS, schedule)
     """
     # Get current and final position
-    currentPosition = timer.currentTimestep
-    finalPosition = currentPosition + timer.timestepsUsedHorizon
+    currentPosition = timer.current_timestep
+    finalPosition = currentPosition + timer.timesteps_used_horizon
     
     # Only save the first values that are not overwritten later
-    requiredResult = currentResult[0:timer.timestepsUsedHorizon]
+    requiredResult = currentResult[0:timer.timesteps_used_horizon]
     
     # Save the results
     currentAttribute = requiredResult
@@ -75,7 +75,7 @@ def saveResultInit(timer, currentAttribute, totalAttribute, currentResult):
     -------
     >>> # Save the resulting storage temperature
     >>> # Due to limited space, the variable names are shortened
-    >>> # cT --> currentTSto, tT --> totalTSto, tI --> tInit
+    >>> # cT --> current_t_sto, tT --> total_t_sto, tI --> tInit
     >>> tSto = optimizer(...)
     >>> (self.cT, self.tT, self.tI) = saveResult(timer, self.cT, self.tT, tSto)
     """
@@ -83,7 +83,7 @@ def saveResultInit(timer, currentAttribute, totalAttribute, currentResult):
                                                     currentAttribute, 
                                                     totalAttribute, 
                                                     currentResult)
-    init_value = currentResult[timer.timestepsUsedHorizon-1]
+    init_value = currentResult[timer.timesteps_used_horizon-1]
     
     return (currentAttribute, totalAttribute, init_value)
     

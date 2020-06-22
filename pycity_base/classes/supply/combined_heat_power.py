@@ -20,45 +20,45 @@ class CHP(HeatingDevice.HeatingDevice):
 
     def __init__(self, 
                  environment, 
-                 pNominal, 
-                 qNominal, 
+                 p_nominal,
+                 q_nominal,
                  omega, 
-                 tMax=85, 
-                 lowerActivationLimit=1):
+                 t_max=85,
+                 lower_activation_limit=1):
         """
         Parameters
         ---------
         environment : environment object
             Common to all other objects. Includes time and weather instances
-        pNominal : array of float
+        p_nominal : array of float
             nominal electricity output in Watt
-        qNominal : array of float
+        q_nominal : array of float
             nominal heat output in Watt
         omega : array of float
             total efficiency of the CHP unit (without unit)
-        tMax : integer, optional
+        t_max : integer, optional
             maximum provided temperature in °C
-        lowerActivationLimit : float (0 <= lowerActivationLimit <= 1)
+        lower_activation_limit : float (0 <= lower_activation_limit <= 1)
             Define the lower activation limit. For example, heat pumps are 
             typically able to operate between 50 % part load and rated load. 
-            In this case, lowerActivationLimit would be 0.5
+            In this case, lower_activation_limit would be 0.5
             Two special cases: 
-            Linear behavior: lowerActivationLimit = 0
-            Two-point controlled: lowerActivationLimit = 1
+            Linear behavior: lower_activation_limit = 0
+            Two-point controlled: lower_activation_limit = 1
         """
 
-        self.pNominal = pNominal
+        self.p_nominal = p_nominal
         self.omega = omega
-        self.sigma = pNominal / qNominal
+        self.sigma = p_nominal / q_nominal
         super(CHP, self).__init__(environment, 
-                                  qNominal, 
-                                  tMax, 
-                                  lowerActivationLimit)
+                                  q_nominal,
+                                  t_max,
+                                  lower_activation_limit)
         
         self._kind = "chp"
 
-        self.totalPOutput = np.zeros(environment.timer.timestepsTotal)
-        self.currentPOutput = np.zeros(environment.timer.timestepsUsedHorizon)
+        self.total_p_output = np.zeros(environment.timer.timesteps_total)
+        self.current_p_output = np.zeros(environment.timer.timesteps_used_horizon)
 
     @property
     def kind(self):
@@ -76,16 +76,16 @@ class CHP(HeatingDevice.HeatingDevice):
         
         Order
         -----
-        pOutput : array_like
+        pOutput : array-like
             Electricity production of the CHP unit
-        qOutput : array_like
+        qOutput : array-like
             Heat production of the CHP unit
-        schedule : array_like
+        schedule : array-like
             Operational schedule
         """
         pOutput = handleData.getValues(currentValues, 
-                                       self.currentPOutput, 
-                                       self.totalPOutput)
+                                       self.current_p_output,
+                                       self.total_p_output)
         
         return (pOutput,
                 self._getQOutput(currentValues), 
@@ -98,10 +98,10 @@ class CHP(HeatingDevice.HeatingDevice):
         self._setSchedule(schedule)
         self._setQOutput(qOutput)
         result = handleData.saveResult(self.environment.timer, 
-                                       self.currentPOutput, 
-                                       self.totalPOutput, 
+                                       self.current_p_output,
+                                       self.total_p_output,
                                        pOutput)
-        (self.currentPOutput, self.totalPOutput) = result
+        (self.current_p_output, self.total_p_output) = result
         
     def getNominalValues(self):
         """
@@ -111,5 +111,5 @@ class CHP(HeatingDevice.HeatingDevice):
         output, nominal heat output, maximum flow temperature and lower 
         activation limit.
         """
-        return (self.omega, self.sigma, self.pNominal, self.qNominal, 
-                self.tMax, self.lowerActivationLimit)
+        return (self.omega, self.sigma, self.p_nominal, self.q_nominal,
+                self.t_max, self.lower_activation_limit)

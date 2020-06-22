@@ -82,10 +82,10 @@ class TestCityDistrict(object):
 
         #  Convert power values in W to energy values in kWh
         el_demand = np.sum(demand_tuple[0]) * \
-                    create_citydist.environment.timer.timeDiscretization / \
+                    create_citydist.environment.timer.time_discretization / \
                     (1000 * 3600)
         th_demand = np.sum(demand_tuple[1]) * \
-                    create_citydist.environment.timer.timeDiscretization / \
+                    create_citydist.environment.timer.time_discretization / \
                     (1000 * 3600)
 
         daily_consumption = 70

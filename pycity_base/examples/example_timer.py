@@ -10,15 +10,14 @@ import pycity_base.classes.timer
 
 def print_timer(time):
     print()
-    print(("Time discretization: " + str(time.timeDiscretization)))
-    print(("Time steps horizon: " + str(time.timestepsHorizon)))
-    print(("Time steps used horizon: " + str(time.timestepsUsedHorizon)))
-    print(("Time steps total: " + str(time.timestepsTotal)))
-    print(("Current time step: " + str(time.currentTimestep)))
-    print(("Current optimization period: " + str(time.currentOptimizationPeriod)))
-    print(("Current day: " + str(time.currentDay)))
-    print(("Current weekday: " + str(time.currentWeekday)))
-    print(("Is the current day on a weekend? " + str(time.currentDayWeekend)))
+    print(("Time discretization: " + str(time.time_discretization)))
+    print(("Time steps horizon: " + str(time.timesteps_horizon)))
+    print(("Time steps used horizon: " + str(time.timesteps_used_horizon)))
+    print(("Time steps total: " + str(time.timesteps_total)))
+    print(("Current time step: " + str(time.current_timestep)))
+    print(("Current day: " + str(time.current_day)))
+    print(("Current weekday: " + str(time.current_weekday)))
+    print(("Is the current day on a weekend? " + str(time.current_day_weekend)))
 
 
 def run_example():

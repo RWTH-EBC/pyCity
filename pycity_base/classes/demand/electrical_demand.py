@@ -43,9 +43,9 @@ class ElectricalDemand(pycity_base.classes.demand.load.Load):
                  environment,
                  method=0,
                  loadcurve=[],
-                 annualDemand=None, profileType="H0",
-                 singleFamilyHouse=True, total_nb_occupants=0,
-                 randomizeAppliances=True, lightConfiguration=0, occupancy=[],
+                 annual_demand=None, profile_type="H0",
+                 single_family_house=True, total_nb_occupants=0,
+                 randomize_appliances=True, light_configuration=0, occupancy=[],
                  do_normalization=False, method_3_type=None,
                  method_4_type=None, prev_heat_dev=False, app_filename=None,
                  light_filename=None, season_light_mod=False,
@@ -65,13 +65,13 @@ class ElectricalDemand(pycity_base.classes.demand.load.Load):
                     (non-residential)
         loadcurve : Array-like, optional
             Load curve for all investigated time steps
-        annualDemand : Float (required for SLP and recommended for method 2)
+        annual_demand : Float (required for SLP and recommended for method 2)
             Annual electrical demand in kWh.
             If method 2 is chosen but no value is given, a standard value for
             Germany (http://www.die-stromsparinitiative.de/fileadmin/bilder/
             Stromspiegel/Brosch%C3%BCre/Stromspiegel2014web_final.pdf) is used.
             (default: None)
-        profileType : String (required for SLP; method=1)
+        profile_type : String (required for SLP; method=1)
             - H0 : Household
             - L0 : Farms
             - L1 : Farms with breeding / cattle
@@ -85,20 +85,20 @@ class ElectricalDemand(pycity_base.classes.demand.load.Load):
             - G6 : Weekend operation
         total_nb_occupants : int, optional (used in method 2)
             Number of people living in the household.
-        randomizeAppliances : Boolean (only required in method 2)
+        randomize_appliances : Boolean (only required in method 2)
             - True : Distribute installed appliances randomly
             - False : Use the standard distribution
-        lightConfiguration : Integer (only optional in method 2)
+        light_configuration : Integer (only optional in method 2)
             There are 100 light bulb configurations predefined for the
             Stochastic model. Select one by entering an integer in [0, ..., 99]
         occupancy : Array-like (optional, but recommended in method 2)
             Occupancy given at 10-minute intervals for a full year
         do_normalization : bool, optional
             Defines, if stochastic profile (method=2) should be
-            normalized to given annualDemand value (default: False).
+            normalized to given annual_demand value (default: False).
             If set to False, annual el. demand depends on stochastic el. load
             profile generation. If set to True, does normalization with
-            annualDemand
+            annual_demand
         method_3_type : str, optional
             Defines type of profile for method=3 (default: None)
             Options:
@@ -158,12 +158,12 @@ class ElectricalDemand(pycity_base.classes.demand.load.Load):
                                         'standard_load_profile',
                                         'slp_electrical.xlsx')
                 ElectricalDemand.slp = slp_el.load(filename,
-                                                   time_discretization=environment.timer.timeDiscretization)
+                                                   time_discretization=environment.timer.time_discretization)
                 ElectricalDemand.loaded_slp = True
 
-            loadcurve = slp_el.get_demand(annualDemand,
-                                          ElectricalDemand.slp[profileType],
-                                          environment.timer.timeDiscretization)
+            loadcurve = slp_el.get_demand(annual_demand,
+                                          ElectricalDemand.slp[profile_type],
+                                          environment.timer.time_discretization)
 
             super(ElectricalDemand, self).__init__(environment, loadcurve)
 
@@ -171,14 +171,14 @@ class ElectricalDemand(pycity_base.classes.demand.load.Load):
         elif method == 2:
 
             #  Extract radiation values of weather
-            q_direct = environment.weather.qDirect
-            q_diffuse = environment.weather.qDiffuse
+            q_direct = environment.weather.q_direct
+            q_diffuse = environment.weather.q_diffuse
 
             #  Extract initial_day
-            initial_day = environment.timer.initialDay
+            initial_day = environment.timer.initial_day
 
             #  Get timestep
-            timestep = environment.timer.timeDiscretization
+            timestep = environment.timer.time_discretization
 
             #  Generate Richadsonpy el. load object instance
             electr_lodad = \
@@ -186,13 +186,13 @@ class ElectricalDemand(pycity_base.classes.demand.load.Load):
                                    total_nb_occ=total_nb_occupants,
                                    q_direct=q_direct,
                                    q_diffuse=q_diffuse,
-                                   annual_demand=annualDemand,
-                                   is_sfh=singleFamilyHouse,
+                                   annual_demand=annual_demand,
+                                   is_sfh=single_family_house,
                                    path_app=app_filename,
                                    path_light=light_filename,
-                                   randomize_appliances=randomizeAppliances,
+                                   randomize_appliances=randomize_appliances,
                                    prev_heat_dev=prev_heat_dev,
-                                   light_config=lightConfiguration,
+                                   light_config=light_configuration,
                                    timestep=timestep,
                                    initial_day=initial_day,
                                    season_light_mod=season_light_mod,
@@ -216,34 +216,34 @@ class ElectricalDemand(pycity_base.classes.demand.load.Load):
             #     pathLights = light_filename
             #
             # # Initialize appliances and lights
-            # if annualDemand == 0:
-            #     if singleFamilyHouse:
-            #         annualDemand = self.standard_consumption["SFH"][
+            # if annual_demand == 0:
+            #     if single_family_house:
+            #         annual_demand = self.standard_consumption["SFH"][
             #             total_nb_occupants]
             #     else:
-            #         annualDemand = self.standard_consumption["MFH"][
+            #         annual_demand = self.standard_consumption["MFH"][
             #             total_nb_occupants]
             #
             # # According to http://www.die-stromsparinitiative.de/fileadmin/
             # # bilder/Stromspiegel/Brosch%C3%BCre/Stromspiegel2014web_final.pdf
             # # roughly 9% of the electricity consumption are due to lighting.
             # # This has to be excluded from the appliances' demand:
-            # appliancesDemand = 0.91 * annualDemand
+            # appliancesDemand = 0.91 * annual_demand
             #
             # #  Get appliances
             # self.appliances = app_model.Appliances(pathApps,
             #                                        annual_consumption=appliancesDemand,
-            #                                        randomize_appliances=randomizeAppliances,
+            #                                        randomize_appliances=randomize_appliances,
             #                                        prev_heat_dev=prev_heat_dev)
             #
             # #  Get lighting configuration
             # self.lights = light_model.load_lighting_profile(pathLights,
-            #                                                 lightConfiguration)
+            #                                                 light_configuration)
             #
             # # Create wrapper object
-            # timeDis = environment.timer.timeDiscretization
+            # timeDis = environment.timer.time_discretization
             # timestepsDay = int(86400 / timeDis)
-            # day = environment.timer.currentWeekday
+            # day = environment.timer.current_weekday
             # self.wrapper = wrapper.Electricity_profile(self.appliances,
             #                                            self.lights)
             #
@@ -252,8 +252,8 @@ class ElectricalDemand(pycity_base.classes.demand.load.Load):
             # light_load = []
             # app_load = []
             #
-            # beam = environment.weather.qDirect
-            # diffuse = environment.weather.qDiffuse
+            # beam = environment.weather.q_direct
+            # diffuse = environment.weather.q_diffuse
             # irradiance = beam + diffuse
             # required_timestamp = np.arange(1440)
             # given_timestamp = timeDis * np.arange(timestepsDay)
@@ -325,7 +325,7 @@ class ElectricalDemand(pycity_base.classes.demand.load.Load):
             # # light_load = cr.changeResolution(light_load, 60, timeDis)
             # # app_load = cr.changeResolution(app_load, 60, timeDis)
             #
-            # #  Normalize el. load profile to annualDemand
+            # #  Normalize el. load profile to annual_demand
             # if do_normalization:
             #     #  Convert power to energy values
             #     energy_curve = loadcurve * timeDis  # in Ws
@@ -333,7 +333,7 @@ class ElectricalDemand(pycity_base.classes.demand.load.Load):
             #     #  Sum up energy values (plus conversion from Ws to kWh)
             #     curr_el_dem = sum(energy_curve) / (3600 * 1000)
             #
-            #     con_factor = annualDemand / curr_el_dem
+            #     con_factor = annual_demand / curr_el_dem
             #
             #     #  Rescale load curve
             #     loadcurve *= con_factor
@@ -345,7 +345,7 @@ class ElectricalDemand(pycity_base.classes.demand.load.Load):
         elif method == 3:
 
             assert type is not None, 'You need to define a valid type for method 3!'
-            assert annualDemand > 0, 'annualDemand has to be larger than 0!'
+            assert annual_demand > 0, 'annual_demand has to be larger than 0!'
 
             if not ElectricalDemand.loaded_weekly_data:
                 fpath = os.path.join(src_path, 'inputs',
@@ -358,13 +358,13 @@ class ElectricalDemand(pycity_base.classes.demand.load.Load):
             loadcurve = eloader.gen_annual_el_load(
                 ElectricalDemand.weekly_data,
                 type=method_3_type,
-                start_wd=environment.timer.currentWeekday,
-                annual_demand=annualDemand)
+                start_wd=environment.timer.current_weekday,
+                annual_demand=annual_demand)
 
             loadcurve = cr.changeResolution(loadcurve,
                                             oldResolution=900,
                                             newResolution=
-                                            environment.timer.timeDiscretization)
+                                            environment.timer.time_discretization)
 
             super(ElectricalDemand, self).__init__(environment, loadcurve)
 
@@ -372,7 +372,7 @@ class ElectricalDemand(pycity_base.classes.demand.load.Load):
         elif method == 4:
 
             assert type is not None, 'You need to define a valid type for method 4!'
-            assert annualDemand > 0, 'annualDemand has to be larger than 0!'
+            assert annual_demand > 0, 'annual_demand has to be larger than 0!'
 
             if not ElectricalDemand.load_ann_data:
                 fpath = os.path.join(src_path, 'inputs',
@@ -385,12 +385,12 @@ class ElectricalDemand(pycity_base.classes.demand.load.Load):
             loadcurve = eloader.get_annual_el_load(
                 ElectricalDemand.ann_data,
                 type=method_4_type,
-                annual_demand=annualDemand)
+                annual_demand=annual_demand)
 
             loadcurve = cr.changeResolution(loadcurve,
                                             oldResolution=900,
                                             newResolution=
-                                            environment.timer.timeDiscretization)
+                                            environment.timer.time_discretization)
 
             super(ElectricalDemand, self).__init__(environment, loadcurve)
 

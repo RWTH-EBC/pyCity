@@ -19,7 +19,7 @@ import pycity_base.classes.environment
 def run_example():
     # Create environment
     timer = pycity_base.classes.timer.Timer()
-    weather = pycity_base.classes.weather.Weather(timer, useTRY=True)
+    weather = pycity_base.classes.weather.Weather(timer, use_TRY=True)
     prices = pycity_base.classes.prices.Prices()
     environment = pycity_base.classes.environment.Environment(timer, weather, prices)
 
@@ -30,15 +30,15 @@ def run_example():
 
     # Print results
     print()
-    print(("Efficiency: "               + str(inverter.eta)))
-    print(("Maximum electrical input: " + str(inverter.pNominal)))
-    print(("Inverter input AC: "        + str(inverter)))
+    print(("Efficiency: " + str(inverter.eta)))
+    print(("Maximum electrical input: " + str(inverter.p_nominal)))
+    print(("Inverter input AC: " + str(inverter)))
 
     print()
     print(("Nominals: " + str(inverter.getNominalValues())))
 
     np.random.seed(0)
-    results_p_in = np.random.rand(timer.timestepsUsedHorizon) * p_nominal
+    results_p_in = np.random.rand(timer.timesteps_used_horizon) * p_nominal
     results_p_out = results_p_in * inverter.eta
     inverter.setResults(results_p_in, results_p_out)
 

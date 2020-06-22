@@ -50,7 +50,7 @@ def run_example(do_plot=False):
     print(("Efficiency: " + str(pv_detailed.eta)))
     print(("Area: " + str(pv_detailed.area)))
     print(("Cell temperature: " + str(pv_detailed.temperature_nominal)))
-    print(("Loss coefficient: "    + str(pv_detailed.alpha)))
+    print(("Loss coefficient: " + str(pv_detailed.alpha)))
 
     print(("Nominal values: " + str(pv_detailed.getNominalValues())))
 
@@ -61,7 +61,7 @@ def run_example(do_plot=False):
 
     if do_plot:
         # Plot PV power
-        plot_time = list(range(environment.timer.timestepsHorizon))
+        plot_time = list(range(environment.timer.timesteps_horizon))
         figure = plt.figure(figsize=(6,6))
         from matplotlib import gridspec
         gs = gridspec.GridSpec(2,1, height_ratios=[3,1])
@@ -69,7 +69,7 @@ def run_example(do_plot=False):
         ax0.plot(plot_time, pvPower_detailed, label="PV electricity (detailed")
         ax0.plot(plot_time, pvPower_simple,   label="PV electricity (simple")
         plt.ylabel("Power", fontsize=12)
-        plt.xlim((0,environment.timer.timestepsHorizon-1))
+        plt.xlim((0,environment.timer.timesteps_horizon-1))
 
         ax1 = plt.subplot(gs[1], sharex=ax0)
         ax1.plot(plot_time, pvPower_detailed - pvPower_simple)

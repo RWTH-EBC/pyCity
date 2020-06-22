@@ -15,7 +15,7 @@ import pycity_base.classes.weather
 
 def run_example_simple():
     time = pycity_base.classes.timer.Timer()
-    weather = pycity_base.classes.weather.Weather(time, useTRY=True)
+    weather = pycity_base.classes.weather.Weather(time, use_TRY=True)
 
     (tamb, qdif, vw, phiamb, pamb) = weather.getWeatherForecast(getTAmbient=True,
                                                                 getQDirect=True,
@@ -34,7 +34,7 @@ def run_example_simple():
            str((weather.getRadiationTiltedSurface(beta=30, gamma=45,
                                                   update=True))[0])))
 
-    w2 = pycity_base.classes.weather.Weather(time, useTRY=False, useTMY3=True)
+    w2 = pycity_base.classes.weather.Weather(time, use_TRY=False, use_TMY3=True)
     (tamb2, qdif2, vw2, phiamb2, pamb2) = w2.getWeatherForecast(getTAmbient=True,
                                                                 getQDirect=True,
                                                                 getQDiffuse=False,
@@ -48,13 +48,13 @@ def run_example_advanced(do_plot=True):
     src_path = os.path.dirname(os.path.dirname(__file__))
 
     #  Initialize timer object
-    timer = pycity_base.classes.timer.Timer(timeDiscretization=3600)
+    timer = pycity_base.classes.timer.Timer(time_discretization=3600)
 
     #  Initialize default weather object
     weather = pycity_base.classes.weather.Weather(timer=timer)
 
     print('Outdoor temperature in degree Celsius:')
-    print(weather.tAmbient)
+    print(weather.t_ambient)
 
     path_try_cold = os.path.join(src_path,
                                  'inputs',
@@ -62,7 +62,7 @@ def run_example_advanced(do_plot=True):
                                  'TRY2010_05_Wint.dat')
 
     #  Initialize cold weather object
-    weather_cold = pycity_base.classes.weather.Weather(timer=timer, pathTRY=path_try_cold)
+    weather_cold = pycity_base.classes.weather.Weather(timer=timer, path_TRY=path_try_cold)
 
     path_try_warm = os.path.join(src_path,
                                  'inputs',
@@ -70,33 +70,33 @@ def run_example_advanced(do_plot=True):
                                  'TRY2010_05_Somm.dat')
 
     #  Initialize warm weather object
-    weather_warm = pycity_base.classes.weather.Weather(timer=timer, pathTRY=path_try_warm)
+    weather_warm = pycity_base.classes.weather.Weather(timer=timer, path_TRY=path_try_warm)
 
     print('Average temperature TRY regular (2010) in degree Celsius:')
-    print(np.mean(weather.tAmbient))
+    print(np.mean(weather.t_ambient))
     print()
     print('Average temperature TRY cold (2010) in degree Celsius:')
-    print(np.mean(weather_cold.tAmbient))
+    print(np.mean(weather_cold.t_ambient))
     print()
     print('Average temperature TRY warm (2010) in degree Celsius:')
-    print(np.mean(weather_warm.tAmbient))
+    print(np.mean(weather_warm.t_ambient))
     print()
 
     print('Average direct + diffuse radiation TRY regular (2010) in kW/m^2:')
-    print(np.mean(weather.qDirect + weather.qDiffuse))
+    print(np.mean(weather.q_direct + weather.q_diffuse))
     print()
     print('Average direct + diffuse radiation TRY cold (2010) in kW/m^2:')
-    print(np.mean(weather_cold.qDirect + weather_cold.qDiffuse))
+    print(np.mean(weather_cold.q_direct + weather_cold.q_diffuse))
     print()
     print('Average direct + diffuse radiation TRY warm (2010) in kW/m^2:')
-    print(np.mean(weather_warm.qDirect + weather_warm.qDiffuse))
+    print(np.mean(weather_warm.q_direct + weather_warm.q_diffuse))
     print()
 
     if do_plot:
         fig1 = plt.figure()
-        plt.plot(weather.tAmbient, label='TRY regular (2010)')
-        plt.plot(weather_cold.tAmbient, label='TRY cold (2010)')
-        plt.plot(weather_warm.tAmbient, label='TRY warm (2010)')
+        plt.plot(weather.t_ambient, label='TRY regular (2010)')
+        plt.plot(weather_cold.t_ambient, label='TRY cold (2010)')
+        plt.plot(weather_warm.t_ambient, label='TRY warm (2010)')
         plt.xlabel('Time in hours')
         plt.ylabel('Outdoor temperature\nin degree Celsius')
         plt.legend()
@@ -104,10 +104,10 @@ def run_example_advanced(do_plot=True):
         plt.close()
 
         fig2 = plt.figure()
-        plt.plot(weather.qDirect + weather.qDiffuse, label='TRY regular (2010)')
-        plt.plot(weather_cold.qDirect + weather_cold.qDiffuse,
+        plt.plot(weather.q_direct + weather.q_diffuse, label='TRY regular (2010)')
+        plt.plot(weather_cold.q_direct + weather_cold.q_diffuse,
                  label='TRY cold (2010)')
-        plt.plot(weather_warm.qDirect + weather_warm.qDiffuse,
+        plt.plot(weather_warm.q_direct + weather_warm.q_diffuse,
                  label='TRY warm (2010)')
         plt.xlabel('Time in hours')
         plt.ylabel('Outdoor temperature\nin degree Celsius')
@@ -124,7 +124,7 @@ def run_example_advanced(do_plot=True):
                             'TRY2035_05_Jahr.dat')
 
     #  Initialize weather object
-    weather = pycity_base.classes.weather.Weather(timer=timer, pathTRY=path_try)
+    weather = pycity_base.classes.weather.Weather(timer=timer, path_TRY=path_try)
 
     path_try_cold = os.path.join(src_path,
                                  'inputs',
@@ -132,7 +132,7 @@ def run_example_advanced(do_plot=True):
                                  'TRY2035_05_Wint.dat')
 
     #  Initialize cold weather object
-    weather_cold = pycity_base.classes.weather.Weather(timer=timer, pathTRY=path_try_cold)
+    weather_cold = pycity_base.classes.weather.Weather(timer=timer, path_TRY=path_try_cold)
 
     path_try_warm = os.path.join(src_path,
                                  'inputs',
@@ -140,33 +140,33 @@ def run_example_advanced(do_plot=True):
                                  'TRY2035_05_Somm.dat')
 
     #  Initialize warm weather object
-    weather_warm = pycity_base.classes.weather.Weather(timer=timer, pathTRY=path_try_warm)
+    weather_warm = pycity_base.classes.weather.Weather(timer=timer, path_TRY=path_try_warm)
 
     print('Average temperature TRY regular (2035) in degree Celsius:')
-    print(np.mean(weather.tAmbient))
+    print(np.mean(weather.t_ambient))
     print()
     print('Average temperature TRY cold (2035) in degree Celsius:')
-    print(np.mean(weather_cold.tAmbient))
+    print(np.mean(weather_cold.t_ambient))
     print()
     print('Average temperature TRY warm (2035) in degree Celsius:')
-    print(np.mean(weather_warm.tAmbient))
+    print(np.mean(weather_warm.t_ambient))
     print()
 
     print('Average direct + diffuse radiation TRY regular (2035) in kW/m^2:')
-    print(np.mean(weather.qDirect + weather.qDiffuse))
+    print(np.mean(weather.q_direct + weather.q_diffuse))
     print()
     print('Average direct + diffuse radiation TRY cold (2035) in kW/m^2:')
-    print(np.mean(weather_cold.qDirect + weather_cold.qDiffuse))
+    print(np.mean(weather_cold.q_direct + weather_cold.q_diffuse))
     print()
     print('Average direct + diffuse radiation TRY warm (2035) in kW/m^2:')
-    print(np.mean(weather_warm.qDirect + weather_warm.qDiffuse))
+    print(np.mean(weather_warm.q_direct + weather_warm.q_diffuse))
     print()
 
     if do_plot:
         fig3 = plt.figure()
-        plt.plot(weather.tAmbient, label='TRY regular (2035)')
-        plt.plot(weather_cold.tAmbient, label='TRY cold (2035)')
-        plt.plot(weather_warm.tAmbient, label='TRY warm (2035)')
+        plt.plot(weather.t_ambient, label='TRY regular (2035)')
+        plt.plot(weather_cold.t_ambient, label='TRY cold (2035)')
+        plt.plot(weather_warm.t_ambient, label='TRY warm (2035)')
         plt.xlabel('Time in hours')
         plt.ylabel('Outdoor temperature\nin degree Celsius')
         plt.legend()
@@ -174,10 +174,10 @@ def run_example_advanced(do_plot=True):
         plt.close()
 
         fig4 = plt.figure()
-        plt.plot(weather.qDirect + weather.qDiffuse, label='TRY regular (2035)')
-        plt.plot(weather_cold.qDirect + weather_cold.qDiffuse,
+        plt.plot(weather.q_direct + weather.q_diffuse, label='TRY regular (2035)')
+        plt.plot(weather_cold.q_direct + weather_cold.q_diffuse,
                  label='TRY cold (2035)')
-        plt.plot(weather_warm.qDirect + weather_warm.qDiffuse,
+        plt.plot(weather_warm.q_direct + weather_warm.q_diffuse,
                  label='TRY warm (2035)')
         plt.xlabel('Time in hours')
         plt.ylabel('Outdoor temperature\nin degree Celsius')

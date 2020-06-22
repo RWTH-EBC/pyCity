@@ -47,15 +47,15 @@ def compute_daily_demand(probability_profiles, average_profile, occupancy,
     """
     Parameters
     ----------
-    probability_profiles : array_like
+    probability_profiles : array-like
         Minute-wise sampled probability distribution.
         "Haushaltewd" and "Haushaltewe" in Lion's thesis.
         This input should also be equivalent to "pwd" and "pwe", because only 
         one household is taken into account.
-    average_profile : array_like
+    average_profile : array-like
         Minute-wise sampled average tap water profiles (in liters per hour).
         "mwwd" and "mwwe" in Lion's thesis.
-    occupancy : array_like
+    occupancy : array-like
         10-Minute-wise sampled occupancy of the considered building/apartment.
     current_day : integer
         Current day of the year (January 1st -> 0, February 1st -> 31, ...)
@@ -65,9 +65,9 @@ def compute_daily_demand(probability_profiles, average_profile, occupancy,
     
     Returns
     -------
-    water : array_like
+    water : array-like
         Tap water volume flow in liters per hour.
-    heat : array_like
+    heat : array-like
         Resulting minute-wise sampled heat demand in Watt.
         The heat capacity of water is assumed to be 4180 J/(kg.K) and the
         density is assumed to be 980 kg/m3
@@ -121,7 +121,7 @@ def full_year_computation(occupancy,
     """
     Parameters
     ----------
-    occupancy : array_like
+    occupancy : array-ike
         Full year, 10-minute-wise sampled occupancy profile. All values have
         to be integers.
     profiles : dictionary
@@ -145,9 +145,9 @@ def full_year_computation(occupancy,
     
     Returns
     -------
-    water : array_like
+    water : array-like
         Tap water volume flow in liters per hour.
-    heat : array_like
+    heat : array-like
         Resulting minute-wise sampled heat demand in Watt.
         The heat capacity of water is assumed to be 4180 J/(kg.K) and the
         density is assumed to be 980 kg/m3

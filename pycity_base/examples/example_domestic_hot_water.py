@@ -19,22 +19,22 @@ import pycity_base.classes.demand.occupancy
 
 
 def run_example(do_plot=False):
-    timeDiscretization = 3600
-    total_nb_timesteps = 365 * 24 * 60 * 60 / timeDiscretization
-    timer = pycity_base.classes.timer.Timer(timeDiscretization=timeDiscretization,
-                                            timestepsTotal=total_nb_timesteps)
-    weather = pycity_base.classes.weather.Weather(timer, useTRY=True)
+    time_discretization = 3600
+    total_nb_timesteps = 365 * 24 * 60 * 60 / time_discretization
+    timer = pycity_base.classes.timer.Timer(time_discretization=time_discretization,
+                                            timesteps_total=total_nb_timesteps)
+    weather = pycity_base.classes.weather.Weather(timer, use_TRY=True)
     prices = pycity_base.classes.prices.Prices()
 
     environment = pycity_base.classes.environment.Environment(timer, weather,
                                                               prices)
 
     dhw_annex42 = dhw.DomesticHotWater(environment,
-                                       tFlow=60,
+                                       t_flow=60,
                                        thermal=True,
                                        method=1,  # Annex 42
-                                       dailyConsumption=100,
-                                       supplyTemperature=25)
+                                       daily_consumption=100,
+                                       supply_temperature=25)
 
     results = dhw_annex42.get_power(currentValues=False)
 
@@ -45,7 +45,7 @@ def run_example(do_plot=False):
     print()
     
     #  Convert into energy values in kWh
-    dhw_energy_curve = results[0] * timeDiscretization / (3600*1000)
+    dhw_energy_curve = results[0] * time_discretization / (3600*1000)
     annual_energy_demand = np.sum(dhw_energy_curve)
 
     print('Annual dhw energy demand in kWh: ', annual_energy_demand)
@@ -61,21 +61,21 @@ def run_example(do_plot=False):
     occupancy = occup_obj.occupancy
 
     dhw_stochastical = dhw.DomesticHotWater(environment,
-                                            tFlow=60,
+                                            t_flow=60,
                                             thermal=True,
                                             method=2,
-                                            supplyTemperature=20,
+                                            supply_temperature=20,
                                             occupancy=occupancy)
 
     dhw_power_curve = dhw_stochastical.get_power(currentValues=False,
                                                  returnTemperature=False)
     #  Convert into energy values in kWh
-    dhw_energy_curve = dhw_power_curve * timeDiscretization / (3600*1000)
+    dhw_energy_curve = dhw_power_curve * time_discretization / (3600*1000)
     annual_energy_demand = np.sum(dhw_energy_curve)
     #  DHW volume flow curve in liters/hour
     volume_flow_curve = dhw_stochastical.water
     #  Recalc into water volume in liters
-    water_volume_per_timestep = volume_flow_curve / 3600 * timeDiscretization
+    water_volume_per_timestep = volume_flow_curve / 3600 * time_discretization
     # Average daily dhw consumption in liters
     av_daily_dhw_volume = np.sum(water_volume_per_timestep) / 365
 

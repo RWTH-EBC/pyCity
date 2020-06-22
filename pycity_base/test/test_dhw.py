@@ -27,32 +27,30 @@ class TestDomesticHotWater(object):
         create_environment : object
             Environment object (pytest fixture)
         """
-        tFlow = 60
-        supplyTemperature = 25
-        dailyConsumption = 50
+        t_flow = 60
+        supply_temperature = 25
+        daily_consumption = 50
 
         dhw_annex42 = dhw.DomesticHotWater(create_environment,
-                                           tFlow=tFlow,
+                                           t_flow=t_flow,
                                            thermal=True,
                                            method=1,
-                                           dailyConsumption=dailyConsumption,
-                                           supplyTemperature=supplyTemperature)
+                                           daily_consumption=daily_consumption,
+                                           supply_temperature=supply_temperature)
 
         #  Thermal power in W (per 15 minute timestep)
         load_curve = dhw_annex42.get_power(currentValues=False,
                                            returnTemperature=False)
 
         #  Convert power to energy demand values for dhw (in kWh)
-        energy_curve = load_curve * \
-                       create_environment.timer.timeDiscretization / \
-                       (1000 * 3600)
+        energy_curve = load_curve * create_environment.timer.time_discretization / (1000 * 3600)
 
         #  annual energy demand
         annual_dhw_energy_demand = np.sum(energy_curve)
 
         #  Reference value (in Joule)
-        reference_value = 365 * dailyConsumption * 4180 * (tFlow -
-                                                           supplyTemperature)
+        reference_value = 365 * daily_consumption * 4180 * (t_flow - supply_temperature)
+
         #  Convert to kWh
         reference_value = reference_value / (1000 * 3600)
 
@@ -73,17 +71,16 @@ class TestDomesticHotWater(object):
         occupancy_profile = create_occupancy.occupancy
 
         dhw_stochastical = dhw.DomesticHotWater(create_environment,
-                                                tFlow=60,
+                                                t_flow=60,
                                                 thermal=True,
                                                 method=2,
-                                                supplyTemperature=20,
+                                                supply_temperature=20,
                                                 occupancy=occupancy_profile)
 
         #  DHW volume flow curve in liters/hour
         volume_flow_curve = dhw_stochastical.water
         #  Recalc into water volume in liters
-        water_volume_per_timestep = volume_flow_curve / 3600 * \
-                                    create_environment.timer.timeDiscretization
+        water_volume_per_timestep = volume_flow_curve / 3600 * create_environment.timer.time_discretization
         # Average daily dhw consumption in liters
         av_daily_dhw_volume = np.sum(water_volume_per_timestep) / 365
 
@@ -100,26 +97,26 @@ class TestDomesticHotWater(object):
         create_environment : object
             Environment object (pytest fixture)
         """
-        tFlow = 60
-        supplyTemperature = 25
-        dailyConsumption = 200
+        t_flow = 60
+        supply_temperature = 25
+        daily_consumption = 200
 
         environment = copy.deepcopy(create_environment)
 
-        environment.timer.timeDiscretization = 3600
+        environment.timer.time_discretization = 3600
 
         dhw_annex42 = dhw.DomesticHotWater(create_environment,
-                                           tFlow=tFlow,
+                                           t_flow=t_flow,
                                            thermal=True,
                                            method=1,
-                                           dailyConsumption=dailyConsumption,
-                                           supplyTemperature=supplyTemperature)
+                                           daily_consumption=daily_consumption,
+                                           supply_temperature=supply_temperature)
 
-        dailyConsumption = 300
+        daily_consumption = 300
 
         dhw_annex42 = dhw.DomesticHotWater(create_environment,
-                                           tFlow=tFlow,
+                                           t_flow=t_flow,
                                            thermal=False,
                                            method=1,
-                                           dailyConsumption=dailyConsumption,
-                                           supplyTemperature=supplyTemperature)
+                                           daily_consumption=daily_consumption,
+                                           supply_temperature=supply_temperature)

@@ -58,12 +58,12 @@ def generate_profile_pool(path=None, runs=100, timestep=60):
         #  Create path, if not existent
         create_path_if_not_exist(path)
 
-    timestepsTotal = 365 * 24 * 3600 / timestep
+    timesteps_total = 365 * 24 * 3600 / timestep
 
     #  Generate environment
-    timer = pycity_base.classes.timer.Timer(timeDiscretization=timestep,
-                                            timestepsTotal=timestepsTotal)
-    weather = pycity_base.classes.weather.Weather(timer, useTRY=True)
+    timer = pycity_base.classes.timer.Timer(time_discretization=timestep,
+                                            timesteps_total=timesteps_total)
+    weather = pycity_base.classes.weather.Weather(timer, use_TRY=True)
     prices = pycity_base.classes.prices.Prices()
     env = pycity_base.classes.environment.Environment(timer, weather, prices)
 
@@ -101,8 +101,8 @@ def generate_profile_pool(path=None, runs=100, timestep=60):
                 ed.ElectricalDemand(environment=env,
                                     method=2,
                                     total_nb_occupants=occ_index,
-                                    randomizeAppliances=True,
-                                    lightConfiguration=10,
+                                    randomize_appliances=True,
+                                    light_configuration=10,
                                     occupancy=occupancy.occupancy)
 
             #  Get el. load profile
@@ -116,10 +116,10 @@ def generate_profile_pool(path=None, runs=100, timestep=60):
             # Generate hot water profile
             dhw_stochastical = \
                 dhw.DomesticHotWater(environment=env,
-                                     tFlow=60,
+                                     t_flow=60,
                                      thermal=True,
                                      method=2,
-                                     supplyTemperature=20,
+                                     supply_temperature=20,
                                      occupancy=occ_profile)
 
             #  Get dhw curve

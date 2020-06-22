@@ -18,7 +18,7 @@ import pycity_base.classes.supply.compression_chiller as chill
 def run_example():
     # Create environment
     timer = pycity_base.classes.timer.Timer()
-    weather = pycity_base.classes.weather.Weather(timer, useTRY=True)
+    weather = pycity_base.classes.weather.Weather(timer, use_TRY=True)
     prices = pycity_base.classes.prices.Prices()
     environment = pycity_base.classes.environment.Environment(timer, weather, prices)
 
@@ -41,8 +41,8 @@ def run_example():
     print(("Nominals: " + str(chiller.get_nominal_values())))
 
     np.random.seed(0)
-    result_q = np.random.rand(timer.timestepsUsedHorizon) * q_nominal
-    result_schedule = np.random.randint(2, size=timer.timestepsUsedHorizon)
+    result_q = np.random.rand(timer.timesteps_used_horizon) * q_nominal
+    result_schedule = np.random.randint(2, size=timer.timesteps_used_horizon)
     chiller.set_results(result_q, result_schedule)
 
     results = chiller.get_results(True)

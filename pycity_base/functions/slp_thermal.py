@@ -24,7 +24,7 @@ def calculate(temperature, initial_day, profiles, weekly_factors,
     """
     Parameters
     ----------
-    temperature : array_like
+    temperature : array-like
         Full year temperature profile with hourly discretization.
     initial_day : integer
         - 0 : Monday
@@ -34,11 +34,11 @@ def calculate(temperature, initial_day, profiles, weekly_factors,
         - 4 : Friday
         - 5 : Saturday
         - 6 : Sunday
-    profiles : array_like
+    profiles : array-like
         Dictionary containing all profile factors (A, B, C, D) for all types
         of houses.
         Index order: 0 - A, 1 - B, 2 - C, 3 - D
-    weekly_factors : array_like
+    weekly_factors : array-like
         Week day modifiers for each day. Indexes correspond to the description
         of initial_day (0 - Monday, ..., 6 - Sunday)
     hourly_factors : dictionary
@@ -120,7 +120,7 @@ def _average_temperature(temperature, timesteps_day=24):
         
 def _daily_profiles(temperatures, KW, h, F, hourly_factors, initial_day):
     """
-    temperatures : array_like
+    temperatures : array-like
         Average ambient temperatures for each day
     KW : float
         Customer demand in kWh per day

@@ -6,8 +6,19 @@ Room class.
 
 
 class Room(object):
+    """
+    """
 
     def __init__(self, environment):
+        """
+        Constructor of room object.
+
+        Parameters
+        ----------
+        environment : object
+            Environment of pyCity
+        """
+
         self.environment = environment
         self._kind = "room"
 

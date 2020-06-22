@@ -202,9 +202,9 @@ class CityDistrict(ues.UESGraph):
             Power curve
         """
         if current_values:
-            timesteps = self.environment.timer.timestepsHorizon
+            timesteps = self.environment.timer.timesteps_horizon
         else:
-            timesteps = self.environment.timer.timestepsTotal
+            timesteps = self.environment.timer.timesteps_total
 
         power = np.zeros(timesteps)
         for generator in generators:
@@ -231,9 +231,9 @@ class CityDistrict(ues.UESGraph):
         """
 
         if current_values:
-            timesteps = self.environment.timer.timestepsHorizon
+            timesteps = self.environment.timer.timesteps_horizon
         else:
-            timesteps = self.environment.timer.timestepsTotal
+            timesteps = self.environment.timer.timesteps_total
 
         #  Create empty list of pv entities
         pv_entities = []
@@ -274,9 +274,9 @@ class CityDistrict(ues.UESGraph):
         """
 
         if current_values:
-            timesteps = self.environment.timer.timestepsHorizon
+            timesteps = self.environment.timer.timesteps_horizon
         else:
-            timesteps = self.environment.timer.timestepsTotal
+            timesteps = self.environment.timer.timesteps_total
 
         #  Create empty list of pv entities
         wind_entities = []
@@ -321,9 +321,9 @@ class CityDistrict(ues.UESGraph):
             Aggregated heat demand
         """
         if current_values:
-            timesteps = self.environment.timer.timestepsHorizon
+            timesteps = self.environment.timer.timesteps_horizon
         else:
-            timesteps = self.environment.timer.timestepsTotal
+            timesteps = self.environment.timer.timesteps_total
         power_el = np.zeros(timesteps)
         power_th = np.zeros(timesteps)
 
@@ -368,9 +368,9 @@ class CityDistrict(ues.UESGraph):
         """
 
         if current_values:  # Use horizon
-            size = self.environment.timer.timestepsHorizon
+            size = self.environment.timer.timesteps_horizon
         else:  # Use all timesteps
-            size = self.environment.timer.timestepsTotal
+            size = self.environment.timer.timesteps_total
         agg_th_p_curve = np.zeros(size)
 
         if nodelist is None:
@@ -422,9 +422,9 @@ class CityDistrict(ues.UESGraph):
         """
 
         if current_values:  # Use horizon
-            size = self.environment.timer.timestepsHorizon
+            size = self.environment.timer.timesteps_horizon
         else:  # Use all timesteps
-            size = self.environment.timer.timestepsTotal
+            size = self.environment.timer.timesteps_total
         agg_el_p_curve = np.zeros(size)
 
         if nodelist is None:
@@ -476,9 +476,9 @@ class CityDistrict(ues.UESGraph):
         """
 
         if current_values:  # Use horizon
-            size = self.environment.timer.timestepsHorizon
+            size = self.environment.timer.timesteps_horizon
         else:  # Use all timesteps
-            size = self.environment.timer.timestepsTotal
+            size = self.environment.timer.timesteps_total
         agg_dhw_p_curve = np.zeros(size)
 
         if nodelist is None:
@@ -509,8 +509,8 @@ class CityDistrict(ues.UESGraph):
         Get the aggregated flow temperature forecast.
         """
 
-        timesteps = self.environment.timer.timestepsHorizon
-        flowTemperature = np.zeros(timesteps)
+        timesteps = self.environment.timer.timesteps_horizon
+        flow_temperature = np.zeros(timesteps)
 
         #  Loop over all nodes
         for n in self:
@@ -521,10 +521,10 @@ class CityDistrict(ues.UESGraph):
                     #  If entity is kind building
                     if self.node[n]['entity'].kind == 'building':
                         flow_temp = self.node[n]['entity'].getFlowTemperature()
-                        flowTemperature = np.maximum(flowTemperature,
+                        flow_temperature = np.maximum(flow_temperature,
                                                      flow_temp)
 
-        return flowTemperature
+        return flow_temperature
 
     def get_nb_of_entities(self, entity_name):
         """

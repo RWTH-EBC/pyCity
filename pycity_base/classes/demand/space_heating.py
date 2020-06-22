@@ -32,9 +32,9 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
     
     def __init__(self, environment, method=0,
                  loadcurve=[], 
-                 livingArea=0, specificDemand=0, profile_type='HEF',
-                 zoneParameters=None, T_m_init=None, ventilation=0,
-                 TCoolingSet=200, THeatingSet=-50, occupancy=0,
+                 living_area=0, specific_demand=0, profile_type='HEF',
+                 zone_parameters=None, t_m_init=None, ventilation=0,
+                 t_cooling_set=200, t_heating_set=-50, occupancy=0,
                  appliances=0, lighting=0):
         """
         Parameters
@@ -52,10 +52,10 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
         loadcurve : Array-like, optional
             Load curve for all investigated time steps
             Requires ``method=0``.
-        livingArea : Float, optional
+        living_area : Float, optional
             Living area of the apartment in m^2
             Requires ``method=1``
-        specificDemand : Float, optional
+        specific_demand : Float, optional
             Specific thermal demand of the building in kWh/(m^2 a)
             Requires ``method=1``
         profile_type : str, optional
@@ -75,19 +75,19 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
             - `GMK` : Automotive
             - `GPD` : Paper and printing
             - `GWA` : Laundries
-        zoneParameters : ZoneParameters object, optional
+        zone_parameters : ZoneParameters object, optional
             Parameters of the building (floor area, building class, etc.). 
             Requires ``method=2``.
-        T_m_init : Float, optional
+        t_m_init : Float, optional
             Initial temperature of the internal heat capacity.
             Requires ``method=2``.
         ventilation : Array-like, optional
             Ventilation rate in 1/h.
             Requires ``method=2``.
-        TCoolingSet : Array-like, optional
+        t_cooling_set : Array-like, optional
             Cooling starts if the room temperature exceeds this value.
             Requires ``method=2``.
-        THeatingSet : Array-like, optional
+        t_heating_set : Array-like, optional
             Heating starts if the room temperature drops below this value.
             Requires ``method=2``.
         occupancy : Array-like, optional
@@ -117,7 +117,7 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
 
         elif method == 1:
             #  Generate standardized thermal load profile (SLP)
-            timeDis = environment.timer.timeDiscretization
+            timeDis = environment.timer.time_discretization
             if not SpaceHeating.loaded_slp:
                 src_path = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
                 folder = os.path.join(src_path, 'inputs', 'standard_load_profile')
@@ -131,12 +131,12 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
                                 
                 SpaceHeating.loaded_slp = True
             
-            annual_demand = livingArea * specificDemand  # kWh
+            annual_demand = living_area * specific_demand  # kWh
             profile = 1
     
             fun = slp_th.calculate
-            loadcurve = fun(environment.weather.tAmbient,
-                            environment.timer.currentDay,
+            loadcurve = fun(environment.weather.t_ambient,
+                            environment.timer.current_day,
                             SpaceHeating.slp_prof[profile_type][profile],
                             SpaceHeating.slp_week[profile_type],
                             SpaceHeating.slp_hour[profile_type],
@@ -146,21 +146,21 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
             
         elif method == 2:
             #  Generate thermal load with ISO model
-            self.zoneParameters = zoneParameters
+            self.zone_parameters = zone_parameters
             # Create zoneInputs (this already creates the full year inputs!)
             self.zoneInputs = zi.ZoneInputs(environment,
-                                            zoneParameters,
-                                            T_m_init,
+                                            zone_parameters,
+                                            t_m_init,
                                             ventilation=ventilation,
                                             occupancy=occupancy,
                                             appliances=appliances,
                                             lighting=lighting)
             
             calc = pycity_base.functions.zone_model.calc
-            res = calc(zoneParameters=self.zoneParameters,
+            res = calc(zone_parameters=self.zone_parameters,
                            zoneInputs=self.zoneInputs, 
-                           TCoolingSet=TCoolingSet,
-                           THeatingSet=THeatingSet,
+                           t_cooling_set=t_cooling_set,
+                           t_heating_set=t_heating_set,
                            limitHeating=np.inf, 
                            limitCooling=-np.inf, 
                            beQuiet=True)
@@ -186,7 +186,7 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
 
                 SpaceHeating.loaded_sim_profile = True
 
-            annual_demand = livingArea * specificDemand  # kWh
+            annual_demand = living_area * specific_demand  # kWh
 
             #  Extract first profile
             loadcurve = copy.deepcopy(SpaceHeating.sim_prof_data[:, 1])
@@ -197,7 +197,7 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
 
             #  Change resolution
             loadcurve = chres.changeResolution(loadcurve, oldResolution=3600,
-                                               newResolution=environment.timer.timeDiscretization)
+                                               newResolution=environment.timer.time_discretization)
 
             super(SpaceHeating, self).__init__(environment, loadcurve)
             
@@ -228,10 +228,10 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
 #            if currentValues:
 #                self.zoneInputs.update(occupancy, appliances, lighting)
 #                calc = pycity_base.functions.zoneModel.calc
-#                res = calc(zoneParameters=self.zoneParameters,
+#                res = calc(zone_parameters=self.zone_parameters,
 #                           zoneInputs=self.zoneInputs, 
-#                           TCoolingSet=TCoolingSet,
-#                           THeatingSet=THeatingSet,
+#                           t_cooling_set=t_cooling_set,
+#                           t_heating_set=t_heating_set,
 #                           limitHeating=np.inf, 
 #                           limitCooling=-np.inf, 
 #                           beQuiet=True)

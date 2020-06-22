@@ -20,10 +20,10 @@ class HeatingCurve(object):
     def __init__(self, 
                  environment, 
                  m=0.33, 
-                 setRoom=20, 
-                 setAmbient=-10, 
-                 setFlow=55, 
-                 setReturn=45):
+                 t_set_room=20,
+                 t_set_ambient=-10,
+                 t_set_flow=55,
+                 t_set_return=45):
         """
         Parameters
         ----------
@@ -32,22 +32,22 @@ class HeatingCurve(object):
         m : float, optional
             Heater characteristic. 
             Normally: 0.25 <= m <= 0.40
-        setRoom : integer, optional
+        t_set_room : integer, optional
             Room's set temperature in °C
-        setAmbient : integer, optional
+        t_set_ambient : integer, optional
             Nominal ambient temperature in °C
-        setFlow : integer, optional
+        t_set_flow : integer, optional
             Nominal heater flow temperature in °C
-        setReturn : integer, optional
+        t_set_return : integer, optional
             Nominal heater return temperature in °C
         """
         self._kind = "heatingcurve"
         self.environment = environment
         self.m = m
-        self.setRoom = setRoom
-        self.setAmbient = setAmbient
-        self.setFlow = setFlow
-        self.setReturn = setReturn
+        self.t_set_room = t_set_room
+        self.t_set_ambient = t_set_ambient
+        self.t_set_flow = t_set_flow
+        self.t_set_return = t_set_return
 
     @property
     def kind(self):
@@ -57,9 +57,9 @@ class HeatingCurve(object):
                                        ambientTemperature, 
                                        smoothingPeriod=1):
         """
-        This function is a straight-forward implementation of the heatingCurve 
+        This function is a straight-forward implementation of the heating_curve
         algorithm of our Modelica library 
-        (Cities.Supply.BaseClasses.heatingCurve)
+        (Cities.Supply.BaseClasses.heating_curve)
         
         Parameters
         ----------
@@ -71,7 +71,7 @@ class HeatingCurve(object):
             
         Return
         ------
-        flowTemperature : Array-like
+        flow_temperature : Array-like
             Temperature time series in °C
         """
 
@@ -80,21 +80,21 @@ class HeatingCurve(object):
         ambientTemperature = dema(ambientTemperature, smoothingPeriod)
 
         # Determine design room excess temperature
-        dTmN = (self.setFlow + self.setReturn)/2 - self.setRoom
+        dTmN = (self.t_set_flow + self.t_set_return)/2 - self.t_set_room
             
         # Calculate design temperature spread of heating system
-        dTN  = self.setFlow - self.setReturn   
+        dTN  = self.t_set_flow - self.t_set_return
     
         # Compute load situation of heating system (parameter phi)
         # If room-set-temperature < ambient-temperature, phi equals 0
         phi = np.zeros_like(ambientTemperature)
-        index = ambientTemperature <= self.setRoom
-        phi[index] = ((self.setRoom - ambientTemperature[index]) 
-                       / (self.setRoom - self.setAmbient))
+        index = ambientTemperature <= self.t_set_room
+        phi[index] = ((self.t_set_room - ambientTemperature[index])
+                       / (self.t_set_room - self.t_set_ambient))
     
         # Compute flow temperature according to heating curve
         return (np.power(phi, 1/(1 + self.m)) * dTmN 
-                + 0.5 * phi * dTN + self.setRoom)
+                + 0.5 * phi * dTN + self.t_set_room)
 
     def doubleExponentialMovingAverage(self, timeseries, smoothingPeriod=1):
         """
@@ -114,8 +114,8 @@ class HeatingCurve(object):
         # weightingFactor: Scalar value between 0 and 1.
         # 0 makes the "current" observation irrelevant
         # 1 makes the "previous" observation irrelevant
-        timeDiscretization = self.environment.timer.timeDiscretization
-        smoothingPeriod = 24 * 3600 / timeDiscretization * smoothingPeriod
+        time_discretization = self.environment.timer.time_discretization
+        smoothingPeriod = 24 * 3600 / time_discretization * smoothingPeriod
         weightingFactor = 2 / (smoothingPeriod + 1)
         
         # Compute exponential moving average (ema) of the given time series
@@ -133,7 +133,7 @@ class HeatingCurve(object):
         Explanation of the statistics behind exponential moving average:
             http://etfhq.com/blog/2010/11/08/exponential-moving-average/
         """
-        ema = np.zeros_like(timeseries) # ema: exponential moving average
+        ema = np.zeros_like(timeseries)  # exponential moving average
         ema[0] = timeseries[0]
         for i in range(1, len(timeseries)):
             ema[i] = ema[i-1] + alpha * (timeseries[i] - ema[i-1])

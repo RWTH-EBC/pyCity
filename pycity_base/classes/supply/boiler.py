@@ -18,35 +18,35 @@ class Boiler(HeatingDevice.HeatingDevice):
     
     def __init__(self, 
                  environment, 
-                 qNominal, 
+                 q_nominal,
                  eta, 
-                 tMax=85, 
-                 lowerActivationLimit=1):
+                 t_max=85,
+                 lower_activation_limit=1):
         """
         Parameter
         ---------
-        environment : Environment object
+        environment : environment object
             Common to all other objects. Includes time and weather instances
-        qNominal : array of float
+        q_nominal : array of float
             nominal heat output in Watt
         eta : array of float
             efficiency (without unit)
-        tMax : Integer, optional
+        t_max : integer, optional
             maximum provided temperature in °C
-        lowerActivationLimit : Float (0 <= lowerActivationLimit <= 1)
+        lower_activation_limit : float (0 <= lower_activation_limit <= 1)
             Define the lower activation limit. For example, heat pumps are 
             typically able to operate between 50 % part load and rated load. 
-            In this case, lowerActivationLimit would be 0.5
+            In this case, lower_activation_limit would be 0.5
             Two special cases: 
-            Linear behavior: lowerActivationLimit = 0
-            Two-point controlled: lowerActivationLimit = 1
+            Linear behavior: lower_activation_limit = 0
+            Two-point controlled: lower_activation_limit = 1
         """
         
         self.eta = eta
         super(Boiler, self).__init__(environment, 
-                                     qNominal, 
-                                     tMax, 
-                                     lowerActivationLimit)
+                                     q_nominal,
+                                     t_max,
+                                     lower_activation_limit)
         self._kind = "boiler"
 
     @property
@@ -65,9 +65,9 @@ class Boiler(HeatingDevice.HeatingDevice):
         
         Order
         -----
-        qOutput : array_like
+        qOutput : array-like
             Heat production of the boiler
-        schedule : array_like
+        schedule : array-like
             Operational schedule
         """
         return (self._getQOutput(currentValues), 
@@ -85,4 +85,4 @@ class Boiler(HeatingDevice.HeatingDevice):
         Get the boiler's efficiency, nominal heat output, maximum flow 
         temperature and lower activation limit.
         """
-        return (self.eta, self.qNominal, self.tMax, self.lowerActivationLimit)
+        return (self.eta, self.q_nominal, self.t_max, self.lower_activation_limit)

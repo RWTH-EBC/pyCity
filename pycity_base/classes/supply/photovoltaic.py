@@ -9,7 +9,6 @@ Created on Fri Feb 06 17:39:01 2015
 from __future__ import division
 
 import numpy as np
-import pycity_base.functions.handle_data
 
 
 class PV(object):
@@ -22,7 +21,7 @@ class PV(object):
         """
         Parameters
         ----------
-        environment : Environment object
+        environment : environment object
             Common to all other objects. Includes time and weather instances
         area : integer
             installation area in m^2
@@ -57,9 +56,9 @@ class PV(object):
         self.alpha = alpha
         self.tau_alpha = tau_alpha
         
-        self.totalPower = np.zeros(environment.timer.timestepsTotal)
-        self.totalRadiation = np.zeros(environment.timer.timestepsTotal)
-        self.currentPower = np.zeros(environment.timer.timestepsHorizon)
+        self.total_power = np.zeros(environment.timer.timesteps_total)
+        self.total_radiation = np.zeros(environment.timer.timesteps_total)
+        self.current_power = np.zeros(environment.timer.timesteps_horizon)
         
         self.beta = beta
         self.gamma = gamma
@@ -146,20 +145,20 @@ class PV(object):
             - True: Compute the PV generation forecast for the upcoming horizon
             - False: Do not compute a new PV generation forecast
         """
-        currentTimestep = self.environment.timer.currentTimestep
-        timesteps = self.environment.timer.timestepsHorizon
+        current_timestep = self.environment.timer.current_timestep
+        timesteps = self.environment.timer.timesteps_horizon
 
         if updatePower:
-            (currentPower, currentRadiation) = self._computePower(current_values=currentValues)
+            (current_power, currentRadiation) = self._computePower(current_values=currentValues)
 
             if currentValues:
-                self.currentPower = currentPower
+                self.current_power = current_power
 
-                self.totalPower[currentTimestep:(currentTimestep + timesteps)] = currentPower
-                self.totalRadiation[currentTimestep:(currentTimestep + timesteps)] = currentRadiation
-                return self.currentPower
+                self.total_power[current_timestep:(current_timestep + timesteps)] = current_power
+                self.total_radiation[current_timestep:(current_timestep + timesteps)] = currentRadiation
+                return self.current_power
 
             else:
-                self.totalPower = currentPower
-                self.totalRadiation = currentRadiation
-                return self.totalPower
+                self.total_power = current_power
+                self.total_radiation = currentRadiation
+                return self.total_power

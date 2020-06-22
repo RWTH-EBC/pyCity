@@ -27,33 +27,34 @@ class DomesticHotWater(pycity_base.classes.demand.load.Load):
 
     def __init__(self, 
                  environment, 
-                 tFlow, 
+                 t_flow,
                  thermal=True,
                  method=0,
                  loadcurve=[],
-                 dailyConsumption=0, supplyTemperature=0,
+                 daily_consumption=0,
+                 supply_temperature=0,
                  occupancy=[]):
         """
         Parameters
         ----------
-        environment : Environment object
+        environment : environment object
             Common to all other objects. Includes time and weather instances
-        tFlow : Float
+        t_flow : float
             Flow temperature of domestic hot water in degree Celsius.
-        thermal : Boolean, optional
+        thermal : boolean, optional
             Is the DHW provided electrically (False) or via thermal energy 
             storage (True)
-        method : Integer, optional
+        method : integer, optional
             - `0` : Provide load curve directly (for all timesteps!)
             - `1` : Load profile from Annex 42
             - `2` : Stochastical method
-        loadcurve : Array-like, optional
+        loadcurve : array-like, optional
             Load curve for all investigated time steps (in Watt).
             This parameter is required when using ``method=0``.
-        dailyConsumption : Float, optional
+        daily_consumption : float, optional
             Average, total domestic hot water consumption in liters/day.
             This parameter is required when using ``method=1``.
-        supplyTemperature : Float, optional
+        supply_temperature : float, optional
             Supply temperature in degree Celsius. This parameter is necessary
             to compute the heat load that results from each liter consumption.
             This parameter is required when using ``method=1``.
@@ -67,7 +68,7 @@ class DomesticHotWater(pycity_base.classes.demand.load.Load):
         if method == 0:
             super(DomesticHotWater, self).__init__(environment, loadcurve)
         elif method == 1:
-            timeDis = environment.timer.timeDiscretization
+            timeDis = environment.timer.time_discretization
             # If not already done, load the Annex 42 profile
             if not DomesticHotWater.loaded_profile:
                 src_path = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
@@ -87,17 +88,17 @@ class DomesticHotWater(pycity_base.classes.demand.load.Load):
                 DomesticHotWater.loaded_profile = True
                 
             # Compute tap water profile (based on average daily consumption)
-            if dailyConsumption <= 150:
-                tapProfile = self.a42[:, 0] * dailyConsumption / 100
-            elif dailyConsumption <= 250 and dailyConsumption > 150:
-                tapProfile = self.a42[:, 1] * dailyConsumption / 200
-            elif dailyConsumption > 250:
-                tapProfile = self.a42[:, 2] * dailyConsumption / 300
+            if daily_consumption <= 150:
+                tapProfile = self.a42[:, 0] * daily_consumption / 100
+            elif daily_consumption <= 250 and daily_consumption > 150:
+                tapProfile = self.a42[:, 1] * daily_consumption / 200
+            elif daily_consumption > 250:
+                tapProfile = self.a42[:, 2] * daily_consumption / 300
             
             # Compute equivalent heat demand in Watt
             cWater = 4180  # J/kgK
             flowFactor = 1 / 3600  # l/h -> kg/s
-            deltaTemperature = tFlow - supplyTemperature
+            deltaTemperature = t_flow - supply_temperature
             loadcurve = cWater * tapProfile * flowFactor * deltaTemperature
             super(DomesticHotWater, self).__init__(environment, loadcurve)
         elif method == 2:
@@ -110,18 +111,18 @@ class DomesticHotWater(pycity_base.classes.demand.load.Load):
             
             # Compute dhw demand
             profiles = DomesticHotWater.dhw_sto_profiles
-            initialDay = environment.timer.currentDay
-            timeDis = environment.timer.timeDiscretization
-            tempDiff = tFlow - supplyTemperature
+            initial_day = environment.timer.current_day
+            timeDis = environment.timer.time_discretization
+            tempDiff = t_flow - supply_temperature
             (water, heat) = dhw_sto.full_year_computation(occupancy, profiles, 
-                                                          timeDis, initialDay, 
+                                                          timeDis, initial_day,
                                                           tempDiff)
                                                       
             self.water = water
-            super(DomesticHotWater,self).__init__(environment, heat)
+            super(DomesticHotWater, self).__init__(environment, heat)
         
         self._kind = "domestichotwater"
-        self.tFlow = tFlow
+        self.t_flow = t_flow
         self.thermal = thermal
 
     @property
@@ -145,7 +146,7 @@ class DomesticHotWater(pycity_base.classes.demand.load.Load):
         Return
         ------
         If returnTemperature is True:
-        result_tuple : tuple (load, tFlow)
+        result_tuple : tuple (load, t_flow)
             Result tuple with thermal power curve and return temperature curve
 
         else (returnTemperature is False):
@@ -156,9 +157,9 @@ class DomesticHotWater(pycity_base.classes.demand.load.Load):
             load = self._getLoadcurve(currentValues)
                 
         if returnTemperature:
-            tFlow = np.zeros_like(load)
-            tFlow[load > 0] = self.tFlow
+            t_flow = np.zeros_like(load)
+            t_flow[load > 0] = self.t_flow
             
-            return (load, tFlow)
+            return (load, t_flow)
         else:
             return load

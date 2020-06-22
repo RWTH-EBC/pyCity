@@ -20,20 +20,22 @@ class WindEnergyConverter(object):
                  environment,
                  velocity,
                  power,
-                 hubHeight=10,
+                 hub_height=10,
                  roughness=0.1):
         """
         Create a wind energy converter.
         
         Parameters
         ----------
-        environment : Environment object
+        environment : environment object
             Common to all other objects. Includes time and weather instances
-        velocity : Array_like
+        velocity : array-like
             Vector of wind velocities for which power data is available.
-        power : Array_like
+        power : array-like
             Vector of power data.
-        roughness : Float, optional
+        hub_height : integer, optional
+            Height of the turbine over ground.
+        roughness : float, optional
             Roughness length as described here: 
             http://wind-data.ch/tools/profile.php?lng=en
             The standard value of 0.1 corresponds to algricultural land with 
@@ -45,11 +47,11 @@ class WindEnergyConverter(object):
         
         self.velocity = velocity
         self.power = power
-        self.hubHeight = hubHeight
+        self.hub_height = hub_height
         self.roughness = roughness
         
-        self.totalPower = np.zeros(environment.timer.timestepsTotal)
-        self.currentPower = np.zeros(environment.timer.timestepsHorizon)
+        self.total_power = np.zeros(environment.timer.timesteps_total)
+        self.current_power = np.zeros(environment.timer.timesteps_horizon)
 
     @property
     def kind(self):
@@ -63,8 +65,8 @@ class WindEnergyConverter(object):
         http://wind-data.ch/tools/profile.php?lng=en
         """
         z0 = self.roughness
-        h2 = self.hubHeight
-        h1 = self.environment.weather.heightVelocityMeasurement
+        h2 = self.hub_height
+        h1 = self.environment.weather.height_velocity_measurement
         return (velocity * np.log(h2 / z0) / np.log(h1 / z0))
     
     def getPower(self, currentValues=True, updatePower=True):
@@ -74,26 +76,26 @@ class WindEnergyConverter(object):
         
         Returns
         -------
-        currentPower : Array_like
+        current_power : Array_like
             Output power in Watt.
         """
         if updatePower:
-            currentTimestep = self.environment.timer.currentTimestep
+            current_timestep = self.environment.timer.current_timestep
             weatherForecast = self.environment.weather.getWeatherForecast
             (measuredWind,) = weatherForecast(getVWind=True)
 
             currentWind = self._logWindProfile(measuredWind)
         
-            currentPower = np.interp(currentWind, self.velocity, self.power, right=0)
+            current_power = np.interp(currentWind, self.velocity, self.power, right=0)
             
             # `right` ensures that the electricity production is zero, if the 
             # wind speed is higher than the cut-off wind speed (max. wind 
             # speed)
                                      
-            self.currentPower = currentPower
-            timesteps = self.environment.timer.timestepsHorizon
-            self.totalPower[currentTimestep:(currentTimestep + timesteps)] = currentPower
+            self.current_power = current_power
+            timesteps = self.environment.timer.timesteps_horizon
+            self.total_power[current_timestep:(current_timestep + timesteps)] = current_power
        
         return pycity_base.functions.handle_data.getValues(currentValues,
-                                                           self.currentPower,
-                                                           self.totalPower)
+                                                           self.current_power,
+                                                           self.total_power)

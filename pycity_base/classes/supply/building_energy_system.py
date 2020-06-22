@@ -47,15 +47,15 @@ class BES(object):
         self.tes = []
         
         # The new BES is still empty
-        self.hasBattery = False
-        self.hasBoiler = False
-        self.hasChp = False
-        self.hasElectricalHeater = False
-        self.hasHeatpump = False
-        self.hasInverterAcdc = False
-        self.hasInverterDcac = False
-        self.hasPv = False
-        self.hasTes = False
+        self.has_battery = False
+        self.has_boiler = False
+        self.has_chp = False
+        self.has_electrical_heater = False
+        self.has_heatpump = False
+        self.has_inverter_acdc = False
+        self.has_inverter_dcac = False
+        self.has_pv = False
+        self.has_tes = False
 
     @property
     def kind(self):
@@ -73,39 +73,39 @@ class BES(object):
         """
         if objectInstance.kind == "battery":
             self.battery.append(objectInstance)
-            self.hasBattery = True
+            self.has_battery = True
         
         elif objectInstance.kind == "boiler":
             self.boiler.append(objectInstance)
-            self.hasBoiler = True
+            self.has_boiler = True
         
         elif objectInstance.kind == "chp":
             self.chp.append(objectInstance)
-            self.hasChp = True
+            self.has_chp = True
         
         elif objectInstance.kind == "electricalheater":
             self.electricalHeater.append(objectInstance)
-            self.hasElectricalHeater = True
+            self.has_electrical_heater = True
         
         elif objectInstance.kind == "heatpump":
             self.heatpump.append(objectInstance)
-            self.hasHeatpump = True
+            self.has_heatpump = True
         
         elif objectInstance.kind == "inverter":
-            if objectInstance.inputAC:
+            if objectInstance.input_AC:
                 self.inverterAcdc.append(objectInstance)
-                self.hasInverterAcdc = True
+                self.has_inverter_acdc = True
             else:
                 self.inverterDcac.append(objectInstance)
-                self.hasInverterDcac = True
+                self.has_inverter_dcac = True
         
         elif objectInstance.kind == "pv":
             self.pv.append(objectInstance)
-            self.hasPv = True
+            self.has_pv = True
             
         elif objectInstance.kind == "tes":
             self.tes.append(objectInstance)
-            self.hasTes = True
+            self.has_tes = True
             
     def addMultipleDevices(self, devices):
         """
@@ -166,43 +166,43 @@ class BES(object):
             Return information on the thermal energy storage?
         """
         if allDevices:
-            result = (self.hasBattery, 
-                      self.hasBoiler, 
-                      self.hasChp, 
-                      self.hasElectricalHeater, 
-                      self.hasHeatpump, 
-                      self.hasInverterAcdc, 
-                      self.hasInverterDcac, 
-                      self.hasPv, 
-                      self.hasTes)
+            result = (self.has_battery,
+                      self.has_boiler,
+                      self.has_chp,
+                      self.has_electrical_heater,
+                      self.has_heatpump,
+                      self.has_inverter_acdc,
+                      self.has_inverter_dcac,
+                      self.has_pv,
+                      self.has_tes)
 
         else:
             result = ()
             if battery:
-                result += (self.hasBattery,)
+                result += (self.has_battery,)
                 
             if boiler:
-                result += (self.hasBoiler,)
+                result += (self.has_boiler,)
 
             if chp:
-                result += (self.hasChp,)
+                result += (self.has_chp,)
 
             if electricalHeater:
-                result += (self.hasElectricalHeater,)
+                result += (self.has_electrical_heater,)
 
             if heatpump:
-                result += (self.hasHeatpump,)
+                result += (self.has_heatpump,)
 
             if inverterAcdc:
-                result += (self.hasInverterAcdc,)
+                result += (self.has_inverter_acdc,)
 
             if inverterDcac:
-                result += (self.hasInverterDcac,)
+                result += (self.has_inverter_dcac,)
 
             if pv:
-                result += (self.hasPv,)
+                result += (self.has_pv,)
                 
             if tes:
-                result += (self.hasTes,)
+                result += (self.has_tes,)
         
         return result

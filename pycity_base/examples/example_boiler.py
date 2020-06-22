@@ -19,7 +19,7 @@ import pycity_base.classes.supply.boiler as boiler
 def run_example():
     # Create environment
     timer = pycity_base.classes.timer.Timer()
-    weather = pycity_base.classes.weather.Weather(timer, useTRY=True)
+    weather = pycity_base.classes.weather.Weather(timer, use_TRY=True)
     prices = pycity_base.classes.prices.Prices()
     environment = pycity_base.classes.environment.Environment(timer, weather, prices)
 
@@ -34,16 +34,16 @@ def run_example():
     print()
     print(("Type: " + heater.kind))
     print(("Efficiency: " + str(heater.eta)))
-    print(("Maximum heat output: " + str(heater.qNominal)))
-    print(("Maximum flow temperature: " + str(heater.tMax)))
-    print(("Lower activation limit: " + str(heater.lowerActivationLimit)))
+    print(("Maximum heat output: " + str(heater.q_nominal)))
+    print(("Maximum flow temperature: " + str(heater.t_max)))
+    print(("Lower activation limit: " + str(heater.lower_activation_limit)))
 
     print()
     print(("Nominals: " + str(heater.getNominalValues())))
 
     np.random.seed(0)
-    result_q = np.random.rand(timer.timestepsUsedHorizon) * q_nominal
-    result_schedule = np.random.randint(2, size=timer.timestepsUsedHorizon)
+    result_q = np.random.rand(timer.timesteps_used_horizon) * q_nominal
+    result_schedule = np.random.randint(2, size=timer.timesteps_used_horizon)
     heater.setResults(result_q, result_schedule)
 
     results = heater.getResults(True)

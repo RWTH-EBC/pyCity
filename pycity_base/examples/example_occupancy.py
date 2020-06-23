@@ -40,9 +40,9 @@ def run_example(do_plot=False):
     for i in range(len(occupancy_profile)):
         if occupancy_profile[i] == 1:
             counter += 1
-    print('Number of timesteps in year, when 1 person is within apartment:')
+    print('Number of timesteps in year, in which one person is inside the apartment:')
     print(counter)
-    print('Time share per year, when one person is within apartment:')
+    print('Time share per year, in which one person is inside the apartment:')
     print(counter / len(occupancy_profile))
     print()
 

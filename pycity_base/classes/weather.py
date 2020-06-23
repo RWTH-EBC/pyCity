@@ -29,7 +29,7 @@ class Weather(pycity_base.classes.sun.Sun):
                  time_discretization=3600, delimiter="\t",
                  use_TRY=True, use_TMY3=False,
                  location=(50.76, 6.07), height_velocity_measurement=10,
-                 altitude=0, time_zone=1):
+                 altitude=152.0, time_zone=1):
         """
         Parameters
         ----------
@@ -90,6 +90,8 @@ class Weather(pycity_base.classes.sun.Sun):
 
         super(Weather, self).__init__(timer, location, time_zone, altitude)
         self._kind = "weather"
+        self.weather_dataset_name = ""
+        self.try_number = "00"
 
         self.height_velocity_measurement = height_velocity_measurement
 
@@ -114,9 +116,9 @@ class Weather(pycity_base.classes.sun.Sun):
                 if path_TRY is None:
                     src_path = os.path.dirname(os.path.dirname(__file__))
                     path_TRY = os.path.join(src_path,
-                                           'inputs',
-                                           'weather',
-                                           'TRY2010_05_Jahr.dat')
+                                            'inputs',
+                                            'weather',
+                                            'TRY2010_05_Jahr.dat')
 
                 # Read TRY data
                 TRYData = np.genfromtxt(path_TRY, skip_header=38)
@@ -162,18 +164,20 @@ class Weather(pycity_base.classes.sun.Sun):
                     first_line = data.readline()
                 self.try_number = first_line[3] + first_line[4]
 
+            self.weather_dataset_name = ((str(path_TRY).replace('\\', '/')).split("/")[-1]).split(".")[0]
+
         elif use_TMY3:
             # Generate TMY3 path (if path is None) and use 
             # tmy3_744860_new_york_jfk_airport.csv
             if path_TMY3 is None:
                 src_path = os.path.dirname(os.path.dirname(__file__))
                 path_TMY3 = os.path.join(src_path,
-                                        'inputs',
-                                        'weather',
-                                        'tmy3_744860_new_york_jfk_airport.csv')
+                                         'inputs',
+                                         'weather',
+                                         'tmy3_744860_new_york_jfk_airport.csv')
 
             weather_data = np.genfromtxt(path_TMY3, skip_header=2, delimiter=",",
-                                      usecols=(4, 7, 10, 25, 31, 37, 40, 46))
+                                         usecols=(4, 7, 10, 25, 31, 37, 40, 46))
 
             self.p_ambient = weather_data[0:nb_rows, 6]
             self.phi_ambient = weather_data[0:nb_rows, 5]
@@ -195,7 +199,8 @@ class Weather(pycity_base.classes.sun.Sun):
 
             self.q_direct = directNormalIrrad * np.cos(np.radians(thetaZ))
             self.q_diffuse = np.maximum(0, globalHorIrrad - self.q_direct)
-            self.try_number = "00"
+
+            self.weather_dataset_name = ((str(path_TMY3).replace('\\', '/')).split("/")[-1]).split(".")[0]
 
         else:  # pragma: no cover
             # If the data is not provided via TRY, load each file separately
@@ -213,7 +218,6 @@ class Weather(pycity_base.classes.sun.Sun):
             self.phi_ambient = readTXT(path_humidity, delimiter)
             self.p_ambient = readTXT(path_pressure, delimiter)
             self.cloudiness = readTXT(path_cloudiness, delimiter)
-            self.try_number = "00"
 
         if not time_discretization == self.timer.time_discretization:
             # If there is a difference between the standard time discretization
@@ -221,17 +225,17 @@ class Weather(pycity_base.classes.sun.Sun):
             # to the desired time discretization
             changeRes = changeResolution.changeResolution
             self.t_ambient = changeRes(self.t_ambient, time_discretization,
-                                      self.timer.time_discretization)
+                                       self.timer.time_discretization)
             self.q_direct = changeRes(self.q_direct, time_discretization,
-                                     self.timer.time_discretization)
+                                      self.timer.time_discretization)
             self.q_diffuse = changeRes(self.q_diffuse, time_discretization,
-                                      self.timer.time_discretization)
+                                       self.timer.time_discretization)
             self.v_wind = changeRes(self.v_wind, time_discretization,
-                                   self.timer.time_discretization)
+                                    self.timer.time_discretization)
             self.phi_ambient = changeRes(self.phi_ambient, time_discretization,
-                                        self.timer.time_discretization)
+                                         self.timer.time_discretization)
             self.p_ambient = changeRes(self.p_ambient, time_discretization,
-                                      self.timer.time_discretization)
+                                       self.timer.time_discretization)
             self.cloudiness = changeRes(self.cloudiness, time_discretization,
                                         self.timer.time_discretization)
             if use_TRY:

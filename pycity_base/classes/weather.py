@@ -164,7 +164,7 @@ class Weather(pycity_base.classes.sun.Sun):
                     first_line = data.readline()
                 self.try_number = first_line[3] + first_line[4]
 
-            self.weather_dataset_name = (str(path_TRY).split("\\")[-1]).split(".")[0]
+            self.weather_dataset_name = ((str(path_TRY).replace('\\', '/')).split("/")[-1]).split(".")[0]
 
         elif use_TMY3:
             # Generate TMY3 path (if path is None) and use 
@@ -200,7 +200,7 @@ class Weather(pycity_base.classes.sun.Sun):
             self.q_direct = directNormalIrrad * np.cos(np.radians(thetaZ))
             self.q_diffuse = np.maximum(0, globalHorIrrad - self.q_direct)
 
-            self.weather_dataset_name = (str(path_TMY3).split("\\")[-1]).split(".")[0]
+            self.weather_dataset_name = ((str(path_TMY3).replace('\\', '/')).split("/")[-1]).split(".")[0]
 
         else:  # pragma: no cover
             # If the data is not provided via TRY, load each file separately

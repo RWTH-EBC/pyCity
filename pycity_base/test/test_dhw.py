@@ -58,6 +58,7 @@ class TestDomesticHotWater(object):
         print('DHW annual energy demand in kWh: ', annual_dhw_energy_demand)
 
         assert abs(annual_dhw_energy_demand - reference_value) <= 0.01
+        assert (dhw_annex42.water is None)
 
     def test_method2(self, create_environment, create_occupancy):
         """
@@ -87,6 +88,7 @@ class TestDomesticHotWater(object):
         #  Check if av_daily_dhw_volume is within sufficient limits
         assert (av_daily_dhw_volume <= 250)
         assert (av_daily_dhw_volume >= 45)
+        assert (dhw_stochastical is not None)
 
     def test_method3(self, create_environment):
         """

@@ -22,6 +22,7 @@ class DomesticHotWater(pycity_base.classes.demand.load.Load):
 
     loaded_profile = False
     loaded_dhw_sto = False
+    water = None
     a42 = []  # Tap water consumption profiles given in Annex 42
     dhw_sto_profiles = {}
 

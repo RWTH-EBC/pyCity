@@ -107,7 +107,7 @@ def run_example():
     for i in range(2):
 
         #  Generate PV field within city district
-        pv_unit = pv.PV(environment, 20, 0.15)
+        pv_unit = pv.PV(environment=environment, method=0, area=20, eta_noct=0.15)
 
         #  Add PV fields to city district
         cityDistrict.addEntity(entity=pv_unit, position=dict_pos[i+4])

@@ -46,7 +46,7 @@ def run_example():
     elh = eh.ElectricalHeater(environment, 3000, 0.99)
     inverter_ac_dc = inv.Inverter(environment, 0.98, 10000, True)
     inverter_dc_ac = inv.Inverter(environment, 0.98, 10000, False)
-    pv_unit = pv.PV(environment, 50, 0.15)
+    pv_unit = pv.PV(environment=environment, method=0, area=50, eta_noct=0.15)
     thermal_storage = tes.ThermalEnergyStorage(environment, 50, 1000, 85)
 
     # Instantiate BES

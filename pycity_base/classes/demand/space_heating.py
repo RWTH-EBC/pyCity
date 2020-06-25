@@ -51,7 +51,7 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
                     region 5!)
         loadcurve : Array-like, optional
             Load curve for all investigated time steps
-            Requires ``method=0``.
+            Requires ``method=0``
         living_area : Float, optional
             Living area of the apartment in m^2
             Requires ``method=1``

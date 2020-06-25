@@ -14,7 +14,7 @@ import math
 
 class Sun(object):
     """
-    
+    Implementation of the Sun class.
     """
     
     def __init__(self, 
@@ -299,9 +299,31 @@ class Sun(object):
                                        beta, gamma, albedo=0.3, update=False,
                                        current_values=True):
         """
+        Compute the total radiation on a tilted surface.
 
         Parameters
         ----------
+        beamRadiation : array-like
+            The solar radiation received from the sun without having been
+            scattered by the atmosphere (also often named direct radiation)
+        diffuseRadiation : array-like
+            The solar radiation received from the sun after its direction has
+            been changed by scattering by the atmosphere.
+        beta : float
+            Slope, the angle (in degree) between the plane of the surface in
+            question and the horizontal. 0 <= beta <= 180. If beta > 90, the
+            surface faces downwards.
+        gamma : float
+            Surface azimuth angle. The deviation of the projection on a
+            horizontal plane of the normal to the surface from the local
+            meridian, with zero due south, east negative, and west positive.
+            -180 <= gamma <= 180
+        albedo : float, optional
+            Average value on earth: 0.3
+            Ground reflectance. 0 <= albedo <= 1
+        update : bool, optional
+            Perform an update of the common angles before computing the total
+            radiation on the tilted surface
         current_values : bool, optional
             If True, returns values of current horizon (default: True).
             If False, returns annual values.

@@ -164,8 +164,9 @@ def run_example():
 
     #  Generate PV module object
     pv = pvsys.PV(environment=environment,
+                  method=0,
                   area=30,  # Area in m^2
-                  eta=0.15)  # Electrical efficiency at NOCT conditions
+                  eta_noct=0.15)  # Electrical efficiency at NOCT conditions
 
     # Instantiate BES (container object for all energy systems)
     bes = besys.BES(environment)

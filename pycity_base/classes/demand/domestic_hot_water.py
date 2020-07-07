@@ -76,25 +76,28 @@ class DomesticHotWater(pycity_base.classes.demand.load.Load):
                 filename = os.path.join(src_path, 'inputs', 'standard_load_profile', 'dhw_annex42.csv')
                 DomesticHotWater.a42 = np.loadtxt(filename, 
                                                   skiprows=1, delimiter="\t")
-                # Adjust time resolution. Annex 42 data is sampled at 900 sec.
-                if timeDis != 900:
-                    res = []
-                    changeResol = cr.changeResolution
-                    for i in range(3):
-                        res.append(changeResol(DomesticHotWater.a42[:,i], 
-                                               oldResolution=900,
-                                               newResolution=timeDis,
-                                               method="mean"))
-                    DomesticHotWater.a42 = np.transpose(np.array(res))
                 DomesticHotWater.loaded_profile = True
+
+            # Adjust time resolution. Annex 42 data is sampled at 900 sec.
+            if timeDis != 900:
+                res = []
+                changeResol = cr.changeResolution
+                for i in range(3):
+                    res.append(changeResol(DomesticHotWater.a42[:, i],
+                                           oldResolution=900,
+                                           newResolution=timeDis,
+                                           method="mean"))
+                a42 = np.transpose(np.array(res))
+            else:
+                a42 = DomesticHotWater.a42
                 
             # Compute tap water profile (based on average daily consumption)
             if daily_consumption <= 150:
-                tapProfile = self.a42[:, 0] * daily_consumption / 100
+                tapProfile = a42[:,0] * daily_consumption / 100
             elif daily_consumption <= 250 and daily_consumption > 150:
-                tapProfile = self.a42[:, 1] * daily_consumption / 200
+                tapProfile = a42[:,1] * daily_consumption / 200
             elif daily_consumption > 250:
-                tapProfile = self.a42[:, 2] * daily_consumption / 300
+                tapProfile = a42[:,2] * daily_consumption / 300
             
             # Compute equivalent heat demand in Watt
             cWater = 4180  # J/kgK

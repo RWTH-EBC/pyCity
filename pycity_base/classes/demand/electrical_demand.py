@@ -157,8 +157,7 @@ class ElectricalDemand(pycity_base.classes.demand.load.Load):
                 filename = os.path.join(src_path, 'inputs',
                                         'standard_load_profile',
                                         'slp_electrical.xlsx')
-                ElectricalDemand.slp = slp_el.load(filename,
-                                                   time_discretization=environment.timer.time_discretization)
+                ElectricalDemand.slp = slp_el.load(filename)
                 ElectricalDemand.loaded_slp = True
 
             loadcurve = slp_el.get_demand(annual_demand,

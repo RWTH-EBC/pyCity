@@ -184,13 +184,13 @@ class CityDistrict(ues.UESGraph):
             curr_pos = positions[i]
             self.addEntity(entity=curr_entity, position=curr_pos)
 
-    def _getRESPower(self, generators, current_values=True):
+    def _getRESPower(self, generators, currentValues=True):
         """
         Get the (aggregated) forecast of all renewable electricity generators.
 
         Parameters
         ----------
-        current_values : bool, optional
+        currentValues : bool, optional
             Defines, if only current horizon or all timesteps should be used.
             (default: True)
             False - Use complete number of timesteps
@@ -201,24 +201,24 @@ class CityDistrict(ues.UESGraph):
         power : np.array
             Power curve
         """
-        if current_values:
+        if currentValues:
             timesteps = self.environment.timer.timesteps_horizon
         else:
             timesteps = self.environment.timer.timesteps_total
 
         power = np.zeros(timesteps)
         for generator in generators:
-            power += generator.getPower(currentValues=current_values)
+            power += generator.getPower(currentValues=currentValues)
 
         return power
 
-    def getPVPower(self, current_values=True):
+    def getPVPower(self, currentValues=True):
         """
         Get the (aggregated) forecast of all (stand alone) pv units / pv farms.
 
         Parameters
         ----------
-        current_values : bool, optional
+        currentValues : bool, optional
             Defines, if only current horizon or all timesteps should be used.
             (default: True)
             False - Use complete number of timesteps
@@ -230,7 +230,7 @@ class CityDistrict(ues.UESGraph):
             Array with pv power values of all pv farms
         """
 
-        if current_values:
+        if currentValues:
             timesteps = self.environment.timer.timesteps_horizon
         else:
             timesteps = self.environment.timer.timesteps_total
@@ -252,16 +252,15 @@ class CityDistrict(ues.UESGraph):
         if len(pv_entities) == 0:
             return np.zeros(timesteps)
         else:
-            return self._getRESPower(pv_entities, current_values=
-                                     current_values)
+            return self._getRESPower(pv_entities, currentValues=currentValues)
 
-    def getWindEnergyConverterPower(self, current_values=True):
+    def getWindEnergyConverterPower(self, currentValues=True):
         """
         Get the (aggregated) forecast of all wind energy converters.
 
         Parameters
         ----------
-        current_values : bool, optional
+        currentValues : bool, optional
             Defines, if only current horizon or all timesteps should be used.
             (default: True)
             False - Use complete number of timesteps
@@ -273,7 +272,7 @@ class CityDistrict(ues.UESGraph):
             Array with wind power values of all wind farms
         """
 
-        if current_values:
+        if currentValues:
             timesteps = self.environment.timer.timesteps_horizon
         else:
             timesteps = self.environment.timer.timesteps_total
@@ -295,10 +294,9 @@ class CityDistrict(ues.UESGraph):
         if len(wind_entities) == 0:
             return np.zeros(timesteps)
         else:
-            return self._getRESPower(wind_entities, current_values=
-                                     current_values)
+            return self._getRESPower(wind_entities, currentValues=currentValues)
 
-    def get_power_curves(self, current_values=True):
+    def get_power_curves(self, currentValues=True):
         """ 
         Get the aggregated electricity and heat power forecast of all
         buildings.
@@ -307,7 +305,7 @@ class CityDistrict(ues.UESGraph):
 
         Parameters
         ----------
-        current_values : bool, optional
+        currentValues : bool, optional
             Defines, if only current horizon or all timesteps should be used.
             (default: True)
             False - Use complete number of timesteps
@@ -320,7 +318,7 @@ class CityDistrict(ues.UESGraph):
         HeatDemand : Array_like
             Aggregated heat demand
         """
-        if current_values:
+        if currentValues:
             timesteps = self.environment.timer.timesteps_horizon
         else:
             timesteps = self.environment.timer.timesteps_total
@@ -335,21 +333,20 @@ class CityDistrict(ues.UESGraph):
                 if self.node[n]['node_type'] == 'building':
                     #  If entity is kind building
                     if self.node[n]['entity'].kind == 'building':
-                        temp = self.node[n]['entity'].get_power_curves(
-                            current_values=current_values)
+                        temp = self.node[n]['entity'].get_power_curves(currentValues=currentValues)
                         power_el += temp[0]
                         power_th += temp[1]
 
         return (power_el, power_th)
 
-    def get_aggr_space_heating_power_curve(self, current_values=False, nodelist=None):
+    def get_aggr_space_heating_power_curve(self, currentValues=False, nodelist=None):
         """
         Returns the aggregated space heating power curve for all buildings
         within the city district.
 
         Parameters
         ----------
-        current_values : bool, optional
+        currentValues : bool, optional
             Defines, if only current horizon or all timesteps should be used.
             (default: False)
             False - Use complete number of timesteps
@@ -366,7 +363,7 @@ class CityDistrict(ues.UESGraph):
             Space heating thermal power curve in W per timestep
         """
 
-        if current_values:  # Use horizon
+        if currentValues:  # Use horizon
             size = self.environment.timer.timesteps_horizon
         else:  # Use all timesteps
             size = self.environment.timer.timesteps_total
@@ -389,20 +386,19 @@ class CityDistrict(ues.UESGraph):
                     #  If entity is kind building
                     if self.node[n]['entity'].kind == 'building':
                         th_power_curve = self.node[n]['entity']. \
-                            get_space_heating_power_curve(
-                            current_values=current_values)[0:size]
+                            get_space_heating_power_curve(currentValues=currentValues)[0:size]
                         agg_th_p_curve += th_power_curve
 
         return agg_th_p_curve
 
-    def get_aggr_space_cooling_power_curve(self, current_values=False, nodelist=None):
+    def get_aggr_space_cooling_power_curve(self, currentValues=False, nodelist=None):
         """
         Returns the aggregated space cooling power curve for all buildings
         within the city district.
 
         Parameters
         ----------
-        current_values : bool, optional
+        currentValues : bool, optional
             Defines, if only current horizon or all timesteps should be used.
             (default: False)
             False - Use complete number of timesteps
@@ -419,7 +415,7 @@ class CityDistrict(ues.UESGraph):
             Space cooling thermal power curve in W per timestep
         """
 
-        if current_values:  # Use horizon
+        if currentValues:  # Use horizon
             size = self.environment.timer.timesteps_horizon
         else:  # Use all timesteps
             size = self.environment.timer.timesteps_total
@@ -442,21 +438,19 @@ class CityDistrict(ues.UESGraph):
                     #  If entity is kind building
                     if self.node[n]['entity'].kind == 'building':
                         th_power_curve = self.node[n]['entity']. \
-                            get_space_cooling_power_curve(
-                            current_values=current_values)[0:size]
+                            get_space_cooling_power_curve(currentValues=currentValues)[0:size]
                         agg_th_p_curve += th_power_curve
 
         return agg_th_p_curve
 
-    def get_aggr_el_power_curve(self, current_values=False,
-                                     nodelist=None):
+    def get_aggr_el_power_curve(self, currentValues=False, nodelist=None):
         """
         Returns aggregated electrical power curve for all buildings
         within city district.
 
         Parameters
         ----------
-        current_values : bool, optional
+        currentValues : bool, optional
             Defines, if only current horizon or all timesteps should be used.
             (default: False)
             False - Use complete number of timesteps
@@ -473,7 +467,7 @@ class CityDistrict(ues.UESGraph):
             Electrical power curve in W per timestep
         """
 
-        if current_values:  # Use horizon
+        if currentValues:  # Use horizon
             size = self.environment.timer.timesteps_horizon
         else:  # Use all timesteps
             size = self.environment.timer.timesteps_total
@@ -496,13 +490,12 @@ class CityDistrict(ues.UESGraph):
                     #  If entity is kind building
                     if self.node[n]['entity'].kind == 'building':
                         el_power_curve = self.node[n]['entity']. \
-                            get_electric_power_curve(
-                            current_values=current_values)[0:size]
+                            get_electric_power_curve(currentValues=currentValues)[0:size]
                         agg_el_p_curve += el_power_curve
 
         return agg_el_p_curve
 
-    def get_aggr_dhw_power_curve(self, current_values=False,
+    def get_aggr_dhw_power_curve(self, currentValues=False,
                                      nodelist=None):
         """
         Returns aggregated domestic hot water (dhw) power curve for all
@@ -510,7 +503,7 @@ class CityDistrict(ues.UESGraph):
 
         Parameters
         ----------
-        current_values : bool, optional
+        currentValues : bool, optional
             Defines, if only current horizon or all timesteps should be used.
             (default: False)
             False - Use complete number of timesteps
@@ -527,7 +520,7 @@ class CityDistrict(ues.UESGraph):
             DHW power curve in W per timestep
         """
 
-        if current_values:  # Use horizon
+        if currentValues:  # Use horizon
             size = self.environment.timer.timesteps_horizon
         else:  # Use all timesteps
             size = self.environment.timer.timesteps_total
@@ -550,8 +543,7 @@ class CityDistrict(ues.UESGraph):
                     #  If entity is kind building
                     if self.node[n]['entity'].kind == 'building':
                         dhw_power_curve = self.node[n]['entity']. \
-                            get_dhw_power_curve(
-                            current_values=current_values)[0:size]
+                            get_dhw_power_curve(currentValues=currentValues)[0:size]
                         agg_dhw_p_curve += dhw_power_curve
 
         return agg_dhw_p_curve
@@ -661,8 +653,8 @@ class CityDistrict(ues.UESGraph):
         build_node_id_list : list (of ints)
             List holding building entity node ids
         """
-        build_node_id_list = self.get_node_numbers_of_entities(entity_name=
-                                                               'building')
+        build_node_id_list = self.get_node_numbers_of_entities(entity_name='building')
+
         return build_node_id_list
 
     def get_list_id_of_spec_node_type(self, node_type='building'):

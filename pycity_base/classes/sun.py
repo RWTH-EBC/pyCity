@@ -70,7 +70,7 @@ class Sun(object):
         self.altitude = altitude
         self.time_zone = time_zone
     
-    def update(self, current_values=True):
+    def update(self, currentValues=True):
         """ 
         Update attributes (for example because a new optimization period just
         started).
@@ -84,11 +84,11 @@ class Sun(object):
 
         Parameters
         ----------
-        current_values : bool, optional
+        currentValues : bool, optional
             If True, returns values of current horizon (default: True).
             If False, returns annual values.
         """
-        self.computeGeometry(allTimeSteps=not current_values)
+        self.computeGeometry(allTimeSteps=not currentValues)
     
     def computeGeometry(self, allTimeSteps=False):
         """
@@ -296,8 +296,7 @@ class Sun(object):
         return theta
         
     def getTotalRadiationTiltedSurface(self, beamRadiation, diffuseRadiation, 
-                                       beta, gamma, albedo=0.3, update=False,
-                                       current_values=True):
+                                       beta, gamma, albedo=0.3, update=False, currentValues=True):
         """
         Compute the total radiation on a tilted surface.
 
@@ -324,13 +323,13 @@ class Sun(object):
         update : bool, optional
             Perform an update of the common angles before computing the total
             radiation on the tilted surface
-        current_values : bool, optional
+        currentValues : bool, optional
             If True, returns values of current horizon (default: True).
             If False, returns annual values.
         """
         # Update common angles
         if update:
-            self.update(current_values=current_values)
+            self.update(currentValues=currentValues)
         
         # Get incidence angle
         theta = self.getIncidenceAngle(beta, gamma)

@@ -26,19 +26,19 @@ class Heatpump(HeatingDevice.HeatingDevice):
         Parameters
         ----------
         environment : environment object
-            Common to all other objects. Includes time and weather instances
+            Common to all other objects. Includes time and weather instances.
         t_ambient : array-like
-            DESCRIPTION
+            Outdoor ambient air temperature
         t_flow : array-like
-            DESCRIPTION
+            Heat pump's flow temperature
         heat : array-like (2 dimensional)
-            DESCRIPTION
+            Heat pump's heat power
         power : array-like (2 dimensional)
-            DESCRIPTION
+            Heat pump's electrical power
         cop : array-like (2 dimensional)
-            DESCRIPTION
+            Heat pump's coefficient of performance (cop)
         t_max : float
-            DESCRIPTION
+            Heat pump's nominal temperature
         lower_activation_limit : float (0 <= lower_activation_limit <= 1)
             Define the lower activation limit. For example, heat pumps are 
             typically able to operate between 50 % part load and rated load. 

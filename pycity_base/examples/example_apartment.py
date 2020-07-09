@@ -67,13 +67,13 @@ def run_example(do_plot=False):
     apartment.addMultipleEntities(entities)
 
     #  Get space heating power curve for whole year:
-    array_sh_power = apartment.get_space_heating_power_curve(current_values=False)
+    array_sh_power = apartment.get_space_heating_power_curve(currentValues=False)
 
     #  Get electrical power curve for whole year:
-    array_el_power = apartment.get_el_power_curve(current_values=False)
+    array_el_power = apartment.get_el_power_curve(currentValues=False)
 
     #  Get domestic hot water power curve for whole year:
-    array_dhw_power = apartment.get_dhw_power_curve(current_values=False)
+    array_dhw_power = apartment.get_dhw_power_curve(currentValues=False)
 
     #  Generate time array (in days)
     array_time = np.arange(start=0, stop=int(nb_timesteps * timestep),

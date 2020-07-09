@@ -52,13 +52,13 @@ class AbsorptionChiller(coolingdevice.CoolingDevice):
     def kind(self):
         return self._kind
 
-    def get_results(self, current_values=True):
+    def get_results(self, currentValues=True):
         """
         Return results.
 
         Parameter
         ---------
-        current_values : boolean, optional
+        currentValues : boolean, optional
             - True : Return only values for this scheduling period
             - False : Return values for all scheduling periods
 
@@ -69,8 +69,8 @@ class AbsorptionChiller(coolingdevice.CoolingDevice):
         schedule : array-like
             Operational schedule
         """
-        return (self._get_q_output(current_values),
-                self._get_schedule(current_values))
+        return (self._get_q_output(currentValues),
+                self._get_schedule(currentValues))
 
     def set_results(self, q_output, schedule):
         """

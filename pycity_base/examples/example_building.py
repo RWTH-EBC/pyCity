@@ -125,19 +125,17 @@ def run_example(do_plot=False):
     entities = [apartment, bes, heating_curve]
     building.addMultipleEntities(entities)
 
-    print('Access heat pump nominals:')
-    print(building.getHeatpumpNominals())
-    print()
-
     print('Access flow temperatures:')
     print(building.flow_temperature)
     print()
 
     print('Get number of apartments:')
     print(building.get_number_of_apartments())
+    print()
 
     print('Get net floor area of building in m^2:')
     print(building.get_net_floor_area_of_building())
+    print()
 
     #  Get space heating power curve for whole year:
     array_sh_power = building.get_space_heating_power_curve()

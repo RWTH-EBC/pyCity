@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Cooling demand class
+Compression chiller class
 """
 
 from __future__ import division
@@ -11,7 +11,7 @@ import pycity_base.classes.supply.cooling_device as coolingdevice
 
 class CompressionChiller(coolingdevice.CoolingDevice):
     """
-    Implementation of the chiller
+    Implementation of the compression chiller.
     """
 
     def __init__(self,
@@ -52,25 +52,25 @@ class CompressionChiller(coolingdevice.CoolingDevice):
     def kind(self):
         return self._kind
 
-    def get_results(self, current_values=True):
+    def get_results(self, currentValues=True):
         """
         Return results.
 
         Parameter
         ---------
-        current_values : boolean, optional
+        currentValues : boolean, optional
             - True : Return only values for this scheduling period
             - False : Return values for all scheduling periods
 
         Order
         -----
         q_output : array-like
-            cooling production of the chiller
+            Cooling production of the chiller
         schedule : array-like
             Operational schedule
         """
-        return (self._get_q_output(current_values),
-                self._get_schedule(current_values))
+        return (self._get_q_output(currentValues),
+                self._get_schedule(currentValues))
 
     def set_results(self, q_output, schedule):
         """

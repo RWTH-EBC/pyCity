@@ -39,8 +39,9 @@ class BES(object):
         self.battery = []
         self.boiler = []
         self.chp = []
-        self.electricalHeater = []
+        self.electrical_heater = []
         self.heatpump = []
+        self.compression_chiller = []
         self.inverterAcdc = []
         self.inverterDcac = []
         self.pv = []
@@ -52,6 +53,7 @@ class BES(object):
         self.has_chp = False
         self.has_electrical_heater = False
         self.has_heatpump = False
+        self.has_compression_chiller = False
         self.has_inverter_acdc = False
         self.has_inverter_dcac = False
         self.has_pv = False
@@ -84,12 +86,16 @@ class BES(object):
             self.has_chp = True
         
         elif objectInstance.kind == "electricalheater":
-            self.electricalHeater.append(objectInstance)
+            self.electrical_heater.append(objectInstance)
             self.has_electrical_heater = True
         
         elif objectInstance.kind == "heatpump":
             self.heatpump.append(objectInstance)
             self.has_heatpump = True
+
+        elif objectInstance.kind == "compressionchiller":
+            self.compression_chiller.append(objectInstance)
+            self.has_compression_chiller = True
         
         elif objectInstance.kind == "inverter":
             if objectInstance.input_AC:
@@ -127,12 +133,13 @@ class BES(object):
             self.addDevice(device)
     
     def getHasDevices(self, 
-                      allDevices=True, 
+                      all_devices=True,
                       battery=False, 
                       boiler=False, 
-                      chp=False, 
-                      electricalHeater=False, 
-                      heatpump=False, 
+                      chp=False,
+                      compression_chiller=False,
+                      electrical_heater=False,
+                      heatpump=False,
                       inverterAcdc=False, 
                       inverterDcac=False, 
                       pv=False, 
@@ -143,32 +150,35 @@ class BES(object):
         
         Parameters
         ----------
-        allDevices : boolean, optional
+        all_devices : boolean, optional
             If true: Return all installed devices
             If false: Only return the specified devices
         battery : boolean, optional
-            Return information on the battery?
+            Return information on the battery
         boiler : boolean, optional
-            Return information on the boiler?
+            Return information on the boiler
         chp : boolean, optional
-            Return information on the chp unit?
-        electricalHeater : boolean, optional
-            Return information on the electrical heater?
+            Return information on the chp unit
+        compression_chiller : boolean, optional
+            Return information on the compression chiller unit
+        electrical_heater : boolean, optional
+            Return information on the electrical heater
         heatpump : boolean, optional
-            Return information on the heat pump?
+            Return information on the heat pump
         inverterAcdc : boolean, optional
-            Return information on the AC-DC inverter?
+            Return information on the AC-DC inverter
         inverterDcac : boolean, optional
-            Return information on the DC-AC inverter?
+            Return information on the DC-AC inverter
         pv : boolean, optional
-            Return information on the PV modules?
+            Return information on the PV modules
         tes : boolean, optional
-            Return information on the thermal energy storage?
+            Return information on the thermal energy storage
         """
-        if allDevices:
+        if all_devices:
             result = (self.has_battery,
                       self.has_boiler,
                       self.has_chp,
+                      self.has_compression_chiller,
                       self.has_electrical_heater,
                       self.has_heatpump,
                       self.has_inverter_acdc,
@@ -187,7 +197,10 @@ class BES(object):
             if chp:
                 result += (self.has_chp,)
 
-            if electricalHeater:
+            if compression_chiller:
+                result += (self.has_compression_chiller,)
+
+            if electrical_heater:
                 result += (self.has_electrical_heater,)
 
             if heatpump:

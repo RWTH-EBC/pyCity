@@ -36,7 +36,7 @@ def run_example(do_plot=False):
     print("Heat power curve: " + str(results))
 
     if do_plot:
-        plt.plot(hd_slp.loadcurve, label="SLP", color="b")
+        plt.plot(hd_slp.loadcurve, label="SLP [W]", color="b")
         plt.show()
 
     #  Use simulated profile
@@ -51,11 +51,11 @@ def run_example(do_plot=False):
     print('Thermal power load in W:', sim_th_loadcurve)
 
     if do_plot:
-        plt.plot(sim_th_loadcurve, label="Simulated power curve", color="b")
+        plt.plot(sim_th_loadcurve, label="Simulated power curve [W]", color="b")
         plt.show()
 
-        plt.plot(sim_th_loadcurve, label="Simulated power curve")
-        plt.plot(hd_slp.loadcurve, label="SLP")
+        plt.plot(sim_th_loadcurve, label="Simulated power curve [W]")
+        plt.plot(hd_slp.loadcurve, label="SLP [W]")
         plt.legend()
         plt.show()
 

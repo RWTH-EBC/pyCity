@@ -23,10 +23,10 @@ class TestSpaceHeating(object):
         spaceheating = sh.SpaceHeating(create_environment, method=0, loadcurve=load_array)
 
         #  Return load curve of space heating object
-        space_heat_load_curve = spaceheating.get_power(currentValues=False)
+        space_heating_load_curve = spaceheating.get_power(currentValues=False)
 
         #  Compare arrays
-        np.testing.assert_equal(space_heat_load_curve, load_array)
+        np.testing.assert_equal(space_heating_load_curve, load_array)
 
     def test_method1(self, create_environment):  # Standard load profile
 
@@ -37,12 +37,10 @@ class TestSpaceHeating(object):
                                        specific_demand=150)
 
         #  Get space heating load curve (in W) per timestep
-        space_heat_load_curve = spaceheating.get_power(currentValues=False)
+        space_heating_load_curve = spaceheating.get_power(currentValues=False)
 
         #  Convert to energy demand values (in kWh)
-        th_energy_demand_curve = space_heat_load_curve * \
-                                 create_environment.timer.time_discretization / \
-                                 (1000 * 3600)
+        th_energy_demand_curve = space_heating_load_curve * create_environment.timer.time_discretization / (1000 * 3600)
 
         #  Check if sum of energy demand values is (almost) equal to input
         assert abs(np.sum(th_energy_demand_curve) - 150 * 100) <= 0.001 * 150 * 100
@@ -56,12 +54,10 @@ class TestSpaceHeating(object):
                                        specific_demand=150)
 
         #  Get space heating load curve (in W) per timestep
-        space_heat_load_curve = spaceheating.loadcurve
+        space_heating_load_curve = spaceheating.loadcurve
 
         #  Convert to energy demand values (in kWh)
-        th_energy_demand_curve = space_heat_load_curve * \
-                                 create_environment.timer.time_discretization / \
-                                 (1000 * 3600)
+        th_energy_demand_curve = space_heating_load_curve * create_environment.timer.time_discretization / (1000 * 3600)
 
         #  Check if sum of energy demand values is (almost) equal to input
         assert abs(np.sum(th_energy_demand_curve) - 150 * 100) <= 0.001 * 150 * 100

@@ -7,6 +7,8 @@ Created on Thu Jul 09 08:42:07 2020
 """
 
 from __future__ import division
+
+import warnings
 import numpy as np
 import pycity_base.classes.demand.load
 
@@ -69,7 +71,9 @@ class SpaceCooling(pycity_base.classes.demand.load.Load):
 
         elif method == 1:
             #  Generate standardized thermal load profile (SLP)
-            print("SLP functionality for space cooling objects not implemented yet. Using zero cooling load profile.")
+            if living_area > 0 or specific_demand > 0:
+                warnings.warn("SLP functionality for space cooling objects not implemented yet."
+                              "Using a zero cooling load profile instead.")
             super(SpaceCooling, self).__init__(environment, np.zeros(environment.timer.timesteps_total))
 
         self._kind = "spacecooling"

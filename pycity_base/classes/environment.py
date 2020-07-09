@@ -11,7 +11,7 @@ from __future__ import division
 
 class Environment(object):
     """
-    This class keeps track of the simulation time and the weather conditions
+    This class keeps track of the simulation time and the weather conditions.
     """
 
     def __init__(self, timer, weather, prices, location=(50.76, 6.07)):
@@ -40,6 +40,8 @@ class Environment(object):
         return self._kind
     
     def update(self):
-        """ Increase current timestep and current day """
+        """
+        Increase the current timestep and the current day.
+        """
         self.timer.update()
         self.weather.update()

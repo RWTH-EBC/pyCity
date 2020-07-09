@@ -14,7 +14,7 @@ import numpy as np
 class HeatingCurve(object):
     """
     The heating curve presents a functional relationship between ambient 
-    temperature and required flow temperature
+    temperature and required flow temperature.
     """
     
     def __init__(self, 
@@ -58,7 +58,7 @@ class HeatingCurve(object):
                                        smoothingPeriod=1):
         """
         This function is a straight-forward implementation of the heating_curve
-        algorithm of our Modelica library 
+        algorithm of the E.ON ERC Modelica library.
         (Cities.Supply.BaseClasses.heating_curve)
         
         Parameters
@@ -99,7 +99,7 @@ class HeatingCurve(object):
     def doubleExponentialMovingAverage(self, timeseries, smoothingPeriod=1):
         """
         This function implements the double exponential moving average (DEMA), 
-        as eplained here:
+        as explained here:
         http://etfhq.com/blog/2010/11/17/double-and-triple-exponential-moving-average/
         
         Parameters
@@ -128,7 +128,7 @@ class HeatingCurve(object):
         
     def exponential_moving_average(self, timeseries, alpha):
         """ 
-        Compute the exponential moving average of a given timeseries
+        Compute the exponential moving average for a given timeseries.
     
         Explanation of the statistics behind exponential moving average:
             http://etfhq.com/blog/2010/11/08/exponential-moving-average/

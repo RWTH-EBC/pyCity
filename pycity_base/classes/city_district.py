@@ -342,11 +342,10 @@ class CityDistrict(ues.UESGraph):
 
         return (power_el, power_th)
 
-    def get_aggr_space_h_power_curve(self, current_values=False,
-                                     nodelist=None):
+    def get_aggr_space_heating_power_curve(self, current_values=False, nodelist=None):
         """
-        Returns aggregated space heating power curve for all buildings
-        within city district.
+        Returns the aggregated space heating power curve for all buildings
+        within the city district.
 
         Parameters
         ----------
@@ -391,6 +390,59 @@ class CityDistrict(ues.UESGraph):
                     if self.node[n]['entity'].kind == 'building':
                         th_power_curve = self.node[n]['entity']. \
                             get_space_heating_power_curve(
+                            current_values=current_values)[0:size]
+                        agg_th_p_curve += th_power_curve
+
+        return agg_th_p_curve
+
+    def get_aggr_space_cooling_power_curve(self, current_values=False, nodelist=None):
+        """
+        Returns the aggregated space cooling power curve for all buildings
+        within the city district.
+
+        Parameters
+        ----------
+        current_values : bool, optional
+            Defines, if only current horizon or all timesteps should be used.
+            (default: False)
+            False - Use complete number of timesteps
+            True - Use horizon
+        nodelist : list (of ints), optional
+            Defines which nodes should be used to return annual space
+            cooling demand in kWh (default: None).
+            If nodelist is None, all nodes with building entities will
+            be used.
+
+        Returns
+        -------
+        agg_th_p_curve : np.array
+            Space cooling thermal power curve in W per timestep
+        """
+
+        if current_values:  # Use horizon
+            size = self.environment.timer.timesteps_horizon
+        else:  # Use all timesteps
+            size = self.environment.timer.timesteps_total
+        agg_th_p_curve = np.zeros(size)
+
+        if nodelist is None:
+            use_nodes = self
+        else:
+            for n in nodelist:
+                assert n in self.nodes(), ('Node ' + str(n) + 'is not '
+                                           'within city object!')
+            use_nodes = nodelist
+
+        #  Loop over all nodes
+        for n in use_nodes:
+            #  If node holds attribute 'node_type'
+            if 'node_type' in self.node[n]:
+                #  If node_type is building
+                if self.node[n]['node_type'] == 'building':
+                    #  If entity is kind building
+                    if self.node[n]['entity'].kind == 'building':
+                        th_power_curve = self.node[n]['entity']. \
+                            get_space_cooling_power_curve(
                             current_values=current_values)[0:size]
                         agg_th_p_curve += th_power_curve
 

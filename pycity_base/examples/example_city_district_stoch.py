@@ -128,7 +128,11 @@ def run_example():
     print()
 
     print('Get city district overall space heating power load curve:')
-    print(city_district.get_aggr_space_h_power_curve())
+    print(city_district.get_aggr_space_heating_power_curve())
+    print()
+
+    print('Get city district overall space cooling power load curve:')
+    print(city_district.get_aggr_space_cooling_power_curve())
     print()
 
     #  We can use the Visuals class of uesgraphs to plot the city district

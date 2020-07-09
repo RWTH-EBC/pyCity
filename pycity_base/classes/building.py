@@ -13,7 +13,7 @@ import warnings
 class Building(object):
     """
     Implementation of a building that consists of a single Building Energy 
-    System (BES), one controller and multiple apartments
+    System (BES), one controller and multiple apartments.
     """
     
     def __init__(self, environment):
@@ -50,7 +50,7 @@ class Building(object):
     
     def addEntity(self, entity):
         """ 
-        Add an entity (apartment, BES or heating curve) to the building 
+        Add an entity (apartment, BES or heating curve) to the building.
         
         Example
         -------
@@ -72,7 +72,7 @@ class Building(object):
 
     def addMultipleEntities(self, entities):
         """
-        Add multiple entities to the existing building
+        Add multiple entities to the existing building.
         
         Parameter
         ---------
@@ -102,7 +102,14 @@ class Building(object):
             False - Use complete number of timesteps
             True - Use horizon
 
-        Order: (resultElectrical, resultThermal)
+        Returns
+        -------
+        resultElectrical:
+            Electrical power curve
+        resultThermalSpaceHeating:
+            Thermal space heating (plus domestic hot water) power curve
+        resultThermalSpaceCooling:
+            Thermal space cooling power curve
         """
         # Initialization
         # Demands are zero
@@ -111,27 +118,30 @@ class Building(object):
         else:
             timesteps = self.environment.timer.timesteps_total
         power_el = np.zeros(timesteps)
-        power_th = np.zeros(timesteps)
+        power_th_sh = np.zeros(timesteps)
+        power_th_sc = np.zeros(timesteps)
         
         # Add demands of each apartment
         for apartment in self.apartments:
             # Get entire electrical, domestic hot water and space heating 
             # demand
-            (tempEl, tempDhw, tempSh) = apartment.get_power_curves(currentValues=current_values)
+            (tempEl, tempDhw, tempSh, tempSc) = apartment.get_power_curves(currentValues=current_values)
             dhwThermal = apartment.demand_domestic_hot_water.thermal
             
             if dhwThermal:
-                power_th += tempSh + tempDhw
+                power_th_sh += tempSh + tempDhw
+                power_th_sc += tempSc
                 power_el += tempEl
             else:
-                power_th += tempSh
+                power_th_sh += tempSh
+                power_th_sc += tempSc
                 power_el += tempEl + tempDhw
 
-        return (power_el, power_th)
+        return (power_el, power_th_sh, power_th_sc)
 
     def get_space_heating_power_curve(self, current_values=False):
         """
-        Returns space heating power curve
+        Returns the space heating power curve.
 
         Parameters
         ----------
@@ -156,9 +166,37 @@ class Building(object):
 
         return space_heat_power
 
+    def get_space_cooling_power_curve(self, current_values=False):
+        """
+        Returns the space cooling power curve.
+
+        Parameters
+        ----------
+        current_values : bool, optional
+            Defines, if only current horizon or all timesteps should be used.
+            (default: False)
+            False - Use complete number of timesteps
+            True - Use horizon
+
+        Returns
+        -------
+        space_heat_power : array-like
+            Space cooling power curve in W
+        """
+
+        #  Initialize array with zeros
+        space_cooling_power = np.zeros(len(self.apartments[0].demand_space_cooling.
+                                           get_power(currentValues=current_values)))
+
+        # Get power curves of each apartment
+        for apartment in self.apartments:
+            space_cooling_power += apartment.demand_space_heating.get_power(currentValues=current_values)
+
+        return space_cooling_power
+
     def get_electric_power_curve(self, current_values=False):
         """
-        Returns electric power curve
+        Returns the electrical power curve.
 
         Parameters
         ----------
@@ -185,7 +223,7 @@ class Building(object):
 
     def get_dhw_power_curve(self, current_values=False):
         """
-        Returns domestic hot water (dhw) power curve
+        Returns the domestic hot water (dhw) power curve.
 
         Parameters
         ----------
@@ -250,7 +288,14 @@ class Building(object):
         return occupancy_profile
 
     def getFlowTemperature(self):
-        """ Get the required flow temperature of this building. """
+        """
+        Get the required flow temperature of this building.
+
+        Returns
+        -------
+        t_flow : float
+            Flow temperature
+        """
         
         # Get ambient temperature
         relevantPreviousDays = 1  # Number of previous days' weather forecast
@@ -258,8 +303,7 @@ class Building(object):
         numberTimesteps = (relevantPreviousDays * 24 / 
                            self.environment.timer.time_discretization * 3600)
         function = self.environment.weather.getPreviousWeather
-        (t_ambient_previous,) = function(numberTimesteps=numberTimesteps,
-                                       useTimesteps=True, getTAmbient=True)
+        (t_ambient_previous,) = function(numberTimesteps=numberTimesteps, useTimesteps=True, getTAmbient=True)
                                        
         function = self.environment.weather.getWeatherForecast
         (t_ambient_forecast,) = function(getTAmbient=True)
@@ -276,7 +320,7 @@ class Building(object):
         # Check if this flow temperature has to be increased at certain time 
         # steps due to domestic hot water
         for apartment in self.apartments:
-            t_flow_DHW = (apartment.get_total_th_power())[1]
+            t_flow_DHW = (apartment.get_total_th_space_heating_power())[1]
             t_flow = np.maximum(t_flow, t_flow_DHW)
         
         self.flow_temperature = t_flow
@@ -312,7 +356,7 @@ class Building(object):
     def get_number_of_apartments(self):
         """
         Returns number of apartments within chosen building. Of no apartment
-        exists, returns None.
+        exists, it returns None.
 
         Returns
         -------
@@ -327,7 +371,7 @@ class Building(object):
     def get_number_of_occupants(self):
         """
         Returns number of occupants of all apartments within building.
-        If no occupants exist within building/apartment(s), returns None.
+        If no occupants exist within building/apartment(s), it returns None.
 
         Returns
         -------
@@ -344,7 +388,7 @@ class Building(object):
 
     def get_net_floor_area_of_building(self):
         """
-        Returns net floor area of building. If undefined (within apartments)
+        Returns net floor area of building. If undefined (within apartments) it
         returns None.
 
         Returns

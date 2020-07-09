@@ -67,7 +67,7 @@ def run_example(do_plot=False):
     apartment.addMultipleEntities(entities)
 
     #  Get space heating power curve for whole year:
-    array_sh_power = apartment.get_space_heat_power_curve(current_values=False)
+    array_sh_power = apartment.get_space_heating_power_curve(current_values=False)
 
     #  Get electrical power curve for whole year:
     array_el_power = apartment.get_el_power_curve(current_values=False)

@@ -40,8 +40,7 @@ class TestCityDistrict(object):
         #  Check uesgraphs attribute
         assert len(city.nodelist_building) == 1
 
-    def test_add_multiple_entities(self, create_empty_citydist,
-                                   create_building):
+    def test_add_multiple_entities(self, create_empty_citydist, create_building):
         #  Create empty citydistrict
         city = create_empty_citydist
 
@@ -58,20 +57,16 @@ class TestCityDistrict(object):
         assert len(city.nodelist_building) == 2
 
     def test_get_nb_of_entities(self, create_citydist):
-
         assert create_citydist.get_nb_of_entities(entity_name='building') == 3
 
     def test_get_node_numbers_of_entities(self, create_citydist):
-
-        assert create_citydist.get_node_numbers_of_entities(entity_name=
-                                            'building') == [1001, 1002, 1003]
+        assert create_citydist.get_node_numbers_of_entities(entity_name='building') == [1001, 1002, 1003]
 
     def get_nb_of_building_entities(self, create_citydist):
 
         assert create_citydist.get_nb_of_building_entities() == 3
 
     def test_get_list_build_entity_node_ids(self, create_citydist):
-
         assert create_citydist.get_list_build_entity_node_ids() == [1001,
                                                                     1002,
                                                                     1003]
@@ -81,20 +76,14 @@ class TestCityDistrict(object):
         demand_tuple = create_citydist.get_power_curves()
 
         #  Convert power values in W to energy values in kWh
-        el_demand = np.sum(demand_tuple[0]) * \
-                    create_citydist.environment.timer.time_discretization / \
-                    (1000 * 3600)
-        th_demand = np.sum(demand_tuple[1]) * \
-                    create_citydist.environment.timer.time_discretization / \
-                    (1000 * 3600)
+        el_demand = np.sum(demand_tuple[0]) * create_citydist.environment.timer.time_discretization / (1000 * 3600)
+        th_demand = np.sum(demand_tuple[1]) * create_citydist.environment.timer.time_discretization / (1000 * 3600)
 
         daily_consumption = 70
         t_flow = 70
         supply_temp = 25
         #  Reference value dhw (in kWh)
-        ref_dwh_value = 365 * daily_consumption * 4180 * (t_flow -
-                                                            supply_temp) / \
-                                                            (1000 * 3600)
+        ref_dwh_value = 365 * daily_consumption * 4180 * (t_flow - supply_temp) / (1000 * 3600)
 
         assert (el_demand - 3 * 3000) <= 0.001 * el_demand
         assert (th_demand - 3 * 100 * 150 - ref_dwh_value) <= 0.001 * th_demand

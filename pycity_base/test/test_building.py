@@ -57,9 +57,9 @@ class TestBuilding():
     def test_get_occupancy_profile(self, create_occupancy, create_environment):
         building = build.Building(environment=create_environment)
 
-        assert building.get_number_of_apartments() == None
-        assert building.get_number_of_occupants() == None
-        assert building.get_net_floor_area_of_building() == None
+        assert building.get_number_of_apartments() is None
+        assert building.get_number_of_occupants() is None
+        assert building.get_net_floor_area_of_building() is None
 
         apartment = apart.Apartment(environment=create_environment)
         apartment2 = apart.Apartment(environment=create_environment)

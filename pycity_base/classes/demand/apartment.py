@@ -11,6 +11,7 @@ import warnings
 import pycity_base.classes.demand.domestic_hot_water as DHW
 import pycity_base.classes.demand.electrical_demand as ElecDemand
 import pycity_base.classes.demand.space_heating as SpaceHeat
+import pycity_base.classes.demand.space_cooling as SpaceCool
 
 
 class Apartment(object):
@@ -48,6 +49,10 @@ class Apartment(object):
                                                            method=1,
                                                            living_area=0,
                                                            specific_demand=0)
+        self.demand_space_cooling = SpaceCool.SpaceCooling(environment,
+                                                           method=1,
+                                                           living_area=0,
+                                                           specific_demand=0)
         self.rooms = []
 
     @property
@@ -65,6 +70,7 @@ class Apartment(object):
             - Electrical demand (entity.kind == "electricaldemand")
             - Domestic hot water demand (entity.kind == "domestichotwater")
             - Space heating demand (entity.kind == "spaceheating")
+            - Space cooling demand (entity.kind == "spacecooling")
             - Occupancy (entity.kind == 'occupancy')
             - Room (entity.kind == "room"
         
@@ -83,6 +89,9 @@ class Apartment(object):
 
         elif entity.kind == "spaceheating":
             self.demand_space_heating = entity
+
+        elif entity.kind == "spacecooling":
+            self.demand_space_cooling = entity
 
         elif entity.kind == 'occupancy':
             self.occupancy = entity
@@ -115,7 +124,8 @@ class Apartment(object):
     def get_power_curves(self,
                          getElectrical=True,
                          getDomesticHotWater=True,
-                         getSpaceheating=True,
+                         getSpaceHeating=True,
+                         getSpaceCooling=True,
                          currentValues=True):
         """
         Get apartment's current power curves
@@ -126,7 +136,9 @@ class Apartment(object):
             Also return current electrical demand
         getDomesticHotWater : Boolean, optional
             Also return current domestic hot water demand
-        getSpaceheating : Boolean, optional
+        getSpaceHeating : Boolean, optional
+            Also return current space heating demand
+        getSpaceCooling : Boolean, optional
             Also return current space heating demand
         currentValues : Boolean, optional
             Return the current values (True) or return values for all time 
@@ -142,8 +154,10 @@ class Apartment(object):
             result += (self.power_el.get_power(currentValues),)
         if getDomesticHotWater:
             result += (self.demand_domestic_hot_water.get_power(currentValues, False),)
-        if getSpaceheating:
+        if getSpaceHeating:
             result += (self.demand_space_heating.get_power(currentValues),)
+        if getSpaceCooling:
+            result += (self.demand_space_cooling.get_power(currentValues),)
 
         return result
 
@@ -175,12 +189,12 @@ class Apartment(object):
         else:
             return power_el
 
-    def get_total_th_power(self,
-                           currentValues=True,
-                           returnTemperature=True):
+    def get_total_th_space_heating_power(self,
+                                         currentValues=True,
+                                         returnTemperature=True):
         """
-        Returns current thermal power curve of building (space heating
-        plus thermal hot water, if thermal hot water device is installed).
+        Returns the current thermal power curve of the building (space heating
+        plus domestic hot water, if thermal hot water device is installed).
 
         Parameters
         ----------
@@ -212,15 +226,17 @@ class Apartment(object):
         else:
             return (power_dhw + demandSpaceHeating)
 
-    def get_space_heat_power_curve(self, current_values=True):
+    def get_space_heating_power_curve(self, current_values=True):
         """
-        Returns space heating power curve of apartment
+        Returns the space heating power curve of the apartment.
+
         Parameters
         ----------
-        currentValues : bool, optional
+        current_values : bool, optional
             Return the current values (True) or return values for all time
             steps (False).
             (default: True)
+
         Returns
         -------
         space_heat_curve : array-like
@@ -229,16 +245,37 @@ class Apartment(object):
 
         return self.demand_space_heating.get_power(currentValues=current_values)
 
-    def get_el_power_curve(self, current_values=True):
+    def get_space_cooling_power_curve(self, current_values=True):
         """
-        Returns net electrical power curve of apartment (without space heating
-        or hot water demand!)
+        Returns space cooling power curve of the apartment.
+
         Parameters
         ----------
-        currentValues : bool, optional
+        current_values : bool, optional
             Return the current values (True) or return values for all time
             steps (False).
             (default: True)
+
+        Returns
+        -------
+        space_cool_curve : array-like
+            Space cooling power curve
+        """
+
+        return self.demand_space_cooling.get_power(currentValues=current_values)
+
+    def get_el_power_curve(self, current_values=True):
+        """
+        Returns the net electrical power curve of the apartment (without space heating, space cooling
+        or domestic hot water demand!)
+
+        Parameters
+        ----------
+        current_values : bool, optional
+            Return the current values (True) or return values for all time
+            steps (False).
+            (default: True)
+
         Returns
         -------
         el_power_curve : array-like
@@ -249,13 +286,15 @@ class Apartment(object):
 
     def get_dhw_power_curve(self, current_values=True):
         """
-        Returns hot water power curve of apartment
+        Returns the domestic hot water power curve of the apartment.
+
         Parameters
         ----------
-        currentValues : bool, optional
+        current_values : bool, optional
             Return the current values (True) or return values for all time
             steps (False).
             (default: True)
+
         Returns
         -------
         el_power_curve : array-like
@@ -281,7 +320,7 @@ class Apartment(object):
 
     def get_occupancy_profile(self):
         """
-        Returns occupancy profile (if occupancy object exists)
+        Returns the occupancy profile (if occupancy object exists) of the apartment.
 
         Returns
         -------

@@ -30,8 +30,7 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
     loaded_sim_profile = False
     sim_prof_data = None
     
-    def __init__(self, environment, method=0,
-                 loadcurve=[], 
+    def __init__(self, environment, method=0, loadcurve=[],
                  living_area=0, specific_demand=0, profile_type='HEF',
                  zone_parameters=None, t_m_init=None, ventilation=0,
                  t_cooling_set=200, t_heating_set=-50, occupancy=0,
@@ -158,12 +157,12 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
             
             calc = pycity_base.functions.zone_model.calc
             res = calc(zone_parameters=self.zone_parameters,
-                           zoneInputs=self.zoneInputs, 
-                           t_cooling_set=t_cooling_set,
-                           t_heating_set=t_heating_set,
-                           limitHeating=np.inf, 
-                           limitCooling=-np.inf, 
-                           beQuiet=True)
+                       zoneInputs=self.zoneInputs,
+                       t_cooling_set=t_cooling_set,
+                       t_heating_set=t_heating_set,
+                       limitHeating=np.inf,
+                       limitCooling=-np.inf,
+                       beQuiet=True)
             
             self.loadcurve = res[0]
             self.T_op = res[1]
@@ -224,15 +223,3 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
         """
         if self.method in (0, 1, 2, 3):
             return self._getLoadcurve(currentValues)
-#        elif self.method == 2:
-#            if currentValues:
-#                self.zoneInputs.update(occupancy, appliances, lighting)
-#                calc = pycity_base.functions.zoneModel.calc
-#                res = calc(zone_parameters=self.zone_parameters,
-#                           zoneInputs=self.zoneInputs, 
-#                           t_cooling_set=t_cooling_set,
-#                           t_heating_set=t_heating_set,
-#                           limitHeating=np.inf, 
-#                           limitCooling=-np.inf, 
-#                           beQuiet=True)
-#            return res[0]

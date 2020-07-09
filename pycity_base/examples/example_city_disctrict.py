@@ -169,7 +169,11 @@ def run_example():
     print()
 
     print('Return aggregated space heating power curve:')
-    print(cityDistrict.get_aggr_space_h_power_curve())
+    print(cityDistrict.get_aggr_space_heating_power_curve())
+    print()
+
+    print('Return aggregated space cooling power curve:')
+    print(cityDistrict.get_aggr_space_cooling_power_curve())
     print()
 
     print('Return aggregated electrical power curve:')

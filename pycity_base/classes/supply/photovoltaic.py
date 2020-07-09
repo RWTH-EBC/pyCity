@@ -101,13 +101,13 @@ class PV(object):
         """
         return (self.eta_noct, self.radiation_noct, self.t_cell_noct, self.t_ambient_noct, self.alpha_noct)
 
-    def _computePowerArea(self, current_values=True):
+    def _computePowerArea(self, currentValues=True):
         """
         Compute PV electric output power based on a certain area equipped with PV panels
 
         Parameters
         ----------
-        current_values : bool, optional
+        currentValues : bool, optional
             If True, returns values of current horizon (default: True).
             If False, returns annual values.
 
@@ -120,7 +120,7 @@ class PV(object):
         radiation = self.environment.weather.getRadiationTiltedSurface(beta=self.beta,
                                                                        gamma=self.gamma,
                                                                        update=True,
-                                                                       current_values=current_values)
+                                                                       currentValues=currentValues)
 
         # If no temperature coefficient is given, a simple PV model is applied
         if self.alpha_noct == 0:
@@ -128,7 +128,7 @@ class PV(object):
         else:
             # Get ambient temperature
             getTemperature = self.environment.weather.getWeatherForecast
-            t_ambient = getTemperature(getTAmbient=True, current_values=current_values)
+            t_ambient = getTemperature(getTAmbient=True, currentValues=currentValues)
 
             # Compute the cell temperature. 
             # Assumption: Wind velocity is 1 m/s (same as NOCT conditions)
@@ -149,13 +149,13 @@ class PV(object):
         
         return (power, radiation[0])
 
-    def _computePowerPeakInstallation(self, current_values=True):
+    def _computePowerPeakInstallation(self, currentValues=True):
         """
         Compute PV electric output power based on a given PV peak power installation
 
         Parameters
         ----------
-        current_values : bool, optional
+        currentValues : bool, optional
             If True, returns values of current horizon (default: True).
             If False, returns annual values.
 
@@ -168,11 +168,11 @@ class PV(object):
         radiation = self.environment.weather.getRadiationTiltedSurface(beta=self.beta,
                                                                        gamma=self.gamma,
                                                                        update=True,
-                                                                       current_values=current_values)
+                                                                       currentValues=currentValues)
 
         # Get ambient temperature
         getTemperature = self.environment.weather.getWeatherForecast
-        t_ambient = getTemperature(getTAmbient=True, current_values=current_values)
+        t_ambient = getTemperature(getTAmbient=True, currentValues=currentValues)
 
         # Calculation of PV power output according to:
         # "A novel model for photovoltaic array performance prediction"
@@ -260,9 +260,9 @@ class PV(object):
         if self.method in (0, 1):
             if updatePower:
                 if self.method == 0:
-                    (current_power, currentRadiation) = self._computePowerArea(current_values=currentValues)
+                    (current_power, currentRadiation) = self._computePowerArea(currentValues=currentValues)
                 elif self.method == 1:
-                    (current_power, currentRadiation) = self._computePowerPeakInstallation(current_values=currentValues)
+                    (current_power, currentRadiation) = self._computePowerPeakInstallation(currentValues=currentValues)
 
                 if currentValues:
                     self.current_power = current_power

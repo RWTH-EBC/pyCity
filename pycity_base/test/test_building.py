@@ -39,20 +39,20 @@ class TestBuilding():
         building.getFlowTemperature()
 
     def test_get_power_curves(self, create_building):
-        create_building.get_power_curves(current_values=True)
-        create_building.get_power_curves(current_values=False)
+        create_building.get_power_curves(currentValues=True)
+        create_building.get_power_curves(currentValues=False)
 
     def test_get_space_heating_power_curve(self, create_building):
-        create_building.get_space_heating_power_curve(current_values=False)
-        create_building.get_space_heating_power_curve(current_values=True)
+        create_building.get_space_heating_power_curve(currentValues=False)
+        create_building.get_space_heating_power_curve(currentValues=True)
 
     def test_get_electric_power_curve(self, create_building):
-        create_building.get_electric_power_curve(current_values=False)
-        create_building.get_electric_power_curve(current_values=True)
+        create_building.get_electric_power_curve(currentValues=False)
+        create_building.get_electric_power_curve(currentValues=True)
 
     def test_get_dhw_power_curve(self, create_building):
-        create_building.get_dhw_power_curve(current_values=False)
-        create_building.get_dhw_power_curve(current_values=True)
+        create_building.get_dhw_power_curve(currentValues=False)
+        create_building.get_dhw_power_curve(currentValues=True)
 
     def test_get_occupancy_profile(self, create_occupancy, create_environment):
         building = build.Building(environment=create_environment)

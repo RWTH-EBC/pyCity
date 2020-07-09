@@ -251,7 +251,7 @@ class Weather(pycity_base.classes.sun.Sun):
         return self._kind
 
     def getRadiationTiltedSurface(self, beta, gamma, albedo=0.3, update=False,
-                                  current_values=True):
+                                  currentValues=True):
         """
         Calculates radiation on tilted surface
 
@@ -273,13 +273,13 @@ class Weather(pycity_base.classes.sun.Sun):
             If True, air mass, extraterrestrial radiation, delta, omega and 
             thetaZ are updated before computing the total radiation on the
             tilted surface.
-        current_values : bool, optional
+        currentValues : bool, optional
             If True, returns values of current horizon (default: True).
             If False, returns annual values.
         """
         # Get radiation
         radiation = self.getWeatherForecast(getQDirect=True, getQDiffuse=True,
-                                            current_values=current_values)
+                                            currentValues=currentValues)
         (beam, diffuse) = radiation
 
         # Return total radiation on a given tilted surface
@@ -289,7 +289,7 @@ class Weather(pycity_base.classes.sun.Sun):
                                                    gamma=gamma,
                                                    albedo=albedo,
                                                    update=update,
-                                                   current_values=current_values)
+                                                   currentValues=currentValues)
 
     def _getWeatherData(self,
                         fromTimestep,
@@ -329,10 +329,10 @@ class Weather(pycity_base.classes.sun.Sun):
         result = ()
 
         # Append values to the 'result' if required
-        def requireValue(request, current_values, total_values):
+        def requireValue(request, currentValues, totalValues):
             if request:
-                current_values = total_values[fromTimestep: toTimestep]
-                return (current_values,)
+                currentValues = totalValues[fromTimestep: toTimestep]
+                return (currentValues,)
             else:
                 return ()
 
@@ -367,7 +367,7 @@ class Weather(pycity_base.classes.sun.Sun):
                            getPhiAmbient=False,
                            getPAmbient=False,
                            getCloudiness=False,
-                           current_values=True):
+                           currentValues=True):
         """
         Get the current weather forecast
         
@@ -387,7 +387,7 @@ class Weather(pycity_base.classes.sun.Sun):
             If True, return ambient pressure
         getCloudiness : Boolean
             If True, return cloudiness
-        current_values : bool, optional
+        currentValues : bool, optional
             If True, returns values of current horizon (default: True).
             If False, returns annual values.
             
@@ -396,7 +396,7 @@ class Weather(pycity_base.classes.sun.Sun):
         The result is returned as a tuple
         """
         # Get current and final position
-        if current_values:
+        if currentValues:
             currentPosition = self.timer.current_timestep
             finalPosition = currentPosition + self.timer.timesteps_horizon
         else:

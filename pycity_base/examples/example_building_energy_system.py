@@ -77,19 +77,20 @@ def run_example():
     print("Battery: " + str(battery is bes.battery))
     print("Boiler: " + str(boiler is bes.boiler))
     print("CHP: " + str(chp is bes.chp))
-    print("Electrical heater: " + str(elh is bes.electricalHeater))
+    print("Electrical heater: " + str(elh is bes.electrical_heater))
     print("Inverter AC to DC: " + str(inverter_ac_dc is bes.inverterAcdc))
     print("Inverter DC to AC: " + str(inverter_dc_ac is bes.inverterDcac))
     print("PV: " + str(pv is bes.pv))
     print("TES: " + str(tes is bes.tes))
 
-    bes.getHasDevices(allDevices=True)
+    bes.getHasDevices(all_devices=True)
 
-    bes.getHasDevices(allDevices=False,
+    bes.getHasDevices(all_devices=False,
                       battery=True,
                       boiler=True,
                       chp=True,
-                      electricalHeater=True,
+                      compression_chiller=True,
+                      electrical_heater=True,
                       heatpump=True,
                       inverterAcdc=True,
                       inverterDcac=True,

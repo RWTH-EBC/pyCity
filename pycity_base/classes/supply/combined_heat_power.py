@@ -93,7 +93,7 @@ class CHP(HeatingDevice.HeatingDevice):
 
     def setResults(self, pOutput, qOutput, schedule):
         """
-        Save resulting electricty, heat output and operational schedule.
+        Save obtained electricity, heat output and operational schedule.
         """
         self._setSchedule(schedule)
         self._setQOutput(qOutput)

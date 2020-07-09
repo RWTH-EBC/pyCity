@@ -54,7 +54,9 @@ class HeatingDevice(object):
         return self._kind
         
     def _setSchedule(self, schedule):
-        """ Save the computed schedule to the heating device """
+        """
+        Save the computed schedule to the heating device.
+        """
         results = handleData.saveResult(self.environment.timer,
                                         self.current_device_schedule,
                                         self.total_device_schedule,
@@ -62,7 +64,9 @@ class HeatingDevice(object):
         (self.current_device_schedule, self.total_device_schedule) = results
 
     def _setQOutput(self, qOutput):
-        """ Save the computed heat output to the heating device """
+        """
+        Save the computed heat output to the heating device.
+        """
         results = handleData.saveResult(self.environment.timer, 
                                         self.current_q_output,
                                         self.total_q_output,
@@ -71,8 +75,8 @@ class HeatingDevice(object):
 
     def _getSchedule(self, currentValues=True):
         """ 
-        Return the schedule. If currentValues=True: current values, 
-        else: total values 
+        Returns the schedule.
+        If currentValues=True: current values, else: total values.
         """
         return handleData.getValues(currentValues, 
                                     self.current_device_schedule,
@@ -80,8 +84,7 @@ class HeatingDevice(object):
             
     def _getQOutput(self, currentValues=True):
         """ 
-        Return the heat output. If currentValues=True: current values, 
-        else: total values 
+        Returns the heat output. If currentValues=True: current values, else: total values.
         """
         return handleData.getValues(currentValues, 
                                     self.current_q_output,

@@ -57,7 +57,9 @@ class CoolingDevice(object):
         return self._kind
 
     def _set_schedule(self, schedule):
-        """ Save the computed schedule to the cooling device """
+        """
+        Save the computed schedule to the cooling device.
+        """
         results = handleData.saveResult(self.environment.timer,
                                         self.current_device_schedule,
                                         self.total_device_schedule,
@@ -65,27 +67,27 @@ class CoolingDevice(object):
         (self.current_device_schedule, self.total_device_schedule) = results
 
     def _set_q_output(self, q_output):
-        """ Save the computed heat output to the cooling device """
+        """
+        Save the computed heat output to the cooling device.
+        """
         results = handleData.saveResult(self.environment.timer,
                                         self.current_q_output,
                                         self.total_q_output,
                                         q_output)
         (self.current_q_output, self.total_q_output) = results
 
-    def _get_schedule(self, current_values=True):
+    def _get_schedule(self, currentValues=True):
         """
-        Return the schedule. If current_values=True: current values,
-        else: total values
+        Return the schedule. If currentValues=True: current values, else: total values.
         """
-        return handleData.getValues(current_values,
+        return handleData.getValues(currentValues,
                                     self.current_device_schedule,
                                     self.total_device_schedule)
 
-    def _get_q_output(self, current_values=True):
+    def _get_q_output(self, currentValues=True):
         """
-        Return the heat output. If current_values=True: current values,
-        else: total values
+        Return the heat output. If currentValues=True: current values, else: total values.
         """
-        return handleData.getValues(current_values,
+        return handleData.getValues(currentValues,
                                     self.current_q_output,
                                     self.total_q_output)

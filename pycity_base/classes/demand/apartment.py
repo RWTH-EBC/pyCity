@@ -226,13 +226,13 @@ class Apartment(object):
         else:
             return (power_dhw + demandSpaceHeating)
 
-    def get_space_heating_power_curve(self, current_values=True):
+    def get_space_heating_power_curve(self, currentValues=True):
         """
         Returns the space heating power curve of the apartment.
 
         Parameters
         ----------
-        current_values : bool, optional
+        currentValues : bool, optional
             Return the current values (True) or return values for all time
             steps (False).
             (default: True)
@@ -243,15 +243,15 @@ class Apartment(object):
             Space heating power curve
         """
 
-        return self.demand_space_heating.get_power(currentValues=current_values)
+        return self.demand_space_heating.get_power(currentValues=currentValues)
 
-    def get_space_cooling_power_curve(self, current_values=True):
+    def get_space_cooling_power_curve(self, currentValues=True):
         """
         Returns space cooling power curve of the apartment.
 
         Parameters
         ----------
-        current_values : bool, optional
+        currentValues : bool, optional
             Return the current values (True) or return values for all time
             steps (False).
             (default: True)
@@ -262,16 +262,16 @@ class Apartment(object):
             Space cooling power curve
         """
 
-        return self.demand_space_cooling.get_power(currentValues=current_values)
+        return self.demand_space_cooling.get_power(currentValues=currentValues)
 
-    def get_el_power_curve(self, current_values=True):
+    def get_el_power_curve(self, currentValues=True):
         """
         Returns the net electrical power curve of the apartment (without space heating, space cooling
         or domestic hot water demand!)
 
         Parameters
         ----------
-        current_values : bool, optional
+        currentValues : bool, optional
             Return the current values (True) or return values for all time
             steps (False).
             (default: True)
@@ -282,15 +282,15 @@ class Apartment(object):
             Electrical power curve
         """
 
-        return self.power_el.get_power(currentValues=current_values)
+        return self.power_el.get_power(currentValues=currentValues)
 
-    def get_dhw_power_curve(self, current_values=True):
+    def get_dhw_power_curve(self, currentValues=True):
         """
         Returns the domestic hot water power curve of the apartment.
 
         Parameters
         ----------
-        current_values : bool, optional
+        currentValues : bool, optional
             Return the current values (True) or return values for all time
             steps (False).
             (default: True)
@@ -302,7 +302,7 @@ class Apartment(object):
         """
 
         return self.demand_domestic_hot_water.get_power(
-            currentValues=current_values, returnTemperature=False)
+            currentValues=currentValues, returnTemperature=False)
 
     def get_max_nb_occupants(self):
         """

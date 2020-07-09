@@ -13,7 +13,7 @@ import pycity_base.classes.demand.load
 
 class SpaceCooling(pycity_base.classes.demand.load.Load):
     """
-    Implementation of the space heating object
+    Implementation of the space cooling object
     """
 
     loaded_slp = False
@@ -69,7 +69,7 @@ class SpaceCooling(pycity_base.classes.demand.load.Load):
 
         elif method == 1:
             #  Generate standardized thermal load profile (SLP)
-            print("SLP functionality for space heating objects not implemented yet. Using zero cooling load profile.")
+            print("SLP functionality for space cooling objects not implemented yet. Using zero cooling load profile.")
             super(SpaceCooling, self).__init__(environment, np.zeros(environment.timer.timesteps_total))
 
         self._kind = "spacecooling"
@@ -80,7 +80,7 @@ class SpaceCooling(pycity_base.classes.demand.load.Load):
 
     def get_power(self, currentValues=True):
         """
-        Return space heating power curve
+        Return space cooling power curve
 
         Parameters
         ----------
@@ -91,7 +91,7 @@ class SpaceCooling(pycity_base.classes.demand.load.Load):
         Return
         ------
         loadcurve : np.array
-            Power curve of space heating
+            Power curve of space cooling
         """
         if self.method in (0, 1):
             return self._getLoadcurve(currentValues)

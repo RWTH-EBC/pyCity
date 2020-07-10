@@ -9,7 +9,7 @@ Created on Tue Mar 03 14:38:14 2015
 from __future__ import division
 
 import numpy as np
-import pycity_base.functions.handle_data
+from pycity_base.functions import handle_data
 
 
 class WindEnergyConverter(object):
@@ -96,6 +96,4 @@ class WindEnergyConverter(object):
             timesteps = self.environment.timer.timesteps_horizon
             self.total_power[current_timestep:(current_timestep + timesteps)] = current_power
        
-        return pycity_base.functions.handle_data.getValues(currentValues,
-                                                           self.current_power,
-                                                           self.total_power)
+        return handle_data.getValues(currentValues, self.current_power, self.total_power)

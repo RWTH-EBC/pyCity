@@ -10,7 +10,7 @@ from __future__ import division
 import copy
 
 import richardsonpy.classes.occupancy as occ
-import pycity_base.functions.change_resolution as chres
+from pycity_base.functions import change_resolution as chres
 
 
 class Occupancy(object):

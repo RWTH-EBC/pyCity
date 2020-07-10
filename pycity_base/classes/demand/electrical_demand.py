@@ -7,11 +7,11 @@ Electrical demand class
 from __future__ import division
 
 import os
-import pycity_base.classes.demand.load
-import pycity_base.functions.slp_electrical as slp_el
-import pycity_base.functions.change_resolution as cr
-import pycity_base.functions.load_el_profiles as eloader
 import richardsonpy.classes.electric_load as eload
+import pycity_base.classes.demand.load
+from pycity_base.functions import slp_electrical as slp_el
+from pycity_base.functions import change_resolution as chres
+from pycity_base.functions import load_el_profiles as eloader
 
 
 class ElectricalDemand(pycity_base.classes.demand.load.Load):
@@ -151,7 +151,7 @@ class ElectricalDemand(pycity_base.classes.demand.load.Load):
         if method == 0:
             super(ElectricalDemand, self).__init__(environment, loadcurve)
 
-        #  Use standardized load profiles (SLP)
+        #  Use standard load profiles (SLP)
         elif method == 1:
             if not ElectricalDemand.loaded_slp:
                 filename = os.path.join(src_path, 'inputs',
@@ -321,9 +321,9 @@ class ElectricalDemand(pycity_base.classes.demand.load.Load):
             #     res = light_load_new + app_load
             #
             # #  Change time resolution
-            # loadcurve = cr.changeResolution(res, 60, timeDis)
-            # # light_load = cr.changeResolution(light_load, 60, timeDis)
-            # # app_load = cr.changeResolution(app_load, 60, timeDis)
+            # loadcurve = chres.changeResolution(res, 60, timeDis)
+            # # light_load = chres.changeResolution(light_load, 60, timeDis)
+            # # app_load = chres.changeResolution(app_load, 60, timeDis)
             #
             # #  Normalize el. load profile to annual_demand
             # if do_normalization:
@@ -361,10 +361,9 @@ class ElectricalDemand(pycity_base.classes.demand.load.Load):
                 start_wd=environment.timer.current_weekday,
                 annual_demand=annual_demand)
 
-            loadcurve = cr.changeResolution(loadcurve,
-                                            oldResolution=900,
-                                            newResolution=
-                                            environment.timer.time_discretization)
+            loadcurve = chres.changeResolution(loadcurve,
+                                               oldResolution=900,
+                                               newResolution=environment.timer.time_discretization)
 
             super(ElectricalDemand, self).__init__(environment, loadcurve)
 
@@ -387,10 +386,9 @@ class ElectricalDemand(pycity_base.classes.demand.load.Load):
                 type=method_4_type,
                 annual_demand=annual_demand)
 
-            loadcurve = cr.changeResolution(loadcurve,
-                                            oldResolution=900,
-                                            newResolution=
-                                            environment.timer.time_discretization)
+            loadcurve = chres.changeResolution(loadcurve,
+                                               oldResolution=900,
+                                               newResolution=environment.timer.time_discretization)
 
             super(ElectricalDemand, self).__init__(environment, loadcurve)
 

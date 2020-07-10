@@ -13,7 +13,7 @@ import numpy as np
 import xlrd
 import math
 import random
-import pycity_base.functions.change_resolution as cr
+from pycity_base.functions import change_resolution as chres
 
 
 def load_profiles(filename):
@@ -180,8 +180,8 @@ def full_year_computation(occupancy,
         heat[day*1440:(day+1)*1440] = current_heat
     
     # Change sampling time to the given input
-    water = cr.changeResolution(water, 60, time_dis, "sum") / time_dis * 60
-    heat = cr.changeResolution(heat, 60, time_dis, "sum") / time_dis * 60
+    water = chres.changeResolution(water, 60, time_dis, "sum") / time_dis * 60
+    heat = chres.changeResolution(heat, 60, time_dis, "sum") / time_dis * 60
 
     # Return results
     return (water, heat)
@@ -212,7 +212,7 @@ if __name__ == "__main__":
     
     # Change time resolution to 15 minutes
     dt = 15
-    hd = cr.changeResolution(heat, 60, dt*60, "sum") / dt
+    hd = chres.changeResolution(heat, 60, dt*60, "sum") / dt
 
     # Plot heat demand
     import matplotlib.pyplot as plt

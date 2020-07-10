@@ -10,8 +10,8 @@ from __future__ import division
 
 import os
 import numpy as np
-import pycity_base.functions.change_resolution as changeResolution
 import pycity_base.classes.sun
+from pycity_base.functions import change_resolution as chres
 
 
 class Weather(pycity_base.classes.sun.Sun):
@@ -189,7 +189,7 @@ class Weather(pycity_base.classes.sun.Sun):
             directNormalIrrad = weather_data[0:nb_rows, 1]
 
             self.computeGeometry(allTimeSteps=True)
-            changeRes = changeResolution.changeResolution
+            changeRes = chres.changeResolution
 
             old_res = (3600 * 24 * 365)/len(self.thetaZ)
 
@@ -223,7 +223,7 @@ class Weather(pycity_base.classes.sun.Sun):
             # If there is a difference between the standard time discretization
             # and the discretization of the input data, convert the inputs
             # to the desired time discretization
-            changeRes = changeResolution.changeResolution
+            changeRes = chres.changeResolution
             self.t_ambient = changeRes(self.t_ambient, time_discretization,
                                        self.timer.time_discretization)
             self.q_direct = changeRes(self.q_direct, time_discretization,

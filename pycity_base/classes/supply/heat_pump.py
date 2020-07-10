@@ -10,7 +10,7 @@ from __future__ import division
 
 import pycity_base.classes.supply.heating_device as HeatingDevice
 import numpy as np
-import pycity_base.functions.handle_data as handleData
+from pycity_base.functions import handle_data as handleData
 
 
 class Heatpump(HeatingDevice.HeatingDevice):

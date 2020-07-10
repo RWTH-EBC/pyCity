@@ -22,7 +22,7 @@ import random
 import numpy as np
 import matplotlib.pyplot as plt
 
-import pycity_base.functions.change_resolution as chres
+from pycity_base.functions import change_resolution as chres
 
 
 def get_list_of_npz_files(path):
@@ -220,8 +220,7 @@ if __name__ == '__main__':
         prof_pool.get_occ_el_dhw_profile(nb_occupants=3)
 
     #  Change resolution of occupancy profile from 600 to 60 seconds
-    occ_profile = chres.changeResolution(occ_profile, oldResolution=600,
-                                         newResolution=60)
+    occ_profile = chres.changeResolution(occ_profile, oldResolution=600, newResolution=60)
 
     el_energy = sum(el_profile) * 60 / (3600 * 1000)
     print('El. energy in kWh: ', el_energy)

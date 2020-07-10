@@ -12,7 +12,7 @@ import os
 import numpy as np
 import math
 import xlrd
-import pycity_base.functions.change_resolution as cr
+from pycity_base.functions import change_resolution as chres
 
 
 # Sources:
@@ -203,8 +203,7 @@ def load_hourly_factors(filename, time_discretization=3600):
                 values = [sheet.cell_value(d*11+t+1, hour+1) 
                           for hour in range(24)]
                 if time_discretization != 3600:
-                    values = cr.changeResolution(values, 3600, 
-                                                 time_discretization, "sum")
+                    values = chres.changeResolution(values, 3600, time_discretization, "sum")
                 temp_factors[d, temperature_range[t]] = np.array(values)
         
         # Store values

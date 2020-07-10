@@ -86,7 +86,8 @@ def saveResultInit(timer, currentAttribute, totalAttribute, currentResult):
     init_value = currentResult[timer.timesteps_used_horizon-1]
     
     return (currentAttribute, totalAttribute, init_value)
-    
+
+
 def getValues(currentValues, current, total):
     """ 
     Return either the current values (for this horizon) or all computed results

@@ -6,7 +6,7 @@ Test class for change of resolution functions.
 
 import pytest
 
-import pycity_base.functions.change_resolution as chres
+from pycity_base.functions import change_resolution as chres
 
 
 class TestChangeResolution(object):

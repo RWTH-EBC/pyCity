@@ -12,9 +12,9 @@ import copy
 import numpy as np
 import pycity_base.classes.demand.load
 import pycity_base.classes.demand.zone_inputs as zi
-import pycity_base.functions.slp_thermal as slp_th
-import pycity_base.functions.zone_model
-import pycity_base.functions.change_resolution as chres
+from pycity_base.functions import slp_thermal as slp_th
+from pycity_base.functions import zone_model as zmodel
+from pycity_base.functions import change_resolution as chres
 
 
 class SpaceHeating(pycity_base.classes.demand.load.Load):
@@ -155,7 +155,7 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
                                             appliances=appliances,
                                             lighting=lighting)
             
-            calc = pycity_base.functions.zone_model.calc
+            calc = zmodel.calc
             res = calc(zone_parameters=self.zone_parameters,
                        zoneInputs=self.zoneInputs,
                        t_cooling_set=t_cooling_set,

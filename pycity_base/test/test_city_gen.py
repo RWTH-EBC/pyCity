@@ -4,7 +4,7 @@
 City generator test.
 """
 
-import pycity_base.functions.scripts.city_generators.city_generator as citygen
+from pycity_base.functions.scripts.city_generators import city_generator as citygen
 
 
 class TestCityGen():

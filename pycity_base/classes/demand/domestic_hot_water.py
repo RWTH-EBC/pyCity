@@ -11,8 +11,8 @@ from __future__ import division
 import os
 import numpy as np
 import pycity_base.classes.demand.load
-import pycity_base.functions.change_resolution as cr
-import pycity_base.functions.dhw_stochastical as dhw_sto
+from pycity_base.functions import change_resolution as chres
+from pycity_base.functions import dhw_stochastical as dhw_sto
 
 
 class DomesticHotWater(pycity_base.classes.demand.load.Load):
@@ -79,7 +79,7 @@ class DomesticHotWater(pycity_base.classes.demand.load.Load):
                 # Adjust time resolution. Annex 42 data is sampled at 900 sec.
                 if timeDis != 900:
                     res = []
-                    changeResol = cr.changeResolution
+                    changeResol = chres.changeResolution
                     for i in range(3):
                         res.append(changeResol(DomesticHotWater.a42[:,i], 
                                                oldResolution=900,

@@ -6,9 +6,9 @@ sampling rate.
 """
 
 from __future__ import division
+from pycity_base.functions import slp_electrical
 
 import os
-import pandas as pd
 import numpy as np
 import math
 
@@ -88,12 +88,11 @@ if __name__ == "__main__":
     prof_long = changeResolution(profile, dt_prof_old, dt_prof_long)
     prof_huge = changeResolution(profile, dt_prof_old, dt_prof_huge)
 
-    slp_filename = 'slp_el_h0.txt'
-    input_path = os.path.join(src_path, 'inputs', 'standard_load_profile',
-                              slp_filename)
-    slp = np.loadtxt(input_path)
+    filename = os.path.join(src_path, 'inputs', 'standard_load_profile', 'slp_electrical.xlsx')
+    loaded_slp = slp_electrical.load(filename)
+
     dt_slp = 900
     dt_slp_short = 450
     dt_slp_long = 3600
-    slp_short = changeResolution(slp, dt_slp, dt_slp_short, "sum")
-    slp_long = changeResolution(slp, dt_slp, dt_slp_long, "sum")
+    slp_short = changeResolution(loaded_slp['H0'], dt_slp, dt_slp_short, "sum")
+    slp_long = changeResolution(loaded_slp['H0'], dt_slp, dt_slp_long, "sum")

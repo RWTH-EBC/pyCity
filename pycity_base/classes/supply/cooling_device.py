@@ -7,7 +7,7 @@ Cooling demand class
 from __future__ import division
 
 import numpy as np
-import pycity_base.functions.handle_data as handleData
+from pycity_base.functions import handle_data as handleData
 
 
 class CoolingDevice(object):

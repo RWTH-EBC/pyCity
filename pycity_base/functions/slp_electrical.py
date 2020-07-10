@@ -11,7 +11,7 @@ from __future__ import division
 import os
 import numpy as np
 import xlrd
-import pycity_base.functions.change_resolution as cr
+from pycity_base.functions import change_resolution as chres
 
 
 def load(filename, time_discretization=900):
@@ -29,7 +29,7 @@ def load(filename, time_discretization=900):
         
         # Adjust sampling time
         if time_discretization != 900:
-            changeResol = cr.changeResolution
+            changeResol = chres.changeResolution
             values = changeResol(values, 900, time_discretization, "sum")
             # Use scaling method "sum", because the values are given 
             # in kWh for each 15 minutes

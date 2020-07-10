@@ -9,7 +9,7 @@ Created on Fri Feb 06 17:44:16 2015
 from __future__ import division
 
 import numpy as np
-import pycity_base.functions.handle_data as handleData
+from pycity_base.functions import handle_data as handleData
 
 
 class Inverter(object):

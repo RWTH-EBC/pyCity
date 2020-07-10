@@ -123,8 +123,7 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
                 f_hour = os.path.join(folder, 'slp_thermal_hourly_factors.xlsx')
                 f_prof = os.path.join(folder, 'slp_thermal_profile_factors.xlsx')
                 f_week = os.path.join(folder, 'slp_thermal_week_day_factors.xlsx')
-                SpaceHeating.slp_hour = slp_th.load_hourly_factors(f_hour,
-                                                                   timeDis)
+                SpaceHeating.slp_hour = slp_th.load_hourly_factors(f_hour)
                 SpaceHeating.slp_prof = slp_th.load_profile_factors(f_prof)
                 SpaceHeating.slp_week = slp_th.load_week_day_factors(f_week)
                                 

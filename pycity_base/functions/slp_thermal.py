@@ -25,7 +25,7 @@ def calculate(temperature, initial_day, profiles, weekly_factors,
     Parameters
     ----------
     temperature : array-like
-        Full year temperature profile with hourly discretization.
+        Full year temperature profile.
     initial_day : integer
         - 0 : Monday
         - 1 : Tuesday
@@ -67,8 +67,18 @@ def calculate(temperature, initial_day, profiles, weekly_factors,
         Total yearly demand in kWh
     """
     # Compute average daily temperatures. [1], page 17, section 3.5.2
-    timesteps_day = len(hourly_factors[list(hourly_factors.keys())[0]])
+    timesteps_day, r = divmod(len(temperature), 365)
+    if r != 0:
+        raise ValueError("`temperature` array could not be split into days")
+
     t_average = _average_temperature(temperature, timesteps_day)
+
+    time_discretization = 86400 / timesteps_day
+    if time_discretization != 3600:
+        hourly_factors = {
+            k: cr.changeResolution(values, 3600, time_discretization, "sum")
+            for k, values in hourly_factors.items()
+        }
 
     # Compute h-factors. [1], page 38
     theta_0 = 40  # [1], page 38
@@ -90,7 +100,6 @@ def calculate(temperature, initial_day, profiles, weekly_factors,
     result = _daily_profiles(t_average, KW, h, F, hourly_factors, initial_day)
     
     # Transform to W instead of kWh
-    time_discretization = 86400 / timesteps_day
     return result * 1000 * 3600 / time_discretization
 
 
@@ -183,8 +192,7 @@ def load_week_day_factors(filename):
     # Return results
     return profiles
 
-
-def load_hourly_factors(filename, time_discretization=3600):
+def load_hourly_factors(filename):
     """
     """
     # Initialization
@@ -202,9 +210,6 @@ def load_hourly_factors(filename, time_discretization=3600):
                 # Read values
                 values = [sheet.cell_value(d*11+t+1, hour+1) 
                           for hour in range(24)]
-                if time_discretization != 3600:
-                    values = cr.changeResolution(values, 3600, 
-                                                 time_discretization, "sum")
                 temp_factors[d, temperature_range[t]] = np.array(values)
         
         # Store values

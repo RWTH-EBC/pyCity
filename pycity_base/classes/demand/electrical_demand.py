@@ -156,7 +156,7 @@ class ElectricalDemand(pycity_base.classes.demand.load.Load):
             if not ElectricalDemand.loaded_slp:
                 filename = os.path.join(src_path, 'inputs',
                                         'standard_load_profile',
-                                        'slp_electrical.xlsx')
+                                        'slp_electrical_2019.xlsx')
                 ElectricalDemand.slp = slp_el.load(filename,
                                                    time_discretization=environment.timer.time_discretization)
                 ElectricalDemand.loaded_slp = True

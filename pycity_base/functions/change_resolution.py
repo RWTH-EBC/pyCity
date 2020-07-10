@@ -88,7 +88,7 @@ if __name__ == "__main__":
     prof_long = changeResolution(profile, dt_prof_old, dt_prof_long)
     prof_huge = changeResolution(profile, dt_prof_old, dt_prof_huge)
 
-    filename = os.path.join(src_path, 'inputs', 'standard_load_profile', 'slp_electrical.xlsx')
+    filename = os.path.join(src_path, 'inputs', 'standard_load_profile', 'slp_electrical_2014.xlsx')
     loaded_slp = slp_electrical.load(filename)
 
     dt_slp = 900

@@ -53,7 +53,7 @@ if __name__ == "__main__":
     src_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
     # Temperature - mean values
-    filename = 'slp_electrical.xlsx'
+    filename = 'slp_electrical_2019.xlsx'
     import_path = os.path.join(src_path, 'inputs', 'standard_load_profile', filename)
 
     profiles = load(import_path, time_dis)

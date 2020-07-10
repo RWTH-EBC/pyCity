@@ -64,18 +64,18 @@ class TestSpaceHeating(object):
         assert abs(np.sum(th_energy_demand_curve) - 150 * 100) <= 0.001 * 150 * 100
 
 
-    @pytest.mark.parametrize("create_environment", [(3600)], indirect=["create_environment"])
+    @pytest.mark.parametrize("create_environment2", [(3600)], indirect=["create_environment2"])
     def test_multiple_resolutions(self, create_environment, create_environment2):
 
         #  Generate space heating object
-        assert create_environment.timer.time_discretization == 3600
-        assert create_environment2.timer.time_discretization == 900
-        sh_1 = sh.SpaceHeating(create_environment,
+        assert create_environment2.timer.time_discretization == 3600
+        assert create_environment.timer.time_discretization == 900
+        sh_1 = sh.SpaceHeating(create_environment2,
                                method=1,
                                living_area=100,
                                specific_demand=150)
 
-        sh_2 = sh.SpaceHeating(create_environment2,
+        sh_2 = sh.SpaceHeating(create_environment,
                                method=1,
                                living_area=100,
                                specific_demand=150)

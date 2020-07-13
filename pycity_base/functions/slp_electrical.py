@@ -14,7 +14,7 @@ import xlrd
 import pycity_base.functions.change_resolution as cr
 
 
-def load(filename, time_discretization=900):
+def load(filename):
     # Open the workbook and get the sheet with all profiles
     book = xlrd.open_workbook(filename)
     sheet = book.sheet_by_name("Profiles")
@@ -27,13 +27,6 @@ def load(filename, time_discretization=900):
         # Get the corresponding values
         values = [sheet.cell_value(r, c) for r in range(2, sheet.nrows)]
         
-        # Adjust sampling time
-        if time_discretization != 900:
-            changeResol = cr.changeResolution
-            values = changeResol(values, 900, time_discretization, "sum")
-            # Use scaling method "sum", because the values are given 
-            # in kWh for each 15 minutes
-        
         # Store the results
         profiles[key] = np.array(values)
     
@@ -43,6 +36,14 @@ def load(filename, time_discretization=900):
 
 def get_demand(annual_demand, profile, time_discretization):
     scaling = 4000 / 1000000 * annual_demand / time_discretization * 900
+
+    # Adjust sampling time
+    if time_discretization != 900:
+        changeResol = cr.changeResolution
+        profile = changeResol(profile, 900, time_discretization, "sum")
+        # Use scaling method "sum", because the values are given
+        # in kWh for each 15 minutes
+
     return scaling * profile
 
 

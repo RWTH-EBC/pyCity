@@ -122,3 +122,68 @@ class TestDomesticHotWater(object):
                                            method=1,
                                            daily_consumption=daily_consumption,
                                            supply_temperature=supply_temperature)
+
+    def test_multiple_resolutions(self, create_environment, create_occupancy):
+
+        timer = create_environment.timer
+        occupancy_profile = create_occupancy.occupancy
+        tFlow = 60
+        supplyTemperature = 25
+        dailyConsumption = 50
+
+        #  Generate electrical demand object
+        dhw_1 = dhw.DomesticHotWater(create_environment,
+                                             t_flow=tFlow,
+                                             thermal=True,
+                                             method=1,
+                                             daily_consumption=dailyConsumption,
+                                             supply_temperature=supplyTemperature)
+
+        timer.time_discretization = int(timer.time_discretization/2)
+        dhw_2 = dhw.DomesticHotWater(create_environment,
+                                             t_flow=tFlow,
+                                             thermal=True,
+                                             method=1,
+                                             daily_consumption=dailyConsumption,
+                                             supply_temperature=supplyTemperature)
+
+        #  Thermal power in W (per 15 minute timestep)
+        load_1 = dhw_1.get_power(currentValues=False, returnTemperature=False)
+        #  Thermal power in W (per 7.5 minute timestep)
+        load_2 = dhw_2.get_power(currentValues=False, returnTemperature=False)
+
+        assert len(load_2) == len(load_1) * 2
+
+        assert np.allclose(load_2[::2], load_1)
+        assert np.isclose(np.mean(load_2), np.mean(load_1))
+
+
+    def test_multiple_resolutions_stochastical(self, create_environment, create_occupancy):
+        timer = create_environment.timer
+        occupancy_profile = create_occupancy.occupancy
+
+        #  Generate electrical demand object
+        dhw_1 = dhw.DomesticHotWater(create_environment,
+                                                  t_flow=60,
+                                                  thermal=True,
+                                                  method=2,
+                                                  supply_temperature=20,
+                                                  occupancy=occupancy_profile)
+
+        timer.time_discretization = int(timer.time_discretization / 2)
+
+        dhw_2 = dhw.DomesticHotWater(create_environment,
+                                                  t_flow=60,
+                                                  thermal=True,
+                                                  method=2,
+                                                  supply_temperature=20,
+                                                  occupancy=occupancy_profile)
+
+        #  Thermal power in W (per 15 minute timestep)
+        load_1 = dhw_1.get_power(currentValues=False, returnTemperature=False)
+        #  Thermal power in W (per 7.5 minute timestep)
+        load_2 = dhw_2.get_power(currentValues=False, returnTemperature=False)
+
+        assert len(load_2) == len(load_1) * 2
+
+        assert np.isclose(np.mean(load_2), np.mean(load_1), rtol=0.1)

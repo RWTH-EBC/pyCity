@@ -21,7 +21,7 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
     """
     Implementation of the space heating object
     """
-    
+
     loaded_slp = False
     slp_hour = []
     slp_prof = []
@@ -29,7 +29,7 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
 
     loaded_sim_profile = False
     sim_prof_data = None
-    
+
     def __init__(self, environment, method=0, loadcurve=[],
                  living_area=0, specific_demand=0, profile_type='HEF',
                  zone_parameters=None, t_m_init=None, ventilation=0,
@@ -75,7 +75,7 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
             - `GPD` : Paper and printing
             - `GWA` : Laundries
         zone_parameters : ZoneParameters object, optional
-            Parameters of the building (floor area, building class, etc.). 
+            Parameters of the building (floor area, building class, etc.).
             Requires ``method=2``.
         t_m_init : Float, optional
             Initial temperature of the internal heat capacity.
@@ -98,18 +98,18 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
         lighting : Array-like, optional
             Internal gains from lighting in Watt.
             Requires ``method=2``.
-        
+
         Info
         ----
         The thermal standard load profile is based on the disseratation of
-        Mark Hellwig. 
+        Mark Hellwig.
         "Entwicklung und Anwendung parametrisierter Standard-Lastprofile",
         TU München, Germany, 2003.
-        
+
         URL : http://mediatum.ub.tum.de/doc/601557/601557.pdf
         """
         self.method = method
-        
+
         if method == 0:
             #  Hand over own power curve
             super(SpaceHeating, self).__init__(environment, loadcurve)
@@ -123,16 +123,15 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
                 f_hour = os.path.join(folder, 'slp_thermal_hourly_factors.xlsx')
                 f_prof = os.path.join(folder, 'slp_thermal_profile_factors.xlsx')
                 f_week = os.path.join(folder, 'slp_thermal_week_day_factors.xlsx')
-                SpaceHeating.slp_hour = slp_th.load_hourly_factors(f_hour,
-                                                                   timeDis)
+                SpaceHeating.slp_hour = slp_th.load_hourly_factors(f_hour)
                 SpaceHeating.slp_prof = slp_th.load_profile_factors(f_prof)
                 SpaceHeating.slp_week = slp_th.load_week_day_factors(f_week)
-                                
+
                 SpaceHeating.loaded_slp = True
-            
+
             annual_demand = living_area * specific_demand  # kWh
             profile = 1
-    
+
             fun = slp_th.calculate
             loadcurve = fun(environment.weather.t_ambient,
                             environment.timer.current_day,
@@ -140,9 +139,9 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
                             SpaceHeating.slp_week[profile_type],
                             SpaceHeating.slp_hour[profile_type],
                             annual_demand)
-            
+
             super(SpaceHeating, self).__init__(environment, loadcurve)
-            
+
         elif method == 2:
             #  Generate thermal load with ISO model
             self.zone_parameters = zone_parameters
@@ -154,7 +153,7 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
                                             occupancy=occupancy,
                                             appliances=appliances,
                                             lighting=lighting)
-            
+
             calc = zmodel.calc
             res = calc(zone_parameters=self.zone_parameters,
                        zoneInputs=self.zoneInputs,
@@ -163,7 +162,7 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
                        limitHeating=np.inf,
                        limitCooling=-np.inf,
                        beQuiet=True)
-            
+
             self.loadcurve = res[0]
             self.T_op = res[1]
             self.T_m = res[2]
@@ -199,13 +198,13 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
                                                newResolution=environment.timer.time_discretization)
 
             super(SpaceHeating, self).__init__(environment, loadcurve)
-            
+
         self._kind = "spaceheating"
 
     @property
     def kind(self):
         return self._kind
-        
+
     def get_power(self, currentValues=True):
         """
         Return space heating power curve

@@ -18,8 +18,8 @@ import pycity_base.classes.building as Build
 import pycity_base.classes.city_district as citydist
 
 
-@pytest.fixture(scope='module')
-def create_environment(timestep=900):
+@pytest.fixture(scope='module', params=[900])
+def create_environment(request):
     """
     Fixture to create environment object for PyCity (scope='module')
 
@@ -32,6 +32,7 @@ def create_environment(timestep=900):
     -------
     create_environment : environment object
     """
+    timestep = request.param
     timer = pycity_base.classes.timer.Timer(time_discretization=timestep,
                                             timesteps_total=365 * 24 * 4,
                                             initial_day=1)

@@ -7,11 +7,11 @@ Electrical demand class
 from __future__ import division
 
 import os
-import richardsonpy.classes.electric_load as eload
 import pycity_base.classes.demand.load
 from pycity_base.functions import slp_electrical as slp_el
 from pycity_base.functions import change_resolution as chres
 from pycity_base.functions import load_el_profiles as eloader
+from richardsonpy.classes import electric_load as eload
 
 
 class ElectricalDemand(pycity_base.classes.demand.load.Load):
@@ -151,14 +151,13 @@ class ElectricalDemand(pycity_base.classes.demand.load.Load):
         if method == 0:
             super(ElectricalDemand, self).__init__(environment, loadcurve)
 
-        #  Use standard load profiles (SLP)
+        #  Use standardized load profiles (SLP)
         elif method == 1:
             if not ElectricalDemand.loaded_slp:
                 filename = os.path.join(src_path, 'inputs',
                                         'standard_load_profile',
                                         'slp_electrical_2019.xlsx')
-                ElectricalDemand.slp = slp_el.load(filename,
-                                                   time_discretization=environment.timer.time_discretization)
+                ElectricalDemand.slp = slp_el.load(filename)
                 ElectricalDemand.loaded_slp = True
 
             loadcurve = slp_el.get_demand(annual_demand,

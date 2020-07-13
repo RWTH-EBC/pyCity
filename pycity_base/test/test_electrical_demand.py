@@ -133,3 +133,25 @@ class TestElectricalDemand(object):
         print(el_en_demand_value)
 
         assert ann_demand - el_en_demand_value <= 0.001 * ann_demand
+
+    def test_multiple_resolutions(self, create_environment):
+        timer = create_environment.timer
+        #  Generate electrical demand object
+        el_demand_object_1 = ed.ElectricalDemand(create_environment,
+                                                 method=1,
+                                                 profile_type="H0",
+                                                 annual_demand=3000)
+
+        timer.time_discretization = int(timer.time_discretization/2)
+        el_demand_object_2 = ed.ElectricalDemand(create_environment,
+                                                 method=1,
+                                                 profile_type="H0",
+                                                 annual_demand=3000)
+
+        #  Get space heating load curve (in W) per timestep
+        load_1 = el_demand_object_1.get_power(currentValues=False)
+        load_2 = el_demand_object_2.get_power(currentValues=False)
+
+        assert len(load_2) == len(load_1) * 2
+        rescaled_load_2 = np.mean(load_2.reshape(-1, 2), axis=1)
+        assert np.allclose(rescaled_load_2, load_1)

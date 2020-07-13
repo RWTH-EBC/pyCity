@@ -26,8 +26,8 @@ class DomesticHotWater(pycity_base.classes.demand.load.Load):
     a42 = []  # Tap water consumption profiles given in Annex 42
     dhw_sto_profiles = {}
 
-    def __init__(self, 
-                 environment, 
+    def __init__(self,
+                 environment,
                  t_flow,
                  thermal=True,
                  method=0,
@@ -43,7 +43,7 @@ class DomesticHotWater(pycity_base.classes.demand.load.Load):
         t_flow : float
             Flow temperature of domestic hot water in degree Celsius.
         thermal : boolean, optional
-            Is the DHW provided electrically (False) or via thermal energy 
+            Is the DHW provided electrically (False) or via thermal energy
             storage (True)
         method : integer, optional
             - `0` : Provide load curve directly (for all timesteps!)
@@ -59,10 +59,10 @@ class DomesticHotWater(pycity_base.classes.demand.load.Load):
             Supply temperature in degree Celsius. This parameter is necessary
             to compute the heat load that results from each liter consumption.
             This parameter is required when using ``method=1``.
-            
+
         Info
         ----
-        The load profiles from Annex 42 can be found here: 
+        The load profiles from Annex 42 can be found here:
         http://www.ecbcs.org/annexes/annex42.htm
         """
         self.method = method
@@ -74,28 +74,31 @@ class DomesticHotWater(pycity_base.classes.demand.load.Load):
             if not DomesticHotWater.loaded_profile:
                 src_path = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
                 filename = os.path.join(src_path, 'inputs', 'standard_load_profile', 'dhw_annex42.csv')
-                DomesticHotWater.a42 = np.loadtxt(filename, 
+                DomesticHotWater.a42 = np.loadtxt(filename,
                                                   skiprows=1, delimiter="\t")
-                # Adjust time resolution. Annex 42 data is sampled at 900 sec.
-                if timeDis != 900:
-                    res = []
-                    changeResol = chres.changeResolution
-                    for i in range(3):
-                        res.append(changeResol(DomesticHotWater.a42[:,i], 
-                                               oldResolution=900,
-                                               newResolution=timeDis,
-                                               method="mean"))
-                    DomesticHotWater.a42 = np.transpose(np.array(res))
                 DomesticHotWater.loaded_profile = True
-                
+
+            # Adjust time resolution. Annex 42 data is sampled at 900 sec.
+            if timeDis != 900:
+                res = []
+                changeResol = chres.changeResolution
+                for i in range(3):
+                    res.append(changeResol(DomesticHotWater.a42[:, i],
+                                           oldResolution=900,
+                                           newResolution=timeDis,
+                                           method="mean"))
+                a42 = np.transpose(np.array(res))
+            else:
+                a42 = DomesticHotWater.a42
+
             # Compute tap water profile (based on average daily consumption)
             if daily_consumption <= 150:
-                tapProfile = self.a42[:, 0] * daily_consumption / 100
+                tapProfile = a42[:, 0] * daily_consumption / 100
             elif daily_consumption <= 250 and daily_consumption > 150:
-                tapProfile = self.a42[:, 1] * daily_consumption / 200
+                tapProfile = a42[:, 1] * daily_consumption / 200
             elif daily_consumption > 250:
-                tapProfile = self.a42[:, 2] * daily_consumption / 300
-            
+                tapProfile = a42[:, 2] * daily_consumption / 300
+
             # Compute equivalent heat demand in Watt
             cWater = 4180  # J/kgK
             flowFactor = 1 / 3600  # l/h -> kg/s
@@ -109,19 +112,19 @@ class DomesticHotWater(pycity_base.classes.demand.load.Load):
                 loc = os.path.join(src_path, 'inputs', 'dhw_stochastical.xlsx')
                 DomesticHotWater.dhw_sto_profiles = dhw_sto.load_profiles(loc)
                 DomesticHotWater.loaded_dhw_sto = True
-            
+
             # Compute dhw demand
             profiles = DomesticHotWater.dhw_sto_profiles
             initial_day = environment.timer.current_day
             timeDis = environment.timer.time_discretization
             tempDiff = t_flow - supply_temperature
-            (water, heat) = dhw_sto.full_year_computation(occupancy, profiles, 
+            (water, heat) = dhw_sto.full_year_computation(occupancy, profiles,
                                                           timeDis, initial_day,
                                                           tempDiff)
-                                                      
+
             self.water = water
             super(DomesticHotWater, self).__init__(environment, heat)
-        
+
         self._kind = "domestichotwater"
         self.t_flow = t_flow
         self.thermal = thermal
@@ -129,12 +132,12 @@ class DomesticHotWater(pycity_base.classes.demand.load.Load):
     @property
     def kind(self):
         return self._kind
-    
+
     def get_power(self, currentValues=True, returnTemperature=True):
         """
         Get the domestic hot water power curve
         (and the required flow temperature).
-        
+
         Parameters
         ----------
         currentValues : Boolean, optional
@@ -156,11 +159,11 @@ class DomesticHotWater(pycity_base.classes.demand.load.Load):
         """
         if self.method in (0, 1, 2):
             load = self._getLoadcurve(currentValues)
-                
+
         if returnTemperature:
             t_flow = np.zeros_like(load)
             t_flow[load > 0] = self.t_flow
-            
+
             return (load, t_flow)
         else:
             return load

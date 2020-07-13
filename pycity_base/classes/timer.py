@@ -73,7 +73,7 @@ class Timer(object):
         self.current_timestep += self.timesteps_used_horizon
         newDay = int(self.current_timestep * 150 / self.time_discretization)
         # 150 = 3600 / 24
-        if  newDay > self.current_day:
+        if newDay > self.current_day:
             self.current_day += 1
             self.current_weekday += 1
             if self.current_weekday > 7:

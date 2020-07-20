@@ -13,7 +13,7 @@ matrix:
 
 install:
   - pip install --upgrade pip setuptools wheel
-  - pip install --only-binary=numpy,scipy numpy scipy
+  - pip install --upgrade --only-binary=numpy,scipy numpy scipy
   - pip install networkx
   - pip install xlrd
   - pip install pandas

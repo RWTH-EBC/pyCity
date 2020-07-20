@@ -88,4 +88,5 @@ class TestSpaceHeating(object):
         assert len(load_2) == 24*4*365
 
         rescaled_load_2 = np.mean(load_2.reshape(-1, 4), axis=1)
+        assert np.allclose(rescaled_load_2, load_1)
         assert np.isclose(rescaled_load_2.sum(), load_1.sum())

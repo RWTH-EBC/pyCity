@@ -6,6 +6,8 @@ Building test.
 
 from __future__ import division
 
+import numpy as np
+
 import pycity_base.classes.demand.apartment as apart
 import pycity_base.classes.building as build
 import pycity_base.classes.supply.building_energy_system as bes
@@ -78,3 +80,19 @@ class TestBuilding():
         assert building.get_number_of_apartments() == 2
         assert building.get_number_of_occupants() == 2
         assert building.get_net_floor_area_of_building() == 50
+
+    def test_get_power_no_load(self, create_environment):
+        building = build.Building(environment=create_environment)
+
+        bes_unit = bes.BES(environment=create_environment)
+
+        building.addEntity(entity=bes_unit)
+
+        assert all(building.get_space_heating_power_curve(currentValues=False) == 0)
+        assert all(building.get_space_heating_power_curve(currentValues=True) == 0)
+        assert all(building.get_space_cooling_power_curve(currentValues=False) == 0)
+        assert all(building.get_space_cooling_power_curve(currentValues=True) == 0)
+        assert all(building.get_electric_power_curve(currentValues=False) == 0)
+        assert all(building.get_electric_power_curve(currentValues=True) == 0)
+        assert all(building.get_dhw_power_curve(currentValues=False) == 0)
+        assert all(building.get_dhw_power_curve(currentValues=True) == 0)

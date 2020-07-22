@@ -101,22 +101,29 @@ def calculate(temperature, initial_day, profiles, weekly_factors, hourly_factors
     # Transform to W instead of kWh
     return result * 1000 * 3600 / time_discretization
 
+def _daily_average_temperatures(temperature, timesteps_day=24):
+    weights = np.array([1] + [2] * (timesteps_day-1) + [1])
+
+    days, r = divmod(len(temperature), timesteps_day)
+    averages = np.zeros(days)
+    if r == 0:
+        temperature = np.append(temperature, temperature[-1])
+    for day in range(days):
+        averages[day] = np.average(temperature[day*timesteps_day:(day+1)*timesteps_day + 1],
+                                 weights=weights)
+    return averages
 
 def _average_temperature(temperature, timesteps_day=24):
     t_ambient_average = []
     t = 0
     day = 0
-    while t + timesteps_day <= len(temperature):
+    averages = _daily_average_temperatures(temperature, timesteps_day)
+    while t+timesteps_day <= len(temperature):
         if day < 3:
-            t_ambient_average.append(np.mean(temperature[t:t + timesteps_day]))
+            t_ambient_average.append(averages[day])
         else:
-            t_prev = np.zeros(4)
-            for d in range(4):
-                index_from = t - d * timesteps_day
-                index_to = t - (d - 1) * timesteps_day
-                t_prev[d] = np.mean(temperature[index_from: index_to])
-
-            weights = np.array([1.0 / 2 ** (i) for i in range(4)])
+            t_prev = averages[day-3:day+1]
+            weights = np.array([1.0 / 2**(i) for i in reversed(range(4))])
 
             t_ambient_average.append(np.dot(weights, t_prev) / np.sum(weights))
 

@@ -17,7 +17,7 @@ class TestChangeResolution(object):
                                               oldResolution=900,
                                               newResolution=3600,
                                               method="mean")
-        assert output_array[0] == 10
+        assert output_array[0] == 15
 
     def test_change_res_mean_larger_timestep_2(self):
         input_array = [10, 20, 20, 20, 20, 30]
@@ -25,9 +25,27 @@ class TestChangeResolution(object):
                                               oldResolution=900,
                                               newResolution=3600,
                                               method="mean")
-        assert output_array[0] == 10
-        assert output_array[1] == 20
+        assert output_array[0] == 17.5
+        assert output_array[1] == 27.5
 
+    def test_change_res_mean_larger_timestep_3(self):
+        input_array = [10, 20, 20, 20, 20, 30]
+        output_array = chres.changeResolution(values=input_array,
+                                              oldResolution=900,
+                                              newResolution=2700,
+                                              method="mean")
+        assert output_array[0] == pytest.approx(20 * 2/3 + 10 /3)
+        assert output_array[1] == pytest.approx(20 * 2/3 + 30 /3)
+
+    def test_change_res_mean_larger_timestep_4(self):
+        input_array = [10, 20, 30, 30]
+        output_array = chres.changeResolution(values=input_array,
+                                              oldResolution=1800,
+                                              newResolution=2700,
+                                              method="mean")
+        assert output_array[0] == pytest.approx(10 * 2/3 + 20 /3)
+        assert output_array[1] == pytest.approx(30 * 2/3 + 20 /3)
+        assert output_array[2] == 30
 
     def test_change_res_mean_smaller_timestep(self):
         input_array = [10, 20]

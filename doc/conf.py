@@ -166,10 +166,12 @@ texinfo_documents = [
 
 # -- Extension configuration -------------------------------------------------
 
+numpydoc_show_inherited_class_members = False
+
 # -- Options for intersphinx extension ---------------------------------------
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://docs.python.org/': None}
+intersphinx_mapping = {'https://docs.python.org/3/': None}
 
 
 # Napoleon settings

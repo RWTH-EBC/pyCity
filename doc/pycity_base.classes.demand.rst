@@ -4,91 +4,91 @@ pycity\_base.classes.demand package
 Submodules
 ----------
 
-pycity\_base.classes.demand.Apartment module
+pycity\_base.classes.demand.apartment module
 --------------------------------------------
 
-.. automodule:: pycity_base.classes.demand.Apartment
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. automodule:: pycity_base.classes.demand.apartment
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-pycity\_base.classes.demand.CoolingDemand module
-------------------------------------------------
+pycity\_base.classes.demand.domestic\_hot\_water module
+-------------------------------------------------------
 
-.. automodule:: pycity_base.classes.demand.CoolingDemand
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. automodule:: pycity_base.classes.demand.domestic_hot_water
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-pycity\_base.classes.demand.DomesticHotWater module
----------------------------------------------------
+pycity\_base.classes.demand.electrical\_demand module
+-----------------------------------------------------
 
-.. automodule:: pycity_base.classes.demand.DomesticHotWater
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. automodule:: pycity_base.classes.demand.electrical_demand
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-pycity\_base.classes.demand.ElectricalDemand module
----------------------------------------------------
-
-.. automodule:: pycity_base.classes.demand.ElectricalDemand
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-pycity\_base.classes.demand.Load module
+pycity\_base.classes.demand.load module
 ---------------------------------------
 
-.. automodule:: pycity_base.classes.demand.Load
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. automodule:: pycity_base.classes.demand.load
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-pycity\_base.classes.demand.Occupancy module
+pycity\_base.classes.demand.occupancy module
 --------------------------------------------
 
-.. automodule:: pycity_base.classes.demand.Occupancy
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. automodule:: pycity_base.classes.demand.occupancy
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-pycity\_base.classes.demand.Room module
+pycity\_base.classes.demand.room module
 ---------------------------------------
 
-.. automodule:: pycity_base.classes.demand.Room
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. automodule:: pycity_base.classes.demand.room
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-pycity\_base.classes.demand.SpaceHeating module
------------------------------------------------
-
-.. automodule:: pycity_base.classes.demand.SpaceHeating
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-pycity\_base.classes.demand.ZoneInputs module
----------------------------------------------
-
-.. automodule:: pycity_base.classes.demand.ZoneInputs
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-pycity\_base.classes.demand.ZoneParameters module
+pycity\_base.classes.demand.space\_cooling module
 -------------------------------------------------
 
-.. automodule:: pycity_base.classes.demand.ZoneParameters
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. automodule:: pycity_base.classes.demand.space_cooling
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pycity\_base.classes.demand.space\_heating module
+-------------------------------------------------
+
+.. automodule:: pycity_base.classes.demand.space_heating
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pycity\_base.classes.demand.zone\_inputs module
+-----------------------------------------------
+
+.. automodule:: pycity_base.classes.demand.zone_inputs
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pycity\_base.classes.demand.zone\_parameters module
+---------------------------------------------------
+
+.. automodule:: pycity_base.classes.demand.zone_parameters
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 
 Module contents
 ---------------
 
 .. automodule:: pycity_base.classes.demand
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:

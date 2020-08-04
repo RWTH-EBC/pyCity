@@ -1,18 +1,18 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>pycity_base &#8212; pycity_base 0.1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
    
@@ -27,6 +27,8 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
   <div class="section" id="pycity-base">
@@ -38,23 +40,23 @@
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
-<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
-<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
 </div>
 <div class="section" id="contributing">
 <h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h1>
 <blockquote>
 <div><ol class="arabic simple">
-<li>Clone repository: <cite>git clone git&#64;github.com:RWTH-EBC/pyCity.git</cite> (for SSH usage) Alternatively: Clone via https: <cite>git clone https://github.com/RWTH-EBC/pyCity.git</cite></li>
-<li>Open an issue at [<a class="reference external" href="https://github.com/RWTH-EBC/pyCity/issues](https://github.com/RWTH-EBC/pyCity/issues">https://github.com/RWTH-EBC/pyCity/issues](https://github.com/RWTH-EBC/pyCity/issues</a>)</li>
-<li>Checkout development branch: <cite>git checkout development</cite></li>
-<li>Update local development branch (if necessary): <cite>git pull origin development</cite></li>
-<li>Create your feature branch: <cite>git checkout -b issueXY_explanation</cite></li>
-<li>Commit your changes: <cite>git commit -m “Add some feature #XY”</cite></li>
-<li>Push to the branch: <cite>git push origin issueXY_explanation</cite></li>
-<li>Submit a pull request from issueXY_explanation to development branch via [<a class="reference external" href="https://github.com/RWTH-EBC/pyCity/pulls](https://github.com/RWTH-EBC/pyCity/pulls">https://github.com/RWTH-EBC/pyCity/pulls](https://github.com/RWTH-EBC/pyCity/pulls</a>)</li>
+<li><p>Clone repository: <cite>git clone git&#64;github.com:RWTH-EBC/pyCity.git</cite> (for SSH usage) Alternatively: Clone via https: <cite>git clone https://github.com/RWTH-EBC/pyCity.git</cite></p></li>
+<li><p>Open an issue at [<a class="reference external" href="https://github.com/RWTH-EBC/pyCity/issues](https://github.com/RWTH-EBC/pyCity/issues">https://github.com/RWTH-EBC/pyCity/issues](https://github.com/RWTH-EBC/pyCity/issues</a>)</p></li>
+<li><p>Checkout development branch: <cite>git checkout development</cite></p></li>
+<li><p>Update local development branch (if necessary): <cite>git pull origin development</cite></p></li>
+<li><p>Create your feature branch: <cite>git checkout -b issueXY_explanation</cite></p></li>
+<li><p>Commit your changes: <cite>git commit -m “Add some feature #XY”</cite></p></li>
+<li><p>Push to the branch: <cite>git push origin issueXY_explanation</cite></p></li>
+<li><p>Submit a pull request from issueXY_explanation to development branch via [<a class="reference external" href="https://github.com/RWTH-EBC/pyCity/pulls](https://github.com/RWTH-EBC/pyCity/pulls">https://github.com/RWTH-EBC/pyCity/pulls](https://github.com/RWTH-EBC/pyCity/pulls</a>)</p></li>
 </ol>
 </div></blockquote>
 </div>
@@ -63,26 +65,25 @@
 <p><em>One important issue at the beginning: Please do NOT confuse pyCity_base with
 the pycity package on pypi! This (other) pycity package is installable via
 pip. However, if you want to install pycity_base, follow this instruction.</em></p>
-<dl class="docutils">
-<dt>pyCity_base requires the following Python packages:</dt>
-<dd><ul class="first last simple">
-<li>numpy</li>
-<li>matplotlib</li>
-<li>networkX</li>
-<li>pandas</li>
-<li>pytest</li>
-<li>xlrd</li>
+<dl class="simple">
+<dt>pyCity_base requires the following Python packages:</dt><dd><ul class="simple">
+<li><p>numpy</p></li>
+<li><p>matplotlib</p></li>
+<li><p>networkX</p></li>
+<li><p>pandas</p></li>
+<li><p>pytest</p></li>
+<li><p>xlrd</p></li>
 </ul>
 </dd>
 </dl>
 <p>as well as the EBC Python packages:</p>
 <ul class="simple">
-<li>richardsonpy</li>
+<li><p>richardsonpy</p></li>
 </ul>
 <p>which is available under</p>
 <p><a class="reference external" href="https://github.com/RWTH-EBC/richardsonpy">https://github.com/RWTH-EBC/richardsonpy</a></p>
 <ul class="simple">
-<li>uesgraphs</li>
+<li><p>uesgraphs</p></li>
 </ul>
 <p>(with dependencies to shapely and pyproj)</p>
 <p>which is available under</p>
@@ -129,11 +130,12 @@ under the MIT License.</p>
 <p>We gratefully acknowledge the financial support by BMWi
 (German Federal Ministry for Economic Affairs and Energy)
 under promotional references 03ET1138D and 03ET1381A.</p>
-<a class="reference internal image-reference" href="_static/foerderlogo_bmwi.jpg"><img alt="_static/foerderlogo_bmwi.jpg" src="_static/foerderlogo_bmwi.jpg" style="width: 194.7px; height: 160.5px;" /></a>
+<a class="reference internal image-reference" href="_images/foerderlogo_bmwi.jpg"><img alt="_images/foerderlogo_bmwi.jpg" src="_images/foerderlogo_bmwi.jpg" style="width: 194.7px; height: 160.5px;" /></a>
 </div>
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -157,17 +159,23 @@ under promotional references 03ET1138D and 03ET1381A.</p>
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
@@ -176,8 +184,8 @@ under promotional references 03ET1138D and 03ET1381A.</p>
       &copy;2018, Institute for Energy Efficient Buildings and Indoor Climate, Institute for Automation of Complex Power Systems, E.ON Energy Research Center, RWTH Aachen University.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.9</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/index.rst.txt"

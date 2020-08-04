@@ -1,18 +1,18 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>pycity_base.functions.scripts.city_generators package &#8212; pycity_base 0.1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
    
@@ -27,6 +27,8 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
   <div class="section" id="pycity-base-functions-scripts-city-generators-package">
@@ -54,41 +56,37 @@
 <p>Script to generate city district (building objects with demand and position;
 Without energy systems)
 This script assumes buildings with single zoning.</p>
-<dl class="function">
+<dl class="py function">
 <dt id="pycity_base.functions.scripts.city_generators.city_generator.run_city_generator">
-<code class="descclassname">pycity_base.functions.scripts.city_generators.city_generator.</code><code class="descname">run_city_generator</code><span class="sig-paren">(</span><em>gen_mo=0</em>, <em>input_name='test_city_mixed_buildings.txt'</em>, <em>output_name=None</em>, <em>use_el_slp=True</em>, <em>gen_dhw_profile=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.scripts.city_generators.city_generator.run_city_generator" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pycity_base.functions.scripts.city_generators.city_generator.</code><code class="sig-name descname">run_city_generator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">gen_mo</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">input_name</span><span class="o">=</span><span class="default_value">'test_city_mixed_buildings.txt'</span></em>, <em class="sig-param"><span class="n">output_name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">use_el_slp</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">gen_dhw_profile</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.scripts.city_generators.city_generator.run_city_generator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to generate and return city district object</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>gen_mo</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) – Generation mode number:
-0 - Use data from input file (default)</li>
-<li><strong>input_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Name of input data file (default: ‘test_city_only_buildings.txt’)</li>
-<li><strong>output_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Name of output file (default: None)
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gen_mo</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>optional</em>) – Generation mode number:
+0 - Use data from input file (default)</p></li>
+<li><p><strong>input_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Name of input data file (default: ‘test_city_only_buildings.txt’)</p></li>
+<li><p><strong>output_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Name of output file (default: None)
 If output_name is None, no output file is generated.
-Else: Pickled output file is saved to output folder</li>
-<li><strong>use_el_slp</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Boolean to define, how electrical load profile should be generated
+Else: Pickled output file is saved to output folder</p></li>
+<li><p><strong>use_el_slp</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – Boolean to define, how electrical load profile should be generated
 (default: True)
 True: Generate el. load profile via el. slp
 False: Use stochastic profile generator (
-only valid for residential buildings!)</li>
-<li><strong>gen_dhw_profile</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Boolean to define, if domestic hot water profile should be generated
+only valid for residential buildings!)</p></li>
+<li><p><strong>gen_dhw_profile</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – Boolean to define, if domestic hot water profile should be generated
 (default: False)
 True: Generate dhw profile (valid for residential buildings!)
-False: Do not generate dhw profile</li>
+False: Do not generate dhw profile</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>city_district</strong> – CityDistrict object of PyCity</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)">object</a></p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>city_district</strong> – CityDistrict object of PyCity</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)">object</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -99,6 +97,7 @@ False: Do not generate dhw profile</li>
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -122,17 +121,23 @@ False: Do not generate dhw profile</li>
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
@@ -141,8 +146,8 @@ False: Do not generate dhw profile</li>
       &copy;2018, Institute for Energy Efficient Buildings and Indoor Climate, Institute for Automation of Complex Power Systems, E.ON Energy Research Center, RWTH Aachen University.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.9</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/pycity_base.functions.scripts.city_generators.rst.txt"

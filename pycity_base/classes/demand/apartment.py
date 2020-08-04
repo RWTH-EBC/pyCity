@@ -22,8 +22,8 @@ class Apartment(object):
 
     def __init__(self, environment, net_floor_area=None, occupancy=None):
         """
-        Parameter
-        ---------
+        Parameters
+        ----------
         environment : environment object
             Common to all other objects. Includes time and weather instances
         net_floor_area : float, optional
@@ -74,8 +74,8 @@ class Apartment(object):
             - Occupancy (entity.kind == 'occupancy')
             - Room (entity.kind == "room"
         
-        Example
-        -------
+        Examples
+        --------
         >>> myDHW = DomesticHotWater(...)
         >>> myApartment = Apartment(...)
         >>> myApartment.addDevice(myDHW)
@@ -106,13 +106,13 @@ class Apartment(object):
         """
         Add multiple entities to the existing apartment
         
-        Parameter
-        ---------
+        Parameters
+        ----------
         entities: List-like
             List (or tuple) of entities that are added to the apartment
             
-        Example
-        -------
+        Examples
+        --------
         >>> myDHW = DomesticHotWater(...)
         >>> mySH = SpaceHeating(...)
         >>> myApartment = Apartment(...)
@@ -144,8 +144,8 @@ class Apartment(object):
             Return the current values (True) or return values for all time 
             steps (False).
             
-        Return
-        ------
+        Returns
+        -------
         Current power curves. Order: electrical, domestic hot water,
         space heating
         """
@@ -172,8 +172,8 @@ class Apartment(object):
             Return the current values (True) or return values for all time
             steps (False).
 
-        Return
-        ------
+        Returns
+        -------
         If dhw is supplied by electrical supply:
         result_tuple : tuple (power_dhw + power_el)
             Result tuple with power curve
@@ -206,8 +206,8 @@ class Apartment(object):
             Defines, if return temperature should be returned
             (default: True)
 
-        Return
-        ------
+        Returns
+        -------
         If returnTemperature is True:
         result_tuple : tuple (power_dhw[0] + demandSpaceHeating, power_dhw[1])
             Result tuple with thermal power curve and return temperature curve

@@ -104,8 +104,8 @@ class CityDistrict(ues.UESGraph):
         node_number : int
             Node number
 
-        Example
-        -------
+        Examples
+        --------
         >>> myBuilding = Building(...)
         >>> myCityDistrict = CityDistrict(...)
         >>> myCityDistrict.addDevice(myBuilding)
@@ -157,8 +157,8 @@ class CityDistrict(ues.UESGraph):
         """
         Add multiple entities to the existing city district.
         
-        Parameter
-        ---------
+        Parameters
+        ----------
         entities_tuple : List-like
             List (or tuple) of entities that are added to the city district
         positions : List-like
@@ -166,8 +166,8 @@ class CityDistrict(ues.UESGraph):
             district
             (list of shapely.geometry.Point objects)
             
-        Example
-        -------
+        Examples
+        --------
         >>> import shapely.geometry.point as point
         >>> myPV  = PV(...)
         >>> myWEC = WindEnergyConverter(...)
@@ -311,8 +311,8 @@ class CityDistrict(ues.UESGraph):
             False - Use complete number of timesteps
             True - Use horizon
 
-        Order
-        -----
+        Returns
+        -------
         ElectricityDemand : Array_like
             Aggregated electrical demand
         HeatDemand : Array_like

@@ -53,14 +53,14 @@ class Inverter(object):
         """
         Return results.
         
-        Parameter
-        ---------
+        Parameters
+        ----------
         currentValues : boolean, optional
             - True : Return only values for this scheduling period
             - False : Return values for all scheduling periods
         
-        Order
-        -----
+        Returns
+        -------
         pInput : array-like
             Electricity input of the inverter
         pOutput : array-like

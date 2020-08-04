@@ -92,8 +92,8 @@ class SpaceCooling(pycity_base.classes.demand.load.Load):
             Return only current values (True) or the entire load (False)
             (default: True)
 
-        Return
-        ------
+        Returns
+        -------
         loadcurve : np.array
             Power curve of space cooling
         """

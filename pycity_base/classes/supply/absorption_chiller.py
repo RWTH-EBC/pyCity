@@ -21,8 +21,8 @@ class AbsorptionChiller(coolingdevice.CoolingDevice):
                  t_min=4,
                  lower_activation_limit=1):
         """
-        Parameter
-        ---------
+        Parameters
+        ----------
         environment : environment object
             Common to all other objects. Includes time and weather instances
         q_nominal : array of float
@@ -56,14 +56,14 @@ class AbsorptionChiller(coolingdevice.CoolingDevice):
         """
         Return results.
 
-        Parameter
-        ---------
+        Parameters
+        ----------
         currentValues : boolean, optional
             - True : Return only values for this scheduling period
             - False : Return values for all scheduling periods
 
-        Order
-        -----
+        Returns
+        -------
         q_output : array-like
             cooling production of the chiller
         schedule : array-like

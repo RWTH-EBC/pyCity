@@ -27,8 +27,8 @@ class ThermalEnergyStorage(object):
                  t_surroundings=20,
                  k_losses=3):
         """
-        Parameter
-        ---------
+        Parameters
+        ----------
         environment : environment object
             Common to all other objects. Includes time and weather instances
         t_init : integer

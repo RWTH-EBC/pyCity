@@ -138,8 +138,8 @@ class ProfilePool(object):
             going to select random integer. If integer is given, this integer
             is goint to be used.
 
-        Return
-        ------
+        Returns
+        -------
         profile : array-like
             Selected profile
         """

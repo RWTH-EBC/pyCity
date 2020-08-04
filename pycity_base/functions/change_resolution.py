@@ -15,7 +15,7 @@ import math
 
 def changeResolution(values, oldResolution, newResolution, method="mean"):
     """
-    Change the temporal resolution of values that have a constant sampling rate
+    Change the temporal resolution of averages that have a constant sampling rate
 
     Parameters
     ----------
@@ -37,23 +37,38 @@ def changeResolution(values, oldResolution, newResolution, method="mean"):
     length = math.ceil(len(values) * oldResolution / newResolution)
     timeNew = np.arange(length) * newResolution
 
-    # Sample means or sum values
     if method == "mean":
-        # Interpolate
-        valuesResampled = np.interp(timeNew, timeOld, values)
-    else:
+        if newResolution < oldResolution:
+            # Interpolate
+            valuesResampled = np.interp(timeNew, timeOld, values)
+            return valuesResampled
+        else:
+            # Use cumsum for averaging values
+            # Repeat last value in old resolution for time values larger than
+            # timesOld + oldResolution
+            timeOld = np.concatenate((timeOld, [timeOld[-1] + oldResolution]))
+            timeNew = np.concatenate((timeNew, [timeNew[-1] + newResolution]))
+            while timeOld[-1] < timeNew[-1]:
+                timeOld = np.append(timeOld, timeOld[-1] + oldResolution)
+                values = np.append(values, values[-1])
+            values = np.cumsum(np.concatenate(([0], values)))
+
+            # Rescale values for averages
+            values = values * oldResolution / newResolution
+    elif method == "sum":
         # If values have to be summed up, use cumsum to modify the given data
         # Add one dummy value to later use diff (which reduces the number of
         # indexes by one)
         values = np.cumsum(np.concatenate(([0], values)))
         timeOld = np.concatenate((timeOld, [timeOld[-1] + oldResolution]))
         timeNew = np.concatenate((timeNew, [timeNew[-1] + newResolution]))
+    else:
+        raise ValueError("Unknown method selected.")
+    # Interpolate
+    valuesResampled = np.interp(timeNew, timeOld, values)
 
-        # Interpolate
-        valuesResampled = np.interp(timeNew, timeOld, values)
-
-        # "Undo" the cumsum
-        valuesResampled = np.diff(valuesResampled)
+    # "Undo" the cumsum
+    valuesResampled = np.diff(valuesResampled)
 
     return valuesResampled
 

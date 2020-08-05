@@ -68,14 +68,14 @@ class CHP(HeatingDevice.HeatingDevice):
         """
         Return results.
         
-        Parameter
-        ---------
+        Parameters
+        ----------
         currentValues : boolean, optional
             - True : Return only values for this scheduling period
             - False : Return values for all scheduling periods
         
-        Order
-        -----
+        Returns
+        -------
         pOutput : array-like
             Electricity production of the CHP unit
         qOutput : array-like

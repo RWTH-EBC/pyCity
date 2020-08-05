@@ -61,14 +61,14 @@ class ElectricalHeater(HeatingDevice.HeatingDevice):
         """
         Return results.
         
-        Parameter
-        ---------
+        Parameters
+        ----------
         currentValues : boolean, optional
             - True : Return only values for this scheduling period
             - False : Return values for all scheduling periods
         
-        Order
-        -----
+        Returns
+        -------
         pConsumption : array-like
             Electricity consumption of the electrical heater
         qOutput : array-like

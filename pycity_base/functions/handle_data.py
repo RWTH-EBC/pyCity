@@ -28,8 +28,8 @@ def saveResult(timer, currentAttribute, totalAttribute, currentResult):
     -------
     Returns a tuple of updated currentAttribute and totalAttribute
     
-    Example
-    -------
+    Examples
+    --------
     >>> # Save the results of a scheduling optimization
     >>> # Due to limited space, the variable names are shortened
     >>> # cS --> current_device_schedule, tS --> total_device_schedule
@@ -71,8 +71,8 @@ def saveResultInit(timer, currentAttribute, totalAttribute, currentResult):
     Returns a tuple of updated currentAttribute and totalAttribute as well as 
     a new initial value
     
-    Example
-    -------
+    Examples
+    --------
     >>> # Save the resulting storage temperature
     >>> # Due to limited space, the variable names are shortened
     >>> # cT --> current_t_sto, tT --> total_t_sto, tI --> tInit

@@ -271,7 +271,7 @@ T_set_cooling = np.ones(timer.timesteps_total) * 27
 
 heating_mode = 20
 setback_mode = 18
-dt = len(occupancy.occupancy) / timer.timesteps_total
+dt = len(occupancy.occupancy) // timer.timesteps_total
 occupancy_reshaped = np.array([np.mean(occupancy.occupancy[dt*i: dt*(i+1)]) 
                                for i in range(timer.timesteps_total)])
 

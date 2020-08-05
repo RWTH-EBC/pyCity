@@ -1,18 +1,18 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pycity_base.classes.demand package &#8212; pycity_base 0.1 documentation</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pycity_base.classes.demand package &#8212; pycity_base 0.3.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
    
@@ -27,6 +27,8 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
   <div class="section" id="pycity-base-classes-demand-package">
@@ -34,607 +36,861 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-pycity_base.classes.demand.Apartment">
-<span id="pycity-base-classes-demand-apartment-module"></span><h2>pycity_base.classes.demand.Apartment module<a class="headerlink" href="#module-pycity_base.classes.demand.Apartment" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-pycity_base.classes.demand.apartment">
+<span id="pycity-base-classes-demand-apartment-module"></span><h2>pycity_base.classes.demand.apartment module<a class="headerlink" href="#module-pycity_base.classes.demand.apartment" title="Permalink to this headline">¶</a></h2>
 <p>Apartment class of pycity</p>
-<dl class="class">
-<dt id="pycity_base.classes.demand.Apartment.Apartment">
-<em class="property">class </em><code class="descclassname">pycity_base.classes.demand.Apartment.</code><code class="descname">Apartment</code><span class="sig-paren">(</span><em>environment</em>, <em>net_floor_area=None</em>, <em>occupancy=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.Apartment.Apartment" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<dl class="docutils">
-<dt>Apartments potentially contain:</dt>
-<dd>Electricity, domestic hot water and space heating demand</dd>
+<dl class="py class">
+<dt id="pycity_base.classes.demand.apartment.Apartment">
+<em class="property">class </em><code class="sig-prename descclassname">pycity_base.classes.demand.apartment.</code><code class="sig-name descname">Apartment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">environment</span></em>, <em class="sig-param"><span class="n">net_floor_area</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">occupancy</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.apartment.Apartment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="simple">
+<dt>Apartments potentially contain:</dt><dd><p>Electricity, domestic hot water and space heating demand</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>kind</strong></dt><dd></dd>
+</dl>
+</dd>
 </dl>
 <p class="rubric">Methods</p>
-<dl class="method">
-<dt id="pycity_base.classes.demand.Apartment.Apartment.addEntity">
-<code class="descname">addEntity</code><span class="sig-paren">(</span><em>entity</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.Apartment.Apartment.addEntity" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add an entity to apartment.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>entity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><em>object</em></a>) – Entity. Possible objects:
-- Electrical demand (entity._kind == “electricaldemand”)
-- Domestic hot water demand (entity._kind == “domestichotwater”)
-- Space heating demand (entity._kind == “spaceheating”)
-- Occupancy (entity._kind == ‘occupancy’)
-- Room (entity._kind == “room”</td>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pycity_base.classes.demand.apartment.Apartment.addEntity" title="pycity_base.classes.demand.apartment.Apartment.addEntity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">addEntity</span></code></a>(entity)</p></td>
+<td><p>Add an entity to apartment.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pycity_base.classes.demand.apartment.Apartment.addMultipleEntities" title="pycity_base.classes.demand.apartment.Apartment.addMultipleEntities"><code class="xref py py-obj docutils literal notranslate"><span class="pre">addMultipleEntities</span></code></a>(entities)</p></td>
+<td><p>Add multiple entities to the existing apartment</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pycity_base.classes.demand.apartment.Apartment.get_dhw_power_curve" title="pycity_base.classes.demand.apartment.Apartment.get_dhw_power_curve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_dhw_power_curve</span></code></a>([currentValues])</p></td>
+<td><p>Returns the domestic hot water power curve of the apartment.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pycity_base.classes.demand.apartment.Apartment.get_el_power_curve" title="pycity_base.classes.demand.apartment.Apartment.get_el_power_curve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_el_power_curve</span></code></a>([currentValues])</p></td>
+<td><p>Returns the net electrical power curve of the apartment (without space heating, space cooling or domestic hot water demand!)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pycity_base.classes.demand.apartment.Apartment.get_max_nb_occupants" title="pycity_base.classes.demand.apartment.Apartment.get_max_nb_occupants"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_max_nb_occupants</span></code></a>()</p></td>
+<td><p>Returns maximum number of occupants within apartment</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pycity_base.classes.demand.apartment.Apartment.get_occupancy_profile" title="pycity_base.classes.demand.apartment.Apartment.get_occupancy_profile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_occupancy_profile</span></code></a>()</p></td>
+<td><p>Returns the occupancy profile (if occupancy object exists) of the apartment.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pycity_base.classes.demand.apartment.Apartment.get_power_curves" title="pycity_base.classes.demand.apartment.Apartment.get_power_curves"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_power_curves</span></code></a>([getElectrical, …])</p></td>
+<td><p>Get apartment’s current power curves</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pycity_base.classes.demand.apartment.Apartment.get_space_cooling_power_curve" title="pycity_base.classes.demand.apartment.Apartment.get_space_cooling_power_curve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_space_cooling_power_curve</span></code></a>([currentValues])</p></td>
+<td><p>Returns space cooling power curve of the apartment.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pycity_base.classes.demand.apartment.Apartment.get_space_heating_power_curve" title="pycity_base.classes.demand.apartment.Apartment.get_space_heating_power_curve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_space_heating_power_curve</span></code></a>([currentValues])</p></td>
+<td><p>Returns the space heating power curve of the apartment.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pycity_base.classes.demand.apartment.Apartment.get_total_el_power" title="pycity_base.classes.demand.apartment.Apartment.get_total_el_power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_total_el_power</span></code></a>([currentValues])</p></td>
+<td><p>Returns current el.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pycity_base.classes.demand.apartment.Apartment.get_total_th_space_heating_power" title="pycity_base.classes.demand.apartment.Apartment.get_total_th_space_heating_power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_total_th_space_heating_power</span></code></a>([…])</p></td>
+<td><p>Returns the current thermal power curve of the building (space heating plus domestic hot water, if thermal hot water device is installed).</p></td>
 </tr>
 </tbody>
 </table>
-<p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">myDHW</span> <span class="o">=</span> <span class="n">DomesticHotWater</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<dl class="py method">
+<dt id="pycity_base.classes.demand.apartment.Apartment.addEntity">
+<code class="sig-name descname">addEntity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">entity</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.apartment.Apartment.addEntity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an entity to apartment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>entity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><em>object</em></a>) – Entity. Possible objects:
+- Electrical demand (entity.kind == “electricaldemand”)
+- Domestic hot water demand (entity.kind == “domestichotwater”)
+- Space heating demand (entity.kind == “spaceheating”)
+- Space cooling demand (entity.kind == “spacecooling”)
+- Occupancy (entity.kind == ‘occupancy’)
+- Room (entity.kind == “room”</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">myDHW</span> <span class="o">=</span> <span class="n">DomesticHotWater</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">myApartment</span> <span class="o">=</span> <span class="n">Apartment</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">myApartment</span><span class="o">.</span><span class="n">addDevice</span><span class="p">(</span><span class="n">myDHW</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.classes.demand.Apartment.Apartment.addMultipleEntities">
-<code class="descname">addMultipleEntities</code><span class="sig-paren">(</span><em>entities</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.Apartment.Apartment.addMultipleEntities" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.classes.demand.apartment.Apartment.addMultipleEntities">
+<code class="sig-name descname">addMultipleEntities</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">entities</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.apartment.Apartment.addMultipleEntities" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add multiple entities to the existing apartment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>entities</strong> (<em>List-like</em>) – List (or tuple) of entities that are added to the apartment</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">myDHW</span> <span class="o">=</span> <span class="n">DomesticHotWater</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mySH</span> <span class="o">=</span> <span class="n">SpaceHeating</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myApartment</span> <span class="o">=</span> <span class="n">Apartment</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myApartment</span><span class="o">.</span><span class="n">addDevice</span><span class="p">([</span><span class="n">myDHW</span><span class="p">,</span> <span class="n">mySH</span><span class="p">])</span>
+</pre></div>
+</div>
 </dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.classes.demand.Apartment.Apartment.get_dhw_power_curve">
-<code class="descname">get_dhw_power_curve</code><span class="sig-paren">(</span><em>current_values=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.Apartment.Apartment.get_dhw_power_curve" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns hot water power curve of apartment
-:param currentValues: Return the current values (True) or return values for all time</p>
-<blockquote>
-<div>steps (False).
-(default: True)</div></blockquote>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>el_power_curve</strong> – Electrical power curve</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">array-like</td>
-</tr>
-</tbody>
-</table>
+<dl class="py method">
+<dt id="pycity_base.classes.demand.apartment.Apartment.get_dhw_power_curve">
+<code class="sig-name descname">get_dhw_power_curve</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">currentValues</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.apartment.Apartment.get_dhw_power_curve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the domestic hot water power curve of the apartment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>currentValues</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – Return the current values (True) or return values for all time
+steps (False).
+(default: True)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>el_power_curve</strong> – Electrical power curve</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.classes.demand.Apartment.Apartment.get_el_power_curve">
-<code class="descname">get_el_power_curve</code><span class="sig-paren">(</span><em>current_values=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.Apartment.Apartment.get_el_power_curve" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns net electrical power curve of apartment (without space heating
-or hot water demand!)
-:param currentValues: Return the current values (True) or return values for all time</p>
-<blockquote>
-<div>steps (False).
-(default: True)</div></blockquote>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>el_power_curve</strong> – Electrical power curve</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">array-like</td>
-</tr>
-</tbody>
-</table>
+<dl class="py method">
+<dt id="pycity_base.classes.demand.apartment.Apartment.get_el_power_curve">
+<code class="sig-name descname">get_el_power_curve</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">currentValues</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.apartment.Apartment.get_el_power_curve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the net electrical power curve of the apartment (without space heating, space cooling
+or domestic hot water demand!)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>currentValues</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – Return the current values (True) or return values for all time
+steps (False).
+(default: True)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>el_power_curve</strong> – Electrical power curve</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.classes.demand.Apartment.Apartment.get_max_nb_occupants">
-<code class="descname">get_max_nb_occupants</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.Apartment.Apartment.get_max_nb_occupants" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.classes.demand.apartment.Apartment.get_max_nb_occupants">
+<code class="sig-name descname">get_max_nb_occupants</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.apartment.Apartment.get_max_nb_occupants" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns maximum number of occupants within apartment</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>max_nb_occupants</strong> – Maximum number of occupants</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>max_nb_occupants</strong> – Maximum number of occupants</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.classes.demand.Apartment.Apartment.get_occupancy_profile">
-<code class="descname">get_occupancy_profile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.Apartment.Apartment.get_occupancy_profile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns occupancy profile (if occupancy object exists)</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>occupancy_profile</strong> – 1d array-like list with number of occupants per timestep</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">array-like</td>
-</tr>
-</tbody>
-</table>
+<dl class="py method">
+<dt id="pycity_base.classes.demand.apartment.Apartment.get_occupancy_profile">
+<code class="sig-name descname">get_occupancy_profile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.apartment.Apartment.get_occupancy_profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the occupancy profile (if occupancy object exists) of the apartment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>occupancy_profile</strong> – 1d array-like list with number of occupants per timestep</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>array-like</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.classes.demand.Apartment.Apartment.get_power_curves">
-<code class="descname">get_power_curves</code><span class="sig-paren">(</span><em>getElectrical=True</em>, <em>getDomesticHotWater=True</em>, <em>getSpaceheating=True</em>, <em>currentValues=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.Apartment.Apartment.get_power_curves" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.classes.demand.apartment.Apartment.get_power_curves">
+<code class="sig-name descname">get_power_curves</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">getElectrical</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">getDomesticHotWater</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">getSpaceHeating</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">getSpaceCooling</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">currentValues</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.apartment.Apartment.get_power_curves" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get apartment’s current power curves</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>getElectrical</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – Also return current electrical demand</li>
-<li><strong>getDomesticHotWater</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – Also return current domestic hot water demand</li>
-<li><strong>getSpaceheating</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – Also return current space heating demand</li>
-<li><strong>currentValues</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – Return the current values (True) or return values for all time
-steps (False).</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>getElectrical</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – Also return current electrical demand</p></li>
+<li><p><strong>getDomesticHotWater</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – Also return current domestic hot water demand</p></li>
+<li><p><strong>getSpaceHeating</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – Also return current space heating demand</p></li>
+<li><p><strong>getSpaceCooling</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – Also return current space heating demand</p></li>
+<li><p><strong>currentValues</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – Return the current values (True) or return values for all time
+steps (False).</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
-<li><strong>Current power curves. Order</strong> (<em>electrical, domestic hot water,</em>)</li>
-<li><em>space heating</em></li>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>Current power curves. Order</strong> (<em>electrical, domestic hot water,</em>)</p></li>
+<li><p><em>space heating</em></p></li>
 </ul>
 </p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.classes.demand.Apartment.Apartment.get_space_heat_power_curve">
-<code class="descname">get_space_heat_power_curve</code><span class="sig-paren">(</span><em>current_values=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.Apartment.Apartment.get_space_heat_power_curve" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns space heating power curve of apartment
-:param currentValues: Return the current values (True) or return values for all time</p>
-<blockquote>
-<div>steps (False).
-(default: True)</div></blockquote>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>space_heat_curve</strong> – Space heating power curve</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">array-like</td>
-</tr>
-</tbody>
-</table>
+<dl class="py method">
+<dt id="pycity_base.classes.demand.apartment.Apartment.get_space_cooling_power_curve">
+<code class="sig-name descname">get_space_cooling_power_curve</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">currentValues</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.apartment.Apartment.get_space_cooling_power_curve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns space cooling power curve of the apartment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>currentValues</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – Return the current values (True) or return values for all time
+steps (False).
+(default: True)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>space_cool_curve</strong> – Space cooling power curve</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.classes.demand.Apartment.Apartment.get_total_el_power">
-<code class="descname">get_total_el_power</code><span class="sig-paren">(</span><em>currentValues=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.Apartment.Apartment.get_total_el_power" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.classes.demand.apartment.Apartment.get_space_heating_power_curve">
+<code class="sig-name descname">get_space_heating_power_curve</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">currentValues</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.apartment.Apartment.get_space_heating_power_curve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the space heating power curve of the apartment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>currentValues</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – Return the current values (True) or return values for all time
+steps (False).
+(default: True)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>space_heat_curve</strong> – Space heating power curve</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pycity_base.classes.demand.apartment.Apartment.get_total_el_power">
+<code class="sig-name descname">get_total_el_power</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">currentValues</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.apartment.Apartment.get_total_el_power" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns current el. power curve of building (net electric power plus
 electric hot water, if electric hot water device is installed).</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>currentValues</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Return the current values (True) or return values for all time
-steps (False).</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
-<li><em>If dhw is supplied by electrical supply</em></li>
-<li><strong>result_tuple</strong> (<em>tuple (power_dhw + power_el)</em>) – Result tuple with power curve</li>
-<li><em>else (no dhw via electrical device)</em></li>
-<li><strong>power_el</strong> (<em>np.array</em>) – Electrical power curve of apartment</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="pycity_base.classes.demand.Apartment.Apartment.get_total_th_power">
-<code class="descname">get_total_th_power</code><span class="sig-paren">(</span><em>currentValues=True</em>, <em>returnTemperature=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.Apartment.Apartment.get_total_th_power" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns current thermal power curve of building (space heating
-plus thermal hot water, if thermal hot water device is installed).</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>currentValues</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Return the current values (True) or return values for all time
-steps (False).
-(default: True)</li>
-<li><strong>returnTemperature</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Defines, if return temperature should be returned
-(default: True)</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
-<li><em>If returnTemperature is True</em></li>
-<li><strong>result_tuple</strong> (<em>tuple (power_dhw[0] + demandSpaceHeating, power_dhw[1])</em>) – Result tuple with thermal power curve and return temperature curve</li>
-<li><em>else (returnTemperature is False)</em></li>
-<li><strong>result_tuple</strong> (<em>tuple (power_dhw + demandSpaceHeating)</em>) – Thermal power curve of apartment</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>currentValues</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – Return the current values (True) or return values for all time
+steps (False).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>If dhw is supplied by electrical supply</em></p></li>
+<li><p><strong>result_tuple</strong> (<em>tuple (power_dhw + power_el)</em>) – Result tuple with power curve</p></li>
+<li><p><em>else (no dhw via electrical device)</em></p></li>
+<li><p><strong>power_el</strong> (<em>np.array</em>) – Electrical power curve of apartment</p></li>
 </ul>
 </p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
+
+<dl class="py method">
+<dt id="pycity_base.classes.demand.apartment.Apartment.get_total_th_space_heating_power">
+<code class="sig-name descname">get_total_th_space_heating_power</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">currentValues</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">returnTemperature</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.apartment.Apartment.get_total_th_space_heating_power" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current thermal power curve of the building (space heating
+plus domestic hot water, if thermal hot water device is installed).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>currentValues</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – Return the current values (True) or return values for all time
+steps (False).
+(default: True)</p></li>
+<li><p><strong>returnTemperature</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – Defines, if return temperature should be returned
+(default: True)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>If returnTemperature is True</em></p></li>
+<li><p><strong>result_tuple</strong> (<em>tuple (power_dhw[0] + demandSpaceHeating, power_dhw[1])</em>) – Result tuple with thermal power curve and return temperature curve</p></li>
+<li><p><em>else (returnTemperature is False)</em></p></li>
+<li><p><strong>result_tuple</strong> (<em>tuple (power_dhw + demandSpaceHeating)</em>) – Thermal power curve of apartment</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pycity_base.classes.demand.apartment.Apartment.kind">
+<em class="property">property </em><code class="sig-name descname">kind</code><a class="headerlink" href="#pycity_base.classes.demand.apartment.Apartment.kind" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
 </div>
-<div class="section" id="module-pycity_base.classes.demand.CoolingDemand">
-<span id="pycity-base-classes-demand-coolingdemand-module"></span><h2>pycity_base.classes.demand.CoolingDemand module<a class="headerlink" href="#module-pycity_base.classes.demand.CoolingDemand" title="Permalink to this headline">¶</a></h2>
-<p>Cooling demand class</p>
-<dl class="class">
-<dt id="pycity_base.classes.demand.CoolingDemand.CoolingDemand">
-<em class="property">class </em><code class="descclassname">pycity_base.classes.demand.CoolingDemand.</code><code class="descname">CoolingDemand</code><span class="sig-paren">(</span><em>environment</em>, <em>loadcurve=[]</em>, <em>method=0</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.CoolingDemand.CoolingDemand" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#pycity_base.classes.demand.Load.Load" title="pycity_base.classes.demand.Load.Load"><code class="xref py py-class docutils literal notranslate"><span class="pre">pycity_base.classes.demand.Load.Load</span></code></a></p>
-<p>Implementation of the cooling demand object</p>
-<p class="rubric">Methods</p>
-<dl class="method">
-<dt id="pycity_base.classes.demand.CoolingDemand.CoolingDemand.get_power">
-<code class="descname">get_power</code><span class="sig-paren">(</span><em>currentValues=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.CoolingDemand.CoolingDemand.get_power" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return cooling power curve</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>currentValues</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Return only current values (True) or the entire load (False)
-(default: True)</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>loadcurve</strong> – Cooling power curve</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">np.array</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-pycity_base.classes.demand.DomesticHotWater">
-<span id="pycity-base-classes-demand-domestichotwater-module"></span><h2>pycity_base.classes.demand.DomesticHotWater module<a class="headerlink" href="#module-pycity_base.classes.demand.DomesticHotWater" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-pycity_base.classes.demand.domestic_hot_water">
+<span id="pycity-base-classes-demand-domestic-hot-water-module"></span><h2>pycity_base.classes.demand.domestic_hot_water module<a class="headerlink" href="#module-pycity_base.classes.demand.domestic_hot_water" title="Permalink to this headline">¶</a></h2>
 <p>Created on Sun Feb 08 22:39:15 2015</p>
-<p>&#64;author: Thomas</p>
-<dl class="class">
-<dt id="pycity_base.classes.demand.DomesticHotWater.DomesticHotWater">
-<em class="property">class </em><code class="descclassname">pycity_base.classes.demand.DomesticHotWater.</code><code class="descname">DomesticHotWater</code><span class="sig-paren">(</span><em>environment</em>, <em>tFlow</em>, <em>thermal=True</em>, <em>method=0</em>, <em>loadcurve=[]</em>, <em>dailyConsumption=0</em>, <em>supplyTemperature=0</em>, <em>occupancy=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.DomesticHotWater.DomesticHotWater" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#pycity_base.classes.demand.Load.Load" title="pycity_base.classes.demand.Load.Load"><code class="xref py py-class docutils literal notranslate"><span class="pre">pycity_base.classes.demand.Load.Load</span></code></a></p>
+<p>&#64;author: tsz</p>
+<dl class="py class">
+<dt id="pycity_base.classes.demand.domestic_hot_water.DomesticHotWater">
+<em class="property">class </em><code class="sig-prename descclassname">pycity_base.classes.demand.domestic_hot_water.</code><code class="sig-name descname">DomesticHotWater</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">environment</span></em>, <em class="sig-param"><span class="n">t_flow</span></em>, <em class="sig-param"><span class="n">thermal</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">loadcurve</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">daily_consumption</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">supply_temperature</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">occupancy</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.domestic_hot_water.DomesticHotWater" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pycity_base.classes.demand.load.Load" title="pycity_base.classes.demand.load.Load"><code class="xref py py-class docutils literal notranslate"><span class="pre">pycity_base.classes.demand.load.Load</span></code></a></p>
 <p>Implementation of the domestic hot water (DHW) object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>kind</strong></dt><dd></dd>
+<dt><strong>water</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
 <p class="rubric">Methods</p>
-<dl class="attribute">
-<dt id="pycity_base.classes.demand.DomesticHotWater.DomesticHotWater.a42">
-<code class="descname">a42</code><em class="property"> = []</em><a class="headerlink" href="#pycity_base.classes.demand.DomesticHotWater.DomesticHotWater.a42" title="Permalink to this definition">¶</a></dt>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pycity_base.classes.demand.domestic_hot_water.DomesticHotWater.get_power" title="pycity_base.classes.demand.domestic_hot_water.DomesticHotWater.get_power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_power</span></code></a>([currentValues, returnTemperature])</p></td>
+<td><p>Get the domestic hot water power curve (and the required flow temperature).</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py attribute">
+<dt id="pycity_base.classes.demand.domestic_hot_water.DomesticHotWater.a42">
+<code class="sig-name descname">a42</code><em class="property"> = []</em><a class="headerlink" href="#pycity_base.classes.demand.domestic_hot_water.DomesticHotWater.a42" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="pycity_base.classes.demand.DomesticHotWater.DomesticHotWater.dhw_sto_profiles">
-<code class="descname">dhw_sto_profiles</code><em class="property"> = {}</em><a class="headerlink" href="#pycity_base.classes.demand.DomesticHotWater.DomesticHotWater.dhw_sto_profiles" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt id="pycity_base.classes.demand.domestic_hot_water.DomesticHotWater.dhw_sto_profiles">
+<code class="sig-name descname">dhw_sto_profiles</code><em class="property"> = {}</em><a class="headerlink" href="#pycity_base.classes.demand.domestic_hot_water.DomesticHotWater.dhw_sto_profiles" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.classes.demand.DomesticHotWater.DomesticHotWater.get_power">
-<code class="descname">get_power</code><span class="sig-paren">(</span><em>currentValues=True</em>, <em>returnTemperature=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.DomesticHotWater.DomesticHotWater.get_power" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.classes.demand.domestic_hot_water.DomesticHotWater.get_power">
+<code class="sig-name descname">get_power</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">currentValues</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">returnTemperature</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.domestic_hot_water.DomesticHotWater.get_power" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the domestic hot water power curve
 (and the required flow temperature).</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>currentValues</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – Return only current values (True) or the entire load (False)
-(default: True)</li>
-<li><strong>returnTemperature</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – Also return the required flow temperature (True)
-(default: True)</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>currentValues</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – Return only current values (True) or the entire load (False)
+(default: True)</p></li>
+<li><p><strong>returnTemperature</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – Also return the required flow temperature (True)
+(default: True)</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
-<li><em>If returnTemperature is True</em></li>
-<li><strong>result_tuple</strong> (<em>tuple (load, tFlow)</em>) – Result tuple with thermal power curve and return temperature curve</li>
-<li><em>else (returnTemperature is False)</em></li>
-<li><strong>load</strong> (<em>np.array</em>) – Thermal hot water power curve</li>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>If returnTemperature is True</em></p></li>
+<li><p><strong>result_tuple</strong> (<em>tuple (load, t_flow)</em>) – Result tuple with thermal power curve and return temperature curve</p></li>
+<li><p><em>else (returnTemperature is False)</em></p></li>
+<li><p><strong>load</strong> (<em>np.array</em>) – Thermal hot water power curve</p></li>
 </ul>
 </p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="pycity_base.classes.demand.DomesticHotWater.DomesticHotWater.loaded_dhw_sto">
-<code class="descname">loaded_dhw_sto</code><em class="property"> = False</em><a class="headerlink" href="#pycity_base.classes.demand.DomesticHotWater.DomesticHotWater.loaded_dhw_sto" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.classes.demand.domestic_hot_water.DomesticHotWater.kind">
+<em class="property">property </em><code class="sig-name descname">kind</code><a class="headerlink" href="#pycity_base.classes.demand.domestic_hot_water.DomesticHotWater.kind" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="pycity_base.classes.demand.DomesticHotWater.DomesticHotWater.loaded_profile">
-<code class="descname">loaded_profile</code><em class="property"> = False</em><a class="headerlink" href="#pycity_base.classes.demand.DomesticHotWater.DomesticHotWater.loaded_profile" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt id="pycity_base.classes.demand.domestic_hot_water.DomesticHotWater.loaded_dhw_sto">
+<code class="sig-name descname">loaded_dhw_sto</code><em class="property"> = False</em><a class="headerlink" href="#pycity_base.classes.demand.domestic_hot_water.DomesticHotWater.loaded_dhw_sto" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="pycity_base.classes.demand.domestic_hot_water.DomesticHotWater.loaded_profile">
+<code class="sig-name descname">loaded_profile</code><em class="property"> = False</em><a class="headerlink" href="#pycity_base.classes.demand.domestic_hot_water.DomesticHotWater.loaded_profile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="pycity_base.classes.demand.domestic_hot_water.DomesticHotWater.water">
+<code class="sig-name descname">water</code><em class="property"> = None</em><a class="headerlink" href="#pycity_base.classes.demand.domestic_hot_water.DomesticHotWater.water" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 </div>
-<div class="section" id="module-pycity_base.classes.demand.ElectricalDemand">
-<span id="pycity-base-classes-demand-electricaldemand-module"></span><h2>pycity_base.classes.demand.ElectricalDemand module<a class="headerlink" href="#module-pycity_base.classes.demand.ElectricalDemand" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-pycity_base.classes.demand.electrical_demand">
+<span id="pycity-base-classes-demand-electrical-demand-module"></span><h2>pycity_base.classes.demand.electrical_demand module<a class="headerlink" href="#module-pycity_base.classes.demand.electrical_demand" title="Permalink to this headline">¶</a></h2>
 <p>Electrical demand class</p>
-<dl class="class">
-<dt id="pycity_base.classes.demand.ElectricalDemand.ElectricalDemand">
-<em class="property">class </em><code class="descclassname">pycity_base.classes.demand.ElectricalDemand.</code><code class="descname">ElectricalDemand</code><span class="sig-paren">(</span><em>environment</em>, <em>method=0</em>, <em>loadcurve=[]</em>, <em>annualDemand=None</em>, <em>profileType='H0'</em>, <em>singleFamilyHouse=True</em>, <em>total_nb_occupants=0</em>, <em>randomizeAppliances=True</em>, <em>lightConfiguration=0</em>, <em>occupancy=[]</em>, <em>do_normalization=False</em>, <em>method_3_type=None</em>, <em>method_4_type=None</em>, <em>prev_heat_dev=False</em>, <em>app_filename=None</em>, <em>light_filename=None</em>, <em>season_light_mod=False</em>, <em>light_mod_fac=0.25</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.ElectricalDemand.ElectricalDemand" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#pycity_base.classes.demand.Load.Load" title="pycity_base.classes.demand.Load.Load"><code class="xref py py-class docutils literal notranslate"><span class="pre">pycity_base.classes.demand.Load.Load</span></code></a></p>
+<dl class="py class">
+<dt id="pycity_base.classes.demand.electrical_demand.ElectricalDemand">
+<em class="property">class </em><code class="sig-prename descclassname">pycity_base.classes.demand.electrical_demand.</code><code class="sig-name descname">ElectricalDemand</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">environment</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">loadcurve</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">annual_demand</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">profile_type</span><span class="o">=</span><span class="default_value">'H0'</span></em>, <em class="sig-param"><span class="n">single_family_house</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">total_nb_occupants</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">randomize_appliances</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">light_configuration</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">occupancy</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">do_normalization</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">method_3_type</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">method_4_type</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">prev_heat_dev</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">app_filename</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">light_filename</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">season_light_mod</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">light_mod_fac</span><span class="o">=</span><span class="default_value">0.25</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.electrical_demand.ElectricalDemand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pycity_base.classes.demand.load.Load" title="pycity_base.classes.demand.load.Load"><code class="xref py py-class docutils literal notranslate"><span class="pre">pycity_base.classes.demand.load.Load</span></code></a></p>
 <p>Implementation of the electrical demand object</p>
-<p class="rubric">Attributes</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="60%" />
-<col width="40%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><strong>ann_data</strong></td>
-<td>&#160;</td>
-</tr>
-<tr class="row-even"><td><strong>weekly_data</strong></td>
-<td>&#160;</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>ann_data</strong></dt><dd></dd>
+<dt><strong>kind</strong></dt><dd></dd>
+<dt><strong>weekly_data</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
 <p class="rubric">Methods</p>
-<dl class="attribute">
-<dt id="pycity_base.classes.demand.ElectricalDemand.ElectricalDemand.ann_data">
-<code class="descname">ann_data</code><em class="property"> = None</em><a class="headerlink" href="#pycity_base.classes.demand.ElectricalDemand.ElectricalDemand.ann_data" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="pycity_base.classes.demand.ElectricalDemand.ElectricalDemand.get_power">
-<code class="descname">get_power</code><span class="sig-paren">(</span><em>currentValues=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.ElectricalDemand.ElectricalDemand.get_power" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return electrical power curve</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>currentValues</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Return only current values (True) or the entire load (False)
-(default: True)</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>loadcurve</strong> – Electrical power curve</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">np.array</td>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pycity_base.classes.demand.electrical_demand.ElectricalDemand.get_power" title="pycity_base.classes.demand.electrical_demand.ElectricalDemand.get_power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_power</span></code></a>([currentValues])</p></td>
+<td><p>Return electrical power curve</p></td>
 </tr>
 </tbody>
 </table>
+<dl class="py attribute">
+<dt id="pycity_base.classes.demand.electrical_demand.ElectricalDemand.ann_data">
+<code class="sig-name descname">ann_data</code><em class="property"> = None</em><a class="headerlink" href="#pycity_base.classes.demand.electrical_demand.ElectricalDemand.ann_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="pycity_base.classes.demand.electrical_demand.ElectricalDemand.get_power">
+<code class="sig-name descname">get_power</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">currentValues</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.electrical_demand.ElectricalDemand.get_power" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return electrical power curve</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>currentValues</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – Return only current values (True) or the entire load (False)
+(default: True)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>loadcurve</strong> – Electrical power curve</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="pycity_base.classes.demand.ElectricalDemand.ElectricalDemand.load_ann_data">
-<code class="descname">load_ann_data</code><em class="property"> = False</em><a class="headerlink" href="#pycity_base.classes.demand.ElectricalDemand.ElectricalDemand.load_ann_data" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.classes.demand.electrical_demand.ElectricalDemand.kind">
+<em class="property">property </em><code class="sig-name descname">kind</code><a class="headerlink" href="#pycity_base.classes.demand.electrical_demand.ElectricalDemand.kind" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="pycity_base.classes.demand.ElectricalDemand.ElectricalDemand.loaded_slp">
-<code class="descname">loaded_slp</code><em class="property"> = False</em><a class="headerlink" href="#pycity_base.classes.demand.ElectricalDemand.ElectricalDemand.loaded_slp" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt id="pycity_base.classes.demand.electrical_demand.ElectricalDemand.load_ann_data">
+<code class="sig-name descname">load_ann_data</code><em class="property"> = False</em><a class="headerlink" href="#pycity_base.classes.demand.electrical_demand.ElectricalDemand.load_ann_data" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="pycity_base.classes.demand.ElectricalDemand.ElectricalDemand.loaded_weekly_data">
-<code class="descname">loaded_weekly_data</code><em class="property"> = False</em><a class="headerlink" href="#pycity_base.classes.demand.ElectricalDemand.ElectricalDemand.loaded_weekly_data" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt id="pycity_base.classes.demand.electrical_demand.ElectricalDemand.loaded_slp">
+<code class="sig-name descname">loaded_slp</code><em class="property"> = False</em><a class="headerlink" href="#pycity_base.classes.demand.electrical_demand.ElectricalDemand.loaded_slp" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="pycity_base.classes.demand.ElectricalDemand.ElectricalDemand.slp">
-<code class="descname">slp</code><em class="property"> = []</em><a class="headerlink" href="#pycity_base.classes.demand.ElectricalDemand.ElectricalDemand.slp" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt id="pycity_base.classes.demand.electrical_demand.ElectricalDemand.loaded_weekly_data">
+<code class="sig-name descname">loaded_weekly_data</code><em class="property"> = False</em><a class="headerlink" href="#pycity_base.classes.demand.electrical_demand.ElectricalDemand.loaded_weekly_data" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="pycity_base.classes.demand.ElectricalDemand.ElectricalDemand.standard_consumption">
-<code class="descname">standard_consumption</code><em class="property"> = {'MFH': {1: 1500, 2: 2200, 3: 3000, 4: 3400, 5: 4100}, 'SFH': {1: 2700, 2: 3200, 3: 4000, 4: 4400, 5: 5500}}</em><a class="headerlink" href="#pycity_base.classes.demand.ElectricalDemand.ElectricalDemand.standard_consumption" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt id="pycity_base.classes.demand.electrical_demand.ElectricalDemand.slp">
+<code class="sig-name descname">slp</code><em class="property"> = []</em><a class="headerlink" href="#pycity_base.classes.demand.electrical_demand.ElectricalDemand.slp" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="pycity_base.classes.demand.ElectricalDemand.ElectricalDemand.weekly_data">
-<code class="descname">weekly_data</code><em class="property"> = None</em><a class="headerlink" href="#pycity_base.classes.demand.ElectricalDemand.ElectricalDemand.weekly_data" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt id="pycity_base.classes.demand.electrical_demand.ElectricalDemand.standard_consumption">
+<code class="sig-name descname">standard_consumption</code><em class="property"> = {'MFH': {1: 1500, 2: 2200, 3: 3000, 4: 3400, 5: 4100}, 'SFH': {1: 2700, 2: 3200, 3: 4000, 4: 4400, 5: 5500}}</em><a class="headerlink" href="#pycity_base.classes.demand.electrical_demand.ElectricalDemand.standard_consumption" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="pycity_base.classes.demand.electrical_demand.ElectricalDemand.weekly_data">
+<code class="sig-name descname">weekly_data</code><em class="property"> = None</em><a class="headerlink" href="#pycity_base.classes.demand.electrical_demand.ElectricalDemand.weekly_data" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 </div>
-<div class="section" id="module-pycity_base.classes.demand.Load">
-<span id="pycity-base-classes-demand-load-module"></span><h2>pycity_base.classes.demand.Load module<a class="headerlink" href="#module-pycity_base.classes.demand.Load" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-pycity_base.classes.demand.load">
+<span id="pycity-base-classes-demand-load-module"></span><h2>pycity_base.classes.demand.load module<a class="headerlink" href="#module-pycity_base.classes.demand.load" title="Permalink to this headline">¶</a></h2>
 <p>Created on Sat Feb 07 07:09:12 2015</p>
-<p>&#64;author: Thomas</p>
-<dl class="class">
-<dt id="pycity_base.classes.demand.Load.Load">
-<em class="property">class </em><code class="descclassname">pycity_base.classes.demand.Load.</code><code class="descname">Load</code><span class="sig-paren">(</span><em>environment</em>, <em>loadcurve</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.Load.Load" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>&#64;author: tsz</p>
+<dl class="py class">
+<dt id="pycity_base.classes.demand.load.Load">
+<em class="property">class </em><code class="sig-prename descclassname">pycity_base.classes.demand.load.</code><code class="sig-name descname">Load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">environment</span></em>, <em class="sig-param"><span class="n">loadcurve</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.load.Load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>This class holds a load curve and is able to return it or parts of it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>kind</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="pycity_base.classes.demand.load.Load.kind">
+<em class="property">property </em><code class="sig-name descname">kind</code><a class="headerlink" href="#pycity_base.classes.demand.load.Load.kind" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </div>
-<div class="section" id="module-pycity_base.classes.demand.Occupancy">
-<span id="pycity-base-classes-demand-occupancy-module"></span><h2>pycity_base.classes.demand.Occupancy module<a class="headerlink" href="#module-pycity_base.classes.demand.Occupancy" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-pycity_base.classes.demand.occupancy">
+<span id="pycity-base-classes-demand-occupancy-module"></span><h2>pycity_base.classes.demand.occupancy module<a class="headerlink" href="#module-pycity_base.classes.demand.occupancy" title="Permalink to this headline">¶</a></h2>
 <p>Occupancy class. Holds information about number of occupants and their
 occupancy profile.</p>
-<dl class="class">
-<dt id="pycity_base.classes.demand.Occupancy.Occupancy">
-<em class="property">class </em><code class="descclassname">pycity_base.classes.demand.Occupancy.</code><code class="descname">Occupancy</code><span class="sig-paren">(</span><em>environment</em>, <em>number_occupants</em>, <em>initial_day=1</em>, <em>nb_days=365</em>, <em>do_profile=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.Occupancy.Occupancy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py class">
+<dt id="pycity_base.classes.demand.occupancy.Occupancy">
+<em class="property">class </em><code class="sig-prename descclassname">pycity_base.classes.demand.occupancy.</code><code class="sig-name descname">Occupancy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">environment</span></em>, <em class="sig-param"><span class="n">number_occupants</span></em>, <em class="sig-param"><span class="n">initial_day</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">nb_days</span><span class="o">=</span><span class="default_value">365</span></em>, <em class="sig-param"><span class="n">do_profile</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.occupancy.Occupancy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>kind</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
 <p class="rubric">Methods</p>
-<dl class="method">
-<dt id="pycity_base.classes.demand.Occupancy.Occupancy.get_occ_profile_in_curr_timestep">
-<code class="descname">get_occ_profile_in_curr_timestep</code><span class="sig-paren">(</span><em>timestep=None</em>, <em>int_con=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.Occupancy.Occupancy.get_occ_profile_in_curr_timestep" title="Permalink to this definition">¶</a></dt>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pycity_base.classes.demand.occupancy.Occupancy.get_occ_profile_in_curr_timestep" title="pycity_base.classes.demand.occupancy.Occupancy.get_occ_profile_in_curr_timestep"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_occ_profile_in_curr_timestep</span></code></a>([timestep, …])</p></td>
+<td><p>Returns occupancy profile in current timestep (as occupancy profile is saved with 600 seconds timestep, per default)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="pycity_base.classes.demand.occupancy.Occupancy.get_occ_profile_in_curr_timestep">
+<code class="sig-name descname">get_occ_profile_in_curr_timestep</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">timestep</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">int_con</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.occupancy.Occupancy.get_occ_profile_in_curr_timestep" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns occupancy profile in current timestep (as occupancy profile
 is saved with 600 seconds timestep, per default)</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>timestep</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) – Defines specific timestep to return occupancy profile in
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>timestep</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>optional</em>) – Defines specific timestep to return occupancy profile in
 (default: None). If None is chosen, returns profile with
-timestep found in environment.timer</li>
-<li><strong>int_con</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Defines, if output values should be converted into integer
+timestep found in environment.timer</p></li>
+<li><p><strong>int_con</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – Defines, if output values should be converted into integer
 numbers (conversion might lead to float numbers, depending
-on chosen timesteps) (default: False)</li>
+on chosen timesteps) (default: False)</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>occ_profile</strong> – Numpy array holding number of persons, present within
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>occ_profile</strong> – Numpy array holding number of persons, present within
 zone</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">np.array</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
 </dd></dl>
+
+<dl class="py method">
+<dt id="pycity_base.classes.demand.occupancy.Occupancy.kind">
+<em class="property">property </em><code class="sig-name descname">kind</code><a class="headerlink" href="#pycity_base.classes.demand.occupancy.Occupancy.kind" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
 </div>
-<div class="section" id="module-pycity_base.classes.demand.Room">
-<span id="pycity-base-classes-demand-room-module"></span><h2>pycity_base.classes.demand.Room module<a class="headerlink" href="#module-pycity_base.classes.demand.Room" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pycity_base.classes.demand.Room.Room">
-<em class="property">class </em><code class="descclassname">pycity_base.classes.demand.Room.</code><code class="descname">Room</code><span class="sig-paren">(</span><em>environment</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.Room.Room" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<div class="section" id="module-pycity_base.classes.demand.room">
+<span id="pycity-base-classes-demand-room-module"></span><h2>pycity_base.classes.demand.room module<a class="headerlink" href="#module-pycity_base.classes.demand.room" title="Permalink to this headline">¶</a></h2>
+<p>Room class.</p>
+<dl class="py class">
+<dt id="pycity_base.classes.demand.room.Room">
+<em class="property">class </em><code class="sig-prename descclassname">pycity_base.classes.demand.room.</code><code class="sig-name descname">Room</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">environment</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.room.Room" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>kind</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="pycity_base.classes.demand.room.Room.kind">
+<em class="property">property </em><code class="sig-name descname">kind</code><a class="headerlink" href="#pycity_base.classes.demand.room.Room.kind" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </div>
-<div class="section" id="module-pycity_base.classes.demand.SpaceHeating">
-<span id="pycity-base-classes-demand-spaceheating-module"></span><h2>pycity_base.classes.demand.SpaceHeating module<a class="headerlink" href="#module-pycity_base.classes.demand.SpaceHeating" title="Permalink to this headline">¶</a></h2>
-<p>Created on Sat Feb 14 09:12:35 2015</p>
-<p>&#64;author: Thomas</p>
-<dl class="class">
-<dt id="pycity_base.classes.demand.SpaceHeating.SpaceHeating">
-<em class="property">class </em><code class="descclassname">pycity_base.classes.demand.SpaceHeating.</code><code class="descname">SpaceHeating</code><span class="sig-paren">(</span><em>environment</em>, <em>method=0</em>, <em>loadcurve=[]</em>, <em>livingArea=0</em>, <em>specificDemand=0</em>, <em>profile_type='HEF'</em>, <em>zoneParameters=None</em>, <em>T_m_init=None</em>, <em>ventilation=0</em>, <em>TCoolingSet=200</em>, <em>THeatingSet=-50</em>, <em>occupancy=0</em>, <em>appliances=0</em>, <em>lighting=0</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.SpaceHeating.SpaceHeating" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#pycity_base.classes.demand.Load.Load" title="pycity_base.classes.demand.Load.Load"><code class="xref py py-class docutils literal notranslate"><span class="pre">pycity_base.classes.demand.Load.Load</span></code></a></p>
-<p>Implementation of the space heating object</p>
-<p class="rubric">Attributes</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="63%" />
-<col width="37%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><strong>sim_prof_data</strong></td>
-<td>&#160;</td>
-</tr>
-</tbody>
-</table>
+<div class="section" id="module-pycity_base.classes.demand.space_cooling">
+<span id="pycity-base-classes-demand-space-cooling-module"></span><h2>pycity_base.classes.demand.space_cooling module<a class="headerlink" href="#module-pycity_base.classes.demand.space_cooling" title="Permalink to this headline">¶</a></h2>
+<p>Created on Thu Jul 09 08:42:07 2020</p>
+<p>&#64;author: ssw</p>
+<dl class="py class">
+<dt id="pycity_base.classes.demand.space_cooling.SpaceCooling">
+<em class="property">class </em><code class="sig-prename descclassname">pycity_base.classes.demand.space_cooling.</code><code class="sig-name descname">SpaceCooling</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">environment</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">loadcurve</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">living_area</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">specific_demand</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">profile_type</span><span class="o">=</span><span class="default_value">'HEF'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.space_cooling.SpaceCooling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pycity_base.classes.demand.load.Load" title="pycity_base.classes.demand.load.Load"><code class="xref py py-class docutils literal notranslate"><span class="pre">pycity_base.classes.demand.load.Load</span></code></a></p>
+<p>Implementation of the space cooling object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>kind</strong></dt><dd></dd>
+<dt><strong>sim_prof_data</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
 <p class="rubric">Methods</p>
-<dl class="method">
-<dt id="pycity_base.classes.demand.SpaceHeating.SpaceHeating.get_power">
-<code class="descname">get_power</code><span class="sig-paren">(</span><em>currentValues=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.SpaceHeating.SpaceHeating.get_power" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return space heating power curve</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>currentValues</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Return only current values (True) or the entire load (False)
-(default: True)</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>loadcurve</strong> – Power curve of space heating</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">np.array</td>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pycity_base.classes.demand.space_cooling.SpaceCooling.get_power" title="pycity_base.classes.demand.space_cooling.SpaceCooling.get_power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_power</span></code></a>([currentValues])</p></td>
+<td><p>Return space cooling power curve</p></td>
 </tr>
 </tbody>
 </table>
+<dl class="py method">
+<dt id="pycity_base.classes.demand.space_cooling.SpaceCooling.get_power">
+<code class="sig-name descname">get_power</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">currentValues</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.space_cooling.SpaceCooling.get_power" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return space cooling power curve</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>currentValues</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – Return only current values (True) or the entire load (False)
+(default: True)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>loadcurve</strong> – Power curve of space cooling</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="pycity_base.classes.demand.SpaceHeating.SpaceHeating.loaded_sim_profile">
-<code class="descname">loaded_sim_profile</code><em class="property"> = False</em><a class="headerlink" href="#pycity_base.classes.demand.SpaceHeating.SpaceHeating.loaded_sim_profile" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.classes.demand.space_cooling.SpaceCooling.kind">
+<em class="property">property </em><code class="sig-name descname">kind</code><a class="headerlink" href="#pycity_base.classes.demand.space_cooling.SpaceCooling.kind" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="pycity_base.classes.demand.SpaceHeating.SpaceHeating.loaded_slp">
-<code class="descname">loaded_slp</code><em class="property"> = False</em><a class="headerlink" href="#pycity_base.classes.demand.SpaceHeating.SpaceHeating.loaded_slp" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt id="pycity_base.classes.demand.space_cooling.SpaceCooling.loaded_sim_profile">
+<code class="sig-name descname">loaded_sim_profile</code><em class="property"> = False</em><a class="headerlink" href="#pycity_base.classes.demand.space_cooling.SpaceCooling.loaded_sim_profile" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="pycity_base.classes.demand.SpaceHeating.SpaceHeating.sim_prof_data">
-<code class="descname">sim_prof_data</code><em class="property"> = None</em><a class="headerlink" href="#pycity_base.classes.demand.SpaceHeating.SpaceHeating.sim_prof_data" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt id="pycity_base.classes.demand.space_cooling.SpaceCooling.loaded_slp">
+<code class="sig-name descname">loaded_slp</code><em class="property"> = False</em><a class="headerlink" href="#pycity_base.classes.demand.space_cooling.SpaceCooling.loaded_slp" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="pycity_base.classes.demand.SpaceHeating.SpaceHeating.slp_hour">
-<code class="descname">slp_hour</code><em class="property"> = []</em><a class="headerlink" href="#pycity_base.classes.demand.SpaceHeating.SpaceHeating.slp_hour" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt id="pycity_base.classes.demand.space_cooling.SpaceCooling.sim_prof_data">
+<code class="sig-name descname">sim_prof_data</code><em class="property"> = None</em><a class="headerlink" href="#pycity_base.classes.demand.space_cooling.SpaceCooling.sim_prof_data" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="pycity_base.classes.demand.SpaceHeating.SpaceHeating.slp_prof">
-<code class="descname">slp_prof</code><em class="property"> = []</em><a class="headerlink" href="#pycity_base.classes.demand.SpaceHeating.SpaceHeating.slp_prof" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt id="pycity_base.classes.demand.space_cooling.SpaceCooling.slp_hour">
+<code class="sig-name descname">slp_hour</code><em class="property"> = []</em><a class="headerlink" href="#pycity_base.classes.demand.space_cooling.SpaceCooling.slp_hour" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="pycity_base.classes.demand.SpaceHeating.SpaceHeating.slp_week">
-<code class="descname">slp_week</code><em class="property"> = []</em><a class="headerlink" href="#pycity_base.classes.demand.SpaceHeating.SpaceHeating.slp_week" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt id="pycity_base.classes.demand.space_cooling.SpaceCooling.slp_prof">
+<code class="sig-name descname">slp_prof</code><em class="property"> = []</em><a class="headerlink" href="#pycity_base.classes.demand.space_cooling.SpaceCooling.slp_prof" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="pycity_base.classes.demand.space_cooling.SpaceCooling.slp_week">
+<code class="sig-name descname">slp_week</code><em class="property"> = []</em><a class="headerlink" href="#pycity_base.classes.demand.space_cooling.SpaceCooling.slp_week" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 </div>
-<div class="section" id="module-pycity_base.classes.demand.ZoneInputs">
-<span id="pycity-base-classes-demand-zoneinputs-module"></span><h2>pycity_base.classes.demand.ZoneInputs module<a class="headerlink" href="#module-pycity_base.classes.demand.ZoneInputs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-pycity_base.classes.demand.space_heating">
+<span id="pycity-base-classes-demand-space-heating-module"></span><h2>pycity_base.classes.demand.space_heating module<a class="headerlink" href="#module-pycity_base.classes.demand.space_heating" title="Permalink to this headline">¶</a></h2>
+<p>Created on Sat Feb 14 09:12:35 2015</p>
+<p>&#64;author: tsz</p>
+<dl class="py class">
+<dt id="pycity_base.classes.demand.space_heating.SpaceHeating">
+<em class="property">class </em><code class="sig-prename descclassname">pycity_base.classes.demand.space_heating.</code><code class="sig-name descname">SpaceHeating</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">environment</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">loadcurve</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">living_area</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">specific_demand</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">profile_type</span><span class="o">=</span><span class="default_value">'HEF'</span></em>, <em class="sig-param"><span class="n">zone_parameters</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">t_m_init</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ventilation</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">t_cooling_set</span><span class="o">=</span><span class="default_value">200</span></em>, <em class="sig-param"><span class="n">t_heating_set</span><span class="o">=</span><span class="default_value">- 50</span></em>, <em class="sig-param"><span class="n">occupancy</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">appliances</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">lighting</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.space_heating.SpaceHeating" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pycity_base.classes.demand.load.Load" title="pycity_base.classes.demand.load.Load"><code class="xref py py-class docutils literal notranslate"><span class="pre">pycity_base.classes.demand.load.Load</span></code></a></p>
+<p>Implementation of the space heating object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>kind</strong></dt><dd></dd>
+<dt><strong>sim_prof_data</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pycity_base.classes.demand.space_heating.SpaceHeating.get_power" title="pycity_base.classes.demand.space_heating.SpaceHeating.get_power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_power</span></code></a>([currentValues])</p></td>
+<td><p>Return space heating power curve</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="pycity_base.classes.demand.space_heating.SpaceHeating.get_power">
+<code class="sig-name descname">get_power</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">currentValues</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.space_heating.SpaceHeating.get_power" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return space heating power curve</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>currentValues</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – Return only current values (True) or the entire load (False)
+(default: True)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>loadcurve</strong> – Power curve of space heating</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pycity_base.classes.demand.space_heating.SpaceHeating.kind">
+<em class="property">property </em><code class="sig-name descname">kind</code><a class="headerlink" href="#pycity_base.classes.demand.space_heating.SpaceHeating.kind" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="pycity_base.classes.demand.space_heating.SpaceHeating.loaded_sim_profile">
+<code class="sig-name descname">loaded_sim_profile</code><em class="property"> = False</em><a class="headerlink" href="#pycity_base.classes.demand.space_heating.SpaceHeating.loaded_sim_profile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="pycity_base.classes.demand.space_heating.SpaceHeating.loaded_slp">
+<code class="sig-name descname">loaded_slp</code><em class="property"> = False</em><a class="headerlink" href="#pycity_base.classes.demand.space_heating.SpaceHeating.loaded_slp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="pycity_base.classes.demand.space_heating.SpaceHeating.sim_prof_data">
+<code class="sig-name descname">sim_prof_data</code><em class="property"> = None</em><a class="headerlink" href="#pycity_base.classes.demand.space_heating.SpaceHeating.sim_prof_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="pycity_base.classes.demand.space_heating.SpaceHeating.slp_hour">
+<code class="sig-name descname">slp_hour</code><em class="property"> = []</em><a class="headerlink" href="#pycity_base.classes.demand.space_heating.SpaceHeating.slp_hour" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="pycity_base.classes.demand.space_heating.SpaceHeating.slp_prof">
+<code class="sig-name descname">slp_prof</code><em class="property"> = []</em><a class="headerlink" href="#pycity_base.classes.demand.space_heating.SpaceHeating.slp_prof" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="pycity_base.classes.demand.space_heating.SpaceHeating.slp_week">
+<code class="sig-name descname">slp_week</code><em class="property"> = []</em><a class="headerlink" href="#pycity_base.classes.demand.space_heating.SpaceHeating.slp_week" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.classes.demand.zone_inputs">
+<span id="pycity-base-classes-demand-zone-inputs-module"></span><h2>pycity_base.classes.demand.zone_inputs module<a class="headerlink" href="#module-pycity_base.classes.demand.zone_inputs" title="Permalink to this headline">¶</a></h2>
 <p>Created on Fri Mar 27 09:27:39 2015</p>
 <p>&#64;author: tsz</p>
-<dl class="class">
-<dt id="pycity_base.classes.demand.ZoneInputs.ZoneInputs">
-<em class="property">class </em><code class="descclassname">pycity_base.classes.demand.ZoneInputs.</code><code class="descname">ZoneInputs</code><span class="sig-paren">(</span><em>environment</em>, <em>zoneParameters=None</em>, <em>T_m_init=20</em>, <em>ventilation=0</em>, <em>occupancy=0</em>, <em>appliances=0</em>, <em>lighting=0</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.ZoneInputs.ZoneInputs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py class">
+<dt id="pycity_base.classes.demand.zone_inputs.ZoneInputs">
+<em class="property">class </em><code class="sig-prename descclassname">pycity_base.classes.demand.zone_inputs.</code><code class="sig-name descname">ZoneInputs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">environment</span></em>, <em class="sig-param"><span class="n">zone_parameters</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">t_m_init</span><span class="o">=</span><span class="default_value">20</span></em>, <em class="sig-param"><span class="n">ventilation</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">occupancy</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">appliances</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">lighting</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.zone_inputs.ZoneInputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>kind</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
 <p class="rubric">Methods</p>
-<dl class="method">
-<dt id="pycity_base.classes.demand.ZoneInputs.ZoneInputs.getInternalGains">
-<code class="descname">getInternalGains</code><span class="sig-paren">(</span><em>occupancy=0</em>, <em>appliances=0</em>, <em>lighting=0</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.ZoneInputs.ZoneInputs.getInternalGains" title="Permalink to this definition">¶</a></dt>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pycity_base.classes.demand.zone_inputs.ZoneInputs.getInternalGains" title="pycity_base.classes.demand.zone_inputs.ZoneInputs.getInternalGains"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getInternalGains</span></code></a>([occupancy, appliances, …])</p></td>
+<td><p>Computation of Phi_int.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pycity_base.classes.demand.zone_inputs.ZoneInputs.getSolarGains" title="pycity_base.classes.demand.zone_inputs.ZoneInputs.getSolarGains"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getSolarGains</span></code></a>()</p></td>
+<td><p>Set the solar gains for the upcoming scheduling period.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="pycity_base.classes.demand.zone_inputs.ZoneInputs.getInternalGains">
+<code class="sig-name descname">getInternalGains</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">occupancy</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">appliances</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">lighting</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.zone_inputs.ZoneInputs.getInternalGains" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computation of Phi_int.</p>
 <p>Based on DIN EN ISO 13790, equation 36, section 10.2.
 Confirm pages 60, ff.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>occupancy</strong> (<em>array_like</em>) – Number of active people at each time step (no unit).
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>occupancy</strong> (<em>array-like</em>) – Number of active people at each time step (no unit).
 According to DIN EN ISO 8996, table A.2 (page 21), this number is
-multiplied by 115 Watt/person.</li>
-<li><strong>appliances</strong> (<em>array_like</em>) – Aggregated electricity consumption of all electrical appliances in
-this zone in Watt.</li>
-<li><strong>lighting</strong> (<em>array_like</em>) – Aggregated electricity consumption of all installed lights in Watt.</li>
+multiplied by 115 Watt/person.</p></li>
+<li><p><strong>appliances</strong> (<em>array-like</em>) – Aggregated electricity consumption of all electrical appliances in
+this zone in Watt.</p></li>
+<li><p><strong>lighting</strong> (<em>array-like</em>) – Aggregated electricity consumption of all installed lights in Watt.</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.classes.demand.ZoneInputs.ZoneInputs.getSolarGains">
-<code class="descname">getSolarGains</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.ZoneInputs.ZoneInputs.getSolarGains" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.classes.demand.zone_inputs.ZoneInputs.getSolarGains">
+<code class="sig-name descname">getSolarGains</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.zone_inputs.ZoneInputs.getSolarGains" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the solar gains for the upcoming scheduling period.</p>
 </dd></dl>
+
+<dl class="py method">
+<dt id="pycity_base.classes.demand.zone_inputs.ZoneInputs.kind">
+<em class="property">property </em><code class="sig-name descname">kind</code><a class="headerlink" href="#pycity_base.classes.demand.zone_inputs.ZoneInputs.kind" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
 </div>
-<div class="section" id="module-pycity_base.classes.demand.ZoneParameters">
-<span id="pycity-base-classes-demand-zoneparameters-module"></span><h2>pycity_base.classes.demand.ZoneParameters module<a class="headerlink" href="#module-pycity_base.classes.demand.ZoneParameters" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-pycity_base.classes.demand.zone_parameters">
+<span id="pycity-base-classes-demand-zone-parameters-module"></span><h2>pycity_base.classes.demand.zone_parameters module<a class="headerlink" href="#module-pycity_base.classes.demand.zone_parameters" title="Permalink to this headline">¶</a></h2>
 <p>Created on Tue Mar 24 21:22:29 2015</p>
-<p>&#64;author: Thomas</p>
+<p>&#64;author: tsz</p>
 <p>Inputs:
-A_f (section 6.4) - used area in m2</p>
-<dl class="class">
-<dt id="pycity_base.classes.demand.ZoneParameters.ZoneParameters">
-<em class="property">class </em><code class="descclassname">pycity_base.classes.demand.ZoneParameters.</code><code class="descname">ZoneParameters</code><span class="sig-paren">(</span><em>A_f=0, A_w=[], U_w=[], g_gln=[], epsilon_w=[], R_se_w=0.04, A_op=[], U_op=[], alpha_Sc=[], R_se_op=0.04, epsilon_op=0, V=0, samplingRate=3600, buildingClass=0, kappa_j=[], A_j=[], simplifiedCapacity=True, albedo=0.2, gamma=[0, 90, 180, 270, 0, 0], beta=[90, 90, 90, 90, 0, 0]</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.ZoneParameters.ZoneParameters" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+A_f (section 6.4) - used area in m^2</p>
+<dl class="py class">
+<dt id="pycity_base.classes.demand.zone_parameters.ZoneParameters">
+<em class="property">class </em><code class="sig-prename descclassname">pycity_base.classes.demand.zone_parameters.</code><code class="sig-name descname">ZoneParameters</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">A_f</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">A_w</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">U_w</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">g_gln</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">epsilon_w</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">R_se_w</span><span class="o">=</span><span class="default_value">0.04</span></em>, <em class="sig-param"><span class="n">A_op</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">U_op</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">alpha_Sc</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">R_se_op</span><span class="o">=</span><span class="default_value">0.04</span></em>, <em class="sig-param"><span class="n">epsilon_op</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">V</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">sampling_rate</span><span class="o">=</span><span class="default_value">3600</span></em>, <em class="sig-param"><span class="n">building_class</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">kappa_j</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">A_j</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">simplified_capacity</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">albedo</span><span class="o">=</span><span class="default_value">0.2</span></em>, <em class="sig-param"><span class="n">gamma</span><span class="o">=</span><span class="default_value">[0, 90, 180, 270, 0, 0]</span></em>, <em class="sig-param"><span class="n">beta</span><span class="o">=</span><span class="default_value">[90, 90, 90, 90, 0, 0]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.zone_parameters.ZoneParameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>This class holds all relevant parameters of a single zone as described in
 DIN EN ISO 13790:2008 (German version of ISO 13790:2008).</p>
 <p>This class also provides a function to compute the resistance
 corresponding to ventilation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>kind</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
 <p class="rubric">Methods</p>
-<dl class="method">
-<dt id="pycity_base.classes.demand.ZoneParameters.ZoneParameters.updateVentilation">
-<code class="descname">updateVentilation</code><span class="sig-paren">(</span><em>ventilationRate</em>, <em>ventilationRateMinimum=0.5</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.ZoneParameters.ZoneParameters.updateVentilation" title="Permalink to this definition">¶</a></dt>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pycity_base.classes.demand.zone_parameters.ZoneParameters.updateVentilation" title="pycity_base.classes.demand.zone_parameters.ZoneParameters.updateVentilation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">updateVentilation</span></code></a>(ventilationRate[, …])</p></td>
+<td><p>Compute the heat transfer due to ventilation for the given ventilationRate.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="pycity_base.classes.demand.zone_parameters.ZoneParameters.kind">
+<em class="property">property </em><code class="sig-name descname">kind</code><a class="headerlink" href="#pycity_base.classes.demand.zone_parameters.ZoneParameters.kind" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="pycity_base.classes.demand.zone_parameters.ZoneParameters.updateVentilation">
+<code class="sig-name descname">updateVentilation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ventilationRate</span></em>, <em class="sig-param"><span class="n">ventilationRateMinimum</span><span class="o">=</span><span class="default_value">0.5</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.classes.demand.zone_parameters.ZoneParameters.updateVentilation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the heat transfer due to ventilation for the given
 ventilationRate.</p>
-<dl class="docutils">
-<dt>ventilationRate <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
-<dd>Infiltration due to window opening, etc.</dd>
-<dt>ventilationRateMinimum <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
-<dd>Minimum air exchange rate.</dd>
+<dl class="simple">
+<dt>ventilationRate<span class="classifier">array-like</span></dt><dd><p>Infiltration due to window opening, etc.</p>
+</dd>
+<dt>ventilationRateMinimum<span class="classifier">float, optional</span></dt><dd><p>Minimum air exchange rate.</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -648,6 +904,7 @@ ventilationRate.</p>
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -671,27 +928,33 @@ ventilationRate.</p>
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2018, Institute for Energy Efficient Buildings and Indoor Climate, Institute for Automation of Complex Power Systems, E.ON Energy Research Center, RWTH Aachen University.
+      &copy;2020, Institute for Energy Efficient Buildings and Indoor Climate, Institute for Automation of Complex Power Systems, E.ON Energy Research Center, RWTH Aachen University.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.9</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/pycity_base.classes.demand.rst.txt"

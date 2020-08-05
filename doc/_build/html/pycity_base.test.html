@@ -1,18 +1,18 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pycity_base.test package &#8212; pycity_base 0.1 documentation</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pycity_base.test package &#8212; pycity_base 0.3.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
    
@@ -27,6 +27,8 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
   <div class="section" id="pycity-base-test-package">
@@ -47,189 +49,198 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="pycity-base-test-all-test-execute-module">
-<h2>pycity_base.test.all_test_execute module<a class="headerlink" href="#pycity-base-test-all-test-execute-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-pycity_base.test.all_test_execute">
+<span id="pycity-base-test-all-test-execute-module"></span><h2>pycity_base.test.all_test_execute module<a class="headerlink" href="#module-pycity_base.test.all_test_execute" title="Permalink to this headline">¶</a></h2>
+<p>Script to run all pytests within name ‘test_xyz.py’ within test folder.</p>
 </div>
 <div class="section" id="module-pycity_base.test.pycity_fixtures">
 <span id="pycity-base-test-pycity-fixtures-module"></span><h2>pycity_base.test.pycity_fixtures module<a class="headerlink" href="#module-pycity_base.test.pycity_fixtures" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
+<dl class="py function">
 <dt id="pycity_base.test.pycity_fixtures.create_apartment">
-<code class="descclassname">pycity_base.test.pycity_fixtures.</code><code class="descname">create_apartment</code><span class="sig-paren">(</span><em>create_environment</em>, <em>create_demands</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.pycity_fixtures.create_apartment" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pycity_base.test.pycity_fixtures.</code><code class="sig-name descname">create_apartment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_environment</span></em>, <em class="sig-param"><span class="n">create_demands</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.pycity_fixtures.create_apartment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pytest fixture function to generate apartment object (with demands)</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>create_environment</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><em>object</em></a>) – Environment object (as fixture of pytest)</li>
-<li><strong>create_demands</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.7)"><em>tuple</em></a><em> (</em><em>of np.arrays</em><em>)</em>) – Tuple with demand arrays (heat_demand, el_demand, dhw_demand)</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>create_environment</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><em>object</em></a>) – Environment object (as fixture of pytest)</p></li>
+<li><p><strong>create_demands</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)"><em>tuple</em></a><em> (</em><em>of np.arrays</em><em>)</em>) – Tuple with demand arrays (heat_demand, el_demand, dhw_demand)</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>create_apartment</strong> – Apartment object</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)">object</a></p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>create_apartment</strong> – Apartment object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)">object</a></p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="pycity_base.test.pycity_fixtures.create_building">
-<code class="descclassname">pycity_base.test.pycity_fixtures.</code><code class="descname">create_building</code><span class="sig-paren">(</span><em>create_environment</em>, <em>create_apartment</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.pycity_fixtures.create_building" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pycity_base.test.pycity_fixtures.</code><code class="sig-name descname">create_building</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_environment</span></em>, <em class="sig-param"><span class="n">create_apartment</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.pycity_fixtures.create_building" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pytest fixture function to generate building object (with demands,
 without BES or heating-curve)</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>create_environment</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><em>object</em></a>) – Environment object (as fixture of pytest)</li>
-<li><strong>create_apartment</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><em>object</em></a>) – Apartment object (with demands)</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>create_environment</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><em>object</em></a>) – Environment object (as fixture of pytest)</p></li>
+<li><p><strong>create_apartment</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><em>object</em></a>) – Apartment object (with demands)</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>create_building</strong> – Building object</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)">object</a></p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>create_building</strong> – Building object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)">object</a></p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="pycity_base.test.pycity_fixtures.create_citydist">
-<code class="descclassname">pycity_base.test.pycity_fixtures.</code><code class="descname">create_citydist</code><span class="sig-paren">(</span><em>create_environment</em>, <em>create_building</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.pycity_fixtures.create_citydist" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pycity_base.test.pycity_fixtures.</code><code class="sig-name descname">create_citydist</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_environment</span></em>, <em class="sig-param"><span class="n">create_building</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.pycity_fixtures.create_citydist" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pytest fixture function to generate city district with three
 res. buildings (with demands) on positions (0, 0), (0, 10), (10, 10)</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>create_environment</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><em>object</em></a>) – Environment object (as fixture of pytest)</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>create_citydistrict</strong> – CityDistrict object of PyCity</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)">object</a></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>create_environment</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><em>object</em></a>) – Environment object (as fixture of pytest)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>create_citydistrict</strong> – CityDistrict object of PyCity</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)">object</a></p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="pycity_base.test.pycity_fixtures.create_demands">
-<code class="descclassname">pycity_base.test.pycity_fixtures.</code><code class="descname">create_demands</code><span class="sig-paren">(</span><em>create_environment</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.pycity_fixtures.create_demands" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pycity_base.test.pycity_fixtures.</code><code class="sig-name descname">create_demands</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_environment</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.pycity_fixtures.create_demands" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fixture to create space heating, dhw and electrical demands
 (for residential buildings; with standardized load profiles (SLP))</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>create_environment</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><em>object</em></a>) – Environment object (as fixture of pytest)</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>create_demands</strong> – Tuple with demand arrays (heat_demand, el_demand, dhw_demand)</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.7)">tuple</a> (of np.arrays)</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>create_environment</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><em>object</em></a>) – Environment object (as fixture of pytest)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>create_demands</strong> – Tuple with demand arrays (heat_demand, el_demand, dhw_demand)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)">tuple</a> (of np.arrays)</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="pycity_base.test.pycity_fixtures.create_empty_citydist">
-<code class="descclassname">pycity_base.test.pycity_fixtures.</code><code class="descname">create_empty_citydist</code><span class="sig-paren">(</span><em>create_environment</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.pycity_fixtures.create_empty_citydist" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pycity_base.test.pycity_fixtures.</code><code class="sig-name descname">create_empty_citydist</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_environment</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.pycity_fixtures.create_empty_citydist" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pytest fixture function to generate city district</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>create_environment</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><em>object</em></a>) – Environment object (as fixture of pytest)</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>create_empty_citydist</strong> – CityDistrict object of PyCity</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)">object</a></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>create_environment</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><em>object</em></a>) – Environment object (as fixture of pytest)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>create_empty_citydist</strong> – CityDistrict object of PyCity</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)">object</a></p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="pycity_base.test.pycity_fixtures.create_environment">
-<code class="descclassname">pycity_base.test.pycity_fixtures.</code><code class="descname">create_environment</code><span class="sig-paren">(</span><em>timestep=900</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.pycity_fixtures.create_environment" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pycity_base.test.pycity_fixtures.</code><code class="sig-name descname">create_environment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.pycity_fixtures.create_environment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fixture to create environment object for PyCity (scope=’module’)</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>timestep</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) – Integer timestep in seconds (default: 900)</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>create_environment</strong></td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">environment object</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>timestep</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>optional</em>) – Integer timestep in seconds (default: 900)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>create_environment</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>environment object</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="pycity_base.test.pycity_fixtures.create_occupancy">
-<code class="descclassname">pycity_base.test.pycity_fixtures.</code><code class="descname">create_occupancy</code><span class="sig-paren">(</span><em>create_environment</em>, <em>nb_occupants=1</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.pycity_fixtures.create_occupancy" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pycity_base.test.pycity_fixtures.</code><code class="sig-name descname">create_occupancy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_environment</span></em>, <em class="sig-param"><span class="n">nb_occupants</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.pycity_fixtures.create_occupancy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pytest fixture function to generate occupancy object.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>create_environment</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><em>object</em></a>) – Environment object (as fixture of pytest)</li>
-<li><strong>nb_occupants</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) – Number of occupants (default: 1)</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>create_environment</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><em>object</em></a>) – Environment object (as fixture of pytest)</p></li>
+<li><p><strong>nb_occupants</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>optional</em>) – Number of occupants (default: 1)</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>create_occupancy</strong> – occupancy object</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)">object</a></p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>create_occupancy</strong> – occupancy object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)">object</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
 <div class="section" id="module-pycity_base.test.test_apartment">
 <span id="pycity-base-test-test-apartment-module"></span><h2>pycity_base.test.test_apartment module<a class="headerlink" href="#module-pycity_base.test.test_apartment" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pycity_base.test.test_apartment.Test_apartment">
-<em class="property">class </em><code class="descclassname">pycity_base.test.test_apartment.</code><code class="descname">Test_apartment</code><a class="headerlink" href="#pycity_base.test.test_apartment.Test_apartment" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Apartment test.</p>
+<dl class="py class">
+<dt id="pycity_base.test.test_apartment.TestApartment">
+<em class="property">class </em><code class="sig-prename descclassname">pycity_base.test.test_apartment.</code><code class="sig-name descname">TestApartment</code><a class="headerlink" href="#pycity_base.test.test_apartment.TestApartment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p class="rubric">Methods</p>
-<dl class="method">
-<dt id="pycity_base.test.test_apartment.Test_apartment.test_addEntity">
-<code class="descname">test_addEntity</code><span class="sig-paren">(</span><em>create_environment</em>, <em>create_demands</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_apartment.Test_apartment.test_addEntity" title="Permalink to this definition">¶</a></dt>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 74%" />
+<col style="width: 26%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>test_addEntity</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>test_addMultipleEntities</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>test_get_demands</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>test_get_max_nb_occupants</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>test_init</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="pycity_base.test.test_apartment.TestApartment.test_addEntity">
+<code class="sig-name descname">test_addEntity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_environment</span></em>, <em class="sig-param"><span class="n">create_demands</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_apartment.TestApartment.test_addEntity" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.test.test_apartment.Test_apartment.test_addMultipleEntities">
-<code class="descname">test_addMultipleEntities</code><span class="sig-paren">(</span><em>create_environment</em>, <em>create_demands</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_apartment.Test_apartment.test_addMultipleEntities" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.test.test_apartment.TestApartment.test_addMultipleEntities">
+<code class="sig-name descname">test_addMultipleEntities</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_environment</span></em>, <em class="sig-param"><span class="n">create_demands</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_apartment.TestApartment.test_addMultipleEntities" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.test.test_apartment.Test_apartment.test_get_demands">
-<code class="descname">test_get_demands</code><span class="sig-paren">(</span><em>create_apartment</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_apartment.Test_apartment.test_get_demands" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.test.test_apartment.TestApartment.test_get_demands">
+<code class="sig-name descname">test_get_demands</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_apartment</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_apartment.TestApartment.test_get_demands" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.test.test_apartment.Test_apartment.test_get_max_nb_occupants">
-<code class="descname">test_get_max_nb_occupants</code><span class="sig-paren">(</span><em>create_apartment</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_apartment.Test_apartment.test_get_max_nb_occupants" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.test.test_apartment.TestApartment.test_get_max_nb_occupants">
+<code class="sig-name descname">test_get_max_nb_occupants</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_apartment</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_apartment.TestApartment.test_get_max_nb_occupants" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.test.test_apartment.Test_apartment.test_init">
-<code class="descname">test_init</code><span class="sig-paren">(</span><em>create_environment</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_apartment.Test_apartment.test_init" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.test.test_apartment.TestApartment.test_init">
+<code class="sig-name descname">test_init</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_environment</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_apartment.TestApartment.test_init" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -237,14 +248,26 @@ res. buildings (with demands) on positions (0, 0), (0, 10), (10, 10)</p>
 </div>
 <div class="section" id="module-pycity_base.test.test_ashrae_val">
 <span id="pycity-base-test-test-ashrae-val-module"></span><h2>pycity_base.test.test_ashrae_val module<a class="headerlink" href="#module-pycity_base.test.test_ashrae_val" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pycity_base.test.test_ashrae_val.Test_Ashrae140">
-<em class="property">class </em><code class="descclassname">pycity_base.test.test_ashrae_val.</code><code class="descname">Test_Ashrae140</code><a class="headerlink" href="#pycity_base.test.test_ashrae_val.Test_Ashrae140" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Ashrae test.</p>
+<dl class="py class">
+<dt id="pycity_base.test.test_ashrae_val.TestAshrae140">
+<em class="property">class </em><code class="sig-prename descclassname">pycity_base.test.test_ashrae_val.</code><code class="sig-name descname">TestAshrae140</code><a class="headerlink" href="#pycity_base.test.test_ashrae_val.TestAshrae140" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p class="rubric">Methods</p>
-<dl class="method">
-<dt id="pycity_base.test.test_ashrae_val.Test_Ashrae140.test_ashrae140">
-<code class="descname">test_ashrae140</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_ashrae_val.Test_Ashrae140.test_ashrae140" title="Permalink to this definition">¶</a></dt>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 64%" />
+<col style="width: 36%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>test_ashrae140</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="pycity_base.test.test_ashrae_val.TestAshrae140.test_ashrae140">
+<code class="sig-name descname">test_ashrae140</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_ashrae_val.TestAshrae140.test_ashrae140" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -252,44 +275,82 @@ res. buildings (with demands) on positions (0, 0), (0, 10), (10, 10)</p>
 </div>
 <div class="section" id="module-pycity_base.test.test_building">
 <span id="pycity-base-test-test-building-module"></span><h2>pycity_base.test.test_building module<a class="headerlink" href="#module-pycity_base.test.test_building" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pycity_base.test.test_building.Test_Building">
-<em class="property">class </em><code class="descclassname">pycity_base.test.test_building.</code><code class="descname">Test_Building</code><a class="headerlink" href="#pycity_base.test.test_building.Test_Building" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Building test.</p>
+<dl class="py class">
+<dt id="pycity_base.test.test_building.TestBuilding">
+<em class="property">class </em><code class="sig-prename descclassname">pycity_base.test.test_building.</code><code class="sig-name descname">TestBuilding</code><a class="headerlink" href="#pycity_base.test.test_building.TestBuilding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p class="rubric">Methods</p>
-<dl class="method">
-<dt id="pycity_base.test.test_building.Test_Building.test_add_entity">
-<code class="descname">test_add_entity</code><span class="sig-paren">(</span><em>create_environment</em>, <em>create_apartment</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_building.Test_Building.test_add_entity" title="Permalink to this definition">¶</a></dt>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 79%" />
+<col style="width: 21%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>test_add_entity</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>test_get_dhw_power_curve</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>test_get_electric_power_curve</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>test_get_occupancy_profile</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>test_get_power_curves</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>test_get_power_no_load</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>test_get_space_heating_power_curve</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>test_init_building</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="pycity_base.test.test_building.TestBuilding.test_add_entity">
+<code class="sig-name descname">test_add_entity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_environment</span></em>, <em class="sig-param"><span class="n">create_apartment</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_building.TestBuilding.test_add_entity" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.test.test_building.Test_Building.test_get_dhw_power_curve">
-<code class="descname">test_get_dhw_power_curve</code><span class="sig-paren">(</span><em>create_building</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_building.Test_Building.test_get_dhw_power_curve" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.test.test_building.TestBuilding.test_get_dhw_power_curve">
+<code class="sig-name descname">test_get_dhw_power_curve</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_building</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_building.TestBuilding.test_get_dhw_power_curve" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.test.test_building.Test_Building.test_get_electric_power_curve">
-<code class="descname">test_get_electric_power_curve</code><span class="sig-paren">(</span><em>create_building</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_building.Test_Building.test_get_electric_power_curve" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.test.test_building.TestBuilding.test_get_electric_power_curve">
+<code class="sig-name descname">test_get_electric_power_curve</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_building</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_building.TestBuilding.test_get_electric_power_curve" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.test.test_building.Test_Building.test_get_occupancy_profile">
-<code class="descname">test_get_occupancy_profile</code><span class="sig-paren">(</span><em>create_occupancy</em>, <em>create_environment</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_building.Test_Building.test_get_occupancy_profile" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.test.test_building.TestBuilding.test_get_occupancy_profile">
+<code class="sig-name descname">test_get_occupancy_profile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_occupancy</span></em>, <em class="sig-param"><span class="n">create_environment</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_building.TestBuilding.test_get_occupancy_profile" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.test.test_building.Test_Building.test_get_power_curves">
-<code class="descname">test_get_power_curves</code><span class="sig-paren">(</span><em>create_building</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_building.Test_Building.test_get_power_curves" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.test.test_building.TestBuilding.test_get_power_curves">
+<code class="sig-name descname">test_get_power_curves</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_building</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_building.TestBuilding.test_get_power_curves" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.test.test_building.Test_Building.test_get_space_heating_power_curve">
-<code class="descname">test_get_space_heating_power_curve</code><span class="sig-paren">(</span><em>create_building</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_building.Test_Building.test_get_space_heating_power_curve" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.test.test_building.TestBuilding.test_get_power_no_load">
+<code class="sig-name descname">test_get_power_no_load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_environment</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_building.TestBuilding.test_get_power_no_load" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.test.test_building.Test_Building.test_init_building">
-<code class="descname">test_init_building</code><span class="sig-paren">(</span><em>create_environment</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_building.Test_Building.test_init_building" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.test.test_building.TestBuilding.test_get_space_heating_power_curve">
+<code class="sig-name descname">test_get_space_heating_power_curve</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_building</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_building.TestBuilding.test_get_space_heating_power_curve" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="pycity_base.test.test_building.TestBuilding.test_init_building">
+<code class="sig-name descname">test_init_building</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_environment</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_building.TestBuilding.test_init_building" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -297,35 +358,74 @@ res. buildings (with demands) on positions (0, 0), (0, 10), (10, 10)</p>
 </div>
 <div class="section" id="module-pycity_base.test.test_change_resolution">
 <span id="pycity-base-test-test-change-resolution-module"></span><h2>pycity_base.test.test_change_resolution module<a class="headerlink" href="#module-pycity_base.test.test_change_resolution" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pycity_base.test.test_change_resolution.Test_ChangeResolution">
-<em class="property">class </em><code class="descclassname">pycity_base.test.test_change_resolution.</code><code class="descname">Test_ChangeResolution</code><a class="headerlink" href="#pycity_base.test.test_change_resolution.Test_ChangeResolution" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>Test class for change of resolution functions</p>
+<p>Test class for change of resolution functions.</p>
+<dl class="py class">
+<dt id="pycity_base.test.test_change_resolution.TestChangeResolution">
+<em class="property">class </em><code class="sig-prename descclassname">pycity_base.test.test_change_resolution.</code><code class="sig-name descname">TestChangeResolution</code><a class="headerlink" href="#pycity_base.test.test_change_resolution.TestChangeResolution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p class="rubric">Methods</p>
-<dl class="method">
-<dt id="pycity_base.test.test_change_resolution.Test_ChangeResolution.test_change_res_mean_larger_timestep">
-<code class="descname">test_change_res_mean_larger_timestep</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_change_resolution.Test_ChangeResolution.test_change_res_mean_larger_timestep" title="Permalink to this definition">¶</a></dt>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 81%" />
+<col style="width: 19%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>test_change_res_mean_larger_timestep</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>test_change_res_mean_larger_timestep_2</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>test_change_res_mean_larger_timestep_3</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>test_change_res_mean_larger_timestep_4</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>test_change_res_mean_smaller_timestep</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>test_change_res_sum_larger_timestep</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>test_change_res_sum_smaller_timestep</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="pycity_base.test.test_change_resolution.TestChangeResolution.test_change_res_mean_larger_timestep">
+<code class="sig-name descname">test_change_res_mean_larger_timestep</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_change_resolution.TestChangeResolution.test_change_res_mean_larger_timestep" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.test.test_change_resolution.Test_ChangeResolution.test_change_res_mean_larger_timestep_2">
-<code class="descname">test_change_res_mean_larger_timestep_2</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_change_resolution.Test_ChangeResolution.test_change_res_mean_larger_timestep_2" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.test.test_change_resolution.TestChangeResolution.test_change_res_mean_larger_timestep_2">
+<code class="sig-name descname">test_change_res_mean_larger_timestep_2</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_change_resolution.TestChangeResolution.test_change_res_mean_larger_timestep_2" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.test.test_change_resolution.Test_ChangeResolution.test_change_res_mean_smaller_timestep">
-<code class="descname">test_change_res_mean_smaller_timestep</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_change_resolution.Test_ChangeResolution.test_change_res_mean_smaller_timestep" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.test.test_change_resolution.TestChangeResolution.test_change_res_mean_larger_timestep_3">
+<code class="sig-name descname">test_change_res_mean_larger_timestep_3</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_change_resolution.TestChangeResolution.test_change_res_mean_larger_timestep_3" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.test.test_change_resolution.Test_ChangeResolution.test_change_res_sum_larger_timestep">
-<code class="descname">test_change_res_sum_larger_timestep</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_change_resolution.Test_ChangeResolution.test_change_res_sum_larger_timestep" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.test.test_change_resolution.TestChangeResolution.test_change_res_mean_larger_timestep_4">
+<code class="sig-name descname">test_change_res_mean_larger_timestep_4</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_change_resolution.TestChangeResolution.test_change_res_mean_larger_timestep_4" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.test.test_change_resolution.Test_ChangeResolution.test_change_res_sum_smaller_timestep">
-<code class="descname">test_change_res_sum_smaller_timestep</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_change_resolution.Test_ChangeResolution.test_change_res_sum_smaller_timestep" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.test.test_change_resolution.TestChangeResolution.test_change_res_mean_smaller_timestep">
+<code class="sig-name descname">test_change_res_mean_smaller_timestep</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_change_resolution.TestChangeResolution.test_change_res_mean_smaller_timestep" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="pycity_base.test.test_change_resolution.TestChangeResolution.test_change_res_sum_larger_timestep">
+<code class="sig-name descname">test_change_res_sum_larger_timestep</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_change_resolution.TestChangeResolution.test_change_res_sum_larger_timestep" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="pycity_base.test.test_change_resolution.TestChangeResolution.test_change_res_sum_smaller_timestep">
+<code class="sig-name descname">test_change_res_sum_smaller_timestep</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_change_resolution.TestChangeResolution.test_change_res_sum_smaller_timestep" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -333,14 +433,26 @@ res. buildings (with demands) on positions (0, 0), (0, 10), (10, 10)</p>
 </div>
 <div class="section" id="module-pycity_base.test.test_city_gen">
 <span id="pycity-base-test-test-city-gen-module"></span><h2>pycity_base.test.test_city_gen module<a class="headerlink" href="#module-pycity_base.test.test_city_gen" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pycity_base.test.test_city_gen.Test_CityGen">
-<em class="property">class </em><code class="descclassname">pycity_base.test.test_city_gen.</code><code class="descname">Test_CityGen</code><a class="headerlink" href="#pycity_base.test.test_city_gen.Test_CityGen" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>City generator test.</p>
+<dl class="py class">
+<dt id="pycity_base.test.test_city_gen.TestCityGen">
+<em class="property">class </em><code class="sig-prename descclassname">pycity_base.test.test_city_gen.</code><code class="sig-name descname">TestCityGen</code><a class="headerlink" href="#pycity_base.test.test_city_gen.TestCityGen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p class="rubric">Methods</p>
-<dl class="method">
-<dt id="pycity_base.test.test_city_gen.Test_CityGen.test_city_gen">
-<code class="descname">test_city_gen</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_city_gen.Test_CityGen.test_city_gen" title="Permalink to this definition">¶</a></dt>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 63%" />
+<col style="width: 37%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>test_city_gen</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="pycity_base.test.test_city_gen.TestCityGen.test_city_gen">
+<code class="sig-name descname">test_city_gen</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_city_gen.TestCityGen.test_city_gen" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -349,49 +461,89 @@ res. buildings (with demands) on positions (0, 0), (0, 10), (10, 10)</p>
 <div class="section" id="module-pycity_base.test.test_citydistrict">
 <span id="pycity-base-test-test-citydistrict-module"></span><h2>pycity_base.test.test_citydistrict module<a class="headerlink" href="#module-pycity_base.test.test_citydistrict" title="Permalink to this headline">¶</a></h2>
 <p>Pytest script for CityDistrict class of pycity</p>
-<dl class="class">
-<dt id="pycity_base.test.test_citydistrict.Test_CityDistrict">
-<em class="property">class </em><code class="descclassname">pycity_base.test.test_citydistrict.</code><code class="descname">Test_CityDistrict</code><a class="headerlink" href="#pycity_base.test.test_citydistrict.Test_CityDistrict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py class">
+<dt id="pycity_base.test.test_citydistrict.TestCityDistrict">
+<em class="property">class </em><code class="sig-prename descclassname">pycity_base.test.test_citydistrict.</code><code class="sig-name descname">TestCityDistrict</code><a class="headerlink" href="#pycity_base.test.test_citydistrict.TestCityDistrict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p class="rubric">Methods</p>
-<dl class="method">
-<dt id="pycity_base.test.test_citydistrict.Test_CityDistrict.get_nb_of_building_entities">
-<code class="descname">get_nb_of_building_entities</code><span class="sig-paren">(</span><em>create_citydist</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_citydistrict.Test_CityDistrict.get_nb_of_building_entities" title="Permalink to this definition">¶</a></dt>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pycity_base.test.test_citydistrict.TestCityDistrict.test_init" title="pycity_base.test.test_citydistrict.TestCityDistrict.test_init"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_init</span></code></a>()</p></td>
+<td><p>Test initialization of citydistrict object</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 80%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>get_nb_of_building_entities</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>test_add_entity_building</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>test_add_multiple_entities</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>test_get_demands</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>test_get_list_build_entity_node_ids</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>test_get_nb_of_entities</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>test_get_node_numbers_of_entities</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="pycity_base.test.test_citydistrict.TestCityDistrict.get_nb_of_building_entities">
+<code class="sig-name descname">get_nb_of_building_entities</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_citydist</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_citydistrict.TestCityDistrict.get_nb_of_building_entities" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.test.test_citydistrict.Test_CityDistrict.test_add_entity_building">
-<code class="descname">test_add_entity_building</code><span class="sig-paren">(</span><em>create_empty_citydist</em>, <em>create_building</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_citydistrict.Test_CityDistrict.test_add_entity_building" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.test.test_citydistrict.TestCityDistrict.test_add_entity_building">
+<code class="sig-name descname">test_add_entity_building</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_empty_citydist</span></em>, <em class="sig-param"><span class="n">create_building</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_citydistrict.TestCityDistrict.test_add_entity_building" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.test.test_citydistrict.Test_CityDistrict.test_add_multiple_entities">
-<code class="descname">test_add_multiple_entities</code><span class="sig-paren">(</span><em>create_empty_citydist</em>, <em>create_building</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_citydistrict.Test_CityDistrict.test_add_multiple_entities" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.test.test_citydistrict.TestCityDistrict.test_add_multiple_entities">
+<code class="sig-name descname">test_add_multiple_entities</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_empty_citydist</span></em>, <em class="sig-param"><span class="n">create_building</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_citydistrict.TestCityDistrict.test_add_multiple_entities" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.test.test_citydistrict.Test_CityDistrict.test_get_demands">
-<code class="descname">test_get_demands</code><span class="sig-paren">(</span><em>create_citydist</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_citydistrict.Test_CityDistrict.test_get_demands" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.test.test_citydistrict.TestCityDistrict.test_get_demands">
+<code class="sig-name descname">test_get_demands</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_citydist</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_citydistrict.TestCityDistrict.test_get_demands" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.test.test_citydistrict.Test_CityDistrict.test_get_list_build_entity_node_ids">
-<code class="descname">test_get_list_build_entity_node_ids</code><span class="sig-paren">(</span><em>create_citydist</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_citydistrict.Test_CityDistrict.test_get_list_build_entity_node_ids" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.test.test_citydistrict.TestCityDistrict.test_get_list_build_entity_node_ids">
+<code class="sig-name descname">test_get_list_build_entity_node_ids</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_citydist</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_citydistrict.TestCityDistrict.test_get_list_build_entity_node_ids" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.test.test_citydistrict.Test_CityDistrict.test_get_nb_of_entities">
-<code class="descname">test_get_nb_of_entities</code><span class="sig-paren">(</span><em>create_citydist</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_citydistrict.Test_CityDistrict.test_get_nb_of_entities" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.test.test_citydistrict.TestCityDistrict.test_get_nb_of_entities">
+<code class="sig-name descname">test_get_nb_of_entities</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_citydist</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_citydistrict.TestCityDistrict.test_get_nb_of_entities" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.test.test_citydistrict.Test_CityDistrict.test_get_node_numbers_of_entities">
-<code class="descname">test_get_node_numbers_of_entities</code><span class="sig-paren">(</span><em>create_citydist</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_citydistrict.Test_CityDistrict.test_get_node_numbers_of_entities" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.test.test_citydistrict.TestCityDistrict.test_get_node_numbers_of_entities">
+<code class="sig-name descname">test_get_node_numbers_of_entities</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_citydist</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_citydistrict.TestCityDistrict.test_get_node_numbers_of_entities" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.test.test_citydistrict.Test_CityDistrict.test_init">
-<code class="descname">test_init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_citydistrict.Test_CityDistrict.test_init" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.test.test_citydistrict.TestCityDistrict.test_init">
+<code class="sig-name descname">test_init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_citydistrict.TestCityDistrict.test_init" title="Permalink to this definition">¶</a></dt>
 <dd><p>Test initialization of citydistrict object</p>
 </dd></dl>
 
@@ -400,122 +552,255 @@ res. buildings (with demands) on positions (0, 0), (0, 10), (10, 10)</p>
 </div>
 <div class="section" id="module-pycity_base.test.test_dhw">
 <span id="pycity-base-test-test-dhw-module"></span><h2>pycity_base.test.test_dhw module<a class="headerlink" href="#module-pycity_base.test.test_dhw" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<p>Domestic hot water test.</p>
+<dl class="py class">
 <dt id="pycity_base.test.test_dhw.TestDomesticHotWater">
-<em class="property">class </em><code class="descclassname">pycity_base.test.test_dhw.</code><code class="descname">TestDomesticHotWater</code><a class="headerlink" href="#pycity_base.test.test_dhw.TestDomesticHotWater" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<em class="property">class </em><code class="sig-prename descclassname">pycity_base.test.test_dhw.</code><code class="sig-name descname">TestDomesticHotWater</code><a class="headerlink" href="#pycity_base.test.test_dhw.TestDomesticHotWater" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Test class for pyCity domestic hot water object.</p>
 <p class="rubric">Methods</p>
-<dl class="method">
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pycity_base.test.test_dhw.TestDomesticHotWater.test_method1" title="pycity_base.test.test_dhw.TestDomesticHotWater.test_method1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_method1</span></code></a>(create_environment)</p></td>
+<td><p>Test method for IEA annex 42 domestic hot water profile generator</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pycity_base.test.test_dhw.TestDomesticHotWater.test_method2" title="pycity_base.test.test_dhw.TestDomesticHotWater.test_method2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_method2</span></code></a>(create_environment, …)</p></td>
+<td><p>Test method for stochastic domestic hot water profile generator</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pycity_base.test.test_dhw.TestDomesticHotWater.test_method3" title="pycity_base.test.test_dhw.TestDomesticHotWater.test_method3"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_method3</span></code></a>(create_environment)</p></td>
+<td><p>Test method for IEA annex 42 domestic hot water profile generator</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 81%" />
+<col style="width: 19%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>test_multiple_resolutions</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>test_multiple_resolutions_stochastical</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
 <dt id="pycity_base.test.test_dhw.TestDomesticHotWater.test_method1">
-<code class="descname">test_method1</code><span class="sig-paren">(</span><em>create_environment</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_dhw.TestDomesticHotWater.test_method1" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">test_method1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_environment</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_dhw.TestDomesticHotWater.test_method1" title="Permalink to this definition">¶</a></dt>
 <dd><p>Test method for IEA annex 42 domestic hot water profile generator</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>create_environment</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><em>object</em></a>) – Environment object (pytest fixture)</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>create_environment</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><em>object</em></a>) – Environment object (pytest fixture)</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="pycity_base.test.test_dhw.TestDomesticHotWater.test_method2">
-<code class="descname">test_method2</code><span class="sig-paren">(</span><em>create_environment</em>, <em>create_occupancy</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_dhw.TestDomesticHotWater.test_method2" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">test_method2</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_environment</span></em>, <em class="sig-param"><span class="n">create_occupancy</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_dhw.TestDomesticHotWater.test_method2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Test method for stochastic domestic hot water profile generator</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>create_environment</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><em>object</em></a>) – Environment object (pytest fixture)</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>create_environment</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><em>object</em></a>) – Environment object (pytest fixture)</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="pycity_base.test.test_dhw.TestDomesticHotWater.test_method3">
-<code class="descname">test_method3</code><span class="sig-paren">(</span><em>create_environment</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_dhw.TestDomesticHotWater.test_method3" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">test_method3</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_environment</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_dhw.TestDomesticHotWater.test_method3" title="Permalink to this definition">¶</a></dt>
 <dd><p>Test method for IEA annex 42 domestic hot water profile generator</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>create_environment</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><em>object</em></a>) – Environment object (pytest fixture)</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>create_environment</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><em>object</em></a>) – Environment object (pytest fixture)</p>
+</dd>
+</dl>
 </dd></dl>
+
+<dl class="py method">
+<dt id="pycity_base.test.test_dhw.TestDomesticHotWater.test_multiple_resolutions">
+<code class="sig-name descname">test_multiple_resolutions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_environment</span></em>, <em class="sig-param"><span class="n">create_occupancy</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_dhw.TestDomesticHotWater.test_multiple_resolutions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="pycity_base.test.test_dhw.TestDomesticHotWater.test_multiple_resolutions_stochastical">
+<code class="sig-name descname">test_multiple_resolutions_stochastical</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_environment</span></em>, <em class="sig-param"><span class="n">create_occupancy</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_dhw.TestDomesticHotWater.test_multiple_resolutions_stochastical" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
 </div>
-<div class="section" id="module-pycity_base.test.test_electricaldemand">
-<span id="pycity-base-test-test-electricaldemand-module"></span><h2>pycity_base.test.test_electricaldemand module<a class="headerlink" href="#module-pycity_base.test.test_electricaldemand" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pycity_base.test.test_electricaldemand.Test_ElectricalDemand">
-<em class="property">class </em><code class="descclassname">pycity_base.test.test_electricaldemand.</code><code class="descname">Test_ElectricalDemand</code><a class="headerlink" href="#pycity_base.test.test_electricaldemand.Test_ElectricalDemand" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<div class="section" id="module-pycity_base.test.test_electrical_demand">
+<span id="pycity-base-test-test-electrical-demand-module"></span><h2>pycity_base.test.test_electrical_demand module<a class="headerlink" href="#module-pycity_base.test.test_electrical_demand" title="Permalink to this headline">¶</a></h2>
+<p>Electrical demand test</p>
+<dl class="py class">
+<dt id="pycity_base.test.test_electrical_demand.TestElectricalDemand">
+<em class="property">class </em><code class="sig-prename descclassname">pycity_base.test.test_electrical_demand.</code><code class="sig-name descname">TestElectricalDemand</code><a class="headerlink" href="#pycity_base.test.test_electrical_demand.TestElectricalDemand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Test class for pyCity electrical demand object.</p>
 <p class="rubric">Methods</p>
-<dl class="method">
-<dt id="pycity_base.test.test_electricaldemand.Test_ElectricalDemand.test_method0">
-<code class="descname">test_method0</code><span class="sig-paren">(</span><em>create_environment</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_electricaldemand.Test_ElectricalDemand.test_method0" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="pycity_base.test.test_electricaldemand.Test_ElectricalDemand.test_method1">
-<code class="descname">test_method1</code><span class="sig-paren">(</span><em>create_environment</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_electricaldemand.Test_ElectricalDemand.test_method1" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="pycity_base.test.test_electricaldemand.Test_ElectricalDemand.test_method3">
-<code class="descname">test_method3</code><span class="sig-paren">(</span><em>create_environment</em>, <em>create_occupancy</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_electricaldemand.Test_ElectricalDemand.test_method3" title="Permalink to this definition">¶</a></dt>
-<dd><p>Pytest method for stochastic load profiles with normalization to
-annual demand</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>create_environment</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><em>object</em></a>) – Environment object (as fixture of pytest)</li>
-<li><strong>create_occupancy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><em>object</em></a>) – occupancy object</li>
-</ul>
-</td>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pycity_base.test.test_electrical_demand.TestElectricalDemand.test_method3" title="pycity_base.test.test_electrical_demand.TestElectricalDemand.test_method3"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_method3</span></code></a>(create_environment, …)</p></td>
+<td><p>Pytest method for stochastic load profiles with normalization to annual demand</p></td>
 </tr>
 </tbody>
 </table>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 74%" />
+<col style="width: 26%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>test_method0</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>test_method1</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>test_multiple_resolutions</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="pycity_base.test.test_electrical_demand.TestElectricalDemand.test_method0">
+<code class="sig-name descname">test_method0</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_environment</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_electrical_demand.TestElectricalDemand.test_method0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="pycity_base.test.test_electrical_demand.TestElectricalDemand.test_method1">
+<code class="sig-name descname">test_method1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_environment</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_electrical_demand.TestElectricalDemand.test_method1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="pycity_base.test.test_electrical_demand.TestElectricalDemand.test_method3">
+<code class="sig-name descname">test_method3</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_environment</span></em>, <em class="sig-param"><span class="n">create_occupancy</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_electrical_demand.TestElectricalDemand.test_method3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pytest method for stochastic load profiles with normalization to
+annual demand</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>create_environment</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><em>object</em></a>) – Environment object (as fixture of pytest)</p></li>
+<li><p><strong>create_occupancy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><em>object</em></a>) – occupancy object</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
+
+<dl class="py method">
+<dt id="pycity_base.test.test_electrical_demand.TestElectricalDemand.test_multiple_resolutions">
+<code class="sig-name descname">test_multiple_resolutions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_environment</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_electrical_demand.TestElectricalDemand.test_multiple_resolutions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
 </div>
 <div class="section" id="module-pycity_base.test.test_examples">
 <span id="pycity-base-test-test-examples-module"></span><h2>pycity_base.test.test_examples module<a class="headerlink" href="#module-pycity_base.test.test_examples" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pycity_base.test.test_examples.Test_Examples">
-<em class="property">class </em><code class="descclassname">pycity_base.test.test_examples.</code><code class="descname">Test_Examples</code><a class="headerlink" href="#pycity_base.test.test_examples.Test_Examples" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Test all pycity_base examples.</p>
+<dl class="py class">
+<dt id="pycity_base.test.test_examples.TestExamples">
+<em class="property">class </em><code class="sig-prename descclassname">pycity_base.test.test_examples.</code><code class="sig-name descname">TestExamples</code><a class="headerlink" href="#pycity_base.test.test_examples.TestExamples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p class="rubric">Methods</p>
-<dl class="method">
-<dt id="pycity_base.test.test_examples.Test_Examples.test_examples">
-<code class="descname">test_examples</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_examples.Test_Examples.test_examples" title="Permalink to this definition">¶</a></dt>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 63%" />
+<col style="width: 37%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>test_examples</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="pycity_base.test.test_examples.TestExamples.test_examples">
+<code class="sig-name descname">test_examples</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_examples.TestExamples.test_examples" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.test.test_photovoltaic">
+<span id="pycity-base-test-test-photovoltaic-module"></span><h2>pycity_base.test.test_photovoltaic module<a class="headerlink" href="#module-pycity_base.test.test_photovoltaic" title="Permalink to this headline">¶</a></h2>
+<p>Photovoltaic test.</p>
+<dl class="py class">
+<dt id="pycity_base.test.test_photovoltaic.TestPhotovoltaic">
+<em class="property">class </em><code class="sig-prename descclassname">pycity_base.test.test_photovoltaic.</code><code class="sig-name descname">TestPhotovoltaic</code><a class="headerlink" href="#pycity_base.test.test_photovoltaic.TestPhotovoltaic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pycity_base.test.test_photovoltaic.TestPhotovoltaic.test_pv_check_method0_annual_energy" title="pycity_base.test.test_photovoltaic.TestPhotovoltaic.test_pv_check_method0_annual_energy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_pv_check_method0_annual_energy</span></code></a>()</p></td>
+<td><p>Test to check annual energy output of PV object instance (´´method==0´´)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pycity_base.test.test_photovoltaic.TestPhotovoltaic.test_pv_check_method0_annual_energy2" title="pycity_base.test.test_photovoltaic.TestPhotovoltaic.test_pv_check_method0_annual_energy2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_pv_check_method0_annual_energy2</span></code></a>()</p></td>
+<td><p>Test to check annual energy output of PV object instance (´´method==0´´)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pycity_base.test.test_photovoltaic.TestPhotovoltaic.test_pv_check_method1_annual_energy" title="pycity_base.test.test_photovoltaic.TestPhotovoltaic.test_pv_check_method1_annual_energy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_pv_check_method1_annual_energy</span></code></a>()</p></td>
+<td><p>Test to check annual energy output of PV object instance (´´method==1´´)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="pycity_base.test.test_photovoltaic.TestPhotovoltaic.test_pv_check_method0_annual_energy">
+<code class="sig-name descname">test_pv_check_method0_annual_energy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_photovoltaic.TestPhotovoltaic.test_pv_check_method0_annual_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test to check annual energy output of PV object instance (´´method==0´´)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pycity_base.test.test_photovoltaic.TestPhotovoltaic.test_pv_check_method0_annual_energy2">
+<code class="sig-name descname">test_pv_check_method0_annual_energy2</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_photovoltaic.TestPhotovoltaic.test_pv_check_method0_annual_energy2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test to check annual energy output of PV object instance (´´method==0´´)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pycity_base.test.test_photovoltaic.TestPhotovoltaic.test_pv_check_method1_annual_energy">
+<code class="sig-name descname">test_pv_check_method1_annual_energy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_photovoltaic.TestPhotovoltaic.test_pv_check_method1_annual_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test to check annual energy output of PV object instance (´´method==1´´)</p>
+</dd></dl>
 
 </dd></dl>
 
 </div>
 <div class="section" id="module-pycity_base.test.test_prices">
 <span id="pycity-base-test-test-prices-module"></span><h2>pycity_base.test.test_prices module<a class="headerlink" href="#module-pycity_base.test.test_prices" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pycity_base.test.test_prices.Test_Prices">
-<em class="property">class </em><code class="descclassname">pycity_base.test.test_prices.</code><code class="descname">Test_Prices</code><a class="headerlink" href="#pycity_base.test.test_prices.Test_Prices" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Prices test.</p>
+<dl class="py class">
+<dt id="pycity_base.test.test_prices.TestPrices">
+<em class="property">class </em><code class="sig-prename descclassname">pycity_base.test.test_prices.</code><code class="sig-name descname">TestPrices</code><a class="headerlink" href="#pycity_base.test.test_prices.TestPrices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p class="rubric">Methods</p>
-<dl class="method">
-<dt id="pycity_base.test.test_prices.Test_Prices.test_prices">
-<code class="descname">test_prices</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_prices.Test_Prices.test_prices" title="Permalink to this definition">¶</a></dt>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 60%" />
+<col style="width: 40%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>test_prices</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="pycity_base.test.test_prices.TestPrices.test_prices">
+<code class="sig-name descname">test_prices</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_prices.TestPrices.test_prices" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -523,51 +808,88 @@ annual demand</p>
 </div>
 <div class="section" id="module-pycity_base.test.test_process_city">
 <span id="pycity-base-test-test-process-city-module"></span><h2>pycity_base.test.test_process_city module<a class="headerlink" href="#module-pycity_base.test.test_process_city" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<p>Test for processing a city district.</p>
+<dl class="py class">
 <dt id="pycity_base.test.test_process_city.TestProcessCity">
-<em class="property">class </em><code class="descclassname">pycity_base.test.test_process_city.</code><code class="descname">TestProcessCity</code><a class="headerlink" href="#pycity_base.test.test_process_city.TestProcessCity" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<em class="property">class </em><code class="sig-prename descclassname">pycity_base.test.test_process_city.</code><code class="sig-name descname">TestProcessCity</code><a class="headerlink" href="#pycity_base.test.test_process_city.TestProcessCity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p class="rubric">Methods</p>
-<dl class="method">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 67%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>test_get_subcity</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
 <dt id="pycity_base.test.test_process_city.TestProcessCity.test_get_subcity">
-<code class="descname">test_get_subcity</code><span class="sig-paren">(</span><em>create_empty_citydist</em>, <em>create_environment</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_process_city.TestProcessCity.test_get_subcity" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">test_get_subcity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_empty_citydist</span></em>, <em class="sig-param"><span class="n">create_environment</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_process_city.TestProcessCity.test_get_subcity" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-pycity_base.test.test_pv">
-<span id="pycity-base-test-test-pv-module"></span><h2>pycity_base.test.test_pv module<a class="headerlink" href="#module-pycity_base.test.test_pv" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pycity_base.test.test_pv.TestPV">
-<em class="property">class </em><code class="descclassname">pycity_base.test.test_pv.</code><code class="descname">TestPV</code><a class="headerlink" href="#pycity_base.test.test_pv.TestPV" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p class="rubric">Methods</p>
-<dl class="method">
-<dt id="pycity_base.test.test_pv.TestPV.test_pv_check_annual_energy">
-<code class="descname">test_pv_check_annual_energy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_pv.TestPV.test_pv_check_annual_energy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Test to check annual energy output of PV object instance</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pycity_base.test.test_pv.TestPV.test_pv_check_annual_energy2">
-<code class="descname">test_pv_check_annual_energy2</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_pv.TestPV.test_pv_check_annual_energy2" title="Permalink to this definition">¶</a></dt>
-<dd><p>Test to check annual energy output of PV object instance</p>
-</dd></dl>
 
 </dd></dl>
 
 </div>
 <div class="section" id="module-pycity_base.test.test_room">
 <span id="pycity-base-test-test-room-module"></span><h2>pycity_base.test.test_room module<a class="headerlink" href="#module-pycity_base.test.test_room" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pycity_base.test.test_room.Test_Room">
-<em class="property">class </em><code class="descclassname">pycity_base.test.test_room.</code><code class="descname">Test_Room</code><a class="headerlink" href="#pycity_base.test.test_room.Test_Room" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Room test.</p>
+<dl class="py class">
+<dt id="pycity_base.test.test_room.TestRoom">
+<em class="property">class </em><code class="sig-prename descclassname">pycity_base.test.test_room.</code><code class="sig-name descname">TestRoom</code><a class="headerlink" href="#pycity_base.test.test_room.TestRoom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p class="rubric">Methods</p>
-<dl class="method">
-<dt id="pycity_base.test.test_room.Test_Room.test_room">
-<code class="descname">test_room</code><span class="sig-paren">(</span><em>create_environment</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_room.Test_Room.test_room" title="Permalink to this definition">¶</a></dt>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 57%" />
+<col style="width: 43%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>test_room</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="pycity_base.test.test_room.TestRoom.test_room">
+<code class="sig-name descname">test_room</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_environment</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_room.TestRoom.test_room" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pycity_base.test.test_spacecooling">
+<span id="pycity-base-test-test-spacecooling-module"></span><h2>pycity_base.test.test_spacecooling module<a class="headerlink" href="#module-pycity_base.test.test_spacecooling" title="Permalink to this headline">¶</a></h2>
+<p>Space cooling test.</p>
+<dl class="py class">
+<dt id="pycity_base.test.test_spacecooling.TestSpaceCooling">
+<em class="property">class </em><code class="sig-prename descclassname">pycity_base.test.test_spacecooling.</code><code class="sig-name descname">TestSpaceCooling</code><a class="headerlink" href="#pycity_base.test.test_spacecooling.TestSpaceCooling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 62%" />
+<col style="width: 38%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>test_method0</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>test_method1</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="pycity_base.test.test_spacecooling.TestSpaceCooling.test_method0">
+<code class="sig-name descname">test_method0</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_environment</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_spacecooling.TestSpaceCooling.test_method0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="pycity_base.test.test_spacecooling.TestSpaceCooling.test_method1">
+<code class="sig-name descname">test_method1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_environment</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_spacecooling.TestSpaceCooling.test_method1" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -575,24 +897,50 @@ annual demand</p>
 </div>
 <div class="section" id="module-pycity_base.test.test_spaceheating">
 <span id="pycity-base-test-test-spaceheating-module"></span><h2>pycity_base.test.test_spaceheating module<a class="headerlink" href="#module-pycity_base.test.test_spaceheating" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pycity_base.test.test_spaceheating.Test_SpaceHeating">
-<em class="property">class </em><code class="descclassname">pycity_base.test.test_spaceheating.</code><code class="descname">Test_SpaceHeating</code><a class="headerlink" href="#pycity_base.test.test_spaceheating.Test_SpaceHeating" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Space heating test.</p>
+<dl class="py class">
+<dt id="pycity_base.test.test_spaceheating.TestSpaceHeating">
+<em class="property">class </em><code class="sig-prename descclassname">pycity_base.test.test_spaceheating.</code><code class="sig-name descname">TestSpaceHeating</code><a class="headerlink" href="#pycity_base.test.test_spaceheating.TestSpaceHeating" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p class="rubric">Methods</p>
-<dl class="method">
-<dt id="pycity_base.test.test_spaceheating.Test_SpaceHeating.test_method0">
-<code class="descname">test_method0</code><span class="sig-paren">(</span><em>create_environment</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_spaceheating.Test_SpaceHeating.test_method0" title="Permalink to this definition">¶</a></dt>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 74%" />
+<col style="width: 26%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>test_method0</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>test_method1</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>test_method3</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>test_multiple_resolutions</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="pycity_base.test.test_spaceheating.TestSpaceHeating.test_method0">
+<code class="sig-name descname">test_method0</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_environment</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_spaceheating.TestSpaceHeating.test_method0" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.test.test_spaceheating.Test_SpaceHeating.test_method1">
-<code class="descname">test_method1</code><span class="sig-paren">(</span><em>create_environment</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_spaceheating.Test_SpaceHeating.test_method1" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.test.test_spaceheating.TestSpaceHeating.test_method1">
+<code class="sig-name descname">test_method1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_environment</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_spaceheating.TestSpaceHeating.test_method1" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pycity_base.test.test_spaceheating.Test_SpaceHeating.test_method3">
-<code class="descname">test_method3</code><span class="sig-paren">(</span><em>create_environment</em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_spaceheating.Test_SpaceHeating.test_method3" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pycity_base.test.test_spaceheating.TestSpaceHeating.test_method3">
+<code class="sig-name descname">test_method3</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_environment</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_spaceheating.TestSpaceHeating.test_method3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="pycity_base.test.test_spaceheating.TestSpaceHeating.test_multiple_resolutions">
+<code class="sig-name descname">test_multiple_resolutions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">create_environment</span></em>, <em class="sig-param"><span class="n">create_environment2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_spaceheating.TestSpaceHeating.test_multiple_resolutions" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -600,15 +948,26 @@ annual demand</p>
 </div>
 <div class="section" id="module-pycity_base.test.test_thermal_slp">
 <span id="pycity-base-test-test-thermal-slp-module"></span><h2>pycity_base.test.test_thermal_slp module<a class="headerlink" href="#module-pycity_base.test.test_thermal_slp" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pycity_base.test.test_thermal_slp.Test_ThermalSLP">
-<em class="property">class </em><code class="descclassname">pycity_base.test.test_thermal_slp.</code><code class="descname">Test_ThermalSLP</code><a class="headerlink" href="#pycity_base.test.test_thermal_slp.Test_ThermalSLP" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>Test class for thermal standardized load profile generation (SLP)</p>
+<p>Test case for thermal standardized load profile generation (SLP)</p>
+<dl class="py class">
+<dt id="pycity_base.test.test_thermal_slp.TestThermalSLP">
+<em class="property">class </em><code class="sig-prename descclassname">pycity_base.test.test_thermal_slp.</code><code class="sig-name descname">TestThermalSLP</code><a class="headerlink" href="#pycity_base.test.test_thermal_slp.TestThermalSLP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p class="rubric">Methods</p>
-<dl class="method">
-<dt id="pycity_base.test.test_thermal_slp.Test_ThermalSLP.test_average_temperature">
-<code class="descname">test_average_temperature</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_thermal_slp.Test_ThermalSLP.test_average_temperature" title="Permalink to this definition">¶</a></dt>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pycity_base.test.test_thermal_slp.TestThermalSLP.test_average_temperature" title="pycity_base.test.test_thermal_slp.TestThermalSLP.test_average_temperature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_average_temperature</span></code></a>()</p></td>
+<td><p>Test method for average temperature calculation</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="pycity_base.test.test_thermal_slp.TestThermalSLP.test_average_temperature">
+<code class="sig-name descname">test_average_temperature</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_thermal_slp.TestThermalSLP.test_average_temperature" title="Permalink to this definition">¶</a></dt>
 <dd><p>Test method for average temperature calculation</p>
 </dd></dl>
 
@@ -617,14 +976,34 @@ annual demand</p>
 </div>
 <div class="section" id="module-pycity_base.test.test_weather">
 <span id="pycity-base-test-test-weather-module"></span><h2>pycity_base.test.test_weather module<a class="headerlink" href="#module-pycity_base.test.test_weather" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pycity_base.test.test_weather.Test_Weather">
-<em class="property">class </em><code class="descclassname">pycity_base.test.test_weather.</code><code class="descname">Test_Weather</code><a class="headerlink" href="#pycity_base.test.test_weather.Test_Weather" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Weather test.</p>
+<dl class="py class">
+<dt id="pycity_base.test.test_weather.TestWeather">
+<em class="property">class </em><code class="sig-prename descclassname">pycity_base.test.test_weather.</code><code class="sig-name descname">TestWeather</code><a class="headerlink" href="#pycity_base.test.test_weather.TestWeather" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p class="rubric">Methods</p>
-<dl class="method">
-<dt id="pycity_base.test.test_weather.Test_Weather.test_weather">
-<code class="descname">test_weather</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_weather.Test_Weather.test_weather" title="Permalink to this definition">¶</a></dt>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 66%" />
+<col style="width: 34%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>test_downscaled</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>test_weather</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="pycity_base.test.test_weather.TestWeather.test_downscaled">
+<code class="sig-name descname">test_downscaled</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_weather.TestWeather.test_downscaled" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="pycity_base.test.test_weather.TestWeather.test_weather">
+<code class="sig-name descname">test_weather</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.test.test_weather.TestWeather.test_weather" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -637,6 +1016,7 @@ annual demand</p>
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -660,27 +1040,33 @@ annual demand</p>
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2018, Institute for Energy Efficient Buildings and Indoor Climate, Institute for Automation of Complex Power Systems, E.ON Energy Research Center, RWTH Aachen University.
+      &copy;2020, Institute for Energy Efficient Buildings and Indoor Climate, Institute for Automation of Complex Power Systems, E.ON Energy Research Center, RWTH Aachen University.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.9</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/pycity_base.test.rst.txt"

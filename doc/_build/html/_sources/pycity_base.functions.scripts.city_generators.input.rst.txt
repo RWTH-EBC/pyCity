@@ -5,6 +5,6 @@ Module contents
 ---------------
 
 .. automodule:: pycity_base.functions.scripts.city_generators.input
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -102,8 +102,8 @@ class Heatpump(HeatingDevice.HeatingDevice):
             Linear behavior: lower_activation_limit = 0
             Two-point controlled: lower_activation_limit = 1
             
-        Example
-        -------
+        Examples
+        --------
         >>> t_flow = building.getFlowTemperature()
         >>> (p_nominal, q_nominal, lower_activation_limit) = hp.getNominals(t_flow)
         """
@@ -137,14 +137,14 @@ class Heatpump(HeatingDevice.HeatingDevice):
         """
         Return results.
         
-        Parameter
-        ---------
+        Parameters
+        ----------
         currentValues : boolean, optional
             - True : Return only values for this scheduling period
             - False : Return values for all scheduling periods
         
-        Order
-        -----
+        Returns
+        -------
         pConsumption : array-like
             Electricity consumption of the heat pump
         qOutput : array-like

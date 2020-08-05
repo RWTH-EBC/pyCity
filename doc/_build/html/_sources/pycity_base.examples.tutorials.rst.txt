@@ -5,6 +5,6 @@ Module contents
 ---------------
 
 .. automodule:: pycity_base.examples.tutorials
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:

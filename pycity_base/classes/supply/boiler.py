@@ -23,8 +23,8 @@ class Boiler(HeatingDevice.HeatingDevice):
                  t_max=85,
                  lower_activation_limit=1):
         """
-        Parameter
-        ---------
+        Parameters
+        ----------
         environment : environment object
             Common to all other objects. Includes time and weather instances
         q_nominal : array of float
@@ -57,14 +57,14 @@ class Boiler(HeatingDevice.HeatingDevice):
         """
         Return results.
         
-        Parameter
-        ---------
+        Parameters
+        ----------
         currentValues : boolean, optional
             - True : Return only values for this scheduling period
             - False : Return values for all scheduling periods
         
-        Order
-        -----
+        Returns
+        -------
         qOutput : array-like
             Heat production of the boiler
         schedule : array-like

@@ -25,8 +25,8 @@ class Building(object):
         2 : Add entities such as heating curve or BES, by invoking the 
             addEntity or addMultipleEntities methods.
         
-        Parameter
-        ---------
+        Parameters
+        ----------
         environment : Environment object
             Common to all other objects. Includes time and weather instances
         """
@@ -52,8 +52,8 @@ class Building(object):
         """ 
         Add an entity (apartment, BES or heating curve) to the building.
         
-        Example
-        -------
+        Examples
+        --------
         >>> myBes = BES(...)
         >>> myBuilding = Building(...)
         >>> myBuilding.addEntity(myBes)
@@ -74,13 +74,13 @@ class Building(object):
         """
         Add multiple entities to the existing building.
         
-        Parameter
-        ---------
+        Parameters
+        ----------
         entities: List-like
             List (or tuple) of entities that are added to the building
             
-        Example
-        -------
+        Examples
+        --------
         >>> myBes = BES(...)
         >>> myHeatingCurve = HeatingCurve(...)
         >>> myBuilding = Building(...)
@@ -221,7 +221,7 @@ class Building(object):
 
         # Get power curves of each apartment
         for apartment in self.apartments:
-            space_cooling_power += apartment.demand_space_heating.get_power(currentValues=currentValues)
+            space_cooling_power += apartment.demand_space_cooling.get_power(currentValues=currentValues)
 
         return space_cooling_power
 
@@ -283,7 +283,6 @@ class Building(object):
 
         # Get power curves of each apartment
         for apartment in self.apartments:
-
             dhw_heat_power += apartment.demand_domestic_hot_water.get_power(currentValues=currentValues,
                                                                             returnTemperature=False)
 

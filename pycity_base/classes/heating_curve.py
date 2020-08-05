@@ -69,8 +69,8 @@ class HeatingCurve(object):
             Over how many days (not time steps!) the moving average is 
             computed
             
-        Return
-        ------
+        Returns
+        -------
         flow_temperature : Array-like
             Temperature time series in °C
         """

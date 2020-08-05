@@ -55,8 +55,8 @@ class Sun(object):
         """ 
         Update location (latitude and longitude), time zone and altitude. 
         
-        Parameter
-        ---------
+        Parameters
+        ----------
         location : tuple, optional
             (latitude, longitude) of the simulated system's position. Standard
             values (50.76, 6.07) represent Aachen, Germany.
@@ -105,20 +105,25 @@ class Sun(object):
             - True: Compute the results for all time steps
             - False: Compute the results only for the upcoming horizon
         
-        Updates
-        -------
-        omega : array-like
-            Hour angle. The angular displacement of the sun east or west of 
-            the local meridian due to rotation of the earth on its axis at 
-            15 degrees per hour; morning negative, afternoon positive
-        delta : array-like
-            Declination. The angular position of the sun at solar noon (i.e., 
-            when the sun is on the local meridian) with respect to the plane 
-            of the equator, north positive; −23.45 <= delta <= 23.45
-        thetaZ : array-like
-            Zenith angle. The angle between the vertical and the line to the 
-            sun, that is, the angle of incidence of beam radiation on a 
-            horizontal surface; 0 <= thetaZ <= 90
+        Notes
+        -----
+        Updates the following attributes
+
+        * omega : array-like
+          Hour angle. The angular displacement of the sun east or west of
+          the local meridian due to rotation of the earth on its axis at
+          15 degrees per hour; morning negative, afternoon positive
+
+        * delta : array-like
+          Declination. The angular position of the sun at solar noon (i.e.,
+          when the sun is on the local meridian) with respect to the plane
+          of the equator, north positive; −23.45 <= delta <= 23.45
+
+        * thetaZ : array-like
+          Zenith angle. The angle between the vertical and the line to the
+          sun, that is, the angle of incidence of beam radiation on a
+          horizontal surface; 0 <= thetaZ <= 90
+
         """
         # Get timer-relevant data
         time_discretization = self.timer.time_discretization

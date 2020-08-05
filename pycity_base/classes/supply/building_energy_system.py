@@ -26,8 +26,8 @@ class BES(object):
         2 : Add devices such as thermal energy storage unit to the BES, by 
             invoking the addDevice or addMultipleDevices methods.
         
-        Parameter
-        ---------
+        Parameters
+        ----------
         environment : Environment object
             Common to all other objects. Includes time and weather instances
         """
@@ -67,8 +67,8 @@ class BES(object):
         """
         Add a device object
         
-        Example
-        -------
+        Examples
+        --------
         >>> myChp = CHP(...)
         >>> myBes = BES(...)
         >>> myBes.addDevice(myChp)
@@ -117,13 +117,13 @@ class BES(object):
         """
         Add multiple devices to the existing BES
         
-        Parameter
-        ---------
+        Parameters
+        ----------
         devices : List-like
             List (or tuple) of devices that are added to the BES
             
-        Example
-        -------
+        Examples
+        --------
         >>> myBoiler = Boiler(...)
         >>> myChp = CHP(...)
         >>> myBes = BES(...)

@@ -391,8 +391,8 @@ class Weather(pycity_base.classes.sun.Sun):
             If True, returns values of current horizon (default: True).
             If False, returns annual values.
             
-        Return
-        ------
+        Returns
+        -------
         The result is returned as a tuple
         """
         # Get current and final position
@@ -452,8 +452,8 @@ class Weather(pycity_base.classes.sun.Sun):
         getCloudiness : Boolean
             If Ture, return cloudiness
             
-        Return
-        ------
+        Returns
+        -------
         The result is returned as a tuple
         """
         if not useTimesteps:

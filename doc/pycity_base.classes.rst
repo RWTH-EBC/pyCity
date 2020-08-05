@@ -6,97 +6,89 @@ Subpackages
 
 .. toctree::
 
-    pycity_base.classes.demand
-    pycity_base.classes.supply
+   pycity_base.classes.demand
+   pycity_base.classes.supply
 
 Submodules
 ----------
 
-pycity\_base.classes.Building module
+pycity\_base.classes.building module
 ------------------------------------
 
-.. automodule:: pycity_base.classes.Building
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. automodule:: pycity_base.classes.building
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-pycity\_base.classes.CityDistrict module
-----------------------------------------
+pycity\_base.classes.city\_district module
+------------------------------------------
 
-.. automodule:: pycity_base.classes.CityDistrict
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. automodule:: pycity_base.classes.city_district
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-pycity\_base.classes.Controller module
---------------------------------------
-
-.. automodule:: pycity_base.classes.Controller
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-pycity\_base.classes.Environment module
+pycity\_base.classes.environment module
 ---------------------------------------
 
-.. automodule:: pycity_base.classes.Environment
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. automodule:: pycity_base.classes.environment
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-pycity\_base.classes.ExternalElectricityGrid module
----------------------------------------------------
+pycity\_base.classes.heating\_curve module
+------------------------------------------
 
-.. automodule:: pycity_base.classes.ExternalElectricityGrid
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. automodule:: pycity_base.classes.heating_curve
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-pycity\_base.classes.HeatingCurve module
-----------------------------------------
-
-.. automodule:: pycity_base.classes.HeatingCurve
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-pycity\_base.classes.Prices module
+pycity\_base.classes.prices module
 ----------------------------------
 
-.. automodule:: pycity_base.classes.Prices
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. automodule:: pycity_base.classes.prices
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-pycity\_base.classes.Sun module
+pycity\_base.classes.sun module
 -------------------------------
 
-.. automodule:: pycity_base.classes.Sun
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. automodule:: pycity_base.classes.sun
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-pycity\_base.classes.Timer module
+pycity\_base.classes.timer module
 ---------------------------------
 
-.. automodule:: pycity_base.classes.Timer
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. automodule:: pycity_base.classes.timer
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-pycity\_base.classes.Weather module
+pycity\_base.classes.timeseries module
+--------------------------------------
+
+.. automodule:: pycity_base.classes.timeseries
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pycity\_base.classes.weather module
 -----------------------------------
 
-.. automodule:: pycity_base.classes.Weather
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. automodule:: pycity_base.classes.weather
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 
 Module contents
 ---------------
 
 .. automodule:: pycity_base.classes
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:

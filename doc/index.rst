@@ -6,7 +6,7 @@
 pycity_base
 =======================================
 
-Python package for data handling and scenario generation of city districts.
+Python package for data handling and scenario generation of city districts and urban energy systems.
 
 
 .. toctree::
@@ -42,11 +42,11 @@ Contributing
 Installation
 ==================
 
-*One important issue at the beginning: Please do NOT confuse pyCity_base with
+*One important issue at the beginning: Please do NOT confuse pycity_base with
 the pycity package on pypi! This (other) pycity package is installable via 
 pip. However, if you want to install pycity_base, follow this instruction.*
 
-pyCity_base requires the following Python packages:
+pycity_base requires the following Python packages:
 	- numpy
 	- matplotlib
 	- networkX
@@ -85,7 +85,7 @@ Installation of pycity_base
 =============================
 
 When uesgraph and its dependencies are installed, you should be able to install
-pyCity_base via pip:
+pycity_base via pip:
 
 `pip install -e '<your_path_to_pycity_setup_folder>'`
 
@@ -105,7 +105,7 @@ Import should be possible without errors.
 Tutorial
 ==================
 
-pyCity has a jupyter notebook tutorial script under pycity/examples/tutorials/... 
+pycity_base also has a jupyter notebook tutorial script under pycity/examples/tutorials/... 
 To open the jupyter notebook, open a command/terminal window and change your directory to the directory, 
 where tutorial_pycity_calc_1.ipynb is stored. Then type 'jupyter notebook' (without '' signs) and press Enter.
 Jupyter notebook should open within your browser (such as Firefox). Click on one notebook to start.

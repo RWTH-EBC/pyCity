@@ -20,13 +20,13 @@ sys.path.insert(0, os.path.abspath('.'))
 # -- Project information -----------------------------------------------------
 
 project = 'pycity_base'
-copyright = '2018, Institute for Energy Efficient Buildings and Indoor Climate, Institute for Automation of Complex Power Systems, E.ON Energy Research Center, RWTH Aachen University'
+copyright = '2020, Institute for Energy Efficient Buildings and Indoor Climate, Institute for Automation of Complex Power Systems, E.ON Energy Research Center, RWTH Aachen University'
 author = 'Institute for Energy Efficient Buildings and Indoor Climate, Institute for Automation of Complex Power Systems, E.ON Energy Research Center, RWTH Aachen University'
 
 # The short X.Y version
-version = '0.1'
+version = '0.3.0'
 # The full version, including alpha/beta/rc tags
-release = '0.1'
+release = '0.3.0'
 
 
 # -- General configuration ---------------------------------------------------
@@ -166,10 +166,12 @@ texinfo_documents = [
 
 # -- Extension configuration -------------------------------------------------
 
+numpydoc_show_inherited_class_members = False
+
 # -- Options for intersphinx extension ---------------------------------------
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://docs.python.org/': None}
+intersphinx_mapping = {'https://docs.python.org/3/': None}
 
 
 # Napoleon settings

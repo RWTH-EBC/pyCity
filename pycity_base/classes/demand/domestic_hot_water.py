@@ -147,8 +147,8 @@ class DomesticHotWater(pycity_base.classes.demand.load.Load):
             Also return the required flow temperature (True)
             (default: True)
 
-        Return
-        ------
+        Returns
+        -------
         If returnTemperature is True:
         result_tuple : tuple (load, t_flow)
             Result tuple with thermal power curve and return temperature curve

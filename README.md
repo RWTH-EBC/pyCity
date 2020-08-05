@@ -6,9 +6,9 @@
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
 
 
-# pyCity_base
+# pycity_base
 
-Python package for data handling and scenario generation of city districts.
+Python package for data handling and scenario generation of city districts and urban energy systems.
 
 ## Contributing
 
@@ -24,11 +24,11 @@ Alternatively: Clone via https: `git clone https://github.com/RWTH-EBC/pyCity.gi
 
 ## Installation
 
-*One important issue at the beginning: Please do NOT confuse pyCity_base with
+*One important issue at the beginning: Please do NOT confuse pycity_base with
 the pycity package on pypi! This (other) pycity package is installable via 
 pip. However, if you want to install pycity_base, follow this instruction.*
 
-pyCity_base requires the following Python packages:
+pycity_base requires the following Python packages:
 - numpy
 - matplotlib
 - networkX
@@ -56,14 +56,23 @@ In this case, follow the instructions of the uesgraphs installation:
 [https://github.com/RWTH-EBC/uesgraphs/blob/master/README.md](https://github.com/RWTH-EBC/uesgraphs/blob/master/README.md)
 (see Install uesgraphs)
 
-### Installation of pyCity_base
+### Installation of pycity_base
+
+The latest version of pycity_base is 0.3.0.
 
 When uesgraph and its dependencies are installed, you should be able to install
-pyCity_base via pip:
+pycity_base via pip:
+
+`pip install pycity_base`
+
+or:
 
 `pip install -e '<your_path_to_pycity_setup_folder>'`
 
+or:
+
 `<path_to_your_python_dist\Python.exe> -m pip install -e '<your_path_to_pycity_setup_folder>'`
+
 
 You can check if installation / adding packages to python has been successful
 by adding new .py file and trying to import uesgraphs and pyCity.
@@ -266,14 +275,14 @@ if __name__ == '__main__':
 
 ## Tutorial
 
-pyCity has a jupyter notebook tutorial script under pycity/examples/tutorials/... 
+pycity_base also has also a jupyter notebook tutorial script under pycity/examples/tutorials/... 
 To open the jupyter notebook, open a command/terminal window and change your directory to the directory, 
 where tutorial_pycity_calc_1.ipynb is stored. Then type 'jupyter notebook' (without '' signs) and press Enter.
 Jupyter notebook should open within your browser (such as Firefox). Click on one notebook to start.
 If your Pyhton path does not point at your Python installation, you have to
 open jupyter notebook directly, e.g. by looking for the jupyter.exe in your distribution.
 
-## How to cite pyCity_base
+## How to cite pycity_base
 
 + Schiefelbein, J., Rudnick, J., Scholl, A., Remmen, P., Fuchs, M., Müller, D. (2019),
 Automated urban energy system modeling and thermal building simulation based on OpenStreetMap data sets,

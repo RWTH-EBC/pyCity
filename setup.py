@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 """
 pyCity: Python package for data handling and scenario generation of
-city districts.
+city districts and urban energy systems.
 
 The MIT License
 
-Copyright (C) 2015-2019  Thomas Schuetz, Jan Schiefelbein
+Copyright (C) 2015-2020  Thomas Schuetz, Jan Schiefelbein, Sebastian Schwarz
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -50,15 +50,15 @@ def read(*filenames, **kwargs):
 setup(name='pycity_base',
       version='0.3.0',
       description='Python package for data handling and scenario generation '
-                  'of city districts.',
+                  'of city districts and urban energy systems.',
       #long_description=long_description,
       long_description='Python package for data handling and scenario generation '
-                    'of city districts.',
+                    'of city districts and urban energy systems.',
       url='https://github.com/RWTH-EBC/pyCity',
       author='Institute of Energy Efficient Buildings and Indoor Climate, '
              'Institute for Automation of Complex Power Systems'
              'E.ON Energy Research Center, RWTH Aachen University',
-      author_email='pycity@eonerc.rwth-aachen.de',
+      author_email='post_ebc@eonerc.rwth-aachen.de',
       license='MIT License',
       packages=find_packages(),
       package_data = {'': ['*.ipynb', '*.txt', '*.csv', '*.txt', 'inputs/*', 'inputs/**/*', 'inputs/**/**/*']},
@@ -70,9 +70,9 @@ setup(name='pycity_base',
       platforms='any',
       classifiers=[
           'License :: OSI Approved :: MIT License',
-          'Programming Language :: Python :: 2.7',
           'Programming Language :: Python :: 3.5',
           'Programming Language :: Python :: 3.6',
+          'Programming Language :: Python :: 3.7',
           'Natural Language :: English',
           'Intended Audience :: Science/Research',
           'Topic :: Scientific/Engineering',

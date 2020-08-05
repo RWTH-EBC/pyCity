@@ -221,7 +221,7 @@ class Building(object):
 
         # Get power curves of each apartment
         for apartment in self.apartments:
-            space_cooling_power += apartment.demand_space_heating.get_power(currentValues=currentValues)
+            space_cooling_power += apartment.demand_space_cooling.get_power(currentValues=currentValues)
 
         return space_cooling_power
 
@@ -283,7 +283,6 @@ class Building(object):
 
         # Get power curves of each apartment
         for apartment in self.apartments:
-
             dhw_heat_power += apartment.demand_domestic_hot_water.get_power(currentValues=currentValues,
                                                                             returnTemperature=False)
 

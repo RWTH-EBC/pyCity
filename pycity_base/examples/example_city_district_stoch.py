@@ -186,7 +186,7 @@ def run_example():
 
     #  Access boiler nominal thermal power
     print('Nominal thermal power of boiler in kW:')
-    print(building_1001.bes.boiler.q_nominal / 1000)
+    print(building_1001.bes.boilers[0].q_nominal / 1000)
 
 
 if __name__ == '__main__':

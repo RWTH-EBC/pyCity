@@ -36,16 +36,16 @@ class BES(object):
         self._kind = "bes"
         
         # Initialize all devices as empty lists
-        self.battery = []
-        self.boiler = []
-        self.chp = []
-        self.electrical_heater = []
-        self.heatpump = []
-        self.compression_chiller = []
-        self.inverter_acdc = []
-        self.inverter_dcac = []
-        self.pv = []
-        self.tes = []
+        self.battery_units = []
+        self.boilers = []
+        self.chp_units = []
+        self.electrical_heaters = []
+        self.heatpumps = []
+        self.compression_chillers = []
+        self.inverters_acdc = []
+        self.inverters_dcac = []
+        self.pv_units = []
+        self.tes_units = []
         
         # The new BES is still empty
         self.has_battery = False
@@ -74,43 +74,43 @@ class BES(object):
         >>> myBes.addDevice(myChp)
         """
         if objectInstance.kind == "battery":
-            self.battery.append(objectInstance)
+            self.battery_units.append(objectInstance)
             self.has_battery = True
         
         elif objectInstance.kind == "boiler":
-            self.boiler.append(objectInstance)
+            self.boilers.append(objectInstance)
             self.has_boiler = True
         
         elif objectInstance.kind == "chp":
-            self.chp.append(objectInstance)
+            self.chp_units.append(objectInstance)
             self.has_chp = True
         
         elif objectInstance.kind == "electricalheater":
-            self.electrical_heater.append(objectInstance)
+            self.electrical_heaters.append(objectInstance)
             self.has_electrical_heater = True
         
         elif objectInstance.kind == "heatpump":
-            self.heatpump.append(objectInstance)
+            self.heatpumps.append(objectInstance)
             self.has_heatpump = True
 
         elif objectInstance.kind == "compressionchiller":
-            self.compression_chiller.append(objectInstance)
+            self.compression_chillers.append(objectInstance)
             self.has_compression_chiller = True
         
         elif objectInstance.kind == "inverter":
             if objectInstance.input_AC:
-                self.inverter_acdc.append(objectInstance)
+                self.inverters_acdc.append(objectInstance)
                 self.has_inverter_acdc = True
             else:
-                self.inverter_dcac.append(objectInstance)
+                self.inverters_dcac.append(objectInstance)
                 self.has_inverter_dcac = True
         
         elif objectInstance.kind == "pv":
-            self.pv.append(objectInstance)
+            self.pv_units.append(objectInstance)
             self.has_pv = True
             
         elif objectInstance.kind == "tes":
-            self.tes.append(objectInstance)
+            self.tes_units.append(objectInstance)
             self.has_tes = True
             
     def addMultipleDevices(self, devices):

@@ -36,16 +36,16 @@ class BES(object):
         self._kind = "bes"
         
         # Initialize all devices as empty lists
-        self.batteries = []
+        self.battery_units = []
         self.boilers = []
-        self.chps = []
+        self.chp_units = []
         self.electrical_heaters = []
         self.heatpumps = []
         self.compression_chillers = []
-        self.inverter_acdcs = []
-        self.inverter_dcacs = []
-        self.pvs = []
-        self.tess = []
+        self.inverters_acdc = []
+        self.inverters_dcac = []
+        self.pv_units = []
+        self.tes_units = []
         
         # The new BES is still empty
         self.has_battery = False
@@ -74,7 +74,7 @@ class BES(object):
         >>> myBes.addDevice(myChp)
         """
         if objectInstance.kind == "battery":
-            self.batteries.append(objectInstance)
+            self.battery_units.append(objectInstance)
             self.has_battery = True
         
         elif objectInstance.kind == "boiler":
@@ -82,7 +82,7 @@ class BES(object):
             self.has_boiler = True
         
         elif objectInstance.kind == "chp":
-            self.chps.append(objectInstance)
+            self.chp_units.append(objectInstance)
             self.has_chp = True
         
         elif objectInstance.kind == "electricalheater":
@@ -99,18 +99,18 @@ class BES(object):
         
         elif objectInstance.kind == "inverter":
             if objectInstance.input_AC:
-                self.inverter_acdcs.append(objectInstance)
+                self.inverters_acdc.append(objectInstance)
                 self.has_inverter_acdc = True
             else:
-                self.inverter_dcacs.append(objectInstance)
+                self.inverters_dcac.append(objectInstance)
                 self.has_inverter_dcac = True
         
         elif objectInstance.kind == "pv":
-            self.pvs.append(objectInstance)
+            self.pv_units.append(objectInstance)
             self.has_pv = True
             
         elif objectInstance.kind == "tes":
-            self.tess.append(objectInstance)
+            self.tes_units.append(objectInstance)
             self.has_tes = True
             
     def addMultipleDevices(self, devices):

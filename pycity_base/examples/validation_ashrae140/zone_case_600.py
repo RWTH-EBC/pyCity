@@ -243,8 +243,8 @@ def run_validation(do_plot=False):
 
     # Retrieve results
     Q_HC = spaceHeating.loadcurve
-    solarOpaque = spaceHeating.zoneInputs.solarOpaque
-    solarWindow = spaceHeating.zoneInputs.solarWindow
+    solarOpaque = spaceHeating.zone_inputs.solar_opaque
+    solarWindow = spaceHeating.zone_inputs.solar_window
 
     # Pass results to the plotting script
     from collections import namedtuple

@@ -145,8 +145,8 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
         elif method == 2:
             #  Generate thermal load with ISO model
             self.zone_parameters = zone_parameters
-            # Create zoneInputs (this already creates the full year inputs!)
-            self.zoneInputs = zi.ZoneInputs(environment,
+            # Create zone_inputs (this already creates the full year inputs!)
+            self.zone_inputs = zi.ZoneInputs(environment,
                                             zone_parameters,
                                             t_m_init,
                                             ventilation=ventilation,
@@ -156,7 +156,7 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
 
             calc = zmodel.calc
             res = calc(zone_parameters=self.zone_parameters,
-                       zoneInputs=self.zoneInputs,
+                       zone_inputs=self.zone_inputs,
                        t_cooling_set=t_cooling_set,
                        t_heating_set=t_heating_set,
                        limitHeating=np.inf,

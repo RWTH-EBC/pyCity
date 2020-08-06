@@ -42,8 +42,8 @@ class BES(object):
         self.electrical_heater = []
         self.heatpump = []
         self.compression_chiller = []
-        self.inverterAcdc = []
-        self.inverterDcac = []
+        self.inverter_acdc = []
+        self.inverter_dcac = []
         self.pv = []
         self.tes = []
         
@@ -99,10 +99,10 @@ class BES(object):
         
         elif objectInstance.kind == "inverter":
             if objectInstance.input_AC:
-                self.inverterAcdc.append(objectInstance)
+                self.inverter_acdc.append(objectInstance)
                 self.has_inverter_acdc = True
             else:
-                self.inverterDcac.append(objectInstance)
+                self.inverter_dcac.append(objectInstance)
                 self.has_inverter_dcac = True
         
         elif objectInstance.kind == "pv":
@@ -140,8 +140,8 @@ class BES(object):
                       compression_chiller=False,
                       electrical_heater=False,
                       heatpump=False,
-                      inverterAcdc=False, 
-                      inverterDcac=False, 
+                      inverter_acdc=False,
+                      inverter_dcac=False,
                       pv=False, 
                       tes=False):
         """
@@ -165,9 +165,9 @@ class BES(object):
             Return information on the electrical heater
         heatpump : boolean, optional
             Return information on the heat pump
-        inverterAcdc : boolean, optional
+        inverter_acdc : boolean, optional
             Return information on the AC-DC inverter
-        inverterDcac : boolean, optional
+        inverter_dcac : boolean, optional
             Return information on the DC-AC inverter
         pv : boolean, optional
             Return information on the PV modules
@@ -206,10 +206,10 @@ class BES(object):
             if heatpump:
                 result += (self.has_heatpump,)
 
-            if inverterAcdc:
+            if inverter_acdc:
                 result += (self.has_inverter_acdc,)
 
-            if inverterDcac:
+            if inverter_dcac:
                 result += (self.has_inverter_dcac,)
 
             if pv:

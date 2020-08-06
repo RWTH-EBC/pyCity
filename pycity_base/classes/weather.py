@@ -191,9 +191,9 @@ class Weather(pycity_base.classes.sun.Sun):
             self.computeGeometry(allTimeSteps=True)
             changeRes = chres.changeResolution
 
-            old_res = (3600 * 24 * 365)/len(self.thetaZ)
+            old_res = (3600 * 24 * 365)/len(self.theta_z)
 
-            thetaZ = changeRes(self.thetaZ,
+            thetaZ = changeRes(self.theta_z,
                                oldResolution=old_res,
                                newResolution=time_discretization)
 
@@ -271,7 +271,7 @@ class Weather(pycity_base.classes.sun.Sun):
             Ground reflectance. 0 <= albedo <= 1
         update : Boolean, optional
             If True, air mass, extraterrestrial radiation, delta, omega and 
-            thetaZ are updated before computing the total radiation on the
+            theta_z are updated before computing the total radiation on the
             tilted surface.
         currentValues : bool, optional
             If True, returns values of current horizon (default: True).

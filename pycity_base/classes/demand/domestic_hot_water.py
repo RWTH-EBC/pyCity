@@ -100,10 +100,10 @@ class DomesticHotWater(pycity_base.classes.demand.load.Load):
                 tapProfile = a42[:, 2] * daily_consumption / 300
 
             # Compute equivalent heat demand in Watt
-            cWater = 4180  # J/kgK
+            c_water = 4180  # J/kgK
             flowFactor = 1 / 3600  # l/h -> kg/s
             deltaTemperature = t_flow - supply_temperature
-            loadcurve = cWater * tapProfile * flowFactor * deltaTemperature
+            loadcurve = c_water * tapProfile * flowFactor * deltaTemperature
             super(DomesticHotWater, self).__init__(environment, loadcurve)
         elif method == 2:
             # Load profiles

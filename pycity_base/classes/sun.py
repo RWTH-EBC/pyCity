@@ -119,10 +119,10 @@ class Sun(object):
           when the sun is on the local meridian) with respect to the plane
           of the equator, north positive; −23.45 <= delta <= 23.45
 
-        * thetaZ : array-like
+        * theta_z : array-like
           Zenith angle. The angle between the vertical and the line to the
           sun, that is, the angle of incidence of beam radiation on a
-          horizontal surface; 0 <= thetaZ <= 90
+          horizontal surface; 0 <= theta_z <= 90
 
         """
         # Get timer-relevant data
@@ -246,7 +246,7 @@ class Sun(object):
                           + 0.000077 * sin2B)
         
         # Save results
-        self.thetaZ = thetaZ
+        self.theta_z = thetaZ
         self.delta = delta
         self.omega = omega
 
@@ -398,7 +398,7 @@ class Sun(object):
     
         # Compute a and b (page 281, below equation 9)
         thetaR = np.radians(theta)
-        thetaZR = np.radians(self.thetaZ)
+        thetaZR = np.radians(self.theta_z)
         cosThetaZ = np.cos(thetaZR)
         cosTheta = np.cos(thetaR)
         a = np.maximum(0, cosTheta)

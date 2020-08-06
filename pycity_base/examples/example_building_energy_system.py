@@ -78,8 +78,8 @@ def run_example():
     print("Boiler: " + str(boiler is bes.boiler))
     print("CHP: " + str(chp is bes.chp))
     print("Electrical heater: " + str(elh is bes.electrical_heater))
-    print("Inverter AC to DC: " + str(inverter_ac_dc is bes.inverterAcdc))
-    print("Inverter DC to AC: " + str(inverter_dc_ac is bes.inverterDcac))
+    print("Inverter AC to DC: " + str(inverter_ac_dc is bes.inverter_acdc))
+    print("Inverter DC to AC: " + str(inverter_dc_ac is bes.inverter_dcac))
     print("PV: " + str(pv is bes.pv))
     print("TES: " + str(tes is bes.tes))
 
@@ -92,8 +92,8 @@ def run_example():
                       compression_chiller=True,
                       electrical_heater=True,
                       heatpump=True,
-                      inverterAcdc=True,
-                      inverterDcac=True,
+                      inverter_acdc=True,
+                      inverter_dcac=True,
                       pv=True,
                       tes=True)
 

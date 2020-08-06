@@ -17,7 +17,7 @@ class ThermalEnergyStorage(object):
     Implementation of the thermal energy storage unit
     """
     
-    cWater = 4180  # heat capacity of water. In J/(kgK)
+    c_water = 4180  # heat capacity of water. In J/(kgK)
     
     def __init__(self, 
                  environment, 

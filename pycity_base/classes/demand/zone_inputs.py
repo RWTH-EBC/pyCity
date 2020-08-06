@@ -60,7 +60,7 @@ class ZoneInputs(object):
         self.T_sup = environment.weather.t_ambient
         
         # UNDER CONSTRUCTION
-        self.Phi_sol, self.solarOpaque, self.solarWindow = self.getSolarGains()
+        self.Phi_sol, self.solar_opaque, self.solar_window = self.getSolarGains()
 
     @property
     def kind(self):

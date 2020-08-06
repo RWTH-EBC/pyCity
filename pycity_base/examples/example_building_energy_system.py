@@ -74,14 +74,14 @@ def run_example():
 
     # Check if objects stored in BES are the same as the original objects:
     print()
-    print("Battery: " + str(battery is bes.battery))
-    print("Boiler: " + str(boiler is bes.boiler))
-    print("CHP: " + str(chp is bes.chp))
-    print("Electrical heater: " + str(elh is bes.electrical_heater))
-    print("Inverter AC to DC: " + str(inverter_ac_dc is bes.inverter_acdc))
-    print("Inverter DC to AC: " + str(inverter_dc_ac is bes.inverter_dcac))
-    print("PV: " + str(pv is bes.pv))
-    print("TES: " + str(tes is bes.tes))
+    print("Battery: " + str(battery in bes.batteries))
+    print("Boiler: " + str(boiler in bes.boilers))
+    print("CHP: " + str(chp in bes.chps))
+    print("Electrical heater: " + str(elh in bes.electrical_heaters))
+    print("Inverter AC to DC: " + str(inverter_ac_dc in bes.inverter_acdcs))
+    print("Inverter DC to AC: " + str(inverter_dc_ac in bes.inverter_dcacs))
+    print("PV: " + str(pv in bes.pvs))
+    print("TES: " + str(tes in bes.tess))
 
     bes.getHasDevices(all_devices=True)
 

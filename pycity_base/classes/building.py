@@ -70,6 +70,9 @@ class Building(object):
             self.heating_curve = entity
             self.has_heating_curve = True
 
+        else:
+            warnings.warn('Kind of entity is unknown. Entity has not been added!')
+
     def addMultipleEntities(self, entities):
         """
         Add multiple entities to the existing building.

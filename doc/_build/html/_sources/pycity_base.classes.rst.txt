@@ -69,14 +69,6 @@ pycity\_base.classes.timer module
    :undoc-members:
    :show-inheritance:
 
-pycity\_base.classes.timeseries module
---------------------------------------
-
-.. automodule:: pycity_base.classes.timeseries
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 pycity\_base.classes.weather module
 -----------------------------------
 

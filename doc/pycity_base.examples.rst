@@ -5,6 +5,7 @@ Subpackages
 -----------
 
 .. toctree::
+   :maxdepth: 4
 
    pycity_base.examples.stochastic_inputs
    pycity_base.examples.tutorials

@@ -84,18 +84,10 @@ https://github.com/RWTH-EBC/uesgraphs/blob/master/README.md
 Installation of pycity_base
 =============================
 
-The latest version of pycity_base is 0.3.0.
-
 When uesgraph and its dependencies are installed, you should be able to install
 pycity_base via pip:
 
-`pip install pycity_base`
-
-or:
-
 `pip install -e '<your_path_to_pycity_setup_folder>'`
-
-or:
 
 `<path_to_your_python_dist\Python.exe> -m pip install -e '<your_path_to_pycity_setup_folder>'`
 
@@ -138,5 +130,5 @@ We gratefully acknowledge the financial support by BMWi
 under promotional references 03ET1138D and 03ET1381A.
 
 .. image:: 
-	_static/foerderlogo_bmwi.jpg
+	https://www.innovation-beratung-foerderung.de/INNO/Redaktion/DE/Bilder/Titelbilder/titel_foerderlogo_bmwi.jpg?__blob=normal&v=3
 	:scale: 30 %

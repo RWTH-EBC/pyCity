@@ -5,6 +5,7 @@ Subpackages
 -----------
 
 .. toctree::
+   :maxdepth: 4
 
    pycity_base.classes.demand
    pycity_base.classes.supply

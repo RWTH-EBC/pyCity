@@ -40,17 +40,7 @@
 <li class="toctree-l1"><a class="reference internal" href="pycity_base.functions.scripts.html">pycity_base.functions.scripts package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="pycity_base.functions.scripts.html#subpackages">Subpackages</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="pycity_base.functions.scripts.city_generators.html">pycity_base.functions.scripts.city_generators package</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="pycity_base.functions.scripts.city_generators.html#subpackages">Subpackages</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="pycity_base.functions.scripts.city_generators.input.html">pycity_base.functions.scripts.city_generators.input package</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="pycity_base.functions.scripts.city_generators.input.html#module-pycity_base.functions.scripts.city_generators.input">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l5"><a class="reference internal" href="pycity_base.functions.scripts.city_generators.output.html">pycity_base.functions.scripts.city_generators.output package</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="pycity_base.functions.scripts.city_generators.output.html#module-pycity_base.functions.scripts.city_generators.output">Module contents</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l4"><a class="reference internal" href="pycity_base.functions.scripts.city_generators.html#subpackages">Subpackages</a></li>
 <li class="toctree-l4"><a class="reference internal" href="pycity_base.functions.scripts.city_generators.html#submodules">Submodules</a></li>
 <li class="toctree-l4"><a class="reference internal" href="pycity_base.functions.scripts.city_generators.html#module-pycity_base.functions.scripts.city_generators.city_generator">pycity_base.functions.scripts.city_generators.city_generator module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="pycity_base.functions.scripts.city_generators.html#module-pycity_base.functions.scripts.city_generators">Module contents</a></li>
@@ -507,14 +497,14 @@ time interval from 00:00 until 01:00.</p></li>
 <p>&#64;author: tsz</p>
 <dl class="py function">
 <dt id="pycity_base.functions.zone_model.calc">
-<code class="sig-prename descclassname">pycity_base.functions.zone_model.</code><code class="sig-name descname">calc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">zone_parameters</span></em>, <em class="sig-param"><span class="n">zoneInputs</span></em>, <em class="sig-param"><span class="n">t_cooling_set</span></em>, <em class="sig-param"><span class="n">t_heating_set</span></em>, <em class="sig-param"><span class="n">limitHeating</span><span class="o">=</span><span class="default_value">inf</span></em>, <em class="sig-param"><span class="n">limitCooling</span><span class="o">=</span><span class="default_value">- inf</span></em>, <em class="sig-param"><span class="n">beQuiet</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.zone_model.calc" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pycity_base.functions.zone_model.</code><code class="sig-name descname">calc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">zone_parameters</span></em>, <em class="sig-param"><span class="n">zone_inputs</span></em>, <em class="sig-param"><span class="n">t_cooling_set</span></em>, <em class="sig-param"><span class="n">t_heating_set</span></em>, <em class="sig-param"><span class="n">limitHeating</span><span class="o">=</span><span class="default_value">inf</span></em>, <em class="sig-param"><span class="n">limitCooling</span><span class="o">=</span><span class="default_value">- inf</span></em>, <em class="sig-param"><span class="n">beQuiet</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.zone_model.calc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute heating/cooling demand for the thermal zone.
 Deadbands between heating and cooling temperatures are considered.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>zone_parameters</strong> (<a class="reference internal" href="pycity_base.classes.demand.html#pycity_base.classes.demand.zone_parameters.ZoneParameters" title="pycity_base.classes.demand.zone_parameters.ZoneParameters"><em>ZoneParameters</em></a>) – Resistances and capacity</p></li>
-<li><p><strong>zoneInputs</strong> (<a class="reference internal" href="pycity_base.classes.demand.html#pycity_base.classes.demand.zone_inputs.ZoneInputs" title="pycity_base.classes.demand.zone_inputs.ZoneInputs"><em>ZoneInputs</em></a>) – External inputs (solar, internal gains, set temperatures)</p></li>
+<li><p><strong>zone_inputs</strong> (<a class="reference internal" href="pycity_base.classes.demand.html#pycity_base.classes.demand.zone_inputs.ZoneInputs" title="pycity_base.classes.demand.zone_inputs.ZoneInputs"><em>ZoneInputs</em></a>) – External inputs (solar, internal gains, set temperatures)</p></li>
 <li><p><strong>t_cooling_set</strong> (<em>array-like</em>) – Cooling set temperatures in degC.</p></li>
 <li><p><strong>t_heating_set</strong> (<em>array-like</em>) – Heating set temperatures in degC.</p></li>
 <li><p><strong>limitHeating</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum available heating power in Watt.</p></li>
@@ -540,7 +530,7 @@ temperature).</p></li>
 
 <dl class="py function">
 <dt id="pycity_base.functions.zone_model.calculate">
-<code class="sig-prename descclassname">pycity_base.functions.zone_model.</code><code class="sig-name descname">calculate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">zone_parameters</span></em>, <em class="sig-param"><span class="n">zoneInputs</span></em>, <em class="sig-param"><span class="n">T_set</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.zone_model.calculate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pycity_base.functions.zone_model.</code><code class="sig-name descname">calculate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">zone_parameters</span></em>, <em class="sig-param"><span class="n">zone_inputs</span></em>, <em class="sig-param"><span class="n">T_set</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycity_base.functions.zone_model.calculate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute heating/cooling demand.
 There is no difference between heating and cooling set temperatures. No
 deadband is considered.</p>
@@ -548,7 +538,7 @@ deadband is considered.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>zone_parameters</strong> (<a class="reference internal" href="pycity_base.classes.demand.html#pycity_base.classes.demand.zone_parameters.ZoneParameters" title="pycity_base.classes.demand.zone_parameters.ZoneParameters"><em>ZoneParameters</em></a>) – Resistances and capacity</p></li>
-<li><p><strong>zoneInputs</strong> (<a class="reference internal" href="pycity_base.classes.demand.html#pycity_base.classes.demand.zone_inputs.ZoneInputs" title="pycity_base.classes.demand.zone_inputs.ZoneInputs"><em>ZoneInputs</em></a>) – External inputs (solar, internal gains, set temperatures)</p></li>
+<li><p><strong>zone_inputs</strong> (<a class="reference internal" href="pycity_base.classes.demand.html#pycity_base.classes.demand.zone_inputs.ZoneInputs" title="pycity_base.classes.demand.zone_inputs.ZoneInputs"><em>ZoneInputs</em></a>) – External inputs (solar, internal gains, set temperatures)</p></li>
 <li><p><strong>T_set</strong> (<em>array-like</em>) – Set value for operating temperature in degC.</p></li>
 </ul>
 </dd>

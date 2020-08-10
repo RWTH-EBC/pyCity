@@ -130,5 +130,5 @@ We gratefully acknowledge the financial support by BMWi
 under promotional references 03ET1138D and 03ET1381A.
 
 .. image:: 
-	_static/foerderlogo_bmwi.jpg
+	https://www.innovation-beratung-foerderung.de/INNO/Redaktion/DE/Bilder/Titelbilder/titel_foerderlogo_bmwi.jpg?__blob=normal&v=3
 	:scale: 30 %

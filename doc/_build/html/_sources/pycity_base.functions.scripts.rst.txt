@@ -5,6 +5,7 @@ Subpackages
 -----------
 
 .. toctree::
+   :maxdepth: 4
 
    pycity_base.functions.scripts.city_generators
    pycity_base.functions.scripts.profile_pool

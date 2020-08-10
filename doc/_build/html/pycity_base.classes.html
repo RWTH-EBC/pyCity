@@ -1073,10 +1073,10 @@ the local meridian due to rotation of the earth on its axis at
 Declination. The angular position of the sun at solar noon (i.e.,
 when the sun is on the local meridian) with respect to the plane
 of the equator, north positive; −23.45 &lt;= delta &lt;= 23.45</p></li>
-<li><p>thetaZ : array-like
+<li><p>theta_z : array-like
 Zenith angle. The angle between the vertical and the line to the
 sun, that is, the angle of incidence of beam radiation on a
-horizontal surface; 0 &lt;= thetaZ &lt;= 90</p></li>
+horizontal surface; 0 &lt;= theta_z &lt;= 90</p></li>
 </ul>
 </dd></dl>
 
@@ -1371,7 +1371,7 @@ meridian, with zero due south, east negative, and west positive.
 <li><p><strong>albedo</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Average value on earth: 0.3
 Ground reflectance. 0 &lt;= albedo &lt;= 1</p></li>
 <li><p><strong>update</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – If True, air mass, extraterrestrial radiation, delta, omega and
-thetaZ are updated before computing the total radiation on the
+theta_z are updated before computing the total radiation on the
 tilted surface.</p></li>
 <li><p><strong>currentValues</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, returns values of current horizon (default: True).
 If False, returns annual values.</p></li>

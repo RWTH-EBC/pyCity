@@ -24,9 +24,9 @@ copyright = '2020, Institute for Energy Efficient Buildings and Indoor Climate, 
 author = 'Institute for Energy Efficient Buildings and Indoor Climate, Institute for Automation of Complex Power Systems, E.ON Energy Research Center, RWTH Aachen University'
 
 # The short X.Y version
-version = '0.3.0'
+version = '0.3.1'
 # The full version, including alpha/beta/rc tags
-release = '0.3.0'
+release = '0.3.1'
 
 
 # -- General configuration ---------------------------------------------------

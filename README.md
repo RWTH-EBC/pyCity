@@ -58,7 +58,7 @@ In this case, follow the instructions of the uesgraphs installation:
 
 ### Installation of pycity_base
 
-The latest version of pycity_base is 0.3.0.
+The latest version of pycity_base is 0.3.1.
 
 When uesgraph and its dependencies are installed, you should be able to install
 pycity_base via pip:

@@ -121,7 +121,7 @@ class Weather(pycity_base.classes.sun.Sun):
                                             'TRY2010_05_Jahr.dat')
 
                 # Read TRY data
-                TRYData = np.genfromtxt(path_TRY, skip_header=38)
+                TRYData = np.genfromtxt(path_TRY, skip_header=38, encoding="utf-8")
 
                 # Save relevant weather data (only extract row 0 to 8760)
                 self.p_ambient = TRYData[0:nb_rows, 9]
@@ -146,7 +146,7 @@ class Weather(pycity_base.classes.sun.Sun):
                     raise AssertionError(msg)
 
                 # Read TRY data
-                TRYData = np.genfromtxt(path_TRY, skip_header=34)
+                TRYData = np.genfromtxt(path_TRY, skip_header=34, encoding="utf-8")
 
                 # Save relevant weather data (only extract row 0 to 8760)
                 self.p_ambient = TRYData[0:nb_rows, 6]
@@ -177,7 +177,8 @@ class Weather(pycity_base.classes.sun.Sun):
                                          'tmy3_744860_new_york_jfk_airport.csv')
 
             weather_data = np.genfromtxt(path_TMY3, skip_header=2, delimiter=",",
-                                         usecols=(4, 7, 10, 25, 31, 37, 40, 46))
+                                         usecols=(4, 7, 10, 25, 31, 37, 40, 46),
+                                         encoding="utf-8")
 
             self.p_ambient = weather_data[0:nb_rows, 6]
             self.phi_ambient = weather_data[0:nb_rows, 5]

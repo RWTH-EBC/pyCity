@@ -180,7 +180,8 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
 
                 SpaceHeating.sim_prof_data = np.genfromtxt(dpath,
                                                            delimiter='\t',
-                                                           skip_header=2)
+                                                           skip_header=2,
+                                                           encoding="utf-8")
 
                 SpaceHeating.loaded_sim_profile = True
 

@@ -34,7 +34,7 @@ pycity_base requires the following Python packages:
 - pandas==1.1.5
 - pytest==6.2.4
 - xlrd==1.2.0
-- networkx=2.5.1
+- networkx==2.5.1
 - Shapely==1.7.1
 - pyproj==3.0.1
 

@@ -20,13 +20,13 @@ sys.path.insert(0, os.path.abspath('.'))
 # -- Project information -----------------------------------------------------
 
 project = 'pycity_base'
-copyright = '2020, Institute for Energy Efficient Buildings and Indoor Climate, Institute for Automation of Complex Power Systems, E.ON Energy Research Center, RWTH Aachen University'
+copyright = '2021, Institute for Energy Efficient Buildings and Indoor Climate, Institute for Automation of Complex Power Systems, E.ON Energy Research Center, RWTH Aachen University'
 author = 'Institute for Energy Efficient Buildings and Indoor Climate, Institute for Automation of Complex Power Systems, E.ON Energy Research Center, RWTH Aachen University'
 
 # The short X.Y version
-version = '0.3.1'
+version = '0.3.2'
 # The full version, including alpha/beta/rc tags
-release = '0.3.1'
+release = '0.3.2'
 
 
 # -- General configuration ---------------------------------------------------

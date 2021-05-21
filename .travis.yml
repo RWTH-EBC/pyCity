@@ -14,12 +14,6 @@ matrix:
 install:
   - pip install --upgrade pip setuptools wheel
   - pip install --upgrade --only-binary=numpy,scipy numpy scipy
-  - pip install networkx
-  - pip install xlrd
-  - pip install pandas
-  - pip install shapely
-  - pip install pyproj
-  - pip install uesgraphs
   - pip install -e git+https://github.com/RWTH-EBC/richardsonpy.git#egg=richardsonpy
   - pip install .
   - pip install pytest-cov

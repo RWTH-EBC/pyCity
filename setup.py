@@ -44,14 +44,11 @@ def read(*filenames, **kwargs):
             buf.append(f.read())
     return sep.join(buf)
 
-#long_description = read('README.md')
-
 
 setup(name='pycity_base',
-      version='0.3.1',
+      version='0.3.2',
       description='Python package for data handling and scenario generation '
                   'of city districts and urban energy systems.',
-      #long_description=long_description,
       long_description='Python package for data handling and scenario generation '
                     'of city districts and urban energy systems.',
       url='https://github.com/RWTH-EBC/pyCity',
@@ -61,12 +58,26 @@ setup(name='pycity_base',
       author_email='post_ebc@eonerc.rwth-aachen.de',
       license='MIT License',
       packages=find_packages(),
-      package_data = {'': ['*.ipynb', '*.txt', '*.csv', '*.txt', 'inputs/*', 'inputs/**/*', 'inputs/**/**/*']},
-      setup_requires=['numpy', 'matplotlib', 'pandas', 'pytest', 'xlrd',
-                      'networkx', 'richardsonpy', 'uesgraphs'],
-      install_requires=['numpy', 'matplotlib', 'pandas', 'pytest', 'xlrd',
-                        'networkx', 'richardsonpy', 'uesgraphs'],
-      tests_require=['pytest'],
+      package_data={'': ['*.ipynb', '*.txt', '*.csv', '*.txt', 'inputs/*', 'inputs/**/*', 'inputs/**/**/*']},
+      setup_requires=['numpy==1.19.5',
+                      'matplotlib==3.3.4',
+                      'pandas==1.1.5',
+                      'xlrd==1.2.0',
+                      'networkx=2.5.1',
+                      'richardsonpy==0.2.1',
+                      'uesgraphs==0.6.4',
+                      'Shapely==1.7.1',
+                      'pyproj==3.0.1'],
+      install_requires=['numpy==1.19.5',
+                        'matplotlib==3.3.4',
+                        'pandas==1.1.5',
+                        'xlrd==1.2.0',
+                        'networkx=2.5.1',
+                        'richardsonpy==0.2.1',
+                        'uesgraphs==0.6.4',
+                        'Shapely==1.7.1',
+                        'pyproj==3.0.1'],
+      tests_require=['pytest==6.2.4'],
       platforms='any',
       classifiers=[
           'License :: OSI Approved :: MIT License',

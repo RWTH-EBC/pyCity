@@ -29,36 +29,31 @@ the pycity package on pypi! This (other) pycity package is installable via
 pip. However, if you want to install pycity_base, follow this instruction.*
 
 pycity_base requires the following Python packages:
-- numpy
-- matplotlib
-- networkX
-- pandas
-- pytest
-- xlrd
+- numpy==1.19.5
+- matplotlib==3.3.4
+- pandas==1.1.5
+- pytest==6.2.4
+- xlrd==1.2.0
+- networkx=2.5.1
+- Shapely==1.7.1
+- pyproj==3.0.1
 
 as well as the EBC Python packages:
 
-- richardsonpy 
+- richardsonpy==0.2.1
 
-which is available under [https://github.com/RWTH-EBC/richardsonpy](https://github.com/RWTH-EBC/richardsonpy)
+which is available at [https://github.com/RWTH-EBC/richardsonpy](https://github.com/RWTH-EBC/richardsonpy)
 
-- uesgraphs
+- uesgraphs==0.6.4
 (with dependencies to shapely and pyproj)
 
-which is available under 
-[https://github.com/RWTH-EBC/uesgraphs](https://github.com/RWTH-EBC/uesgraphs)
+which is available at [https://github.com/RWTH-EBC/uesgraphs](https://github.com/RWTH-EBC/uesgraphs)
 
-richardsonpy can be installed via pip.
-uesgraphs can be installed via pip on Linux or Mac OS distributions.
-In contrast, uesgraphs installation might not be possible via pip on Windows
-machines, due to compiler issues with the dependencies to shapely and pyproj.
-In this case, follow the instructions of the uesgraphs installation:
-[https://github.com/RWTH-EBC/uesgraphs/blob/master/README.md](https://github.com/RWTH-EBC/uesgraphs/blob/master/README.md)
-(see Install uesgraphs)
+richardsonpy and uesgraphs can be installed via pip.
 
 ### Installation of pycity_base
 
-The latest version of pycity_base is 0.3.1.
+The latest version of pycity_base is 0.3.2.
 
 When uesgraph and its dependencies are installed, you should be able to install
 pycity_base via pip:

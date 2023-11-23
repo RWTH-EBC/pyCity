@@ -132,13 +132,12 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
             annual_demand = living_area * specific_demand  # kWh
             profile = 1
 
-            fun = slp_th.calculate
-            loadcurve = fun(environment.weather.t_ambient,
-                            environment.timer.current_day,
-                            SpaceHeating.slp_prof[profile_type][profile],
-                            SpaceHeating.slp_week[profile_type],
-                            SpaceHeating.slp_hour[profile_type],
-                            annual_demand)
+            loadcurve = slp_th.calculate(environment.weather.t_ambient,
+                                         environment.timer.current_day,
+                                         SpaceHeating.slp_prof[profile_type][profile],
+                                         SpaceHeating.slp_week[profile_type],
+                                         SpaceHeating.slp_hour[profile_type],
+                                         annual_demand)
 
             super(SpaceHeating, self).__init__(environment, loadcurve)
 
@@ -147,12 +146,12 @@ class SpaceHeating(pycity_base.classes.demand.load.Load):
             self.zone_parameters = zone_parameters
             # Create zone_inputs (this already creates the full year inputs!)
             self.zone_inputs = zi.ZoneInputs(environment,
-                                            zone_parameters,
-                                            t_m_init,
-                                            ventilation=ventilation,
-                                            occupancy=occupancy,
-                                            appliances=appliances,
-                                            lighting=lighting)
+                                             zone_parameters,
+                                             t_m_init,
+                                             ventilation=ventilation,
+                                             occupancy=occupancy,
+                                             appliances=appliances,
+                                             lighting=lighting)
 
             calc = zmodel.calc
             res = calc(zone_parameters=self.zone_parameters,

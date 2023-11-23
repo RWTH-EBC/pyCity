@@ -52,7 +52,7 @@ pycity_base requires the following Python packages:
 	- networkX
 	- pandas
 	- pytest
-	- xlrd
+	- openpyxl
 
 as well as the EBC Python packages:
 

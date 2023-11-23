@@ -59,7 +59,7 @@ class Apartment(object):
     def kind(self):
         return self._kind
 
-    def addEntity(self, entity):
+    def addEntity(self, entity, warn=False):
         """
         Add an entity to apartment.
 
@@ -73,6 +73,8 @@ class Apartment(object):
             - Space cooling demand (entity.kind == "spacecooling")
             - Occupancy (entity.kind == 'occupancy')
             - Room (entity.kind == "room"
+        warn : bool, optional
+            Throw a warning, if an unknown entity is added (default: False)
         
         Examples
         --------
@@ -96,11 +98,12 @@ class Apartment(object):
         elif entity.kind == 'occupancy':
             self.occupancy = entity
 
-        elif entity.kind == "room":  # pragma: no cover
+        elif entity.kind == "room":
             self.rooms.append(entity)
 
-        else:  # pragma: no cover
-            warnings.warn('Kind of entity is unknown. Entity has not been added!')
+        else:
+            if warn:
+                warnings.warn('Kind of entity is unknown. Entity has not been added!')
 
     def addMultipleEntities(self, entities):
         """

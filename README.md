@@ -29,14 +29,13 @@ the pycity package on pypi! This (other) pycity package is installable via
 pip. However, if you want to install pycity_base, follow this instruction.*
 
 pycity_base requires the following Python packages:
-- numpy==1.19.5
-- matplotlib==3.3.4
-- pandas==1.1.5
-- pytest==6.2.4
-- xlrd==1.2.0
+- numpy==1.26.0
+- matplotlib==3.8.0
+- pandas==2.1.1
+- Shapely==2.0.1
+- openpyxl==3.1.2
 - networkx==2.5.1
-- Shapely==1.7.1
-- pyproj==3.0.1
+- pyproj==3.6.1
 
 as well as the EBC Python packages:
 
@@ -53,7 +52,7 @@ richardsonpy and uesgraphs can be installed via pip.
 
 ### Installation of pycity_base
 
-The latest version of pycity_base is 0.3.2.
+The latest version of pycity_base is 0.3.3.
 
 When uesgraph and its dependencies are installed, you should be able to install
 pycity_base via pip:

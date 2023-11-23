@@ -10,22 +10,22 @@ from __future__ import division
 
 import os
 import numpy as np
-import xlrd
+import openpyxl
 from pycity_base.functions import change_resolution as chres
 
 
 def load(filename):
     # Open the workbook and get the sheet with all profiles
-    book = xlrd.open_workbook(filename)
-    sheet = book.sheet_by_name("Profiles")
+    book = openpyxl.load_workbook(filename, data_only=True)
+    sheet = book["Profiles"]
 
     # Fill all values into one dictionary
     profiles = {}
-    for c in range(1, sheet.ncols):
+    for c in range(1, sheet.max_column):
         # Get each key
-        key = sheet.cell_value(0, c)
+        key = sheet.cell(1, c+1).value
         # Get the corresponding values
-        values = [sheet.cell_value(r, c) for r in range(2, sheet.nrows)]
+        values = [sheet.cell(r+1, c+1).value for r in range(2, sheet.max_row)]
 
         # Store the results
         profiles[key] = np.array(values)

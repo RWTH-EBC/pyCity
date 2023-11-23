@@ -1,21 +1,20 @@
 language: python
 matrix:
     include:
-        - python: 3.6
-          dist: trusty
+        - python: 3.9
+          dist: focal
           sudo: false
-        - python: 3.7
-          dist: xenial
+        - python: 3.10
+          dist: focal
           sudo: true
-        - python: 3.8
-          dist: bionic
+        - python: 3.11
+          dist: focal
           sudo: true
 
 install:
   - pip install --upgrade pip setuptools wheel
-  - pip install --upgrade --only-binary=numpy,scipy numpy scipy
   - pip install -e git+https://github.com/RWTH-EBC/richardsonpy.git#egg=richardsonpy
-  - pip install .
+  - pip install -e .
   - pip install pytest-cov
   - pip install coveralls
   - pip install flake8

@@ -7,7 +7,7 @@ Example script on how to generate a city district.
 from __future__ import division
 
 import os
-import xlrd
+import openpyxl
 import numpy as np
 import shapely.geometry.point as point
 
@@ -116,17 +116,16 @@ def run_example():
     #  #-------------------------------------------------------------------
     # Create Wind Energy Converter (ENERCON E-126)
     src_path = os.path.dirname(os.path.dirname(__file__))
-    wind_data_path = os.path.join(src_path, 'inputs',
-                                  'wind_energy_converters.xlsx')
-    wecDatasheets = xlrd.open_workbook(wind_data_path)
-    ENERCON_E_126 = wecDatasheets.sheet_by_name("ENERCON_E_126")
-    hubHeight = ENERCON_E_126.cell_value(0, 1)
+    wind_data_path = os.path.join(src_path, 'inputs', 'wind_energy_converters.xlsx')
+    wecDatasheets = openpyxl.load_workbook(wind_data_path, data_only=True)
+    ENERCON_E_126 = wecDatasheets["ENERCON_E_126"]
+    hubHeight = ENERCON_E_126.cell(1, 2).value
     mapWind = []
     mapPower = []
     counter = 0
-    while ENERCON_E_126._dimnrows > 3 + counter:
-        mapWind.append(ENERCON_E_126.cell_value(3 + counter, 0))
-        mapPower.append(ENERCON_E_126.cell_value(3 + counter, 1))
+    while ENERCON_E_126.max_row > 3 + counter:
+        mapWind.append(ENERCON_E_126.cell(4 + counter, 1).value)
+        mapPower.append(ENERCON_E_126.cell(4 + counter, 2).value)
         counter += 1
 
     mapWind = np.array(mapWind)

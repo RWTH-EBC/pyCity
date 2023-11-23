@@ -10,7 +10,7 @@ from __future__ import division
 
 import os
 import numpy as np
-import xlrd
+import openpyxl
 import math
 import random
 from pycity_base.functions import change_resolution as chres
@@ -21,22 +21,21 @@ def load_profiles(filename):
     """
     # Initialization
     profiles = {"we": {}, "wd": {}}
-    book = xlrd.open_workbook(filename)
+    book = openpyxl.load_workbook(filename, data_only=True)
     
     # Iterate over all sheets    
-    for sheetname in book.sheet_names():
-        sheet = book.sheet_by_name(sheetname)
-        
+    for sheet in book.worksheets:
+
         # Read values
-        values = [sheet.cell_value(i,0) for i in range(1440)]
+        values = [sheet.cell(i+1, 1).value for i in range(1440)]
 
         # Store values in dictionary
-        if sheetname in ("wd_mw", "we_mw"):
-            profiles[sheetname] = np.array(values)
-        elif sheetname[1] == "e":
-            profiles["we"][int(sheetname[2])] = np.array(values)
+        if str(sheet.title) in ("wd_mw", "we_mw"):
+            profiles[str(sheet.title)] = np.array(values)
+        elif str(sheet.title)[1] == "e":
+            profiles["we"][int(str(sheet.title)[2])] = np.array(values)
         else:
-            profiles["wd"][int(sheetname[2])] = np.array(values)
+            profiles["wd"][int(str(sheet.title)[2])] = np.array(values)
     
     # Return results
     return profiles

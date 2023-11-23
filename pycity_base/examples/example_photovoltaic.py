@@ -11,7 +11,7 @@ import pycity_base.classes.supply.photovoltaic as pv
 
 import numpy as np
 import matplotlib.pyplot as plt
-import xlrd
+import openpyxl
 
 import pycity_base.classes.timer
 import pycity_base.classes.weather
@@ -30,12 +30,12 @@ def run_example(do_plot=False):
     # Create PV
     src_path = os.path.dirname(os.path.dirname(__file__))
     pv_data_path = os.path.join(src_path, 'inputs', 'photovoltaic_modules.xlsx')
-    pv_data = xlrd.open_workbook(pv_data_path)
-    sw_290 = pv_data.sheet_by_name("SolarWorld_SW290")
-    area = sw_290.cell_value(1, 2)  # m^2, 1 module
-    eta = sw_290.cell_value(6, 2)
-    t_cell = sw_290.cell_value(7, 2)
-    alpha = sw_290.cell_value(8, 2)
+    pv_data = openpyxl.load_workbook(pv_data_path, data_only=True)
+    sw_290 = pv_data["SolarWorld_SW290"]
+    area = sw_290.cell(2, 3).value  # m^2, 1 module
+    eta = sw_290.cell(7, 3).value
+    t_cell = sw_290.cell(8, 3).value
+    alpha = sw_290.cell(9, 3).value
 
     beta = 0  # Slope of the PV unit
 
@@ -56,9 +56,9 @@ def run_example(do_plot=False):
     print(("Nominal values: " + str(pv_detailed.getNominalValues())))
 
     print()
-    print(("PV power (simple model): " + np.str(pvPower_simple)))
+    print(("PV power (simple model): " + str(pvPower_simple)))
     print()
-    print(("PV power (detailed model): " + np.str(pvPower_detailed)))
+    print(("PV power (detailed model): " + str(pvPower_detailed)))
 
     if do_plot:
         # Plot PV power
@@ -88,9 +88,9 @@ def run_example(do_plot=False):
     pvPower_kWp = pv_kWp.getPower()
 
     print()
-    print(("PV power (based on area model): " + np.str(pvPower_area)))
+    print(("PV power (based on area model): " + str(pvPower_area)))
     print()
-    print(("PV power (based on peak power model): " + np.str(pvPower_kWp)))
+    print(("PV power (based on peak power model): " + str(pvPower_kWp)))
 
     if do_plot:
         # Plot PV power

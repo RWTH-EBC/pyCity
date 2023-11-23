@@ -3,7 +3,7 @@ FROM python:3.7
 RUN  pip3 install --upgrade pip setuptools wheel &&\
      pip3 install numpy scipy &&\
      pip3 install networkx &&\
-     pip3 install xlrd &&\
+     pip3 install openpyxl &&\
      pip3 install pandas &&\
      pip3 install shapely &&\
      pip3 install pyproj &&\

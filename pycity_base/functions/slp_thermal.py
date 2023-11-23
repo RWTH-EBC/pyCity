@@ -11,7 +11,7 @@ from __future__ import division
 import os
 import numpy as np
 import math
-import xlrd
+import openpyxl
 from pycity_base.functions import change_resolution as chres
 
 
@@ -47,21 +47,6 @@ def calculate(temperature, initial_day, profiles, weekly_factors, hourly_factors
         (-15; -10; -5; 0; 5; 10; 15; 20; 25; else). The values at this level
         are arrays containing the factors for one day, starting with the
         time interval from 00:00 until 01:00.
-    house_type : string
-        - `HEF` : Single family household
-        - `HMF` : Multi family household
-        - `GBA` : Bakeries
-        - `GBD` : Other services
-        - `GBH` : Accomodations
-        - `GGA` : Restaurants
-        - `GGB` : Gardening
-        - `GHA` : Retailers
-        - `GHD` : Summed load profile business, trade and services
-        - `GKO` : Banks, insurances, public institutions
-        - `GMF` : Household similar businesses
-        - `GMK` : Automotive
-        - `GPD` : Paper and printing
-        - `GWA` : Laundries
     total_demand : float
         Total yearly demand in kWh
     """
@@ -109,8 +94,7 @@ def _daily_average_temperatures(temperature, timesteps_day=24):
     if r == 0:
         temperature = np.append(temperature, temperature[-1])
     for day in range(days):
-        averages[day] = np.average(temperature[day*timesteps_day:(day+1)*timesteps_day + 1],
-                                 weights=weights)
+        averages[day] = np.average(temperature[day*timesteps_day:(day+1)*timesteps_day + 1], weights=weights)
     return averages
 
 def _average_temperature(temperature, timesteps_day=24):
@@ -185,17 +169,16 @@ def load_week_day_factors(filename):
     """
     # Initialization
     profiles = {}
-    book_weekday = xlrd.open_workbook(filename)
+    book_weekday = openpyxl.load_workbook(filename, data_only=True)
 
     # Iterate over all sheets
-    for sheetname in book_weekday.sheet_names():
-        sheet = book_weekday.sheet_by_name(sheetname)
+    for sheet in book_weekday.worksheets:
 
         # Read values
-        values = [sheet.cell_value(1, d) for d in range(7)]
+        values = [sheet.cell(1+1, d+1).value for d in range(7)]
 
         # Store values in dictionary
-        profiles[sheetname] = np.array(values)
+        profiles[str(sheet.title)] = np.array(values)
 
     # Return results
     return profiles
@@ -207,22 +190,21 @@ def load_hourly_factors(filename):
     # Initialization
     hourly_factors = {}
     temperature_range = [-15, -10, -5, 0, 5, 10, 15, 20, 25, 100]
-    book_hourly = xlrd.open_workbook(filename)
+    book_hourly = openpyxl.load_workbook(filename, data_only=True)
 
     # Iterate over all sheets
-    for sheetname in book_hourly.sheet_names():
-        sheet = book_hourly.sheet_by_name(sheetname)
+    for sheet in book_hourly.worksheets:
 
         temp_factors = {}  # Create temporary dictionary for each sheet
         for d in range(7):
             for t in range(len(temperature_range)):
                 # Read values
-                values = [sheet.cell_value(d * 11 + t + 1, hour + 1)
+                values = [sheet.cell(d * 11 + t + 2, hour + 2).value
                           for hour in range(24)]
                 temp_factors[d, temperature_range[t]] = np.array(values)
 
         # Store values
-        hourly_factors[sheetname] = temp_factors
+        hourly_factors[str(sheet.title)] = temp_factors
 
     # Return final results
     return hourly_factors
@@ -231,23 +213,22 @@ def load_hourly_factors(filename):
 def load_profile_factors(filename):
     # Initialization
     profile_factors = {}
-    book_profiles = xlrd.open_workbook(filename)
+    book_profiles = openpyxl.load_workbook(filename, data_only=True)
 
     # Iterate over all sheets
-    for sheetname in book_profiles.sheet_names():
-        sheet = book_profiles.sheet_by_name(sheetname)
+    for sheet in book_profiles.worksheets:
 
         temp_factors = {}  # Create temporary dictionary for each sheet
         for demand in range(5):  # Iterate over all demand types (1-5)
             # Read values.
             # Note: Demand types are stored in the wrong order (5-1)
             # Note: Letters: 0 - A, 1 - B, 2 - C, 3 - D
-            values = [sheet.cell_value(5 - demand, letter + 1) for letter in range(4)]
+            values = [sheet.cell(5 - demand + 1, letter + 2).value for letter in range(4)]
 
             temp_factors[demand + 1] = np.array(values)
 
         # Store values
-        profile_factors[sheetname] = temp_factors
+        profile_factors[str(sheet.title)] = temp_factors
 
     # Return final results
     return profile_factors

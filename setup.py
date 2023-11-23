@@ -46,11 +46,11 @@ def read(*filenames, **kwargs):
 
 
 setup(name='pycity_base',
-      version='0.3.2',
+      version='0.3.3',
       description='Python package for data handling and scenario generation '
                   'of city districts and urban energy systems.',
       long_description='Python package for data handling and scenario generation '
-                    'of city districts and urban energy systems.',
+                       'of city districts and urban energy systems.',
       url='https://github.com/RWTH-EBC/pyCity',
       author='Institute of Energy Efficient Buildings and Indoor Climate, '
              'Institute for Automation of Complex Power Systems'
@@ -59,16 +59,16 @@ setup(name='pycity_base',
       license='MIT License',
       packages=find_packages(),
       package_data={'': ['*.ipynb', '*.txt', '*.csv', '*.txt', 'inputs/*', 'inputs/**/*', 'inputs/**/**/*']},
-      install_requires=['numpy==1.19.5',
-                        'matplotlib==3.3.4',
-                        'pandas==1.1.5',
-                        'xlrd==1.2.0',
+      install_requires=['numpy==1.26.0',
+                        'matplotlib==3.8.0',
+                        'pandas==2.1.1',
+                        'Shapely==2.0.1',
+                        'openpyxl==3.1.2',
                         'networkx==2.5.1',
                         'richardsonpy==0.2.1',
                         'uesgraphs==0.6.4',
-                        'Shapely==1.7.1',
-                        'pyproj==3.0.1'],
-      tests_require=['pytest==6.2.4'],
+                        'pyproj==3.6.1'],
+      tests_require=['pytest==7.4.2'],
       platforms='any',
       classifiers=[
           'License :: OSI Approved :: MIT License',

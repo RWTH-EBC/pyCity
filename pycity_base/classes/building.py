@@ -48,9 +48,16 @@ class Building(object):
     def kind(self):
         return self._kind
     
-    def addEntity(self, entity):
+    def addEntity(self, entity, warn=False):
         """ 
         Add an entity (apartment, BES or heating curve) to the building.
+
+        Parameters
+        ----------
+        entity : object
+            Entity object.
+        warn : bool, optional
+            Throw a warning, if an unknown entity is added (default: False)
         
         Examples
         --------
@@ -71,7 +78,8 @@ class Building(object):
             self.has_heating_curve = True
 
         else:
-            warnings.warn('Kind of entity is unknown. Entity has not been added!')
+            if warn:
+                warnings.warn('Kind of entity is unknown. Entity has not been added!')
 
     def addMultipleEntities(self, entities):
         """

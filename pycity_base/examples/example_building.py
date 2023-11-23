@@ -7,7 +7,7 @@ Example of the building class.
 from __future__ import division
 
 import os
-import xlrd
+import openpyxl
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -74,17 +74,17 @@ def run_example(do_plot=False):
     #  Heatpump data path
     src_path = os.path.dirname(os.path.dirname(__file__))
     hp_data_path = os.path.join(src_path, 'inputs', 'heat_pumps.xlsx')
-    heatpumpData = xlrd.open_workbook(hp_data_path)
-    dimplex_LA12TU = heatpumpData.sheet_by_name("Dimplex_LA12TU")
+    heatpumpData = openpyxl.load_workbook(hp_data_path, data_only=True)
+    dimplex_LA12TU = heatpumpData["Dimplex_LA12TU"]
 
     # Size of the worksheet
-    number_rows = dimplex_LA12TU._dimnrows
-    number_columns = dimplex_LA12TU._dimncols
+    number_rows = dimplex_LA12TU.max_row
+    number_columns = dimplex_LA12TU.max_column
 
     # Flow, ambient and max. temperatures
     t_flow = np.zeros(number_columns - 2)
     t_ambient = np.zeros(int((number_rows - 7) / 2))
-    t_max = dimplex_LA12TU.cell_value(0, 1)
+    t_max = dimplex_LA12TU.cell(1, 2).value
 
     firstRowCOP = number_rows - len(t_ambient)
 
@@ -92,14 +92,12 @@ def run_example(do_plot=False):
     cop = np.empty((len(t_ambient), len(t_flow)))
 
     for i in range(number_columns - 2):
-        t_flow[i] = dimplex_LA12TU.cell_value(3, 2 + i)
+        t_flow[i] = dimplex_LA12TU.cell(4, 3 + i).value
 
     for col in range(len(t_flow)):
         for row in range(len(t_ambient)):
-            q_nominal[row, col] = dimplex_LA12TU.cell_value(int(4 + row),
-                                                           int(2 + col))
-            cop[row, col] = dimplex_LA12TU.cell_value(int(firstRowCOP + row),
-                                                      int(2 + col))
+            q_nominal[row, col] = dimplex_LA12TU.cell(int(5 + row), int(3 + col)).value
+            cop[row, col] = dimplex_LA12TU.cell(int(firstRowCOP + row + 1), int(3 + col)).value
 
     p_nominal = q_nominal / cop
 

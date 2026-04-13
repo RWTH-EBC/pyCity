@@ -68,7 +68,7 @@ setup(name='pycity_base',
                         'richardsonpy==0.2.1',
                         'uesgraphs==0.6.4',
                         'pyproj==3.6.1'],
-      tests_require=['pytest==7.4.2'],
+      tests_require=['pytest==9.0.3'],
       platforms='any',
       classifiers=[
           'License :: OSI Approved :: MIT License',
